@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="通过Docker在群晖安装Calibre-Web，用于打造个人可随身携带的藏书阁。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造一个可以随身携带的“藏书阁”">
+<meta property="og:url" content="https://laosu.ml/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="通过Docker在群晖安装Calibre-Web，用于打造个人可随身携带的藏书阁。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1510409325266_000-1588488607852.png">
+<meta property="article:published_time" content="2020-05-03T05:21:00.000Z">
+<meta property="article:modified_time" content="2020-05-03T10:41:12.830Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="Calibre">
+<meta property="article:tag" content="Calibre-Web">
+<meta property="article:tag" content="calibre-webserver">
+<meta property="article:tag" content="my-calibre-webserver-docker">
+<meta property="article:tag" content="OPDS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1510409325266_000-1588488607852.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>打造一个可以随身携带的“藏书阁” | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          打造一个可以随身携带的“藏书阁”
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-03 13:21:00 / 修改时间：18:41:12" itemprop="dateCreated datePublished" datetime="2020-05-03T13:21:00+08:00">2020-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">通过Docker在群晖安装Calibre-Web，用于打造个人可随身携带的藏书阁。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1510409325266_000-1588488607852.png" itemprop="contentUrl">
+        </div>
+        <p><strong>什么是calibre？</strong></p>
+<blockquote>
+<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Calibre-Web？</strong></p>
+<blockquote>
+<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
+</blockquote>
+<p><strong>什么是OPDS？</strong></p>
+<blockquote>
+<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
+</blockquote>
+<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
+<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
+<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
+<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
+<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
+<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
+<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
+<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
+<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
+<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
+<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
+
+<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
+<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
+<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
+<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
+<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
+<ul>
+<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
+<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
+<blockquote>
+<ul>
+<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
+<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
+<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
+<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
+<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/" title="打造一个可以随身携带的“藏书阁”">https://laosu.ml/2020/05/03/打造随身携带的“藏书阁”/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Calibre/" rel="tag"><i class="fa fa-tag"></i> Calibre</a>
+              <a href="/tags/Calibre-Web/" rel="tag"><i class="fa fa-tag"></i> Calibre-Web</a>
+              <a href="/tags/calibre-webserver/" rel="tag"><i class="fa fa-tag"></i> calibre-webserver</a>
+              <a href="/tags/my-calibre-webserver-docker/" rel="tag"><i class="fa fa-tag"></i> my-calibre-webserver-docker</a>
+              <a href="/tags/OPDS/" rel="tag"><i class="fa fa-tag"></i> OPDS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/" rel="prev" title="家庭多媒体中心（5）：查询篇">
+      <i class="fa fa-chevron-left"></i> 家庭多媒体中心（5）：查询篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/" rel="next" title="个人专属的音乐库">
+      个人专属的音乐库 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#构建本地图书库"><span class="nav-number">1.</span> <span class="nav-text">构建本地图书库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打造Web书库"><span class="nav-number">2.</span> <span class="nav-text">打造Web书库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#oldiy-my-calibre-webserver-docker"><span class="nav-number">2.1.</span> <span class="nav-text">oldiy&#x2F;my-calibre-webserver-docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linuxserver-calibre-web"><span class="nav-number">2.2.</span> <span class="nav-text">linuxserver&#x2F;calibre-web</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导入本地书库"><span class="nav-number">3.</span> <span class="nav-text">导入本地书库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#书库的维护"><span class="nav-number">4.</span> <span class="nav-text">书库的维护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#远程访问"><span class="nav-number">5.</span> <span class="nav-text">远程访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OPDS订阅"><span class="nav-number">6.</span> <span class="nav-text">OPDS订阅</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#可用的OPDS源"><span class="nav-number">6.1.</span> <span class="nav-text">可用的OPDS源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐几个书库"><span class="nav-number">6.2.</span> <span class="nav-text">推荐几个书库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">24 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

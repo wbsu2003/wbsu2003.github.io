@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这是一个系列，为了避免篇幅过长，准备分五个部分，以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="家庭多媒体中心（1）：综合篇">
+<meta property="og:url" content="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="这是一个系列，为了避免篇幅过长，准备分五个部分，以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png">
+<meta property="article:published_time" content="2020-05-01T01:04:00.000Z">
+<meta property="article:modified_time" content="2020-05-03T03:32:49.554Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="刮削器">
+<meta property="article:tag" content="Scrapers">
+<meta property="article:tag" content="Plex">
+<meta property="article:tag" content="Emby">
+<meta property="article:tag" content="ZogVM">
+<meta property="article:tag" content="jellyfin">
+<meta property="article:tag" content="极影派">
+<meta property="article:tag" content="Kodi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>家庭多媒体中心（1）：综合篇 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          家庭多媒体中心（1）：综合篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-01 09:04:00" itemprop="dateCreated datePublished" datetime="2020-05-01T09:04:00+08:00">2020-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-03 11:32:49" itemprop="dateModified" datetime="2020-05-03T11:32:49+08:00">2020-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">这是一个系列，为了避免篇幅过长，准备分五个部分，以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" itemprop="contentUrl">
+        </div>
+        <p><strong>什么是刮削器（Scrapers）</strong></p>
+<blockquote>
+<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
+</blockquote>
+<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
+<blockquote>
+<ol>
+<li>综合篇（本文）</li>
+<li>影片的管理</li>
+<li>影片的播放</li>
+<li>流媒体服务</li>
+<li>离线查询</li>
+</ol>
+</blockquote>
+<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
+<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
+<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
+<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
+<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
+<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
+<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
+<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
+<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
+</ul>
+<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
+<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
+<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
+<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\01\家庭多媒体中心（2）：管理篇\" rel="bookmark">家庭多媒体中心（2）：管理篇</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\01\家庭多媒体中心（4）：流媒体服务器篇\" rel="bookmark">家庭多媒体中心（4）：流媒体服务器篇</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\04\个人专属的音乐库\" rel="bookmark">个人专属的音乐库</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\02\家庭多媒体中心（5）：查询篇\" rel="bookmark">家庭多媒体中心（5）：查询篇</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/" title="家庭多媒体中心（1）：综合篇">https://laosu.ml/2020/05/01/家庭多媒体中心（1）：综合篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%88%AE%E5%89%8A%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 刮削器</a>
+              <a href="/tags/Scrapers/" rel="tag"><i class="fa fa-tag"></i> Scrapers</a>
+              <a href="/tags/Plex/" rel="tag"><i class="fa fa-tag"></i> Plex</a>
+              <a href="/tags/Emby/" rel="tag"><i class="fa fa-tag"></i> Emby</a>
+              <a href="/tags/ZogVM/" rel="tag"><i class="fa fa-tag"></i> ZogVM</a>
+              <a href="/tags/jellyfin/" rel="tag"><i class="fa fa-tag"></i> jellyfin</a>
+              <a href="/tags/%E6%9E%81%E5%BD%B1%E6%B4%BE/" rel="tag"><i class="fa fa-tag"></i> 极影派</a>
+              <a href="/tags/Kodi/" rel="tag"><i class="fa fa-tag"></i> Kodi</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" rel="prev" title="GitNote的简单使用记录">
+      <i class="fa fa-chevron-left"></i> GitNote的简单使用记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/" rel="next" title="家庭多媒体中心（2）：管理篇">
+      家庭多媒体中心（2）：管理篇 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#离线查询："><span class="nav-number">1.</span> <span class="nav-text">离线查询：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载片源："><span class="nav-number">2.</span> <span class="nav-text">下载片源：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#影片管理："><span class="nav-number">3.</span> <span class="nav-text">影片管理：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#影片播放："><span class="nav-number">4.</span> <span class="nav-text">影片播放：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流媒体服务："><span class="nav-number">5.</span> <span class="nav-text">流媒体服务：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">24 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitNote的简单使用记录">
+<meta property="og:url" content="https://laosu.ml/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/0-1588480470552.jpg">
+<meta property="article:published_time" content="2020-04-29T03:40:00.000Z">
+<meta property="article:modified_time" content="2020-05-03T04:35:41.564Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="GitNote">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/0-1588480470552.jpg">
+
+<link rel="canonical" href="https://laosu.ml/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>GitNote的简单使用记录 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GitNote的简单使用记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-29 11:40:00" itemprop="dateCreated datePublished" datetime="2020-04-29T11:40:00+08:00">2020-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-03 12:35:41" itemprop="dateModified" datetime="2020-05-03T12:35:41+08:00">2020-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/0-1588480470552.jpg" itemprop="contentUrl">
+        </div>
+        <p><strong>什么是GitHub</strong></p>
+<blockquote>
+<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是git</strong></p>
+<blockquote>
+<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Markdown</strong></p>
+<blockquote>
+<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
+</blockquote>
+<p><strong>什么是GitNote</strong></p>
+<blockquote>
+<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
+<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
+<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
+<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
+<p><strong>特别注意：</strong></p>
+<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
+<p>点击 Create repository 完成创建</p>
+<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
+<p><strong>特别注意：</strong></p>
+<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
+<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
+<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
+<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
+<ol>
+<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>解压到 {user}/.gitnote/plugins 目录</p>
+</li>
+<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
+</li>
+<li><p>重启 GitNote</p>
+</li>
+</ol>
+<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
+<li>不要用菜单栏的插入图片，这个不会上传；</li>
+<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
+</ul>
+<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
+<p>记得要先注册</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
+<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
+<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
+<li>网络错误：</li>
+</ul>
+<p>比如上传github图床时，时不时出现的网络错误</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
+<ul>
+<li>预览问题：</li>
+</ul>
+<p>上传成功的图片不显示，而只是显示一个title</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
+<p>而实际上在github的网页上应该是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
+<ul>
+<li>文档历史</li>
+</ul>
+<p>不知道什么原因，一直没有文档的编辑历史</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
+<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
+<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
+<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
+<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\29\在GitHub上搭建Blog\" rel="bookmark">在GitHub上搭建Blog</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\Hexo-theme-next主题\" rel="bookmark">Hexo-theme-next主题</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" title="GitNote的简单使用记录">https://laosu.ml/2020/04/29/GitNote的简单使用记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+              <a href="/tags/GitNote/" rel="tag"><i class="fa fa-tag"></i> GitNote</a>
+              <a href="/tags/Markdown/" rel="tag"><i class="fa fa-tag"></i> Markdown</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/" rel="prev" title="在GitHub上搭建Blog">
+      <i class="fa fa-chevron-left"></i> 在GitHub上搭建Blog
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/" rel="next" title="家庭多媒体中心（1）：综合篇">
+      家庭多媒体中心（1）：综合篇 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、申请GitHub账号"><span class="nav-number">1.</span> <span class="nav-text">1、申请GitHub账号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、建私有仓库，存放笔记"><span class="nav-number">2.</span> <span class="nav-text">2、建私有仓库，存放笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、建公有仓库，存放图片"><span class="nav-number">3.</span> <span class="nav-text">3、建公有仓库，存放图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、下载、配置Gitnote"><span class="nav-number">4.</span> <span class="nav-text">4、下载、配置Gitnote</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1、-添加本地已经-GIT-仓库"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、 添加本地已经 GIT 仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2、-克隆一个仓库"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、 克隆一个仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、安装图床插件"><span class="nav-number">5.</span> <span class="nav-text">5、安装图床插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1、从插件市场"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、从插件市场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2、gitnote-手动插件安装方式"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、gitnote 手动插件安装方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、几个坑"><span class="nav-number">6.</span> <span class="nav-text">6、几个坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1、github图床问题"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、github图床问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2、网页剪藏问题"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、网页剪藏问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3、各种莫名错误"><span class="nav-number">6.3.</span> <span class="nav-text">6.3、各种莫名错误</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">27k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">24 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
