@@ -94,176 +94,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
-<blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
-</blockquote>
-<p><strong>frp是什么？</strong></p>
-<blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
-</blockquote>
-<p><strong>WebDAV是什么？</strong></p>
-<blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
-</blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
-
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在GitHub上搭建Blog</title>
-    <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
-    <content><![CDATA[<p><strong>什么是Hexo</strong></p>
-<blockquote>
-<p>Hexo是一款基于Node.js的静态博客框架，依赖少、易于安装使用，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。可以方便的托管在GitHub和Heroku上，是搭建博客的首选框架。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4019-1588127705678.png" alt="title"></p>
-<p>之前我们聊过GitNote的简单使用记录，一款使用Git仓库来保存数据的笔记软件。</p>
-<p>但笔记并不都适宜公开，像我的笔记中还有很多跟工作相关的内容，比如待办事项等，所以我们在创建笔记仓库时，建议选择的是Private属性。如果我们有想要公开分享的内容时怎么办呢？这就要用到我们今天介绍的Hexo。</p>
-<p>具体的安装步骤，仔细阅读参考文档即可。</p>
-<p>这里给大家看看效果：<span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy5naXRodWIuaW8v">https://wbsu2003.github.io/<i class="fa fa-external-link-alt"></i></span></p>
-<p><strong>介绍下一篇文章的发布流程：</strong></p>
-<ol>
-<li><strong>编辑</strong><blockquote>
-<p>在GitNote中编写Markdown笔记（图床建议使用GitHub）；</p>
-</blockquote>
-</li>
-<li><strong>拷贝</strong><blockquote>
-<p>将MD文档，复制到blog\source_poster\目录下；</p>
-</blockquote>
-</li>
-<li><strong>预览</strong><blockquote>
-<p>在blog目录中，cmd模式下依次运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4022-1588129251266.png" alt="title"></p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>在浏览器中打开网址：<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw5Y2z5Y+v55yL5Yiw6aKE6KeI5pWI5p6c">http://localhost:4000即可看到预览效果<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<ol start="4">
-<li><strong>发布到Hexo</strong><blockquote>
-<p>在blog目录中，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-<p>然后在浏览器中打开网址：https://用户名.github.io</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<ol start="5">
-<li><strong>发布到微信公众号</strong><blockquote>
-<p>微信公众号并不支持MD，所以我们只能复制右侧的预览界面</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-112742-1588130920726.jpg" alt="title"></p>
-<blockquote>
-<p>微信公众号不支持第三方图床，直接粘贴过来会显示图片错误，所以需要重新上传图片</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-113036-1588131074459.jpg" alt="title"></p>
-<blockquote>
-<p>稍微再调整下字体、格式等等就可以发布了。</p>
-</blockquote>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mv">https://hexo.io/zh-cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>GitHub+Hexo 搭建个人网站详细教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjYyNTI0OQ==">https://zhuanlan.zhihu.com/p/26625249<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>Blog</tag>
-        <tag>Hexo</tag>
-        <tag>微信公众号</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo-theme-next主题</title>
     <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是NexT</strong></p>
@@ -320,8 +150,56 @@
       </categories>
       <tags>
         <tag>GitHub</tag>
-        <tag>Hexo</tag>
         <tag>NexT</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>RaiDrive</tag>
+        <tag>frp</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -421,14 +299,88 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
         <tag>刮削器</tag>
         <tag>Scrapers</tag>
         <tag>Plex</tag>
+        <tag>Emby</tag>
         <tag>ZogVM</tag>
+        <tag>jellyfin</tag>
         <tag>极影派</tag>
         <tag>Kodi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在GitHub上搭建Blog</title>
+    <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
+    <content><![CDATA[<p><strong>什么是Hexo</strong></p>
+<blockquote>
+<p>Hexo是一款基于Node.js的静态博客框架，依赖少、易于安装使用，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。可以方便的托管在GitHub和Heroku上，是搭建博客的首选框架。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4019-1588127705678.png" alt="title"></p>
+<p>之前我们聊过GitNote的简单使用记录，一款使用Git仓库来保存数据的笔记软件。</p>
+<p>但笔记并不都适宜公开，像我的笔记中还有很多跟工作相关的内容，比如待办事项等，所以我们在创建笔记仓库时，建议选择的是Private属性。如果我们有想要公开分享的内容时怎么办呢？这就要用到我们今天介绍的Hexo。</p>
+<p>具体的安装步骤，仔细阅读参考文档即可。</p>
+<p>这里给大家看看效果：<span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy5naXRodWIuaW8v">https://wbsu2003.github.io/<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>介绍下一篇文章的发布流程：</strong></p>
+<ol>
+<li><strong>编辑</strong><blockquote>
+<p>在GitNote中编写Markdown笔记（图床建议使用GitHub）；</p>
+</blockquote>
+</li>
+<li><strong>拷贝</strong><blockquote>
+<p>将MD文档，复制到blog\source_poster\目录下；</p>
+</blockquote>
+</li>
+<li><strong>预览</strong><blockquote>
+<p>在blog目录中，cmd模式下依次运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4022-1588129251266.png" alt="title"></p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>在浏览器中打开网址：<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw5Y2z5Y+v55yL5Yiw6aKE6KeI5pWI5p6c">http://localhost:4000即可看到预览效果<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<ol start="4">
+<li><strong>发布到Hexo</strong><blockquote>
+<p>在blog目录中，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<p>然后在浏览器中打开网址：https://用户名.github.io</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<ol start="5">
+<li><strong>发布到微信公众号</strong><blockquote>
+<p>微信公众号并不支持MD，所以我们只能复制右侧的预览界面</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-112742-1588130920726.jpg" alt="title"></p>
+<blockquote>
+<p>微信公众号不支持第三方图床，直接粘贴过来会显示图片错误，所以需要重新上传图片</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-113036-1588131074459.jpg" alt="title"></p>
+<blockquote>
+<p>稍微再调整下字体、格式等等就可以发布了。</p>
+</blockquote>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mv">https://hexo.io/zh-cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>GitHub+Hexo 搭建个人网站详细教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjYyNTI0OQ==">https://zhuanlan.zhihu.com/p/26625249<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
+        <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>微信公众号</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -513,6 +465,54 @@
         <tag>Kodi</tag>
         <tag>MediaElch</tag>
         <tag>tinyMediaManager</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
       </tags>
   </entry>
   <entry>
@@ -606,6 +606,52 @@
       </tags>
   </entry>
   <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>MariaDB</tag>
+        <tag>群晖</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>家庭多媒体中心（4）：流媒体服务器篇</title>
     <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
     <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
@@ -665,11 +711,97 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Emby</tag>
         <tag>Plex</tag>
+        <tag>Emby</tag>
         <tag>流媒体服务器</tag>
         <tag>Jellyfin</tag>
         <tag>威动影音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>打造一个可以随身携带的“藏书阁”</title>
+    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
+    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
+<blockquote>
+<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Calibre-Web？</strong></p>
+<blockquote>
+<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
+</blockquote>
+<p><strong>什么是OPDS？</strong></p>
+<blockquote>
+<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
+</blockquote>
+<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
+<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
+<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
+<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
+<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
+<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
+<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
+<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
+<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
+<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
+<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
+
+<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
+<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
+<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
+<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
+<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
+<ul>
+<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
+<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
+<blockquote>
+<ul>
+<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
+<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
+<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
+<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
+<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Calibre</tag>
+        <tag>Calibre-Web</tag>
+        <tag>calibre-webserver</tag>
+        <tag>my-calibre-webserver-docker</tag>
+        <tag>OPDS</tag>
       </tags>
   </entry>
   <entry>
@@ -775,199 +907,9 @@
       </categories>
       <tags>
         <tag>Kodi</tag>
+        <tag>MariaDB</tag>
         <tag>NAS</tag>
         <tag>KodiWebPortal</tag>
-        <tag>MariaDB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>MariaDB</tag>
-        <tag>群晖</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>打造一个可以随身携带的“藏书阁”</title>
-    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
-    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
-<blockquote>
-<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Calibre-Web？</strong></p>
-<blockquote>
-<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
-</blockquote>
-<p><strong>什么是OPDS？</strong></p>
-<blockquote>
-<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
-</blockquote>
-<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
-<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
-<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
-<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
-<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
-<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
-<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
-<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
-<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
-<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
-<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
-
-<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
-<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
-<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
-<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
-<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
-<ul>
-<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
-<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
-<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
-<blockquote>
-<ul>
-<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
-<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
-<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
-<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
-<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Calibre</tag>
-        <tag>Calibre-Web</tag>
-        <tag>calibre-webserver</tag>
-        <tag>my-calibre-webserver-docker</tag>
-        <tag>OPDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>苏玉云作品</category>
-      </categories>
-      <tags>
-        <tag>服装设计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>NAS</tag>
-        <tag>群晖</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
       </tags>
   </entry>
   <entry>
@@ -1022,13 +964,71 @@
       </categories>
       <tags>
         <tag>frp</tag>
-        <tag>NAS</tag>
         <tag>群晖</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
+        <tag>NAS</tag>
         <tag>黑群</tag>
         <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
         <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>群晖</tag>
+        <tag>NAS</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>苏玉云作品</category>
+      </categories>
+      <tags>
+        <tag>服装设计</tag>
       </tags>
   </entry>
   <entry>
