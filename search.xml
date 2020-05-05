@@ -94,6 +94,54 @@
       </tags>
   </entry>
   <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>RaiDrive</tag>
+        <tag>frp</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>个人专属的音乐库</title>
     <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
     <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
@@ -139,124 +187,6 @@
         <tag>Ampache</tag>
         <tag>SoundCloud</tag>
         <tag>Google Play Music</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo-theme-next主题</title>
-    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是NexT</strong></p>
-<blockquote>
-<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
-<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
-<blockquote>
-<ul>
-<li>去掉了顶部的banner</li>
-<li>对Markdown的引用显示的更友好</li>
-<li>没有全部居中显示</li>
-</ul>
-</blockquote>
-<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
-</blockquote>
-<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
-<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
-<p>回到<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
-<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
-<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
-<p>在编译发布一次</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
-<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
-<p>需要创建相应的文件夹，比如标签：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>NexT</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>家庭多媒体中心（1）：综合篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
-<blockquote>
-<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
-</blockquote>
-<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
-<blockquote>
-<ol>
-<li>综合篇（本文）</li>
-<li>影片的管理</li>
-<li>影片的播放</li>
-<li>流媒体服务</li>
-<li>离线查询</li>
-</ol>
-</blockquote>
-<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
-<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
-<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
-<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
-<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
-<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
-<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
-<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
-<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
-<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
-</ul>
-<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
-<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
-<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
-<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>刮削器</tag>
-        <tag>Scrapers</tag>
-        <tag>Plex</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
@@ -327,58 +257,71 @@
         <tag>GitHub</tag>
         <tag>GitNote</tag>
         <tag>Markdown</tag>
-        <tag>Hexo</tag>
         <tag>Blog</tag>
+        <tag>Hexo</tag>
         <tag>微信公众号</tag>
         <tag>博客</tag>
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+    <title>Hexo-theme-next主题</title>
+    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是NexT</strong></p>
 <blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
 </blockquote>
-<p><strong>frp是什么？</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
+<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
 <blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+<ul>
+<li>去掉了顶部的banner</li>
+<li>对Markdown的引用显示的更友好</li>
+<li>没有全部居中显示</li>
+</ul>
 </blockquote>
-<p><strong>WebDAV是什么？</strong></p>
+<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
+<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
 </blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
+<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
+<p>回到<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
 
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
+<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
+<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
+<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
+<p>在编译发布一次</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
+<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
+<p>需要创建相应的文件夹，比如标签：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+
+<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
+        <tag>GitHub</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
@@ -429,6 +372,63 @@
         <tag>GCP</tag>
         <tag>Zerotier</tag>
         <tag>Moon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（1）：综合篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
+<blockquote>
+<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
+</blockquote>
+<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
+<blockquote>
+<ol>
+<li>综合篇（本文）</li>
+<li>影片的管理</li>
+<li>影片的播放</li>
+<li>流媒体服务</li>
+<li>离线查询</li>
+</ol>
+</blockquote>
+<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
+<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
+<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
+<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
+<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
+<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
+<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
+<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
+<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
+</ul>
+<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
+<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
+<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
+<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>刮削器</tag>
+        <tag>Scrapers</tag>
+        <tag>Plex</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
@@ -513,73 +513,6 @@
         <tag>Kodi</tag>
         <tag>MediaElch</tag>
         <tag>tinyMediaManager</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
-    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇</li>
-<li>播放篇</li>
-<li>流媒体服务（本文）</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
-<p>网上别人总结的一些优缺点：</p>
-<blockquote>
-<ul>
-<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
-</li>
-<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
-</li>
-<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
-</li>
-<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
-<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
-<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
-<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
-<p>界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
-<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
-<ul>
-<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
-<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
-<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Emby</tag>
-        <tag>Plex</tag>
-        <tag>流媒体服务器</tag>
-        <tag>Jellyfin</tag>
-        <tag>威动影音</tag>
       </tags>
   </entry>
   <entry>
@@ -670,6 +603,73 @@
         <tag>MX Player</tag>
         <tag>小白文件管理器</tag>
         <tag>samba</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
+    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇</li>
+<li>播放篇</li>
+<li>流媒体服务（本文）</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
+<p>网上别人总结的一些优缺点：</p>
+<blockquote>
+<ul>
+<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
+</li>
+<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
+</li>
+<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
+</li>
+<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
+<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p>界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<ul>
+<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
+<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
+<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>Plex</tag>
+        <tag>流媒体服务器</tag>
+        <tag>Jellyfin</tag>
+        <tag>威动影音</tag>
       </tags>
   </entry>
   <entry>
@@ -827,35 +827,6 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>NAS</tag>
-        <tag>群晖</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>打造一个可以随身携带的“藏书阁”</title>
     <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
     <content><![CDATA[<p><strong>什么是calibre？</strong></p>
@@ -971,6 +942,35 @@
       </tags>
   </entry>
   <entry>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>NAS</tag>
+        <tag>群晖</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>群晖app访问遇到的端口问题</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是 NAS</strong></p>
@@ -1034,7 +1034,7 @@
   <entry>
     <title>遇到“Error spawn failed”错误</title>
     <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
 
 <p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
