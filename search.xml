@@ -110,6 +110,99 @@
       </tags>
   </entry>
   <entry>
+    <title>GitNote的简单使用记录</title>
+    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
+<blockquote>
+<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是git</strong></p>
+<blockquote>
+<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Markdown</strong></p>
+<blockquote>
+<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
+</blockquote>
+<p><strong>什么是GitNote</strong></p>
+<blockquote>
+<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
+<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
+<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
+<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
+<p><strong>特别注意：</strong></p>
+<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
+<p>点击 Create repository 完成创建</p>
+<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
+<p><strong>特别注意：</strong></p>
+<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
+<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
+<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
+<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
+<ol>
+<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>解压到 {user}/.gitnote/plugins 目录</p>
+</li>
+<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
+</li>
+<li><p>重启 GitNote</p>
+</li>
+</ol>
+<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
+<li>不要用菜单栏的插入图片，这个不会上传；</li>
+<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
+</ul>
+<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
+<p>记得要先注册</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
+<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
+<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
+<li>网络错误：</li>
+</ul>
+<p>比如上传github图床时，时不时出现的网络错误</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
+<ul>
+<li>预览问题：</li>
+</ul>
+<p>上传成功的图片不显示，而只是显示一个title</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
+<p>而实际上在github的网页上应该是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
+<ul>
+<li>文档历史</li>
+</ul>
+<p>不知道什么原因，一直没有文档的编辑历史</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
+<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
+<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
+<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
+<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>git</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在GCP上安装Zerotier的Moon服务器</title>
     <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
@@ -208,99 +301,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitNote的简单使用记录</title>
-    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
-<blockquote>
-<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是git</strong></p>
-<blockquote>
-<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Markdown</strong></p>
-<blockquote>
-<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
-</blockquote>
-<p><strong>什么是GitNote</strong></p>
-<blockquote>
-<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
-<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
-<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
-<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
-<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
-<p><strong>特别注意：</strong></p>
-<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
-<p>点击 Create repository 完成创建</p>
-<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
-<p><strong>特别注意：</strong></p>
-<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
-<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
-<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
-<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
-<ol>
-<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>解压到 {user}/.gitnote/plugins 目录</p>
-</li>
-<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
-</li>
-<li><p>重启 GitNote</p>
-</li>
-</ol>
-<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
-<li>不要用菜单栏的插入图片，这个不会上传；</li>
-<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
-</ul>
-<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
-<p>记得要先注册</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
-<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
-<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
-<li>网络错误：</li>
-</ul>
-<p>比如上传github图床时，时不时出现的网络错误</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
-<ul>
-<li>预览问题：</li>
-</ul>
-<p>上传成功的图片不显示，而只是显示一个title</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
-<p>而实际上在github的网页上应该是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
-<ul>
-<li>文档历史</li>
-</ul>
-<p>不知道什么原因，一直没有文档的编辑历史</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
-<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
-<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
-<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
-<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>git</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在GitHub上搭建Blog</title>
     <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
     <content><![CDATA[<p><strong>什么是Hexo</strong></p>
@@ -372,63 +372,6 @@
         <tag>Blog</tag>
         <tag>微信公众号</tag>
         <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>家庭多媒体中心（1）：综合篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
-<blockquote>
-<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
-</blockquote>
-<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
-<blockquote>
-<ol>
-<li>综合篇（本文）</li>
-<li>影片的管理</li>
-<li>影片的播放</li>
-<li>流媒体服务</li>
-<li>离线查询</li>
-</ol>
-</blockquote>
-<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
-<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
-<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
-<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
-<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
-<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
-<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
-<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
-<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
-<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
-</ul>
-<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
-<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
-<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
-<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>刮削器</tag>
-        <tag>Scrapers</tag>
-        <tag>Plex</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
@@ -508,11 +451,11 @@
       </categories>
       <tags>
         <tag>刮削器</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
         <tag>Kodi</tag>
         <tag>MediaElch</tag>
         <tag>tinyMediaManager</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
       </tags>
   </entry>
   <entry>
@@ -666,10 +609,67 @@
       </categories>
       <tags>
         <tag>Emby</tag>
-        <tag>Plex</tag>
         <tag>流媒体服务器</tag>
         <tag>Jellyfin</tag>
+        <tag>Plex</tag>
         <tag>威动影音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（1）：综合篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
+<blockquote>
+<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
+</blockquote>
+<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
+<blockquote>
+<ol>
+<li>综合篇（本文）</li>
+<li>影片的管理</li>
+<li>影片的播放</li>
+<li>流媒体服务</li>
+<li>离线查询</li>
+</ol>
+</blockquote>
+<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
+<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
+<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
+<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
+<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
+<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
+<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
+<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
+<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
+</ul>
+<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
+<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
+<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
+<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>刮削器</tag>
+        <tag>Kodi</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Plex</tag>
+        <tag>Scrapers</tag>
       </tags>
   </entry>
   <entry>
@@ -827,6 +827,67 @@
       </tags>
   </entry>
   <entry>
+    <title>群晖app访问遇到的端口问题</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
+<blockquote>
+<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
+</blockquote>
+<p><strong>什么是 黑群</strong></p>
+<blockquote>
+<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
+</blockquote>
+<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
+<blockquote>
+<ol>
+<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
+</li>
+<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
+</li>
+<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
+</li>
+<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
+</li>
+<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
+</li>
+</ol>
+</blockquote>
+<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
+<p>登录成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
+<p>同样的设置，群晖管家、DS file却一直登录失败</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
+<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
+<p>大功告成！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
+<blockquote>
+<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
+</blockquote>
+<p>参考文档</p>
+<blockquote>
+<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>群晖</tag>
+        <tag>NAS</tag>
+        <tag>黑群</tag>
+        <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>打造一个可以随身携带的“藏书阁”</title>
     <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
     <content><![CDATA[<p><strong>什么是calibre？</strong></p>
@@ -910,67 +971,6 @@
         <tag>calibre-webserver</tag>
         <tag>my-calibre-webserver-docker</tag>
         <tag>OPDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>群晖app访问遇到的端口问题</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
-<blockquote>
-<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
-</blockquote>
-<p><strong>什么是 黑群</strong></p>
-<blockquote>
-<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
-</blockquote>
-<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
-<blockquote>
-<ol>
-<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
-</li>
-<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
-</li>
-<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
-</li>
-<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
-</li>
-<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
-</li>
-</ol>
-</blockquote>
-<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
-<p>登录成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
-<p>同样的设置，群晖管家、DS file却一直登录失败</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
-<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
-<p>大功告成！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
-<blockquote>
-<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
-</blockquote>
-<p>参考文档</p>
-<blockquote>
-<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>NAS</tag>
-        <tag>黑群</tag>
-        <tag>QuickConnect</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
