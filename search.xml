@@ -94,6 +94,67 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo-theme-next主题</title>
+    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是NexT</strong></p>
+<blockquote>
+<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
+<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
+<blockquote>
+<ul>
+<li>去掉了顶部的banner</li>
+<li>对Markdown的引用显示的更友好</li>
+<li>没有全部居中显示</li>
+</ul>
+</blockquote>
+<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
+<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
+</blockquote>
+<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
+<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
+<p>回到<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
+<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
+<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
+<p>在编译发布一次</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
+<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
+<p>需要创建相应的文件夹，比如标签：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+
+<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>NexT</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>免费在线流程图Draw.io</title>
     <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
     <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
@@ -153,55 +214,112 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo-theme-next主题</title>
-    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是NexT</strong></p>
-<blockquote>
-<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
-<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在GitHub上搭建Blog</title>
+    <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
+    <content><![CDATA[<p><strong>什么是Hexo</strong></p>
+<blockquote>
+<p>Hexo是一款基于Node.js的静态博客框架，依赖少、易于安装使用，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。可以方便的托管在GitHub和Heroku上，是搭建博客的首选框架。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4019-1588127705678.png" alt="title"></p>
+<p>之前我们聊过GitNote的简单使用记录，一款使用Git仓库来保存数据的笔记软件。</p>
+<p>但笔记并不都适宜公开，像我的笔记中还有很多跟工作相关的内容，比如待办事项等，所以我们在创建笔记仓库时，建议选择的是Private属性。如果我们有想要公开分享的内容时怎么办呢？这就要用到我们今天介绍的Hexo。</p>
+<p>具体的安装步骤，仔细阅读参考文档即可。</p>
+<p>这里给大家看看效果：<span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy5naXRodWIuaW8v">https://wbsu2003.github.io/<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>介绍下一篇文章的发布流程：</strong></p>
+<ol>
+<li><strong>编辑</strong><blockquote>
+<p>在GitNote中编写Markdown笔记（图床建议使用GitHub）；</p>
+</blockquote>
+</li>
+<li><strong>拷贝</strong><blockquote>
+<p>将MD文档，复制到blog\source_poster\目录下；</p>
+</blockquote>
+</li>
+<li><strong>预览</strong><blockquote>
+<p>在blog目录中，cmd模式下依次运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4022-1588129251266.png" alt="title"></p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>在浏览器中打开网址：<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw5Y2z5Y+v55yL5Yiw6aKE6KeI5pWI5p6c">http://localhost:4000即可看到预览效果<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<ol start="4">
+<li><strong>发布到Hexo</strong><blockquote>
+<p>在blog目录中，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<p>然后在浏览器中打开网址：https://用户名.github.io</p>
+</blockquote>
+</li>
+</ol>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
-<blockquote>
-<ul>
-<li>去掉了顶部的banner</li>
-<li>对Markdown的引用显示的更友好</li>
-<li>没有全部居中显示</li>
-</ul>
+<ol start="5">
+<li><strong>发布到微信公众号</strong><blockquote>
+<p>微信公众号并不支持MD，所以我们只能复制右侧的预览界面</p>
 </blockquote>
-<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-112742-1588130920726.jpg" alt="title"></p>
 <blockquote>
-<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
+<p>微信公众号不支持第三方图床，直接粘贴过来会显示图片错误，所以需要重新上传图片</p>
 </blockquote>
-<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
-<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
-<p>回到<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
-<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
-<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
-<p>在编译发布一次</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
-<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
-<p>需要创建相应的文件夹，比如标签：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-113036-1588131074459.jpg" alt="title"></p>
+<blockquote>
+<p>稍微再调整下字体、格式等等就可以发布了。</p>
+</blockquote>
 <p><strong>参考文档</strong></p>
 <blockquote>
-<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
+<p>官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mv">https://hexo.io/zh-cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>GitHub+Hexo 搭建个人网站详细教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjYyNTI0OQ==">https://zhuanlan.zhihu.com/p/26625249<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -209,8 +327,12 @@
       </categories>
       <tags>
         <tag>GitHub</tag>
-        <tag>NexT</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
         <tag>Hexo</tag>
+        <tag>Blog</tag>
+        <tag>微信公众号</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -312,128 +434,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在GitHub上搭建Blog</title>
-    <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
-    <content><![CDATA[<p><strong>什么是Hexo</strong></p>
-<blockquote>
-<p>Hexo是一款基于Node.js的静态博客框架，依赖少、易于安装使用，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。可以方便的托管在GitHub和Heroku上，是搭建博客的首选框架。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4019-1588127705678.png" alt="title"></p>
-<p>之前我们聊过GitNote的简单使用记录，一款使用Git仓库来保存数据的笔记软件。</p>
-<p>但笔记并不都适宜公开，像我的笔记中还有很多跟工作相关的内容，比如待办事项等，所以我们在创建笔记仓库时，建议选择的是Private属性。如果我们有想要公开分享的内容时怎么办呢？这就要用到我们今天介绍的Hexo。</p>
-<p>具体的安装步骤，仔细阅读参考文档即可。</p>
-<p>这里给大家看看效果：<span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy5naXRodWIuaW8v">https://wbsu2003.github.io/<i class="fa fa-external-link-alt"></i></span></p>
-<p><strong>介绍下一篇文章的发布流程：</strong></p>
-<ol>
-<li><strong>编辑</strong><blockquote>
-<p>在GitNote中编写Markdown笔记（图床建议使用GitHub）；</p>
-</blockquote>
-</li>
-<li><strong>拷贝</strong><blockquote>
-<p>将MD文档，复制到blog\source_poster\目录下；</p>
-</blockquote>
-</li>
-<li><strong>预览</strong><blockquote>
-<p>在blog目录中，cmd模式下依次运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4022-1588129251266.png" alt="title"></p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>在浏览器中打开网址：<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo0MDAw5Y2z5Y+v55yL5Yiw6aKE6KeI5pWI5p6c">http://localhost:4000即可看到预览效果<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<ol start="4">
-<li><strong>发布到Hexo</strong><blockquote>
-<p>在blog目录中，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-<p>然后在浏览器中打开网址：https://用户名.github.io</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<ol start="5">
-<li><strong>发布到微信公众号</strong><blockquote>
-<p>微信公众号并不支持MD，所以我们只能复制右侧的预览界面</p>
-</blockquote>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-112742-1588130920726.jpg" alt="title"></p>
-<blockquote>
-<p>微信公众号不支持第三方图床，直接粘贴过来会显示图片错误，所以需要重新上传图片</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-113036-1588131074459.jpg" alt="title"></p>
-<blockquote>
-<p>稍微再调整下字体、格式等等就可以发布了。</p>
-</blockquote>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2RvY3Mv">https://hexo.io/zh-cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>GitHub+Hexo 搭建个人网站详细教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjYyNTI0OQ==">https://zhuanlan.zhihu.com/p/26625249<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>Hexo</tag>
-        <tag>Blog</tag>
-        <tag>微信公众号</tag>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
-
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在Netlify上部署Hexo</title>
     <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
@@ -526,90 +526,6 @@
         <tag>seafile</tag>
         <tag>owncloud</tag>
         <tag>kodexplorer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>家庭多媒体中心（2）：管理篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
-<blockquote>
-<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
-</blockquote>
-<p><strong>什么是MediaElch</strong></p>
-<blockquote>
-<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
-</blockquote>
-<p><strong>什么是tinyMediaManager</strong></p>
-<blockquote>
-<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
-</blockquote>
-<p><strong>什么是ZogVM</strong></p>
-<blockquote>
-<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
-</blockquote>
-<p><strong>什么是极影派</strong></p>
-<blockquote>
-<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
-</blockquote>
-<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇（本文）</li>
-<li>播放篇</li>
-<li>流媒体服务</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
-<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
-<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
-<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
-<p>同步设置界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
-<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
-<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>这些软件都很优秀，总会有一款适合你的需求。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
-<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>刮削器</tag>
-        <tag>Kodi</tag>
-        <tag>MediaElch</tag>
-        <tag>tinyMediaManager</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
       </tags>
   </entry>
   <entry>
@@ -728,78 +644,95 @@
         <tag>Emby</tag>
         <tag>jellyfin</tag>
         <tag>刮削器</tag>
-        <tag>Kodi</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
         <tag>Scrapers</tag>
         <tag>Plex</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
-    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+    <title>家庭多媒体中心（2）：管理篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
+<blockquote>
+<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
+</blockquote>
+<p><strong>什么是MediaElch</strong></p>
+<blockquote>
+<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
+</blockquote>
+<p><strong>什么是tinyMediaManager</strong></p>
+<blockquote>
+<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
+</blockquote>
+<p><strong>什么是ZogVM</strong></p>
+<blockquote>
+<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
+</blockquote>
+<p><strong>什么是极影派</strong></p>
+<blockquote>
+<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
+</blockquote>
+<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
 <blockquote>
 <ol>
 <li>综合篇</li>
-<li>管理篇</li>
+<li>管理篇（本文）</li>
 <li>播放篇</li>
-<li>流媒体服务（本文）</li>
+<li>流媒体服务</li>
 <li>查询篇</li>
 </ol>
 </blockquote>
-<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
-<p>网上别人总结的一些优缺点：</p>
-<blockquote>
-<ul>
-<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
-</li>
-<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
-</li>
-<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
-</li>
-<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
-<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
-<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
-<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
-<p>界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
-<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
-<ul>
-<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
-<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
-
-
+<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
+<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
+<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
+<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
+<p>同步设置界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
+<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
+<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>这些软件都很优秀，总会有一款适合你的需求。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
-<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
+<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Emby</tag>
-        <tag>Plex</tag>
-        <tag>流媒体服务器</tag>
-        <tag>Jellyfin</tag>
-        <tag>威动影音</tag>
+        <tag>刮削器</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
+        <tag>MediaElch</tag>
+        <tag>tinyMediaManager</tag>
       </tags>
   </entry>
   <entry>
@@ -890,6 +823,73 @@
         <tag>MX Player</tag>
         <tag>小白文件管理器</tag>
         <tag>samba</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
+    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇</li>
+<li>播放篇</li>
+<li>流媒体服务（本文）</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
+<p>网上别人总结的一些优缺点：</p>
+<blockquote>
+<ul>
+<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
+</li>
+<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
+</li>
+<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
+</li>
+<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
+<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p>界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<ul>
+<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
+<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
+<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>Plex</tag>
+        <tag>流媒体服务器</tag>
+        <tag>Jellyfin</tag>
+        <tag>威动影音</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,52 +1001,6 @@
       </tags>
   </entry>
   <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>打造一个可以随身携带的“藏书阁”</title>
     <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
     <content><![CDATA[<p><strong>什么是calibre？</strong></p>
@@ -1133,108 +1087,37 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
 <blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>frp</tag>
-        <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>苏玉云作品</category>
-      </categories>
-      <tags>
-        <tag>服装设计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>适合小团队的Kanboard项目管理软件</title>
-    <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
-    <content><![CDATA[<p><strong>什么是kanban？</strong></p>
-<blockquote>
-<p>看板管理(Kanban)，常作「Kanban管理」，是豐田生產模式中的重要概念，指為了達到及時生產方式控制現場生產流程的工具。及時生產方式中的拉式生產系統可以使信息的流程縮短，並配合定量、固定裝貨容器等方式，而使生產過程中的物料流動順暢。 在看板標示系統中常將塑料或紙製成薄板，將產品名稱及數量寫於其上，故此得名。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Kanboard？</strong></p>
-<blockquote>
-<p>Kanboard专注于看板管理的项目管理软件。</p>
-</blockquote>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Kanboard是一个php的开源看板web程序，非常适合异地办公的小型团队使用。</p>
-<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>没有用代码部署方式，而是继续采用了Docker部署的方式。</p>
-<ul>
-<li>在docker注册表中搜索“kanboard”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589094844528-1589094844529.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589094926401-1589094926404.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>先建好需要用的文件夹</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095223433-1589095223434.png" alt="title"></p>
-<ul>
-<li>进【高级设置】，【卷】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095278692-1589095278694.png" alt="title"></p>
-<ul>
-<li>【端口】的设置，只要避免冲突就可以</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095325676-1589095325679.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:9080，默认的账号/密码是：admin/admin</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095579595-1589095579597.png" alt="title"></p>
-<p>Kanboard 是一个简单的可视化任务板 Web 应用程序，它能使你的项目管理更加简单有效。直观清晰的任务概览看板是视觉上了解项目当前状态的最佳方法。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589096078814-1589096078818.png" alt="title"></p>
-<p>Kanboard还能通过安装一些plugins扩展来扩展Kanboard的功能。插件下载地址：<span class="exturl" data-url="aHR0cHM6Ly9rYW5ib2FyZC5vcmcvcGx1Z2lucy5odG1s">https://kanboard.org/plugins.html<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589096806531-1589096806532.png" alt="title"></p>
-<p>目前Kanboard已经支持超过30种语言，其中包括了简体中文，基本上不需要培训就会使用。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Kanboard官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rYW5ib2FyZC5vcmcv">https://kanboard.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Kanboard代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thbmJvYXJkL2thbmJvYXJk">https://github.com/kanboard/kanboard<i class="fa fa-external-link-alt"></i></span></p>
-<p>KANBOARD：免费开源项目管理工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zaGVzaHVpLm1lL2RvY3Mva2FuYm9hcmQtcHJvamVjdC1tYW5hZ2VtZW50">https://sheshui.me/docs/kanboard-project-management<i class="fa fa-external-link-alt"></i></span></p>
-<p>open source软件：kanboard介绍(项目看板）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1pbmdfemhhby9hcnRpY2xlL2RldGFpbHMvOTAyOTUzNTQ=">https://blog.csdn.net/junming_zhao/article/details/90295354<i class="fa fa-external-link-alt"></i></span></p>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -1242,39 +1125,11 @@
       </categories>
       <tags>
         <tag>群晖</tag>
-        <tag>看板</tag>
-        <tag>Kanboard</tag>
-        <tag>kanban</tag>
-        <tag>项目管理软件</tag>
-        <tag>hide</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>遇到“Error spawn failed”错误</title>
-    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-
-<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
-
-<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
-<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>deploy_git</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
       </tags>
   </entry>
   <entry>
@@ -1331,11 +1186,156 @@
         <tag>群晖</tag>
         <tag>frp</tag>
         <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
         <tag>黑群</tag>
         <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
         <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>苏玉云作品</category>
+      </categories>
+      <tags>
+        <tag>服装设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>frp</tag>
+        <tag>NAS</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>遇到“Error spawn failed”错误</title>
+    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+
+<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
+
+<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
+<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>deploy_git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>适合小团队的Kanboard项目管理软件</title>
+    <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<p><strong>什么是kanban？</strong></p>
+<blockquote>
+<p>看板管理(Kanban)，常作「Kanban管理」，是豐田生產模式中的重要概念，指為了達到及時生產方式控制現場生產流程的工具。及時生產方式中的拉式生產系統可以使信息的流程縮短，並配合定量、固定裝貨容器等方式，而使生產過程中的物料流動順暢。 在看板標示系統中常將塑料或紙製成薄板，將產品名稱及數量寫於其上，故此得名。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Kanboard？</strong></p>
+<blockquote>
+<p>Kanboard专注于看板管理的项目管理软件。</p>
+</blockquote>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Kanboard是一个php的开源看板web程序，非常适合异地办公的小型团队使用。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>没有用代码部署方式，而是继续采用了Docker部署的方式。</p>
+<ul>
+<li>在docker注册表中搜索“kanboard”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589094844528-1589094844529.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589094926401-1589094926404.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>先建好需要用的文件夹</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095223433-1589095223434.png" alt="title"></p>
+<ul>
+<li>进【高级设置】，【卷】的设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095278692-1589095278694.png" alt="title"></p>
+<ul>
+<li>【端口】的设置，只要避免冲突就可以</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095325676-1589095325679.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:9080，默认的账号/密码是：admin/admin</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589095579595-1589095579597.png" alt="title"></p>
+<p>Kanboard 是一个简单的可视化任务板 Web 应用程序，它能使你的项目管理更加简单有效。直观清晰的任务概览看板是视觉上了解项目当前状态的最佳方法。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589096078814-1589096078818.png" alt="title"></p>
+<p>Kanboard还能通过安装一些plugins扩展来扩展Kanboard的功能。插件下载地址：<span class="exturl" data-url="aHR0cHM6Ly9rYW5ib2FyZC5vcmcvcGx1Z2lucy5odG1s">https://kanboard.org/plugins.html<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589096806531-1589096806532.png" alt="title"></p>
+<p>目前Kanboard已经支持超过30种语言，其中包括了简体中文，基本上不需要培训就会使用。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Kanboard官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rYW5ib2FyZC5vcmcv">https://kanboard.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Kanboard代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thbmJvYXJkL2thbmJvYXJk">https://github.com/kanboard/kanboard<i class="fa fa-external-link-alt"></i></span></p>
+<p>KANBOARD：免费开源项目管理工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zaGVzaHVpLm1lL2RvY3Mva2FuYm9hcmQtcHJvamVjdC1tYW5hZ2VtZW50">https://sheshui.me/docs/kanboard-project-management<i class="fa fa-external-link-alt"></i></span></p>
+<p>open source软件：kanboard介绍(项目看板）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1pbmdfemhhby9hcnRpY2xlL2RldGFpbHMvOTAyOTUzNTQ=">https://blog.csdn.net/junming_zhao/article/details/90295354<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>hide</tag>
+        <tag>看板</tag>
+        <tag>Kanboard</tag>
+        <tag>kanban</tag>
+        <tag>项目管理软件</tag>
       </tags>
   </entry>
 </search>
