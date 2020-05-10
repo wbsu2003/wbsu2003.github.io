@@ -1398,4 +1398,30 @@
         <tag>项目管理软件</tag>
       </tags>
   </entry>
+  <entry>
+    <title>自带过滤功能的Hexo首页生成器插件</title>
+    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
+<blockquote>
+<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
+</blockquote>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>hide</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
 </search>
