@@ -155,54 +155,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
-<blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
-</blockquote>
-<p><strong>frp是什么？</strong></p>
-<blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
-</blockquote>
-<p><strong>WebDAV是什么？</strong></p>
-<blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
-</blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>免费在线流程图Draw.io</title>
     <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
     <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
@@ -262,92 +214,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在GCP上安装Zerotier的Moon服务器</title>
-    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
-<p>而之前是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
-<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
-<p>GCP有公网地址，直接就它了。</p>
-<p><strong>1. 在GCP上安装Zerotier</strong></p>
-<p>用官网上提供的命令行：</p>
-<figure class="highlight plain"><figcaption><span>-s</span><span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWxsLnplcm90aWVyLmNvbQ==">| sudo bash```<i class="fa fa-external-link-alt"></i></span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">开始安装：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;38901587517414_.pic_hd-1587534791827.jpg)</span><br><span class="line"></span><br><span class="line">安装完成：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3891-1587534849922.png)</span><br><span class="line"></span><br><span class="line">**2. 加入网络**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3897-1587536175663.png)</span><br><span class="line"></span><br><span class="line">**3. 获取网络情况**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3899-1587536235890.png)</span><br><span class="line"></span><br><span class="line">**4. 生成moon.json**</span><br><span class="line">进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3893-1587534932410.png)</span><br><span class="line"></span><br><span class="line">运行下面的语句</span><br><span class="line">&#96;&#96;&#96;zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
-
-<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
-<p>直接运行<code>vi moon.js</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>5. 需要修改stableEndpoints</strong></p>
-<p>增加做moon机器的IP地址信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: [&quot;34.84.xxx.xxx&#x2F;9993&quot;,&quot;192.168.191.1&#x2F;9993&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
-<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
-<figure class="highlight plain"><figcaption><span>genmoon moon.json```</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</span><br><span class="line"></span><br><span class="line">**7. 重启服务**</span><br><span class="line"></span><br><span class="line">网上的命令是这样的</span><br></pre></td></tr></table></figure>
-<p>killall -9 zerotier-one<br>zerotier-one -d</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">但是我执行后遇到错误，所以最简单的办法是直接reboot</span><br><span class="line"></span><br><span class="line">**8. 客户端配置**</span><br><span class="line"></span><br><span class="line">- 在没有加入moon时，运行&#96;&#96;&#96;zerotier-cli listpeers&#96;&#96;&#96;查看客户端的连接情况</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3906-1587536897732.png)</span><br><span class="line"></span><br><span class="line">可以看到都是planet和leaf，没有moon；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 不管Windows还是Mac OS，都需要以管理员身份运行：</span><br><span class="line">&#96;&#96;&#96;zerotier-cli orbit 3648b35427 3648b35427</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>再次用<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
-<ul>
-<li>注意红色的部分，看到了moon有木有？</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
-<p>参考文档：</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GCP</tag>
-        <tag>Zerotier</tag>
-        <tag>Moon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Netlify</tag>
-        <tag>blog</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>个人专属的音乐库</title>
     <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
     <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
@@ -396,62 +262,53 @@
       </tags>
   </entry>
   <entry>
-    <title>在群晖上实现在线Office文档编辑</title>
-    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
+    <title>在GCP上安装Zerotier的Moon服务器</title>
+    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
+<p>而之前是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
+<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
+<p>GCP有公网地址，直接就它了。</p>
+<p><strong>1. 在GCP上安装Zerotier</strong></p>
+<p>用官网上提供的命令行：</p>
+<figure class="highlight plain"><figcaption><span>-s</span><span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWxsLnplcm90aWVyLmNvbQ==">| sudo bash```<i class="fa fa-external-link-alt"></i></span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">开始安装：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;38901587517414_.pic_hd-1587534791827.jpg)</span><br><span class="line"></span><br><span class="line">安装完成：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3891-1587534849922.png)</span><br><span class="line"></span><br><span class="line">**2. 加入网络**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3897-1587536175663.png)</span><br><span class="line"></span><br><span class="line">**3. 获取网络情况**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3899-1587536235890.png)</span><br><span class="line"></span><br><span class="line">**4. 生成moon.json**</span><br><span class="line">进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3893-1587534932410.png)</span><br><span class="line"></span><br><span class="line">运行下面的语句</span><br><span class="line">&#96;&#96;&#96;zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
+
+<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
+<p>直接运行<code>vi moon.js</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 需要修改stableEndpoints</strong></p>
+<p>增加做moon机器的IP地址信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: [&quot;34.84.xxx.xxx&#x2F;9993&quot;,&quot;192.168.191.1&#x2F;9993&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
+<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
+<figure class="highlight plain"><figcaption><span>genmoon moon.json```</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</span><br><span class="line"></span><br><span class="line">**7. 重启服务**</span><br><span class="line"></span><br><span class="line">网上的命令是这样的</span><br></pre></td></tr></table></figure>
+<p>killall -9 zerotier-one<br>zerotier-one -d</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">但是我执行后遇到错误，所以最简单的办法是直接reboot</span><br><span class="line"></span><br><span class="line">**8. 客户端配置**</span><br><span class="line"></span><br><span class="line">- 在没有加入moon时，运行&#96;&#96;&#96;zerotier-cli listpeers&#96;&#96;&#96;查看客户端的连接情况</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3906-1587536897732.png)</span><br><span class="line"></span><br><span class="line">可以看到都是planet和leaf，没有moon；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 不管Windows还是Mac OS，都需要以管理员身份运行：</span><br><span class="line">&#96;&#96;&#96;zerotier-cli orbit 3648b35427 3648b35427</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>双击开始安装，选“latest”</li>
+<li>再次用<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
 <ul>
-<li>下载速度还可以</li>
+<li>注意红色的部分，看到了moon有木有？</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>先建好需要用的文件夹</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
-<ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
-<ul>
-<li>进【高级设置】，【卷】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
-<ul>
-<li>【端口】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
-<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
-<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
-<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
+<p>参考文档：</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
-        <tag>群晖</tag>
-        <tag>onlyoffice</tag>
-        <tag>nextcloud</tag>
-        <tag>seafile</tag>
-        <tag>owncloud</tag>
-        <tag>kodexplorer</tag>
+        <tag>GCP</tag>
+        <tag>Zerotier</tag>
+        <tag>Moon</tag>
       </tags>
   </entry>
   <entry>
@@ -529,6 +386,149 @@
       </tags>
   </entry>
   <entry>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
+<ul>
+<li>Github原生域名：wbsu2003.github.io</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.ml</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
+<ul>
+<li>Netlify原生域名：laosu.netlify.app</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.tk</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Netlify</tag>
+        <tag>blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>RaiDrive</tag>
+        <tag>frp</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在群晖上实现在线Office文档编辑</title>
+    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
+<ul>
+<li>下载速度还可以</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>先建好需要用的文件夹</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
+<ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
+<ul>
+<li>进【高级设置】，【卷】的设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
+<ul>
+<li>【端口】的设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
+<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
+<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>docker</tag>
+        <tag>onlyoffice</tag>
+        <tag>nextcloud</tag>
+        <tag>seafile</tag>
+        <tag>owncloud</tag>
+        <tag>kodexplorer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>复旦大学的藤月开了</title>
     <url>/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/</url>
     <content><![CDATA[<p>自从去年复旦大学把藤月种下去，我就一直挺好奇的，到底开花的时候会是什么样呢？</p>
@@ -595,90 +595,6 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（2）：管理篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
-<blockquote>
-<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
-</blockquote>
-<p><strong>什么是MediaElch</strong></p>
-<blockquote>
-<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
-</blockquote>
-<p><strong>什么是tinyMediaManager</strong></p>
-<blockquote>
-<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
-</blockquote>
-<p><strong>什么是ZogVM</strong></p>
-<blockquote>
-<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
-</blockquote>
-<p><strong>什么是极影派</strong></p>
-<blockquote>
-<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
-</blockquote>
-<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇（本文）</li>
-<li>播放篇</li>
-<li>流媒体服务</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
-<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
-<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
-<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
-<p>同步设置界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
-<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
-<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>这些软件都很优秀，总会有一款适合你的需求。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
-<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>刮削器</tag>
-        <tag>Kodi</tag>
-        <tag>MediaElch</tag>
-        <tag>tinyMediaManager</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（1）：综合篇</title>
     <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
     <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
@@ -728,11 +644,11 @@
         <tag>Emby</tag>
         <tag>jellyfin</tag>
         <tag>刮削器</tag>
-        <tag>Kodi</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
         <tag>Scrapers</tag>
         <tag>Plex</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
@@ -893,6 +809,90 @@
       </tags>
   </entry>
   <entry>
+    <title>家庭多媒体中心（2）：管理篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
+<blockquote>
+<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
+</blockquote>
+<p><strong>什么是MediaElch</strong></p>
+<blockquote>
+<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
+</blockquote>
+<p><strong>什么是tinyMediaManager</strong></p>
+<blockquote>
+<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
+</blockquote>
+<p><strong>什么是ZogVM</strong></p>
+<blockquote>
+<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
+</blockquote>
+<p><strong>什么是极影派</strong></p>
+<blockquote>
+<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
+</blockquote>
+<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇（本文）</li>
+<li>播放篇</li>
+<li>流媒体服务</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
+<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
+<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
+<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
+<p>同步设置界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
+<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
+<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>这些软件都很优秀，总会有一款适合你的需求。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
+<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>刮削器</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
+        <tag>MediaElch</tag>
+        <tag>tinyMediaManager</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>家庭多媒体中心（5）：查询篇</title>
     <url>/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/</url>
     <content><![CDATA[<p>Kodi（以前叫XBMC）是一款强大的开源媒体播放器软件，支持 MacOS、Windows、Linux、Android等多系统平台。Kodi 的局域网视频播放功能异常强大；默认情况下 Kodi 的资料库是独立的，这就带来一个很大的问题，当家里有多个Kodi终端的话，资料的同步是个很大的问题。</p>
@@ -1001,35 +1001,6 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>手动安装WordPress</title>
     <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
     <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
@@ -1073,6 +1044,96 @@
         <tag>PHP</tag>
         <tag>Nginx</tag>
         <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖app访问遇到的端口问题</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
+<blockquote>
+<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
+</blockquote>
+<p><strong>什么是 黑群</strong></p>
+<blockquote>
+<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
+</blockquote>
+<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
+<blockquote>
+<ol>
+<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
+</li>
+<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
+</li>
+<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
+</li>
+<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
+</li>
+<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
+</li>
+</ol>
+</blockquote>
+<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
+<p>登录成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
+<p>同样的设置，群晖管家、DS file却一直登录失败</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
+<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
+<p>大功告成！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
+<blockquote>
+<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
+</blockquote>
+<p>参考文档</p>
+<blockquote>
+<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>frp</tag>
+        <tag>NAS</tag>
+        <tag>黑群</tag>
+        <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>frp</tag>
+        <tag>NAS</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
       </tags>
   </entry>
   <entry>
@@ -1191,67 +1252,6 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖app访问遇到的端口问题</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
-<blockquote>
-<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
-</blockquote>
-<p><strong>什么是 黑群</strong></p>
-<blockquote>
-<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
-</blockquote>
-<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
-<blockquote>
-<ol>
-<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
-</li>
-<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
-</li>
-<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
-</li>
-<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
-</li>
-<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
-</li>
-</ol>
-</blockquote>
-<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
-<p>登录成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
-<p>同样的设置，群晖管家、DS file却一直登录失败</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
-<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
-<p>大功告成！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
-<blockquote>
-<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
-</blockquote>
-<p>参考文档</p>
-<blockquote>
-<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>黑群</tag>
-        <tag>QuickConnect</tag>
-        <tag>VPS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>适合小团队的Kanboard项目管理软件</title>
     <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
     <content><![CDATA[<p><strong>什么是kanban？</strong></p>
@@ -1311,7 +1311,7 @@
       </tags>
   </entry>
   <entry>
-    <title>适合小团队的Kanboard项目管理软件</title>
+    <title>适合小团队的Kanboard项目管理软件（隐藏）</title>
     <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6(%E9%9A%90%E8%97%8F)/</url>
     <content><![CDATA[<p><strong>什么是kanban？</strong></p>
 <blockquote>
