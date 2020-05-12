@@ -1361,4 +1361,86 @@
         <tag>deploy_git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>在Coding上部署Hexo并实现和Github双线访问</title>
+    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
+<p>虽然上一次的折腾失败了，详见《在Netlify上部署Hexo》( <a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</a> )，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
+<li>首先是<strong>注册团队</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<ul>
+<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<ul>
+<li>接下来就可以新建项目了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
+<li>点右上角的头像，选择个人设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<ul>
+<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+</ul>
+<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
+<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
+<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<ul>
+<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<ul>
+<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<ul>
+<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
+</ul>
+<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
+<li>从右上角的<strong>设置</strong>进入</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<ul>
+<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p>然后再次申请，等一会儿就会显示成功了！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
+<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>Coding</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
 </search>

@@ -25,27 +25,25 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="既然是家庭多媒体中心，主要的应用场景就是局域网，需求就是要能实现多屏幕的播放，包括：电视、机顶盒、PC电脑、Mac电脑、平板电脑、手机等。这些设备的操作系统涵盖了主流的Windows、Mac OS、Android和iOS。">
+  <meta name="description" content="在Coding上终于找到了正常访问的感觉，比Github和Netlify都要快。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="家庭多媒体中心（3）：播放篇">
-<meta property="og:url" content="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/index.html">
+<meta property="og:title" content="在Coding上部署Hexo并实现和Github双线访问">
+<meta property="og:url" content="https://laosu.ml/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="既然是家庭多媒体中心，主要的应用场景就是局域网，需求就是要能实现多屏幕的播放，包括：电视、机顶盒、PC电脑、Mac电脑、平板电脑、手机等。这些设备的操作系统涵盖了主流的Windows、Mac OS、Android和iOS。">
+<meta property="og:description" content="在Coding上终于找到了正常访问的感觉，比Github和Netlify都要快。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/v2-b2a8a3d12d300c6a605474fcd75da304_r-1588479703177.jpg">
-<meta property="article:published_time" content="2020-05-01T05:25:00.000Z">
-<meta property="article:modified_time" content="2020-05-03T04:29:16.036Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/3561610c-0908-49fa-8da2-846777015db1-1589284319773.png">
+<meta property="article:published_time" content="2020-05-12T11:49:00.000Z">
+<meta property="article:modified_time" content="2020-05-12T13:27:09.075Z">
 <meta property="article:author" content="杨浦老苏">
-<meta property="article:tag" content="Potplayer">
-<meta property="article:tag" content="IINA">
-<meta property="article:tag" content="nplayer">
-<meta property="article:tag" content="MX Player">
-<meta property="article:tag" content="小白文件管理器">
-<meta property="article:tag" content="samba">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="blog">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="Github">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/v2-b2a8a3d12d300c6a605474fcd75da304_r-1588479703177.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/3561610c-0908-49fa-8da2-846777015db1-1589284319773.png">
 
-<link rel="canonical" href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/">
+<link rel="canonical" href="https://laosu.ml/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/">
 
 
 <script id="page-configurations">
@@ -71,7 +69,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>家庭多媒体中心（3）：播放篇 | 老苏的blog</title>
+  <title>在Coding上部署Hexo并实现和Github双线访问 | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -244,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -257,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          家庭多媒体中心（3）：播放篇
+          在Coding上部署Hexo并实现和Github双线访问
         </h1>
 
         <div class="post-meta">
@@ -266,16 +264,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-05-01 13:25:00" itemprop="dateCreated datePublished" datetime="2020-05-01T13:25:00+08:00">2020-05-01</time>
+              <time title="创建时间：2020-05-12 19:49:00 / 修改时间：21:27:09" itemprop="dateCreated datePublished" datetime="2020-05-12T19:49:00+08:00">2020-05-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-03 12:29:16" itemprop="dateModified" datetime="2020-05-03T12:29:16+08:00">2020-05-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -302,8 +294,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -313,16 +305,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
-            <div class="post-description">既然是家庭多媒体中心，主要的应用场景就是局域网，需求就是要能实现多屏幕的播放，包括：电视、机顶盒、PC电脑、Mac电脑、平板电脑、手机等。这些设备的操作系统涵盖了主流的Windows、Mac OS、Android和iOS。</div>
+            <div class="post-description">在Coding上终于找到了正常访问的感觉，比Github和Netlify都要快。</div>
 
         </div>
       </header>
@@ -334,81 +326,75 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/v2-b2a8a3d12d300c6a605474fcd75da304_r-1588479703177.jpg" itemprop="contentUrl">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/3561610c-0908-49fa-8da2-846777015db1-1589284319773.png" itemprop="contentUrl">
         </div>
-        <p><strong>什么是Samba</strong></p>
-<blockquote>
-<p>Samba是一套使用SMB(Server Message Block)协议的应用程序, 通过支持这个协议, Samba允许Linux服务器与Windows系统之间进行通信,使跨平台的互访成为可能。Samba采用C/S模式, 其工作机制是让NetBIOS( Windows 网上邻居的通信协议)和SMB两个协议运行于TCP/IP通信协议之上,并且用NetBEUI协议让Windows在“网上邻居”中能浏览Linux服务器。</p>
-</blockquote>
-<p>既然是家庭多媒体中心，主要的应用场景就是局域网，需求就是要能实现多屏幕的播放，包括：电视、机顶盒、PC电脑、Mac电脑、平板电脑、手机等。这些设备的操作系统涵盖了主流的Windows、Mac OS、Android和iOS。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇</li>
-<li>播放篇（本文）</li>
-<li>流媒体服务</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><p>目前常见的媒体共享方式主要有以下几种：Samba、ftp、upnp（DLNA）、NFS等，对于我们使用来说并不用关心具体的协议及其实现原理，只要简单好用就行。建议用Samba协议，需要在群晖中启用。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/7f7f0928e434e1601c44c74ebaad622-1588313906643.png" alt="title"></p>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><table>
-<thead>
-<tr>
-<th align="center">设备</th>
-<th align="center">系统</th>
-<th align="center">推荐的播放器</th>
-<th align="center">主要操作方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">机顶盒</td>
-<td align="center">Android平台</td>
-<td align="center">小白文件管理器</td>
-<td align="center">遥控器</td>
-</tr>
-<tr>
-<td align="center">台式机、笔记本</td>
-<td align="center">Windows平台</td>
-<td align="center">PotPlayer</td>
-<td align="center">鼠标+快捷键</td>
-</tr>
-<tr>
-<td align="center">Mac电脑</td>
-<td align="center">Mac OS平台</td>
-<td align="center">IINA</td>
-<td align="center">触控板+快捷键</td>
-</tr>
-<tr>
-<td align="center">android手机或平板</td>
-<td align="center">Android平台</td>
-<td align="center">MX Player</td>
-<td align="center">触控屏</td>
-</tr>
-<tr>
-<td align="center">iOS手机或iPAD平板</td>
-<td align="center">iOS平台</td>
-<td align="center">nPlayer</td>
-<td align="center">触控屏</td>
-</tr>
-</tbody></table>
-<h2 id="小白文件管理器"><a href="#小白文件管理器" class="headerlink" title="小白文件管理器"></a>小白文件管理器</h2><p>小白文件管理器是完全针对电视进行设计、开发的，因此出色地适配了电视的各种操作方式，用电视遥控器也能快速完成文件管理操作。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/a8b893088d7386e8c21ba9952e190e3-1588315234306.jpg" alt="title"></p>
-<p>只要选择左边的【家庭网络】，就能看到smb共享的影片了。</p>
-<h2 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h2><p>PotPlayer 是 KMPlayer 的原作者姜勇囍進入 Daum 公司后的新一代作品，内置了解码器，支持支援 DXVA（DirectX Video Acceleration）、CUDA（Compute Unified Device Architecture）和 QSV（QuickSync Video Acceleratio）等硬件加速技术，也就是能够使用 GPU 来协助解码并播放影片。PotPlayer 启动迅速、功耗低、解码能力强大，所以在 Windows 平台上本人再没用过其他的播放器。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/scrNsaKUe-1588316745355.png" alt="title"></p>
-<h2 id="IINA"><a href="#IINA" class="headerlink" title="IINA"></a>IINA</h2><p>IINA 是一款基于 mpv 的自由及开源的媒体播放器。从框架到界面、用户体验，都是非常与 MacOS 系统最搭的视频播放器，处处融入了 MacOS 的设计语言：简洁的画面、大量的毛玻璃元素、功能上可以结合Force Touch, Touch Bar等。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/sc-sky-1588316723371.png" alt="title"></p>
-<h2 id="MX-Player"><a href="#MX-Player" class="headerlink" title="MX Player"></a>MX Player</h2><p>作为Android平台上最强悍的视频播放器，MX Player以超强的解码性能以及兼容性闻名，对字幕的支持更是堪称一绝，能够兼容特效字幕，支持在线字幕匹配，看外语片无需自己找字幕！强力的硬件加速，可以轻松的更改解码模式，安装后会根据CPU型号安装对应的解码包。如果你需要更多功能可以选择MX Player Pro。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15081256088254927-1588317546356.jpg" alt="title"></p>
-<h2 id="nPlayer"><a href="#nPlayer" class="headerlink" title="nPlayer"></a>nPlayer</h2><p>nPlayer 支持视频格式众多，支持WebDAV，FTP，SFTP，HTTP，SMB / CIFS，UPnP / DLNA（流媒体和下载）。支持与各种NAS设备同步。IOS端一共有三个版本：nPlayer Lite、nPlayer、nPlayer Plus。Lite免费版，基本使用没有问题，只是主界面底部有广告。后两者在产品使用上没有任何区别。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/570d01c0ce90ae898d44b06098879fd-1588318912746.jpg" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>小白文件管理器<br>地址：<span class="exturl" data-url="aHR0cDovL2FwcC5zaGFmYS5jb20vYXBrL3hpYW9iYWl3ZW5qaWFuZ3VhbmxpcWkuaHRtbA==">http://app.shafa.com/apk/xiaobaiwenjianguanliqi.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>PotPlayer：最强播放器，无边框+4款简约皮肤<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTc1NzE3Ng==">https://zhuanlan.zhihu.com/p/35757176<i class="fa fa-external-link-alt"></i></span></p>
-<p>IINA官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9paW5hLmlvLw==">https://iina.io/<i class="fa fa-external-link-alt"></i></span></p>
-<p>软件分享 篇十二：MXplayer Pro —— 安卓最强万能格式播放器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FyMDhyOTlxLw==">https://post.smzdm.com/p/ar08r99q/<i class="fa fa-external-link-alt"></i></span></p>
-<p>nPlayer - 手机全能格式视频播放器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWVjai5jb20vaW9zLzIwMTktMDIvMTg4Ni5odG1s">https://chromecj.com/ios/2019-02/1886.html<i class="fa fa-external-link-alt"></i></span></p>
+        <p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
+<p>虽然上一次的折腾失败了，详见《在Netlify上部署Hexo》( <a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</a> )，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
+<li>首先是<strong>注册团队</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<ul>
+<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<ul>
+<li>接下来就可以新建项目了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
+<li>点右上角的头像，选择个人设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<ul>
+<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+</ul>
+<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
+<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
+<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<ul>
+<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<ul>
+<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<ul>
+<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
+</ul>
+<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
+<li>从右上角的<strong>设置</strong>进入</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<ul>
+<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p>然后再次申请，等一会儿就会显示成功了！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
+<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -439,6 +425,21 @@
     
     
       
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\06\在Netlify上部署Hexo\" rel="bookmark">在Netlify上部署Hexo</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\05\遇到“Error spawn failed”错误\" rel="bookmark">遇到“Error spawn failed”错误</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\Hexo-theme-next主题\" rel="bookmark">Hexo-theme-next主题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\29\在GitHub上搭建Blog\" rel="bookmark">在GitHub上搭建Blog</a></div>
+    </li>
+  </ul>
 <div class="post-widgets">
       <div id="needsharebutton-postbottom">
         <span class="btn">
@@ -455,7 +456,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/" title="家庭多媒体中心（3）：播放篇">https://laosu.ml/2020/05/01/家庭多媒体中心（3）：播放篇/</a>
+    <a href="https://laosu.ml/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/" title="在Coding上部署Hexo并实现和Github双线访问">https://laosu.ml/2020/05/12/在Coding上部署Hexo并实现和Github双线访问/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -496,12 +497,10 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Potplayer/" rel="tag"><i class="fa fa-tag"></i> Potplayer</a>
-              <a href="/tags/IINA/" rel="tag"><i class="fa fa-tag"></i> IINA</a>
-              <a href="/tags/nplayer/" rel="tag"><i class="fa fa-tag"></i> nplayer</a>
-              <a href="/tags/MX-Player/" rel="tag"><i class="fa fa-tag"></i> MX Player</a>
-              <a href="/tags/%E5%B0%8F%E7%99%BD%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 小白文件管理器</a>
-              <a href="/tags/samba/" rel="tag"><i class="fa fa-tag"></i> samba</a>
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/blog/" rel="tag"><i class="fa fa-tag"></i> blog</a>
+              <a href="/tags/Coding/" rel="tag"><i class="fa fa-tag"></i> Coding</a>
+              <a href="/tags/Github/" rel="tag"><i class="fa fa-tag"></i> Github</a>
           </div>
 
         
@@ -510,13 +509,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/" rel="prev" title="家庭多媒体中心（2）：管理篇">
-      <i class="fa fa-chevron-left"></i> 家庭多媒体中心（2）：管理篇
+    <a href="/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/" rel="prev" title="自带过滤功能的Hexo首页生成器插件">
+      <i class="fa fa-chevron-left"></i> 自带过滤功能的Hexo首页生成器插件
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" rel="next" title="家庭多媒体中心（4）：流媒体服务器篇">
-      家庭多媒体中心（4）：流媒体服务器篇 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -576,7 +572,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#协议"><span class="nav-number">1.</span> <span class="nav-text">协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件"><span class="nav-number">2.</span> <span class="nav-text">软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小白文件管理器"><span class="nav-number">2.1.</span> <span class="nav-text">小白文件管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PotPlayer"><span class="nav-number">2.2.</span> <span class="nav-text">PotPlayer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IINA"><span class="nav-number">2.3.</span> <span class="nav-text">IINA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MX-Player"><span class="nav-number">2.4.</span> <span class="nav-text">MX Player</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nPlayer"><span class="nav-number">2.5.</span> <span class="nav-text">nPlayer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number">1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置SSH公钥"><span class="nav-number">2.</span> <span class="nav-text">配置SSH公钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-config-yml"><span class="nav-number">3.</span> <span class="nav-text">配置 _config.yml</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码部署"><span class="nav-number">4.</span> <span class="nav-text">代码部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开启-Coding-Pages"><span class="nav-number">5.</span> <span class="nav-text">开启 Coding Pages</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定自定义域名"><span class="nav-number">6.</span> <span class="nav-text">绑定自定义域名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置双线访问"><span class="nav-number">7.</span> <span class="nav-text">设置双线访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#证书问题"><span class="nav-number">8.</span> <span class="nav-text">证书问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测速"><span class="nav-number">9.</span> <span class="nav-text">测速</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">10.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
