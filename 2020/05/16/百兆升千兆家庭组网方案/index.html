@@ -34,14 +34,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
 <meta property="article:published_time" content="2020-05-16T10:49:00.000Z">
-<meta property="article:modified_time" content="2020-05-16T15:56:51.819Z">
+<meta property="article:modified_time" content="2020-05-16T16:07:52.616Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="千兆">
 <meta property="article:tag" content="电力猫">
-<meta property="article:tag" content="mesh">
 <meta property="article:tag" content="wifi6">
 <meta property="article:tag" content="路由器">
 <meta property="article:tag" content="光猫">
+<meta property="article:tag" content="Mesh路由">
+<meta property="article:tag" content="WDS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
 
@@ -266,10 +267,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-16 18:49:00 / 修改时间：23:56:51" itemprop="dateCreated datePublished" datetime="2020-05-16T18:49:00+08:00">2020-05-16</time>
+              <time title="创建时间：2020-05-16 18:49:00" itemprop="dateCreated datePublished" datetime="2020-05-16T18:49:00+08:00">2020-05-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-17 00:07:52" itemprop="dateModified" datetime="2020-05-17T00:07:52+08:00">2020-05-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -307,7 +314,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -331,7 +338,7 @@
             <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/wifi-6-logo-1589626596200.png" itemprop="contentUrl">
         </div>
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
-<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
+<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
 <h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
 <blockquote>
@@ -350,11 +357,11 @@
 <p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
 <p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
 <h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
+<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
 <blockquote>
 <p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
 </blockquote>
-<h2 id="mesh路由器"><a href="#mesh路由器" class="headerlink" title="mesh路由器"></a>mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
+<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
 <blockquote>
 <p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
 </blockquote>
@@ -367,6 +374,10 @@
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
 <p>（图片来自： 淘宝 ）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
+<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+</ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
 <p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
@@ -462,10 +473,11 @@
           <div class="post-tags">
               <a href="/tags/%E5%8D%83%E5%85%86/" rel="tag"><i class="fa fa-tag"></i> 千兆</a>
               <a href="/tags/%E7%94%B5%E5%8A%9B%E7%8C%AB/" rel="tag"><i class="fa fa-tag"></i> 电力猫</a>
-              <a href="/tags/mesh/" rel="tag"><i class="fa fa-tag"></i> mesh</a>
               <a href="/tags/wifi6/" rel="tag"><i class="fa fa-tag"></i> wifi6</a>
               <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 路由器</a>
               <a href="/tags/%E5%85%89%E7%8C%AB/" rel="tag"><i class="fa fa-tag"></i> 光猫</a>
+              <a href="/tags/Mesh%E8%B7%AF%E7%94%B1/" rel="tag"><i class="fa fa-tag"></i> Mesh路由</a>
+              <a href="/tags/WDS/" rel="tag"><i class="fa fa-tag"></i> WDS</a>
           </div>
 
         
@@ -537,7 +549,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#家庭网络的组成"><span class="nav-number">2.</span> <span class="nav-text">家庭网络的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#光猫"><span class="nav-number">2.1.</span> <span class="nav-text">光猫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网线"><span class="nav-number">2.2.</span> <span class="nav-text">网线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器"><span class="nav-number">2.3.</span> <span class="nav-text">路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网卡"><span class="nav-number">2.4.</span> <span class="nav-text">网卡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用无线桥接"><span class="nav-number">3.1.</span> <span class="nav-text">使用无线桥接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mesh路由器"><span class="nav-number">3.2.</span> <span class="nav-text">mesh路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用电力猫"><span class="nav-number">3.3.</span> <span class="nav-text">使用电力猫</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#家庭网络的组成"><span class="nav-number">2.</span> <span class="nav-text">家庭网络的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#光猫"><span class="nav-number">2.1.</span> <span class="nav-text">光猫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网线"><span class="nav-number">2.2.</span> <span class="nav-text">网线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器"><span class="nav-number">2.3.</span> <span class="nav-text">路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网卡"><span class="nav-number">2.4.</span> <span class="nav-text">网卡</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无线解决方案"><span class="nav-number">3.</span> <span class="nav-text">无线解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用无线桥接"><span class="nav-number">3.1.</span> <span class="nav-text">使用无线桥接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Mesh路由器"><span class="nav-number">3.2.</span> <span class="nav-text">使用Mesh路由器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用电力猫"><span class="nav-number">3.3.</span> <span class="nav-text">使用电力猫</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -564,7 +576,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
