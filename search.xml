@@ -121,17 +121,17 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
 <p>进入PVE UI的截图</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
-<h1 id="3、虚拟化设置"><a href="#3、虚拟化设置" class="headerlink" title="3、虚拟化设置"></a>3、虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在BIOS中要开启跟虚拟化相关的选项，比如VD-T等；</p>
+<h1 id="虚拟化设置"><a href="#虚拟化设置" class="headerlink" title="虚拟化设置"></a>虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在BIOS中要开启跟虚拟化相关的选项，比如VD-T等；</p>
 <h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE的内核开启支持VD-T直通的IOMMU及相关模块；</p>
 <ul>
 <li>修改/etc/default/grub文件中的内容</li>
 </ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
 <p>【注意】：</p>
 <blockquote>
 <p>后面所有的操作都在WEB GUI的shell中进行</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
 <p>把原内容中 </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">改为</span><br><span class="line">&#96;&#96;&#96; GRUB\_CMDLINE\_LINUX\_DEFAULT&#x3D;&quot;quiet intel\_iommu&#x3D;on video&#x3D;efifb:off&quot;</span><br></pre></td></tr></table></figure>
 
