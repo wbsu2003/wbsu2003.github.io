@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一篇旧文，记录了PVE下安装win10，并折腾集显直通的过程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PVE安装win10集显直通">
+<meta property="og:url" content="https://laosu.ml/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="一篇旧文，记录了PVE下安装win10，并折腾集显直通的过程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/ext-1590039616535.jpeg">
+<meta property="article:published_time" content="2020-05-21T13:11:00.000Z">
+<meta property="article:modified_time" content="2020-05-21T11:13:36.177Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="PVE">
+<meta property="article:tag" content="显卡直通">
+<meta property="article:tag" content="GPU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/ext-1590039616535.jpeg">
+
+<link rel="canonical" href="https://laosu.ml/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>PVE安装win10集显直通 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PVE安装win10集显直通
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-21 21:11:00 / 修改时间：19:13:36" itemprop="dateCreated datePublished" datetime="2020-05-21T21:11:00+08:00">2020-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">一篇旧文，记录了PVE下安装win10，并折腾集显直通的过程。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/ext-1590039616535.jpeg" itemprop="contentUrl">
+        </div>
+        <p><strong>什么是PVE</strong></p>
+<blockquote>
+<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
+</blockquote>
+<p><strong>为什么要显卡直通</strong></p>
+<blockquote>
+<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
+</blockquote>
+<h1 id="安装PVE"><a href="#安装PVE" class="headerlink" title="安装PVE"></a>安装PVE</h1><h2 id="下载PVE-ISO文件"><a href="#下载PVE-ISO文件" class="headerlink" title="下载PVE ISO文件"></a>下载PVE ISO文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="制作启动U盘"><a href="#制作启动U盘" class="headerlink" title="制作启动U盘"></a>制作启动U盘</h2><p>用UltraISO写入U盘；</p>
+<p>【注意】：</p>
+<blockquote>
+<ol>
+<li>可能会存在U盘兼容性问题，但我没遇到，用的kingstone DT101 G2的4G；</li>
+<li>在写入格式时，开始选的USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为RAW后正常；</li>
+</ol>
+</blockquote>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS中设置U盘启动；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
+<p>自检画面，等待几秒</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
+<p>同意协议，点击“I agree”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
+<p>选择硬盘，点击“Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>注意要选择你要安装pve系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
+</blockquote>
+<p>设定国家、时区和键盘，Country输入China即可，点击“Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
+<p>设置管理员root账号密码和邮箱</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>密码要牢记</p>
+</blockquote>
+<p>设定主机名，IP，网关，掩码和DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
+<p>安装中，等待几分钟</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
+<p>安装完提示重启</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>重启前请先移除U盘，或者关闭U盘启动；</p>
+</blockquote>
+<p>启动完成后的控制台，会提示控制台访问URL</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
+<p>【注意】</p>
+<blockquote>
+<p>1、是https，不是http；<br>2、因为证书问题，尽量不要用ie和edge浏览器，chrome浏览器的效果比较好；</p>
+</blockquote>
+<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL，<span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA277yM6K+t6KiA5Y+v5Lul6YCJ5oup5Lit5paH77yM5a+55LqO5Lit5paH5pSv5oyB5LiN6ZSZ77yb">https://IP:8006，语言可以选择中文，对于中文支持不错；<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
+<p>进入PVE UI的截图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
+<h1 id="3、虚拟化设置"><a href="#3、虚拟化设置" class="headerlink" title="3、虚拟化设置"></a>3、虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在BIOS中要开启跟虚拟化相关的选项，比如VD-T等；</p>
+<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE的内核开启支持VD-T直通的IOMMU及相关模块；</p>
+<ul>
+<li>修改/etc/default/grub文件中的内容</li>
+</ul>
+<p>【注意】：</p>
+<blockquote>
+<p>后面所有的操作都在WEB GUI的shell中进行</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
+<p>把原内容中 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">改为</span><br><span class="line">&#96;&#96;&#96; GRUB\_CMDLINE\_LINUX\_DEFAULT&#x3D;&quot;quiet intel\_iommu&#x3D;on video&#x3D;efifb:off&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
+<p>执行 <code>update-grub</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
+<p>立即更新grub</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
+<ul>
+<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
+<p>加上以下代码，每个一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio\_iommu\_type1</span><br><span class="line">vfio\_pci</span><br><span class="line">vfio\_virqfd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
+<ul>
+<li>建立驱动黑名单，依次输入以下命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;blacklist snd\_hda\_intel&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist snd\_hda\_codec\_hdmi&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist i915&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
+<ul>
+<li>GPU信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
+<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
+<p>把集显指定到 VFIO 模块</p>
+<figure class="highlight plain"><figcaption><span>"options vfio-pci ids</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2023-1590037450012.png)</span><br><span class="line"></span><br><span class="line"># 4、创建Win10虚拟机</span><br><span class="line"></span><br><span class="line">## 下载win10的iso包；</span><br><span class="line"></span><br><span class="line">我相信你一定有，就是没有你也能找得到；</span><br><span class="line"> </span><br><span class="line">## 下载virtio-win的iso驱动包；</span><br><span class="line"></span><br><span class="line">下载地址：[https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;](https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;)</span><br><span class="line"></span><br><span class="line">【注意】：</span><br><span class="line"></span><br><span class="line">&gt; 建议下日期最新的版本</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2024-1590037534614.png)</span><br><span class="line"></span><br><span class="line">## 上传ISO文件</span><br><span class="line"></span><br><span class="line">上述的iso包都上传到下图目录中</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2025-1590037579769.png)</span><br><span class="line"></span><br><span class="line">## 设置虚拟机参数</span><br><span class="line"></span><br><span class="line">参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2026-1590037624180.png)</span><br><span class="line"></span><br><span class="line">【注意】：以下说法不一定准确，需要进一步验证：</span><br><span class="line">&gt; 1、处理器需要为HOST模式；</span><br><span class="line">&gt; 2、Win10系统要放在ide0，否则有可能不会启动；</span><br><span class="line">&gt; 3、机器要选q35，据说PCI-e的性能更好；</span><br><span class="line">&gt; 4、网上都说装win10时BIOS要选OVMF（UEFI），但在我的机器上就是死活起不来；</span><br><span class="line">&gt; 5、显示选默认就可以，但是一定要分显存；</span><br><span class="line">&gt; 6、安装win10过程中，如果找不到磁盘，可以在virtio-win的ISO上找virscsi驱动；</span><br><span class="line">&gt; 7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用virtio-win的ISO</span><br><span class="line">&gt; 8、显卡可以直接下载对应版本的集显驱动；</span><br><span class="line"></span><br><span class="line">## 连接win10虚拟机</span><br><span class="line">- 1、虚拟机安装完成后，建议启用远程桌面，配置RDP访问；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2027-1590037678865.png)</span><br><span class="line"></span><br><span class="line">- 2、修改&#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf（Win10在PVE顺序是100）</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2028-1590037714502.png)</span><br><span class="line"></span><br><span class="line">输入：&#96;&#96;&#96;vi &#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
+<p>在第一行插入：<br><code>args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>1、据说这一步骤是直通核显GPU的关键步骤；<br>2、需要注意的是：host=00:02.0这个00:02.0需要与前面lspic显示的核显编号对应上；<br>3、PVE主机的HDMI接口接到显示器；<br>4、当win10认到双显示器时，改为复制模式；</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/" title="PVE安装win10集显直通">https://laosu.ml/2020/05/21/PVE安装win10集显直通/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/PVE/" rel="tag"><i class="fa fa-tag"></i> PVE</a>
+              <a href="/tags/%E6%98%BE%E5%8D%A1%E7%9B%B4%E9%80%9A/" rel="tag"><i class="fa fa-tag"></i> 显卡直通</a>
+              <a href="/tags/GPU/" rel="tag"><i class="fa fa-tag"></i> GPU</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/" rel="prev" title="将 Draw.io 集成到 VS Code">
+      <i class="fa fa-chevron-left"></i> 将 Draw.io 集成到 VS Code
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装PVE"><span class="nav-number">1.</span> <span class="nav-text">安装PVE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载PVE-ISO文件"><span class="nav-number">1.1.</span> <span class="nav-text">下载PVE ISO文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作启动U盘"><span class="nav-number">1.2.</span> <span class="nav-text">制作启动U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">1.3.</span> <span class="nav-text">开始安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行PVE"><span class="nav-number">2.</span> <span class="nav-text">运行PVE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、虚拟化设置"><span class="nav-number">3.</span> <span class="nav-text">3、虚拟化设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改BIOS"><span class="nav-number">3.1.</span> <span class="nav-text">修改BIOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改PVE内核"><span class="nav-number">3.2.</span> <span class="nav-text">修改PVE内核</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">40k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">36 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

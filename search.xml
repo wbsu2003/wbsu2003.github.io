@@ -62,6 +62,178 @@
       </tags>
   </entry>
   <entry>
+    <title>PVE安装win10集显直通</title>
+    <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
+    <content><![CDATA[<p><strong>什么是PVE</strong></p>
+<blockquote>
+<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
+</blockquote>
+<p><strong>为什么要显卡直通</strong></p>
+<blockquote>
+<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
+</blockquote>
+<h1 id="安装PVE"><a href="#安装PVE" class="headerlink" title="安装PVE"></a>安装PVE</h1><h2 id="下载PVE-ISO文件"><a href="#下载PVE-ISO文件" class="headerlink" title="下载PVE ISO文件"></a>下载PVE ISO文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="制作启动U盘"><a href="#制作启动U盘" class="headerlink" title="制作启动U盘"></a>制作启动U盘</h2><p>用UltraISO写入U盘；</p>
+<p>【注意】：</p>
+<blockquote>
+<ol>
+<li>可能会存在U盘兼容性问题，但我没遇到，用的kingstone DT101 G2的4G；</li>
+<li>在写入格式时，开始选的USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为RAW后正常；</li>
+</ol>
+</blockquote>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS中设置U盘启动；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
+<p>自检画面，等待几秒</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
+<p>同意协议，点击“I agree”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
+<p>选择硬盘，点击“Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>注意要选择你要安装pve系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
+</blockquote>
+<p>设定国家、时区和键盘，Country输入China即可，点击“Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
+<p>设置管理员root账号密码和邮箱</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>密码要牢记</p>
+</blockquote>
+<p>设定主机名，IP，网关，掩码和DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
+<p>安装中，等待几分钟</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
+<p>安装完提示重启</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>重启前请先移除U盘，或者关闭U盘启动；</p>
+</blockquote>
+<p>启动完成后的控制台，会提示控制台访问URL</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
+<p>【注意】</p>
+<blockquote>
+<p>1、是https，不是http；<br>2、因为证书问题，尽量不要用ie和edge浏览器，chrome浏览器的效果比较好；</p>
+</blockquote>
+<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL，<span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA277yM6K+t6KiA5Y+v5Lul6YCJ5oup5Lit5paH77yM5a+55LqO5Lit5paH5pSv5oyB5LiN6ZSZ77yb">https://IP:8006，语言可以选择中文，对于中文支持不错；<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
+<p>进入PVE UI的截图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
+<h1 id="3、虚拟化设置"><a href="#3、虚拟化设置" class="headerlink" title="3、虚拟化设置"></a>3、虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在BIOS中要开启跟虚拟化相关的选项，比如VD-T等；</p>
+<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE的内核开启支持VD-T直通的IOMMU及相关模块；</p>
+<ul>
+<li>修改/etc/default/grub文件中的内容</li>
+</ul>
+<p>【注意】：</p>
+<blockquote>
+<p>后面所有的操作都在WEB GUI的shell中进行</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
+<p>把原内容中 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">改为</span><br><span class="line">&#96;&#96;&#96; GRUB\_CMDLINE\_LINUX\_DEFAULT&#x3D;&quot;quiet intel\_iommu&#x3D;on video&#x3D;efifb:off&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
+<p>执行 <code>update-grub</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
+<p>立即更新grub</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
+<ul>
+<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
+<p>加上以下代码，每个一行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio\_iommu\_type1</span><br><span class="line">vfio\_pci</span><br><span class="line">vfio\_virqfd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
+<ul>
+<li>建立驱动黑名单，依次输入以下命令：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &quot;blacklist snd\_hda\_intel&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist snd\_hda\_codec\_hdmi&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist i915&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
+<ul>
+<li>GPU信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
+<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
+<p>把集显指定到 VFIO 模块</p>
+<figure class="highlight plain"><figcaption><span>"options vfio-pci ids</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2023-1590037450012.png)</span><br><span class="line"></span><br><span class="line"># 4、创建Win10虚拟机</span><br><span class="line"></span><br><span class="line">## 下载win10的iso包；</span><br><span class="line"></span><br><span class="line">我相信你一定有，就是没有你也能找得到；</span><br><span class="line"> </span><br><span class="line">## 下载virtio-win的iso驱动包；</span><br><span class="line"></span><br><span class="line">下载地址：[https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;](https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;)</span><br><span class="line"></span><br><span class="line">【注意】：</span><br><span class="line"></span><br><span class="line">&gt; 建议下日期最新的版本</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2024-1590037534614.png)</span><br><span class="line"></span><br><span class="line">## 上传ISO文件</span><br><span class="line"></span><br><span class="line">上述的iso包都上传到下图目录中</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2025-1590037579769.png)</span><br><span class="line"></span><br><span class="line">## 设置虚拟机参数</span><br><span class="line"></span><br><span class="line">参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2026-1590037624180.png)</span><br><span class="line"></span><br><span class="line">【注意】：以下说法不一定准确，需要进一步验证：</span><br><span class="line">&gt; 1、处理器需要为HOST模式；</span><br><span class="line">&gt; 2、Win10系统要放在ide0，否则有可能不会启动；</span><br><span class="line">&gt; 3、机器要选q35，据说PCI-e的性能更好；</span><br><span class="line">&gt; 4、网上都说装win10时BIOS要选OVMF（UEFI），但在我的机器上就是死活起不来；</span><br><span class="line">&gt; 5、显示选默认就可以，但是一定要分显存；</span><br><span class="line">&gt; 6、安装win10过程中，如果找不到磁盘，可以在virtio-win的ISO上找virscsi驱动；</span><br><span class="line">&gt; 7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用virtio-win的ISO</span><br><span class="line">&gt; 8、显卡可以直接下载对应版本的集显驱动；</span><br><span class="line"></span><br><span class="line">## 连接win10虚拟机</span><br><span class="line">- 1、虚拟机安装完成后，建议启用远程桌面，配置RDP访问；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2027-1590037678865.png)</span><br><span class="line"></span><br><span class="line">- 2、修改&#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf（Win10在PVE顺序是100）</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2028-1590037714502.png)</span><br><span class="line"></span><br><span class="line">输入：&#96;&#96;&#96;vi &#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
+<p>在第一行插入：<br><code>args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>1、据说这一步骤是直通核显GPU的关键步骤；<br>2、需要注意的是：host=00:02.0这个00:02.0需要与前面lspic显示的核显编号对应上；<br>3、PVE主机的HDMI接口接到显示器；<br>4、当win10认到双显示器时，改为复制模式；</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>PVE</tag>
+        <tag>显卡直通</tag>
+        <tag>GPU</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GitNote的简单使用记录</title>
     <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p><strong>什么是GitHub</strong></p>
@@ -203,6 +375,115 @@
       </tags>
   </entry>
   <entry>
+    <title>免费在线流程图Draw.io</title>
+    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
+    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
+<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
+<ul>
+<li><p>【卷】不用设置</p>
+</li>
+<li><p>【端口】的设置，只要避免冲突就可以</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
+<p>显示更多网盘</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
+<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
+<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
+<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
+<p>支持的图库非常丰富</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>免注册</li>
+<li>支持中文</li>
+<li>丰富的内置图库</li>
+<li>多种存储格式</li>
+<li>支持云盘存储</li>
+<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>visio</tag>
+        <tag>draw.io</tag>
+        <tag>云盘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在GCP上安装Zerotier的Moon服务器</title>
+    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
+<p>而之前是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
+<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
+<p>GCP有公网地址，直接就它了。</p>
+<p><strong>1. 在GCP上安装Zerotier</strong></p>
+<p>用官网上提供的命令行：</p>
+<figure class="highlight plain"><figcaption><span>-s</span><span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWxsLnplcm90aWVyLmNvbQ==">| sudo bash```<i class="fa fa-external-link-alt"></i></span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">开始安装：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;38901587517414_.pic_hd-1587534791827.jpg)</span><br><span class="line"></span><br><span class="line">安装完成：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3891-1587534849922.png)</span><br><span class="line"></span><br><span class="line">**2. 加入网络**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3897-1587536175663.png)</span><br><span class="line"></span><br><span class="line">**3. 获取网络情况**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3899-1587536235890.png)</span><br><span class="line"></span><br><span class="line">**4. 生成moon.json**</span><br><span class="line">进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3893-1587534932410.png)</span><br><span class="line"></span><br><span class="line">运行下面的语句</span><br><span class="line">&#96;&#96;&#96;zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
+
+<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
+<p>直接运行<code>vi moon.js</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 需要修改stableEndpoints</strong></p>
+<p>增加做moon机器的IP地址信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: [&quot;34.84.xxx.xxx&#x2F;9993&quot;,&quot;192.168.191.1&#x2F;9993&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
+<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
+<figure class="highlight plain"><figcaption><span>genmoon moon.json```</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</span><br><span class="line"></span><br><span class="line">**7. 重启服务**</span><br><span class="line"></span><br><span class="line">网上的命令是这样的</span><br></pre></td></tr></table></figure>
+<p>killall -9 zerotier-one<br>zerotier-one -d</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">但是我执行后遇到错误，所以最简单的办法是直接reboot</span><br><span class="line"></span><br><span class="line">**8. 客户端配置**</span><br><span class="line"></span><br><span class="line">- 在没有加入moon时，运行&#96;&#96;&#96;zerotier-cli listpeers&#96;&#96;&#96;查看客户端的连接情况</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3906-1587536897732.png)</span><br><span class="line"></span><br><span class="line">可以看到都是planet和leaf，没有moon；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 不管Windows还是Mac OS，都需要以管理员身份运行：</span><br><span class="line">&#96;&#96;&#96;zerotier-cli orbit 3648b35427 3648b35427</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再次用<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
+<ul>
+<li>注意红色的部分，看到了moon有木有？</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
+<p>参考文档：</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GCP</tag>
+        <tag>Zerotier</tag>
+        <tag>Moon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在Coding上部署Hexo并实现和Github双线访问</title>
     <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
     <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
@@ -286,110 +567,60 @@
       </tags>
   </entry>
   <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
-
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+    <title>家庭多媒体中心（1）：综合篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
+<blockquote>
+<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
+</blockquote>
+<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
+<blockquote>
+<ol>
+<li>综合篇（本文）</li>
+<li>影片的管理</li>
+<li>影片的播放</li>
+<li>流媒体服务</li>
+<li>离线查询</li>
+</ol>
+</blockquote>
+<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
+<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
+<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
+<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
+<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
+<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
+<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
+<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
+<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
+</ul>
+<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
+<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
+<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
+<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
         <tag>Emby</tag>
         <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>免费在线流程图Draw.io</title>
-    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
-    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
-<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
-<ul>
-<li><p>【卷】不用设置</p>
-</li>
-<li><p>【端口】的设置，只要避免冲突就可以</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
-<p>显示更多网盘</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
-<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
-<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
-<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
-<p>支持的图库非常丰富</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
-<li>免注册</li>
-<li>支持中文</li>
-<li>丰富的内置图库</li>
-<li>多种存储格式</li>
-<li>支持云盘存储</li>
-<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>visio</tag>
-        <tag>draw.io</tag>
-        <tag>云盘</tag>
+        <tag>刮削器</tag>
+        <tag>Scrapers</tag>
+        <tag>Plex</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
       </tags>
   </entry>
   <entry>
@@ -467,56 +698,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在GCP上安装Zerotier的Moon服务器</title>
-    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
-<p>而之前是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
-<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
-<p>GCP有公网地址，直接就它了。</p>
-<p><strong>1. 在GCP上安装Zerotier</strong></p>
-<p>用官网上提供的命令行：</p>
-<figure class="highlight plain"><figcaption><span>-s</span><span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWxsLnplcm90aWVyLmNvbQ==">| sudo bash```<i class="fa fa-external-link-alt"></i></span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">开始安装：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;38901587517414_.pic_hd-1587534791827.jpg)</span><br><span class="line"></span><br><span class="line">安装完成：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3891-1587534849922.png)</span><br><span class="line"></span><br><span class="line">**2. 加入网络**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3897-1587536175663.png)</span><br><span class="line"></span><br><span class="line">**3. 获取网络情况**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3899-1587536235890.png)</span><br><span class="line"></span><br><span class="line">**4. 生成moon.json**</span><br><span class="line">进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3893-1587534932410.png)</span><br><span class="line"></span><br><span class="line">运行下面的语句</span><br><span class="line">&#96;&#96;&#96;zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
-
-<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
-<p>直接运行<code>vi moon.js</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>5. 需要修改stableEndpoints</strong></p>
-<p>增加做moon机器的IP地址信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: [&quot;34.84.xxx.xxx&#x2F;9993&quot;,&quot;192.168.191.1&#x2F;9993&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
-<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
-<figure class="highlight plain"><figcaption><span>genmoon moon.json```</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</span><br><span class="line"></span><br><span class="line">**7. 重启服务**</span><br><span class="line"></span><br><span class="line">网上的命令是这样的</span><br></pre></td></tr></table></figure>
-<p>killall -9 zerotier-one<br>zerotier-one -d</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">但是我执行后遇到错误，所以最简单的办法是直接reboot</span><br><span class="line"></span><br><span class="line">**8. 客户端配置**</span><br><span class="line"></span><br><span class="line">- 在没有加入moon时，运行&#96;&#96;&#96;zerotier-cli listpeers&#96;&#96;&#96;查看客户端的连接情况</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3906-1587536897732.png)</span><br><span class="line"></span><br><span class="line">可以看到都是planet和leaf，没有moon；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 不管Windows还是Mac OS，都需要以管理员身份运行：</span><br><span class="line">&#96;&#96;&#96;zerotier-cli orbit 3648b35427 3648b35427</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>再次用<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
-<ul>
-<li>注意红色的部分，看到了moon有木有？</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
-<p>参考文档：</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GCP</tag>
-        <tag>Zerotier</tag>
-        <tag>Moon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在Netlify上部署Hexo</title>
     <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
@@ -550,65 +731,6 @@
         <tag>Hexo</tag>
         <tag>blog</tag>
         <tag>Netlify</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在群晖上实现在线Office文档编辑</title>
-    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
-<ul>
-<li>下载速度还可以</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>先建好需要用的文件夹</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
-<ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
-<ul>
-<li>进【高级设置】，【卷】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
-<ul>
-<li>【端口】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
-<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
-<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
-<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>群晖</tag>
-        <tag>onlyoffice</tag>
-        <tag>nextcloud</tag>
-        <tag>seafile</tag>
-        <tag>owncloud</tag>
-        <tag>kodexplorer</tag>
       </tags>
   </entry>
   <entry>
@@ -678,144 +800,62 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（1）：综合篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
-<blockquote>
-<p>是指能够从以下受支持的站点收集电影的信息：IMDb，themoviedb.org，Rutten Tomatoes，OFDb.de，fanart.tv，port.hu、豆瓣等；</p>
-</blockquote>
-<p>这是一个系列，为了避免篇幅过长，准备分五个部分：</p>
-<blockquote>
-<ol>
-<li>综合篇（本文）</li>
-<li>影片的管理</li>
-<li>影片的播放</li>
-<li>流媒体服务</li>
-<li>离线查询</li>
-</ol>
-</blockquote>
-<p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
-<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
-<h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
-<h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
-<li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
-<li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
-<li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
+    <title>在群晖上实现在线Office文档编辑</title>
+    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
-<h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
-<li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
-<li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
 </ul>
-<h1 id="流媒体服务："><a href="#流媒体服务：" class="headerlink" title="流媒体服务："></a><strong>流媒体服务</strong>：</h1><ul>
-<li>Plex、Emby是收费软件，按月付费提供 premium 服务，jellyfin是免费的，这几个软件都是跨平台的，哪怕是在windows电脑上，也是瞬间就可以变成流媒体服务器的。</li>
-<li>国产软件，也可以考虑威动影音，支持移动端，虽然好像已经不再维护，但还是可以使用的。</li>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
+<ul>
+<li>下载速度还可以</li>
 </ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
-<p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>先建好需要用的文件夹</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
+<ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
+<ul>
+<li>进【高级设置】，【卷】的设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
+<ul>
+<li>【端口】的设置</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
+<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
+<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>刮削器</tag>
-        <tag>Scrapers</tag>
-        <tag>Plex</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-        <tag>Kodi</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>家庭多媒体中心（2）：管理篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
-<blockquote>
-<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
-</blockquote>
-<p><strong>什么是MediaElch</strong></p>
-<blockquote>
-<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
-</blockquote>
-<p><strong>什么是tinyMediaManager</strong></p>
-<blockquote>
-<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
-</blockquote>
-<p><strong>什么是ZogVM</strong></p>
-<blockquote>
-<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
-</blockquote>
-<p><strong>什么是极影派</strong></p>
-<blockquote>
-<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
-</blockquote>
-<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇（本文）</li>
-<li>播放篇</li>
-<li>流媒体服务</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
-<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
-<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
-<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
-<p>同步设置界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
-<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
-<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>这些软件都很优秀，总会有一款适合你的需求。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
-<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>刮削器</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-        <tag>Kodi</tag>
-        <tag>MediaElch</tag>
-        <tag>tinyMediaManager</tag>
+        <tag>docker</tag>
+        <tag>群晖</tag>
+        <tag>onlyoffice</tag>
+        <tag>nextcloud</tag>
+        <tag>seafile</tag>
+        <tag>owncloud</tag>
+        <tag>kodexplorer</tag>
       </tags>
   </entry>
   <entry>
@@ -909,70 +949,151 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
-    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+    <title>家庭多媒体中心（2）：管理篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
+<blockquote>
+<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
+</blockquote>
+<p><strong>什么是MediaElch</strong></p>
+<blockquote>
+<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
+</blockquote>
+<p><strong>什么是tinyMediaManager</strong></p>
+<blockquote>
+<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
+</blockquote>
+<p><strong>什么是ZogVM</strong></p>
+<blockquote>
+<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
+</blockquote>
+<p><strong>什么是极影派</strong></p>
+<blockquote>
+<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
+</blockquote>
+<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
 <blockquote>
 <ol>
 <li>综合篇</li>
-<li>管理篇</li>
+<li>管理篇（本文）</li>
 <li>播放篇</li>
-<li>流媒体服务（本文）</li>
+<li>流媒体服务</li>
 <li>查询篇</li>
 </ol>
 </blockquote>
-<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
-<p>网上别人总结的一些优缺点：</p>
-<blockquote>
-<ul>
-<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
-</li>
-<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
-</li>
-<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
-</li>
-<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
-<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
-<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
-<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
-<p>界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
-<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
-<ul>
-<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
-<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
-
-
+<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
+<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
+<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
+<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
+<p>同步设置界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
+<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
+<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>这些软件都很优秀，总会有一款适合你的需求。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
-<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
+<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Emby</tag>
-        <tag>Plex</tag>
-        <tag>流媒体服务器</tag>
-        <tag>Jellyfin</tag>
-        <tag>威动影音</tag>
+        <tag>刮削器</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
+        <tag>MediaElch</tag>
+        <tag>tinyMediaManager</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>将 Draw.io 集成到 VS Code</title>
+    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
+    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
+<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
+<li>点击 <code>install</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
+<ul>
+<li>点击 <code>打开Visual Studio Code</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
+<ul>
+<li>点击 <code>安装</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
+<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
+<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
+<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
+<ul>
+<li>进入【扩展设置】</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
+<ul>
+<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
+</li>
+<li><p>支持更换主题</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
+<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
+<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
+<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
+</ul>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>draw.io</tag>
+        <tag>VS Code</tag>
       </tags>
   </entry>
   <entry>
@@ -1170,6 +1291,119 @@
       </tags>
   </entry>
   <entry>
+    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
+    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇</li>
+<li>播放篇</li>
+<li>流媒体服务（本文）</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
+<p>网上别人总结的一些优缺点：</p>
+<blockquote>
+<ul>
+<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
+</li>
+<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
+</li>
+<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
+</li>
+<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
+<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p>界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<ul>
+<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
+<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
+<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>Plex</tag>
+        <tag>流媒体服务器</tag>
+        <tag>Jellyfin</tag>
+        <tag>威动影音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>群晖app访问遇到的端口问题</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是 NAS</strong></p>
@@ -1231,81 +1465,6 @@
       </tags>
   </entry>
   <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>苏玉云作品</category>
-      </categories>
-      <tags>
-        <tag>服装设计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>群晖上的Zerotier GUI一直显示offline的原因</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
     <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
@@ -1359,31 +1518,68 @@
       </tags>
   </entry>
   <entry>
-    <title>遇到“Error spawn failed”错误</title>
-    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-
-<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
-
-<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
-<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
+    <title>百兆升千兆家庭组网方案</title>
+    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
+<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
+<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
+<blockquote>
+<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
+</blockquote>
+<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
+<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
+<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
+<p>当然你不差钱，也可以直接上八类线。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
+<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
+<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
+<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
+<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
+<blockquote>
+<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
+</blockquote>
+<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
+<blockquote>
+<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
+</blockquote>
+<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
+<blockquote>
+<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
+<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+</ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
+<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
+<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
+<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>deploy_git</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>Mesh路由</tag>
+        <tag>wifi6</tag>
+        <tag>路由器</tag>
+        <tag>光猫</tag>
+        <tag>WDS</tag>
       </tags>
   </entry>
   <entry>
@@ -1445,132 +1641,60 @@
       </tags>
   </entry>
   <entry>
-    <title>百兆升千兆家庭组网方案</title>
-    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
-<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
-<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
-<blockquote>
-<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
 </blockquote>
-<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
-<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
-<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
-<p>当然你不差钱，也可以直接上八类线。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
-<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
-<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
-<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
-<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
-<blockquote>
-<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
-</blockquote>
-<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
-<blockquote>
-<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
-</blockquote>
-<blockquote>
-<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
-</blockquote>
-<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
-<blockquote>
-<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
-<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
 </ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
-<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
-<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
-<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
 ]]></content>
       <categories>
-        <category>各种折腾</category>
+        <category>苏玉云作品</category>
       </categories>
       <tags>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>wifi6</tag>
-        <tag>路由器</tag>
-        <tag>光猫</tag>
-        <tag>Mesh路由</tag>
-        <tag>WDS</tag>
+        <tag>服装设计</tag>
       </tags>
   </entry>
   <entry>
-    <title>将 Draw.io 集成到 VS Code</title>
-    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
-    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
-<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
-<li>点击 <code>install</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
-<ul>
-<li>点击 <code>打开Visual Studio Code</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
-<ul>
-<li>点击 <code>安装</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
-<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
-<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
-<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
-<ul>
-<li>进入【扩展设置】</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
-<ul>
-<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
-</li>
-<li><p>支持更换主题</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
-<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
-<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
-<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
-</ul>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+    <title>遇到“Error spawn failed”错误</title>
+    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+
+<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
+
+<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
+<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>draw.io</tag>
-        <tag>VS Code</tag>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>deploy_git</tag>
       </tags>
   </entry>
 </search>
