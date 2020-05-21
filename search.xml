@@ -464,10 +464,10 @@
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
 <p>把原内容中：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span> = <span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT = <span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
 
 <p>改为：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span> = <span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT = <span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
 <p>执行 <code>update-grub</code></p>
@@ -479,13 +479,13 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
 <p>加上以下代码，每个一行：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio\_iommu\_type1</span><br><span class="line">vfio\_pci</span><br><span class="line">vfio\_virqfd</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
 <ul>
 <li>建立驱动黑名单，依次输入以下命令：</li>
 </ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">echo "blacklist snd\_hda\_intel"&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line">echo "blacklist snd\_hda\_codec\_hdmi"&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line">echo "blacklist i915"&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_intel"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_codec_hdmi"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist i915"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
 <ul>
@@ -495,7 +495,7 @@
 <p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
 <p>把集显指定到 VFIO 模块</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">echo "options vfio-pci ids=8086:1616" &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options vfio-pci ids=8086:1616"</span> &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
 <h1 id="4、创建-Win10-虚拟机"><a href="#4、创建-Win10-虚拟机" class="headerlink" title="4、创建 Win10 虚拟机"></a>4、创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
@@ -523,7 +523,9 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
 <p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
-<p>在第一行插入：<br><code>args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</code></p>
+<p>在第一行插入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
 <p>【注意】：</p>
 <blockquote>
