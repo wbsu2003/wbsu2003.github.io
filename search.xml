@@ -408,8 +408,8 @@
 <p>【注意】：</p>
 <blockquote>
 <ol>
-<li>可能会存在U盘兼容性问题，但我没遇到，用的kingstone DT101 G2的4G；</li>
-<li>在写入格式时，开始选的USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为RAW后正常；</li>
+<li>可能会存在U盘兼容性问题，但我没遇到，用的 kingstone DT101 G2 的 4G；</li>
+<li>在写入格式时，开始选的 USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为 RAW 后正常；</li>
 </ol>
 </blockquote>
 <h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS 中设置 U 盘启动；</p>
@@ -432,7 +432,7 @@
 <blockquote>
 <p>密码要牢记</p>
 </blockquote>
-<p>设定主机名，IP，网关，掩码和DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
+<p>设定主机名，IP，网关，掩码和 DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
 <p>安装中，等待几分钟</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
@@ -463,8 +463,11 @@
 <p>后面所有的操作都在 WEB GUI 的 shell 中进行</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
-<p>把原内容中 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">改为</span><br><span class="line">&#96;&#96;&#96; GRUB_CMDLINE_LINUX_DEFAULT &#x3D; &quot;quiet intel_iommu&#x3D;on video&#x3D;efifb:off&quot;</span><br></pre></td></tr></table></figure>
+<p>把原内容中：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span> = <span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">GRUB_CMDLINE_LINUX_DEFAULT</span> = <span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
 <p>执行 <code>update-grub</code></p>
@@ -476,14 +479,14 @@
 </ul>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
 <p>加上以下代码，每个一行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio\_iommu\_type1</span><br><span class="line">vfio\_pci</span><br><span class="line">vfio\_virqfd</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio\_iommu\_type1</span><br><span class="line">vfio\_pci</span><br><span class="line">vfio\_virqfd</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
 <ul>
-<li>建立驱动黑名单，依次输入以下命令：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &quot;blacklist snd\_hda\_intel&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist snd\_hda\_codec\_hdmi&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.conf</span><br><span class="line">echo &quot;blacklist i915&quot;&gt;&gt; &#x2F;etc&#x2F;modprobe.d&#x2F;pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>建立驱动黑名单，依次输入以下命令：</li>
 </ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">echo "blacklist snd\_hda\_intel"&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line">echo "blacklist snd\_hda\_codec\_hdmi"&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line">echo "blacklist i915"&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
 <ul>
 <li>GPU 信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
@@ -492,8 +495,33 @@
 <p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
 <p>把集显指定到 VFIO 模块</p>
-<figure class="highlight plain"><figcaption><span>"options vfio-pci ids</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2023-1590037450012.png)</span><br><span class="line"></span><br><span class="line"># 4、创建 Win10 虚拟机</span><br><span class="line"></span><br><span class="line">## 下载 win10 的 iso 包；</span><br><span class="line"></span><br><span class="line">我相信你一定有，就是没有你也能找得到；</span><br><span class="line"> </span><br><span class="line">## 下载 virtio-win 的 iso 驱动包；</span><br><span class="line"></span><br><span class="line">下载地址：[https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;](https:&#x2F;&#x2F;fedorapeople.org&#x2F;groups&#x2F;virt&#x2F;virtio-win&#x2F;direct-downloads&#x2F;archive-virtio&#x2F;)</span><br><span class="line"></span><br><span class="line">【注意】：</span><br><span class="line"></span><br><span class="line">&gt; 建议下日期最新的版本</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2024-1590037534614.png)</span><br><span class="line"></span><br><span class="line">## 上传ISO文件</span><br><span class="line"></span><br><span class="line">上述的 iso 包都上传到下图目录中</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2025-1590037579769.png)</span><br><span class="line"></span><br><span class="line">## 设置虚拟机参数</span><br><span class="line"></span><br><span class="line">参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2026-1590037624180.png)</span><br><span class="line"></span><br><span class="line">【注意】：以下说法不一定准确，需要进一步验证：</span><br><span class="line">&gt; 1、处理器需要为 HOST 模式；</span><br><span class="line">&gt; 2、Win10 系统要放在 ide0，否则有可能不会启动；</span><br><span class="line">&gt; 3、机器要选 q35，据说 PCI-e 的性能更好；</span><br><span class="line">&gt; 4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；</span><br><span class="line">&gt; 5、显示选默认就可以，但是一定要分显存；</span><br><span class="line">&gt; 6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；</span><br><span class="line">&gt; 7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO</span><br><span class="line">&gt; 8、显卡可以直接下载对应版本的集显驱动；</span><br><span class="line"></span><br><span class="line">## 连接win10虚拟机</span><br><span class="line">- 1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2027-1590037678865.png)</span><br><span class="line"></span><br><span class="line">- 2、修改&#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf（Win10 在 PVE 顺序是 100）</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;21&#x2F;%E5%9B%BE%E7%89%87%2028-1590037714502.png)</span><br><span class="line"></span><br><span class="line">输入：&#96;&#96;&#96;vi &#x2F;etc&#x2F;pve&#x2F;qemu-server&#x2F;100.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">echo "options vfio-pci ids=8086:1616" &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
 
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
+<h1 id="4、创建-Win10-虚拟机"><a href="#4、创建-Win10-虚拟机" class="headerlink" title="4、创建 Win10 虚拟机"></a>4、创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
+<h2 id="下载-virtio-win-的-iso-驱动包；"><a href="#下载-virtio-win-的-iso-驱动包；" class="headerlink" title="下载 virtio-win 的 iso 驱动包；"></a>下载 virtio-win 的 iso 驱动包；</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mZWRvcmFwZW9wbGUub3JnL2dyb3Vwcy92aXJ0L3ZpcnRpby13aW4vZGlyZWN0LWRvd25sb2Fkcy9hcmNoaXZlLXZpcnRpby8=">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/<i class="fa fa-external-link-alt"></i></span></p>
+<p>【注意】：</p>
+<blockquote>
+<p>建议下日期最新的版本</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2024-1590037534614.png" alt="title"></p>
+<h2 id="上传ISO文件"><a href="#上传ISO文件" class="headerlink" title="上传ISO文件"></a>上传ISO文件</h2><p>上述的 iso 包都上传到下图目录中</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2025-1590037579769.png" alt="title"></p>
+<h2 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h2><p>参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2026-1590037624180.png" alt="title"></p>
+<p>【注意】：以下说法不一定准确，需要进一步验证：</p>
+<blockquote>
+<p>1、处理器需要为 HOST 模式；<br>2、Win10 系统要放在 ide0，否则有可能不会启动；<br>3、机器要选 q35，据说 PCI-e 的性能更好；<br>4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；<br>5、显示选默认就可以，但是一定要分显存；<br>6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；<br>7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO<br>8、显卡可以直接下载对应版本的集显驱动；</p>
+</blockquote>
+<h2 id="连接win10虚拟机"><a href="#连接win10虚拟机" class="headerlink" title="连接win10虚拟机"></a>连接win10虚拟机</h2><ul>
+<li>1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2027-1590037678865.png" alt="title"></p>
+<ul>
+<li>2、修改/etc/pve/qemu-server/100.conf（Win10 在 PVE 顺序是 100）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
+<p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
 <p>在第一行插入：<br><code>args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
