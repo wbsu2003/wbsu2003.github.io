@@ -34,7 +34,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/5-1588482334919.png">
 <meta property="article:published_time" content="2020-04-28T03:40:00.000Z">
-<meta property="article:modified_time" content="2020-05-03T05:05:50.361Z">
+<meta property="article:modified_time" content="2020-05-23T08:32:02.381Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="GCP">
 <meta property="article:tag" content="Zerotier">
@@ -271,7 +271,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-03 13:05:50" itemprop="dateModified" datetime="2020-05-03T13:05:50+08:00">2020-05-03</time>
+                <time title="修改时间：2020-05-23 16:32:02" itemprop="dateModified" datetime="2020-05-23T16:32:02+08:00">2020-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -310,14 +310,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.1k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>2 分钟</span>
             </span>
             <div class="post-description">介绍如何在GCP上安装Zerotier的Moon服务器。</div>
 
@@ -341,25 +341,47 @@
 <p>GCP有公网地址，直接就它了。</p>
 <p><strong>1. 在GCP上安装Zerotier</strong></p>
 <p>用官网上提供的命令行：</p>
-<figure class="highlight plain"><figcaption><span>-s</span><span class="exturl" data-url="aHR0cHM6Ly9pbnN0YWxsLnplcm90aWVyLmNvbQ==">| sudo bash```<i class="fa fa-external-link-alt"></i></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">开始安装：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;38901587517414_.pic_hd-1587534791827.jpg)</span><br><span class="line"></span><br><span class="line">安装完成：</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3891-1587534849922.png)</span><br><span class="line"></span><br><span class="line">**2. 加入网络**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3897-1587536175663.png)</span><br><span class="line"></span><br><span class="line">**3. 获取网络情况**</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3899-1587536235890.png)</span><br><span class="line"></span><br><span class="line">**4. 生成moon.json**</span><br><span class="line">进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹</span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3893-1587534932410.png)</span><br><span class="line"></span><br><span class="line">运行下面的语句</span><br><span class="line">&#96;&#96;&#96;zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br></pre></td></tr></table></figure>
+
+<p>开始安装：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/38901587517414_.pic_hd-1587534791827.jpg" alt="title"></p>
+<p>安装完成：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3891-1587534849922.png" alt="title"></p>
+<p><strong>2. 加入网络</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3897-1587536175663.png" alt="title"></p>
+<p><strong>3. 获取网络情况</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3899-1587536235890.png" alt="title"></p>
+<p><strong>4. 生成moon.json</strong><br>进入 /var/lib/zerotier-one 文件夹<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3893-1587534932410.png" alt="title"></p>
+<p>运行下面的语句</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
 
 <p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
 <p>直接运行<code>vi moon.js</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>5. 需要修改stableEndpoints</strong></p>
 <p>增加做moon机器的IP地址信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;id&quot;: &quot;3648b35427&quot;,</span><br><span class="line"> &quot;objtype&quot;: &quot;world&quot;,</span><br><span class="line"> &quot;roots&quot;: [</span><br><span class="line">  &#123;</span><br><span class="line">   &quot;identity&quot;: &quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;,</span><br><span class="line">   &quot;stableEndpoints&quot;: [&quot;34.84.xxx.xxx&#x2F;9993&quot;,&quot;192.168.191.1&#x2F;9993&quot;]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> &quot;signingKey&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;signingKey_SECRET&quot;: &quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;,</span><br><span class="line"> &quot;updatesMustBeSignedBy&quot;: &quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;,</span><br><span class="line"> &quot;worldType&quot;: &quot;moon&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: [<span class="string">"34.84.xxx.xxx/9993"</span>,<span class="string">"192.168.191.1/9993"</span>]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
 <p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
-<figure class="highlight plain"><figcaption><span>genmoon moon.json```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</span><br><span class="line"></span><br><span class="line">**7. 重启服务**</span><br><span class="line"></span><br><span class="line">网上的命令是这样的</span><br></pre></td></tr></table></figure>
-<p>killall -9 zerotier-one<br>zerotier-one -d</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">但是我执行后遇到错误，所以最简单的办法是直接reboot</span><br><span class="line"></span><br><span class="line">**8. 客户端配置**</span><br><span class="line"></span><br><span class="line">- 在没有加入moon时，运行&#96;&#96;&#96;zerotier-cli listpeers&#96;&#96;&#96;查看客户端的连接情况</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;04&#x2F;22&#x2F;WechatIMG3906-1587536897732.png)</span><br><span class="line"></span><br><span class="line">可以看到都是planet和leaf，没有moon；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 不管Windows还是Mac OS，都需要以管理员身份运行：</span><br><span class="line">&#96;&#96;&#96;zerotier-cli orbit 3648b35427 3648b35427</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-idtool genmoon moon.json</span><br></pre></td></tr></table></figure>
 
+<p>运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 /var/lib/zerotier-one/moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</p>
+<p><strong>7. 重启服务</strong></p>
+<p>网上的命令是这样的</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall -9 zerotier-one</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+<p>但是我执行后遇到错误，所以最简单的办法是直接reboot</p>
+<p><strong>8. 客户端配置</strong></p>
 <ul>
-<li>再次用<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
+<li>在没有加入moon时，运行<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3906-1587536897732.png" alt="title"></p>
+<p>可以看到都是planet和leaf，没有moon；</p>
+<ul>
+<li><p>不管Windows还是Mac OS，都需要以管理员身份运行：<br><code>zerotier-cli orbit 3648b35427 3648b35427</code></p>
+</li>
+<li><p>再次用 <code>zerotier-cli listpeers</code> 查看客户端的连接情况</p>
+</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
 <ul>
@@ -625,12 +647,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">39k</span>
+    <span title="站点总字数">37k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">35 分钟</span>
+    <span title="站点阅读时长">34 分钟</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
   </div>
