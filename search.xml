@@ -1783,4 +1783,46 @@
         <tag>WDS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>群晖上用docker安装homeassistant</title>
+    <url>/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/</url>
+    <content><![CDATA[<p><strong>什么是Home Assistant？</strong></p>
+<blockquote>
+<p>Home Assistant 是一个基于Python 3开发的开源家庭自动化平台。可以跟踪和控制家庭中的所有设备，并实现自动化控制。后面简称为HA。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最早安装的是0.82版，后来升级到了0.93版，正好遇到HA进行了一次较大的调整，导致很多插件无法使用，所以后来基本上不再主动升级，目前最新docker版本好像已经到了0.99版。</p>
+<p>这篇是大概一年前写的安装记录，做了一些调整，图片全部是重新截取的。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在注册表中搜索 <code>homeassistant</code>，第一个就是我们要安装的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590325699443-1590325699446.png" alt="title"></p>
+<p>双击下载，选择标签也就是版本，如果你有选择困难症，建议直接选 <code>latest</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/2-1590326402698.png" alt="title"></p>
+<p>这个docker镜像比较大，约2G，如果你没有修改成国内源的话，可能要等待的时间会非常长。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326564593-1590326564595.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>容器名称随意，一般都用的默认的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326787591-1590326787592.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326896505-1590326896507.png" alt="title"></p>
+<p>初始化后，会在 <code>config</code> 目录中存储配置文件、日志文件等</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327043067-1590327043068.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327200325-1590327200326.png" alt="title"></p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327253144-1590327253145.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327851525-1590327851527.png" alt="title"></p>
+<p>这里需要我们点 <code>+</code> 号，左边 <code>可变</code> 输入 TZ（Time Zone，也就是时区），右边 <code>值</code> Asia/Shanghai。</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>在浏览器中打开 http://群晖IP:8123即可。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590328555243-1590328555245.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>智能家居从新出发： 第一篇 群晖docker安装homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2N2s5cDVuLw==">https://post.smzdm.com/p/av7k9p5n/<i class="fa fa-external-link-alt"></i></span></p>
+<p>智能家居探索 篇八：nas群晖套件直接安装hassio/homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E4Mzkya2w2Lw==">https://post.smzdm.com/p/a8392kl6/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>群晖</tag>
+        <tag>homeassistant</tag>
+        <tag>HA</tag>
+        <tag>智能家居</tag>
+      </tags>
+  </entry>
 </search>
