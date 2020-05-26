@@ -25,22 +25,25 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="hexo-generator-index2是带过滤功能的Hexo首页生成器插件，可以完全替代官方的hexo-generator-index。">
+  <meta name="description" content="原来一直用的0.22版本，这次升级到了最新的0.33版。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自带过滤功能的Hexo首页生成器插件">
-<meta property="og:url" content="https://laosu.ml/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:title" content="全面升级frp">
+<meta property="og:url" content="https://laosu.ml/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="hexo-generator-index2是带过滤功能的Hexo首页生成器插件，可以完全替代官方的hexo-generator-index。">
+<meta property="og:description" content="原来一直用的0.22版本，这次升级到了最新的0.33版。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/hexo-1589105873303.png">
-<meta property="article:published_time" content="2020-05-10T10:04:00.000Z">
-<meta property="article:modified_time" content="2020-05-10T11:02:50.758Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/v2-91fe755ffa253a70695f33ce1abc2fba_1200x500-1590500383729.jpg">
+<meta property="article:published_time" content="2020-05-26T11:25:00.000Z">
+<meta property="article:modified_time" content="2020-05-26T13:39:56.531Z">
 <meta property="article:author" content="杨浦老苏">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="frp">
+<meta property="article:tag" content="VPS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/hexo-1589105873303.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/v2-91fe755ffa253a70695f33ce1abc2fba_1200x500-1590500383729.jpg">
 
-<link rel="canonical" href="https://laosu.ml/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/">
+<link rel="canonical" href="https://laosu.ml/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/">
 
 
 <script id="page-configurations">
@@ -66,7 +69,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>自带过滤功能的Hexo首页生成器插件 | 老苏的blog</title>
+  <title>全面升级frp | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -239,7 +242,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -252,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          自带过滤功能的Hexo首页生成器插件
+          全面升级frp
         </h1>
 
         <div class="post-meta">
@@ -263,7 +266,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-10 18:04:00 / 修改时间：19:02:50" itemprop="dateCreated datePublished" datetime="2020-05-10T18:04:00+08:00">2020-05-10</time>
+              <time title="创建时间：2020-05-26 19:25:00 / 修改时间：21:39:56" itemprop="dateCreated datePublished" datetime="2020-05-26T19:25:00+08:00">2020-05-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,8 +294,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -302,16 +305,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>737</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
-            <div class="post-description">hexo-generator-index2是带过滤功能的Hexo首页生成器插件，可以完全替代官方的hexo-generator-index。</div>
+            <div class="post-description">原来一直用的0.22版本，这次升级到了最新的0.33版。</div>
 
         </div>
       </header>
@@ -323,20 +326,96 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/hexo-1589105873303.png" itemprop="contentUrl">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/v2-91fe755ffa253a70695f33ce1abc2fba_1200x500-1590500383729.jpg" itemprop="contentUrl">
         </div>
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
-<blockquote>
-<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
+        <blockquote>
+<p>题图来自：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMTM2NzI2NTI=">https://zhuanlan.zhihu.com/p/113672652<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
+<p><strong>什么是 frp</strong></p>
+<blockquote>
+<p>frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透。【官网中文说明：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycC9ibG9iL21hc3Rlci9SRUFETUVfemgubWQ=">https://github.com/fatedier/frp/blob/master/README_zh.md<i class="fa fa-external-link-alt"></i></span>】</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590492748211-1590492748244.png" alt="title"><br>（图片来自官网）</p>
+<p>这张架构图清晰的显示了 frp 的工作原理，外网的用户 User 通过域名访问到内网提供 tcp 或者 http 服务的设备。</p>
+<ul>
+<li><strong>frps</strong> 是具有公网 IP 地址的frp服务器，一般我们都是购买 VPS ；</li>
+<li><strong>tcp or http service</strong> 是指内网提供 http 或者 tcp 服务的设备，可以是群晖，也可以是安装了各种服务的Windows、Linux主机，像我们之前介绍过的多媒体服务 jellyfin、图书库 Calibre-Web 等等都是跨平台、能够对外提供 http服务的软件；</li>
+<li><strong>frpc</strong> 是指 frp 客户端，可以安装在 windows电脑上，也可以安装在群晖，甚至是路由器上，建议安装的一直开机的设备上，这样能保证随时都可以访问内网；当然作为7*24小时开始的设备，要考虑功耗、噪音等等问题。</li>
+</ul>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>升级前一直用 0.20 版本，也一直蛮稳定的，之所以要升级是因为 0.20 之后的版本带来了一些新的特性，比如：0.25 版本之后 frpc 和 frps 之间支持通过 TLS 协议加密传输，安全性会更高一些；还有诸如服务器插件等等；当然最重要的原因还是喜欢折腾。</p>
+<h1 id="VPS-上卸载-0-20-版"><a href="#VPS-上卸载-0-20-版" class="headerlink" title="VPS 上卸载 0.20 版"></a>VPS 上卸载 0.20 版</h1><p>0.20 版本是用的《<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTY1Mzc5LTEtMS5odG1s">内网穿透利器Frp一键安装脚本及设置教程<i class="fa fa-external-link-alt"></i></span>》里的脚本安装的</p>
+<p>首先我们在VPS服务器上看看是否有更新</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install-frps.sh update</span><br></pre></td></tr></table></figure>
+
+<p>发现依然还是 0.20，说明这个脚本的作者已经弃坑了，只能卸载了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install-frps.sh uninstall</span><br></pre></td></tr></table></figure>
+
+<p>整个过程非常简单，所以就不上图了。</p>
+<h1 id="停用路由器上的-0-20-版-frpc"><a href="#停用路由器上的-0-20-版-frpc" class="headerlink" title="停用路由器上的 0.20 版 frpc"></a>停用路由器上的 0.20 版 frpc</h1><p>frpc 客户端当时是安装在netgear的R6300v2，刷了梅林固件，从软件中心进去已安装中可以找到 frpc 穿透</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590499866859-1590499866861.png" alt="title"></p>
+<p>先停用</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590499976846-1590499976847.png" alt="title"></p>
+<p>鼠标移上去会显示卸载</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590499930762-1590499930763.png" alt="title"></p>
+<h1 id="VPS上安装-0-33-版-frps"><a href="#VPS上安装-0-33-版-frps" class="headerlink" title="VPS上安装 0.33 版 frps"></a>VPS上安装 0.33 版 frps</h1><p>我们在万能的 github 上找到了另一个提供一键安装脚本的大神，安装脚本已支持跟随到最新的服务版本，这正是我们需要的。</p>
+<p>在VPS上依次执行：</p>
+<ul>
+<li><p>下载 sh 脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 ./install-frps.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行脚本安装 frps</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>除了密码外，一路无脑回车</strong>，所以也不上过程图了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590496171230-1590496171231.png" alt="title"></p>
+<h1 id="群晖上安装-0-33-版-frpc"><a href="#群晖上安装-0-33-版-frpc" class="headerlink" title="群晖上安装 0.33 版 frpc"></a>群晖上安装 0.33 版 frpc</h1><h2 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h2><p>还是继续用 docker 镜像的方式安装，在注册表中搜索 frpc，排在第一的 <code>oldiy/frpc</code>,因为之前我们我们用的就是它，但是它的最新版本只到 0.26</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590496890276-1590496890279.png" alt="title"></p>
+<p>所以这次我们选了红框中的 <code>stilleshan/frpc</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590496869650-1590496869651.png" alt="title"></p>
+<p>因为这个版本的镜像支持 0.33 版本</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590497020692-1590497020693.png" alt="title"></p>
+<h2 id="安装设置"><a href="#安装设置" class="headerlink" title="安装设置"></a>安装设置</h2><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><p>还是用的默认名称</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590497170077-1590497170078.png" alt="title"></p>
+<h3 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h3><ul>
+<li>勾选启用自动重新启动</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590497354380-1590497354382.png" alt="title"></p>
+<ul>
+<li>卷</li>
+</ul>
+<p>添加文件，根据你存放的 frpc.ini 添加，后面的装在路径必须是 <code>/frp/frpc.ini</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590497660747-1590497660748.png" alt="title"></p>
+<p>下面是镜像的作者提供的frpc.ini格式内容参考，请根据自己的实际进行修改。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = free.frp.ioiox.com</span><br><span class="line"><span class="attr">server_port</span> = <span class="number">7007</span></span><br><span class="line"><span class="attr">token</span> = www.ioiox.com</span><br><span class="line"></span><br><span class="line"><span class="section">[web1]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">1.2</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = yourdomain.com</span><br><span class="line"></span><br><span class="line"><span class="section">[web2]</span></span><br><span class="line"><span class="attr">type</span> = https</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">1.2</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5001</span></span><br><span class="line"><span class="attr">custom_domains</span> = yourdomain.com</span><br><span class="line"></span><br><span class="line"><span class="section">[tcp1]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">1.2</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">22</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">22222</span></span><br><span class="line"><span class="attr">custom_domains</span> = yourdomain.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>网络</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590498683867-1590498683868.png" alt="title"></p>
+<ul>
+<li>端口</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590498725028-1590498725029.png" alt="title"></p>
+<ul>
+<li>链接</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590498781478-1590498781479.png" alt="title"></p>
+<ul>
+<li>环境</li>
+</ul>
+<p>可以添加个时区，左边<code>可变``输入 TZ ，右边</code>值``` 输入 Asia/Shanghai，不加也不影响使用。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/26/1590498838936-1590498838937.png" alt="title"></p>
+<p>稍等一会儿就可以访问了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+<p>frp官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==">https://github.com/fatedier/frp<i class="fa fa-external-link-alt"></i></span></p>
+<p>内网穿透利器Frp一键安装脚本及设置教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTY1Mzc5LTEtMS5odG1s">https://koolshare.cn/thread-65379-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Frps服务端一键配置脚本，Frp最新版本：0.33.0<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL012c0NvZGUvZnJwcy1vbmVrZXk=">https://github.com/MvsCode/frps-onekey<i class="fa fa-external-link-alt"></i></span></p>
+<p>stilleshan/frpc项目<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0aWxsZXNoYW4vZnJwYw==">https://github.com/stilleshan/frpc<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -367,6 +446,24 @@
     
     
       
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\群晖app访问遇到的端口问题\" rel="bookmark">群晖app访问遇到的端口问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\08\在群晖上实现在线Office文档编辑\" rel="bookmark">在群晖上实现在线Office文档编辑</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\24\群晖上用docker安装homeassistant\" rel="bookmark">群晖上用docker安装homeassistant</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\群晖上的Zerotier GUI一直显示offline的原因\" rel="bookmark">群晖上的Zerotier GUI一直显示offline的原因</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\RaiDrive挂载frp映射的WebDAV网盘\" rel="bookmark">RaiDrive挂载frp映射的WebDAV网盘</a></div>
+    </li>
+  </ul>
 <div class="post-widgets">
       <div id="needsharebutton-postbottom">
         <span class="btn">
@@ -383,7 +480,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/" title="自带过滤功能的Hexo首页生成器插件">https://laosu.ml/2020/05/10/自带过滤功能的Hexo首页生成器插件/</a>
+    <a href="https://laosu.ml/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/" title="全面升级frp">https://laosu.ml/2020/05/26/全面升级frp/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -424,7 +521,10 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/frp/" rel="tag"><i class="fa fa-tag"></i> frp</a>
+              <a href="/tags/VPS/" rel="tag"><i class="fa fa-tag"></i> VPS</a>
           </div>
 
         
@@ -433,13 +533,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/" rel="prev" title="适合小团队的Kanboard项目管理软件">
-      <i class="fa fa-chevron-left"></i> 适合小团队的Kanboard项目管理软件
+    <a href="/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/" rel="prev" title="群晖上用docker安装homeassistant">
+      <i class="fa fa-chevron-left"></i> 群晖上用docker安装homeassistant
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/" rel="next" title="在Coding上部署Hexo并实现和Github双线访问">
-      在Coding上部署Hexo并实现和Github双线访问 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -499,7 +596,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置"><span class="nav-number">4.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试结论"><span class="nav-number">5.</span> <span class="nav-text">测试结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPS-上卸载-0-20-版"><span class="nav-number">2.</span> <span class="nav-text">VPS 上卸载 0.20 版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#停用路由器上的-0-20-版-frpc"><span class="nav-number">3.</span> <span class="nav-text">停用路由器上的 0.20 版 frpc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPS上安装-0-33-版-frps"><span class="nav-number">4.</span> <span class="nav-text">VPS上安装 0.33 版 frps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#群晖上安装-0-33-版-frpc"><span class="nav-number">5.</span> <span class="nav-text">群晖上安装 0.33 版 frpc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本选择"><span class="nav-number">5.1.</span> <span class="nav-text">版本选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装设置"><span class="nav-number">5.2.</span> <span class="nav-text">安装设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建容器"><span class="nav-number">5.2.1.</span> <span class="nav-text">创建容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级设置"><span class="nav-number">5.2.2.</span> <span class="nav-text">高级设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
