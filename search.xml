@@ -62,6 +62,147 @@
       </tags>
   </entry>
   <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>RaiDrive</tag>
+        <tag>frp</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitNote的简单使用记录</title>
+    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
+<blockquote>
+<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是git</strong></p>
+<blockquote>
+<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Markdown</strong></p>
+<blockquote>
+<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
+</blockquote>
+<p><strong>什么是GitNote</strong></p>
+<blockquote>
+<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
+<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
+<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
+<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
+<p><strong>特别注意：</strong></p>
+<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
+<p>点击 Create repository 完成创建</p>
+<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
+<p><strong>特别注意：</strong></p>
+<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
+<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
+<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
+<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
+<ol>
+<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>解压到 {user}/.gitnote/plugins 目录</p>
+</li>
+<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
+</li>
+<li><p>重启 GitNote</p>
+</li>
+</ol>
+<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
+<li>不要用菜单栏的插入图片，这个不会上传；</li>
+<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
+</ul>
+<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
+<p>记得要先注册</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
+<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
+<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
+<li>网络错误：</li>
+</ul>
+<p>比如上传github图床时，时不时出现的网络错误</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
+<ul>
+<li>预览问题：</li>
+</ul>
+<p>上传成功的图片不显示，而只是显示一个title</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
+<p>而实际上在github的网页上应该是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
+<ul>
+<li>文档历史</li>
+</ul>
+<p>不知道什么原因，一直没有文档的编辑历史</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
+<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
+<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
+<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
+<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>git</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PVE安装win10集显直通</title>
     <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
     <content><![CDATA[<p><strong>什么是PVE</strong></p>
@@ -264,99 +405,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitNote的简单使用记录</title>
-    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
-<blockquote>
-<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是git</strong></p>
-<blockquote>
-<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Markdown</strong></p>
-<blockquote>
-<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
-</blockquote>
-<p><strong>什么是GitNote</strong></p>
-<blockquote>
-<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
-<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
-<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
-<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
-<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
-<p><strong>特别注意：</strong></p>
-<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
-<p>点击 Create repository 完成创建</p>
-<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
-<p><strong>特别注意：</strong></p>
-<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
-<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
-<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
-<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
-<ol>
-<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>解压到 {user}/.gitnote/plugins 目录</p>
-</li>
-<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
-</li>
-<li><p>重启 GitNote</p>
-</li>
-</ol>
-<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
-<li>不要用菜单栏的插入图片，这个不会上传；</li>
-<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
-</ul>
-<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
-<p>记得要先注册</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
-<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
-<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
-<li>网络错误：</li>
-</ul>
-<p>比如上传github图床时，时不时出现的网络错误</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
-<ul>
-<li>预览问题：</li>
-</ul>
-<p>上传成功的图片不显示，而只是显示一个title</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
-<p>而实际上在github的网页上应该是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
-<ul>
-<li>文档历史</li>
-</ul>
-<p>不知道什么原因，一直没有文档的编辑历史</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
-<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
-<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
-<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
-<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>git</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>全面升级frp</title>
     <url>/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/</url>
     <content><![CDATA[<blockquote>
@@ -453,58 +501,69 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>群晖</tag>
-        <tag>docker</tag>
         <tag>frp</tag>
+        <tag>docker</tag>
+        <tag>群晖</tag>
         <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
-<blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+    <title>免费在线流程图Draw.io</title>
+    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
+    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
+<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
+<ul>
+<li><p>【卷】不用设置</p>
+</li>
+<li><p>【端口】的设置，只要避免冲突就可以</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
+<p>显示更多网盘</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
+<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
+<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
+<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
+<p>支持的图库非常丰富</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>免注册</li>
+<li>支持中文</li>
+<li>丰富的内置图库</li>
+<li>多种存储格式</li>
+<li>支持云盘存储</li>
+<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><strong>frp是什么？</strong></p>
-<blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
-</blockquote>
-<p><strong>WebDAV是什么？</strong></p>
-<blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
-</blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
-        <tag>frp</tag>
-        <tag>RaiDrive</tag>
-        <tag>WebDAV</tag>
+        <tag>群晖</tag>
+        <tag>visio</tag>
+        <tag>draw.io</tag>
+        <tag>云盘</tag>
       </tags>
   </entry>
   <entry>
@@ -588,65 +647,6 @@
         <tag>Coding</tag>
         <tag>blog</tag>
         <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>免费在线流程图Draw.io</title>
-    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
-    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
-<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
-<ul>
-<li><p>【卷】不用设置</p>
-</li>
-<li><p>【端口】的设置，只要避免冲突就可以</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
-<p>显示更多网盘</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
-<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
-<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
-<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
-<p>支持的图库非常丰富</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
-<li>免注册</li>
-<li>支持中文</li>
-<li>丰富的内置图库</li>
-<li>多种存储格式</li>
-<li>支持云盘存储</li>
-<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>visio</tag>
-        <tag>draw.io</tag>
-        <tag>云盘</tag>
       </tags>
   </entry>
   <entry>
@@ -947,8 +947,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>群晖</tag>
         <tag>docker</tag>
+        <tag>群晖</tag>
         <tag>onlyoffice</tag>
         <tag>nextcloud</tag>
         <tag>seafile</tag>
@@ -1011,6 +1011,90 @@
         <tag>ZogVM</tag>
         <tag>极影派</tag>
         <tag>Kodi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（2）：管理篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
+    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
+<blockquote>
+<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
+</blockquote>
+<p><strong>什么是MediaElch</strong></p>
+<blockquote>
+<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
+</blockquote>
+<p><strong>什么是tinyMediaManager</strong></p>
+<blockquote>
+<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
+</blockquote>
+<p><strong>什么是ZogVM</strong></p>
+<blockquote>
+<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
+</blockquote>
+<p><strong>什么是极影派</strong></p>
+<blockquote>
+<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
+</blockquote>
+<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇（本文）</li>
+<li>播放篇</li>
+<li>流媒体服务</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
+<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
+<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
+<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
+<p>同步设置界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
+<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
+<p>界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
+<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
+<p>界面效果展示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>这些软件都很优秀，总会有一款适合你的需求。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
+<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>刮削器</tag>
+        <tag>ZogVM</tag>
+        <tag>极影派</tag>
+        <tag>Kodi</tag>
+        <tag>MediaElch</tag>
+        <tag>tinyMediaManager</tag>
       </tags>
   </entry>
   <entry>
@@ -1104,200 +1188,6 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（2）：管理篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%882%EF%BC%89%EF%BC%9A%E7%AE%A1%E7%90%86%E7%AF%87/</url>
-    <content><![CDATA[<p><strong>什么是Kodi</strong></p>
-<blockquote>
-<p>Kodi (formerly XBMC) is a free and open source media player application developed by the XBMC/Kodi Foundation, a non-profit technology consortium. Kodi is available for multiple operating-systems and hardware platforms, featuring a 10-foot user interface for use with televisions and remote controls. It allows users to play and view most videos, music, podcasts, and other digital media files from local and network storage media and the internet.</p>
-</blockquote>
-<p><strong>什么是MediaElch</strong></p>
-<blockquote>
-<p>MediaElch is a free MediaManager for movies and tv shows. It supports generating of nfo files and also directly manipulating XBMCs database (SQLite). Posters, thumbnails, screenshots and actor images will be stored along movies and tv shows (when using nfos) or directly in XMBCs thumbnail folder. Built with Qt MediaElch is available for Mac OS X, Windows and Linux.</p>
-</blockquote>
-<p><strong>什么是tinyMediaManager</strong></p>
-<blockquote>
-<p>tinyMediaManager is a media management tool written in Java/Swing. It is written to provide metadata for the Kodi Media Center (formerly known as XBMC), MediaPortal and Plex media server. Due to the fact that it is written in Java, tinyMediaManager will run on Windows, Linux and macOS (and possible more OS).</p>
-</blockquote>
-<p><strong>什么是ZogVM</strong></p>
-<blockquote>
-<p>ZogVM 是一款专门针对大量音频、视频进行管理的工具，支持多硬盘、局域网 NAS、设备离线检索、匹配字幕并下载等功能。</p>
-</blockquote>
-<p><strong>什么是极影派</strong></p>
-<blockquote>
-<p>极影派是一款本地视频管理工具，能够帮你管理本地电脑上的视频、电影，并且可以自动获取电影信息，包括类型、导演、主演、简介、海报图片等资料，用来创建属于自己的电影视频库。</p>
-</blockquote>
-<p>电影下多了之后，会存在重复下载，或者同一个片源有多个格式、分辨率，这个比较浪费空间，也不利于查找，今天我们就聊聊电影的管理。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇（本文）</li>
-<li>播放篇</li>
-<li>流媒体服务</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<h1 id="命名格式"><a href="#命名格式" class="headerlink" title="命名格式"></a>命名格式</h1><p>资料的组织和存放，必然要按照一定的规则，否则肯定乱糟糟的，不利于查找，所以Kodi给出了电影的命名规则( <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvTW92aWVz">https://kodi.wiki/view/Naming_video_files/Movies<i class="fa fa-external-link-alt"></i></span> )，我个人倾向于采用文件夹命名这样的结构：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/Video-Movie_Folder_File_Structure-1588298537860.jpg" alt="title"></p>
-<p>电视剧的命名规则（ <span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9OYW1pbmdfdmlkZW9fZmlsZXMvVFZfc2hvd3M=">https://kodi.wiki/view/Naming_video_files/TV_shows<i class="fa fa-external-link-alt"></i></span> ）</p>
-<h1 id="管理软件"><a href="#管理软件" class="headerlink" title="管理软件"></a>管理软件</h1><h2 id="Kodi"><a href="#Kodi" class="headerlink" title="Kodi"></a>Kodi</h2><p>刮削器首选Kodi，功能强大、扩展性强、界面漂亮，为了电视等大屏设备做了特别优化，在家庭影音系统中倍受青睐。然而 Kodi 的劣势也很明显：比如默认情况下无法在不同设备上同步数据，这个我们放到查询篇再说。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/kodi-media-center-vulnerability-exposes-users-to-man-in-the-middle-attacks-600x315-1588300797866.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/3536d9c54417375d82823002d2a3303-1588300950052.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/290fc0ece9c21758514fffef1573d78-1588308178290.png" alt="title"></p>
-<h2 id="MediaElch"><a href="#MediaElch" class="headerlink" title="MediaElch"></a>MediaElch</h2><p>这是目前本人日常用的刮削器，感觉用的人不是很多，但是官方的文档还比较详细，主要是支持和Kodi同步，意味着可以共享媒体库，这一点对我来说很重要。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/icon-1587952393579.png" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/a7289ec6269856496b1be887ae3545f-1587995862868.png" alt="title"></p>
-<p>同步设置界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/15fa93859f1e9326157980b4bcbe7b7-1588306523428.png" alt="title"></p>
-<h2 id="tinyMediaManager"><a href="#tinyMediaManager" class="headerlink" title="tinyMediaManager"></a>tinyMediaManager</h2><p>这个软件用的人比较多，网上教程也很多。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/images-1588301699586.jpg" alt="title"></p>
-<p>界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/703e264d7d24a7da30834de23079124-1587998438949.png" alt="title"></p>
-<p>看设置也支持和Kodi共享媒体库，但本人没实践过。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/image-5-1588305127636.png" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9rb2Z6aGFuZ2FuZ3VvLmhvbWUuYmxvZy8yMDE5LzA2LzA0LyVFNyVBQyVBQyVFNCVCOCU4MCVFNSVCQyVCOS10aW55bWVkaWFtYW5hZ2VyLSVFNSU5RiVCQSVFNiU5QyVBQyVFOCVBRSVCRSVFNyVCRCVBRSVFNyVBRiU4Ny/vvIk=">https://kofzhanganguo.home.blog/2019/06/04/%E7%AC%AC%E4%B8%80%E5%BC%B9-tinymediamanager-%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE%E7%AF%87/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="ZogVM"><a href="#ZogVM" class="headerlink" title="ZogVM"></a>ZogVM</h2><p>这个软件最大的特点就是搜索速度极快，据说可以媲美EveryThing，可惜 ZogVM2已经停止更新了，但是 ZogVM3 又跳票了几年了。界面效果展示：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/zogvm2.0-1588303329930.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3pvZ3ZtL3pvZ3Zt77yJ">https://github.com/zogvm/zogvm）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="极影派"><a href="#极影派" class="headerlink" title="极影派"></a>极影派</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/logo-2-1588302621835.png" alt="title"></p>
-<p>界面效果展示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/006D2KSdjw1fatuz0vokrj31e00nmne6-1588302889531.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cud3V6dW93ZWkubmV0LzU1NzcuaHRtbO+8iQ==">https://www.wuzuowei.net/5577.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>这些软件都很优秀，总会有一款适合你的需求。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>Kodi官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLnR2Lw==">https://kodi.tv/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua3ZpYmVzLmRlL21lZGlhZWxjaC8=">https://www.kvibes.de/mediaelch/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MediaElch官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpYWVsY2guZ2l0aHViLmlvL21lZGlhZWxjaC1kb2Mv">https://mediaelch.github.io/mediaelch-doc/<i class="fa fa-external-link-alt"></i></span></p>
-<p>tinyMediaManager官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlueW1lZGlhbWFuYWdlci5vcmcv">https://www.tinymediamanager.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM 电影视频管理软件 - 影迷必备利器！整理/收集/管理硬盘 NAS 大量影音资源<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS96b2d2bS5odG1s">https://www.iplaysoft.com/zogvm.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qZWVucGkuY29tLw==">http://www.jeenpi.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>刮削器</tag>
-        <tag>ZogVM</tag>
-        <tag>极影派</tag>
-        <tag>Kodi</tag>
-        <tag>MediaElch</tag>
-        <tag>tinyMediaManager</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>将 Draw.io 集成到 VS Code</title>
-    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
-    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
-<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
-<li>点击 <code>install</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
-<ul>
-<li>点击 <code>打开Visual Studio Code</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
-<ul>
-<li>点击 <code>安装</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
-<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
-<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
-<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
-<ul>
-<li>进入【扩展设置】</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
-<ul>
-<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
-</li>
-<li><p>支持更换主题</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
-<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
-<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
-<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
-</ul>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>draw.io</tag>
-        <tag>VS Code</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（4）：流媒体服务器篇</title>
     <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
     <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
@@ -1362,157 +1252,6 @@
         <tag>流媒体服务器</tag>
         <tag>Jellyfin</tag>
         <tag>威动影音</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>打造一个可以随身携带的“藏书阁”</title>
-    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
-    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
-<blockquote>
-<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Calibre-Web？</strong></p>
-<blockquote>
-<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
-</blockquote>
-<p><strong>什么是OPDS？</strong></p>
-<blockquote>
-<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
-</blockquote>
-<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
-<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
-<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
-<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
-<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
-<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
-<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
-<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
-<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
-<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
-<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
-
-<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
-<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
-<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
-<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
-<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
-<ul>
-<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
-<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
-<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
-<blockquote>
-<ul>
-<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
-<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
-<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
-<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
-<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Calibre</tag>
-        <tag>Calibre-Web</tag>
-        <tag>calibre-webserver</tag>
-        <tag>my-calibre-webserver-docker</tag>
-        <tag>OPDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百兆升千兆家庭组网方案</title>
-    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
-<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
-<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
-<blockquote>
-<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
-</blockquote>
-<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
-<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
-<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
-<p>当然你不差钱，也可以直接上八类线。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
-<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
-<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
-<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
-<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
-<blockquote>
-<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
-</blockquote>
-<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
-<blockquote>
-<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
-</blockquote>
-<blockquote>
-<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
-</blockquote>
-<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
-<blockquote>
-<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
-<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
-<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
-<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
-<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>Mesh路由</tag>
-        <tag>wifi6</tag>
-        <tag>路由器</tag>
-        <tag>光猫</tag>
-        <tag>WDS</tag>
       </tags>
   </entry>
   <entry>
@@ -1618,9 +1357,119 @@
       </categories>
       <tags>
         <tag>Kodi</tag>
-        <tag>MariaDB</tag>
         <tag>NAS</tag>
         <tag>KodiWebPortal</tag>
+        <tag>MariaDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>将 Draw.io 集成到 VS Code</title>
+    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
+    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
+<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
+<li>点击 <code>install</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
+<ul>
+<li>点击 <code>打开Visual Studio Code</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
+<ul>
+<li>点击 <code>安装</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
+<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
+<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
+<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
+<ul>
+<li>进入【扩展设置】</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
+<ul>
+<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
+</li>
+<li><p>支持更换主题</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
+<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
+<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
+<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
+</ul>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>draw.io</tag>
+        <tag>VS Code</tag>
       </tags>
   </entry>
   <entry>
@@ -1658,45 +1507,154 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖上用docker安装homeassistant</title>
-    <url>/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/</url>
-    <content><![CDATA[<p><strong>什么是Home Assistant？</strong></p>
+    <title>百兆升千兆家庭组网方案</title>
+    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
+<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
+<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
 <blockquote>
-<p>Home Assistant 是一个基于Python 3开发的开源家庭自动化平台。可以跟踪和控制家庭中的所有设备，并实现自动化控制。后面简称为HA。</p>
+<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
 </blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最早安装的是0.82版，后来升级到了0.93版，正好遇到HA进行了一次较大的调整，导致很多插件无法使用，所以后来基本上不再主动升级，目前最新docker版本好像已经到了0.99版。</p>
-<p>这篇是大概一年前写的安装记录，做了一些调整，图片全部是重新截取的。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在注册表中搜索 <code>homeassistant</code>，第一个就是我们要安装的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590325699443-1590325699446.png" alt="title"></p>
-<p>双击下载，选择标签也就是版本，如果你有选择困难症，建议直接选 <code>latest</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/2-1590326402698.png" alt="title"></p>
-<p>这个docker镜像比较大，约2G，如果你没有修改成国内源的话，可能要等待的时间会非常长。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326564593-1590326564595.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>容器名称随意，一般都用的默认的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326787591-1590326787592.png" alt="title"></p>
-<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326896505-1590326896507.png" alt="title"></p>
-<p>初始化后，会在 <code>config</code> 目录中存储配置文件、日志文件等</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327043067-1590327043068.png" alt="title"></p>
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327200325-1590327200326.png" alt="title"></p>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327253144-1590327253145.png" alt="title"></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327851525-1590327851527.png" alt="title"></p>
-<p>这里需要我们点 <code>+</code> 号，左边 <code>可变</code> 输入 TZ（Time Zone，也就是时区），右边 <code>值</code> 输入 Asia/Shanghai。</p>
-<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>在浏览器中打开 http://群晖IP:8123即可。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590328555243-1590328555245.png" alt="title"></p>
+<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
+<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
+<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
+<p>当然你不差钱，也可以直接上八类线。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
+<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
+<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
+<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
+<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
+<blockquote>
+<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
+</blockquote>
+<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
+<blockquote>
+<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
+</blockquote>
+<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
+<blockquote>
+<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
+<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+</ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>智能家居从新出发： 第一篇 群晖docker安装homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2N2s5cDVuLw==">https://post.smzdm.com/p/av7k9p5n/<i class="fa fa-external-link-alt"></i></span></p>
-<p>智能家居探索 篇八：nas群晖套件直接安装hassio/homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E4Mzkya2w2Lw==">https://post.smzdm.com/p/a8392kl6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
+<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
+<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
+<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>群晖</tag>
-        <tag>docker</tag>
-        <tag>homeassistant</tag>
-        <tag>HA</tag>
-        <tag>智能家居</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>路由器</tag>
+        <tag>WDS</tag>
+        <tag>Mesh路由</tag>
+        <tag>wifi6</tag>
+        <tag>光猫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>打造一个可以随身携带的“藏书阁”</title>
+    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
+    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
+<blockquote>
+<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Calibre-Web？</strong></p>
+<blockquote>
+<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
+</blockquote>
+<p><strong>什么是OPDS？</strong></p>
+<blockquote>
+<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
+</blockquote>
+<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
+<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
+<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
+<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
+<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
+<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
+<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
+<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
+<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
+<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
+<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
+
+<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
+<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
+<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
+<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
+<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
+<ul>
+<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
+<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
+<blockquote>
+<ul>
+<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
+<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
+<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
+<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
+<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Calibre</tag>
+        <tag>Calibre-Web</tag>
+        <tag>calibre-webserver</tag>
+        <tag>my-calibre-webserver-docker</tag>
+        <tag>OPDS</tag>
       </tags>
   </entry>
   <entry>
@@ -1750,8 +1708,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>群晖</tag>
         <tag>frp</tag>
+        <tag>群晖</tag>
         <tag>VPS</tag>
         <tag>NAS</tag>
         <tag>黑群</tag>
@@ -1781,8 +1739,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>群晖</tag>
         <tag>frp</tag>
+        <tag>群晖</tag>
         <tag>NAS</tag>
         <tag>ngrok</tag>
         <tag>ZeroTier</tag>
@@ -1790,32 +1748,45 @@
       </tags>
   </entry>
   <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+    <title>群晖上用docker安装homeassistant</title>
+    <url>/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/</url>
+    <content><![CDATA[<p><strong>什么是Home Assistant？</strong></p>
+<blockquote>
+<p>Home Assistant 是一个基于Python 3开发的开源家庭自动化平台。可以跟踪和控制家庭中的所有设备，并实现自动化控制。后面简称为HA。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最早安装的是0.82版，后来升级到了0.93版，正好遇到HA进行了一次较大的调整，导致很多插件无法使用，所以后来基本上不再主动升级，目前最新docker版本好像已经到了0.99版。</p>
+<p>这篇是大概一年前写的安装记录，做了一些调整，图片全部是重新截取的。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在注册表中搜索 <code>homeassistant</code>，第一个就是我们要安装的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590325699443-1590325699446.png" alt="title"></p>
+<p>双击下载，选择标签也就是版本，如果你有选择困难症，建议直接选 <code>latest</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/2-1590326402698.png" alt="title"></p>
+<p>这个docker镜像比较大，约2G，如果你没有修改成国内源的话，可能要等待的时间会非常长。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326564593-1590326564595.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>容器名称随意，一般都用的默认的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326787591-1590326787592.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326896505-1590326896507.png" alt="title"></p>
+<p>初始化后，会在 <code>config</code> 目录中存储配置文件、日志文件等</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327043067-1590327043068.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327200325-1590327200326.png" alt="title"></p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327253144-1590327253145.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327851525-1590327851527.png" alt="title"></p>
+<p>这里需要我们点 <code>+</code> 号，左边 <code>可变</code> 输入 TZ（Time Zone，也就是时区），右边 <code>值</code> 输入 Asia/Shanghai。</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>在浏览器中打开 http://群晖IP:8123即可。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590328555243-1590328555245.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>智能家居从新出发： 第一篇 群晖docker安装homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2N2s5cDVuLw==">https://post.smzdm.com/p/av7k9p5n/<i class="fa fa-external-link-alt"></i></span></p>
+<p>智能家居探索 篇八：nas群晖套件直接安装hassio/homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E4Mzkya2w2Lw==">https://post.smzdm.com/p/a8392kl6/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>苏玉云作品</category>
+        <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>服装设计</tag>
+        <tag>docker</tag>
+        <tag>群晖</tag>
+        <tag>homeassistant</tag>
+        <tag>HA</tag>
+        <tag>智能家居</tag>
       </tags>
   </entry>
   <entry>
@@ -1898,6 +1869,35 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>苏玉云作品</category>
+      </categories>
+      <tags>
+        <tag>服装设计</tag>
       </tags>
   </entry>
   <entry>
