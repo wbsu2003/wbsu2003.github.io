@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="详细介绍frp的工作原理及基本设置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="frp基础设置示例详解">
+<meta property="og:url" content="https://laosu.ml/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="详细介绍frp的工作原理及基本设置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/logo-1590667665166.jpg">
+<meta property="article:published_time" content="2020-05-28T11:35:00.000Z">
+<meta property="article:modified_time" content="2020-05-28T12:13:26.409Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="frp">
+<meta property="article:tag" content="kcp协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/logo-1590667665166.jpg">
+
+<link rel="canonical" href="https://laosu.ml/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>frp基础设置示例详解 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          frp基础设置示例详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-28 19:35:00 / 修改时间：20:13:26" itemprop="dateCreated datePublished" datetime="2020-05-28T19:35:00+08:00">2020-05-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">详细介绍frp的工作原理及基本设置。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/logo-1590667665166.jpg" itemprop="contentUrl">
+        </div>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
+<h1 id="frp-工作原理"><a href="#frp-工作原理" class="headerlink" title="frp 工作原理"></a>frp 工作原理</h1><p>官网的架构图比较抽象，不便于描述</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590643008214-1590643008248.png" alt="title"></p>
+<p>所以我重绘了一张，结合实例来进行说明</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644061456-1590644061464.png" alt="title"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
+<li>frps 需要有公网 IP，例如：IP 是 <code>10.146.0.3</code></li>
+<li>frps 要绑定域名，例如：绑定到 <code>laosu.ml</code></li>
+<li>根据需要访问的内容，在 dns 解析中绑定二级域名，所有的域名均指向 <code>10.146.0.3</code></li>
+</ol>
+<ul>
+<li>为NAS管理页面绑定了：nas.laosu.ml</li>
+<li>为Jellyfin绑定了域名：movie.laosu.ml</li>
+<li>为airsonic绑定了域名：music.laosu.ml</li>
+<li>为R6300v2绑定了域名：router.laosu.ml</li>
+</ul>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>当我在浏览器中输入： <span class="exturl" data-url="aHR0cDovL21vdmllLmxhb3N1Lm1s">http://movie.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，dns 服务会将其解析到 IP：<code>10.146.0.3</code> 上，也就是跳转到了我们安装了 frps 的主机上，frps 会根据用户输入的域名向 frpc 发起查询，如果存在该服务，则返回 jellyfin 的web 页面。</p>
+<p>而当我输入了错误的二级域名，或者该二级域名没有被解析、绑定，又或者是 frps 和 frpc 之间的网络出现了问题，也就是服务不存在时，则会返回下面的错误界面。</p>
+<p>例如在浏览器中输入了：<span class="exturl" data-url="aHR0cDovL21vdmllMS5sYW9zdS5tbA==">http://movie1.laosu.ml<i class="fa fa-external-link-alt"></i></span> 之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644807478-1590644807482.png" alt="title"></p>
+<h1 id="frps-ini-说明"><a href="#frps-ini-说明" class="headerlink" title="frps.ini 说明"></a>frps.ini 说明</h1><p>frps 服务器有了一键安装包之后，变得简单多了，可以输入frps config 来查看 /usr/local/frps/frps.ini 的内容，下面的 frps.ini 是一路默认设置生成的内容：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [common] is integral section</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># A literal address or host name for IPv6 must be enclosed</span></span><br><span class="line"><span class="comment"># in square brackets, as in "[::1]:80", "[ipv6-host]:http" or "[ipv6-host%zone]:80"</span></span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br><span class="line"><span class="comment"># assets_dir = ./static</span></span><br><span class="line"><span class="attr">vhost_http_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">vhost_https_port</span> = <span class="number">443</span></span><br><span class="line"><span class="comment"># console or real logFile path like ./frps.log</span></span><br><span class="line"><span class="attr">log_file</span> = ./frps.log</span><br><span class="line"><span class="comment"># debug, info, warn, error</span></span><br><span class="line"><span class="attr">log_level</span> = info</span><br><span class="line"><span class="attr">log_max_days</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"><span class="comment"># It is convenient to use subdomain configure for http、https type when many people use one frps server together.</span></span><br><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="comment"># only allow frpc to bind ports you list, if you set nothing, there won't be any limit</span></span><br><span class="line"><span class="comment">#allow_ports = 1-65535</span></span><br><span class="line"><span class="comment"># pool_count in each proxy will change to max_pool_count if they exceed the maximum value</span></span><br><span class="line"><span class="attr">max_pool_count</span> = <span class="number">50</span></span><br><span class="line"><span class="comment"># if tcp stream multiplexing is used, default is true</span></span><br><span class="line"><span class="attr">tcp_mux</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这里比较关键的信息：</p>
+<ul>
+<li>子域名主机和 frps 服务器的公网IP是同一个</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>管理页面</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>你可以在浏览器中输入：<span class="exturl" data-url="aHR0cDovLzEwLjE0Ni4wLjM6NjQ0Mw==">http://10.146.0.3:6443<i class="fa fa-external-link-alt"></i></span> ，输入用户名、密码后，可以查看实时的服务状态是否在线等信息。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
+<h1 id="token"><a href="#token" class="headerlink" title="token"></a>token</h1><p>frpc 登录到 frps 时的认证凭证，在 <code>frpc.ini</code> 重要用到的。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
+
+<h1 id="frpc-ini-说明"><a href="#frpc-ini-说明" class="headerlink" title="frpc.ini 说明"></a>frpc.ini 说明</h1><p>先上实例 <code>frpc.ini</code>，后面再做说明。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[music]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">4040</span></span><br><span class="line"><span class="attr">custom_domains</span> = music.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[router]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = router.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端-token-认证"><a href="#客户端-token-认证" class="headerlink" title="客户端 token 认证"></a>客户端 token 认证</h2><p>frpc.ini 中，在 <code>[common]</code>节：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启kcp协议"><a href="#开启kcp协议" class="headerlink" title="开启kcp协议"></a>开启kcp协议</h2><p>kcp协议虽然会有额外的流量消耗，但在弱网环境下传输效率提升明显。关于kcp协议，有兴趣的可以自己度娘。</p>
+<p>首先在 <code>frps.ini</code> 中启用 kcp 协议支持，指定一个 udp 端口用于接收客户端请求：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br></pre></td></tr></table></figure>
+
+<p>其次在 <code>frpc.ini</code> 中，在 <code>[common]</code>节：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"></span><br><span class="line"><span class="attr">protocol</span> = kcp</span><br></pre></td></tr></table></figure>
+
+<h2 id="节的名称不能重复"><a href="#节的名称不能重复" class="headerlink" title="节的名称不能重复"></a>节的名称不能重复</h2><p>在示例 frpc.ini 中，一共有5个节，名称分别是 <code>[common]</code> 、 <code>[nas]</code> 、<code>[movie]</code> 、<code>[music]</code> 、 <code>[router]</code> ；</p>
+<p><strong>【重要说明】</strong></p>
+<blockquote>
+<ul>
+<li>这些节的名称是不可以重复的，否则会报错，尤其是一台 frps 服务器对应多台 frpc 客户端，这个错就会比较难发现</li>
+<li>个人习惯将节的名称和二级域名的前缀保持一致，这样便于管理</li>
+</ul>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590649156365-1590649156373.png" alt="title"></p>
+<h2 id="加密与压缩"><a href="#加密与压缩" class="headerlink" title="加密与压缩"></a>加密与压缩</h2><p>这个是将 frpc 与 frps 之间的通信内容加密与压缩传输</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ul>
+<li>加密可以有效防止 frpc 与 frps 之间流量被拦截</li>
+<li>压缩可以有效减小 frpc 与 frps 之间的网络流量</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>会额外消耗一些 cpu 资源</li>
+</ul>
+<p>以 <code>[nas]</code> 为例：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加密码保护"><a href="#增加密码保护" class="headerlink" title="增加密码保护"></a>增加密码保护</h2><p>对于一些没有安全保护的页面，需要输入账号、密码才能访问</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br></pre></td></tr></table></figure>
+
+<p>以 <code>[nas]</code> 为例：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<p>当你在浏览器中输入： <span class="exturl" data-url="aHR0cDovL25hcy5sYW9zdS5tbA==">http://nas.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，浏览器中会弹出用户号、密码的输入窗口，需要输入配置的用户名和密码才能继续访问。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>frp官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==">https://github.com/fatedier/frp<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\26\全面升级frp\" rel="bookmark">全面升级frp</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\群晖app访问遇到的端口问题\" rel="bookmark">群晖app访问遇到的端口问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\群晖上的Zerotier GUI一直显示offline的原因\" rel="bookmark">群晖上的Zerotier GUI一直显示offline的原因</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\10\免费在线流程图Draw.io\" rel="bookmark">免费在线流程图Draw.io</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\08\在群晖上实现在线Office文档编辑\" rel="bookmark">在群晖上实现在线Office文档编辑</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/" title="frp基础设置示例详解">https://laosu.ml/2020/05/28/frp基础设置示例详解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/frp/" rel="tag"><i class="fa fa-tag"></i> frp</a>
+              <a href="/tags/kcp%E5%8D%8F%E8%AE%AE/" rel="tag"><i class="fa fa-tag"></i> kcp协议</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/" rel="prev" title="全面升级frp">
+      <i class="fa fa-chevron-left"></i> 全面升级frp
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frp-工作原理"><span class="nav-number">2.</span> <span class="nav-text">frp 工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.2.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frps-ini-说明"><span class="nav-number">3.</span> <span class="nav-text">frps.ini 说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#token"><span class="nav-number">4.</span> <span class="nav-text">token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frpc-ini-说明"><span class="nav-number">5.</span> <span class="nav-text">frpc.ini 说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端-token-认证"><span class="nav-number">5.1.</span> <span class="nav-text">客户端 token 认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启kcp协议"><span class="nav-number">5.2.</span> <span class="nav-text">开启kcp协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节的名称不能重复"><span class="nav-number">5.3.</span> <span class="nav-text">节的名称不能重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密与压缩"><span class="nav-number">5.4.</span> <span class="nav-text">加密与压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加密码保护"><span class="nav-number">5.5.</span> <span class="nav-text">增加密码保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">44k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">40 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
