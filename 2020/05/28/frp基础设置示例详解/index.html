@@ -34,7 +34,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/logo-1590667665166.jpg">
 <meta property="article:published_time" content="2020-05-28T11:35:00.000Z">
-<meta property="article:modified_time" content="2020-05-28T12:13:26.409Z">
+<meta property="article:modified_time" content="2020-05-28T12:18:49.234Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="frp">
@@ -265,7 +265,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-28 19:35:00 / 修改时间：20:13:26" itemprop="dateCreated datePublished" datetime="2020-05-28T19:35:00+08:00">2020-05-28</time>
+              <time title="创建时间：2020-05-28 19:35:00 / 修改时间：20:18:49" itemprop="dateCreated datePublished" datetime="2020-05-28T19:35:00+08:00">2020-05-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -362,7 +362,10 @@
 
 <p>你可以在浏览器中输入：<span class="exturl" data-url="aHR0cDovLzEwLjE0Ni4wLjM6NjQ0Mw==">http://10.146.0.3:6443<i class="fa fa-external-link-alt"></i></span> ，输入用户名、密码后，可以查看实时的服务状态是否在线等信息。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
-<h1 id="token"><a href="#token" class="headerlink" title="token"></a>token</h1><p>frpc 登录到 frps 时的认证凭证，在 <code>frpc.ini</code> 重要用到的。</p>
+<ul>
+<li>token</li>
+</ul>
+<p>frpc 登录到 frps 时的认证凭证，在 <code>frpc.ini</code> 要用到的。</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
 
 <h1 id="frpc-ini-说明"><a href="#frpc-ini-说明" class="headerlink" title="frpc.ini 说明"></a>frpc.ini 说明</h1><p>先上实例 <code>frpc.ini</code>，后面再做说明。</p>
@@ -590,7 +593,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frp-工作原理"><span class="nav-number">2.</span> <span class="nav-text">frp 工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.2.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frps-ini-说明"><span class="nav-number">3.</span> <span class="nav-text">frps.ini 说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#token"><span class="nav-number">4.</span> <span class="nav-text">token</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frpc-ini-说明"><span class="nav-number">5.</span> <span class="nav-text">frpc.ini 说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端-token-认证"><span class="nav-number">5.1.</span> <span class="nav-text">客户端 token 认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启kcp协议"><span class="nav-number">5.2.</span> <span class="nav-text">开启kcp协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节的名称不能重复"><span class="nav-number">5.3.</span> <span class="nav-text">节的名称不能重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密与压缩"><span class="nav-number">5.4.</span> <span class="nav-text">加密与压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加密码保护"><span class="nav-number">5.5.</span> <span class="nav-text">增加密码保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frp-工作原理"><span class="nav-number">2.</span> <span class="nav-text">frp 工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">2.1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">2.2.</span> <span class="nav-text">过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frps-ini-说明"><span class="nav-number">3.</span> <span class="nav-text">frps.ini 说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frpc-ini-说明"><span class="nav-number">4.</span> <span class="nav-text">frpc.ini 说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端-token-认证"><span class="nav-number">4.1.</span> <span class="nav-text">客户端 token 认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启kcp协议"><span class="nav-number">4.2.</span> <span class="nav-text">开启kcp协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节的名称不能重复"><span class="nav-number">4.3.</span> <span class="nav-text">节的名称不能重复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密与压缩"><span class="nav-number">4.4.</span> <span class="nav-text">加密与压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加密码保护"><span class="nav-number">4.5.</span> <span class="nav-text">增加密码保护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
