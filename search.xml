@@ -348,6 +348,107 @@
       </tags>
   </entry>
   <entry>
+    <title>frp基础设置示例详解</title>
+    <url>/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
+<h1 id="frp-工作原理"><a href="#frp-工作原理" class="headerlink" title="frp 工作原理"></a>frp 工作原理</h1><p>官网的架构图比较抽象，不便于描述</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590643008214-1590643008248.png" alt="title"></p>
+<p>所以我重绘了一张，结合实例来进行说明</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644061456-1590644061464.png" alt="title"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
+<li>frps 需要有公网 IP，例如：IP 是 <code>10.146.0.3</code></li>
+<li>frps 要绑定域名，例如：绑定到 <code>laosu.ml</code></li>
+<li>根据需要访问的内容，在 dns 解析中绑定二级域名，所有的域名均指向 <code>10.146.0.3</code></li>
+</ol>
+<ul>
+<li>为NAS管理页面绑定了：nas.laosu.ml</li>
+<li>为Jellyfin绑定了域名：movie.laosu.ml</li>
+<li>为airsonic绑定了域名：music.laosu.ml</li>
+<li>为R6300v2绑定了域名：router.laosu.ml</li>
+</ul>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>当我在浏览器中输入： <span class="exturl" data-url="aHR0cDovL21vdmllLmxhb3N1Lm1s">http://movie.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，dns 服务会将其解析到 IP：<code>10.146.0.3</code> 上，也就是跳转到了我们安装了 frps 的主机上，frps 会根据用户输入的域名向 frpc 发起查询，如果存在该服务，则返回 jellyfin 的web 页面。</p>
+<p>而当我输入了错误的二级域名，或者该二级域名没有被解析、绑定，又或者是 frps 和 frpc 之间的网络出现了问题，也就是服务不存在时，则会返回下面的错误界面。</p>
+<p>例如在浏览器中输入了：<span class="exturl" data-url="aHR0cDovL21vdmllMS5sYW9zdS5tbA==">http://movie1.laosu.ml<i class="fa fa-external-link-alt"></i></span> 之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644807478-1590644807482.png" alt="title"></p>
+<h1 id="frps-ini-说明"><a href="#frps-ini-说明" class="headerlink" title="frps.ini 说明"></a>frps.ini 说明</h1><p>frps 服务器有了一键安装包之后，变得简单多了，可以输入frps config 来查看 /usr/local/frps/frps.ini 的内容，下面的 frps.ini 是一路默认设置生成的内容：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># [common] is integral section</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># A literal address or host name for IPv6 must be enclosed</span></span><br><span class="line"><span class="comment"># in square brackets, as in "[::1]:80", "[ipv6-host]:http" or "[ipv6-host%zone]:80"</span></span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br><span class="line"><span class="comment"># assets_dir = ./static</span></span><br><span class="line"><span class="attr">vhost_http_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">vhost_https_port</span> = <span class="number">443</span></span><br><span class="line"><span class="comment"># console or real logFile path like ./frps.log</span></span><br><span class="line"><span class="attr">log_file</span> = ./frps.log</span><br><span class="line"><span class="comment"># debug, info, warn, error</span></span><br><span class="line"><span class="attr">log_level</span> = info</span><br><span class="line"><span class="attr">log_max_days</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"><span class="comment"># It is convenient to use subdomain configure for http、https type when many people use one frps server together.</span></span><br><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="comment"># only allow frpc to bind ports you list, if you set nothing, there won't be any limit</span></span><br><span class="line"><span class="comment">#allow_ports = 1-65535</span></span><br><span class="line"><span class="comment"># pool_count in each proxy will change to max_pool_count if they exceed the maximum value</span></span><br><span class="line"><span class="attr">max_pool_count</span> = <span class="number">50</span></span><br><span class="line"><span class="comment"># if tcp stream multiplexing is used, default is true</span></span><br><span class="line"><span class="attr">tcp_mux</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这里比较关键的信息：</p>
+<ul>
+<li>子域名主机和 frps 服务器的公网IP是同一个</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>管理页面</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>你可以在浏览器中输入：<span class="exturl" data-url="aHR0cDovLzEwLjE0Ni4wLjM6NjQ0Mw==">http://10.146.0.3:6443<i class="fa fa-external-link-alt"></i></span> ，输入用户名、密码后，可以查看实时的服务状态是否在线等信息。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
+<ul>
+<li>token</li>
+</ul>
+<p>frpc 登录到 frps 时的认证凭证，在 <code>frpc.ini</code> 要用到的。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
+
+<h1 id="frpc-ini-说明"><a href="#frpc-ini-说明" class="headerlink" title="frpc.ini 说明"></a>frpc.ini 说明</h1><p>先上实例 <code>frpc.ini</code>，后面再做说明。</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[music]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">4040</span></span><br><span class="line"><span class="attr">custom_domains</span> = music.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[router]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = router.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端-token-认证"><a href="#客户端-token-认证" class="headerlink" title="客户端 token 认证"></a>客户端 token 认证</h2><p>frpc.ini 中，在 <code>[common]</code>节：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启kcp协议"><a href="#开启kcp协议" class="headerlink" title="开启kcp协议"></a>开启kcp协议</h2><p>kcp协议虽然会有额外的流量消耗，但在弱网环境下传输效率提升明显。关于kcp协议，有兴趣的可以自己度娘。</p>
+<p>首先在 <code>frps.ini</code> 中启用 kcp 协议支持，指定一个 udp 端口用于接收客户端请求：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br></pre></td></tr></table></figure>
+
+<p>其次在 <code>frpc.ini</code> 中，在 <code>[common]</code>节：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"></span><br><span class="line"><span class="attr">protocol</span> = kcp</span><br></pre></td></tr></table></figure>
+
+<h2 id="节的名称不能重复"><a href="#节的名称不能重复" class="headerlink" title="节的名称不能重复"></a>节的名称不能重复</h2><p>在示例 frpc.ini 中，一共有5个节，名称分别是 <code>[common]</code> 、 <code>[nas]</code> 、<code>[movie]</code> 、<code>[music]</code> 、 <code>[router]</code> ；</p>
+<p><strong>【重要说明】</strong></p>
+<blockquote>
+<ul>
+<li>这些节的名称是不可以重复的，否则会报错，尤其是一台 frps 服务器对应多台 frpc 客户端，这个错就会比较难发现</li>
+<li>个人习惯将节的名称和二级域名的前缀保持一致，这样便于管理</li>
+</ul>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590649156365-1590649156373.png" alt="title"></p>
+<h2 id="加密与压缩"><a href="#加密与压缩" class="headerlink" title="加密与压缩"></a>加密与压缩</h2><p>这个是将 frpc 与 frps 之间的通信内容加密与压缩传输</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>优点：</p>
+<ul>
+<li>加密可以有效防止 frpc 与 frps 之间流量被拦截</li>
+<li>压缩可以有效减小 frpc 与 frps 之间的网络流量</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>会额外消耗一些 cpu 资源</li>
+</ul>
+<p>以 <code>[nas]</code> 为例：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<h2 id="增加密码保护"><a href="#增加密码保护" class="headerlink" title="增加密码保护"></a>增加密码保护</h2><p>对于一些没有安全保护的页面，需要输入账号、密码才能访问</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br></pre></td></tr></table></figure>
+
+<p>以 <code>[nas]</code> 为例：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
+
+<p>当你在浏览器中输入： <span class="exturl" data-url="aHR0cDovL25hcy5sYW9zdS5tbA==">http://nas.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，浏览器中会弹出用户号、密码的输入窗口，需要输入配置的用户名和密码才能继续访问。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>frp官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==">https://github.com/fatedier/frp<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>frp</tag>
+        <tag>kcp协议</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PVE安装win10集显直通</title>
     <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
     <content><![CDATA[<p><strong>什么是PVE</strong></p>
@@ -502,6 +603,54 @@
       </tags>
   </entry>
   <entry>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RaiDrive挂载frp映射的WebDAV网盘</title>
     <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
     <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
@@ -543,111 +692,10 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>RaiDrive</tag>
         <tag>frp</tag>
+        <tag>RaiDrive</tag>
         <tag>WebDAV</tag>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>frp基础设置示例详解</title>
-    <url>/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
-<h1 id="frp-工作原理"><a href="#frp-工作原理" class="headerlink" title="frp 工作原理"></a>frp 工作原理</h1><p>官网的架构图比较抽象，不便于描述</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590643008214-1590643008248.png" alt="title"></p>
-<p>所以我重绘了一张，结合实例来进行说明</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644061456-1590644061464.png" alt="title"></p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
-<li>frps 需要有公网 IP，例如：IP 是 <code>10.146.0.3</code></li>
-<li>frps 要绑定域名，例如：绑定到 <code>laosu.ml</code></li>
-<li>根据需要访问的内容，在 dns 解析中绑定二级域名，所有的域名均指向 <code>10.146.0.3</code></li>
-</ol>
-<ul>
-<li>为NAS管理页面绑定了：nas.laosu.ml</li>
-<li>为Jellyfin绑定了域名：movie.laosu.ml</li>
-<li>为airsonic绑定了域名：music.laosu.ml</li>
-<li>为R6300v2绑定了域名：router.laosu.ml</li>
-</ul>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>当我在浏览器中输入： <span class="exturl" data-url="aHR0cDovL21vdmllLmxhb3N1Lm1s">http://movie.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，dns 服务会将其解析到 IP：<code>10.146.0.3</code> 上，也就是跳转到了我们安装了 frps 的主机上，frps 会根据用户输入的域名向 frpc 发起查询，如果存在该服务，则返回 jellyfin 的web 页面。</p>
-<p>而当我输入了错误的二级域名，或者该二级域名没有被解析、绑定，又或者是 frps 和 frpc 之间的网络出现了问题，也就是服务不存在时，则会返回下面的错误界面。</p>
-<p>例如在浏览器中输入了：<span class="exturl" data-url="aHR0cDovL21vdmllMS5sYW9zdS5tbA==">http://movie1.laosu.ml<i class="fa fa-external-link-alt"></i></span> 之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590644807478-1590644807482.png" alt="title"></p>
-<h1 id="frps-ini-说明"><a href="#frps-ini-说明" class="headerlink" title="frps.ini 说明"></a>frps.ini 说明</h1><p>frps 服务器有了一键安装包之后，变得简单多了，可以输入frps config 来查看 /usr/local/frps/frps.ini 的内容，下面的 frps.ini 是一路默认设置生成的内容：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># [common] is integral section</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># A literal address or host name for IPv6 must be enclosed</span></span><br><span class="line"><span class="comment"># in square brackets, as in "[::1]:80", "[ipv6-host]:http" or "[ipv6-host%zone]:80"</span></span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br><span class="line"><span class="comment"># assets_dir = ./static</span></span><br><span class="line"><span class="attr">vhost_http_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">vhost_https_port</span> = <span class="number">443</span></span><br><span class="line"><span class="comment"># console or real logFile path like ./frps.log</span></span><br><span class="line"><span class="attr">log_file</span> = ./frps.log</span><br><span class="line"><span class="comment"># debug, info, warn, error</span></span><br><span class="line"><span class="attr">log_level</span> = info</span><br><span class="line"><span class="attr">log_max_days</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"><span class="comment"># It is convenient to use subdomain configure for http、https type when many people use one frps server together.</span></span><br><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="comment"># only allow frpc to bind ports you list, if you set nothing, there won't be any limit</span></span><br><span class="line"><span class="comment">#allow_ports = 1-65535</span></span><br><span class="line"><span class="comment"># pool_count in each proxy will change to max_pool_count if they exceed the maximum value</span></span><br><span class="line"><span class="attr">max_pool_count</span> = <span class="number">50</span></span><br><span class="line"><span class="comment"># if tcp stream multiplexing is used, default is true</span></span><br><span class="line"><span class="attr">tcp_mux</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>这里比较关键的信息：</p>
-<ul>
-<li>子域名主机和 frps 服务器的公网IP是同一个</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>管理页面</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br></pre></td></tr></table></figure>
-
-<p>你可以在浏览器中输入：<span class="exturl" data-url="aHR0cDovLzEwLjE0Ni4wLjM6NjQ0Mw==">http://10.146.0.3:6443<i class="fa fa-external-link-alt"></i></span> ，输入用户名、密码后，可以查看实时的服务状态是否在线等信息。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
-<ul>
-<li>token</li>
-</ul>
-<p>frpc 登录到 frps 时的认证凭证，在 <code>frpc.ini</code> 要用到的。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
-
-<h1 id="frpc-ini-说明"><a href="#frpc-ini-说明" class="headerlink" title="frpc.ini 说明"></a>frpc.ini 说明</h1><p>先上实例 <code>frpc.ini</code>，后面再做说明。</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[music]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">4040</span></span><br><span class="line"><span class="attr">custom_domains</span> = music.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[router]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = router.laosu.ml</span><br></pre></td></tr></table></figure>
-
-<h2 id="客户端-token-认证"><a href="#客户端-token-认证" class="headerlink" title="客户端 token 认证"></a>客户端 token 认证</h2><p>frpc.ini 中，在 <code>[common]</code>节：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br></pre></td></tr></table></figure>
-
-<h2 id="开启kcp协议"><a href="#开启kcp协议" class="headerlink" title="开启kcp协议"></a>开启kcp协议</h2><p>kcp协议虽然会有额外的流量消耗，但在弱网环境下传输效率提升明显。关于kcp协议，有兴趣的可以自己度娘。</p>
-<p>首先在 <code>frps.ini</code> 中启用 kcp 协议支持，指定一个 udp 端口用于接收客户端请求：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with 'bind_port'</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br></pre></td></tr></table></figure>
-
-<p>其次在 <code>frpc.ini</code> 中，在 <code>[common]</code>节：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">server_addr</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="attr">server_port</span> = <span class="number">5443</span></span><br><span class="line"></span><br><span class="line"><span class="attr">protocol</span> = kcp</span><br></pre></td></tr></table></figure>
-
-<h2 id="节的名称不能重复"><a href="#节的名称不能重复" class="headerlink" title="节的名称不能重复"></a>节的名称不能重复</h2><p>在示例 frpc.ini 中，一共有5个节，名称分别是 <code>[common]</code> 、 <code>[nas]</code> 、<code>[movie]</code> 、<code>[music]</code> 、 <code>[router]</code> ；</p>
-<p><strong>【重要说明】</strong></p>
-<blockquote>
-<ul>
-<li>这些节的名称是不可以重复的，否则会报错，尤其是一台 frps 服务器对应多台 frpc 客户端，这个错就会比较难发现</li>
-<li>个人习惯将节的名称和二级域名的前缀保持一致，这样便于管理</li>
-</ul>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/28/1590649156365-1590649156373.png" alt="title"></p>
-<h2 id="加密与压缩"><a href="#加密与压缩" class="headerlink" title="加密与压缩"></a>加密与压缩</h2><p>这个是将 frpc 与 frps 之间的通信内容加密与压缩传输</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>优点：</p>
-<ul>
-<li>加密可以有效防止 frpc 与 frps 之间流量被拦截</li>
-<li>压缩可以有效减小 frpc 与 frps 之间的网络流量</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>会额外消耗一些 cpu 资源</li>
-</ul>
-<p>以 <code>[nas]</code> 为例：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
-
-<h2 id="增加密码保护"><a href="#增加密码保护" class="headerlink" title="增加密码保护"></a>增加密码保护</h2><p>对于一些没有安全保护的页面，需要输入账号、密码才能访问</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br></pre></td></tr></table></figure>
-
-<p>以 <code>[nas]</code> 为例：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">http_user</span> = abc</span><br><span class="line"><span class="attr">http_pwd</span> = abc</span><br><span class="line"><span class="attr">custom_domains</span> = nas.laosu.ml</span><br></pre></td></tr></table></figure>
-
-<p>当你在浏览器中输入： <span class="exturl" data-url="aHR0cDovL25hcy5sYW9zdS5tbA==">http://nas.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，浏览器中会弹出用户号、密码的输入窗口，需要输入配置的用户名和密码才能继续访问。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>frp官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdGVkaWVyL2ZycA==">https://github.com/fatedier/frp<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>kcp协议</tag>
       </tags>
   </entry>
   <entry>
@@ -710,51 +758,86 @@
       </tags>
   </entry>
   <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
+    <title>在Coding上部署Hexo并实现和Github双线访问</title>
+    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
+<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
+<li>首先是<strong>注册团队</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<ul>
+<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<ul>
+<li>接下来就可以新建项目了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
+<li>点右上角的头像，选择<strong>个人设置</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<ul>
+<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+</ul>
+<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
+<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
+<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<ul>
+<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<ul>
+<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<ul>
+<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
+</ul>
+<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
+<li>从右上角的<strong>设置</strong>进入</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<ul>
+<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p>然后再次申请，等一会儿就会显示成功了！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
+<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
+<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
+        <tag>Hexo</tag>
+        <tag>Coding</tag>
+        <tag>blog</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -854,10 +937,46 @@
         <category>各种折腾</category>
       </categories>
       <tags>
+        <tag>群晖</tag>
         <tag>frp</tag>
         <tag>docker</tag>
-        <tag>群晖</tag>
         <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
+<ul>
+<li>Github原生域名：wbsu2003.github.io</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.ml</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
+<ul>
+<li>Netlify原生域名：laosu.netlify.app</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.tk</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>Netlify</tag>
       </tags>
   </entry>
   <entry>
@@ -930,89 +1049,6 @@
         <tag>GCP</tag>
         <tag>Zerotier</tag>
         <tag>Moon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Coding上部署Hexo并实现和Github双线访问</title>
-    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
-    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
-<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
-<li>首先是<strong>注册团队</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
-<ul>
-<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
-<ul>
-<li>接下来就可以新建项目了</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
-<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
-<li>点右上角的头像，选择<strong>个人设置</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
-<ul>
-<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
-</ul>
-<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
-<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
-<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
-<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
-<ul>
-<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
-<ul>
-<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
-<ul>
-<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
-</ul>
-<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
-<li>从右上角的<strong>设置</strong>进入</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
-<ul>
-<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
-<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
-<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
-<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
-<p>然后再次申请，等一会儿就会显示成功了！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
-<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
-<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
-<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
-<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Coding</tag>
-        <tag>blog</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -1139,49 +1175,13 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>群晖</tag>
+        <tag>docker</tag>
         <tag>onlyoffice</tag>
         <tag>nextcloud</tag>
         <tag>seafile</tag>
         <tag>owncloud</tag>
         <tag>kodexplorer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>Netlify</tag>
       </tags>
   </entry>
   <entry>
@@ -1482,73 +1482,6 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
-    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇</li>
-<li>播放篇</li>
-<li>流媒体服务（本文）</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
-<p>网上别人总结的一些优缺点：</p>
-<blockquote>
-<ul>
-<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
-</li>
-<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
-</li>
-<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
-</li>
-<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
-<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
-<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
-<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
-<p>界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
-<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
-<ul>
-<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
-<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
-<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Emby</tag>
-        <tag>Plex</tag>
-        <tag>流媒体服务器</tag>
-        <tag>Jellyfin</tag>
-        <tag>威动影音</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（5）：查询篇</title>
     <url>/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/</url>
     <content><![CDATA[<p>Kodi（以前叫XBMC）是一款强大的开源媒体播放器软件，支持 MacOS、Windows、Linux、Android等多系统平台。Kodi 的局域网视频播放功能异常强大；默认情况下 Kodi 的资料库是独立的，这就带来一个很大的问题，当家里有多个Kodi终端的话，资料的同步是个很大的问题。</p>
@@ -1654,6 +1587,119 @@
         <tag>NAS</tag>
         <tag>KodiWebPortal</tag>
         <tag>MariaDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
+    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇</li>
+<li>播放篇</li>
+<li>流媒体服务（本文）</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
+<p>网上别人总结的一些优缺点：</p>
+<blockquote>
+<ul>
+<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
+</li>
+<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
+</li>
+<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
+</li>
+<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
+<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p>界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<ul>
+<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
+<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
+<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>Plex</tag>
+        <tag>流媒体服务器</tag>
+        <tag>Jellyfin</tag>
+        <tag>威动影音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
       </tags>
   </entry>
   <entry>
@@ -1807,6 +1853,40 @@
       </tags>
   </entry>
   <entry>
+    <title>百兆升千兆家庭组网方案（续1）</title>
+    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
+<p>等了两天收到了，送了两根六类线</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
+<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
+<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
+<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
+<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
+<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
+<ul>
+<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
+<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
+<li>线路上有大功率的电器</li>
+</ul>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>WDS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>百兆升千兆家庭组网方案</title>
     <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
@@ -1865,90 +1945,10 @@
         <tag>路由器</tag>
         <tag>千兆</tag>
         <tag>电力猫</tag>
+        <tag>WDS</tag>
         <tag>Mesh路由</tag>
         <tag>wifi6</tag>
         <tag>光猫</tag>
-        <tag>WDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百兆升千兆家庭组网方案（续1）</title>
-    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
-<p>等了两天收到了，送了两根六类线</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
-<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
-<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
-<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
-<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
-<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
-<ul>
-<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
-<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
-<li>线路上有大功率的电器</li>
-</ul>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>WDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
       </tags>
   </entry>
   <entry>
@@ -2018,6 +2018,48 @@
       </tags>
   </entry>
   <entry>
+    <title>群晖上用docker安装homeassistant</title>
+    <url>/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/</url>
+    <content><![CDATA[<p><strong>什么是Home Assistant？</strong></p>
+<blockquote>
+<p>Home Assistant 是一个基于Python 3开发的开源家庭自动化平台。可以跟踪和控制家庭中的所有设备，并实现自动化控制。后面简称为HA。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最早安装的是0.82版，后来升级到了0.93版，正好遇到HA进行了一次较大的调整，导致很多插件无法使用，所以后来基本上不再主动升级，目前最新docker版本好像已经到了0.99版。</p>
+<p>这篇是大概一年前写的安装记录，做了一些调整，图片全部是重新截取的。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在注册表中搜索 <code>homeassistant</code>，第一个就是我们要安装的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590325699443-1590325699446.png" alt="title"></p>
+<p>双击下载，选择标签也就是版本，如果你有选择困难症，建议直接选 <code>latest</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/2-1590326402698.png" alt="title"></p>
+<p>这个docker镜像比较大，约2G，如果你没有修改成国内源的话，可能要等待的时间会非常长。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326564593-1590326564595.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>容器名称随意，一般都用的默认的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326787591-1590326787592.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326896505-1590326896507.png" alt="title"></p>
+<p>初始化后，会在 <code>config</code> 目录中存储配置文件、日志文件等</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327043067-1590327043068.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327200325-1590327200326.png" alt="title"></p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327253144-1590327253145.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327851525-1590327851527.png" alt="title"></p>
+<p>这里需要我们点 <code>+</code> 号，左边 <code>可变</code> 输入 TZ（Time Zone，也就是时区），右边 <code>值</code> 输入 Asia/Shanghai。</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>在浏览器中打开 http://群晖IP:8123即可。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590328555243-1590328555245.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>智能家居从新出发： 第一篇 群晖docker安装homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2N2s5cDVuLw==">https://post.smzdm.com/p/av7k9p5n/<i class="fa fa-external-link-alt"></i></span></p>
+<p>智能家居探索 篇八：nas群晖套件直接安装hassio/homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E4Mzkya2w2Lw==">https://post.smzdm.com/p/a8392kl6/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>docker</tag>
+        <tag>homeassistant</tag>
+        <tag>HA</tag>
+        <tag>智能家居</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>群晖app访问遇到的端口问题</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是 NAS</strong></p>
@@ -2068,56 +2110,14 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>VPS</tag>
         <tag>NAS</tag>
         <tag>黑群</tag>
         <tag>QuickConnect</tag>
         <tag>ngrok</tag>
         <tag>ZeroTier</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>群晖上用docker安装homeassistant</title>
-    <url>/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant/</url>
-    <content><![CDATA[<p><strong>什么是Home Assistant？</strong></p>
-<blockquote>
-<p>Home Assistant 是一个基于Python 3开发的开源家庭自动化平台。可以跟踪和控制家庭中的所有设备，并实现自动化控制。后面简称为HA。</p>
-</blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最早安装的是0.82版，后来升级到了0.93版，正好遇到HA进行了一次较大的调整，导致很多插件无法使用，所以后来基本上不再主动升级，目前最新docker版本好像已经到了0.99版。</p>
-<p>这篇是大概一年前写的安装记录，做了一些调整，图片全部是重新截取的。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在注册表中搜索 <code>homeassistant</code>，第一个就是我们要安装的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590325699443-1590325699446.png" alt="title"></p>
-<p>双击下载，选择标签也就是版本，如果你有选择困难症，建议直接选 <code>latest</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/2-1590326402698.png" alt="title"></p>
-<p>这个docker镜像比较大，约2G，如果你没有修改成国内源的话，可能要等待的时间会非常长。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326564593-1590326564595.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>容器名称随意，一般都用的默认的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326787591-1590326787592.png" alt="title"></p>
-<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590326896505-1590326896507.png" alt="title"></p>
-<p>初始化后，会在 <code>config</code> 目录中存储配置文件、日志文件等</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327043067-1590327043068.png" alt="title"></p>
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327200325-1590327200326.png" alt="title"></p>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327253144-1590327253145.png" alt="title"></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590327851525-1590327851527.png" alt="title"></p>
-<p>这里需要我们点 <code>+</code> 号，左边 <code>可变</code> 输入 TZ（Time Zone，也就是时区），右边 <code>值</code> 输入 Asia/Shanghai。</p>
-<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>在浏览器中打开 http://群晖IP:8123即可。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/24/1590328555243-1590328555245.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>智能家居从新出发： 第一篇 群晖docker安装homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F2N2s5cDVuLw==">https://post.smzdm.com/p/av7k9p5n/<i class="fa fa-external-link-alt"></i></span></p>
-<p>智能家居探索 篇八：nas群晖套件直接安装hassio/homeassistant<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E4Mzkya2w2Lw==">https://post.smzdm.com/p/a8392kl6/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>群晖</tag>
-        <tag>homeassistant</tag>
-        <tag>HA</tag>
-        <tag>智能家居</tag>
       </tags>
   </entry>
   <entry>
@@ -2141,8 +2141,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>NAS</tag>
         <tag>ngrok</tag>
         <tag>ZeroTier</tag>
@@ -2176,6 +2176,30 @@
       </categories>
       <tags>
         <tag>服装设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自带过滤功能的Hexo首页生成器插件</title>
+    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
+<blockquote>
+<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
+</blockquote>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
+<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -2234,30 +2258,6 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自带过滤功能的Hexo首页生成器插件</title>
-    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
-<blockquote>
-<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
-</blockquote>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
