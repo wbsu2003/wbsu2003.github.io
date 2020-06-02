@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ntfstool是为苹果电脑提供NTFS读写支持的一款免费软件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己编译ntfstool">
+<meta property="og:url" content="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="ntfstool是为苹果电脑提供NTFS读写支持的一款免费软件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589791597003-1589791597010.png">
+<meta property="article:published_time" content="2020-06-02T09:31:00.000Z">
+<meta property="article:modified_time" content="2020-06-02T12:03:41.341Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="ntfs">
+<meta property="article:tag" content="ntfstool">
+<meta property="article:tag" content="FUSE">
+<meta property="article:tag" content="electron">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589791597003-1589791597010.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>自己编译ntfstool | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自己编译ntfstool
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-02 17:31:00 / 修改时间：20:03:41" itemprop="dateCreated datePublished" datetime="2020-06-02T17:31:00+08:00">2020-06-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">ntfstool是为苹果电脑提供NTFS读写支持的一款免费软件。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589791597003-1589791597010.png" itemprop="contentUrl">
+        </div>
+        <blockquote>
+<p><strong>什么是ntfstool</strong><br>一群热爱生活热爱编程的软件技术从业者，利用零散时间，针对Mac电脑无法很好的支持Ntfs格式的硬盘和Usb而开发的免费的 NTFS Tool for Mac 工具。支持NTFS磁盘读写、挂载，推出、管理等功能。需 FUSE for macOS 支持。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是FUSE</strong><br>FUSE for Mac 是 MacFUSE 的继承者，基于FUSE为MacOS用户提供除系统外的第三方文件系统的支持。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是Electron</strong><br>Electron是GitHub開發的一個開源框架。它允許使用Node.js和Chromium完成桌面 GUI 應用程式的開發。Electron 現已被多個開源 Web 應用程式用於前端與後端的開發，著名專案包括 GitHub 的 Atom 和微軟的 Visual Studio Code。 【維基百科】</p>
+</blockquote>
+<h1 id="Mac-OS-平台-NTFS-读写软件"><a href="#Mac-OS-平台-NTFS-读写软件" class="headerlink" title="Mac OS 平台 NTFS 读写软件"></a>Mac OS 平台 NTFS 读写软件</h1><h2 id="Tuxera-NTFS-for-Mac"><a href="#Tuxera-NTFS-for-Mac" class="headerlink" title="Tuxera NTFS for Mac"></a>Tuxera NTFS for Mac</h2><p>商业软件，能够在Mac上对所有Windows格式化的移动硬盘进行完全读写操作。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591099316069-1591099316070.png" alt="title"></p>
+<h2 id="Paragon-NTFS-for-Mac"><a href="#Paragon-NTFS-for-Mac" class="headerlink" title="Paragon NTFS for Mac"></a>Paragon NTFS for Mac</h2><p>商业软件，是Mac上最知名的一款NTFS读写工具，能够让我们读写NTFS分区，完全兼容 Windows NTFS文件，让我们简单自如读写NTFS外置存储文件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591099282316-1591099282354.png" alt="title"></p>
+<h2 id="Mounty-for-NTFS"><a href="#Mounty-for-NTFS" class="headerlink" title="Mounty for NTFS"></a>Mounty for NTFS</h2><p>完全免费，但据不少网友反馈，Mounty 的稳定性，准确来说是 Mac 隐藏的 ntfs 原生读写功能的稳定性和性能都不算特别的好，有过一些出问题丢数据的例子。<code>这一点非常致命，果断放弃。</code></p>
+<h2 id="FUSE-for-Mac"><a href="#FUSE-for-Mac" class="headerlink" title="FUSE for Mac"></a>FUSE for Mac</h2><p>完全免费，是一款开源软件，允许你通过第三方文件系统来扩展 macOS。需要敲命令把苹果原来的 NTFS 挂载工具替换为 NTFS-3g 提供的，易用性有点差。</p>
+<h2 id="ntfstool"><a href="#ntfstool" class="headerlink" title="ntfstool"></a>ntfstool</h2><p>完全免费，是一款 MacOS 下的免费开源 NTFS 磁盘格式读写工具，需 FUSE for macOS 支持，提供一个简单易用的磁盘管理界面。</p>
+<p>我们可以直接下载官方编译好的版本，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL250ZnN0b29sL250ZnN0b29sL3JlbGVhc2Vz">GitHub Releases<i class="fa fa-external-link-alt"></i></span>，现在的最新版本是v2.3.2</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589792613895-1589792613901.png" alt="title"></p>
+<h1 id="自己动手，丰衣足食"><a href="#自己动手，丰衣足食" class="headerlink" title="自己动手，丰衣足食"></a>自己动手，丰衣足食</h1><p>除了直接下载编译好的版本外，我们也可以尝试自己编译。</p>
+<h2 id="开发环境安装"><a href="#开发环境安装" class="headerlink" title="开发环境安装"></a>开发环境安装</h2><p>比较简单的办法就是从 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnLw==">nodejs.org<i class="fa fa-external-link-alt"></i></span> 下载 MacOS<br> 安装包</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591074602452-1591074602460.png" alt="title"></p>
+<p>最新的版本已经是14.3.0</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591075832661-1591075832668.png" alt="title"></p>
+<p>检查一下安装是否成功，<code>终端</code> 中依次输入可以看到版本号</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786699474-1589786699481.png" alt="title"></p>
+<h2 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h2><p>在 <code>终端模式</code> 下输入：</p>
+<figure class="highlight plain"><figcaption><span>clone git@github.com:ntfstool/ntfstool.git```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">或者直接打包下载源代码</span><br><span class="line"></span><br><span class="line">![title](https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;wbsu2003&#x2F;gitnote-images&#x2F;master&#x2F;mynote&#x2F;2020&#x2F;05&#x2F;18&#x2F;1589792907225-1589792907231.png)</span><br><span class="line"> </span><br><span class="line">## 安装依赖</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;sh</span><br><span class="line">cd ntfstool</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>下载的各种包在 <code>node_modules</code>目录中</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591088847070-1591088847119.png" alt="title"></p>
+<h2 id="调试模式"><a href="#调试模式" class="headerlink" title="调试模式"></a>调试模式</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591089358970-1591089358973.png" alt="title"></p>
+<h2 id="发布模式"><a href="#发布模式" class="headerlink" title="发布模式"></a>发布模式</h2><p>国内用户建议先更换 electron 源，不然有可能会比较慢</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://cdn.npm.taobao.org/dist/electron/</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure>
+
+<p>接着执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589787487804-1589787487807.png" alt="title"></p>
+<p>会安装 electron-builder  </p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591077850276-1591077850284.png" alt="title"></p>
+<p>过程中会生成 <code>build</code> 和 <code>dist</code> 目录</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591090348903-1591090348915.png" alt="title"></p>
+<h2 id="开始运行程序"><a href="#开始运行程序" class="headerlink" title="开始运行程序"></a>开始运行程序</h2><p>运行 <code>build</code> 目录下生成的安装包 <code>NTFSool-2.3.3.dmg</code> 进行安装</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591090613669-1591090613676.png" alt="title"></p>
+<p>运行 <code>NTFSTool</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786803079-1589786803088.png" alt="title"></p>
+<h2 id="第一次运行会提示安装FUSE"><a href="#第一次运行会提示安装FUSE" class="headerlink" title="第一次运行会提示安装FUSE"></a>第一次运行会提示安装FUSE</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786711420-1589786711426.png" alt="title"></p>
+<p>一路按图执行</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786724367-1589786724374.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786736666-1589786736675.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786748283-1589786748284.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786759671-1589786759674.png" alt="title"></p>
+<p>需要设置一下权限，这里需要我们 <code>允许</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786771459-1589786771468.png" alt="title"></p>
+<p>安装完成</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786782795-1589786782804.png" alt="title"></p>
+<p>第一次可能会需要权限</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591090835448-1591090835449.png" alt="title"></p>
+<p>接入一块250G的移动硬盘，被识别到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786814886-1589786814894.png" alt="title"></p>
+<p>不过这块硬盘不是 ntfs 格式的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786827713-1589786827720.png" alt="title"></p>
+<p>工具栏上</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786838242-1589786838249.png" alt="title"></p>
+<p>退出前先卸载</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786849388-1589786849395.png" alt="title"></p>
+<p>换一个 ntfs 格式的 U 盘</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591079278757-1591079278769.png" alt="title"></p>
+<p>软件的功能，自己慢慢发掘吧。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591092240270-1591092240325.png" alt="title"></p>
+<p>动动手就省了100多块，是不是很开心呢？</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>ntfstool源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL250ZnN0b29sL250ZnN0b29s">https://github.com/ntfstool/ntfstool<i class="fa fa-external-link-alt"></i></span></p>
+<p>FUSE for macOS源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29zeGZ1c2Uvb3N4ZnVzZS8=">https://github.com/osxfuse/osxfuse/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MacOS下开启NTFS读写 - FUSE for Mac<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9hNzcwYzY2YmRkZGY=">https://www.jianshu.com/p/a770c66bdddf<i class="fa fa-external-link-alt"></i></span></p>
+<p>Mac os catalina使用FUSE for macOS开启ntfs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2J5dGlnZS9hcnRpY2xlL2RldGFpbHMvMTAzNTM1MTg0">https://blog.csdn.net/bytige/article/details/103535184<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/" title="自己编译ntfstool">https://laosu.ml/2020/06/02/自己编译ntfstool/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ntfs/" rel="tag"><i class="fa fa-tag"></i> ntfs</a>
+              <a href="/tags/ntfstool/" rel="tag"><i class="fa fa-tag"></i> ntfstool</a>
+              <a href="/tags/FUSE/" rel="tag"><i class="fa fa-tag"></i> FUSE</a>
+              <a href="/tags/electron/" rel="tag"><i class="fa fa-tag"></i> electron</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/%E7%A5%9E%E5%A5%87%E7%9A%84WeChatTweak/" rel="prev" title="神奇的WeChatTweak">
+      <i class="fa fa-chevron-left"></i> 神奇的WeChatTweak
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac-OS-平台-NTFS-读写软件"><span class="nav-number">1.</span> <span class="nav-text">Mac OS 平台 NTFS 读写软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuxera-NTFS-for-Mac"><span class="nav-number">1.1.</span> <span class="nav-text">Tuxera NTFS for Mac</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paragon-NTFS-for-Mac"><span class="nav-number">1.2.</span> <span class="nav-text">Paragon NTFS for Mac</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mounty-for-NTFS"><span class="nav-number">1.3.</span> <span class="nav-text">Mounty for NTFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FUSE-for-Mac"><span class="nav-number">1.4.</span> <span class="nav-text">FUSE for Mac</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ntfstool"><span class="nav-number">1.5.</span> <span class="nav-text">ntfstool</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自己动手，丰衣足食"><span class="nav-number">2.</span> <span class="nav-text">自己动手，丰衣足食</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境安装"><span class="nav-number">2.1.</span> <span class="nav-text">开发环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载源代码"><span class="nav-number">2.2.</span> <span class="nav-text">下载源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试模式"><span class="nav-number">2.3.</span> <span class="nav-text">调试模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布模式"><span class="nav-number">2.4.</span> <span class="nav-text">发布模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始运行程序"><span class="nav-number">2.5.</span> <span class="nav-text">开始运行程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次运行会提示安装FUSE"><span class="nav-number">2.6.</span> <span class="nav-text">第一次运行会提示安装FUSE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">52k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">47 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
