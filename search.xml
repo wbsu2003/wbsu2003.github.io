@@ -62,99 +62,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitNote的简单使用记录</title>
-    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
-<blockquote>
-<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是git</strong></p>
-<blockquote>
-<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Markdown</strong></p>
-<blockquote>
-<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
-</blockquote>
-<p><strong>什么是GitNote</strong></p>
-<blockquote>
-<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
-<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
-<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
-<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
-<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
-<p><strong>特别注意：</strong></p>
-<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
-<p>点击 Create repository 完成创建</p>
-<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
-<p><strong>特别注意：</strong></p>
-<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
-<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
-<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
-<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
-<ol>
-<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>解压到 {user}/.gitnote/plugins 目录</p>
-</li>
-<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
-</li>
-<li><p>重启 GitNote</p>
-</li>
-</ol>
-<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
-<li>不要用菜单栏的插入图片，这个不会上传；</li>
-<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
-</ul>
-<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
-<p>记得要先注册</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
-<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
-<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
-<li>网络错误：</li>
-</ul>
-<p>比如上传github图床时，时不时出现的网络错误</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
-<ul>
-<li>预览问题：</li>
-</ul>
-<p>上传成功的图片不显示，而只是显示一个title</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
-<p>而实际上在github的网页上应该是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
-<ul>
-<li>文档历史</li>
-</ul>
-<p>不知道什么原因，一直没有文档的编辑历史</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
-<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
-<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
-<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
-<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>git</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>笔记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>PVE安装win10集显直通</title>
     <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
     <content><![CDATA[<p><strong>什么是PVE</strong></p>
@@ -309,51 +216,96 @@
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+    <title>GitNote的简单使用记录</title>
+    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
 <blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
 </blockquote>
-<p><strong>frp是什么？</strong></p>
+<p><strong>什么是git</strong></p>
 <blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
 </blockquote>
-<p><strong>WebDAV是什么？</strong></p>
+<p><strong>什么是Markdown</strong></p>
 <blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
 </blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
+<p><strong>什么是GitNote</strong></p>
+<blockquote>
+<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
+<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
+<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
+<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
+<p><strong>特别注意：</strong></p>
+<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
+<p>点击 Create repository 完成创建</p>
+<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
+<p><strong>特别注意：</strong></p>
+<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
+<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
+<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
+<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
+<ol>
+<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>解压到 {user}/.gitnote/plugins 目录</p>
+</li>
+<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
+</li>
+<li><p>重启 GitNote</p>
+</li>
+</ol>
+<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
+<li>不要用菜单栏的插入图片，这个不会上传；</li>
+<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
+</ul>
+<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
+<p>记得要先注册</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
+<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
+<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
+<li>网络错误：</li>
+</ul>
+<p>比如上传github图床时，时不时出现的网络错误</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
+<ul>
+<li>预览问题：</li>
+</ul>
+<p>上传成功的图片不显示，而只是显示一个title</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
+<p>而实际上在github的网页上应该是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
+<ul>
+<li>文档历史</li>
+</ul>
+<p>不知道什么原因，一直没有文档的编辑历史</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
+<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
+<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
+<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
+<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
+        <tag>GitHub</tag>
+        <tag>git</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -550,6 +502,161 @@
       </tags>
   </entry>
   <entry>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>RaiDrive</tag>
+        <tag>frp</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>免费在线流程图Draw.io</title>
+    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
+    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
+<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
+<ul>
+<li><p>【卷】不用设置</p>
+</li>
+<li><p>【端口】的设置，只要避免冲突就可以</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
+<p>显示更多网盘</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
+<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
+<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
+<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
+<p>支持的图库非常丰富</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>免注册</li>
+<li>支持中文</li>
+<li>丰富的内置图库</li>
+<li>多种存储格式</li>
+<li>支持云盘存储</li>
+<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>visio</tag>
+        <tag>draw.io</tag>
+        <tag>云盘</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>frp基础设置示例详解</title>
     <url>/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
@@ -648,65 +755,6 @@
         <tag>frp</tag>
         <tag>群晖</tag>
         <tag>kcp协议</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>免费在线流程图Draw.io</title>
-    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
-    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
-<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
-<ul>
-<li><p>【卷】不用设置</p>
-</li>
-<li><p>【端口】的设置，只要避免冲突就可以</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
-<p>显示更多网盘</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
-<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
-<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
-<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
-<p>支持的图库非常丰富</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
-<li>免注册</li>
-<li>支持中文</li>
-<li>丰富的内置图库</li>
-<li>多种存储格式</li>
-<li>支持云盘存储</li>
-<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>visio</tag>
-        <tag>draw.io</tag>
-        <tag>云盘</tag>
       </tags>
   </entry>
   <entry>
@@ -810,54 +858,6 @@
         <tag>docker</tag>
         <tag>群晖</tag>
         <tag>VPS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
-
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
       </tags>
   </entry>
   <entry>
@@ -1016,42 +1016,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>Netlify</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在GitHub上搭建Blog</title>
     <url>/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/</url>
     <content><![CDATA[<p><strong>什么是Hexo</strong></p>
@@ -1126,6 +1090,42 @@
       </tags>
   </entry>
   <entry>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
+<ul>
+<li>Github原生域名：wbsu2003.github.io</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.ml</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
+<ul>
+<li>Netlify原生域名：laosu.netlify.app</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.tk</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>Netlify</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在群晖上实现在线Office文档编辑</title>
     <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
@@ -1182,72 +1182,6 @@
         <tag>seafile</tag>
         <tag>owncloud</tag>
         <tag>kodexplorer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>复旦大学的藤月开了</title>
-    <url>/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/</url>
-    <content><![CDATA[<p>自从去年复旦大学把藤月种下去，我就一直挺好奇的，到底开花的时候会是什么样呢？</p>
-<h1 id="五一节前"><a href="#五一节前" class="headerlink" title="五一节前"></a>五一节前</h1><p>当时路过还是一个一个的花骨朵。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4074-1588740269573.jpeg" alt="title"></p>
-<p>但也有的已经含苞待放了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4073-1588740436193.jpeg" alt="黄色的"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4076-1588740455075.jpeg" alt="红色的"></p>
-<h1 id="今天（5月6日）"><a href="#今天（5月6日）" class="headerlink" title="今天（5月6日）"></a>今天（5月6日）</h1><p>今天路过时发现，一小半都已经开放了，而且姹紫嫣红，分外好看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4082-1588740697074.jpeg" alt="title"></p>
-<p>估计等过几天都开了，会更好看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4071-1588740745690.jpeg" alt="title"></p>
-<p>大游行？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4072-1588740768724.jpeg" alt="title"></p>
-<p>甜梦？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4075-1588740908887.jpeg" alt="title"></p>
-<p>紫袍玉带？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4077-1588740948926.jpeg" alt="title"></p>
-<p>藤冰山？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4078-1588740989713.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4079-1588741007305.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4080-1588741031040.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4081-1588741064243.jpeg" alt="title"></p>
-<p>我的心？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4083-1588741092150.jpeg" alt="title"></p>
-<p>玛格丽特王妃？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4084-1588741118387.jpeg" alt="title"></p>
-<p>自由精神？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4085-1588741131409.jpeg" alt="title"></p>
-<p>埃格兰泰恩？塞西尔布朗纳？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4086-1588741145227.jpeg" alt="title"></p>
-<p>麦金？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4087-1588741163758.jpeg" alt="title"></p>
-<p>粉色达芬奇？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4088-1588741187607.jpeg" alt="title"></p>
-<p>沃勒顿老庄园？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4089-1588741222125.jpeg" alt="title"></p>
-<p>欢迎?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4090-1588741242501.jpeg" alt="title"></p>
-<p>粉团蔷薇?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4091-1588741276861.jpeg" alt="title"></p>
-<p>权杖之岛?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4092-1588741297897.jpeg" alt="title"></p>
-<p>克莱尔奥斯汀？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4093-1588741309981.jpeg" alt="title"></p>
-<p>藤冰山？粉妆楼？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4094-1588741330994.jpeg" alt="title"></p>
-<p>抓破美人脸？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4095-1588741354003.jpeg" alt="title"></p>
-<p>先是用形色app对着花儿一顿识别，可这人工智能有时候也掉链子，所有的结果都是月季，只能自己对着图片研究，也不知道到底有没有哪一张是蒙对了的，但起码有一点，我已经绝对打败了AI。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/%E4%B8%8B%E8%BD%BD-1588771007288.jpg" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>藤本月季网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGVuZ2Jlbnl1ZWppLmNvbS8=">https://www.tengbenyueji.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>美好生活</category>
-      </categories>
-      <tags>
-        <tag>藤本月季</tag>
-        <tag>复旦大学</tag>
-        <tag>国帆路</tag>
-        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -1389,6 +1323,72 @@
         <tag>Kodi</tag>
         <tag>MediaElch</tag>
         <tag>tinyMediaManager</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>复旦大学的藤月开了</title>
+    <url>/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/</url>
+    <content><![CDATA[<p>自从去年复旦大学把藤月种下去，我就一直挺好奇的，到底开花的时候会是什么样呢？</p>
+<h1 id="五一节前"><a href="#五一节前" class="headerlink" title="五一节前"></a>五一节前</h1><p>当时路过还是一个一个的花骨朵。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4074-1588740269573.jpeg" alt="title"></p>
+<p>但也有的已经含苞待放了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4073-1588740436193.jpeg" alt="黄色的"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4076-1588740455075.jpeg" alt="红色的"></p>
+<h1 id="今天（5月6日）"><a href="#今天（5月6日）" class="headerlink" title="今天（5月6日）"></a>今天（5月6日）</h1><p>今天路过时发现，一小半都已经开放了，而且姹紫嫣红，分外好看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4082-1588740697074.jpeg" alt="title"></p>
+<p>估计等过几天都开了，会更好看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4071-1588740745690.jpeg" alt="title"></p>
+<p>大游行？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4072-1588740768724.jpeg" alt="title"></p>
+<p>甜梦？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4075-1588740908887.jpeg" alt="title"></p>
+<p>紫袍玉带？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4077-1588740948926.jpeg" alt="title"></p>
+<p>藤冰山？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4078-1588740989713.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4079-1588741007305.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4080-1588741031040.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4081-1588741064243.jpeg" alt="title"></p>
+<p>我的心？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4083-1588741092150.jpeg" alt="title"></p>
+<p>玛格丽特王妃？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4084-1588741118387.jpeg" alt="title"></p>
+<p>自由精神？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4085-1588741131409.jpeg" alt="title"></p>
+<p>埃格兰泰恩？塞西尔布朗纳？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4086-1588741145227.jpeg" alt="title"></p>
+<p>麦金？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4087-1588741163758.jpeg" alt="title"></p>
+<p>粉色达芬奇？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4088-1588741187607.jpeg" alt="title"></p>
+<p>沃勒顿老庄园？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4089-1588741222125.jpeg" alt="title"></p>
+<p>欢迎?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4090-1588741242501.jpeg" alt="title"></p>
+<p>粉团蔷薇?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4091-1588741276861.jpeg" alt="title"></p>
+<p>权杖之岛?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4092-1588741297897.jpeg" alt="title"></p>
+<p>克莱尔奥斯汀？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4093-1588741309981.jpeg" alt="title"></p>
+<p>藤冰山？粉妆楼？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4094-1588741330994.jpeg" alt="title"></p>
+<p>抓破美人脸？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4095-1588741354003.jpeg" alt="title"></p>
+<p>先是用形色app对着花儿一顿识别，可这人工智能有时候也掉链子，所有的结果都是月季，只能自己对着图片研究，也不知道到底有没有哪一张是蒙对了的，但起码有一点，我已经绝对打败了AI。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/%E4%B8%8B%E8%BD%BD-1588771007288.jpg" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>藤本月季网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGVuZ2Jlbnl1ZWppLmNvbS8=">https://www.tengbenyueji.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>美好生活</category>
+      </categories>
+      <tags>
+        <tag>藤本月季</tag>
+        <tag>复旦大学</tag>
+        <tag>国帆路</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -1549,70 +1549,6 @@
       </tags>
   </entry>
   <entry>
-    <title>将 Draw.io 集成到 VS Code</title>
-    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
-    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
-<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
-<li>点击 <code>install</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
-<ul>
-<li>点击 <code>打开Visual Studio Code</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
-<ul>
-<li>点击 <code>安装</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
-<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
-<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
-<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
-<ul>
-<li>进入【扩展设置】</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
-<ul>
-<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
-</li>
-<li><p>支持更换主题</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
-<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
-<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
-<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
-</ul>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>draw.io</tag>
-        <tag>VS Code</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（5）：查询篇</title>
     <url>/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/</url>
     <content><![CDATA[<p>Kodi（以前叫XBMC）是一款强大的开源媒体播放器软件，支持 MacOS、Windows、Linux、Android等多系统平台。Kodi 的局域网视频播放功能异常强大；默认情况下 Kodi 的资料库是独立的，这就带来一个很大的问题，当家里有多个Kodi终端的话，资料的同步是个很大的问题。</p>
@@ -1764,6 +1700,70 @@
         <tag>PHP</tag>
         <tag>Nginx</tag>
         <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>将 Draw.io 集成到 VS Code</title>
+    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
+    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
+<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
+<li>点击 <code>install</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
+<ul>
+<li>点击 <code>打开Visual Studio Code</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
+<ul>
+<li>点击 <code>安装</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
+<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
+<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
+<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
+<ul>
+<li>进入【扩展设置】</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
+<ul>
+<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
+</li>
+<li><p>支持更换主题</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
+<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
+<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
+<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
+</ul>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>draw.io</tag>
+        <tag>VS Code</tag>
       </tags>
   </entry>
   <entry>
@@ -2019,35 +2019,6 @@
       </tags>
   </entry>
   <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>群晖app访问遇到的端口问题</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是 NAS</strong></p>
@@ -2102,10 +2073,10 @@
         <tag>群晖</tag>
         <tag>VPS</tag>
         <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
         <tag>黑群</tag>
         <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
       </tags>
   </entry>
   <entry>
@@ -2151,30 +2122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>自带过滤功能的Hexo首页生成器插件</title>
-    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
-<blockquote>
-<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
-</blockquote>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自己编译ntfstool</title>
     <url>/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/</url>
     <content><![CDATA[<blockquote>
@@ -2205,7 +2152,8 @@
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589786699474-1589786699481.png" alt="title"></p>
 <h2 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h2><p>在 <code>终端模式</code> 下输入：</p>
-<p><code>git clone git@github.com:ntfstool/ntfstool.git</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:ntfstool/ntfstool.git</span><br></pre></td></tr></table></figure>
+
 <p>或者直接打包下载源代码</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/18/1589792907225-1589792907231.png" alt="title"></p>
 <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ntfstool</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
@@ -2273,6 +2221,59 @@
         <tag>ntfstool</tag>
         <tag>FUSE</tag>
         <tag>electron</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自带过滤功能的Hexo首页生成器插件</title>
+    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
+<blockquote>
+<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
+</blockquote>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
+<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>群晖</tag>
+        <tag>NAS</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
       </tags>
   </entry>
   <entry>
@@ -2352,6 +2353,34 @@
       </tags>
   </entry>
   <entry>
+    <title>遇到“Error spawn failed”错误</title>
+    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+
+<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
+
+<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
+<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>deploy_git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>适合小团队的Kanboard项目管理软件</title>
     <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
     <content><![CDATA[<p><strong>什么是kanban？</strong></p>
@@ -2407,34 +2436,6 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>遇到“Error spawn failed”错误</title>
-    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-
-<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
-
-<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
-<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>deploy_git</tag>
       </tags>
   </entry>
 </search>
