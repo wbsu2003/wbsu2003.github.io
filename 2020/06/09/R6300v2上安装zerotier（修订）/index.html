@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="记录了在网件路由器R6300v2上安装zerotier的过程和遇到的坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R6300v2上安装zerotier（修订）">
+<meta property="og:url" content="https://laosu.ml/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="记录了在网件路由器R6300v2上安装zerotier的过程和遇到的坑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/29/1590763720285-1590763720314.png">
+<meta property="article:published_time" content="2020-06-09T14:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-09T14:52:35.229Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="netgear">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="R6300V2">
+<meta property="article:tag" content="zerotier">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/29/1590763720285-1590763720314.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>R6300v2上安装zerotier（修订） | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          R6300v2上安装zerotier（修订）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-09 22:00:00 / 修改时间：22:52:35" itemprop="dateCreated datePublished" datetime="2020-06-09T22:00:00+08:00">2020-06-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">记录了在网件路由器R6300v2上安装zerotier的过程和遇到的坑</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
+        </div>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写的「 <a href="https://laosu.ml/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/">R6300v2上安装zerotier</a> 」当时一切正常，但是发现在R6300v2重启之后，还是存在问题，估计问题主要是出在防火墙的设置上。</p>
+<p>现在把重做的过程做个记录。</p>
+<h1 id="问题1：PORT-ERROR错误"><a href="#问题1：PORT-ERROR错误" class="headerlink" title="问题1：PORT_ERROR错误"></a>问题1：<code>PORT_ERROR</code>错误</h1><p>putty登录到R6300v2，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591514832631-1591514832682.png" alt="title"></p>
+<p>显示出现了 <code>PORT_ERROR</code>错误。 </p>
+<p>初步判断是TUN出了问题，执行 <code>ifconfig</code>，确实没发现zt开头的网卡设备</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517016597-1591517016600.png" alt="title"></p>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>重启zerotier</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">killall zerotier-one</span><br><span class="line">modprobe tun</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+
+<p>再次执行 <code>ifconfig</code> ，有了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517148128-1591517148131.png" alt="title"></p>
+<p>再看看是否正常？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517408587-1591517408591.png" alt="title"></p>
+<p>显示 <code>OK</code></p>
+<h2 id="可能的原因"><a href="#可能的原因" class="headerlink" title="可能的原因"></a>可能的原因</h2><p>虽然在 <code>/jffs/scripts/nat-start</code> 中有 <code>modprobe tun</code>，但是可能存在加载顺序等问题，所以导致在执行 <code>zerotier-one -d</code> 没成功，所以在 <code>/opt/etc/init.d/S90zerotier-one.sh</code> 新加一段，用于解决 <code>PORT_ERROR</code> 问题。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line"><span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    modprobe tun;</span><br><span class="line">    logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line"><span class="built_in">exit</span> 0;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的 <code>/opt/etc/init.d/S90zerotier-one.sh</code>脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  start)</span><br><span class="line">       <span class="comment"># 新增开始</span></span><br><span class="line">       <span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line">       <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">           modprobe tun;</span><br><span class="line">           logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line">       <span class="built_in">exit</span> 0;</span><br><span class="line">       <span class="keyword">fi</span></span><br><span class="line">       <span class="comment"># 新增结束</span></span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is already running."</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Starting ZeroTier-One"</span> ;</span><br><span class="line">        /opt/bin/zerotier-one -d ;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Started ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Stopping ZeroTier-One"</span>;</span><br><span class="line">        killall zerotier-one</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Stopped ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"ZeroTier-One was not running"</span> ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  status)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is running."</span></span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is NOT running"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: /etc/init.d/zerotier-one &#123;start|stop|status&#125;"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="问题2：访问不到内网设备"><a href="#问题2：访问不到内网设备" class="headerlink" title="问题2：访问不到内网设备"></a>问题2：访问不到内网设备</h1><p>将路由加入到 <code>Zerotier</code> 网络是为了在外网访问到家庭局域网中的设备，但是之前的设置只是能够让我们通过zt网地址 <code>192.168.191.10</code> 访问到R6300v2，而不是通过 <code>192.168.0.1</code></p>
+<h2 id="zerotier-com上设置路由"><a href="#zerotier-com上设置路由" class="headerlink" title="zerotier.com上设置路由"></a>zerotier.com上设置路由</h2><p>比如192.168.0.0/24是我的内网网段，后面那个地址是我R6300v2里面zerotier获取的zt地址。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591629176545-1591629176569.png" alt="title"></p>
+<h2 id="增加-iptables-rules"><a href="#增加-iptables-rules" class="headerlink" title="增加 iptables rules"></a>增加 iptables rules</h2><p>先运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -v -L -n --line-numbers</span><br></pre></td></tr></table></figure>
+
+<p>先接受zerotier的所有数据</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -i zt+ -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启zerotier"><a href="#重启zerotier" class="headerlink" title="重启zerotier"></a>重启zerotier</h2><p>先停止</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/etc/init.d/S90zerotier-one.sh stop</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall zerotier-one</span><br></pre></td></tr></table></figure>
+
+<p>再启动</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>测试网络</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 192.168.191.10 -c 4</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591623069478-1591623069524.png" alt="title"></p>
+<h2 id="Allow-FTP-SSH-WEBUI"><a href="#Allow-FTP-SSH-WEBUI" class="headerlink" title="Allow FTP, SSH, WEBUI"></a>Allow FTP, SSH, WEBUI</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 192.168.191.10 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination 192.168.0.1</span><br></pre></td></tr></table></figure>
+
+<p>或者替代方案</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><p>修改 <code>/jffs/scripts/firewall-start</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="手机测试"><a href="#手机测试" class="headerlink" title="手机测试"></a>手机测试</h2><p>手机上打开zerotier，用4G上网，记得勾选 <code>Use Cellular Data</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630322505-1591630322507.png" alt="title"></p>
+<p>在浏览器中访问192.168.0.10（ 就是我们的路由器R6300v2的局域网地址 ） ，已经可以访问了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630477952-1591630477956.png" alt="title"></p>
+<p>但是直接访问192.168.0.199 （ NAS的局域网地址 ）还是不行</p>
+<h2 id="再次修改脚本"><a href="#再次修改脚本" class="headerlink" title="再次修改脚本"></a>再次修改脚本</h2><p>在 <code>/jffs/scripts/firewall-start</code>中增加下面三行就直接可以访问到内网的设备；</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">  iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br><span class="line">```sh</span><br><span class="line"></span><br><span class="line">完整的 ` /jffs/scripts/firewall-start `脚本</span><br><span class="line"></span><br><span class="line">```sh</span><br><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 2020.06.09 参考 https://blog.urusai.me/2019/using-zerotier-to-combine-gateways/</span></span><br><span class="line">  iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">  iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>在手机浏览器中直接访问192.168.0.199 （ NAS的局域网地址 ）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/09/1591713001408-1591713001465.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>终于达成所愿！但是从测试看，依然有2个问题：</p>
+<ol>
+<li>速度并不稳定，有时快有时慢，取决于相连的两侧能否P2P打洞（NAT穿越）成功，如果不成功还是会走服务器中转，这个就会比较影响速度</li>
+<li>在外网访问，需要启动zerotier客户端，这一点不如frp方便</li>
+</ol>
+<p>但不管怎么说可以和frp互为补充，做个双保险。</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>为防止和避免拷贝脚本出错，作为附件提供下载</p>
+<h2 id="jffs-scripts-firewall-start"><a href="#jffs-scripts-firewall-start" class="headerlink" title="/jffs/scripts/firewall-start"></a><code>/jffs/scripts/firewall-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxMzkzMzg1OA==">firewall-start<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-nat-start"><a href="#jffs-scripts-nat-start" class="headerlink" title="/jffs/scripts/nat-start"></a><code>/jffs/scripts/nat-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDA1NTM0MA==">nat-start<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-post-mount"><a href="#jffs-scripts-post-mount" class="headerlink" title="/jffs/scripts/post-mount"></a><code>/jffs/scripts/post-mount</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDE1ODcxMw==">post-mount<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-wan-start"><a href="#jffs-scripts-wan-start" class="headerlink" title="/jffs/scripts/wan-start"></a><code>/jffs/scripts/wan-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDMwMzg3NA==">wan-start<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>[教程] LEDE旁路由中安装zerotier，内网穿透，访问局域网，极简教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1MjU2MS0xLTEuaHRtbA==">https://koolshare.cn/thread-152561-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>A Guide About Installing ZeroTier on ASUS AC68U Router<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc25iZm9ydW1zLmNvbS90aHJlYWRzL2EtZ3VpZGUtYWJvdXQtaW5zdGFsbGluZy16ZXJvdGllci1vbi1hc3VzLWFjNjh1LXJvdXRlci40MjY0OC8=">https://www.snbforums.com/threads/a-guide-about-installing-zerotier-on-asus-ac68u-router.42648/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\29\R6300v2上安装zerotier\" rel="bookmark">R6300v2上安装zerotier</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\16\百兆升千兆家庭组网方案\" rel="bookmark">百兆升千兆家庭组网方案</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\21\百兆升千兆家庭组网方案（续1）\" rel="bookmark">百兆升千兆家庭组网方案（续1）</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/" title="R6300v2上安装zerotier（修订）">https://laosu.ml/2020/06/09/R6300v2上安装zerotier（修订）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/netgear/" rel="tag"><i class="fa fa-tag"></i> netgear</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag"><i class="fa fa-tag"></i> 路由器</a>
+              <a href="/tags/R6300V2/" rel="tag"><i class="fa fa-tag"></i> R6300V2</a>
+              <a href="/tags/zerotier/" rel="tag"><i class="fa fa-tag"></i> zerotier</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/06/%E6%8A%8A%E7%BD%91%E9%A1%B5%E6%89%93%E5%8C%85%E6%88%90%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" rel="prev" title="把网页打包成桌面应用程序">
+      <i class="fa fa-chevron-left"></i> 把网页打包成桌面应用程序
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题1：PORT-ERROR错误"><span class="nav-number">2.</span> <span class="nav-text">问题1：PORT_ERROR错误</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重启"><span class="nav-number">2.1.</span> <span class="nav-text">重启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能的原因"><span class="nav-number">2.2.</span> <span class="nav-text">可能的原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题2：访问不到内网设备"><span class="nav-number">3.</span> <span class="nav-text">问题2：访问不到内网设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zerotier-com上设置路由"><span class="nav-number">3.1.</span> <span class="nav-text">zerotier.com上设置路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加-iptables-rules"><span class="nav-number">3.2.</span> <span class="nav-text">增加 iptables rules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启zerotier"><span class="nav-number">3.3.</span> <span class="nav-text">重启zerotier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ping"><span class="nav-number">3.4.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Allow-FTP-SSH-WEBUI"><span class="nav-number">3.5.</span> <span class="nav-text">Allow FTP, SSH, WEBUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改脚本"><span class="nav-number">3.6.</span> <span class="nav-text">修改脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机测试"><span class="nav-number">3.7.</span> <span class="nav-text">手机测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再次修改脚本"><span class="nav-number">3.8.</span> <span class="nav-text">再次修改脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jffs-scripts-firewall-start"><span class="nav-number">5.1.</span> <span class="nav-text">&#x2F;jffs&#x2F;scripts&#x2F;firewall-start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jffs-scripts-nat-start"><span class="nav-number">5.2.</span> <span class="nav-text">&#x2F;jffs&#x2F;scripts&#x2F;nat-start</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jffs-scripts-post-mount"><span class="nav-number">5.3.</span> <span class="nav-text">&#x2F;jffs&#x2F;scripts&#x2F;post-mount</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jffs-scripts-wan-start"><span class="nav-number">5.4.</span> <span class="nav-text">&#x2F;jffs&#x2F;scripts&#x2F;wan-start</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">114</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">61k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
