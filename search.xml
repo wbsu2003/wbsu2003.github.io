@@ -62,6 +62,351 @@
       </tags>
   </entry>
   <entry>
+    <title>R6300v2上安装zerotier（修订）</title>
+    <url>/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写的「 <a href="https://laosu.ml/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/">R6300v2上安装zerotier</a> 」当时一切正常，但是发现在R6300v2重启之后，还是存在问题，估计问题主要是出在防火墙的设置上。</p>
+<p>现在把重做的过程做个记录。</p>
+<h1 id="问题1：PORT-ERROR错误"><a href="#问题1：PORT-ERROR错误" class="headerlink" title="问题1：PORT_ERROR错误"></a>问题1：<code>PORT_ERROR</code>错误</h1><p>putty登录到R6300v2，执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591514832631-1591514832682.png" alt="title"></p>
+<p>显示出现了 <code>PORT_ERROR</code>错误。 </p>
+<p>初步判断是TUN出了问题，执行 <code>ifconfig</code>，确实没发现zt开头的网卡设备</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517016597-1591517016600.png" alt="title"></p>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>重启zerotier</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall zerotier-one</span><br><span class="line">modprobe tun</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+
+<p>再次执行 <code>ifconfig</code> ，有了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517148128-1591517148131.png" alt="title"></p>
+<p>再看看是否正常？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517408587-1591517408591.png" alt="title"></p>
+<p>显示 <code>OK</code></p>
+<h2 id="可能的原因"><a href="#可能的原因" class="headerlink" title="可能的原因"></a>可能的原因</h2><p>虽然在 <code>/jffs/scripts/nat-start</code> 中有 <code>modprobe tun</code>，但是可能存在加载顺序等问题，所以导致在执行 <code>zerotier-one -d</code> 没成功，所以在 <code>/opt/etc/init.d/S90zerotier-one.sh</code> 新加一段，用于解决 <code>PORT_ERROR</code> 问题。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line"><span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    modprobe tun;</span><br><span class="line">    logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line"><span class="built_in">exit</span> 0;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的 <code>/opt/etc/init.d/S90zerotier-one.sh</code>脚本</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  start)</span><br><span class="line">       <span class="comment"># 新增开始</span></span><br><span class="line">       <span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line">       <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">           modprobe tun;</span><br><span class="line">           logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line">       <span class="built_in">exit</span> 0;</span><br><span class="line">       <span class="keyword">fi</span></span><br><span class="line">       <span class="comment"># 新增结束</span></span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is already running."</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Starting ZeroTier-One"</span> ;</span><br><span class="line">        /opt/bin/zerotier-one -d ;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Started ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Stopping ZeroTier-One"</span>;</span><br><span class="line">        killall zerotier-one</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Stopped ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"ZeroTier-One was not running"</span> ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  status)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is running."</span></span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is NOT running"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: /etc/init.d/zerotier-one &#123;start|stop|status&#125;"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="问题2：访问不到内网设备"><a href="#问题2：访问不到内网设备" class="headerlink" title="问题2：访问不到内网设备"></a>问题2：访问不到内网设备</h1><p>将路由加入到 <code>Zerotier</code> 网络是为了在外网访问到家庭局域网中的设备，但是之前的设置只是能够让我们通过zt网地址 <code>192.168.191.10</code> 访问到R6300v2，而不是通过 <code>192.168.0.1</code></p>
+<h2 id="zerotier-com上设置路由"><a href="#zerotier-com上设置路由" class="headerlink" title="zerotier.com上设置路由"></a>zerotier.com上设置路由</h2><p>比如192.168.0.0/24是我的内网网段，后面那个地址是我R6300v2里面zerotier获取的zt地址。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591629176545-1591629176569.png" alt="title"></p>
+<h2 id="增加-iptables-rules"><a href="#增加-iptables-rules" class="headerlink" title="增加 iptables rules"></a>增加 iptables rules</h2><p>先运行</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -v -L -n --line-numbers</span><br></pre></td></tr></table></figure>
+
+<p>先接受zerotier的所有数据</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -I INPUT -i zt+ -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p><strong>【备注：】</strong> all “zt0, zt1, ztzlgf7vul” can be replaced by zt+ for wild matching in iptables only!   所以后面 <code>ztyqb3hz7p</code> 都将写成 <code>zt+</code> ，这使得脚本有了很大的通用性</p>
+<h2 id="重启zerotier"><a href="#重启zerotier" class="headerlink" title="重启zerotier"></a>重启zerotier</h2><p>先停止</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">/opt/etc/init.d/S90zerotier-one.sh stop</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall zerotier-one</span><br></pre></td></tr></table></figure>
+
+<p>再启动</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>测试网络</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ping 192.168.191.10 -c 4</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591623069478-1591623069524.png" alt="title"></p>
+<h2 id="Allow-FTP-SSH-WEBUI"><a href="#Allow-FTP-SSH-WEBUI" class="headerlink" title="Allow FTP, SSH, WEBUI"></a>Allow FTP, SSH, WEBUI</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 192.168.191.10 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination 192.168.0.1</span><br></pre></td></tr></table></figure>
+
+<p>或者替代方案</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><p>修改 <code>/jffs/scripts/firewall-start</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="手机测试"><a href="#手机测试" class="headerlink" title="手机测试"></a>手机测试</h2><p>手机上打开zerotier，用4G上网，记得勾选 <code>Use Cellular Data</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630322505-1591630322507.png" alt="title"></p>
+<p>在浏览器中访问192.168.0.1（ 就是我们的路由器R6300v2的局域网地址 ） ，已经可以访问了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630477952-1591630477956.png" alt="title"></p>
+<p>但是直接访问192.168.0.199 （ NAS的局域网地址 ）还是不行</p>
+<h2 id="再次修改脚本"><a href="#再次修改脚本" class="headerlink" title="再次修改脚本"></a>再次修改脚本</h2><p>在 <code>/jffs/scripts/firewall-start</code>中增加下面三行就直接可以访问到内网的设备；</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br></pre></td></tr></table></figure>
+
+<p>完整的 <code>/jffs/scripts/firewall-start</code>脚本</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 2020.06.09 参考 https://blog.urusai.me/2019/using-zerotier-to-combine-gateways/</span></span><br><span class="line">  iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">  iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>在手机浏览器中直接访问192.168.0.199 （ NAS的局域网地址 ）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/09/1591713001408-1591713001465.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>终于达成所愿！但是从测试看，依然有2个问题：</p>
+<ol>
+<li>速度并不稳定，有时快有时慢，取决于相连的两侧能否P2P打洞（NAT穿越）成功，如果不成功还是会走服务器中转，这个就会比较影响速度</li>
+<li>在外网访问，需要启动zerotier客户端，这一点不如frp方便</li>
+</ol>
+<p>但不管怎么说可以和frp互为补充，做个双保险。</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>为防止和避免拷贝脚本出错，作为附件提供参考</p>
+<h2 id="jffs-scripts-firewall-start"><a href="#jffs-scripts-firewall-start" class="headerlink" title="/jffs/scripts/firewall-start"></a><code>/jffs/scripts/firewall-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxMzkzMzg1OA==">firewall-start<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-nat-start"><a href="#jffs-scripts-nat-start" class="headerlink" title="/jffs/scripts/nat-start"></a><code>/jffs/scripts/nat-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDA1NTM0MA==">nat-start<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-post-mount"><a href="#jffs-scripts-post-mount" class="headerlink" title="/jffs/scripts/post-mount"></a><code>/jffs/scripts/post-mount</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDE1ODcxMw==">post-mount<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="jffs-scripts-wan-start"><a href="#jffs-scripts-wan-start" class="headerlink" title="/jffs/scripts/wan-start"></a><code>/jffs/scripts/wan-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDMwMzg3NA==">wan-start<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="opt-etc-init-d-S90zerotier-one-sh"><a href="#opt-etc-init-d-S90zerotier-one-sh" class="headerlink" title="/opt/etc/init.d/S90zerotier-one.sh"></a><code>/opt/etc/init.d/S90zerotier-one.sh</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS9TOTB6ZXJvdGllci1vbmUtMTU5MTcxNDg3NzYxNy5zaA==">S90zerotier-one.sh<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>[教程] LEDE旁路由中安装zerotier，内网穿透，访问局域网，极简教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1MjU2MS0xLTEuaHRtbA==">https://koolshare.cn/thread-152561-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>A Guide About Installing ZeroTier on ASUS AC68U Router<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc25iZm9ydW1zLmNvbS90aHJlYWRzL2EtZ3VpZGUtYWJvdXQtaW5zdGFsbGluZy16ZXJvdGllci1vbi1hc3VzLWFjNjh1LXJvdXRlci40MjY0OC8=">https://www.snbforums.com/threads/a-guide-about-installing-zerotier-on-asus-ac68u-router.42648/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>netgear</tag>
+        <tag>路由器</tag>
+        <tag>R6300V2</tag>
+        <tag>zerotier</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitNote的简单使用记录</title>
+    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
+<blockquote>
+<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是git</strong></p>
+<blockquote>
+<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Markdown</strong></p>
+<blockquote>
+<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
+</blockquote>
+<p><strong>什么是GitNote</strong></p>
+<blockquote>
+<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
+<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
+<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
+<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
+<p><strong>特别注意：</strong></p>
+<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
+<p>点击 Create repository 完成创建</p>
+<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
+<p><strong>特别注意：</strong></p>
+<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
+<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
+<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
+<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
+<ol>
+<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+<li><p>解压到 {user}/.gitnote/plugins 目录</p>
+</li>
+<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
+</li>
+<li><p>重启 GitNote</p>
+</li>
+</ol>
+<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
+<li>不要用菜单栏的插入图片，这个不会上传；</li>
+<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
+</ul>
+<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
+<p>记得要先注册</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
+<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
+<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
+<li>网络错误：</li>
+</ul>
+<p>比如上传github图床时，时不时出现的网络错误</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
+<ul>
+<li>预览问题：</li>
+</ul>
+<p>上传成功的图片不显示，而只是显示一个title</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
+<p>而实际上在github的网页上应该是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
+<ul>
+<li>文档历史</li>
+</ul>
+<p>不知道什么原因，一直没有文档的编辑历史</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
+<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
+<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
+<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
+<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>git</tag>
+        <tag>GitNote</tag>
+        <tag>Markdown</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PVE安装win10集显直通</title>
+    <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
+    <content><![CDATA[<p><strong>什么是PVE</strong></p>
+<blockquote>
+<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
+</blockquote>
+<p><strong>为什么要显卡直通</strong></p>
+<blockquote>
+<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
+</blockquote>
+<h1 id="安装-PVE"><a href="#安装-PVE" class="headerlink" title="安装 PVE"></a>安装 PVE</h1><h2 id="下载-PVE-ISO-文件"><a href="#下载-PVE-ISO-文件" class="headerlink" title="下载 PVE ISO 文件"></a>下载 PVE ISO 文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="制作启动-U-盘"><a href="#制作启动-U-盘" class="headerlink" title="制作启动 U 盘"></a>制作启动 U 盘</h2><p>用 UltraISO 写入 U 盘；</p>
+<p>【注意】：</p>
+<blockquote>
+<ol>
+<li>可能会存在U盘兼容性问题，但我没遇到，用的 kingstone DT101 G2 的 4G；</li>
+<li>在写入格式时，开始选的 USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为 RAW 后正常；</li>
+</ol>
+</blockquote>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS 中设置 U 盘启动；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
+<p>自检画面，等待几秒</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
+<p>同意协议，点击 “I agree”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
+<p>选择硬盘，点击 “Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>注意要选择你要安装 pve 系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
+</blockquote>
+<p>设定国家、时区和键盘，Country 输入 China 即可，点击 “Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
+<p>设置管理员 root 账号密码和邮箱</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>密码要牢记</p>
+</blockquote>
+<p>设定主机名，IP，网关，掩码和 DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
+<p>安装中，等待几分钟</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
+<p>安装完提示重启</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>重启前请先移除U盘，或者关闭U盘启动；</p>
+</blockquote>
+<p>启动完成后的控制台，会提示控制台访问URL</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
+<p>【注意】</p>
+<blockquote>
+<p>1、是 https，不是 http；<br>2、因为证书问题，尽量不要用 ie 和 edge 浏览器，chrome 浏览器的效果比较好；</p>
+</blockquote>
+<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL， <span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA2">https://IP:8006<i class="fa fa-external-link-alt"></i></span> ， 语言可以选择中文，对于中文支持不错；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
+<p>进入 PVE UI 的截图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
+<h1 id="虚拟化设置"><a href="#虚拟化设置" class="headerlink" title="虚拟化设置"></a>虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在 BIOS 中要开启跟虚拟化相关的选项，比如VD-T等；</p>
+<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE 的内核开启支持 VD-T 直通的 IOMMU 及相关模块；</p>
+<ul>
+<li>修改/etc/default/grub文件中的内容</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>后面所有的操作都在 WEB GUI 的 shell 中进行</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
+<p>把原内容中：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
+<p>执行 <code>update-grub</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
+<p>立即更新 grub</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
+<ul>
+<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
+<p>加上以下代码，每个一行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
+<ul>
+<li>建立驱动黑名单，依次输入以下命令：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_intel"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_codec_hdmi"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist i915"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
+<ul>
+<li>GPU 信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
+<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
+<p>把集显指定到 VFIO 模块</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options vfio-pci ids=8086:1616"</span> &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
+<h1 id="创建-Win10-虚拟机"><a href="#创建-Win10-虚拟机" class="headerlink" title="创建 Win10 虚拟机"></a>创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
+<h2 id="下载-virtio-win-的-iso-驱动包；"><a href="#下载-virtio-win-的-iso-驱动包；" class="headerlink" title="下载 virtio-win 的 iso 驱动包；"></a>下载 virtio-win 的 iso 驱动包；</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mZWRvcmFwZW9wbGUub3JnL2dyb3Vwcy92aXJ0L3ZpcnRpby13aW4vZGlyZWN0LWRvd25sb2Fkcy9hcmNoaXZlLXZpcnRpby8=">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/<i class="fa fa-external-link-alt"></i></span></p>
+<p>【注意】：</p>
+<blockquote>
+<p>建议下日期最新的版本</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2024-1590037534614.png" alt="title"></p>
+<h2 id="上传ISO文件"><a href="#上传ISO文件" class="headerlink" title="上传ISO文件"></a>上传ISO文件</h2><p>上述的 iso 包都上传到下图目录中</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2025-1590037579769.png" alt="title"></p>
+<h2 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h2><p>参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2026-1590037624180.png" alt="title"></p>
+<p>【注意】：以下说法不一定准确，需要进一步验证：</p>
+<blockquote>
+<p>1、处理器需要为 HOST 模式；<br>2、Win10 系统要放在 ide0，否则有可能不会启动；<br>3、机器要选 q35，据说 PCI-e 的性能更好；<br>4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；<br>5、显示选默认就可以，但是一定要分显存；<br>6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；<br>7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO<br>8、显卡可以直接下载对应版本的集显驱动；</p>
+</blockquote>
+<h2 id="连接win10虚拟机"><a href="#连接win10虚拟机" class="headerlink" title="连接win10虚拟机"></a>连接win10虚拟机</h2><ul>
+<li>1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2027-1590037678865.png" alt="title"></p>
+<ul>
+<li>2、修改/etc/pve/qemu-server/100.conf（Win10 在 PVE 顺序是 100）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
+<p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
+<p>在第一行插入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>1、据说这一步骤是直通核显 GPU 的关键步骤；<br>2、需要注意的是：host=00:02.0这个 00:02.0 需要与前面 lspic 显示的核显编号对应上；<br>3、PVE 主机的 HDMI 接口接到显示器；<br>4、当 win10 认到双显示器时，改为复制模式；</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>PVE</tag>
+        <tag>显卡直通</tag>
+        <tag>GPU</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>R6300v2上安装zerotier</title>
     <url>/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/</url>
     <content><![CDATA[<h1 id="过程回顾"><a href="#过程回顾" class="headerlink" title="过程回顾"></a>过程回顾</h1><h2 id="安装-opkg-软件源"><a href="#安装-opkg-软件源" class="headerlink" title="安装 opkg 软件源"></a>安装 opkg 软件源</h2><p>winscp + putty 登录到路由器上。先要在路由器中设置允许ssh登录</p>
@@ -252,99 +597,6 @@
         <tag>路由器</tag>
         <tag>R6300V2</tag>
         <tag>zerotier</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GitNote的简单使用记录</title>
-    <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<p><strong>什么是GitHub</strong></p>
-<blockquote>
-<p>GitHub 是透過 Git 進行版本控制的軟體原始碼代管服務平台，由 GitHub 公司的開發者 Chris Wanstrath、PJ Hyett 和 Tom Preston-Werner 使用 Ruby on Rails 編寫而成。 GitHub 同時提供付費帳戶和免費帳戶。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是git</strong></p>
-<blockquote>
-<p>git是一個分散式版本控制軟體，最初由林納斯·托瓦茲創作，於2005年以 GPL<br> 釋出。最初目的是為更好地管理 Linux 核心開發而設計。應注意的是，這與 GNU Interactive Tools 不同。 git 最初的開發動力來自於 BitKeeper 和Monotone。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Markdown</strong></p>
-<blockquote>
-<p>Markdown是一種輕量級標記式語言，創始人為約翰·格魯伯。它允許人們使用易讀易寫的純文字格式編寫文件，然後轉換成有效的XHTML文件。這種語言吸收了很多在電子郵件中已有的純文字標記的特性。【維基百科】</p>
-</blockquote>
-<p><strong>什么是GitNote</strong></p>
-<blockquote>
-<p>GitNote 是一款基于 git 的现代笔记软件，不需要依赖本地 git 环境。支持 Windows、macOS、Linux，使用 Git 仓库作为数据保存，如 GitHub、GitLab 等，内置 Git 支持，依托 Git 仓库的特性，拥有历史版本、私密笔记、无限空间等特点。</p>
-<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS8=">https://gitnoteapp.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>看到<strong>历史版本</strong>、<strong>私密笔记</strong>、<strong>无限空间</strong>是不是有些心动？再往下看，还支持<strong>脑图</strong>、支持<strong>流程图</strong>、支持<strong>多图床</strong>，更重要的是支持markdown，是不是已经按奈不住了？</p>
-<p>本文只是粗略描述了过程，详细的安装和配置，请阅读参考文档部分。</p>
-<h1 id="1、申请GitHub账号"><a href="#1、申请GitHub账号" class="headerlink" title="1、申请GitHub账号"></a>1、申请GitHub账号</h1><p>先要去 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">https://github.com/<i class="fa fa-external-link-alt"></i></span> 注册账号，注册完登陆 Github 看起来应该是这样：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/github-1587137114658.jpg" alt="title"></p>
-<h1 id="2、建私有仓库，存放笔记"><a href="#2、建私有仓库，存放笔记" class="headerlink" title="2、建私有仓库，存放笔记"></a>2、建私有仓库，存放笔记</h1><p>访问 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldw==">https://github.com/new<i class="fa fa-external-link-alt"></i></span> 创建仓库。 填写 Repository name，推荐将仓库命名为 xxnote，一目了然。</p>
-<p><strong>特别注意：</strong></p>
-<p>除非你打算公开所有笔记，否则，务必选择 Private。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/repo-1587137248312.jpg" alt="title"></p>
-<p>点击 Create repository 完成创建</p>
-<h1 id="3、建公有仓库，存放图片"><a href="#3、建公有仓库，存放图片" class="headerlink" title="3、建公有仓库，存放图片"></a>3、建公有仓库，存放图片</h1><p>编写笔记的时候，会用到图片，我们将所有图片也托管到 Github 上。类似上一步，再创建一个仓库。 填写 Repository name，推荐将仓库命名为gitnote-images之类，一目了然。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/pic-1587137364240.jpg" alt="title"></p>
-<p><strong>特别注意：</strong></p>
-<p>务必选择 Public，否则在笔记中无法引用图片。<br>勾选 Initialize this repository with a README，省去我们自己初始化仓库的工作。<br>点击 Create repository 完成创建</p>
-<h1 id="4、下载、配置Gitnote"><a href="#4、下载、配置Gitnote" class="headerlink" title="4、下载、配置Gitnote"></a>4、下载、配置Gitnote</h1><p>前往 GitNote 下载对应版本的安装包，并安装。 第一次打开，应该是这样的。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/17/%E4%B8%BB%E7%95%8C%E9%9D%A2-1587136969998.PNG" alt="title"></p>
-<h2 id="4-1、-添加本地已经-GIT-仓库"><a href="#4-1、-添加本地已经-GIT-仓库" class="headerlink" title="4.1、 添加本地已经 GIT 仓库"></a>4.1、 添加本地已经 GIT 仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/import-1587956373130.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="4-2、-克隆一个仓库"><a href="#4-2、-克隆一个仓库" class="headerlink" title="4.2、 克隆一个仓库"></a>4.2、 克隆一个仓库</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/27/clone-1587956400202.gif" alt="title"><br>【以上动图来自官网：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzL3NldHVwLmh0bWzjgJE=">https://gitnoteapp.com/zh/docs/setup.html】<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="5、安装图床插件"><a href="#5、安装图床插件" class="headerlink" title="5、安装图床插件"></a>5、安装图床插件</h1><h2 id="5-1、从插件市场"><a href="#5-1、从插件市场" class="headerlink" title="5.1、从插件市场"></a>5.1、从插件市场</h2><p>一直出错，显示无文字的红色xx，只能另找办法。</p>
-<h2 id="5-2、gitnote-手动插件安装方式"><a href="#5-2、gitnote-手动插件安装方式" class="headerlink" title="5.2、gitnote 手动插件安装方式"></a>5.2、gitnote 手动插件安装方式</h2><p><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">这是作者的博客推荐的方法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly96aGFvcGVuZy5tZS9pbmRleC5waHAvYXJjaGl2ZXMvZ2l0bm90ZS1pbnN0YWxsLXBsdWdpbi5odG1s">https://zhaopeng.me/index.php/archives/gitnote-install-plugin.html<i class="fa fa-external-link-alt"></i></span></p>
-<ol>
-<li><p>到 github 下载插件<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3poYW9wZW5nbWUvZ2l0bm90ZS1leHRlbnNpb25z">https://github.com/zhaopengme/gitnote-extensions<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>解压到 {user}/.gitnote/plugins 目录</p>
-</li>
-<li><p>{user} 用户的根目录,windows是 c:/users/{用户名}</p>
-</li>
-<li><p>重启 GitNote</p>
-</li>
-</ol>
-<h1 id="6、几个坑"><a href="#6、几个坑" class="headerlink" title="6、几个坑"></a>6、几个坑</h1><h2 id="6-1、github图床问题"><a href="#6-1、github图床问题" class="headerlink" title="6.1、github图床问题"></a>6.1、github图床问题</h2><ul>
-<li>不要用菜单栏的插入图片，这个不会上传；</li>
-<li>拖拽图片或者附件到gitnote界面时，会弹出上面一个十字架和下面一个方框，一定要放到方框中，因为下面写着“上传到github”，如果不在方框内，会提示“不支持附件，仅支持上传第三方”，搞得一度以为自己设置有问题；</li>
-</ul>
-<h2 id="6-2、网页剪藏问题"><a href="#6-2、网页剪藏问题" class="headerlink" title="6.2、网页剪藏问题"></a>6.2、网页剪藏问题</h2><p>点开左上角的图标</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172157-1587172234746.png" alt="title"></p>
-<p>记得要先注册</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587172463(1)-1587172504793.png" alt="title"></p>
-<p>因为这个账号不是github的账号，而是gitnote的账号，用于分享和收藏用的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%BC%9A%E5%91%98-1587173880450.png" alt="title"></p>
-<h2 id="6-3、各种莫名错误"><a href="#6-3、各种莫名错误" class="headerlink" title="6.3、各种莫名错误"></a>6.3、各种莫名错误</h2><ul>
-<li>网络错误：</li>
-</ul>
-<p>比如上传github图床时，时不时出现的网络错误</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF-1587173935850.jpg" alt="title"></p>
-<ul>
-<li>预览问题：</li>
-</ul>
-<p>上传成功的图片不显示，而只是显示一个title</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/%E4%B8%8D%E6%98%BE%E7%A4%BA-1587174417113.png" alt="title"></p>
-<p>而实际上在github的网页上应该是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175163(1)-1587175194527.png" alt="title"></p>
-<ul>
-<li>文档历史</li>
-</ul>
-<p>不知道什么原因，一直没有文档的编辑历史</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/18/1587175317(1)-1587175333780.jpg" alt="title"></p>
-<p>个人觉得如果你不是程序员，还是用EverNote、为知笔记、有道云笔记吧~~<br>【备注：之所以不提OneNote是因为国内同步总有各种问题，龟速甚至无法同步，所以不提也罢】</p>
-<p>有句话叫“免费的其实是最贵的”！虽然不花钱，可是得花时间。</p>
-<p>当然你有兴趣、有时间，还是可以折腾折腾的，毕竟也是一种乐趣不是？</p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>GitNote帮助文档 ：<span class="exturl" data-url="aHR0cHM6Ly9naXRub3RlYXBwLmNvbS96aC9kb2NzLw==">https://gitnoteapp.com/zh/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p>数据交给你，我放心！开源笔记软件 GitNote 配置及试用：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC84MDMwNTQ2NQ==">https://zhuanlan.zhihu.com/p/80305465<i class="fa fa-external-link-alt"></i></span></p>
-<p>程序员笔记利器gitNote：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoZV9wb3dlci9hcnRpY2xlL2RldGFpbHMvMTAzMTI1MTc1">https://blog.csdn.net/the_power/article/details/103125175<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>git</tag>
-        <tag>GitNote</tag>
-        <tag>Markdown</tag>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -545,255 +797,62 @@
       </tags>
   </entry>
   <entry>
-    <title>R6300v2上安装zerotier（修订）</title>
-    <url>/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写的「 <a href="https://laosu.ml/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/">R6300v2上安装zerotier</a> 」当时一切正常，但是发现在R6300v2重启之后，还是存在问题，估计问题主要是出在防火墙的设置上。</p>
-<p>现在把重做的过程做个记录。</p>
-<h1 id="问题1：PORT-ERROR错误"><a href="#问题1：PORT-ERROR错误" class="headerlink" title="问题1：PORT_ERROR错误"></a>问题1：<code>PORT_ERROR</code>错误</h1><p>putty登录到R6300v2，执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591514832631-1591514832682.png" alt="title"></p>
-<p>显示出现了 <code>PORT_ERROR</code>错误。 </p>
-<p>初步判断是TUN出了问题，执行 <code>ifconfig</code>，确实没发现zt开头的网卡设备</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517016597-1591517016600.png" alt="title"></p>
-<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>重启zerotier</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall zerotier-one</span><br><span class="line">modprobe tun</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
-
-<p>再次执行 <code>ifconfig</code> ，有了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517148128-1591517148131.png" alt="title"></p>
-<p>再看看是否正常？</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/07/1591517408587-1591517408591.png" alt="title"></p>
-<p>显示 <code>OK</code></p>
-<h2 id="可能的原因"><a href="#可能的原因" class="headerlink" title="可能的原因"></a>可能的原因</h2><p>虽然在 <code>/jffs/scripts/nat-start</code> 中有 <code>modprobe tun</code>，但是可能存在加载顺序等问题，所以导致在执行 <code>zerotier-one -d</code> 没成功，所以在 <code>/opt/etc/init.d/S90zerotier-one.sh</code> 新加一段，用于解决 <code>PORT_ERROR</code> 问题。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line"><span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    modprobe tun;</span><br><span class="line">    logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line"><span class="built_in">exit</span> 0;</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-
-<p>完整的 <code>/opt/etc/init.d/S90zerotier-one.sh</code>脚本</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">  start)</span><br><span class="line">       <span class="comment"># 新增开始</span></span><br><span class="line">       <span class="keyword">if</span> lsmod | grep -q tun ;</span><br><span class="line">       <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"mod tun ready"</span> ;</span><br><span class="line">       <span class="keyword">else</span></span><br><span class="line">           modprobe tun;</span><br><span class="line">           logger -t <span class="string">"zerotier"</span> -c <span class="string">"modprobe tun started, zerotier-one should start in one minute"</span> -p user.notice ;</span><br><span class="line">       <span class="built_in">exit</span> 0;</span><br><span class="line">       <span class="keyword">fi</span></span><br><span class="line">       <span class="comment"># 新增结束</span></span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is already running."</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Starting ZeroTier-One"</span> ;</span><br><span class="line">        /opt/bin/zerotier-one -d ;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Started ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Stopping ZeroTier-One"</span>;</span><br><span class="line">        killall zerotier-one</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$(date)</span> Stopped ZeroTier-One"</span> &gt;&gt; /opt/var/<span class="built_in">log</span>/zerotier-one.log</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"ZeroTier-One was not running"</span> ;</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  status)</span><br><span class="line">    <span class="keyword">if</span> ( pidof zerotier-one )</span><br><span class="line">    <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is running."</span></span><br><span class="line">    <span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"ZeroTier-One is NOT running"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: /etc/init.d/zerotier-one &#123;start|stop|status&#125;"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-
-<h1 id="问题2：访问不到内网设备"><a href="#问题2：访问不到内网设备" class="headerlink" title="问题2：访问不到内网设备"></a>问题2：访问不到内网设备</h1><p>将路由加入到 <code>Zerotier</code> 网络是为了在外网访问到家庭局域网中的设备，但是之前的设置只是能够让我们通过zt网地址 <code>192.168.191.10</code> 访问到R6300v2，而不是通过 <code>192.168.0.1</code></p>
-<h2 id="zerotier-com上设置路由"><a href="#zerotier-com上设置路由" class="headerlink" title="zerotier.com上设置路由"></a>zerotier.com上设置路由</h2><p>比如192.168.0.0/24是我的内网网段，后面那个地址是我R6300v2里面zerotier获取的zt地址。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591629176545-1591629176569.png" alt="title"></p>
-<h2 id="增加-iptables-rules"><a href="#增加-iptables-rules" class="headerlink" title="增加 iptables rules"></a>增加 iptables rules</h2><p>先运行</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -v -L -n --line-numbers</span><br></pre></td></tr></table></figure>
-
-<p>先接受zerotier的所有数据</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -I INPUT -i zt+ -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p><strong>【备注：】</strong> all “zt0, zt1, ztzlgf7vul” can be replaced by zt+ for wild matching in iptables only!   所以后面 <code>ztyqb3hz7p</code> 都将写成 <code>zt+</code> ，这使得脚本有了很大的通用性</p>
-<h2 id="重启zerotier"><a href="#重启zerotier" class="headerlink" title="重启zerotier"></a>重启zerotier</h2><p>先停止</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">/opt/etc/init.d/S90zerotier-one.sh stop</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall zerotier-one</span><br></pre></td></tr></table></figure>
-
-<p>再启动</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
-
-<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>测试网络</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ping 192.168.191.10 -c 4</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591623069478-1591623069524.png" alt="title"></p>
-<h2 id="Allow-FTP-SSH-WEBUI"><a href="#Allow-FTP-SSH-WEBUI" class="headerlink" title="Allow FTP, SSH, WEBUI"></a>Allow FTP, SSH, WEBUI</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 192.168.191.10 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination 192.168.0.1</span><br></pre></td></tr></table></figure>
-
-<p>或者替代方案</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><p>修改 <code>/jffs/scripts/firewall-start</code></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="手机测试"><a href="#手机测试" class="headerlink" title="手机测试"></a>手机测试</h2><p>手机上打开zerotier，用4G上网，记得勾选 <code>Use Cellular Data</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630322505-1591630322507.png" alt="title"></p>
-<p>在浏览器中访问192.168.0.1（ 就是我们的路由器R6300v2的局域网地址 ） ，已经可以访问了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/08/1591630477952-1591630477956.png" alt="title"></p>
-<p>但是直接访问192.168.0.199 （ NAS的局域网地址 ）还是不行</p>
-<h2 id="再次修改脚本"><a href="#再次修改脚本" class="headerlink" title="再次修改脚本"></a>再次修改脚本</h2><p>在 <code>/jffs/scripts/firewall-start</code>中增加下面三行就直接可以访问到内网的设备；</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br></pre></td></tr></table></figure>
-
-<p>完整的 <code>/jffs/scripts/firewall-start</code>脚本</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">logger -t <span class="string">"custom iptables"</span> <span class="string">"Enter"</span> -p user.notice</span><br><span class="line"></span><br><span class="line">iptables -C INPUT -i zt+ -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ $? != 0 ]; <span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">  iptables -I INPUT -i zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I PREROUTING -i zt+ -d 192.168.191.0/24 -p tcp -m multiport --dport 21,22,80 -j DNAT --to-destination `nvram get lan_ipaddr`</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 2020.06.09 参考 https://blog.urusai.me/2019/using-zerotier-to-combine-gateways/</span></span><br><span class="line">  iptables -I FORWARD -i zt+ -j ACCEPT</span><br><span class="line">  iptables -I FORWARD -o zt+ -j ACCEPT</span><br><span class="line">  iptables -t nat -I POSTROUTING -o zt+ -j MASQUERADE</span><br><span class="line"></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules added"</span> -p user.notice</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  logger -t <span class="string">"custom iptables"</span> <span class="string">"rules existed skip"</span> -p user.notice</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-
-<p>在手机浏览器中直接访问192.168.0.199 （ NAS的局域网地址 ）</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/09/1591713001408-1591713001465.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>终于达成所愿！但是从测试看，依然有2个问题：</p>
-<ol>
-<li>速度并不稳定，有时快有时慢，取决于相连的两侧能否P2P打洞（NAT穿越）成功，如果不成功还是会走服务器中转，这个就会比较影响速度</li>
-<li>在外网访问，需要启动zerotier客户端，这一点不如frp方便</li>
-</ol>
-<p>但不管怎么说可以和frp互为补充，做个双保险。</p>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>为防止和避免拷贝脚本出错，作为附件提供参考</p>
-<h2 id="jffs-scripts-firewall-start"><a href="#jffs-scripts-firewall-start" class="headerlink" title="/jffs/scripts/firewall-start"></a><code>/jffs/scripts/firewall-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxMzkzMzg1OA==">firewall-start<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="jffs-scripts-nat-start"><a href="#jffs-scripts-nat-start" class="headerlink" title="/jffs/scripts/nat-start"></a><code>/jffs/scripts/nat-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDA1NTM0MA==">nat-start<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="jffs-scripts-post-mount"><a href="#jffs-scripts-post-mount" class="headerlink" title="/jffs/scripts/post-mount"></a><code>/jffs/scripts/post-mount</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDE1ODcxMw==">post-mount<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="jffs-scripts-wan-start"><a href="#jffs-scripts-wan-start" class="headerlink" title="/jffs/scripts/wan-start"></a><code>/jffs/scripts/wan-start</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS8tMTU5MTcxNDMwMzg3NA==">wan-start<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="opt-etc-init-d-S90zerotier-one-sh"><a href="#opt-etc-init-d-S90zerotier-one-sh" class="headerlink" title="/opt/etc/init.d/S90zerotier-one.sh"></a><code>/opt/etc/init.d/S90zerotier-one.sh</code></h2><p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNi8wOS9TOTB6ZXJvdGllci1vbmUtMTU5MTcxNDg3NzYxNy5zaA==">S90zerotier-one.sh<i class="fa fa-external-link-alt"></i></span></p>
+    <title>免费在线流程图Draw.io</title>
+    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
+    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
+<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
+<ul>
+<li>双击开始安装，选“latest”</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>习惯性的限制下资源的使用</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
+<ul>
+<li><p>【卷】不用设置</p>
+</li>
+<li><p>【端口】的设置，只要避免冲突就可以</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
+<p>显示更多网盘</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
+<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
+<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
+<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
+<p>支持的图库非常丰富</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
+<li>免注册</li>
+<li>支持中文</li>
+<li>丰富的内置图库</li>
+<li>多种存储格式</li>
+<li>支持云盘存储</li>
+<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
+</ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>[教程] LEDE旁路由中安装zerotier，内网穿透，访问局域网，极简教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1MjU2MS0xLTEuaHRtbA==">https://koolshare.cn/thread-152561-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>A Guide About Installing ZeroTier on ASUS AC68U Router<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc25iZm9ydW1zLmNvbS90aHJlYWRzL2EtZ3VpZGUtYWJvdXQtaW5zdGFsbGluZy16ZXJvdGllci1vbi1hc3VzLWFjNjh1LXJvdXRlci40MjY0OC8=">https://www.snbforums.com/threads/a-guide-about-installing-zerotier-on-asus-ac68u-router.42648/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>netgear</tag>
-        <tag>路由器</tag>
-        <tag>R6300V2</tag>
-        <tag>zerotier</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PVE安装win10集显直通</title>
-    <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
-    <content><![CDATA[<p><strong>什么是PVE</strong></p>
-<blockquote>
-<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
-</blockquote>
-<p><strong>为什么要显卡直通</strong></p>
-<blockquote>
-<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
-</blockquote>
-<h1 id="安装-PVE"><a href="#安装-PVE" class="headerlink" title="安装 PVE"></a>安装 PVE</h1><h2 id="下载-PVE-ISO-文件"><a href="#下载-PVE-ISO-文件" class="headerlink" title="下载 PVE ISO 文件"></a>下载 PVE ISO 文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="制作启动-U-盘"><a href="#制作启动-U-盘" class="headerlink" title="制作启动 U 盘"></a>制作启动 U 盘</h2><p>用 UltraISO 写入 U 盘；</p>
-<p>【注意】：</p>
-<blockquote>
-<ol>
-<li>可能会存在U盘兼容性问题，但我没遇到，用的 kingstone DT101 G2 的 4G；</li>
-<li>在写入格式时，开始选的 USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为 RAW 后正常；</li>
-</ol>
-</blockquote>
-<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS 中设置 U 盘启动；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
-<p>自检画面，等待几秒</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
-<p>同意协议，点击 “I agree”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
-<p>选择硬盘，点击 “Next”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>注意要选择你要安装 pve 系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
-</blockquote>
-<p>设定国家、时区和键盘，Country 输入 China 即可，点击 “Next”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
-<p>设置管理员 root 账号密码和邮箱</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>密码要牢记</p>
-</blockquote>
-<p>设定主机名，IP，网关，掩码和 DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
-<p>安装中，等待几分钟</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
-<p>安装完提示重启</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>重启前请先移除U盘，或者关闭U盘启动；</p>
-</blockquote>
-<p>启动完成后的控制台，会提示控制台访问URL</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
-<p>【注意】</p>
-<blockquote>
-<p>1、是 https，不是 http；<br>2、因为证书问题，尽量不要用 ie 和 edge 浏览器，chrome 浏览器的效果比较好；</p>
-</blockquote>
-<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL， <span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA2">https://IP:8006<i class="fa fa-external-link-alt"></i></span> ， 语言可以选择中文，对于中文支持不错；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
-<p>进入 PVE UI 的截图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
-<h1 id="虚拟化设置"><a href="#虚拟化设置" class="headerlink" title="虚拟化设置"></a>虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在 BIOS 中要开启跟虚拟化相关的选项，比如VD-T等；</p>
-<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE 的内核开启支持 VD-T 直通的 IOMMU 及相关模块；</p>
-<ul>
-<li>修改/etc/default/grub文件中的内容</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>后面所有的操作都在 WEB GUI 的 shell 中进行</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
-<p>把原内容中：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
-
-<p>改为：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
-<p>执行 <code>update-grub</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
-<p>立即更新 grub</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
-<ul>
-<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
-<p>加上以下代码，每个一行：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
-<ul>
-<li>建立驱动黑名单，依次输入以下命令：</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_intel"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_codec_hdmi"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist i915"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
-<ul>
-<li>GPU 信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
-<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
-<p>把集显指定到 VFIO 模块</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options vfio-pci ids=8086:1616"</span> &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
-<h1 id="创建-Win10-虚拟机"><a href="#创建-Win10-虚拟机" class="headerlink" title="创建 Win10 虚拟机"></a>创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
-<h2 id="下载-virtio-win-的-iso-驱动包；"><a href="#下载-virtio-win-的-iso-驱动包；" class="headerlink" title="下载 virtio-win 的 iso 驱动包；"></a>下载 virtio-win 的 iso 驱动包；</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mZWRvcmFwZW9wbGUub3JnL2dyb3Vwcy92aXJ0L3ZpcnRpby13aW4vZGlyZWN0LWRvd25sb2Fkcy9hcmNoaXZlLXZpcnRpby8=">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/<i class="fa fa-external-link-alt"></i></span></p>
-<p>【注意】：</p>
-<blockquote>
-<p>建议下日期最新的版本</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2024-1590037534614.png" alt="title"></p>
-<h2 id="上传ISO文件"><a href="#上传ISO文件" class="headerlink" title="上传ISO文件"></a>上传ISO文件</h2><p>上述的 iso 包都上传到下图目录中</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2025-1590037579769.png" alt="title"></p>
-<h2 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h2><p>参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2026-1590037624180.png" alt="title"></p>
-<p>【注意】：以下说法不一定准确，需要进一步验证：</p>
-<blockquote>
-<p>1、处理器需要为 HOST 模式；<br>2、Win10 系统要放在 ide0，否则有可能不会启动；<br>3、机器要选 q35，据说 PCI-e 的性能更好；<br>4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；<br>5、显示选默认就可以，但是一定要分显存；<br>6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；<br>7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO<br>8、显卡可以直接下载对应版本的集显驱动；</p>
-</blockquote>
-<h2 id="连接win10虚拟机"><a href="#连接win10虚拟机" class="headerlink" title="连接win10虚拟机"></a>连接win10虚拟机</h2><ul>
-<li>1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2027-1590037678865.png" alt="title"></p>
-<ul>
-<li>2、修改/etc/pve/qemu-server/100.conf（Win10 在 PVE 顺序是 100）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
-<p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
-<p>在第一行插入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>1、据说这一步骤是直通核显 GPU 的关键步骤；<br>2、需要注意的是：host=00:02.0这个 00:02.0 需要与前面 lspic 显示的核显编号对应上；<br>3、PVE 主机的 HDMI 接口接到显示器；<br>4、当 win10 认到双显示器时，改为复制模式；</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>PVE</tag>
-        <tag>显卡直通</tag>
-        <tag>GPU</tag>
+        <tag>群晖</tag>
+        <tag>visio</tag>
+        <tag>draw.io</tag>
+        <tag>云盘</tag>
       </tags>
   </entry>
   <entry>
@@ -983,65 +1042,6 @@
       </tags>
   </entry>
   <entry>
-    <title>免费在线流程图Draw.io</title>
-    <url>/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/</url>
-    <content><![CDATA[<p>除了office外，我们用的比较多的办公软件应该就是visio了，所以除了在线office外，是否也有免费的在线的visio呢？</p>
-<p>在研究了ProcessOn（ <span class="exturl" data-url="aHR0cHM6Ly93d3cucHJvY2Vzc29uLmNvbS8=">https://www.processon.com/<i class="fa fa-external-link-alt"></i></span> ）、Freedgo Design（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWRnby5jb20v">https://www.freedgo.com/<i class="fa fa-external-link-alt"></i></span> ）、bullmind（ <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnVsbG1pbmQuY29tLw==">https://www.bullmind.com/<i class="fa fa-external-link-alt"></i></span> ）、Draw.io（ <span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span> ）等线上绘图软件之后，我发现Draw.io不仅功能强大，没有保存文件数量限制，内置的图库还很丰富，源代码开源能够本地部署，非常厚道，因此成为我们的首选。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088450552-1589088450553.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088530648-1589088530649.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088826340-1589088826343.png" alt="title"></p>
-<ul>
-<li><p>【卷】不用设置</p>
-</li>
-<li><p>【端口】的设置，只要避免冲突就可以</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589088895467-1589088895468.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:8081</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089216157-1589089216160.png" alt="title"></p>
-<p>显示更多网盘</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089708915-1589089708919.png" alt="title"></p>
-<p>如果你不需要网盘，可以在浏览器中输入 http://群晖IP:8081/?offline=1</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089264415-1589089264419.png" alt="title"></p>
-<h1 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h1><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089603439-1589089603442.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089584334-1589089584335.png" alt="title"></p>
-<h1 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h1><p>来画个网络图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089844093-1589089844095.png" alt="title"></p>
-<p>支持的图库非常丰富</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/10/1589089939950-1589089939952.png" alt="title"></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
-<li>免注册</li>
-<li>支持中文</li>
-<li>丰富的内置图库</li>
-<li>多种存储格式</li>
-<li>支持云盘存储</li>
-<li>有独立的桌面客户端，支持Windows、Mac OS、Linux</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Draw.io官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGlhZ3JhbXMubmV0Lw==">https://app.diagrams.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Draw.io代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pncmFwaA==">https://github.com/jgraph<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>visio</tag>
-        <tag>draw.io</tag>
-        <tag>云盘</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在GCP上安装Zerotier的Moon服务器</title>
     <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
@@ -1111,42 +1111,6 @@
         <tag>GCP</tag>
         <tag>Zerotier</tag>
         <tag>Moon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>Netlify</tag>
       </tags>
   </entry>
   <entry>
@@ -1347,6 +1311,42 @@
       </tags>
   </entry>
   <entry>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
+<ul>
+<li>Github原生域名：wbsu2003.github.io</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.ml</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
+<ul>
+<li>Netlify原生域名：laosu.netlify.app</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.tk</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>Netlify</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在群晖上实现在线Office文档编辑</title>
     <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
@@ -1490,73 +1490,6 @@
       </tags>
   </entry>
   <entry>
-    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
-    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
-    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
-<blockquote>
-<ol>
-<li>综合篇</li>
-<li>管理篇</li>
-<li>播放篇</li>
-<li>流媒体服务（本文）</li>
-<li>查询篇</li>
-</ol>
-</blockquote>
-<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
-<p>网上别人总结的一些优缺点：</p>
-<blockquote>
-<ul>
-<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
-</li>
-<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
-</li>
-<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
-</li>
-<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
-</li>
-</ul>
-</blockquote>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
-<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
-<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
-<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
-<p>界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
-<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
-<ul>
-<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
-<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
-</ul>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
-<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
-<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
-<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Emby</tag>
-        <tag>Plex</tag>
-        <tag>流媒体服务器</tag>
-        <tag>Jellyfin</tag>
-        <tag>威动影音</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（3）：播放篇</title>
     <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%883%EF%BC%89%EF%BC%9A%E6%92%AD%E6%94%BE%E7%AF%87/</url>
     <content><![CDATA[<p><strong>什么是Samba</strong></p>
@@ -1644,6 +1577,183 @@
         <tag>MX Player</tag>
         <tag>小白文件管理器</tag>
         <tag>samba</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>家庭多媒体中心（4）：流媒体服务器篇</title>
+    <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/</url>
+    <content><![CDATA[<p>如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。</p>
+<blockquote>
+<ol>
+<li>综合篇</li>
+<li>管理篇</li>
+<li>播放篇</li>
+<li>流媒体服务（本文）</li>
+<li>查询篇</li>
+</ol>
+</blockquote>
+<p>群晖上搭建媒体服务器的选择主要有自带的Video Station、Plex、Emby、Jellyfin等，除了Web方式外，还支持手机、TV等多种客户端方式。</p>
+<p>网上别人总结的一些优缺点：</p>
+<blockquote>
+<ul>
+<li><p>DS Video：群晖自带的Video Station支持的格式没有其他软件的多。比如群晖没有取得 DTS 音效格式的授权，导致很多格影片格式不能看。</p>
+</li>
+<li><p>Plex：1）专业版收费。2）免费版不支持硬件解码。3）不支持蓝光原盘。</p>
+</li>
+<li><p>Emby：Emby从3.6开始闭源后，越来越多的设置需要使用收费了。当然也包括硬件解码。</p>
+</li>
+<li><p>Jellyfin：Jellyfin和Emby是类似的，（原emby的部分社区开发者fork了emby 3.5.2的存储库，新建了jellyfin项目），目前所有功能都是免费的，而且支持硬件解码。</p>
+</li>
+</ul>
+</blockquote>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29t">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
+<h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p>界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<ul>
+<li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
+<li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[movie]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.200</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">custom_domains</span> = movie.abc.ml</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
+<p>[NAS] 如何安裝 FFmpeg 套件，解決 DS Video 電影格式不支援的問題<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hbWJlcjEwMDIucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMzQ2NDY4ODEtJTVCbmFzJTVELSVFNSVBNiU4MiVFNCVCRCU5NSVFNSVBRSU4OSVFOCVBMyU5RC1mZm1wZWctJUU1JUE1JTk3JUU0JUJCJUI2JUVGJUJDJThDJUU4JUE3JUEzJUU2JUIxJUJBLWRzLXZpZGVvLSVFOSU5QiVCQiVFNSVCRCVCMSVFNiVBMCVCQw==">https://amber1002.pixnet.net/blog/post/34646881-%5Bnas%5D-%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%9D-ffmpeg-%E5%A5%97%E4%BB%B6%EF%BC%8C%E8%A7%A3%E6%B1%BA-ds-video-%E9%9B%BB%E5%BD%B1%E6%A0%BC<i class="fa fa-external-link-alt"></i></span></p>
+<p>推荐-群晖第三方套件如何安装-第三方套件推荐等<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pLmlwYW5zaXIuY29tLzEyMDkuaHRtbA==">https://i.ipansir.com/1209.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS搭建Plex影音中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83NTk2YjllNTM4OTk=">https://www.jianshu.com/p/7596b9e53899<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾笔记 篇二：群晖+Kodi+emby一步一步打造家庭多媒体中心<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FvbzZ6dms2Lw==">https://post.smzdm.com/p/aoo6zvk6/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖使用docker安装&amp;使用EMBY全流程教程-长文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlbGUuY29tLzIwMjAvMDIvMTUvZW1ieS8=">https://sleele.com/2020/02/15/emby/<i class="fa fa-external-link-alt"></i></span></p>
+<p>手把手教你搭建群晖系统下影音软件Jellyfin<br>地址：<span class="exturl" data-url="aHR0cDovL3pob25nY2Uuc2luYS5jb20uY24vYXJ0aWNsZS92aWV3LzM3Mjg1Lw==">http://zhongce.sina.com.cn/article/view/37285/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>Plex</tag>
+        <tag>流媒体服务器</tag>
+        <tag>Jellyfin</tag>
+        <tag>威动影音</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>将 Draw.io 集成到 VS Code</title>
+    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
+    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
+<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
+<li>点击 <code>install</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
+<ul>
+<li>点击 <code>打开Visual Studio Code</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
+<ul>
+<li>点击 <code>安装</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
+<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
+<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
+<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
+<ul>
+<li>进入【扩展设置】</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
+<ul>
+<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
+</li>
+<li><p>支持更换主题</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
+<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
+<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
+<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
+</ul>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>draw.io</tag>
+        <tag>VS Code</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
       </tags>
   </entry>
   <entry>
@@ -1749,73 +1859,187 @@
       </categories>
       <tags>
         <tag>Kodi</tag>
+        <tag>MariaDB</tag>
         <tag>NAS</tag>
         <tag>KodiWebPortal</tag>
-        <tag>MariaDB</tag>
       </tags>
   </entry>
   <entry>
-    <title>将 Draw.io 集成到 VS Code</title>
-    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
-    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
-<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
-<li>点击 <code>install</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
-<ul>
-<li>点击 <code>打开Visual Studio Code</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
-<ul>
-<li>点击 <code>安装</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
-<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
-<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
-<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
-<ul>
-<li>进入【扩展设置】</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
-<ul>
-<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
-</li>
-<li><p>支持更换主题</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
-<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
-<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
-<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
-</ul>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+    <title>把网页打包成桌面应用程序</title>
+    <url>/2020/06/06/%E6%8A%8A%E7%BD%91%E9%A1%B5%E6%89%93%E5%8C%85%E6%88%90%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在的应用一般都需要多端，Android 端、iOS 端、PC 端、Web 端，PC 端还包括了3个不同的操作系统平台，所以要想降低开发成本和开发难度，就需要寻找成熟的跨平台方案。Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造跨平台的桌面应用。软件开发者只需一次编写程序，即可在 Windows、Linux、Mac 等平台运行，不仅大大降低了程序员的工作量，也大大降低了开发难度（相比QT），使公司的产品可以快速迭代。Android端和iOS端作为两种不同的移动端技术，可以考虑用Flutter，暂且不表，今天我们只讨论Electron。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Electron 是由 Github 开发，用 HTML，CSS 和 JavaScript 来构建跨平台桌面应用程序的一个开源库。通过将 Chromium 和 Node.js 合并到同一个运行时环境中，并将其打包为 Mac ， Windows 和 Linux 系统下的应用。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/05/components-1591367317059.png" alt="title"><br>（ 图片来自于：<span class="exturl" data-url="aHR0cHM6Ly9qbG9yZC51cy9lc3NlbnRpYWwtZWxlY3Ryb24v">https://jlord.us/essential-electron/<i class="fa fa-external-link-alt"></i></span> ）</p>
+<p>如上图所示，Electron 结合了 Chromium、Node.js 和用于调用操作系统本地功能的 API。</p>
+<h1 id="Electron开发环境配置"><a href="#Electron开发环境配置" class="headerlink" title="Electron开发环境配置"></a>Electron开发环境配置</h1><h2 id="安装最新版本的Node-js"><a href="#安装最新版本的Node-js" class="headerlink" title="安装最新版本的Node.js"></a>安装最新版本的Node.js</h2><p>按官方的建议，推荐您安装最新的 <code>长期支持版本</code> 或者 <code>当前发行版本</code>，去 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Rvd25sb2FkLw==">nodejs.org<i class="fa fa-external-link-alt"></i></span> 下载相应平台的安装包即可。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591074602452-1591074602460.png" alt="title"></p>
+<p>安装完成后执行如下命令确保正常展示版本号即可。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="用-npm-安装-electron"><a href="#用-npm-安装-electron" class="headerlink" title="用 npm 安装 electron"></a>用 npm 安装 electron</h2><p>一般网上建议全局安装，但是局部安装可以让你在不同的 app 中使用不同的 Electron 版本，所以根据个人需要，在「<a href="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/">自己编译ntfstool</a>」 一文中，我们强调过，国内用户建议先更换 electron 源，不然有可能会比较慢。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://cdn.npm.taobao.org/dist/electron/</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全局安装 需要的话追加上 --registry='http://registry.npm.taobao.org' 使用淘宝npm源安装</span></span><br><span class="line">sudo npm install electron -g --allow-root -unsafe-perm=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows使用下面语句 64位32位机器都是--win32</span></span><br><span class="line">npm install electron -g --platform=win32</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">electron -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="局部安装"><a href="#局部安装" class="headerlink" title="局部安装"></a>局部安装</h3><p>建议新建个文件夹，然后进入到该文件夹进行操作</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 局部安装 需要的话追加上 --registry='http://registry.npm.taobao.org' 使用淘宝npm源安装</span></span><br><span class="line">npm install electron --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows使用下面语句 64位32位机器都是--win32</span></span><br><span class="line">npm install electron --save-dev --platform=win32</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">node_modules/.bin/electron -v</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>为你的新Electron应用创建一个新的空文件夹。 打开你的命令行工具，然后从该文件夹运行</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>会根据你的输入生成 <code>package.json</code> 文件，也可以自己新建。</p>
+<p>你的项目目录/<br>└── package.json</p>
+<p>新建 main.js、index.html 三个文件（注：其中的 index.html 是你的网页首页）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你的项目目录&#x2F;</span><br><span class="line">├── package.json</span><br><span class="line">├── main.js</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
+
+<p>如果是打算局部安装，继续运行下面的命令：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron</span><br></pre></td></tr></table></figure>
+
+<p>你的项目目录/<br>├── node_modules<br>├── package-lock.json<br>├── package.json<br>├── main.js<br>└── index.html</p>
+<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>如果你是自建，可以在 package.json 中添加如下内容</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>    : <span class="string">"app-name"</span>,</span><br><span class="line">  <span class="attr">"version"</span> : <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"main"</span>    : <span class="string">"main.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><p>package.json 中 <code>&quot;main&quot;</code> 指定的入口点文件，即程序主文件，可根据需要修改</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建主窗口，设置了宽高等信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">1000</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      <span class="comment">// node集成，即是否注入node能力</span></span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载主页面内容 index.html</span></span><br><span class="line">  mainWindow.loadFile(<span class="string">'index.html'</span>)</span><br><span class="line"></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
+
+<h2 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此title会覆盖package.json中设置的name，作为应用顶部名称 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>my-app<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello World!</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="启动app"><a href="#启动app" class="headerlink" title="启动app"></a>启动app</h1><h2 id="全局安装时"><a href="#全局安装时" class="headerlink" title="全局安装时"></a>全局安装时</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 进入到包含 package.json 文件的目录，别忽略了后面的点</span><br><span class="line">electron .</span><br></pre></td></tr></table></figure>
+
+<h2 id="局部安装时"><a href="#局部安装时" class="headerlink" title="局部安装时"></a>局部安装时</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 进入到包含 package.json 文件的目录</span><br><span class="line">npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line"># 或者直接使用脚本启动，别忽略了后面的点</span><br><span class="line">node_modules/.bin/electron .</span><br></pre></td></tr></table></figure>
+
+<p>正常启动的话会出现如下界面代表成功，页面内容显示的就是index.html定义的页面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591430690284-1591430690335.png" alt="title"></p>
+<h1 id="打包网站"><a href="#打包网站" class="headerlink" title="打包网站"></a>打包网站</h1><h2 id="修改-main-js"><a href="#修改-main-js" class="headerlink" title="修改 main.js"></a>修改 main.js</h2><p>让我们来试试把 draw.io 打包成桌面 app，只要将 <code>main.js</code> 中的 <code>mainWindow.loadFile(&#39;index.html&#39;)</code> 改成 <code>mainWindow.loadURL(&#39;https://app.diagrams.net/&#39;)</code>就行。</p>
+<p>完整的 main.js 如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建主窗口，设置了宽高等信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">1000</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      <span class="comment">// node集成，即是否注入node能力</span></span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载主页面内容 index.html</span></span><br><span class="line">  <span class="comment">// 改为使用loadURL加载 draw.io 的url地址</span></span><br><span class="line">  mainWindow.loadURL(<span class="string">'https://app.diagrams.net/'</span>)</span><br><span class="line"></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
+
+<h2 id="重新启动app"><a href="#重新启动app" class="headerlink" title="重新启动app"></a>重新启动app</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 全局安装</span><br><span class="line">electron .</span><br><span class="line"></span><br><span class="line"># 局部安装</span><br><span class="line">node_modules/.bin/electron .</span><br><span class="line"># or</span><br><span class="line">npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<p>第一次运行可能有点慢，毕竟是国外网站</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591431030553-1591431030560.png" alt="title"></p>
+<h1 id="程序打包发布"><a href="#程序打包发布" class="headerlink" title="程序打包发布"></a>程序打包发布</h1><h2 id="安装electron-builder"><a href="#安装electron-builder" class="headerlink" title="安装electron-builder"></a>安装electron-builder</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron-builder</span><br></pre></td></tr></table></figure>
+
+<h2 id="开始打包"><a href="#开始打包" class="headerlink" title="开始打包"></a>开始打包</h2><p>以Mac为例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在Mac环境下执行</span><br><span class="line">node_modules&#x2F;.bin&#x2F;electron-builder -m dmg</span><br></pre></td></tr></table></figure>
+
+<p>打包好的程序在当前目录dist文件夹下</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591433294803-1591433294822.png" alt="title"></p>
+<p>如果你担心源代码泄漏，可以用 asar 来进行简单的加密，更复杂的还是要靠对代码进行加密混淆才行。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>Electron 文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxlY3Ryb25qcy5vcmcvZG9jcw==">https://www.electronjs.org/docs<i class="fa fa-external-link-alt"></i></span></p>
+<p>Electron入门指南 | 一篇文章看懂Electron封装网页并打包应用<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9xaWk0MDQubWUvMjAxOS8wNy8xMC9lbGVjdHJvbi5odG1s">https://qii404.me/2019/07/10/electron.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>【最简单】Electron 怎么将网页打包成桌面应用（web前端页面怎么生成exe可执行文件）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E3Mjc5MTE0MzgvYXJ0aWNsZS9kZXRhaWxzLzcwODM0NDY3">https://blog.csdn.net/a727911438/article/details/70834467<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>draw.io</tag>
-        <tag>VS Code</tag>
+        <tag>Github</tag>
+        <tag>Electron</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百兆升千兆家庭组网方案</title>
+    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
+<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
+<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
+<blockquote>
+<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
+</blockquote>
+<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
+<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
+<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
+<p>当然你不差钱，也可以直接上八类线。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
+<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
+<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
+<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
+<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
+<blockquote>
+<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
+</blockquote>
+<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
+<blockquote>
+<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
+</blockquote>
+<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
+<blockquote>
+<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
+<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
+<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
+<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
+<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>Mesh路由</tag>
+        <tag>wifi6</tag>
+        <tag>光猫</tag>
+        <tag>WDS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百兆升千兆家庭组网方案（续1）</title>
+    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
+<p>等了两天收到了，送了两根六类线</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
+<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
+<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
+<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
+<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
+<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
+<ul>
+<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
+<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
+<li>线路上有大功率的电器</li>
+</ul>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>WDS</tag>
       </tags>
   </entry>
   <entry>
@@ -1905,227 +2129,64 @@
       </tags>
   </entry>
   <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
+    <title>群晖app访问遇到的端口问题</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
 <blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
+</blockquote>
+<p><strong>什么是 黑群</strong></p>
+<blockquote>
+<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
+</blockquote>
+<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
+<blockquote>
+<ol>
+<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
+</li>
+<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
+</li>
+<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
+</li>
+<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
+</li>
+<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
+</li>
+</ol>
+</blockquote>
+<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
+<p>登录成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
+<p>同样的设置，群晖管家、DS file却一直登录失败</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
+<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
+<p>大功告成！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
+<blockquote>
+<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
+</blockquote>
+<p>参考文档</p>
+<blockquote>
+<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
+        <tag>frp</tag>
         <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百兆升千兆家庭组网方案</title>
-    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
-<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
-<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
-<blockquote>
-<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
-</blockquote>
-<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
-<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
-<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
-<p>当然你不差钱，也可以直接上八类线。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
-<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
-<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
-<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
-<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
-<blockquote>
-<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
-</blockquote>
-<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
-<blockquote>
-<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
-</blockquote>
-<blockquote>
-<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
-</blockquote>
-<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
-<blockquote>
-<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
-<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
-<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
-<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
-<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>Mesh路由</tag>
-        <tag>wifi6</tag>
-        <tag>光猫</tag>
-        <tag>WDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>把网页打包成桌面应用程序</title>
-    <url>/2020/06/06/%E6%8A%8A%E7%BD%91%E9%A1%B5%E6%89%93%E5%8C%85%E6%88%90%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>现在的应用一般都需要多端，Android 端、iOS 端、PC 端、Web 端，PC 端还包括了3个不同的操作系统平台，所以要想降低开发成本和开发难度，就需要寻找成熟的跨平台方案。Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造跨平台的桌面应用。软件开发者只需一次编写程序，即可在 Windows、Linux、Mac 等平台运行，不仅大大降低了程序员的工作量，也大大降低了开发难度（相比QT），使公司的产品可以快速迭代。Android端和iOS端作为两种不同的移动端技术，可以考虑用Flutter，暂且不表，今天我们只讨论Electron。</p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Electron 是由 Github 开发，用 HTML，CSS 和 JavaScript 来构建跨平台桌面应用程序的一个开源库。通过将 Chromium 和 Node.js 合并到同一个运行时环境中，并将其打包为 Mac ， Windows 和 Linux 系统下的应用。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/05/components-1591367317059.png" alt="title"><br>（ 图片来自于：<span class="exturl" data-url="aHR0cHM6Ly9qbG9yZC51cy9lc3NlbnRpYWwtZWxlY3Ryb24v">https://jlord.us/essential-electron/<i class="fa fa-external-link-alt"></i></span> ）</p>
-<p>如上图所示，Electron 结合了 Chromium、Node.js 和用于调用操作系统本地功能的 API。</p>
-<h1 id="Electron开发环境配置"><a href="#Electron开发环境配置" class="headerlink" title="Electron开发环境配置"></a>Electron开发环境配置</h1><h2 id="安装最新版本的Node-js"><a href="#安装最新版本的Node-js" class="headerlink" title="安装最新版本的Node.js"></a>安装最新版本的Node.js</h2><p>按官方的建议，推荐您安装最新的 <code>长期支持版本</code> 或者 <code>当前发行版本</code>，去 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Rvd25sb2FkLw==">nodejs.org<i class="fa fa-external-link-alt"></i></span> 下载相应平台的安装包即可。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/02/1591074602452-1591074602460.png" alt="title"></p>
-<p>安装完成后执行如下命令确保正常展示版本号即可。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="用-npm-安装-electron"><a href="#用-npm-安装-electron" class="headerlink" title="用 npm 安装 electron"></a>用 npm 安装 electron</h2><p>一般网上建议全局安装，但是局部安装可以让你在不同的 app 中使用不同的 Electron 版本，所以根据个人需要，在「<a href="https://laosu.ml/2020/06/02/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91ntfstool/">自己编译ntfstool</a>」 一文中，我们强调过，国内用户建议先更换 electron 源，不然有可能会比较慢。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://cdn.npm.taobao.org/dist/electron/</span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> electron_mirror https://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure>
-
-<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 全局安装 需要的话追加上 --registry='http://registry.npm.taobao.org' 使用淘宝npm源安装</span></span><br><span class="line">sudo npm install electron -g --allow-root -unsafe-perm=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows使用下面语句 64位32位机器都是--win32</span></span><br><span class="line">npm install electron -g --platform=win32</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">electron -v</span><br></pre></td></tr></table></figure>
-
-<h3 id="局部安装"><a href="#局部安装" class="headerlink" title="局部安装"></a>局部安装</h3><p>建议新建个文件夹，然后进入到该文件夹进行操作</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 局部安装 需要的话追加上 --registry='http://registry.npm.taobao.org' 使用淘宝npm源安装</span></span><br><span class="line">npm install electron --save-dev</span><br><span class="line"></span><br><span class="line"><span class="comment"># Windows使用下面语句 64位32位机器都是--win32</span></span><br><span class="line">npm install electron --save-dev --platform=win32</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证安装</span></span><br><span class="line">node_modules/.bin/electron -v</span><br></pre></td></tr></table></figure>
-
-<h1 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a>文件准备</h1><p>为你的新Electron应用创建一个新的空文件夹。 打开你的命令行工具，然后从该文件夹运行</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
-
-<p>会根据你的输入生成 <code>package.json</code> 文件，也可以自己新建。</p>
-<p>你的项目目录/<br>└── package.json</p>
-<p>新建 main.js、index.html 三个文件（注：其中的 index.html 是你的网页首页）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你的项目目录&#x2F;</span><br><span class="line">├── package.json</span><br><span class="line">├── main.js</span><br><span class="line">└── index.html</span><br></pre></td></tr></table></figure>
-
-<p>如果是打算局部安装，继续运行下面的命令：</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron</span><br></pre></td></tr></table></figure>
-
-<p>你的项目目录/<br>├── node_modules<br>├── package-lock.json<br>├── package.json<br>├── main.js<br>└── index.html</p>
-<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>如果你是自建，可以在 package.json 中添加如下内容</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>    : <span class="string">"app-name"</span>,</span><br><span class="line">  <span class="attr">"version"</span> : <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"main"</span>    : <span class="string">"main.js"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><p>package.json 中 <code>&quot;main&quot;</code> 指定的入口点文件，即程序主文件，可根据需要修改</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建主窗口，设置了宽高等信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">1000</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      <span class="comment">// node集成，即是否注入node能力</span></span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载主页面内容 index.html</span></span><br><span class="line">  mainWindow.loadFile(<span class="string">'index.html'</span>)</span><br><span class="line"></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
-
-<h2 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 此title会覆盖package.json中设置的name，作为应用顶部名称 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>my-app<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello World!</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="启动app"><a href="#启动app" class="headerlink" title="启动app"></a>启动app</h1><h2 id="全局安装时"><a href="#全局安装时" class="headerlink" title="全局安装时"></a>全局安装时</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 进入到包含 package.json 文件的目录，别忽略了后面的点</span><br><span class="line">electron .</span><br></pre></td></tr></table></figure>
-
-<h2 id="局部安装时"><a href="#局部安装时" class="headerlink" title="局部安装时"></a>局部安装时</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 进入到包含 package.json 文件的目录</span><br><span class="line">npm <span class="built_in">start</span></span><br><span class="line"></span><br><span class="line"># 或者直接使用脚本启动，别忽略了后面的点</span><br><span class="line">node_modules/.bin/electron .</span><br></pre></td></tr></table></figure>
-
-<p>正常启动的话会出现如下界面代表成功，页面内容显示的就是index.html定义的页面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591430690284-1591430690335.png" alt="title"></p>
-<h1 id="打包网站"><a href="#打包网站" class="headerlink" title="打包网站"></a>打包网站</h1><h2 id="修改-main-js"><a href="#修改-main-js" class="headerlink" title="修改 main.js"></a>修改 main.js</h2><p>让我们来试试把 draw.io 打包成桌面 app，只要将 <code>main.js</code> 中的 <code>mainWindow.loadFile(&#39;index.html&#39;)</code> 改成 <code>mainWindow.loadURL(&#39;https://app.diagrams.net/&#39;)</code>就行。</p>
-<p>完整的 main.js 如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建主窗口，设置了宽高等信息</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">1000</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      <span class="comment">// node集成，即是否注入node能力</span></span><br><span class="line">      nodeIntegration: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载主页面内容 index.html</span></span><br><span class="line">  <span class="comment">// 改为使用loadURL加载 draw.io 的url地址</span></span><br><span class="line">  mainWindow.loadURL(<span class="string">'https://app.diagrams.net/'</span>)</span><br><span class="line"></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br></pre></td></tr></table></figure>
-
-<h2 id="重新启动app"><a href="#重新启动app" class="headerlink" title="重新启动app"></a>重新启动app</h2><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line"># 全局安装</span><br><span class="line">electron .</span><br><span class="line"></span><br><span class="line"># 局部安装</span><br><span class="line">node_modules/.bin/electron .</span><br><span class="line"># or</span><br><span class="line">npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
-
-<p>第一次运行可能有点慢，毕竟是国外网站</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591431030553-1591431030560.png" alt="title"></p>
-<h1 id="程序打包发布"><a href="#程序打包发布" class="headerlink" title="程序打包发布"></a>程序打包发布</h1><h2 id="安装electron-builder"><a href="#安装electron-builder" class="headerlink" title="安装electron-builder"></a>安装electron-builder</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install --save-dev electron-builder</span><br></pre></td></tr></table></figure>
-
-<h2 id="开始打包"><a href="#开始打包" class="headerlink" title="开始打包"></a>开始打包</h2><p>以Mac为例</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 在Mac环境下执行</span><br><span class="line">node_modules&#x2F;.bin&#x2F;electron-builder -m dmg</span><br></pre></td></tr></table></figure>
-
-<p>打包好的程序在当前目录dist文件夹下</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/06/1591433294803-1591433294822.png" alt="title"></p>
-<p>如果你担心源代码泄漏，可以用 asar 来进行简单的加密，更复杂的还是要靠对代码进行加密混淆才行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Electron 文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZWxlY3Ryb25qcy5vcmcvZG9jcw==">https://www.electronjs.org/docs<i class="fa fa-external-link-alt"></i></span></p>
-<p>Electron入门指南 | 一篇文章看懂Electron封装网页并打包应用<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9xaWk0MDQubWUvMjAxOS8wNy8xMC9lbGVjdHJvbi5odG1s">https://qii404.me/2019/07/10/electron.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>【最简单】Electron 怎么将网页打包成桌面应用（web前端页面怎么生成exe可执行文件）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2E3Mjc5MTE0MzgvYXJ0aWNsZS9kZXRhaWxzLzcwODM0NDY3">https://blog.csdn.net/a727911438/article/details/70834467<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Github</tag>
-        <tag>Electron</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百兆升千兆家庭组网方案（续1）</title>
-    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
-<p>等了两天收到了，送了两根六类线</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
-<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
-<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
-<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
-<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
-<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
-<ul>
-<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
-<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
-<li>线路上有大功率的电器</li>
-</ul>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>WDS</tag>
+        <tag>VPS</tag>
+        <tag>NAS</tag>
+        <tag>黑群</tag>
+        <tag>QuickConnect</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
       </tags>
   </entry>
   <entry>
@@ -2228,67 +2289,6 @@
         <tag>风扇</tag>
         <tag>R6300v2</tag>
         <tag>USB风扇</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>群晖app访问遇到的端口问题</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是 NAS</strong></p>
-<blockquote>
-<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
-</blockquote>
-<p><strong>什么是 黑群</strong></p>
-<blockquote>
-<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
-</blockquote>
-<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
-<blockquote>
-<ol>
-<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
-</li>
-<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
-</li>
-<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
-</li>
-<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
-</li>
-<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
-</li>
-</ol>
-</blockquote>
-<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
-<p>登录成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
-<p>同样的设置，群晖管家、DS file却一直登录失败</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
-<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
-<p>大功告成！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
-<blockquote>
-<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
-</blockquote>
-<p>参考文档</p>
-<blockquote>
-<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>frp</tag>
-        <tag>群晖</tag>
-        <tag>VPS</tag>
-        <tag>NAS</tag>
-        <tag>黑群</tag>
-        <tag>QuickConnect</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
       </tags>
   </entry>
   <entry>
@@ -2518,6 +2518,45 @@
       </tags>
   </entry>
   <entry>
+    <title>蜗牛星际C单的网路唤醒（续）</title>
+    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
+    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
+<p><strong>什么是网络唤醒</strong></p>
+<blockquote>
+<ul>
+<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
+<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
+<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
+<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
+</ul>
+</blockquote>
+<p>考虑到 LAN 模式下是OK的，先看看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
+<p>点击边上的魔术棒，能看到广播地址。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
+<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
+<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>第二步：在 WolOn app 中 进行设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
+<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
+<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
+<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>蜗牛星际</tag>
+        <tag>WOL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>蜗牛星际C单的网路唤醒</title>
     <url>/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/</url>
     <content><![CDATA[<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><blockquote>
@@ -2553,45 +2592,6 @@
 <p>先埋个坑，等有闲心了再来研究，反正有群晖管家APP也就够了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>群辉相关 篇二：实现群辉Nas的外网远程唤醒，以手机外网唤醒群晖Nas为例<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EzZ3Zrd3Y1Lw==">https://post.smzdm.com/p/a3gvkwv5/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>蜗牛星际</tag>
-        <tag>WOL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蜗牛星际C单的网路唤醒（续）</title>
-    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
-    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
-<p><strong>什么是网络唤醒</strong></p>
-<blockquote>
-<ul>
-<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
-<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
-<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
-<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
-</ul>
-</blockquote>
-<p>考虑到 LAN 模式下是OK的，先看看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
-<p>点击边上的魔术棒，能看到广播地址。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
-<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
-<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>第二步：在 WolOn app 中 进行设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
-<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
-<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
-<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -2727,6 +2727,34 @@
       </tags>
   </entry>
   <entry>
+    <title>遇到“Error spawn failed”错误</title>
+    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+
+<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
+
+<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
+<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>deploy_git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>适合小团队的Kanboard项目管理软件</title>
     <url>/2020/05/10/%E9%80%82%E5%90%88%E5%B0%8F%E5%9B%A2%E9%98%9F%E7%9A%84Kanboard%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
     <content><![CDATA[<p><strong>什么是kanban？</strong></p>
@@ -2782,34 +2810,6 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>遇到“Error spawn failed”错误</title>
-    <url>/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/</url>
-    <content><![CDATA[<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
-
-<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
-
-<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
-<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>deploy_git</tag>
       </tags>
   </entry>
 </search>
