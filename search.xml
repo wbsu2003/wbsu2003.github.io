@@ -539,54 +539,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
-<blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
-</blockquote>
-<p><strong>frp是什么？</strong></p>
-<blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
-</blockquote>
-<p><strong>WebDAV是什么？</strong></p>
-<blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
-</blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>frp基础设置示例详解</title>
     <url>/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
@@ -682,9 +634,166 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>kcp协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人专属的音乐库</title>
+    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
+    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
+<a id="more"></a>
+
+<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
+<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
+<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
+<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
+<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
+<p>群晖上可以通过Docker安装，界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
+<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
+<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
+<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
+<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
+<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
+<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
+<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
+<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>subsonic</tag>
+        <tag>airsonic</tag>
+        <tag>plex</tag>
+        <tag>Emby</tag>
+        <tag>jellyfin</tag>
+        <tag>madsonic</tag>
+        <tag>libresonic</tag>
+        <tag>Spotify</tag>
+        <tag>Ampache</tag>
+        <tag>SoundCloud</tag>
+        <tag>Google Play Music</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>RaiDrive</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo-theme-next主题</title>
+    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是NexT</strong></p>
+<blockquote>
+<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
+<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
+<blockquote>
+<ul>
+<li>去掉了顶部的banner</li>
+<li>对Markdown的引用显示的更友好</li>
+<li>没有全部居中显示</li>
+</ul>
+</blockquote>
+<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
+<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
+</blockquote>
+<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
+<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
+<p>回到<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
+<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
+<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
+<p>在编译发布一次</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
+<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
+<p>需要创建相应的文件夹，比如标签：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+
+<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>NexT</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -747,51 +856,86 @@
       </tags>
   </entry>
   <entry>
-    <title>个人专属的音乐库</title>
-    <url>/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/</url>
-    <content><![CDATA[<p>虽然国内已经有了虾米音乐、QQ音乐、网易云音乐等，国外也有Spotify、SoundCloud和Google Play Music等数字音乐服务，但是对于那些拥有大量本地音乐文件的用户，怎么才能不浪费这些资源呢？</p>
-<a id="more"></a>
+    <title>在Coding上部署Hexo并实现和Github双线访问</title>
+    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
+<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
+<li>首先是<strong>注册团队</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<ul>
+<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<ul>
+<li>接下来就可以新建项目了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
+<li>点右上角的头像，选择<strong>个人设置</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<ul>
+<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+</ul>
+<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
+<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
-<p>之前我们专门讨论过家庭多媒体中心，这些流媒体服务软件，包括Plex、Emby、Jellyfin等，尤其是Plex不仅有出色的视频播放，而且在音乐方面也同样出色，除此之外还有Ampache，但今天我们要讨论的是sonic系列。</p>
-<h1 id="Subsonic"><a href="#Subsonic" class="headerlink" title="Subsonic"></a>Subsonic</h1><p>Subsonic由挪威人Sindre Mehus采用Java语言编写而成。它具有一个强大的自动转换格式引擎，可通过将其即时转换为MP3来流式传输各种有损和无损格式。提供28种语言（包括中文），30种不同主题以及高度可配置的用户界面。</p>
-<p>群晖上安装可以通过导入第三方源后在【套件中心】安装，也可以通过Docker安装。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/QQ%E6%88%AA%E5%9B%BE20181014181418-1588561466060.png" alt="title"></p>
-<p>通过购买Subsonic Premium版本，您可以使用视频流功能，无广告体验以及流式传输到Chromecast和Sonos设备。</p>
-<h1 id="Madsonic"><a href="#Madsonic" class="headerlink" title="Madsonic"></a>Madsonic</h1><p>Madsonic是具有自动点唱机功能的基于Web的媒体库和媒体流媒体。Madsonic基于Java技术，可在大多数平台上运行，包括Windows，MacOS，OSX，Linux和Unix变体。</p>
-<p>群晖上可以通过Docker安装，界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/Madsonic-Linux-Media-Server-1588562333873.png" alt="title"></p>
-<h1 id="Libresonic"><a href="#Libresonic" class="headerlink" title="Libresonic"></a>Libresonic</h1><p>这个基于Web的个人音乐服务器可以轻松处理大量收藏。此外Libresonic几乎可以与您使用的所有文件格式兼容。但是这个开源项目已经停止更新了。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/LibreSonic-Music-Server-Software-1588563025909.jpg" alt="title"></p>
-<h1 id="Airsonic"><a href="#Airsonic" class="headerlink" title="Airsonic"></a>Airsonic</h1><p>Airsonic，一个自由和开源社区驱动的媒体服务器，虽然是Subsonic和Libresonic的分支，但是AirSonic仍然是免费和开源的，而不是Subsonic和Madsonic的闭源模型。界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/screenshot-1588563012761.png" alt="title"></p>
-<h1 id="选择的依据"><a href="#选择的依据" class="headerlink" title="选择的依据"></a>选择的依据</h1><p>一个主要因素是开放源代码与封闭源代码，我个人倾向于开源的Libresonic或Airsonic，考虑到持久的更新和维护，最终我选择了Airsonic。</p>
-<h1 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h1><p>除了在Web上直接播放音乐外，Airsonic也支持用客户端来播放，因为Airsonic提供和Subsonic相同的API，所以也意味着所有Subsonic应用程序都应该与Airsonic兼容，起码理论上是这样的。</p>
-<p>在这个页面（ <span class="exturl" data-url="aHR0cHM6Ly9haXJzb25pYy5naXRodWIuaW8vZG9jcy9hcHBzLw==">https://airsonic.github.io/docs/apps/<i class="fa fa-external-link-alt"></i></span> ），详细列举了各种应用，基本上涵盖了所有的主流系统平台，总归有适合你的。</p>
-<p>最后给个Android手机上Subsonic Music Streamer的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/04/nexusae0_225-1588572892955.png" alt="title"></p>
+<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
+<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<ul>
+<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<ul>
+<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<ul>
+<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
+</ul>
+<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
+<li>从右上角的<strong>设置</strong>进入</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<ul>
+<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p>然后再次申请，等一会儿就会显示成功了！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
+<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Subsonic官网<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvaW5kZXguanNw">http://www.subsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Subsonic：在浏览器内欣赏本地音乐<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2FlcmZhLmNvbS9zdWJzb25pYw==">https://www.waerfa.com/subsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>Madsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZXRhLm1hZHNvbmljLm9yZy9wYWdlcy9pbmRleC5qc3A=">https://beta.madsonic.org/pages/index.jsp<i class="fa fa-external-link-alt"></i></span></p>
-<p>Airsonic官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FpcnNvbmljL2FpcnNvbmlj">https://github.com/airsonic/airsonic<i class="fa fa-external-link-alt"></i></span></p>
-<p>【阿文菌】airsonic，用docker搭建属于自己的在线音乐平台。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qdW53ZW4uYmlkOjU4MDAvYXdlbi8xOS5odG1s">http://www.junwen.bid:5800/awen/19.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
+<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>subsonic</tag>
-        <tag>airsonic</tag>
-        <tag>plex</tag>
-        <tag>Emby</tag>
-        <tag>jellyfin</tag>
-        <tag>madsonic</tag>
-        <tag>libresonic</tag>
-        <tag>Spotify</tag>
-        <tag>Ampache</tag>
-        <tag>SoundCloud</tag>
-        <tag>Google Play Music</tag>
+        <tag>Hexo</tag>
+        <tag>Coding</tag>
+        <tag>blog</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -891,83 +1035,37 @@
         <category>各种折腾</category>
       </categories>
       <tags>
+        <tag>群晖</tag>
         <tag>frp</tag>
         <tag>docker</tag>
-        <tag>群晖</tag>
         <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
-    <title>在Coding上部署Hexo并实现和Github双线访问</title>
-    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
-    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
-<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
-<li>首先是<strong>注册团队</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
 <ul>
-<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+<li>Github原生域名：wbsu2003.github.io</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
 <ul>
-<li>接下来就可以新建项目了</li>
+<li>自定义域名：laosu.ml</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
-<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
-<li>点右上角的头像，选择<strong>个人设置</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
 <ul>
-<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+<li>Netlify原生域名：laosu.netlify.app</li>
 </ul>
-<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
-<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
-<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
-<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
 <ul>
-<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+<li>自定义域名：laosu.tk</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
-<ul>
-<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
-<ul>
-<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
-</ul>
-<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
-<li>从右上角的<strong>设置</strong>进入</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
-<ul>
-<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
-<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
-<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
-<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
-<p>然后再次申请，等一会儿就会显示成功了！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
-<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
-<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
-<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
-<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -975,9 +1073,8 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
-        <tag>Coding</tag>
         <tag>blog</tag>
-        <tag>Github</tag>
+        <tag>Netlify</tag>
       </tags>
   </entry>
   <entry>
@@ -1127,42 +1224,6 @@
       </tags>
   </entry>
   <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>Netlify</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在群晖上实现在线Office文档编辑</title>
     <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
     <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
@@ -1212,79 +1273,13 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>群晖</tag>
+        <tag>docker</tag>
         <tag>onlyoffice</tag>
         <tag>nextcloud</tag>
         <tag>seafile</tag>
         <tag>owncloud</tag>
         <tag>kodexplorer</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>复旦大学的藤月开了</title>
-    <url>/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/</url>
-    <content><![CDATA[<p>自从去年复旦大学把藤月种下去，我就一直挺好奇的，到底开花的时候会是什么样呢？</p>
-<h1 id="五一节前"><a href="#五一节前" class="headerlink" title="五一节前"></a>五一节前</h1><p>当时路过还是一个一个的花骨朵。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4074-1588740269573.jpeg" alt="title"></p>
-<p>但也有的已经含苞待放了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4073-1588740436193.jpeg" alt="黄色的"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4076-1588740455075.jpeg" alt="红色的"></p>
-<h1 id="今天（5月6日）"><a href="#今天（5月6日）" class="headerlink" title="今天（5月6日）"></a>今天（5月6日）</h1><p>今天路过时发现，一小半都已经开放了，而且姹紫嫣红，分外好看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4082-1588740697074.jpeg" alt="title"></p>
-<p>估计等过几天都开了，会更好看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4071-1588740745690.jpeg" alt="title"></p>
-<p>大游行？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4072-1588740768724.jpeg" alt="title"></p>
-<p>甜梦？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4075-1588740908887.jpeg" alt="title"></p>
-<p>紫袍玉带？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4077-1588740948926.jpeg" alt="title"></p>
-<p>藤冰山？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4078-1588740989713.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4079-1588741007305.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4080-1588741031040.jpeg" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4081-1588741064243.jpeg" alt="title"></p>
-<p>我的心？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4083-1588741092150.jpeg" alt="title"></p>
-<p>玛格丽特王妃？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4084-1588741118387.jpeg" alt="title"></p>
-<p>自由精神？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4085-1588741131409.jpeg" alt="title"></p>
-<p>埃格兰泰恩？塞西尔布朗纳？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4086-1588741145227.jpeg" alt="title"></p>
-<p>麦金？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4087-1588741163758.jpeg" alt="title"></p>
-<p>粉色达芬奇？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4088-1588741187607.jpeg" alt="title"></p>
-<p>沃勒顿老庄园？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4089-1588741222125.jpeg" alt="title"></p>
-<p>欢迎?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4090-1588741242501.jpeg" alt="title"></p>
-<p>粉团蔷薇?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4091-1588741276861.jpeg" alt="title"></p>
-<p>权杖之岛?</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4092-1588741297897.jpeg" alt="title"></p>
-<p>克莱尔奥斯汀？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4093-1588741309981.jpeg" alt="title"></p>
-<p>藤冰山？粉妆楼？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4094-1588741330994.jpeg" alt="title"></p>
-<p>抓破美人脸？</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4095-1588741354003.jpeg" alt="title"></p>
-<p>先是用形色app对着花儿一顿识别，可这人工智能有时候也掉链子，所有的结果都是月季，只能自己对着图片研究，也不知道到底有没有哪一张是蒙对了的，但起码有一点，我已经绝对打败了AI。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/%E4%B8%8B%E8%BD%BD-1588771007288.jpg" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>藤本月季网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGVuZ2Jlbnl1ZWppLmNvbS8=">https://www.tengbenyueji.com/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>美好生活</category>
-      </categories>
-      <tags>
-        <tag>藤本月季</tag>
-        <tag>复旦大学</tag>
-        <tag>国帆路</tag>
-        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -1426,6 +1421,72 @@
         <tag>Kodi</tag>
         <tag>MediaElch</tag>
         <tag>tinyMediaManager</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>复旦大学的藤月开了</title>
+    <url>/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/</url>
+    <content><![CDATA[<p>自从去年复旦大学把藤月种下去，我就一直挺好奇的，到底开花的时候会是什么样呢？</p>
+<h1 id="五一节前"><a href="#五一节前" class="headerlink" title="五一节前"></a>五一节前</h1><p>当时路过还是一个一个的花骨朵。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4074-1588740269573.jpeg" alt="title"></p>
+<p>但也有的已经含苞待放了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4073-1588740436193.jpeg" alt="黄色的"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4076-1588740455075.jpeg" alt="红色的"></p>
+<h1 id="今天（5月6日）"><a href="#今天（5月6日）" class="headerlink" title="今天（5月6日）"></a>今天（5月6日）</h1><p>今天路过时发现，一小半都已经开放了，而且姹紫嫣红，分外好看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4082-1588740697074.jpeg" alt="title"></p>
+<p>估计等过几天都开了，会更好看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4071-1588740745690.jpeg" alt="title"></p>
+<p>大游行？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4072-1588740768724.jpeg" alt="title"></p>
+<p>甜梦？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4075-1588740908887.jpeg" alt="title"></p>
+<p>紫袍玉带？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4077-1588740948926.jpeg" alt="title"></p>
+<p>藤冰山？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4078-1588740989713.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4079-1588741007305.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4080-1588741031040.jpeg" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4081-1588741064243.jpeg" alt="title"></p>
+<p>我的心？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4083-1588741092150.jpeg" alt="title"></p>
+<p>玛格丽特王妃？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4084-1588741118387.jpeg" alt="title"></p>
+<p>自由精神？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4085-1588741131409.jpeg" alt="title"></p>
+<p>埃格兰泰恩？塞西尔布朗纳？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4086-1588741145227.jpeg" alt="title"></p>
+<p>麦金？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4087-1588741163758.jpeg" alt="title"></p>
+<p>粉色达芬奇？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4088-1588741187607.jpeg" alt="title"></p>
+<p>沃勒顿老庄园？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4089-1588741222125.jpeg" alt="title"></p>
+<p>欢迎?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4090-1588741242501.jpeg" alt="title"></p>
+<p>粉团蔷薇?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4091-1588741276861.jpeg" alt="title"></p>
+<p>权杖之岛?</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4092-1588741297897.jpeg" alt="title"></p>
+<p>克莱尔奥斯汀？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4093-1588741309981.jpeg" alt="title"></p>
+<p>藤冰山？粉妆楼？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4094-1588741330994.jpeg" alt="title"></p>
+<p>抓破美人脸？</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/WechatIMG4095-1588741354003.jpeg" alt="title"></p>
+<p>先是用形色app对着花儿一顿识别，可这人工智能有时候也掉链子，所有的结果都是月季，只能自己对着图片研究，也不知道到底有没有哪一张是蒙对了的，但起码有一点，我已经绝对打败了AI。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/06/%E4%B8%8B%E8%BD%BD-1588771007288.jpg" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>藤本月季网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGVuZ2Jlbnl1ZWppLmNvbS8=">https://www.tengbenyueji.com/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>美好生活</category>
+      </categories>
+      <tags>
+        <tag>藤本月季</tag>
+        <tag>复旦大学</tag>
+        <tag>国帆路</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
@@ -1694,6 +1755,52 @@
       </tags>
   </entry>
   <entry>
+    <title>手动安装WordPress</title>
+    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
+    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
+<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
+<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
+<p><strong>安装组件</strong></p>
+<ul>
+<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
+<ul>
+<li>进入Web Satation修改http后端服务器</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
+<ul>
+<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
+</li>
+<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
+</li>
+<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
+</li>
+<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
+</li>
+<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>MariaDB</tag>
+        <tag>WordPress</tag>
+        <tag>PHP</tag>
+        <tag>Nginx</tag>
+        <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>将 Draw.io 集成到 VS Code</title>
     <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
     <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
@@ -1755,113 +1862,6 @@
       <tags>
         <tag>draw.io</tag>
         <tag>VS Code</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>手动安装WordPress</title>
-    <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
-    <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-chrome-1587372276790.png" alt="title"></p>
-<p>换浏览器，用Safari<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/405-not-allowed-error-nginx-safari-1587372451916.png" alt="title"></p>
-<p>算了，没力气折腾，还是把Nginx换成Apache试试吧</p>
-<p><strong>安装组件</strong></p>
-<ul>
-<li>之前已经安装过Web Station、PHP5.6、PHP7.2、MariaDB 5、phpMyAdmin，所以主要再装个Apache2.4即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165729-1587373072541.jpg" alt="title"></p>
-<ul>
-<li>进入Web Satation修改http后端服务器</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-165544-1587373005801.jpg" alt="title"></p>
-<ul>
-<li><p>对PHP7.2进行设置<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170053-1587373282769.jpg" alt="title"></p>
-</li>
-<li><p>安装PHP7.2必要的组件，安装curl，gd，mysqli，openssl，下图中直接打钩就行；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-170401-1587373473543.jpg" alt="title"></p>
-</li>
-<li><p>在phpMyAdmin，用root账户登录，新建WordPress的数据库</p>
-</li>
-<li><p>将wp-config-sample.php复制一份，重命名为wp-config.php，按下图进行修改：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3869-1587373734970.png" alt="title"></p>
-</li>
-<li><p>访问<span class="exturl" data-url="aHR0cDovL0lQL3dvcmRwcmVzc++8jOaMieatpemqpOaTjeS9nOWNs+WPr++8mw==">http://IP/wordpress，按步骤操作即可；<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-</ul>
-<p>到这里，已经可以在局域网中通过IP使用了，可以根据自己的喜好设置主题等；<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3870-1587373941561.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9raW5zdGEuY29tL2Jsb2cvNDA1LW1ldGhvZC1ub3QtYWxsb3dlZC1lcnJvci8=">How to Fix the 405 Method Not Allowed Error on Your WordPress Site<i class="fa fa-external-link-alt"></i></span><br>2、<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE4LzEwLzA2LzU0LyVFNyVCRSVBNCVFNiU5OSU5NmRzbS02LTIlRUYlQkMlOEMlRTYlODklOEIlRTUlOEElQTglRTUlQUUlODklRTglQTMlODV3b3JkcHJlc3MlRUYlQkMlOENhcGFjaGUtMi00cGhwLTctMC8=">群晖DSM 6.2，手动安装WordPress，Apache 2.4+PHP 7.0<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>MariaDB</tag>
-        <tag>WordPress</tag>
-        <tag>PHP</tag>
-        <tag>Nginx</tag>
-        <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo-theme-next主题</title>
-    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是NexT</strong></p>
-<blockquote>
-<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
-<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
-<blockquote>
-<ul>
-<li>去掉了顶部的banner</li>
-<li>对Markdown的引用显示的更友好</li>
-<li>没有全部居中显示</li>
-</ul>
-</blockquote>
-<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
-</blockquote>
-<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
-<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
-<p>回到<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
-<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
-<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
-<p>在编译发布一次</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
-<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
-<p>需要创建相应的文件夹，比如标签：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
@@ -1948,6 +1948,105 @@
         <tag>calibre-webserver</tag>
         <tag>my-calibre-webserver-docker</tag>
         <tag>OPDS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百兆升千兆家庭组网方案（续1）</title>
+    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
+<p>等了两天收到了，送了两根六类线</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
+<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
+<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
+<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
+<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
+<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
+<ul>
+<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
+<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
+<li>线路上有大功率的电器</li>
+</ul>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>WDS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>百兆升千兆家庭组网方案</title>
+    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
+<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
+<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
+<blockquote>
+<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
+</blockquote>
+<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
+<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
+<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
+<p>当然你不差钱，也可以直接上八类线。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
+<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
+<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
+<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
+<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
+<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
+<blockquote>
+<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
+</blockquote>
+<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
+<blockquote>
+<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
+</blockquote>
+<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
+<blockquote>
+<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
+<p>（图片来自： 淘宝 ）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
+<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
+<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
+<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
+<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>千兆</tag>
+        <tag>电力猫</tag>
+        <tag>WDS</tag>
+        <tag>Mesh路由</tag>
+        <tag>wifi6</tag>
+        <tag>光猫</tag>
       </tags>
   </entry>
   <entry>
@@ -2097,27 +2196,28 @@
       </tags>
   </entry>
   <entry>
-    <title>百兆升千兆家庭组网方案（续1）</title>
-    <url>/2020/05/21/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88%EF%BC%88%E7%BB%AD1%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h1><p><a href="https://laosu.ml/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">上一篇</a> 中讲到买了一对 Netgear PLP1200S 有线版，因为网上介绍 Netgear PLP1200 采用了美国高通 QCA7500+AR1450 芯片组，有线端口能到到千兆，当时我的预期是能达到百兆就行，毕竟原来埋的网线也就这样了。</p>
-<p>等了两天收到了，送了两根六类线</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/3941590041289_.pic-1590041349685.jpg" alt="title"></p>
-<p>网上只搜到一本 PLP1200 的说明书，从外观看基本一样，估计也就 iphone6 和 iphone 6S 的区别吧？所以带不带 S 个人觉得功能应该是一样的。</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzL21hc3Rlci9teW5vdGUvMjAyMC8wNS8yMS8yMDItMTE1NjYtMDFwb3dlcmxpbmVfMTIwMF91c2VyX21hbnVhbDEzSmFuMjAxNS0xNTkwMDQzMjg0NzkxLnBkZg==">PLP1200操作手册（英文版）<i class="fa fa-external-link-alt"></i></span></p>
-<p>手册中比较关键的就是下面这张图，第三个灯红色，连接速度 &lt; 50Mbps，只有绿色才会 &gt; 80Mbps。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/1590043441077-1590043441080.png" alt="title"></p>
-<p>测试时，电力猫都是直接插墙上的插座，而不是通过接线板，这样可以最大限度的避免干扰。</p>
-<p>但从我的测试情况看，只有在一个房间的时候第三个灯才会是绿色的，其他时候都是红色，红灯时实测的速度在 20Mbps 左右。</p>
-<p>不停的排列组合，但是无论插在哪个墙插，距离只要超过3米，只要不是一个房间，基本上就是红灯，所以测了两天还是跟老板商量给退了。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>从网友关于电力猫的使用看，估计速率上不去的原因可能是这几条：</p>
-<ul>
-<li>跟家庭布线有很大关系，可能是不同的房间过了空气开关</li>
-<li>可能使用了带有滤波、防浪涌功能的插座，比如防雷插座</li>
-<li>线路上有大功率的电器</li>
-</ul>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>下回再试试WDS，带宽应该问题不大，就看能否长时间稳定运行。</p>
+    <title>给路由器加个风扇</title>
+    <url>/2020/06/22/%E7%BB%99%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8A%A0%E4%B8%AA%E9%A3%8E%E6%89%87/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>家里的老路由日常温度一般都在80°朝上，据说温度太高会导致网络卡顿、断线，但是说实话平时没啥感觉，可能主要是因为没打游戏，实时性要求不高吧。但是不管怎么样，高温容易导致老化，为了让它能寿命长一点，撸了一个 12cm 的 USB 静音风扇，毕竟马上就要天热了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828575232-1592828575274.png" alt="title"></p>
+<p>之所以选 USB 风扇，是因为路由器本身有2个 USB 接口，3.0 的接了 U 盘用于跑 Entware ，侧面还有个 2.0 的空闲着。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592834034877-1592834034879.png" alt="title"></p>
+<h2 id="吹风还是吸气？"><a href="#吹风还是吸气？" class="headerlink" title="吹风还是吸气？"></a>吹风还是吸气？</h2><p>网上有人说吹风效果好，有人说吸气效果好，这还真是个问题，买之前根本没想那么多，以为装上有风就行了。但是这难不倒我们爱折腾的人，毕竟实践才是检验真理的唯一办法。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592832489943-1592832489947.png" alt="title"></p>
+<h2 id="吹风测试"><a href="#吹风测试" class="headerlink" title="吹风测试"></a>吹风测试</h2><p>先按吹气的方式，为了保证效果，模拟了实际使用的情景，用自锁式尼龙扎带做了固定。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592831703491-1592831703494.png" alt="title"></p>
+<p>光记着拍照忘记截图了，直接说结论，最终温度稳定在65°左右。</p>
+<h2 id="吸气测试"><a href="#吸气测试" class="headerlink" title="吸气测试"></a>吸气测试</h2><p>把扎带剪了重新安装，这回只记得截图忘记拍照了，补了一张已经把铁网装上了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/6-1592835788703.png" alt="title"></p>
+<p>不到2分钟，温度降到了70°</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828592120-1592828592123.png" alt="title"></p>
+<p>再过了2分多钟，温度降到了60°</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828626786-1592828626789.png" alt="title"></p>
+<p>最终基本稳定在55°左右</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828695079-1592828695082.png" alt="title"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>不管吸气或者吹风，估计都和实际空间、接触面等等很多因素有关，很难说哪种更有效，但是在我这，显然是吸气的效果更好一些，相比吹风温度低了将近10°，而且个人感觉吸气的话可能路由器里的积灰会少一点。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>理想很丰满，现实很骨感—腾达/TP-LINK千兆电力猫使用手记<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F4MDh3d3oyLw==">https://post.smzdm.com/p/ax08wwz2/<i class="fa fa-external-link-alt"></i></span></p>
+<p>R6300V2 路由器无痛改装风扇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9haXNrLm1lL2FkZC1jcHUtZmFuLW9uLXI2MzAwdjItcm91dGVyLw==">https://aisk.me/add-cpu-fan-on-r6300v2-router/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -2125,74 +2225,8 @@
       </categories>
       <tags>
         <tag>路由器</tag>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>WDS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>百兆升千兆家庭组网方案</title>
-    <url>/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
-<h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
-<h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
-<blockquote>
-<p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
-</blockquote>
-<h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
-<p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
-<p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
-<p>当然你不差钱，也可以直接上八类线。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
-<p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
-<p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
-<h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
-<h1 id="无线解决方案"><a href="#无线解决方案" class="headerlink" title="无线解决方案"></a>无线解决方案</h1><h2 id="使用无线桥接"><a href="#使用无线桥接" class="headerlink" title="使用无线桥接"></a>使用无线桥接</h2><p>最先想到的办法就是WDS桥接，一般来说桥接最好是同一品牌的，但从个人经验看，无线网桥接并不稳定，丢包比较多，这是最大的问题。</p>
-<blockquote>
-<p><strong>什么是WDS？</strong><br>WDS是无线分布式系统（Wireless Distribution System）的英文缩写，無線分散系統指的是一個能讓無線區域網路中的存取點透過無線方式互相連結的一套系統。它可以讓多個存取點無需傳統的有線骨幹連接需求即可延伸一個無線網路。相較於其他解決方案，WDS值得注意的優點是它在各個存取點傳遞中仍能儲存客戶端的MAC位址，每個存取點可以為三個角色之一：主要、中繼或是遠端基地台： 【維基百科】</p>
-</blockquote>
-<h2 id="使用Mesh路由器"><a href="#使用Mesh路由器" class="headerlink" title="使用Mesh路由器"></a>使用Mesh路由器</h2><p>很早就开始关注，但是价格太喜人了，尤其是WIFI 6 Mesh路由，所有产品中个人觉得<strong>华为AX3 Pro WiFi 6+</strong> 最值得关注，关注的理由只有一个，那就是便宜，但是目前还没看到用这款产品Mesh组网的案例，也许是因为上市时间短的缘故吧。</p>
-<blockquote>
-<p><strong>什么是WIFI 6？</strong><br>WIFI 6 其实就是 802.11ax，也就是 802.11ac 的升级版标准。WiFi 6 又被称为 AX WiFi 或<br> 802.11ax WiFi。</p>
-</blockquote>
-<blockquote>
-<p><strong>什么是Mesh路由器？</strong><br>Mesh路由器除了具有传统的无线路由器的网关、中继功能外，还具有支持 Mesh 网络互连的路由功能，可以通过无线多跳通信，以低得多的发射功率获得同样的无线覆盖范围。 客户端 Mesh 结构是由<br> Mesh 用户端之间互连构成一个小型对等通信网络，在用户设备间提供点到点的服务。</p>
-</blockquote>
-<h2 id="使用电力猫"><a href="#使用电力猫" class="headerlink" title="使用电力猫"></a>使用电力猫</h2><p>这个玩意一直没用过，据说容易受大电器设备的干扰，看着看着手一滑在咸鱼上买了一对 Netgear PLP1200S 有线版，等到手了测测看效果如何。</p>
-<blockquote>
-<p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
-<p>（图片来自： 淘宝 ）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>
-<li>有线永远比无线稳定，没办法的情况下，无线也是一种选择。</li>
-</ul>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>也许是性价比最高的家用路由无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMubmdhLmNuL3JlYWQucGhwP3RpZD0xMzAxNTI0MiZhbXA7cmFuZD03MzI=">https://bbs.nga.cn/read.php?tid=13015242&amp;rand=732<i class="fa fa-external-link-alt"></i></span></p>
-<p>可能是最便宜的WiFi无缝漫游方案<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FrbXJkZDdrLw==">https://post.smzdm.com/p/akmrdd7k/<i class="fa fa-external-link-alt"></i></span></p>
-<p>华为路由AX3 Pro评测：Wi-Fi 6+加持 300元价位最超值<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub3RlYm9vay5wY29ubGluZS5jb20uY24vMTMzOS8xMzM5OTUwNC5odG1s">https://notebook.pconline.com.cn/1339/13399504.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>WiFi6 路由器推荐汇总<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMDY3MzE4NjQ=">https://zhuanlan.zhihu.com/p/106731864<i class="fa fa-external-link-alt"></i></span></p>
-<p>地上最强电力猫——NETGEAR 网件 PLW1010 千兆电力猫 使用体验 兼谈家庭组网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzQzNjQwOS8=">https://post.smzdm.com/p/436409/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>千兆</tag>
-        <tag>电力猫</tag>
-        <tag>WDS</tag>
-        <tag>Mesh路由</tag>
-        <tag>wifi6</tag>
-        <tag>光猫</tag>
+        <tag>R6300v2</tag>
+        <tag>USB风扇</tag>
       </tags>
   </entry>
   <entry>
@@ -2246,8 +2280,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>VPS</tag>
         <tag>NAS</tag>
         <tag>黑群</tag>
@@ -2257,37 +2291,32 @@
       </tags>
   </entry>
   <entry>
-    <title>给路由器加个风扇</title>
-    <url>/2020/06/22/%E7%BB%99%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8A%A0%E4%B8%AA%E9%A3%8E%E6%89%87/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>家里的老路由日常温度一般都在80°朝上，据说温度太高会导致网络卡顿、断线，但是说实话平时没啥感觉，可能主要是因为没打游戏，实时性要求不高吧。但是不管怎么样，高温容易导致老化，为了让它能寿命长一点，撸了一个 12cm 的 USB 静音风扇，毕竟马上就要天热了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828575232-1592828575274.png" alt="title"></p>
-<p>之所以选 USB 风扇，是因为路由器本身有2个 USB 接口，3.0 的接了 U 盘用于跑 Entware ，侧面还有个 2.0 的空闲着。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592834034877-1592834034879.png" alt="title"></p>
-<h2 id="吹风还是吸气？"><a href="#吹风还是吸气？" class="headerlink" title="吹风还是吸气？"></a>吹风还是吸气？</h2><p>网上有人说吹风效果好，有人说吸气效果好，这还真是个问题，买之前根本没想那么多，以为装上有风就行了。但是这难不倒我们爱折腾的人，毕竟实践才是检验真理的唯一办法。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592832489943-1592832489947.png" alt="title"></p>
-<h2 id="吹风测试"><a href="#吹风测试" class="headerlink" title="吹风测试"></a>吹风测试</h2><p>先按吹气的方式，为了保证效果，模拟了实际使用的情景，用自锁式尼龙扎带做了固定。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592831703491-1592831703494.png" alt="title"></p>
-<p>光记着拍照忘记截图了，直接说结论，最终温度稳定在65°左右。</p>
-<h2 id="吸气测试"><a href="#吸气测试" class="headerlink" title="吸气测试"></a>吸气测试</h2><p>把扎带剪了重新安装，这回只记得截图忘记拍照了，补了一张已经把铁网装上了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/6-1592835788703.png" alt="title"></p>
-<p>不到2分钟，温度降到了70°</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828592120-1592828592123.png" alt="title"></p>
-<p>再过了2分多钟，温度降到了60°</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828626786-1592828626789.png" alt="title"></p>
-<p>最终基本稳定在55°左右</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828695079-1592828695082.png" alt="title"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>不管吸气或者吹风，估计都和实际空间、接触面等等很多因素有关，很难说那种更有效，但是在我这，显然是吸气的效果更好一些，相比吹风温度低了将近10°，而且个人感觉吸气的话可能路由器里的积灰会少一点。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>R6300V2 路由器无痛改装风扇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9haXNrLm1lL2FkZC1jcHUtZmFuLW9uLXI2MzAwdjItcm91dGVyLw==">https://aisk.me/add-cpu-fan-on-r6300v2-router/<i class="fa fa-external-link-alt"></i></span></p>
+    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
+    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
+    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
+<p>其中在局域网一台正常：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
+<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
+<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
+<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
+<p>参考文档：</p>
+<blockquote>
+<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
+<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
+<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>路由器</tag>
-        <tag>R6300v2</tag>
-        <tag>USB风扇</tag>
+        <tag>群晖</tag>
+        <tag>frp</tag>
+        <tag>NAS</tag>
+        <tag>ngrok</tag>
+        <tag>ZeroTier</tag>
+        <tag>GUI</tag>
       </tags>
   </entry>
   <entry>
@@ -2325,40 +2354,103 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>群晖</tag>
+        <tag>docker</tag>
         <tag>homeassistant</tag>
         <tag>HA</tag>
         <tag>智能家居</tag>
       </tags>
   </entry>
   <entry>
-    <title>群晖上的Zerotier GUI一直显示offline的原因</title>
-    <url>/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/</url>
-    <content><![CDATA[<p>两台黑群晖，因为共用了frps，所以为了避免端口冲突，一台保留了端口：5000，另一台启用了端口：5002。</p>
-<p>其中在局域网一台正常：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150636-1587366421033.jpg" alt="title"></p>
-<p>之所以强调局域网是因为在用域名访问时，也同样出现了offline</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-150235-1587366203005.jpg" alt="title"></p>
-<p>用ssh登录后发现可以正常使用<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/WechatIMG3868-1587366673982.png" alt="title"></p>
-<p>说明我们下载的包是没问题的，有问题的只是WEB GUI而已。</p>
-<p>参考文档：</p>
+    <title>自带过滤功能的Hexo首页生成器插件</title>
+    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
 <blockquote>
-<p>1、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plcm90aWVyL1plcm9UaWVyTkFTL2lzc3Vlcy8xOA==">Zerotier GUI on Synology shows offline #18<i class="fa fa-external-link-alt"></i></span></p>
+<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
 </blockquote>
-<p>文档中有一段描述，可以证明其只能连接端口：5000<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/20/Jietu20200420-151837-1587367148388.jpg" alt="title"></p>
-<p>而在使用frp后，所有域名是不带端口的，所以才会导致局域网正常而使用frp后又显示offline的原因。</p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
+<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>苏玉云作品</category>
+      </categories>
+      <tags>
+        <tag>服装设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蜗牛星际C单的网路唤醒（续）</title>
+    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
+    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
+<p><strong>什么是网络唤醒</strong></p>
+<blockquote>
+<ul>
+<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
+<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
+<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
+<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
+</ul>
+</blockquote>
+<p>考虑到 LAN 模式下是OK的，先看看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
+<p>点击边上的魔术棒，能看到广播地址。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
+<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
+<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>第二步：在 WolOn app 中 进行设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
+<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
+<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
+<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
         <tag>群晖</tag>
-        <tag>NAS</tag>
-        <tag>ngrok</tag>
-        <tag>ZeroTier</tag>
-        <tag>GUI</tag>
+        <tag>蜗牛星际</tag>
+        <tag>WOL</tag>
       </tags>
   </entry>
   <entry>
@@ -2464,59 +2556,6 @@
       </tags>
   </entry>
   <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>苏玉云作品</category>
-      </categories>
-      <tags>
-        <tag>服装设计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自带过滤功能的Hexo首页生成器插件</title>
-    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
-<blockquote>
-<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
-</blockquote>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>蜗牛星际C单的网路唤醒</title>
     <url>/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/</url>
     <content><![CDATA[<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><blockquote>
@@ -2552,45 +2591,6 @@
 <p>先埋个坑，等有闲心了再来研究，反正有群晖管家APP也就够了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>群辉相关 篇二：实现群辉Nas的外网远程唤醒，以手机外网唤醒群晖Nas为例<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EzZ3Zrd3Y1Lw==">https://post.smzdm.com/p/a3gvkwv5/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>蜗牛星际</tag>
-        <tag>WOL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蜗牛星际C单的网路唤醒（续）</title>
-    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
-    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
-<p><strong>什么是网络唤醒</strong></p>
-<blockquote>
-<ul>
-<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
-<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
-<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
-<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
-</ul>
-</blockquote>
-<p>考虑到 LAN 模式下是OK的，先看看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
-<p>点击边上的魔术棒，能看到广播地址。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
-<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
-<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>第二步：在 WolOn app 中 进行设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
-<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
-<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
-<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
