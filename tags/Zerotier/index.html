@@ -562,11 +562,7 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 
 </body>
 </html>
-t = 'nick,mail,link';
-    guest = guest.split(',').filter(item => {
-      return GUEST.includes(item);
-    });
-    new Valine({
+{
       el         : '#valine-comments',
       verify     : false,
       notify     : false,
@@ -579,6 +575,16 @@ t = 'nick,mail,link';
       visitor    : false,
       lang       : '' || 'zh-cn',
       path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+n.pathname,
       recordIP   : false,
       serverURLs : ''
     });
