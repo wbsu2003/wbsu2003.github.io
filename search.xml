@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hexo-theme-next主题</title>
+    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
+    <content><![CDATA[<p><strong>什么是NexT</strong></p>
+<blockquote>
+<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
+<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
+<blockquote>
+<ul>
+<li>去掉了顶部的banner</li>
+<li>对Markdown的引用显示的更友好</li>
+<li>没有全部居中显示</li>
+</ul>
+</blockquote>
+<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
+<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
+</blockquote>
+<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
+<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
+<p>回到<code>blog</code>目录，cmd模式下运行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
+<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
+<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
+<p>在编译发布一次</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
+<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
+<p>需要创建相应的文件夹，比如标签：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+
+<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p><strong>参考文档</strong></p>
+<blockquote>
+<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>NexT</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GitNote的简单使用记录</title>
     <url>/2020/04/29/GitNote%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p><strong>什么是GitHub</strong></p>
@@ -91,6 +152,160 @@
         <tag>GitNote</tag>
         <tag>Markdown</tag>
         <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PVE安装win10集显直通</title>
+    <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
+    <content><![CDATA[<p><strong>什么是PVE</strong></p>
+<blockquote>
+<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
+</blockquote>
+<p><strong>为什么要显卡直通</strong></p>
+<blockquote>
+<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
+</blockquote>
+<h1 id="安装-PVE"><a href="#安装-PVE" class="headerlink" title="安装 PVE"></a>安装 PVE</h1><h2 id="下载-PVE-ISO-文件"><a href="#下载-PVE-ISO-文件" class="headerlink" title="下载 PVE ISO 文件"></a>下载 PVE ISO 文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="制作启动-U-盘"><a href="#制作启动-U-盘" class="headerlink" title="制作启动 U 盘"></a>制作启动 U 盘</h2><p>用 UltraISO 写入 U 盘；</p>
+<p>【注意】：</p>
+<blockquote>
+<ol>
+<li>可能会存在U盘兼容性问题，但我没遇到，用的 kingstone DT101 G2 的 4G；</li>
+<li>在写入格式时，开始选的 USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为 RAW 后正常；</li>
+</ol>
+</blockquote>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS 中设置 U 盘启动；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
+<p>自检画面，等待几秒</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
+<p>同意协议，点击 “I agree”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
+<p>选择硬盘，点击 “Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>注意要选择你要安装 pve 系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
+</blockquote>
+<p>设定国家、时区和键盘，Country 输入 China 即可，点击 “Next”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
+<p>设置管理员 root 账号密码和邮箱</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>密码要牢记</p>
+</blockquote>
+<p>设定主机名，IP，网关，掩码和 DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
+<p>安装中，等待几分钟</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
+<p>安装完提示重启</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>重启前请先移除U盘，或者关闭U盘启动；</p>
+</blockquote>
+<p>启动完成后的控制台，会提示控制台访问URL</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
+<p>【注意】</p>
+<blockquote>
+<p>1、是 https，不是 http；<br>2、因为证书问题，尽量不要用 ie 和 edge 浏览器，chrome 浏览器的效果比较好；</p>
+</blockquote>
+<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL， <span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA2">https://IP:8006<i class="fa fa-external-link-alt"></i></span> ， 语言可以选择中文，对于中文支持不错；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
+<p>进入 PVE UI 的截图</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
+<h1 id="虚拟化设置"><a href="#虚拟化设置" class="headerlink" title="虚拟化设置"></a>虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在 BIOS 中要开启跟虚拟化相关的选项，比如VD-T等；</p>
+<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE 的内核开启支持 VD-T 直通的 IOMMU 及相关模块；</p>
+<ul>
+<li>修改/etc/default/grub文件中的内容</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>后面所有的操作都在 WEB GUI 的 shell 中进行</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
+<p>把原内容中：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
+<p>执行 <code>update-grub</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
+<p>立即更新 grub</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
+<ul>
+<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
+<p>加上以下代码，每个一行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
+<ul>
+<li>建立驱动黑名单，依次输入以下命令：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_intel"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_codec_hdmi"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist i915"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
+<ul>
+<li>GPU 信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
+<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
+<p>把集显指定到 VFIO 模块</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options vfio-pci ids=8086:1616"</span> &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
+<h1 id="创建-Win10-虚拟机"><a href="#创建-Win10-虚拟机" class="headerlink" title="创建 Win10 虚拟机"></a>创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
+<h2 id="下载-virtio-win-的-iso-驱动包；"><a href="#下载-virtio-win-的-iso-驱动包；" class="headerlink" title="下载 virtio-win 的 iso 驱动包；"></a>下载 virtio-win 的 iso 驱动包；</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mZWRvcmFwZW9wbGUub3JnL2dyb3Vwcy92aXJ0L3ZpcnRpby13aW4vZGlyZWN0LWRvd25sb2Fkcy9hcmNoaXZlLXZpcnRpby8=">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/<i class="fa fa-external-link-alt"></i></span></p>
+<p>【注意】：</p>
+<blockquote>
+<p>建议下日期最新的版本</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2024-1590037534614.png" alt="title"></p>
+<h2 id="上传ISO文件"><a href="#上传ISO文件" class="headerlink" title="上传ISO文件"></a>上传ISO文件</h2><p>上述的 iso 包都上传到下图目录中</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2025-1590037579769.png" alt="title"></p>
+<h2 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h2><p>参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2026-1590037624180.png" alt="title"></p>
+<p>【注意】：以下说法不一定准确，需要进一步验证：</p>
+<blockquote>
+<p>1、处理器需要为 HOST 模式；<br>2、Win10 系统要放在 ide0，否则有可能不会启动；<br>3、机器要选 q35，据说 PCI-e 的性能更好；<br>4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；<br>5、显示选默认就可以，但是一定要分显存；<br>6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；<br>7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO<br>8、显卡可以直接下载对应版本的集显驱动；</p>
+</blockquote>
+<h2 id="连接win10虚拟机"><a href="#连接win10虚拟机" class="headerlink" title="连接win10虚拟机"></a>连接win10虚拟机</h2><ul>
+<li>1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2027-1590037678865.png" alt="title"></p>
+<ul>
+<li>2、修改/etc/pve/qemu-server/100.conf（Win10 在 PVE 顺序是 100）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
+<p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
+<p>在第一行插入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
+<p>【注意】：</p>
+<blockquote>
+<p>1、据说这一步骤是直通核显 GPU 的关键步骤；<br>2、需要注意的是：host=00:02.0这个 00:02.0 需要与前面 lspic 显示的核显编号对应上；<br>3、PVE 主机的 HDMI 接口接到显示器；<br>4、当 win10 认到双显示器时，改为复制模式；</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>PVE</tag>
+        <tag>显卡直通</tag>
+        <tag>GPU</tag>
       </tags>
   </entry>
   <entry>
@@ -287,221 +502,6 @@
       </tags>
   </entry>
   <entry>
-    <title>PVE安装win10集显直通</title>
-    <url>/2020/05/21/PVE%E5%AE%89%E8%A3%85win10%E9%9B%86%E6%98%BE%E7%9B%B4%E9%80%9A/</url>
-    <content><![CDATA[<p><strong>什么是PVE</strong></p>
-<blockquote>
-<p>Proxmox VE 全称是 Proxmox Virtual Environment (Proxmox 虚拟环境)，通常简称为 Proxmox或PVE，Proxmox VE 是一个功能强大的完全开源的虚拟化平台。通过内置的Web管理界面，你能够轻易地管理多个虚拟机和容器, 也可以轻松地管理存储和网络，甚至是管理高可用性集群。</p>
-</blockquote>
-<p><strong>为什么要显卡直通</strong></p>
-<blockquote>
-<p>简单来说，显卡直通就是希望虚拟机能直接用显卡的GPU，来获得更高的性能。理论上包括网卡、声卡等硬件设备都是可以直通（PassThorugh）的。</p>
-</blockquote>
-<h1 id="安装-PVE"><a href="#安装-PVE" class="headerlink" title="安装 PVE"></a>安装 PVE</h1><h2 id="下载-PVE-ISO-文件"><a href="#下载-PVE-ISO-文件" class="headerlink" title="下载 PVE ISO 文件"></a>下载 PVE ISO 文件</h2><p>官方网站下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucHJveG1veC5jb20vZW4vZG93bmxvYWRz">https://www.proxmox.com/en/downloads<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="制作启动-U-盘"><a href="#制作启动-U-盘" class="headerlink" title="制作启动 U 盘"></a>制作启动 U 盘</h2><p>用 UltraISO 写入 U 盘；</p>
-<p>【注意】：</p>
-<blockquote>
-<ol>
-<li>可能会存在U盘兼容性问题，但我没遇到，用的 kingstone DT101 G2 的 4G；</li>
-<li>在写入格式时，开始选的 USB-HDD，但可能跟主板有关系，也可能是设置关系，不能正常启动，后改为 RAW 后正常；</li>
-</ol>
-</blockquote>
-<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>BIOS 中设置 U 盘启动；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%201-1590034607684.png" alt="title"></p>
-<p>自检画面，等待几秒</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%202-1590034644701.png" alt="title"></p>
-<p>同意协议，点击 “I agree”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%203-1590034687395.png" alt="title"></p>
-<p>选择硬盘，点击 “Next”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%204-1590034714141.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>注意要选择你要安装 pve 系统的盘符，会格式化掉硬盘里的所有东西。保险起见把不用的硬盘先拔掉。</p>
-</blockquote>
-<p>设定国家、时区和键盘，Country 输入 China 即可，点击 “Next”</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%205-1590034752844.png" alt="title"></p>
-<p>设置管理员 root 账号密码和邮箱</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%206-1590034782949.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>密码要牢记</p>
-</blockquote>
-<p>设定主机名，IP，网关，掩码和 DNS，在安装过程中这里的IP等信息自动获取了（上述2步骤会自动检查网络，固定IP可以自己设定）</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%207-1590034858836.png" alt="title"></p>
-<p>安装中，等待几分钟</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%208-1590034920244.png" alt="title"></p>
-<p>安装完提示重启</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%209-1590034945702.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>重启前请先移除U盘，或者关闭U盘启动；</p>
-</blockquote>
-<p>启动完成后的控制台，会提示控制台访问URL</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2010-1590034990755.png" alt="title"></p>
-<p>【注意】</p>
-<blockquote>
-<p>1、是 https，不是 http；<br>2、因为证书问题，尽量不要用 ie 和 edge 浏览器，chrome 浏览器的效果比较好；</p>
-</blockquote>
-<h1 id="运行PVE"><a href="#运行PVE" class="headerlink" title="运行PVE"></a>运行PVE</h1><p>输入URL， <span class="exturl" data-url="aHR0cHM6Ly9JUDo4MDA2">https://IP:8006<i class="fa fa-external-link-alt"></i></span> ， 语言可以选择中文，对于中文支持不错；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2011-1590035049330.png" alt="title"></p>
-<p>进入 PVE UI 的截图</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2012-1590035069746.png" alt="title"></p>
-<h1 id="虚拟化设置"><a href="#虚拟化设置" class="headerlink" title="虚拟化设置"></a>虚拟化设置</h1><h2 id="修改BIOS"><a href="#修改BIOS" class="headerlink" title="修改BIOS"></a>修改BIOS</h2><p>在 BIOS 中要开启跟虚拟化相关的选项，比如VD-T等；</p>
-<h2 id="修改PVE内核"><a href="#修改PVE内核" class="headerlink" title="修改PVE内核"></a>修改PVE内核</h2><p>PVE 的内核开启支持 VD-T 直通的 IOMMU 及相关模块；</p>
-<ul>
-<li>修改/etc/default/grub文件中的内容</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2014-1590035396165.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>后面所有的操作都在 WEB GUI 的 shell 中进行</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2013-1590035381302.png" alt="title"></p>
-<p>把原内容中：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet"</span></span><br></pre></td></tr></table></figure>
-
-<p>改为：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=<span class="string">"quiet intel_iommu=on video=efifb:off"</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2015-1590035456671.png" alt="title"></p>
-<p>执行 <code>update-grub</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2016-1590035511541.png" alt="title"></p>
-<p>立即更新 grub</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2017-1590035521808.png" alt="title"></p>
-<ul>
-<li>找到文件 <code>/etc/modules</code>（如果系统没有此文件，则自己建立一个）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2018-1590035572512.png" alt="title"></p>
-<p>加上以下代码，每个一行：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2019-1590035663580.png" alt="title"></p>
-<ul>
-<li>建立驱动黑名单，依次输入以下命令：</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_intel"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist snd_hda_codec_hdmi"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.conf</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"blacklist i915"</span>&gt;&gt; /etc/modprobe.d/pve-blacklist.confupdate-initramfs –u</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2020-1590035762619.png" alt="title"></p>
-<ul>
-<li>GPU 信息确认：<br>输入命令 <code>lspci</code> ，确定核显编号，一般集显是 <code>00:02</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2021-1590035874624.png" alt="title"></p>
-<p>再输入命令 <code>lspci -n -s 00:02</code>  得到 <code>vendor IDs</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2022-1590037422736.png" alt="title"></p>
-<p>把集显指定到 VFIO 模块</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options vfio-pci ids=8086:1616"</span> &gt; /etc/modprobe.d/vfio.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2023-1590037450012.png" alt="title"></p>
-<h1 id="创建-Win10-虚拟机"><a href="#创建-Win10-虚拟机" class="headerlink" title="创建 Win10 虚拟机"></a>创建 Win10 虚拟机</h1><h2 id="下载-win10-的-iso-包；"><a href="#下载-win10-的-iso-包；" class="headerlink" title="下载 win10 的 iso 包；"></a>下载 win10 的 iso 包；</h2><p>我相信你一定有，就是没有你也能找得到；</p>
-<h2 id="下载-virtio-win-的-iso-驱动包；"><a href="#下载-virtio-win-的-iso-驱动包；" class="headerlink" title="下载 virtio-win 的 iso 驱动包；"></a>下载 virtio-win 的 iso 驱动包；</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mZWRvcmFwZW9wbGUub3JnL2dyb3Vwcy92aXJ0L3ZpcnRpby13aW4vZGlyZWN0LWRvd25sb2Fkcy9hcmNoaXZlLXZpcnRpby8=">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/<i class="fa fa-external-link-alt"></i></span></p>
-<p>【注意】：</p>
-<blockquote>
-<p>建议下日期最新的版本</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2024-1590037534614.png" alt="title"></p>
-<h2 id="上传ISO文件"><a href="#上传ISO文件" class="headerlink" title="上传ISO文件"></a>上传ISO文件</h2><p>上述的 iso 包都上传到下图目录中</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2025-1590037579769.png" alt="title"></p>
-<h2 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h2><p>参数设置不同的机器是不一样的，需要根据不同的机器进行验证；</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2026-1590037624180.png" alt="title"></p>
-<p>【注意】：以下说法不一定准确，需要进一步验证：</p>
-<blockquote>
-<p>1、处理器需要为 HOST 模式；<br>2、Win10 系统要放在 ide0，否则有可能不会启动；<br>3、机器要选 q35，据说 PCI-e 的性能更好；<br>4、网上都说装 win10 时 BIOS 要选 OVMF（UEFI），但在我的机器上就是死活起不来；<br>5、显示选默认就可以，但是一定要分显存；<br>6、安装 win10 过程中，如果找不到磁盘，可以在 virtio-win 的 ISO 上找 virscsi 驱动；<br>7、安装完成后，检查【设备管理器】中的驱动情况，除显卡外其他都可以用 virtio-win 的 ISO<br>8、显卡可以直接下载对应版本的集显驱动；</p>
-</blockquote>
-<h2 id="连接win10虚拟机"><a href="#连接win10虚拟机" class="headerlink" title="连接win10虚拟机"></a>连接win10虚拟机</h2><ul>
-<li>1、虚拟机安装完成后，建议启用远程桌面，配置 RDP 访问；</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2027-1590037678865.png" alt="title"></p>
-<ul>
-<li>2、修改/etc/pve/qemu-server/100.conf（Win10 在 PVE 顺序是 100）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2028-1590037714502.png" alt="title"></p>
-<p>输入：<code>vi /etc/pve/qemu-server/100.conf</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2029-1590037773452.png" alt="title"></p>
-<p>在第一行插入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">args: -device vfio-pci,host=00:02.0,addr=0x18,x-igd-opregion=on</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/21/%E5%9B%BE%E7%89%87%2030-1590037807483.png" alt="title"></p>
-<p>【注意】：</p>
-<blockquote>
-<p>1、据说这一步骤是直通核显 GPU 的关键步骤；<br>2、需要注意的是：host=00:02.0这个 00:02.0 需要与前面 lspic 显示的核显编号对应上；<br>3、PVE 主机的 HDMI 接口接到显示器；<br>4、当 win10 认到双显示器时，改为复制模式；</p>
-</blockquote>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>接下来就可以安装显卡驱动愉快的玩耍了。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>PVE的安装，中文手册及GPU独显核显直通、万兆内网的那些事<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29sc2hhcmUuY24vdGhyZWFkLTE1ODkzOS0xLTEuaHRtbA==">https://koolshare.cn/thread-158939-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>PVE直通核显搭建虚拟Win10 HTPC避坑指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuMTBiZXN0cy5jb20vd2luMTAtaHRwYy1vbi1wdmUv">https://www.10bests.com/win10-htpc-on-pve/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>PVE</tag>
-        <tag>显卡直通</tag>
-        <tag>GPU</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo-theme-next主题</title>
-    <url>/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/</url>
-    <content><![CDATA[<p><strong>什么是NexT</strong></p>
-<blockquote>
-<p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
-<p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
-<p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
-<blockquote>
-<ul>
-<li>去掉了顶部的banner</li>
-<li>对Markdown的引用显示的更友好</li>
-<li>没有全部居中显示</li>
-</ul>
-</blockquote>
-<p>其实好看不好的不重要，说白了就是想折腾一下。</p>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-NexT的版本"><a href="#2-1-NexT的版本" class="headerlink" title="2.1 NexT的版本"></a>2.1 NexT的版本</h2><p>v6之前的版本，已不再维护。<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lpc3NuYW4vaGV4by10aGVtZS1uZXh0">https://github.com/iissnan/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>v6之后的版本<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="2-2-安装NexT"><a href="#2-2-安装NexT" class="headerlink" title="2.2 安装NexT"></a>2.2 安装NexT</h2><p>在<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>网上的教程基本上都是安装的v5.1.4之前的版本，可以用，但是会遇到各种奇葩的问题，所以建议用v6以上的版本。</strong></p>
-</blockquote>
-<p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
-<h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
-<p>回到<code>blog</code>目录，cmd模式下运行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
-<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
-<p>再打开3个，去掉前面的#号就行<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
-<p>在编译发布一次</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
-<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
-<p>需要创建相应的文件夹，比如标签：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
-<p><strong>参考文档</strong></p>
-<blockquote>
-<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo-NexT配置超炫网页效果<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC85ZjBlOTBjYzMyYzI=">https://www.jianshu.com/p/9f0e90cc32c2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>NexT</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>R6300v2上安装zerotier（修订）</title>
     <url>/2020/06/09/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写的「 <a href="https://laosu.ml/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/">R6300v2上安装zerotier</a> 」当时一切正常，但是发现在R6300v2重启之后，还是存在问题，估计问题主要是出在防火墙的设置上。</p>
@@ -600,54 +600,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
-    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
-    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
-<blockquote>
-<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
-</blockquote>
-<p><strong>frp是什么？</strong></p>
-<blockquote>
-<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
-</blockquote>
-<p><strong>WebDAV是什么？</strong></p>
-<blockquote>
-<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
-</blockquote>
-<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
-<p>暂时未启用https，如果需要的话勾选即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
-<p>在电脑上打开RaiDrive，按下图设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
-<p>确定之后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
-<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
-<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
-<p>首先要在frpc.ini增加下面的内容</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
-<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
-<p>可是这一次没成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
-<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
-<p>见证奇迹的时刻到了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
-<p>收工~~</p>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>RaiDrive</tag>
-        <tag>frp</tag>
-        <tag>WebDAV</tag>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>frp基础设置示例详解</title>
     <url>/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
@@ -743,9 +695,57 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>kcp协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RaiDrive挂载frp映射的WebDAV网盘</title>
+    <url>/2020/04/28/RaiDrive%E6%8C%82%E8%BD%BDfrp%E6%98%A0%E5%B0%84%E7%9A%84WebDAV%E7%BD%91%E7%9B%98/</url>
+    <content><![CDATA[<p><strong>RaiDrive是什么？</strong></p>
+<blockquote>
+<p>RaiDrive 是一款能够将一些网盘映射为本地网络磁盘的工具，支持 Google Drive、Google Photos、Dropbox、OneDrive、FTP、SFTP、WebDAV。</p>
+</blockquote>
+<p><strong>frp是什么？</strong></p>
+<blockquote>
+<p>frp 是一个高性能的反向代理应用，可以帮助您轻松地进行内网穿透，对外网提供服务，支持tcp, http, https 等协议类型，并且web 服务支持根据域名进行路由转发。</p>
+</blockquote>
+<p><strong>WebDAV是什么？</strong></p>
+<blockquote>
+<p>WebDAV是一组HTTP的扩展协议，支持用户直接对远程Web服务器上的文件进行编辑和管理。 它是一种标准协议，大多数操作系统都支持，比如Windows、Mac和Linux。您可以将WebDAV服务器上的一个文件夹映射成一个网络驱动器。</p>
+</blockquote>
+<p>在群晖上开启WebDAV，只要在<strong>套件中心</strong>安装WebDAV Server即可，剩下的只是一些简单的设置。</p>
+<p>暂时未启用https，如果需要的话勾选即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200425103339-1587782369660.png" alt="title"></p>
+<p>在电脑上打开RaiDrive，按下图设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c4a40fe28c7c2903037bff96010779b-1587782608503.png" alt="title"></p>
+<p>确定之后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4edca9758e42ca3a58951a9c466e0c4-1587782670948.png" alt="title"></p>
+<p>在资源管理器中打开<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/36fe38fbe78e2e38dc2a925a479b7a5-1587782702646.png" alt="title"></p>
+<p>是不是很简单？接下来我们把它映射到外网，方便从远程进行访问。</p>
+<p>首先要在frpc.ini增加下面的内容</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[webdav]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5005</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_gzip</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">custom_domains</span> = webdav.abc.ml</span><br></pre></td></tr></table></figure>
+
+<p>我是在docker中安装的frpc容器，设置好之后重启一下以便设置生效。</p>
+<p>在电脑上打开RaiDrive，端口是必填的，所以还是和局域网一样填了5005。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/2564299304a703440e7df7564292e03-1587783865197.png" alt="title"></p>
+<p>可是这一次没成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/4a9ce9e2e46414ef353878e274b2e33-1587783976746.png" alt="title"></p>
+<p>在网上找了一圈，也没找到解决办法。直到有一天无意中把端口改成了80</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8c58c72442bfb7626ef29cdd1b20a0a-1587784272628.png" alt="title"></p>
+<p>见证奇迹的时刻到了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/c68ac1e782f5f089d0894fd114b2dff-1587784987298.png" alt="title"></p>
+<p>收工~~</p>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>frp</tag>
+        <tag>RaiDrive</tag>
+        <tag>WebDAV</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
@@ -856,6 +856,197 @@
       </tags>
   </entry>
   <entry>
+    <title>在Coding上部署Hexo并实现和Github双线访问</title>
+    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
+<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
+<li>首先是<strong>注册团队</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<ul>
+<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<ul>
+<li>接下来就可以新建项目了</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
+<li>点右上角的头像，选择<strong>个人设置</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<ul>
+<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+</ul>
+<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
+<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
+<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
+<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<ul>
+<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<ul>
+<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<ul>
+<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
+</ul>
+<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
+<li>从右上角的<strong>设置</strong>进入</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<ul>
+<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p>然后再次申请，等一会儿就会显示成功了！</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
+<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
+<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Coding</tag>
+        <tag>blog</tag>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在GCP上安装Zerotier的Moon服务器</title>
+    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
+<p>而之前是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
+<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
+<p>GCP有公网地址，直接就它了。</p>
+<p><strong>1. 在GCP上安装Zerotier</strong></p>
+<p>用官网上提供的命令行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br></pre></td></tr></table></figure>
+
+<p>开始安装：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/38901587517414_.pic_hd-1587534791827.jpg" alt="title"></p>
+<p>安装完成：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3891-1587534849922.png" alt="title"></p>
+<p><strong>2. 加入网络</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3897-1587536175663.png" alt="title"></p>
+<p><strong>3. 获取网络情况</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3899-1587536235890.png" alt="title"></p>
+<p><strong>4. 生成moon.json</strong><br>进入 /var/lib/zerotier-one 文件夹<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3893-1587534932410.png" alt="title"></p>
+<p>运行下面的语句</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
+
+<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
+<p>直接运行<code>vi moon.js</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 需要修改stableEndpoints</strong></p>
+<p>增加做moon机器的IP地址信息如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: [<span class="string">"34.84.xxx.xxx/9993"</span>,<span class="string">"192.168.191.1/9993"</span>]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
+<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-idtool genmoon moon.json</span><br></pre></td></tr></table></figure>
+
+<p>运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 /var/lib/zerotier-one/moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</p>
+<p><strong>7. 重启服务</strong></p>
+<p>网上的命令是这样的</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall -9 zerotier-one</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
+<p>但是我执行后遇到错误，所以最简单的办法是直接reboot</p>
+<p><strong>8. 客户端配置</strong></p>
+<ul>
+<li>在没有加入moon时，运行<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3906-1587536897732.png" alt="title"></p>
+<p>可以看到都是planet和leaf，没有moon；</p>
+<ul>
+<li><p>不管Windows还是Mac OS，都需要以管理员身份运行：<br><code>zerotier-cli orbit 3648b35427 3648b35427</code></p>
+</li>
+<li><p>再次用 <code>zerotier-cli listpeers</code> 查看客户端的连接情况</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
+<ul>
+<li>注意红色的部分，看到了moon有木有？</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
+<p>参考文档：</p>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>GCP</tag>
+        <tag>Zerotier</tag>
+        <tag>Moon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在Netlify上部署Hexo</title>
+    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
+<ul>
+<li>Github原生域名：wbsu2003.github.io</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.ml</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
+<ul>
+<li>Netlify原生域名：laosu.netlify.app</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
+<ul>
+<li>自定义域名：laosu.tk</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>blog</tag>
+        <tag>Netlify</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>全面升级frp</title>
     <url>/2020/05/26/%E5%85%A8%E9%9D%A2%E5%8D%87%E7%BA%A7frp/</url>
     <content><![CDATA[<blockquote>
@@ -952,201 +1143,69 @@
         <category>各种折腾</category>
       </categories>
       <tags>
+        <tag>群晖</tag>
         <tag>frp</tag>
         <tag>docker</tag>
-        <tag>群晖</tag>
         <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
-    <title>在Coding上部署Hexo并实现和Github双线访问</title>
-    <url>/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/</url>
-    <content><![CDATA[<p>之前在Netlify上折腾过一次，但是结果不理想，原本以为Netlify自带CDN，会对速度的提升带来帮助，但是结果却让人大跌眼镜。</p>
-<p>虽然上一次的折腾失败了，详见《<a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a>》，但并没有放弃，一直在寻找替代的方案，最终不负众望找到了Coding，因为官网改版较大，参考文档中的一些过程需要重新说明，避免走弯路。</p>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
-<li>首先是<strong>注册团队</strong></li>
+    <title>在群晖上实现在线Office文档编辑</title>
+    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
+<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
 <ul>
-<li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
+<li>双击开始安装，选“latest”</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
 <ul>
-<li>接下来就可以新建项目了</li>
+<li>下载速度还可以</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
-<h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
-<li>点右上角的头像，选择<strong>个人设置</strong></li>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>先建好需要用的文件夹</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
 <ul>
-<li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
+<li>习惯性的限制下资源的使用</li>
 </ul>
-<h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h1><ul>
-<li>打开你本地博客根目录的 _config.yml 文件，找到 deployment</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: </span><br><span class="line">    github: https://github.com/wbsu2003/wbsu2003.github.io.git</span><br><span class="line">    coding: git@e.coding.net:laosu/blog/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<h1 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h1><ul>
-<li>添加完成后先执行命令 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure></li>
-<li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
-<h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
 <ul>
-<li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
+<li>进【高级设置】，【卷】的设置</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
 <ul>
-<li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
+<li>【端口】的设置</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
-<ul>
-<li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29t">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
-</ul>
-<h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
-<li>从右上角的<strong>设置</strong>进入</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
-<ul>
-<li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
-<h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认<strong>，将 GitHub 的解析路线改为 **境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
-<h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
-<p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
-<p>然后再次申请，等一会儿就会显示成功了！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
-<h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
-<p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
-<h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
+<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
+<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Coding官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jb2RpbmcubmV0Lw==">https://coding.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Hexo 双线部署到 Coding Pages 和 GitHub Pages 并实现全站 HTTPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRyaHguY29tLzIwMTkvMDkvMTYvQTQ3LWhleG8tZGVwbG95ZWQtdG8tZ2l0aHViLWFuZC1jb2Rpbmcv">https://www.itrhx.com/2019/09/16/A47-hexo-deployed-to-github-and-coding/<i class="fa fa-external-link-alt"></i></span></p>
-<p>超详细Hexo+Github博客搭建小白教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8zNTY2ODIzNw==">https://zhuanlan.zhihu.com/p/35668237<i class="fa fa-external-link-alt"></i></span></p>
+<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
-        <tag>Coding</tag>
-        <tag>blog</tag>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在Netlify上部署Hexo</title>
-    <url>/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>整个安装过程比较简单，仔细阅读参考文档就可。</p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbQ==">http://tool.chinaz.com<i class="fa fa-external-link-alt"></i></span> ）–&gt;【网站测速】，分别输入原生的二级域名和自定义域名进行测试。</p>
-<ul>
-<li>Github原生域名：wbsu2003.github.io</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/9a4c0cec7613ef0a26d15f7b8b753f6-1588685964469.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.ml</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/ad4e50dc85d907733371cd9c16f4d5a-1588685562397.png" alt="title"></p>
-<ul>
-<li>Netlify原生域名：laosu.netlify.app</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/f65ecc7bc1fd8346db408228a161c97-1588686229553.png" alt="title"></p>
-<ul>
-<li>自定义域名：laosu.tk</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/56d579185980d254200090020640746-1588685618068.png" alt="title"></p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>先当备用网站吧。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Github Pages访问太慢？通过Netlify免费加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vMzdZMzcvcC8xMjU1MTgzOS5odG1s">https://www.cnblogs.com/37Y37/p/12551839.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>部署 Hexo 静态博客 (下) - 偶遇 Netlify, 优雅地持续部署你的博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGFuZ2NoZW4ubWUvYmxvZy8yMDE4MDgxOS9kZXBsb3ktaGV4by1ibG9nLXRvLW5ldGxpZnkv">https://changchen.me/blog/20180819/deploy-hexo-blog-to-netlify/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>blog</tag>
-        <tag>Netlify</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在GCP上安装Zerotier的Moon服务器</title>
-    <url>/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
-<p>而之前是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
-<p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
-<p>GCP有公网地址，直接就它了。</p>
-<p><strong>1. 在GCP上安装Zerotier</strong></p>
-<p>用官网上提供的命令行：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br></pre></td></tr></table></figure>
-
-<p>开始安装：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/38901587517414_.pic_hd-1587534791827.jpg" alt="title"></p>
-<p>安装完成：<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3891-1587534849922.png" alt="title"></p>
-<p><strong>2. 加入网络</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3897-1587536175663.png" alt="title"></p>
-<p><strong>3. 获取网络情况</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3899-1587536235890.png" alt="title"></p>
-<p><strong>4. 生成moon.json</strong><br>进入 /var/lib/zerotier-one 文件夹<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3893-1587534932410.png" alt="title"></p>
-<p>运行下面的语句</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
-
-<p>会在当前目录下产生一个新文件 <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/moon-1587535706203.json" alt="moon.js"></p>
-<p>直接运行<code>vi moon.js</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: []</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>5. 需要修改stableEndpoints</strong></p>
-<p>增加做moon机器的IP地址信息如下：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="attr">"id"</span>: <span class="string">"3648b35427"</span>,</span><br><span class="line"> <span class="attr">"objtype"</span>: <span class="string">"world"</span>,</span><br><span class="line"> <span class="attr">"roots"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attr">"identity"</span>: <span class="string">"3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c"</span>,</span><br><span class="line">   <span class="attr">"stableEndpoints"</span>: [<span class="string">"34.84.xxx.xxx/9993"</span>,<span class="string">"192.168.191.1/9993"</span>]</span><br><span class="line">  &#125;</span><br><span class="line"> ],</span><br><span class="line"> <span class="attr">"signingKey"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"signingKey_SECRET"</span>: <span class="string">"294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913"</span>,</span><br><span class="line"> <span class="attr">"updatesMustBeSignedBy"</span>: <span class="string">"3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1"</span>,</span><br><span class="line"> <span class="attr">"worldType"</span>: <span class="string">"moon"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中<br>34.84.xxx.xxx 为公网地址<br>192.168.191.1 为zerotier分配的地址，后台设置时已经取消了自动分配；</p>
-<p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">zerotier-idtool genmoon moon.json</span><br></pre></td></tr></table></figure>
-
-<p>运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 /var/lib/zerotier-one/moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</p>
-<p><strong>7. 重启服务</strong></p>
-<p>网上的命令是这样的</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">killall -9 zerotier-one</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
-<p>但是我执行后遇到错误，所以最简单的办法是直接reboot</p>
-<p><strong>8. 客户端配置</strong></p>
-<ul>
-<li>在没有加入moon时，运行<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3906-1587536897732.png" alt="title"></p>
-<p>可以看到都是planet和leaf，没有moon；</p>
-<ul>
-<li><p>不管Windows还是Mac OS，都需要以管理员身份运行：<br><code>zerotier-cli orbit 3648b35427 3648b35427</code></p>
-</li>
-<li><p>再次用 <code>zerotier-cli listpeers</code> 查看客户端的连接情况</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
-<ul>
-<li>注意红色的部分，看到了moon有木有？</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
-<p>参考文档：</p>
-<blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>GCP</tag>
-        <tag>Zerotier</tag>
-        <tag>Moon</tag>
+        <tag>群晖</tag>
+        <tag>docker</tag>
+        <tag>onlyoffice</tag>
+        <tag>nextcloud</tag>
+        <tag>seafile</tag>
+        <tag>owncloud</tag>
+        <tag>kodexplorer</tag>
       </tags>
   </entry>
   <entry>
@@ -1215,71 +1274,12 @@
       </categories>
       <tags>
         <tag>GitHub</tag>
+        <tag>Hexo</tag>
         <tag>GitNote</tag>
         <tag>Markdown</tag>
-        <tag>Hexo</tag>
         <tag>Blog</tag>
         <tag>微信公众号</tag>
         <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在群晖上实现在线Office文档编辑</title>
-    <url>/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
-<li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
-<ul>
-<li>双击开始安装，选“latest”</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
-<ul>
-<li>下载速度还可以</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>先建好需要用的文件夹</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
-<ul>
-<li>习惯性的限制下资源的使用</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
-<ul>
-<li>进【高级设置】，【卷】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
-<ul>
-<li>【端口】的设置</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
-<h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s77yJ">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
-<p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
-<p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇四：群晖Docker安装nextcloud私有云，以及onlyoffice、流程图和思维导图插件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzczNTg3OS8=">https://post.smzdm.com/p/735879/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Docker快速搭建onlyoffice开源在线办公套件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1s">https://baiyue.one/archives/455.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>Seafile服务器手册中文版–OnlyOffice 集成<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwtY24tb3JpZ2luLnNlYWZpbGUuY29tL2RlcGxveV9wcm8vb2ZmaWNlLXdlbi1qaWFuLXl1LWxhbi1oZS1iaWFuLWppL29ubHlfb2ZmaWNl">https://manual-cn-origin.seafile.com/deploy_pro/office-wen-jian-yu-lan-he-bian-ji/only_office<i class="fa fa-external-link-alt"></i></span></p>
-<p>使用可道云kodexplorer和ONLYOFFICE创建您的WebOffice云办公系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAxMDk4Ni9hcnRpY2xlL2RldGFpbHMvODUwNTIwNTQ=">https://blog.csdn.net/weixin_44010986/article/details/85052054<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-        <tag>群晖</tag>
-        <tag>onlyoffice</tag>
-        <tag>nextcloud</tag>
-        <tag>seafile</tag>
-        <tag>owncloud</tag>
-        <tag>kodexplorer</tag>
       </tags>
   </entry>
   <entry>
@@ -1349,97 +1349,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何收藏微信内容到为知笔记</title>
-    <url>/2020/06/30/%E5%A6%82%E4%BD%95%E6%94%B6%E8%97%8F%E5%BE%AE%E4%BF%A1%E5%86%85%E5%AE%B9%E5%88%B0%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>买了很多年的为知笔记，一直用来做个人的知识管理工具，对于微信中的好文章，无论是公众帐号推送的，还是朋友圈中分享的，都能一键保存到为知笔记，原本一直蛮顺手的，但是经过微信几次的接口调整，使用已经变的越来越麻烦了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593516073900-1593516073906.png" alt="title"></p>
-<p>4月份调整之后，在文章右上角的「…」弹出的分享菜单中，取消了所有公众号一键保存到第三方笔记的接口，使得我只能用「邮件」发送来保存。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499220256-1593499220289.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499291765-1593499291774.png" alt="title"></p>
-<p>与调整之前比，需要多两个步骤：选联系人，发送确认。</p>
-<p>但昨晚发现微信又调整了接口，这次连「邮件」都没有了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499506819-1593499506829.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499543488-1593499543497.png" alt="title"></p>
-<p>除了 「在浏览器打开」 外，清一色的全是腾讯自家产品。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593505015204-1593505015210.png" alt="title"></p>
-<p>既然微信不能不用，笔记不能不记，那就只有再想办法咯。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593516272758-1593516272760.png" alt="title"></p>
-<h1 id="方法一：「在浏览器打开」"><a href="#方法一：「在浏览器打开」" class="headerlink" title="方法一：「在浏览器打开」"></a>方法一：「在浏览器打开」</h1><p>以下操作在小米手机上验证通过。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593518873637-1593518873640.png" alt="title"></p>
-<ul>
-<li>「在浏览器打开」</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499839194-1593499839204.png" alt="title"></p>
-<ul>
-<li>打开浏览器的菜单</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499914888-1593499914897.png" alt="title"></p>
-<ul>
-<li>选择分享</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499979722-1593499979727.png" alt="title"></p>
-<ul>
-<li>选择更多</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593500074543-1593500074553.png" alt="title"></p>
-<ul>
-<li>「保存到为知笔记」</li>
-</ul>
-<p>如果你用其他的笔记，道理应该是一样的。</p>
-<p>这个方法虽然步骤较多，但不会中断目前的阅读，</p>
-<h1 id="方案二：「复制链接」"><a href="#方案二：「复制链接」" class="headerlink" title="方案二：「复制链接」"></a>方案二：「复制链接」</h1><ul>
-<li>复制文章链接</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501144162-1593501144167.png" alt="title"></p>
-<ul>
-<li>向为知笔记服务号发送复制的链接</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501177851-1593501177863.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501238626-1593501238637.png" alt="title"></p>
-<p>这个方法看起来步骤不多，但是因为都在微信中切换，所以会打断阅读，体验不好。</p>
-<h1 id="方法三：「浮窗」"><a href="#方法三：「浮窗」" class="headerlink" title="方法三：「浮窗」"></a>方法三：「浮窗」</h1><p>利用微信「浮窗」功能，长期保存一篇含有「为知笔记」服务号二维码的文章.<br>如果你找不到的话，就用这篇吧。<span class="exturl" data-url="aHR0cHM6Ly93d3cud2l6LmNuL3poLWNuL3dlY2hhdGNsaXBwZXItd2VjaGF0aW50cm8=">https://www.wiz.cn/zh-cn/wechatclipper-wechatintro<i class="fa fa-external-link-alt"></i></span></p>
-<ul>
-<li>复制公众号文章链接后，点开浮窗。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593504412601-1593504412639.png" alt="title"></p>
-<ul>
-<li>点出长期保存的带有「为知笔记」公众号二维码的文章，长按识别二维码进入「为知笔记」公众号</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593504517823-1593504517833.png" alt="title"></p>
-<ul>
-<li>再后面就和方法二一样了。</li>
-</ul>
-<p>比方法二强的地方在于不用切来切去。但是需要长按啥的，尤其是长期有个浮窗，反正我觉得很不爽，也许这就是强迫症吧。</p>
-<h1 id="方法四：「收藏」"><a href="#方法四：「收藏」" class="headerlink" title="方法四：「收藏」"></a>方法四：「收藏」</h1><ul>
-<li>先用微信「收藏」按钮来收藏内容</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502327119-1593502327123.png" alt="title"></p>
-<ul>
-<li>当我们收藏了几篇文章以后，然后在「为知笔记」服务号，点击「加号」按钮，然后选择「收藏」按钮，把之前收藏的公众号文章发送给「为知笔记」。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502567727-1593502567732.png" alt="title"></p>
-<ul>
-<li>选中要发送的文章，点击「发送」即可</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502636042-1593502636053.png" alt="title"></p>
-<h1 id="方法五：微信双开"><a href="#方法五：微信双开" class="headerlink" title="方法五：微信双开"></a>方法五：微信双开</h1><p>再注册一个微信，重新将「为知笔记」服务号绑定到另一个微信，每次复制链接后切换到另一个双开微信里面去。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>暂时找到的方法就这些，相比较而言个人认为：</p>
-<p>方法四 –&gt; 方法一 –&gt; 方法五 –&gt; 方法三 –&gt; 方法二</p>
-<p>如果你有更好的方法，请告诉我！</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>更简单的收藏方法来了！快学起来<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvME5MY1JrclMyS3p2ZnRKUE83aVpMdw==">https://mp.weixin.qq.com/s/0NLcRkrS2KzvftJPO7iZLw<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>微信</tag>
-        <tag>为知笔记</tag>
-        <tag>WizNote</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（1）：综合篇</title>
     <url>/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/</url>
     <content><![CDATA[<p><strong>什么是刮削器（Scrapers）</strong></p>
@@ -1494,6 +1403,98 @@
         <tag>ZogVM</tag>
         <tag>极影派</tag>
         <tag>Kodi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何收藏微信内容到为知笔记</title>
+    <url>/2020/06/30/%E5%A6%82%E4%BD%95%E6%94%B6%E8%97%8F%E5%BE%AE%E4%BF%A1%E5%86%85%E5%AE%B9%E5%88%B0%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>买了很多年的为知笔记，一直用来做个人的知识管理工具，对于微信中的好文章，无论是公众帐号推送的，还是朋友圈中分享的，都能一键保存到为知笔记，原本一直蛮顺手的，但是经过微信几次的接口调整，使用已经变的越来越麻烦了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593516073900-1593516073906.png" alt="title"></p>
+<p>4月份调整之后，在文章右上角的「…」弹出的分享菜单中，取消了所有公众号一键保存到第三方笔记的接口，使得我只能用「邮件」发送来保存。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499220256-1593499220289.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499291765-1593499291774.png" alt="title"></p>
+<p>与调整之前比，需要多两个步骤：选联系人，发送确认。</p>
+<p>但昨晚发现微信又调整了接口，这次连「邮件」都没有了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499506819-1593499506829.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499543488-1593499543497.png" alt="title"></p>
+<p>除了 「在浏览器打开」 外，清一色的全是腾讯自家产品。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593505015204-1593505015210.png" alt="title"></p>
+<p>既然微信不能不用，笔记不能不记，那就只有再想办法咯。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593516272758-1593516272760.png" alt="title"></p>
+<h1 id="方法一：「在浏览器打开」"><a href="#方法一：「在浏览器打开」" class="headerlink" title="方法一：「在浏览器打开」"></a>方法一：「在浏览器打开」</h1><p>以下操作在小米手机上验证通过。</p>
+<ul>
+<li><p>「在浏览器打开」</p>
+</li>
+<li><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593518873637-1593518873640.png" alt="title"></p>
+</li>
+<li><p>打开浏览器的菜单</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499839194-1593499839204.png" alt="title"></p>
+<ul>
+<li>选择分享</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499914888-1593499914897.png" alt="title"></p>
+<ul>
+<li>选择更多</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593499979722-1593499979727.png" alt="title"></p>
+<ul>
+<li>「保存到为知笔记」</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593500074543-1593500074553.png" alt="title"></p>
+<p>如果你用其他的笔记，道理应该是一样的。</p>
+<p>这个方法虽然步骤较多，但不会中断目前的阅读，</p>
+<h1 id="方案二：「复制链接」"><a href="#方案二：「复制链接」" class="headerlink" title="方案二：「复制链接」"></a>方案二：「复制链接」</h1><ul>
+<li>复制文章链接</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501144162-1593501144167.png" alt="title"></p>
+<ul>
+<li>向为知笔记服务号发送复制的链接</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501177851-1593501177863.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593501238626-1593501238637.png" alt="title"></p>
+<p>这个方法看起来步骤不多，但是因为都在微信中切换，所以会打断阅读，体验不好。</p>
+<h1 id="方法三：「浮窗」"><a href="#方法三：「浮窗」" class="headerlink" title="方法三：「浮窗」"></a>方法三：「浮窗」</h1><p>利用微信「浮窗」功能，长期保存一篇含有「为知笔记」服务号二维码的文章.<br>如果你找不到的话，就用这篇吧。<span class="exturl" data-url="aHR0cHM6Ly93d3cud2l6LmNuL3poLWNuL3dlY2hhdGNsaXBwZXItd2VjaGF0aW50cm8=">https://www.wiz.cn/zh-cn/wechatclipper-wechatintro<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>复制公众号文章链接后，点开浮窗。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593504412601-1593504412639.png" alt="title"></p>
+<ul>
+<li>点出长期保存的带有「为知笔记」公众号二维码的文章，长按识别二维码进入「为知笔记」公众号</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593504517823-1593504517833.png" alt="title"></p>
+<ul>
+<li>再后面就和方法二一样了。</li>
+</ul>
+<p>比方法二强的地方在于不用切来切去。但是需要长按啥的，尤其是长期有个浮窗，反正我觉得很不爽，也许这就是强迫症吧。</p>
+<h1 id="方法四：「收藏」"><a href="#方法四：「收藏」" class="headerlink" title="方法四：「收藏」"></a>方法四：「收藏」</h1><ul>
+<li>先用微信「收藏」按钮来收藏内容</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502327119-1593502327123.png" alt="title"></p>
+<ul>
+<li>当我们收藏了几篇文章以后，然后在「为知笔记」服务号，点击「加号」按钮，然后选择「收藏」按钮，把之前收藏的公众号文章发送给「为知笔记」。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502567727-1593502567732.png" alt="title"></p>
+<ul>
+<li>选中要发送的文章，点击「发送」即可</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/30/1593502636042-1593502636053.png" alt="title"></p>
+<h1 id="方法五：微信双开"><a href="#方法五：微信双开" class="headerlink" title="方法五：微信双开"></a>方法五：微信双开</h1><p>再注册一个微信，重新将「为知笔记」服务号绑定到另一个微信，每次复制链接后切换到另一个双开微信里面去。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>暂时找到的方法就这些，相比较而言个人认为：</p>
+<p>方法四 –&gt; 方法一 –&gt; 方法五 –&gt; 方法三 –&gt; 方法二</p>
+<p>如果你有更好的方法，请告诉我！</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>更简单的收藏方法来了！快学起来<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvME5MY1JrclMyS3p2ZnRKUE83aVpMdw==">https://mp.weixin.qq.com/s/0NLcRkrS2KzvftJPO7iZLw<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>微信</tag>
+        <tag>为知笔记</tag>
+        <tag>WizNote</tag>
       </tags>
   </entry>
   <entry>
@@ -1738,70 +1739,6 @@
       </tags>
   </entry>
   <entry>
-    <title>将 Draw.io 集成到 VS Code</title>
-    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
-    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
-<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
-<li>点击 <code>install</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
-<ul>
-<li>点击 <code>打开Visual Studio Code</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
-<ul>
-<li>点击 <code>安装</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
-<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
-<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
-<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
-<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
-<ul>
-<li>进入【扩展设置】</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
-<ul>
-<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
-</li>
-<li><p>支持更换主题</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
-<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
-<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
-<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
-<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
-<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
-</ul>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>draw.io</tag>
-        <tag>VS Code</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>家庭多媒体中心（5）：查询篇</title>
     <url>/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/</url>
     <content><![CDATA[<p>Kodi（以前叫XBMC）是一款强大的开源媒体播放器软件，支持 MacOS、Windows、Linux、Android等多系统平台。Kodi 的局域网视频播放功能异常强大；默认情况下 Kodi 的资料库是独立的，这就带来一个很大的问题，当家里有多个Kodi终端的话，资料的同步是个很大的问题。</p>
@@ -1910,6 +1847,70 @@
       </tags>
   </entry>
   <entry>
+    <title>将 Draw.io 集成到 VS Code</title>
+    <url>/2020/05/17/%E5%B0%86%20Draw.io%20%E9%9B%86%E6%88%90%E5%88%B0%20VS%20Code/</url>
+    <content><![CDATA[<p>之前我们在《<a href="https://laosu.ml/2020/05/10/%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%9B%BEDraw.io/">免费在线流程图Draw.io</a>》中介绍过Draw.io，今天要介绍的插件 <code>Draw.io Integration</code> 可以将 <code>Draw.io</code> 集成到 <code>VS Code</code> 中。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="从网页安装"><a href="#从网页安装" class="headerlink" title="从网页安装"></a>从网页安装</h2><ul>
+<li>在浏览器中输入 <code>https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio</code></li>
+<li>点击 <code>install</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700492041-1589700492044.png" alt="网页安装"></p>
+<ul>
+<li>点击 <code>打开Visual Studio Code</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700542017-1589700542019.png" alt="打开应用"></p>
+<ul>
+<li>点击 <code>安装</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700680356-1589700680363.png" alt="开始安装"></p>
+<h2 id="在VS-Code中安装"><a href="#在VS-Code中安装" class="headerlink" title="在VS Code中安装"></a>在VS Code中安装</h2><ul>
+<li>从VS Code左侧进入【扩展】，或用快捷键 <code>ctrl+shift+x</code></li>
+<li>搜索draw，第一个 <code>Draw.io Integration</code> 就是。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589701398663-1589701398667.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
+<li>在【扩展】中找到 <code>Draw.io Integration</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700813314-1589700813318.png" alt="扩展设置菜单"></p>
+<ul>
+<li>进入【扩展设置】</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589700910625-1589700910630.png" alt="设置界面"></p>
+<ul>
+<li><p>默认情况下使用 <code>Draw.io</code> 的脱机版本</p>
+</li>
+<li><p>支持更换主题</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/1589703506111-1589703506113.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><ul>
+<li>只要新建扩展名为 <code>.drawio</code>、<code>.dio</code> 、<code>.drawio.svg</code> 文件即可进入编辑 </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/demo-1589701737138.gif" alt="编辑文档"></p>
+<h2 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h2><ul>
+<li>支持同一个 <code>*.drawio</code> 文件同时用 <code>Draw.io</code> 编辑器和 <code>xml</code> 编辑器打开，不仅是同步的，而且可以根据需要在编辑器间进行切换。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-xml-1589702652016.gif" alt="同时编辑"></p>
+<h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><ul>
+<li>要将 Draw.io 文件从转换 <code>.drawio</code> 为 <code>.drawio.svg</code> ，请使用 <code>文件: 另存为</code> 命令</li>
+</ul>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>直接编辑 <code>.drawio.png</code> 文件的功能尚未发布，原因是使用了不稳定的VS Code API。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/17/drawio-png-1589702313563.gif" alt="未发布的新功能"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>想想以后可以直接在VS Code中绘制流程图、脑图、UML图，是不是很拉风~~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>vscode-drawio代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlZGlldC92c2NvZGUtZHJhd2lv">https://github.com/hediet/vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+<p>vscode插件drawio安装主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPWhlZGlldC52c2NvZGUtZHJhd2lv">https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>draw.io</tag>
+        <tag>VS Code</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>手动安装WordPress</title>
     <url>/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/</url>
     <content><![CDATA[<p>原本以为下载了源代码，丢到群晖的web就OK了，但是很快就被打脸了</p>
@@ -1953,6 +1954,92 @@
         <tag>PHP</tag>
         <tag>Nginx</tag>
         <tag>Apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>打造一个可以随身携带的“藏书阁”</title>
+    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
+    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
+<blockquote>
+<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
+</blockquote>
+<p><strong>什么是Calibre-Web？</strong></p>
+<blockquote>
+<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
+</blockquote>
+<p><strong>什么是OPDS？</strong></p>
+<blockquote>
+<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
+</blockquote>
+<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
+<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
+<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
+<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
+<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
+<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
+<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
+<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
+<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
+<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
+<p>安装完成后的界面效果：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
+<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
+<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
+<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
+
+<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
+<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
+<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
+<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
+<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
+<ul>
+<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
+<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
+<blockquote>
+<ul>
+<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
+<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
+<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
+<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
+<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
+<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</blockquote>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
+<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
+<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Calibre</tag>
+        <tag>Calibre-Web</tag>
+        <tag>calibre-webserver</tag>
+        <tag>my-calibre-webserver-docker</tag>
+        <tag>OPDS</tag>
       </tags>
   </entry>
   <entry>
@@ -2134,89 +2221,37 @@
       </tags>
   </entry>
   <entry>
-    <title>打造一个可以随身携带的“藏书阁”</title>
-    <url>/2020/05/03/%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6%E7%9A%84%E2%80%9C%E8%97%8F%E4%B9%A6%E9%98%81%E2%80%9D/</url>
-    <content><![CDATA[<p><strong>什么是calibre？</strong></p>
-<blockquote>
-<p>calibre是一個自由開源的電子書軟體套裝，可以用來組織、存放、以及管理電子書，支援大多數的電子書格式。同時也支援與許多流行的電子書閱讀器進行同步，並可能在DRM的限制下轉換電子書的格式。 【維基百科】</p>
-</blockquote>
-<p><strong>什么是Calibre-Web？</strong></p>
-<blockquote>
-<p>Calibre-Web is a web app providing a clean interface for browsing, reading and downloading eBooks <strong>using an existing Calibre database</strong>.</p>
-</blockquote>
-<p><strong>什么是OPDS？</strong></p>
-<blockquote>
-<p>OPDS全称是Open Publication Distribution System开放式出版发布系统，使用 Atom 格式，意在为电子书在线目录建立一个公开标准。<br>OPDS 将 RSS 信息源，替换为电子书目录，包括链接到书籍封面和简短摘要的可选链接。使用 OPDS，用户无需到处点击链接，通过电子书应用程序，只需订阅并搜索这些目录，然后就可以将电子书下载到 ebook 阅读器中，不需要再使用浏览器或其他应用程序。<br>OPDS 标准核心功能是支持 EPUB 标准和基于 Atom XML 的目录格式。【百度百科】</p>
-</blockquote>
-<h1 id="构建本地图书库"><a href="#构建本地图书库" class="headerlink" title="构建本地图书库"></a>构建本地图书库</h1><p>Calibre是一个“一站式”的电子书解决方案，它可以全面满足你的电子书需求。Calibre是免费的，源代码开放，拥有跨平台的设计，可在Linux，OS X和Windows操作系统中运行。</p>
-<p>它是一个完整的电子图书馆，包括图书馆管理，格式转换，新闻，将材料转换为电子书，以及电子书阅读器同步功能、整合进电子图书阅读器。</p>
-<p>Calibre是电子书管理软件，支持Amazon、Apple、Bookeen、Ectaco、Endless Ideas、Google/HTC、Hanlin Song设备及格式，功能十分强大。它可以将你书库中的电子书非常方便地“发送”或同步导入到这些设备上进行阅读。</p>
-<p>已经不记得是哪一年开始使用Calibre来管理我的电子书的，反正这些年也存了不少书。电脑、硬盘已经不记得换了几个，但是电子书库还一直保存着，毕竟是花了时间下载、整理。</p>
-<p>用了这么多年也逐渐发现了一些Calibre的缺点：体积庞大、速度慢。最重要的是不利于多设备的共享，虽然calibre本身提供共享服务器服务，但不是我想要的，毕竟要开着电脑，还要开着calibre，既然我们有了7*24小时的群晖NAS，能不能让calibre在群晖上运行呢？</p>
-<h1 id="打造Web书库"><a href="#打造Web书库" class="headerlink" title="打造Web书库"></a>打造Web书库</h1><p>经过一番调研，我们找到了Calibre-Web和calibre-webserver，不仅提供web界面，更重要的是可以使用已经存在的Calibre的数据库，这意味着我们原来的电子书库可以直接通过Web访问，这实在是个好消息，毕竟书库的整理是件非常花时间的事情。</p>
-<p>目前尝试过这两个版本的Docker，功能上大同小异，但是界面差异较大。</p>
-<h2 id="oldiy-my-calibre-webserver-docker"><a href="#oldiy-my-calibre-webserver-docker" class="headerlink" title="oldiy/my-calibre-webserver-docker"></a>oldiy/my-calibre-webserver-docker</h2><p>calibre-webserver是国人开发的，基于calibre-webserver做这个Docker镜像也是国人。</p>
-<p>打开群晖Docker—注册表—搜 oldiy 找到 my-calibre-webserver-docker 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1-12-1588492282423.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/6-7-1588492302725.jpg" alt="title"></p>
-<p>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv77yJ">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/）<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="linuxserver-calibre-web"><a href="#linuxserver-calibre-web" class="headerlink" title="linuxserver/calibre-web"></a>linuxserver/calibre-web</h2><p>打开群晖Docker—注册表—搜 calibre-web 找到 calibre-web 双击下载，tag选择 latest</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/54533fc73c8f0235e303fa5538f4ff0-1588492697150.png" alt="title"></p>
-<p>安装完成后的界面效果：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/3-1588492779826.png" alt="title"></p>
-<h1 id="导入本地书库"><a href="#导入本地书库" class="headerlink" title="导入本地书库"></a>导入本地书库</h1><p>将本地书库中的library目录，也就是包含了metadata.db的目录，拷贝到calibre-web或者my-calibre-webserver-docker的相应目录即可，拷贝前先停止Docker，等拷贝完成后再启动Docker。</p>
-<h1 id="书库的维护"><a href="#书库的维护" class="headerlink" title="书库的维护"></a>书库的维护</h1><p>不管是my-calibre-webserver-docker还是calibre-web，都可以只使用Web进行管理，包括增、删、改、查操作，但是有时候涉及到批量等，还是可以用Calibre客户端，毕竟客户端的功能更丰富、也更强大，我们只需要将远程书库的目录用Samba协议共享出来即可，对于Calibre客户端来说，映射的目录和本地目录操作起来是一样的。</p>
-<h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>如果要远程访问，还需要用frp把内网映射到我们的域名上了，修改frpc.ini文件：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[calibre-webserver]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8001</span></span><br><span class="line"><span class="attr">custom_domains</span> = book.abc.xy</span><br><span class="line"></span><br><span class="line"><span class="section">[calibre-web]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">8083</span></span><br><span class="line"><span class="attr">custom_domains</span> = novel.abc.xy</span><br></pre></td></tr></table></figure>
-
-<h1 id="OPDS订阅"><a href="#OPDS订阅" class="headerlink" title="OPDS订阅"></a>OPDS订阅</h1><p>my-calibre-webserver-docker和calibre-web均支持OPDS，以Android平台静读天下（Moon+ Reader）为例</p>
-<p>左侧菜单【网上书库】–&gt;右上角【增加新书库】，可以输入calibre书库的IP，也可以输入域名。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/14134c4cdafb657213b9c2d1e80ae4f-1588496692241.jpg" alt="title"></p>
-<p>许墨茗书桌（ <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span> ）opds源添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/38dc84274076c3e9c1d7b5073fe2223-1588500681004.jpg" alt="title"></p>
-<p>夜读客（ <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span> ）网站添加的效果图：</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/f93a5a3c8faa278bada58c4cfe831b1-1588496993633.jpg" alt="title"></p>
-<h2 id="可用的OPDS源"><a href="#可用的OPDS源" class="headerlink" title="可用的OPDS源"></a>可用的OPDS源</h2><blockquote>
-<ul>
-<li>许墨茗书桌   <span class="exturl" data-url="aHR0cDovL3p1cmUuZnVuL2Jvb2svb3Bkcw==">http://zure.fun/book/opds<i class="fa fa-external-link-alt"></i></span></li>
-<li>cbeta电子佛典   <span class="exturl" data-url="aHR0cDovL3d3dy5jYmV0YS5vcmcvb3Bkcy8=">http://www.cbeta.org/opds/<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
-<h2 id="推荐几个书库"><a href="#推荐几个书库" class="headerlink" title="推荐几个书库"></a>推荐几个书库</h2><p>最后推荐几个可用的书库作为福利吧。如果你用静读天下（Moon+ Reader）的话，也可以直接和OPDS源一样，加到【网上书库】中。</p>
-<blockquote>
-<ul>
-<li>夜读客   <span class="exturl" data-url="aHR0cHM6Ly93d3cueWVkdWsuY29t">https://www.yeduk.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>天涯客   <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hpbmp1YS5jb20=">https://www.chinjua.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>文渊阁   <span class="exturl" data-url="aHR0cHM6Ly93ZW55dWFuZ2Uub3Jn">https://wenyuange.org<i class="fa fa-external-link-alt"></i></span></li>
-<li>kindle推送小站   <span class="exturl" data-url="aHR0cHM6Ly93d3cuYXp3My50aw==">https://www.azw3.tk<i class="fa fa-external-link-alt"></i></span></li>
-<li>螺丝丁报告   <span class="exturl" data-url="aHR0cHM6Ly93d3cuaHVnaGxpYi5jbg==">https://www.hughlib.cn<i class="fa fa-external-link-alt"></i></span></li>
-<li>书伴   <span class="exturl" data-url="aHR0cHM6Ly9ib29rZmVyZS5jb20vYm9va3M=">https://bookfere.com/books<i class="fa fa-external-link-alt"></i></span></li>
-<li>内酷网    <span class="exturl" data-url="aHR0cDovL25laWt1dy5jb20=">http://neikuw.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>ePUBw    <span class="exturl" data-url="aHR0cHM6Ly9lcHVidy54eXo=">https://epubw.xyz<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅读    <span class="exturl" data-url="aHR0cDovL3d3dy5haXlhZHUuY29t">http://www.aiyadu.com<i class="fa fa-external-link-alt"></i></span></li>
-<li>雅书    <span class="exturl" data-url="aHR0cHM6Ly95YWJvb2sub3Jn">https://yabook.org<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</blockquote>
+    <title>给路由器加个风扇</title>
+    <url>/2020/06/22/%E7%BB%99%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8A%A0%E4%B8%AA%E9%A3%8E%E6%89%87/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>家里的老路由日常温度一般都在80°朝上，据说温度太高会导致网络卡顿、断线，但是说实话平时没啥感觉，可能主要是因为没打游戏，实时性要求不高吧。但是不管怎么样，高温容易导致老化，为了让它能寿命长一点，撸了一个 12cm 的 USB 静音风扇，毕竟马上就要天热了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828575232-1592828575274.png" alt="title"></p>
+<p>之所以选 USB 风扇，是因为路由器本身有2个 USB 接口，3.0 的接了 U 盘用于跑 Entware ，侧面还有个 2.0 的空闲着。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592834034877-1592834034879.png" alt="title"></p>
+<h2 id="吹风还是吸气？"><a href="#吹风还是吸气？" class="headerlink" title="吹风还是吸气？"></a>吹风还是吸气？</h2><p>网上有人说吹风效果好，有人说吸气效果好，这还真是个问题，买之前根本没想那么多，以为装上有风就行了。但是这难不倒我们爱折腾的人，毕竟实践才是检验真理的唯一办法。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592832489943-1592832489947.png" alt="title"></p>
+<h2 id="吹风测试"><a href="#吹风测试" class="headerlink" title="吹风测试"></a>吹风测试</h2><p>先按吹气的方式，为了保证效果，模拟了实际使用的情景，用自锁式尼龙扎带做了固定。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592831703491-1592831703494.png" alt="title"></p>
+<p>光记着拍照忘记截图了，直接说结论，最终温度稳定在65°左右。</p>
+<h2 id="吸气测试"><a href="#吸气测试" class="headerlink" title="吸气测试"></a>吸气测试</h2><p>把扎带剪了重新安装，这回只记得截图忘记拍照了，补了一张已经把铁网装上了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/6-1592835788703.png" alt="title"></p>
+<p>不到2分钟，温度降到了70°</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828592120-1592828592123.png" alt="title"></p>
+<p>再过了2分多钟，温度降到了60°</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828626786-1592828626789.png" alt="title"></p>
+<p>最终基本稳定在55°左右</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828695079-1592828695082.png" alt="title"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>不管吸气或者吹风，估计都和实际空间、接触面等等很多因素有关，很难说哪种更有效，但是在我这，显然是吸气的效果更好一些，相比吹风温度低了将近10°，而且个人感觉吸气的话可能路由器里的积灰会少一点。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>calibre官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYWxpYnJlLWVib29rLmNvbS8=">https://calibre-ebook.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>最强大的本地电子书管理工具：Calibre 使用指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC80Mzg0Mw==">https://sspai.com/post/43843<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-web官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phbmVjemt1L2NhbGlicmUtd2Vi">https://github.com/janeczku/calibre-web<i class="fa fa-external-link-alt"></i></span></p>
-<p>calibre-webserver官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhbGVib29rL2NhbGlicmUtd2Vic2VydmVy">https://github.com/talebook/calibre-webserver<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖Docker安装一个开源的美观calibre-webserver中文网页版，管理你的图书，推送到Kindle<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzI2LzI3MzQvJUU3JUJFJUE0JUU2JTk5JTk2ZG9ja2VyJUU1JUFFJTg5JUU4JUEzJTg1JUU0JUI4JTgwJUU0JUI4JUFBJUU1JUJDJTgwJUU2JUJBJTkwJUU3JTlBJTg0JUU3JUJFJThFJUU4JUE3JTgyY2FsaWJyZS13ZWJzZXJ2ZXIlRTQlQjglQUQlRTYlOTYlODclRTclQkQlOTElRTklQTElQjUlRTclODklODglRUYlQkMlOEMlRTclQUUlQTElRTclOTAlODYv">https://odcn.top/2019/02/26/2734/%E7%BE%A4%E6%99%96docker%E5%AE%89%E8%A3%85%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84%E7%BE%8E%E8%A7%82calibre-webserver%E4%B8%AD%E6%96%87%E7%BD%91%E9%A1%B5%E7%89%88%EF%BC%8C%E7%AE%A1%E7%90%86/<i class="fa fa-external-link-alt"></i></span></p>
-<p>折腾NAS 篇三：群晖Docker搭建网页版Calibre书库<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bDhvdnhlLw==">https://post.smzdm.com/p/a6l8ovxe/<i class="fa fa-external-link-alt"></i></span></p>
+<p>R6300V2 路由器无痛改装风扇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9haXNrLm1lL2FkZC1jcHUtZmFuLW9uLXI2MzAwdjItcm91dGVyLw==">https://aisk.me/add-cpu-fan-on-r6300v2-router/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>Calibre</tag>
-        <tag>Calibre-Web</tag>
-        <tag>calibre-webserver</tag>
-        <tag>my-calibre-webserver-docker</tag>
-        <tag>OPDS</tag>
+        <tag>路由器</tag>
+        <tag>R6300v2</tag>
+        <tag>USB风扇</tag>
       </tags>
   </entry>
   <entry>
@@ -2287,40 +2322,6 @@
       </tags>
   </entry>
   <entry>
-    <title>给路由器加个风扇</title>
-    <url>/2020/06/22/%E7%BB%99%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8A%A0%E4%B8%AA%E9%A3%8E%E6%89%87/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>家里的老路由日常温度一般都在80°朝上，据说温度太高会导致网络卡顿、断线，但是说实话平时没啥感觉，可能主要是因为没打游戏，实时性要求不高吧。但是不管怎么样，高温容易导致老化，为了让它能寿命长一点，撸了一个 12cm 的 USB 静音风扇，毕竟马上就要天热了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828575232-1592828575274.png" alt="title"></p>
-<p>之所以选 USB 风扇，是因为路由器本身有2个 USB 接口，3.0 的接了 U 盘用于跑 Entware ，侧面还有个 2.0 的空闲着。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592834034877-1592834034879.png" alt="title"></p>
-<h2 id="吹风还是吸气？"><a href="#吹风还是吸气？" class="headerlink" title="吹风还是吸气？"></a>吹风还是吸气？</h2><p>网上有人说吹风效果好，有人说吸气效果好，这还真是个问题，买之前根本没想那么多，以为装上有风就行了。但是这难不倒我们爱折腾的人，毕竟实践才是检验真理的唯一办法。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592832489943-1592832489947.png" alt="title"></p>
-<h2 id="吹风测试"><a href="#吹风测试" class="headerlink" title="吹风测试"></a>吹风测试</h2><p>先按吹气的方式，为了保证效果，模拟了实际使用的情景，用自锁式尼龙扎带做了固定。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592831703491-1592831703494.png" alt="title"></p>
-<p>光记着拍照忘记截图了，直接说结论，最终温度稳定在65°左右。</p>
-<h2 id="吸气测试"><a href="#吸气测试" class="headerlink" title="吸气测试"></a>吸气测试</h2><p>把扎带剪了重新安装，这回只记得截图忘记拍照了，补了一张已经把铁网装上了。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/6-1592835788703.png" alt="title"></p>
-<p>不到2分钟，温度降到了70°</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828592120-1592828592123.png" alt="title"></p>
-<p>再过了2分多钟，温度降到了60°</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828626786-1592828626789.png" alt="title"></p>
-<p>最终基本稳定在55°左右</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/22/1592828695079-1592828695082.png" alt="title"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>不管吸气或者吹风，估计都和实际空间、接触面等等很多因素有关，很难说哪种更有效，但是在我这，显然是吸气的效果更好一些，相比吹风温度低了将近10°，而且个人感觉吸气的话可能路由器里的积灰会少一点。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>R6300V2 路由器无痛改装风扇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9haXNrLm1lL2FkZC1jcHUtZmFuLW9uLXI2MzAwdjItcm91dGVyLw==">https://aisk.me/add-cpu-fan-on-r6300v2-router/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>R6300v2</tag>
-        <tag>USB风扇</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>群晖app访问遇到的端口问题</title>
     <url>/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>什么是 NAS</strong></p>
@@ -2371,8 +2372,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>VPS</tag>
         <tag>NAS</tag>
         <tag>黑群</tag>
@@ -2416,8 +2417,8 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>群晖</tag>
+        <tag>docker</tag>
         <tag>homeassistant</tag>
         <tag>HA</tag>
         <tag>智能家居</tag>
@@ -2444,12 +2445,104 @@
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>frp</tag>
         <tag>群晖</tag>
+        <tag>frp</tag>
         <tag>NAS</tag>
         <tag>ngrok</tag>
         <tag>ZeroTier</tag>
         <tag>GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自带过滤功能的Hexo首页生成器插件</title>
+    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
+<blockquote>
+<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
+</blockquote>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
+<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
+<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>苏玉云2019年度作品（6P）</title>
+    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
+<ul>
+<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
+</li>
+<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
+</li>
+<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
+</li>
+<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
+</li>
+<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
+</li>
+<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>苏玉云作品</category>
+      </categories>
+      <tags>
+        <tag>服装设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>蜗牛星际C单的网路唤醒（续）</title>
+    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
+    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
+<p><strong>什么是网络唤醒</strong></p>
+<blockquote>
+<ul>
+<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
+<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
+<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
+<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
+</ul>
+</blockquote>
+<p>考虑到 LAN 模式下是OK的，先看看。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
+<p>点击边上的魔术棒，能看到广播地址。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
+<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
+<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>第二步：在 WolOn app 中 进行设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
+<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
+<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
+<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>蜗牛星际</tag>
+        <tag>WOL</tag>
       </tags>
   </entry>
   <entry>
@@ -2555,145 +2648,6 @@
       </tags>
   </entry>
   <entry>
-    <title>自带过滤功能的Hexo首页生成器插件</title>
-    <url>/2020/05/10/%E8%87%AA%E5%B8%A6%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD%E7%9A%84Hexo%E9%A6%96%E9%A1%B5%E7%94%9F%E6%88%90%E5%99%A8%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。</p>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>先卸载官方的插件，不然会引起一些冲突。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客目录下打开终端（windows下cmd模式），输入以下命令：</p>
-<blockquote>
-<p>$ npm install hexo-generator-index2 –save<br>$ npm uninstall hexo-generator-index –save</p>
-</blockquote>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>打开hexo博客根目录下的<code>_config.yml</code>，添加以下内容，过滤分类或者标签为hide的文章。</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment"># index2 generator是否包含官方的hexo-generator-index，默认true（包含）</span></span><br><span class="line">index2_include_index: true # defult is true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置index2 generator，可以是数组或对象</span></span><br><span class="line">index2_generator:</span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date # 按发布时间排序</span><br><span class="line">  exclude:</span><br><span class="line">    - tag  hide # 不包含标签为hide的文章</span><br><span class="line">    - category hide # 不包含分类为hide的文章</span><br></pre></td></tr></table></figure>
-<h1 id="测试结论"><a href="#测试结论" class="headerlink" title="测试结论"></a>测试结论</h1><p>确实也就只能隐藏首页，但是你可以通过tags标签中的hide来找到所有隐藏的文档。所以实用价值不大。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo-generator-index官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvLWdlbmVyYXRvci1pbmRleA==">https://github.com/hexojs/hexo-generator-index<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo-generator-index2官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phbWxpbmcvaGV4by1nZW5lcmF0b3ItaW5kZXgy">https://github.com/Jamling/hexo-generator-index2<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>苏玉云2019年度作品（6P）</title>
-    <url>/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>发发去年的。<br>还记得那天的大风<br>哈哈哈哈特别感谢两位老板的拍摄</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3337c9233db603d3f300ef2519858d0-1587792802356.jpg" alt="title"></p>
-<ul>
-<li><p>1<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3aec30a6931aed5eb32f587d48cdfdb-1587792834165.jpg" alt="title"></p>
-</li>
-<li><p>2<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b6affe0acbf5a5508a238cec29d657e-1587792968015.jpg" alt="title"></p>
-</li>
-<li><p>3<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/b31faf2adf0762bf39970b352d3efa7-1587793000684.jpg" alt="title"></p>
-</li>
-<li><p>4<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/03d0e5250f59f94f20a08be01210977-1587793027028.jpg" alt="title"></p>
-</li>
-<li><p>5<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/26584dcfb8a84af4ba98feb03c4854b-1587793063468.jpg" alt="title"></p>
-</li>
-<li><p>6<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/5a833d3e767bcc8e8c236f0dcf90135-1587793090589.jpg" alt="title"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>苏玉云作品</category>
-      </categories>
-      <tags>
-        <tag>服装设计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蜗牛星际C单的网路唤醒</title>
-    <url>/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/</url>
-    <content><![CDATA[<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><blockquote>
-<p>网路都说需要用把蜗牛真实 MAC 地址写到引导盘的 grub.cfg 中，但从实际测试看并不需要，因为无论是 Synology Assistant 还是路由器中识别的蜗牛的 MAC 地址，都和 grub.cfg 中的是一致的。</p>
-</blockquote>
-<h2 id="主板的设置"><a href="#主板的设置" class="headerlink" title="主板的设置"></a>主板的设置</h2><p>BIOS设置Advanced –&gt; ACPI Settings –&gt; Resume By Onboard LAN –&gt; Enabled</p>
-<p>忘记拍照了，囧~~</p>
-<h2 id="群晖的设置"><a href="#群晖的设置" class="headerlink" title="群晖的设置"></a>群晖的设置</h2><p>控制面板 –&gt; 硬件和电源 –&gt; 常规 –&gt; 电源自动回复</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590840044831-1590840044858.png" alt="title"></p>
-<h1 id="局域网唤醒"><a href="#局域网唤醒" class="headerlink" title="局域网唤醒"></a>局域网唤醒</h1><h2 id="用-Synology-Assistant"><a href="#用-Synology-Assistant" class="headerlink" title="用 Synology Assistant"></a>用 Synology Assistant</h2><p>首先要绑定群晖的MAC。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850708234-1590850708235.png" alt="title"></p>
-<p>唤醒时只要选中需要唤醒的设备，右键选 WOL –&gt; 唤醒即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590900153275-1590900153278.png" alt="title"></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590851045065-1590851045068.png" alt="title"></p>
-<p>唤醒成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850411818-1590850411820.png" alt="title"></p>
-<h2 id="用路由器"><a href="#用路由器" class="headerlink" title="用路由器"></a>用路由器</h2><p>网络工具 –&gt; 通过网络（LAN）唤醒</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850947122-1590850947125.png" alt="title"></p>
-<p>如果不想每次输入MAC地址，可以把要蜗牛加到离线列表中。</p>
-<h1 id="远程唤醒"><a href="#远程唤醒" class="headerlink" title="远程唤醒"></a>远程唤醒</h1><h2 id="群晖管家APP"><a href="#群晖管家APP" class="headerlink" title="群晖管家APP"></a>群晖管家APP</h2><p>群晖管家APP支持局域网和远程唤醒，白裙通过 QuickConnect 连接，黑裙需要先用 frp 将端口 5000 映射到域名，再通过域名连到群晖。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590854795867-1590854795871.png" alt="title"></p>
-<p><strong>要确保以前成功登陆过。</strong></p>
-<p>选中需要唤醒的离线设备</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590854980536-1590854980540.png" alt="title"></p>
-<p>局域网唤醒（WOL）</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590855195202-1590855195203.png" alt="title"></p>
-<p>发送成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590855165367-1590855165368.png" alt="title"></p>
-<h2 id="Android网络唤醒工具"><a href="#Android网络唤醒工具" class="headerlink" title="Android网络唤醒工具"></a>Android网络唤醒工具</h2><p>同样支持局域网和远程唤醒，局域网测试OK</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590898111757-1590898111797.png" alt="title"></p>
-<p>广域网用 frp 映射的方式没成功，尝试了zerotier也没搞定，<strong>需要注意的是zerotier中的MAC和路由器中识别到的MAC是不同的</strong></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590900396930-1590900396931.png" alt="title"></p>
-<p>先埋个坑，等有闲心了再来研究，反正有群晖管家APP也就够了。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>群辉相关 篇二：实现群辉Nas的外网远程唤醒，以手机外网唤醒群晖Nas为例<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EzZ3Zrd3Y1Lw==">https://post.smzdm.com/p/a3gvkwv5/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>蜗牛星际</tag>
-        <tag>WOL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蜗牛星际C单的网路唤醒（续）</title>
-    <url>/2020/06/05/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92%EF%BC%88%E7%BB%AD%EF%BC%89/</url>
-    <content><![CDATA[<p>在<a href="https://laosu.ml/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/">上一篇</a>中，尝试用 Android 网络唤醒工具进行远程唤醒时没成功。所以今天从原理上开始研究。</p>
-<p><strong>什么是网络唤醒</strong></p>
-<blockquote>
-<ul>
-<li>网络唤醒（Wake-on-LAN，WOL）是一种计算机局域网唤醒技术，使局域网内处于关机或休眠状态的计算机，将状态转换成引导（Boot Loader）或运行状态。</li>
-<li>网络唤醒在一般的局域网环境里使用有限广播地址（255.255.255.255）即可，由于路由器都不转发目的地址为有限广播地址的数据报，因此在复杂网络情况下通常使用子网定向广播地址。</li>
-<li>魔法数据包是一个广播帧，包含目标计算机的MAC地址。由于 MAC 地址的唯一性，使数据包可以在网络中被唯一的识别。魔法数据包发送通常使用无连接的传输协议，如 UDP ，发送端口为 7 或 9 ，这只是通常做法，没有限制。</li>
-<li>在魔法数据包内，每次都会先有连续6个”FF”（十六进制，换算成二进制即：11111111）的数据，即：FF FF FF FF FF FF，在连续6个”FF”后则开始带出MAC地址信息，有时还会带出4字节或6字节的密码，一旦经由网卡侦测、解读、研判（广播）魔法数据包的内容，内容中的MAC地址、密码若与电脑自身的地址、密码吻合，就会引导唤醒、引导的程序。</li>
-</ul>
-</blockquote>
-<p>考虑到 LAN 模式下是OK的，先看看。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920333622-1590920333626.png" alt="title"></p>
-<p>点击边上的魔术棒，能看到广播地址。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590920373468-1590920373470.png" alt="title"></p>
-<p>既然 LAN 模式没问题，接下来我们要做的就是想办法把广播地址给映射到外网去。</p>
-<p>第一步：在 <code>frpc.ini</code> 中，增加一段，</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[wol_wn]</span></span><br><span class="line"><span class="attr">type</span> = udp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.255</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">20495</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p>第二步：在 WolOn app 中 进行设置</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590918052034-1590918052036.png" alt="title"></p>
-<p>当然填域名也是可以的，只要是指向 frps 公网 IP 的域名都行。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>网络唤醒（WOL）全解指南：原理篇<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95cS5hbGl5dW4uY29tL2FydGljbGVzLzY0MDg5OQ==">https://yq.aliyun.com/articles/640899<i class="fa fa-external-link-alt"></i></span></p>
-<p>网络唤醒<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU3JUI2JUIyJUU4JUI3JUFGJUU1JTk2JTlBJUU5JTg2JTky">https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E5%96%9A%E9%86%92<i class="fa fa-external-link-alt"></i></span></p>
-<p>如何远程开启你的电脑：WoL的原理和陷阱<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yODg1OTYyMA==">https://zhuanlan.zhihu.com/p/28859620<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>蜗牛星际</tag>
-        <tag>WOL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>超好用的Mac截图软件iShot</title>
     <url>/2020/06/27/%E8%B6%85%E5%A5%BD%E7%94%A8%E7%9A%84Mac%E6%88%AA%E5%9B%BE%E8%BD%AF%E4%BB%B6iShot/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为日常写文档经常要截图，所以一款好的截图软件对于提升工作效率有很大的帮助，之前一直用的腾讯的截图（Jietu），虽然只有一个简单的选框截图模式，但具备丰富的标注功能，完全可以胜任工作需要，只是自从升级到最新版本后，遇到了包括热键不响应等各种问题，老的安装包又找不到了，所以只能重新寻找新的替代方案。</p>
@@ -2743,55 +2697,50 @@
       </tags>
   </entry>
   <entry>
-    <title>跨平台的工具箱uTools</title>
-    <url>/2020/06/17/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E7%AE%B1uTools/</url>
-    <content><![CDATA[<p><strong>什么是uTools？</strong></p>
-<blockquote>
-<p>uTools 是一个极简、插件化、跨平台的现代化桌面软件。通过自由选配丰富的插件，打造你得心应手的工具集合。<br>通过快捷键（默认 alt+space ）就可以快速呼出这个搜索框。它相当聪明，可以支持输入、拖拽、自动粘贴等作为输入源，相应的插件也早已准备就绪，统一的设计风格和操作方式，助你高效的得到结果。</p>
+    <title>蜗牛星际C单的网路唤醒</title>
+    <url>/2020/05/30/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85C%E5%8D%95%E7%9A%84%E7%BD%91%E8%B7%AF%E5%94%A4%E9%86%92/</url>
+    <content><![CDATA[<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><blockquote>
+<p>网路都说需要用把蜗牛真实 MAC 地址写到引导盘的 grub.cfg 中，但从实际测试看并不需要，因为无论是 Synology Assistant 还是路由器中识别的蜗牛的 MAC 地址，都和 grub.cfg 中的是一致的。</p>
 </blockquote>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>第一次接触 uTools 应该是在一年多之前，因为搜索内网穿透软件找到了它，功能简单好用，让我印象非常深刻。时隔一年，插件中心已经有了上百个，功能也已经涵盖了方方面面。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592398983061-1592398983093.png" alt="title"></p>
-<p>目前已经支持的客户端版本涵盖了主流的 Windows、Linux 和 MacOS，顺便提一下，uTools 是基于 electron 开发的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592399196029-1592399196033.png" alt="title"></p>
-<h1 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h1><h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><h3 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h3><p>uTools 作为一个快速的程序启动器，界面非常简单，和 Mac 上的 Spotlight 、Alfred 非常相似，当然 Windows 下也有类似的应用，比如 Wox 、 Listary 等。</p>
-<p>默认 alt+space 就可以快速呼出这个搜索框</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592399937316-1592399937321.png" alt="title"></p>
-<h3 id="状态栏图标"><a href="#状态栏图标" class="headerlink" title="状态栏图标"></a>状态栏图标</h3><p>工具栏上 uTools 图标上鼠标右键</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592400446491-1592400446494.png" alt="title"></p>
-<p>最上面是微信账号，通过微信登录后可以同步一些使用数据到云端，非常方便。</p>
-<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><p>在没有安装任何插件的情况下，uTools 和 Mac 上的 Spotlight 很像，强大的快速启动，支持首字母检索等。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401324638-1592401324640.png" alt="title"></p>
-<h2 id="插件中心"><a href="#插件中心" class="headerlink" title="插件中心"></a>插件中心</h2><p>可以从工具条的右键菜单进，也可以呼出主界面输入 <code>cj</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401432429-1592401432435.png" alt="title"></p>
-<p>一开始是空空如也的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401522853-1592401522856.png" alt="title"></p>
-<p>先试试我们之前提到的内外穿透，在插件中心搜索 <code>内网</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401610163-1592401610165.png" alt="title"></p>
-<p>点击会弹出插件的简介</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401656579-1592401656580.png" alt="title"></p>
-<p>点右上方蓝色的 <code>下载</code> 按钮，安装完成后会变成红色 <code>移除</code>。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402040543-1592402040545.png" alt="title"></p>
-<p>点红框中的 <code>NAT</code> 或者 <code>内网穿透</code> 进入插件的设置界面。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402156235-1592402156236.png" alt="title"></p>
-<p>设置好之后点 <code>连接</code> 即可。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402242685-1592402242687.png" alt="title"></p>
-<p>接下来我们在浏览器中输入 <code>http://mynas.utools.club/</code> 就可以访问了，非常适合web开发的远程演示，小程序开发等。当然这个插件不仅仅可以穿透web服务，也可以用于远程调试。</p>
-<p>打开连接方式，我们可以看到除了http外，还有本地目录和 tcp 服务<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402493861-1592402493864.png" alt="title"></p>
-<h2 id="自定义插件"><a href="#自定义插件" class="headerlink" title="自定义插件"></a>自定义插件</h2><p>uTools 一切皆插件的设计，使得我们可以开发属于自己的插件，官方提供了 【<span class="exturl" data-url="aHR0cHM6Ly91LnRvb2xzL2RvY3MvZGV2ZWxvcGVyL3dlbGNvbWUuaHRtbA==">开发文档<i class="fa fa-external-link-alt"></i></span>】</p>
-<h2 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h2><p>微信登录后可一键开启，便于在不同设备之间共享数据，或是预防重装系统造成数据丢失，目前是免费的。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>插件非常多，需要根据各人的需要慢慢摸索，当你熟悉之后，它会成为你专属的生产力工具集！</p>
+<h2 id="主板的设置"><a href="#主板的设置" class="headerlink" title="主板的设置"></a>主板的设置</h2><p>BIOS设置Advanced –&gt; ACPI Settings –&gt; Resume By Onboard LAN –&gt; Enabled</p>
+<p>忘记拍照了，囧~~</p>
+<h2 id="群晖的设置"><a href="#群晖的设置" class="headerlink" title="群晖的设置"></a>群晖的设置</h2><p>控制面板 –&gt; 硬件和电源 –&gt; 常规 –&gt; 电源自动回复</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590840044831-1590840044858.png" alt="title"></p>
+<h1 id="局域网唤醒"><a href="#局域网唤醒" class="headerlink" title="局域网唤醒"></a>局域网唤醒</h1><h2 id="用-Synology-Assistant"><a href="#用-Synology-Assistant" class="headerlink" title="用 Synology Assistant"></a>用 Synology Assistant</h2><p>首先要绑定群晖的MAC。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850708234-1590850708235.png" alt="title"></p>
+<p>唤醒时只要选中需要唤醒的设备，右键选 WOL –&gt; 唤醒即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590900153275-1590900153278.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590851045065-1590851045068.png" alt="title"></p>
+<p>唤醒成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850411818-1590850411820.png" alt="title"></p>
+<h2 id="用路由器"><a href="#用路由器" class="headerlink" title="用路由器"></a>用路由器</h2><p>网络工具 –&gt; 通过网络（LAN）唤醒</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/30/1590850947122-1590850947125.png" alt="title"></p>
+<p>如果不想每次输入MAC地址，可以把要蜗牛加到离线列表中。</p>
+<h1 id="远程唤醒"><a href="#远程唤醒" class="headerlink" title="远程唤醒"></a>远程唤醒</h1><h2 id="群晖管家APP"><a href="#群晖管家APP" class="headerlink" title="群晖管家APP"></a>群晖管家APP</h2><p>群晖管家APP支持局域网和远程唤醒，白裙通过 QuickConnect 连接，黑裙需要先用 frp 将端口 5000 映射到域名，再通过域名连到群晖。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590854795867-1590854795871.png" alt="title"></p>
+<p><strong>要确保以前成功登陆过。</strong></p>
+<p>选中需要唤醒的离线设备</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590854980536-1590854980540.png" alt="title"></p>
+<p>局域网唤醒（WOL）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590855195202-1590855195203.png" alt="title"></p>
+<p>发送成功</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590855165367-1590855165368.png" alt="title"></p>
+<h2 id="Android网络唤醒工具"><a href="#Android网络唤醒工具" class="headerlink" title="Android网络唤醒工具"></a>Android网络唤醒工具</h2><p>同样支持局域网和远程唤醒，局域网测试OK</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590898111757-1590898111797.png" alt="title"></p>
+<p>广域网用 frp 映射的方式没成功，尝试了zerotier也没搞定，<strong>需要注意的是zerotier中的MAC和路由器中识别到的MAC是不同的</strong></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/31/1590900396930-1590900396931.png" alt="title"></p>
+<p>先埋个坑，等有闲心了再来研究，反正有群晖管家APP也就够了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>uTools官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly91LnRvb2xzLw==">https://u.tools/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群辉相关 篇二：实现群辉Nas的外网远程唤醒，以手机外网唤醒群晖Nas为例<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EzZ3Zrd3Y1Lw==">https://post.smzdm.com/p/a3gvkwv5/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>各种折腾</category>
       </categories>
       <tags>
-        <tag>electron</tag>
-        <tag>utool</tag>
-        <tag>工具</tag>
-        <tag>效率</tag>
+        <tag>群晖</tag>
+        <tag>蜗牛星际</tag>
+        <tag>WOL</tag>
       </tags>
   </entry>
   <entry>
@@ -2863,6 +2812,58 @@
         <tag>内网穿透</tag>
         <tag>nps</tag>
         <tag>nas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨平台的工具箱uTools</title>
+    <url>/2020/06/17/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%B7%A5%E5%85%B7%E7%AE%B1uTools/</url>
+    <content><![CDATA[<p><strong>什么是uTools？</strong></p>
+<blockquote>
+<p>uTools 是一个极简、插件化、跨平台的现代化桌面软件。通过自由选配丰富的插件，打造你得心应手的工具集合。<br>通过快捷键（默认 alt+space ）就可以快速呼出这个搜索框。它相当聪明，可以支持输入、拖拽、自动粘贴等作为输入源，相应的插件也早已准备就绪，统一的设计风格和操作方式，助你高效的得到结果。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>第一次接触 uTools 应该是在一年多之前，因为搜索内网穿透软件找到了它，功能简单好用，让我印象非常深刻。时隔一年，插件中心已经有了上百个，功能也已经涵盖了方方面面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592398983061-1592398983093.png" alt="title"></p>
+<p>目前已经支持的客户端版本涵盖了主流的 Windows、Linux 和 MacOS，顺便提一下，uTools 是基于 electron 开发的。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592399196029-1592399196033.png" alt="title"></p>
+<h1 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h1><h2 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h2><h3 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h3><p>uTools 作为一个快速的程序启动器，界面非常简单，和 Mac 上的 Spotlight 、Alfred 非常相似，当然 Windows 下也有类似的应用，比如 Wox 、 Listary 等。</p>
+<p>默认 alt+space 就可以快速呼出这个搜索框</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592399937316-1592399937321.png" alt="title"></p>
+<h3 id="状态栏图标"><a href="#状态栏图标" class="headerlink" title="状态栏图标"></a>状态栏图标</h3><p>工具栏上 uTools 图标上鼠标右键</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592400446491-1592400446494.png" alt="title"></p>
+<p>最上面是微信账号，通过微信登录后可以同步一些使用数据到云端，非常方便。</p>
+<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><p>在没有安装任何插件的情况下，uTools 和 Mac 上的 Spotlight 很像，强大的快速启动，支持首字母检索等。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401324638-1592401324640.png" alt="title"></p>
+<h2 id="插件中心"><a href="#插件中心" class="headerlink" title="插件中心"></a>插件中心</h2><p>可以从工具条的右键菜单进，也可以呼出主界面输入 <code>cj</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401432429-1592401432435.png" alt="title"></p>
+<p>一开始是空空如也的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401522853-1592401522856.png" alt="title"></p>
+<p>先试试我们之前提到的内外穿透，在插件中心搜索 <code>内网</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401610163-1592401610165.png" alt="title"></p>
+<p>点击会弹出插件的简介</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592401656579-1592401656580.png" alt="title"></p>
+<p>点右上方蓝色的 <code>下载</code> 按钮，安装完成后会变成红色 <code>移除</code>。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402040543-1592402040545.png" alt="title"></p>
+<p>点红框中的 <code>NAT</code> 或者 <code>内网穿透</code> 进入插件的设置界面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402156235-1592402156236.png" alt="title"></p>
+<p>设置好之后点 <code>连接</code> 即可。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402242685-1592402242687.png" alt="title"></p>
+<p>接下来我们在浏览器中输入 <code>http://mynas.utools.club/</code> 就可以访问了，非常适合web开发的远程演示，小程序开发等。当然这个插件不仅仅可以穿透web服务，也可以用于远程调试。</p>
+<p>打开连接方式，我们可以看到除了http外，还有本地目录和 tcp 服务<br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/17/1592402493861-1592402493864.png" alt="title"></p>
+<h2 id="自定义插件"><a href="#自定义插件" class="headerlink" title="自定义插件"></a>自定义插件</h2><p>uTools 一切皆插件的设计，使得我们可以开发属于自己的插件，官方提供了 【<span class="exturl" data-url="aHR0cHM6Ly91LnRvb2xzL2RvY3MvZGV2ZWxvcGVyL3dlbGNvbWUuaHRtbA==">开发文档<i class="fa fa-external-link-alt"></i></span>】</p>
+<h2 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h2><p>微信登录后可一键开启，便于在不同设备之间共享数据，或是预防重装系统造成数据丢失，目前是免费的。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>插件非常多，需要根据各人的需要慢慢摸索，当你熟悉之后，它会成为你专属的生产力工具集！</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>uTools官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly91LnRvb2xzLw==">https://u.tools/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>electron</tag>
+        <tag>utool</tag>
+        <tag>工具</tag>
+        <tag>效率</tag>
       </tags>
   </entry>
   <entry>
