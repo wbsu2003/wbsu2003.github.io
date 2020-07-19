@@ -3145,4 +3145,111 @@
         <tag>deploy_git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>用Bitwarden自建密码管理系统</title>
+    <url>/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<p><strong>什么是Bitwarden?</strong></p>
+<blockquote>
+<p>Bitwarden 是一款自由且开源的密码管理服务，用户可在加密的保管库中存储敏感信息（例如网站登录凭据）。Bitwarden平台提供有多种客户端应用程序，包括网页用户界面、桌面应用，浏览器扩展、移动应用以及命令行界面。Bitwarden 提供云托管服务，并支持自行部署解决方案。【维基百科】</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用户信息泄露事件时有发生，连 facebook 这样的大网站也不可避免，当你多个网站使用了同一个密码，假如你使用了 chrome 浏览器自动保存填充密码时，在密码被泄露后它会给出提醒。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/13/1594570093933-1594570093937.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/13/1594602446840-1594602446869.png" alt="title"></p>
+<p>所以每个网站、每个应用使用独立的密码是非常必要的。那为什么不用 chrome 自带的密码管理器呢？因为它无法自主添加网站，所以还需要配合其他记录工具使用。</p>
+<p>在上一篇中我们介绍了<a href="https://laosu.ml/2020/07/11/%E5%85%8D%E8%B4%B9%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8KeePass/">《免费跨平台密码管理器KeePass》</a>，其使用本地密码数据库保存，通过云盘同步的方式。属于一个去中心化的方案，也可以说是个离线版的方案。而今天要介绍的 bitwarden 正好相反，是基于服务器的一个方案，今天我们就来介绍如何在群晖上，用 bitwarden 自建密码管理服务器，来保障自己的数据安全。</p>
+<h1 id="为什么要自建服务器"><a href="#为什么要自建服务器" class="headerlink" title="为什么要自建服务器"></a>为什么要自建服务器</h1><p>Bitwarden自己的服务器安全性肯定是没问题的，但是放在别人服务器上总是有点担忧，万一服务器挂了呢？（最近onedrive for business就一直用不了），另一方面国内访问国外网站，总是不太友好，所以干脆自建。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
+<li>一个公网IP；</li>
+<li>一个域名和SSL证书；</li>
+<li>支持Docker的群晖主机（黑白无所谓）；</li>
+</ol>
+<h1 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h1><p><code>bitwarden/setup</code> 是官方镜像，因 Bitwarden 服务器使用 .Net 开发，Docker 镜像体积过大，此外它使用 Microsoft SQL Server 数据库，这个数据库对服务器性能要求比较高。</p>
+<p>有人利用 Rust 重写了一遍，这个项目的 Docker 镜像叫做<br> <code>bitwardenrs/server</code>，这个镜像体积比较小，对服务器性能要求比较低，还可以使用 SQLite 或 MariaDB/MySQL 数据库，而无需像官方服务器那样使用专有的 Microsoft SQL Server。</p>
+<p>所以本次部署采用该镜像。代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL2JpdHdhcmRlbl9ycw==">https://github.com/dani-garcia/bitwarden_rs<i class="fa fa-external-link-alt"></i></span></p>
+<p>打开群晖Docker — 注册表 — 搜 bitwarden ，第一个 <code>bitwardenrs/server</code> 就是，双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594540732235-1594540732239.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594542615497-1594542615499.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>因为 80 端口被占用了，所以需要另外指定。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594542209311-1594542209315.png" alt="title"></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>新增四个变量</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置是否开启 Web 客户端。如果开启，可以通过访问你的域名来打开 Web 客户端，用户登录后即可通过网页管理密码。因为注册用户需要，所以也暂且先打开；</span></span><br><span class="line"><span class="attr">WEB_VAULT_ENABLED</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制是否开放用户注册，因为你必须先注册才能存储数据，所以暂且先打开；搭建好注册后改成false</span></span><br><span class="line"><span class="attr">SIGNUPS_ALLOWED</span> = <span class="literal">true</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否开启WebSocket</span></span><br><span class="line"><span class="attr">WEBSOCKET_ENABLED</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志保存文件路径</span></span><br><span class="line"><span class="attr">LOG_FILE</span> = /data/bitwarden.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594558929684-1594558929685.png" alt="title"></p>
+<h1 id="服务端设置"><a href="#服务端设置" class="headerlink" title="服务端设置"></a>服务端设置</h1><p>虽然 <code>bitwardenrs</code> 已经可以运行起来，但是 <code>bitwardenrs</code> 必须要通过https 访问，否则无法进行注册、登陆等一系列的操作。</p>
+<h2 id="反向代理设置"><a href="#反向代理设置" class="headerlink" title="反向代理设置"></a>反向代理设置</h2><p>进入群晖的 “控制面板” - “Synology 应用程序门户” - “反向代理服务器” 页面 (找不到的话请点击高级模式) ，如图添加一条 “反向代理服务器规则”。（“来源端口” 你自己定义，“目的地端口” ）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824175603-1594824175604.png" alt="title"></p>
+<ul>
+<li>来源处协议必须选择 https，主机名为你在外网访问群晖的域名，端口填写你想要外网访问的端口，这里假如为 9443；</li>
+<li></li>
+<li>目的地处协议选择 http，主机名填写 localhost，对应上面配置容器参数步骤中设置的本地端口 8880；</li>
+<li></li>
+<li>完成后点击确定。</li>
+</ul>
+<h2 id="上传证书"><a href="#上传证书" class="headerlink" title="上传证书"></a>上传证书</h2><p>进入群晖的 “控制面板” - “安全性” - “证书” 页面，将你的域名证书文件和私钥文件导入群晖中。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824544185-1594824544188.png" alt="title"></p>
+<p>以 dnspod 申请的证书为例。将下载下来的证书文件压缩包解压。如图导入群晖中：</p>
+<blockquote>
+<ul>
+<li>Nginx 文件夹里的 2_域名.key 文件放入 “私钥” 中</li>
+<li>Nginx 文件夹里的 1_域名_bundle.crt 文件放入 “证书” 中</li>
+<li>“中间证书” 留空</li>
+</ul>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<ul>
+<li>Apache 文件夹里的 3_域名.key 文件放入 “私钥” 中</li>
+<li>Apache 文件夹里的 2_域名.crt 文件放入 “证书” 中</li>
+<li>Apache 文件夹里的 1_域名.crt 放入 “中间证书” 中</li>
+</ul>
+</blockquote>
+<p>在” 证书 “页面设置刚才添加的反向代理服务器规则使用此证书。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824926962-1594824926964.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="Web端"><a href="#Web端" class="headerlink" title="Web端"></a>Web端</h2><p>至此，Bitwarden 服务端基本就搭建好了。启动 Bitwarden 容器后，浏览器输入 https://群晖的 ip:9443，应该就可以进入登录页面了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594566250628-1594566250631.png" alt="title"></p>
+<p>然后点击注册按钮填写我们的邮箱和主密码，请务必牢记你的主密码，因为一旦遗失，你保存的密码就再也找不回来了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594785522592-1594785522644.png" alt="title"></p>
+<p>主界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594567089388-1594567089390.png" alt="title"></p>
+<p>注册完成后如果不想其他用户进行注册的需要关闭注册及邀请功能。在群晖中停止一下容器，选择编辑容器</p>
+<p>添加环境变量 </p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment">#关闭注册</span></span><br><span class="line"><span class="attr">SIGNUPS_ALLOWED</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭邀请</span></span><br><span class="line"><span class="attr">INVITATIONS_ALLOWED</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>应用后重启容器。</p>
+<h2 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594540953735-1594540953737.png" alt="title"></p>
+<p>点击左上角的齿轮图标进入服务器设置界面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594825860759-1594825860763.png" alt="title"></p>
+<p>在服务器URL中填入服务器地址(如：https://群晖的 ip:9443)后保存。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594825962671-1594825962673.png" alt="title"></p>
+<p>返回主界面后点击登录按钮，用自己注册的账号进行登录。</p>
+<p>安装完插件后，在浏览器中鼠标右键会增加 Bitwarden 。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594828358678-1594828358682.png" alt="title"></p>
+<h2 id="android-app"><a href="#android-app" class="headerlink" title="android app"></a>android app</h2><p>“设置” - “自动填写” - “自动填充服务” - “启用”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594785703887-1594785703894.png" alt="title"></p>
+<p>其他用法和设置可以自行探索。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>这个docker镜像对于服务器的要求不高；</li>
+<li>除了最基本的密码保存、上传附件等，官方需要付费使用的 TOTP 、密码检测等功能也都是可以直接使用的；</li>
+<li>如果之前用过其他的密码管理器，可以导入到 Bitwarden；</li>
+<li>最好启用两步登录，安全性更高一点；</li>
+<li>数据在自己手里，可能会感觉会更安全点吧。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>官网主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iaXR3YXJkZW4uY29tLw==">https://bitwarden.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>放弃付费1Password改用免费开源的bitwarden_rs自建密码管理系统-安装,使用和备份<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93emZvdS5jb20vYml0d2FyZGVuLXJzLw==">https://wzfou.com/bitwarden-rs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用群晖搭建第三方 Bitwarden 密码服务器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wZW5wZW5ndWFuZ3Vhbi5jb20vMTAyNzEuaHRtbA==">https://penpenguanguan.com/10271.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用群晖 Docker 搭建 bitwarden_rs 密码服务器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnd4bG9zdC5jb20vZG9ja2VyX2JpdHdhcmRlbl9ycy5odG1s">https://blog.wxlost.com/docker_bitwarden_rs.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖可以这么玩 - 自建Bitwarden服务从此告别忘记密码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2t3dzNsLw==">https://post.smzdm.com/p/a4wkww3l/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Installing bitwarden on Synology Diskstation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua2FydG9sby5kZS8yMDIwLzAyLzAzL2luc3RhbGxpbmctYml0d2FyZGVuLW9uLXN5bm9sb2d5LWRpc2tzdGF0aW9uLw==">https://www.kartolo.de/2020/02/03/installing-bitwarden-on-synology-diskstation/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>密码</tag>
+        <tag>bitwarden</tag>
+      </tags>
+  </entry>
 </search>
