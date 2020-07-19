@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是Bitwarden?  Bitwarden 是一款自由且开源的密码管理服务，用户可在加密的保管库中存储敏感信息（例如网站登录凭据）。Bitwarden平台提供有多种客户端应用程序，包括网页用户界面、桌面应用，浏览器扩展、移动应用以及命令行界面。Bitwarden 提供云托管服务，并支持自行部署解决方案。【维基百科】  前言用户信息泄露事件时有发生，连 facebook 这样的大网站也不可避免">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Bitwarden自建密码管理系统">
+<meta property="og:url" content="https://laosu.ml/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="什么是Bitwarden?  Bitwarden 是一款自由且开源的密码管理服务，用户可在加密的保管库中存储敏感信息（例如网站登录凭据）。Bitwarden平台提供有多种客户端应用程序，包括网页用户界面、桌面应用，浏览器扩展、移动应用以及命令行界面。Bitwarden 提供云托管服务，并支持自行部署解决方案。【维基百科】  前言用户信息泄露事件时有发生，连 facebook 这样的大网站也不可避免">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594539899989-1594539899993.png">
+<meta property="article:published_time" content="2020-07-18T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-07-19T08:37:22.237Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="密码">
+<meta property="article:tag" content="bitwarden">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594539899989-1594539899993.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>用Bitwarden自建密码管理系统 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用Bitwarden自建密码管理系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-18 23:00:00" itemprop="dateCreated datePublished" datetime="2020-07-18T23:00:00+08:00">2020-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-19 16:37:22" itemprop="dateModified" datetime="2020-07-19T16:37:22+08:00">2020-07-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594539899989-1594539899993.png" itemprop="contentUrl">
+        </div>
+        <p><strong>什么是Bitwarden?</strong></p>
+<blockquote>
+<p>Bitwarden 是一款自由且开源的密码管理服务，用户可在加密的保管库中存储敏感信息（例如网站登录凭据）。Bitwarden平台提供有多种客户端应用程序，包括网页用户界面、桌面应用，浏览器扩展、移动应用以及命令行界面。Bitwarden 提供云托管服务，并支持自行部署解决方案。【维基百科】</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>用户信息泄露事件时有发生，连 facebook 这样的大网站也不可避免，当你多个网站使用了同一个密码，假如你使用了 chrome 浏览器自动保存填充密码时，在密码被泄露后它会给出提醒。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/13/1594570093933-1594570093937.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/13/1594602446840-1594602446869.png" alt="title"></p>
+<p>所以每个网站、每个应用使用独立的密码是非常必要的。那为什么不用 chrome 自带的密码管理器呢？因为它无法自主添加网站，所以还需要配合其他记录工具使用。</p>
+<p>在上一篇中我们介绍了<a href="https://laosu.ml/2020/07/11/%E5%85%8D%E8%B4%B9%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8KeePass/">《免费跨平台密码管理器KeePass》</a>，其使用本地密码数据库保存，通过云盘同步的方式。属于一个去中心化的方案，也可以说是个离线版的方案。而今天要介绍的 bitwarden 正好相反，是基于服务器的一个方案，今天我们就来介绍如何在群晖上，用 bitwarden 自建密码管理服务器，来保障自己的数据安全。</p>
+<h1 id="为什么要自建服务器"><a href="#为什么要自建服务器" class="headerlink" title="为什么要自建服务器"></a>为什么要自建服务器</h1><p>Bitwarden自己的服务器安全性肯定是没问题的，但是放在别人服务器上总是有点担忧，万一服务器挂了呢？（最近onedrive for business就一直用不了），另一方面国内访问国外网站，总是不太友好，所以干脆自建。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
+<li>一个公网IP；</li>
+<li>一个域名和SSL证书；</li>
+<li>支持Docker的群晖主机（黑白无所谓）；</li>
+</ol>
+<h1 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h1><p><code>bitwarden/setup</code> 是官方镜像，因 Bitwarden 服务器使用 .Net 开发，Docker 镜像体积过大，此外它使用 Microsoft SQL Server 数据库，这个数据库对服务器性能要求比较高。</p>
+<p>有人利用 Rust 重写了一遍，这个项目的 Docker 镜像叫做<br> <code>bitwardenrs/server</code>，这个镜像体积比较小，对服务器性能要求比较低，还可以使用 SQLite 或 MariaDB/MySQL 数据库，而无需像官方服务器那样使用专有的 Microsoft SQL Server。</p>
+<p>所以本次部署采用该镜像。代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhbmktZ2FyY2lhL2JpdHdhcmRlbl9ycw==">https://github.com/dani-garcia/bitwarden_rs<i class="fa fa-external-link-alt"></i></span></p>
+<p>打开群晖Docker — 注册表 — 搜 bitwarden ，第一个 <code>bitwardenrs/server</code> 就是，双击下载，tag选择 latest</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594540732235-1594540732239.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594542615497-1594542615499.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>因为 80 端口被占用了，所以需要另外指定。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594542209311-1594542209315.png" alt="title"></p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>新增四个变量</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置是否开启 Web 客户端。如果开启，可以通过访问你的域名来打开 Web 客户端，用户登录后即可通过网页管理密码。因为注册用户需要，所以也暂且先打开；</span></span><br><span class="line"><span class="attr">WEB_VAULT_ENABLED</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控制是否开放用户注册，因为你必须先注册才能存储数据，所以暂且先打开；搭建好注册后改成false</span></span><br><span class="line"><span class="attr">SIGNUPS_ALLOWED</span> = <span class="literal">true</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否开启WebSocket</span></span><br><span class="line"><span class="attr">WEBSOCKET_ENABLED</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志保存文件路径</span></span><br><span class="line"><span class="attr">LOG_FILE</span> = /data/bitwarden.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594558929684-1594558929685.png" alt="title"></p>
+<h1 id="服务端设置"><a href="#服务端设置" class="headerlink" title="服务端设置"></a>服务端设置</h1><p>虽然 <code>bitwardenrs</code> 已经可以运行起来，但是 <code>bitwardenrs</code> 必须要通过https 访问，否则无法进行注册、登陆等一系列的操作。</p>
+<h2 id="反向代理设置"><a href="#反向代理设置" class="headerlink" title="反向代理设置"></a>反向代理设置</h2><p>进入群晖的 “控制面板” - “Synology 应用程序门户” - “反向代理服务器” 页面 (找不到的话请点击高级模式) ，如图添加一条 “反向代理服务器规则”。（“来源端口” 你自己定义，“目的地端口” ）</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824175603-1594824175604.png" alt="title"></p>
+<ul>
+<li>来源处协议必须选择 https，主机名为你在外网访问群晖的域名，端口填写你想要外网访问的端口，这里假如为 9443；</li>
+<li></li>
+<li>目的地处协议选择 http，主机名填写 localhost，对应上面配置容器参数步骤中设置的本地端口 8880；</li>
+<li></li>
+<li>完成后点击确定。</li>
+</ul>
+<h2 id="上传证书"><a href="#上传证书" class="headerlink" title="上传证书"></a>上传证书</h2><p>进入群晖的 “控制面板” - “安全性” - “证书” 页面，将你的域名证书文件和私钥文件导入群晖中。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824544185-1594824544188.png" alt="title"></p>
+<p>以 dnspod 申请的证书为例。将下载下来的证书文件压缩包解压。如图导入群晖中：</p>
+<blockquote>
+<ul>
+<li>Nginx 文件夹里的 2_域名.key 文件放入 “私钥” 中</li>
+<li>Nginx 文件夹里的 1_域名_bundle.crt 文件放入 “证书” 中</li>
+<li>“中间证书” 留空</li>
+</ul>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<ul>
+<li>Apache 文件夹里的 3_域名.key 文件放入 “私钥” 中</li>
+<li>Apache 文件夹里的 2_域名.crt 文件放入 “证书” 中</li>
+<li>Apache 文件夹里的 1_域名.crt 放入 “中间证书” 中</li>
+</ul>
+</blockquote>
+<p>在” 证书 “页面设置刚才添加的反向代理服务器规则使用此证书。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594824926962-1594824926964.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="Web端"><a href="#Web端" class="headerlink" title="Web端"></a>Web端</h2><p>至此，Bitwarden 服务端基本就搭建好了。启动 Bitwarden 容器后，浏览器输入 https://群晖的 ip:9443，应该就可以进入登录页面了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594566250628-1594566250631.png" alt="title"></p>
+<p>然后点击注册按钮填写我们的邮箱和主密码，请务必牢记你的主密码，因为一旦遗失，你保存的密码就再也找不回来了。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594785522592-1594785522644.png" alt="title"></p>
+<p>主界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594567089388-1594567089390.png" alt="title"></p>
+<p>注册完成后如果不想其他用户进行注册的需要关闭注册及邀请功能。在群晖中停止一下容器，选择编辑容器</p>
+<p>添加环境变量 </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#关闭注册</span></span><br><span class="line"><span class="attr">SIGNUPS_ALLOWED</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭邀请</span></span><br><span class="line"><span class="attr">INVITATIONS_ALLOWED</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>应用后重启容器。</p>
+<h2 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/12/1594540953735-1594540953737.png" alt="title"></p>
+<p>点击左上角的齿轮图标进入服务器设置界面。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594825860759-1594825860763.png" alt="title"></p>
+<p>在服务器URL中填入服务器地址(如：https://群晖的 ip:9443)后保存。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594825962671-1594825962673.png" alt="title"></p>
+<p>返回主界面后点击登录按钮，用自己注册的账号进行登录。</p>
+<p>安装完插件后，在浏览器中鼠标右键会增加 Bitwarden 。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594828358678-1594828358682.png" alt="title"></p>
+<h2 id="android-app"><a href="#android-app" class="headerlink" title="android app"></a>android app</h2><p>“设置” - “自动填写” - “自动填充服务” - “启用”</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/15/1594785703887-1594785703894.png" alt="title"></p>
+<p>其他用法和设置可以自行探索。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>这个docker镜像对于服务器的要求不高；</li>
+<li>除了最基本的密码保存、上传附件等，官方需要付费使用的 TOTP 、密码检测等功能也都是可以直接使用的；</li>
+<li>如果之前用过其他的密码管理器，可以导入到 Bitwarden；</li>
+<li>最好启用两步登录，安全性更高一点；</li>
+<li>数据在自己手里，可能会感觉会更安全点吧。</li>
+</ul>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>官网主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iaXR3YXJkZW4uY29tLw==">https://bitwarden.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>放弃付费1Password改用免费开源的bitwarden_rs自建密码管理系统-安装,使用和备份<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93emZvdS5jb20vYml0d2FyZGVuLXJzLw==">https://wzfou.com/bitwarden-rs/<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用群晖搭建第三方 Bitwarden 密码服务器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wZW5wZW5ndWFuZ3Vhbi5jb20vMTAyNzEuaHRtbA==">https://penpenguanguan.com/10271.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用群晖 Docker 搭建 bitwarden_rs 密码服务器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnd4bG9zdC5jb20vZG9ja2VyX2JpdHdhcmRlbl9ycy5odG1s">https://blog.wxlost.com/docker_bitwarden_rs.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖可以这么玩 - 自建Bitwarden服务从此告别忘记密码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2t3dzNsLw==">https://post.smzdm.com/p/a4wkww3l/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Installing bitwarden on Synology Diskstation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua2FydG9sby5kZS8yMDIwLzAyLzAzL2luc3RhbGxpbmctYml0d2FyZGVuLW9uLXN5bm9sb2d5LWRpc2tzdGF0aW9uLw==">https://www.kartolo.de/2020/02/03/installing-bitwarden-on-synology-diskstation/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\28\frp基础设置示例详解\" rel="bookmark">frp基础设置示例详解</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\10\免费在线流程图Draw.io\" rel="bookmark">免费在线流程图Draw.io</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\26\全面升级frp\" rel="bookmark">全面升级frp</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\08\在群晖上实现在线Office文档编辑\" rel="bookmark">在群晖上实现在线Office文档编辑</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\04\28\手动安装WordPress\" rel="bookmark">手动安装WordPress</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/07/18/%E7%94%A8bitwarden%E8%87%AA%E5%BB%BA%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="用Bitwarden自建密码管理系统">https://laosu.ml/2020/07/18/用bitwarden自建密码管理系统/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/%E5%AF%86%E7%A0%81/" rel="tag"><i class="fa fa-tag"></i> 密码</a>
+              <a href="/tags/bitwarden/" rel="tag"><i class="fa fa-tag"></i> bitwarden</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/15/%E5%85%A8%E7%BD%91%E9%9F%B3%E4%B9%90%E5%85%8D%E8%B4%B9%E5%90%AC/" rel="prev" title="全网音乐免费听">
+      <i class="fa fa-chevron-left"></i> 全网音乐免费听
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要自建服务器"><span class="nav-number">2.</span> <span class="nav-text">为什么要自建服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端安装"><span class="nav-number">4.</span> <span class="nav-text">服务端安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">4.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">4.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">4.3.</span> <span class="nav-text">环境变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端设置"><span class="nav-number">5.</span> <span class="nav-text">服务端设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理设置"><span class="nav-number">5.1.</span> <span class="nav-text">反向代理设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传证书"><span class="nav-number">5.2.</span> <span class="nav-text">上传证书</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">6.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web端"><span class="nav-number">6.1.</span> <span class="nav-text">Web端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome插件"><span class="nav-number">6.2.</span> <span class="nav-text">chrome插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-app"><span class="nav-number">6.3.</span> <span class="nav-text">android app</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">8.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">138</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">73k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:07</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
