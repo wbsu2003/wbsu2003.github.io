@@ -3394,4 +3394,41 @@
         <tag>项目管理软件</tag>
       </tags>
   </entry>
+  <entry>
+    <title>利用Cloudreve搭建自用网盘</title>
+    <url>/2020/07/27/%E4%B8%80%E6%AC%BE%E5%85%A8%E8%83%BD%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7Motrix/</url>
+    <content><![CDATA[<p><strong>什么是Motrix</strong>？</p>
+<blockquote>
+<p>Motrix 是一款采用了「Aria 2」作为核心的开源免费下载软件，可以支持下载 HTTP、FTP、BT、磁力链接以及下载百度网盘等资源。软件代码基于 Electron 构架的设计让 Motrix 能够在多平台下施展拳脚，无论是 Windows、macOS 还是 Linux 都能拥有极佳的下载体验。</p>
+</blockquote>
+<h1 id="产品特性"><a href="#产品特性" class="headerlink" title="产品特性"></a>产品特性</h1><p>🕹 简洁明了的图形操作界面<br>🦄 支持BT和磁力链任务<br>☑️ 支持选择性下载BT部分文件<br>📡 每天自动更新 Tracker 服务器列表<br>🔌 UPnP &amp; NAT-PMP 端口映射<br>🎛 最高支持 10 个任务同时下载<br>🚀 单任务最高支持 64 线程下载<br>🕶 模拟用户代理UA<br>🔔 下载完成后通知<br>💻 支持触控栏快捷键(Mac 专享)<br>🤖 常驻系统托盘，操作更加便捷<br>🌑 深色模式<br>🗑 移除任务时可同时删除相关文件<br>🌍 国际化， 查看已可支持的语言<br>🛠 更多特性开发中</p>
+<p>软件主界面：</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595860773837-1595860773868.png" alt="title"></p>
+<p>软件本身的使用非常简单，实在不会在这里能找到详细的使用说明，<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL21vYXBwL2hlbHA=">https://www.yuque.com/moapp/help<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="百度云的2种下载方式"><a href="#百度云的2种下载方式" class="headerlink" title="百度云的2种下载方式"></a>百度云的2种下载方式</h1><h2 id="Motrix-插件"><a href="#Motrix-插件" class="headerlink" title="Motrix 插件"></a>Motrix 插件</h2><p>Motrix 曾经提供过「百度网盘助手」的 Chrome 浏览器扩展，但是因为众所周知的原因已经不提供了，但是我你总归还是有办法的。</p>
+<p>插件安装好之后，在您的百度网盘网页上会出现「MO.app」按钮</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595862597940-1595862597945.png" alt="title"></p>
+<h2 id="油猴（Tampermonkey）脚本"><a href="#油猴（Tampermonkey）脚本" class="headerlink" title="油猴（Tampermonkey）脚本"></a>油猴（Tampermonkey）脚本</h2><p>一个开源的脚本「百度网盘直链下载助手」，代码是开源的，下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N5aHl6MTk5MC9iYWlkdXl1bg==">https://github.com/syhyz1990/baiduyun<i class="fa fa-external-link-alt"></i></span>。安装完成后，在您的百度网盘网页上会出现「下载助手」按钮</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595862832030-1595862832035.png" alt="title"></p>
+<p>详细的教程（<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHV5dW4ud2lraS96aC1jbi9ycGMuaHRtbCNtb3RyaXgtJUU0JUJEJUJGJUU3JTk0JUE4JUU2JThDJTg3JUU1JThEJTk3">https://www.baiduyun.wiki/zh-cn/rpc.html#motrix-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97<i class="fa fa-external-link-alt"></i></span>）在这里能找到。</p>
+<h2 id="两种下载方式的对比"><a href="#两种下载方式的对比" class="headerlink" title="两种下载方式的对比"></a>两种下载方式的对比</h2><p>2种下载方式的下载速度，显然 RPC 下载速度更好，但不确定是否具备普遍性</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595861918637-1595861918639.png" alt="title"></p>
+<h1 id="其他网站的下载"><a href="#其他网站的下载" class="headerlink" title="其他网站的下载"></a>其他网站的下载</h1><p>建议下载「Motrix Chrome Extension」插件，用来拦截 chrome 的下载器</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595863609686-1595863609687.png" alt="title"></p>
+<p>装了插件后默认会用 Motrix 下载，在「蜂鸟云盘」测试下载速度达到 11 MB/s</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595863521050-1595863521053.png" alt="title"></p>
+<h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><p>工具用着虽然爽，但是各种云盘既然存在会员，既然存在限速，说明资源还是有限的，羊毛可以撸，但是千万别撸太狠，把羊给撸没了。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>官网中文主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tb3RyaXguYXBwL3poLUNOLw==">https://motrix.app/zh-CN/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>Motrix</tag>
+        <tag>网盘</tag>
+        <tag>下载</tag>
+      </tags>
+  </entry>
 </search>
