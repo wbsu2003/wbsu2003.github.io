@@ -375,17 +375,24 @@
 <p>其实都已经配好了，只要测试成功就能用了。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595867665225-1595867665227.png" alt="title"></p>
 <p>另外别忘了插件要启用key</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595898820363-1595898820390.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595936377019-1595936377025.png" alt="title"></p>
 <p>这个key来自于 Motrix 的设置</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595899137317-1595899137319.png" alt="title"></p>
+<blockquote>
+<p>需要注意的是，在 windows 平台，用 ctrl +c 复制这个 key 实际上得到的是这样一串字符：<code>http://token:eJEPyMHltDcy@127.0.0.1:16800/jsonrpc</code>，而在 Mac 上 只有 <code>eJEPyMHltDcy</code>，需要自己补全，不然会有问题。</p>
+</blockquote>
 <p>下载前需要先启动 Motrix，选择要下载的文件，然后点「使用MO下载」即可。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595867770517-1595867770518.png" alt="title"></p>
 <h2 id="油猴（Tampermonkey）脚本"><a href="#油猴（Tampermonkey）脚本" class="headerlink" title="油猴（Tampermonkey）脚本"></a>油猴（Tampermonkey）脚本</h2><p>一个开源的脚本「百度网盘直链下载助手」，代码下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N5aHl6MTk5MC9iYWlkdXl1bg==">https://github.com/syhyz1990/baiduyun<i class="fa fa-external-link-alt"></i></span>。安装完成后，在您的百度网盘网页上会出现「下载助手」按钮。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595862832030-1595862832035.png" alt="title"></p>
 <p>要配合 Motrix 下载，我们要用 「PRC 下载」模式。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595900291772-1595900291779.png" alt="title"></p>
-<p>同样需要配置 RPC 服务</p>
+<p>同样需要「配置 RPC 服务」</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595900332408-1595900332414.png" alt="title"></p>
+<blockquote>
+<p>1、这里的密钥只要填写前面 Motrix 生成的 <code>eJEPyMHltDcy</code> 即可；<br>2、端口改为16800；</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595936119011-1595936119111.png" alt="title"></p>
 <p>详细的教程（<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHV5dW4ud2lraS96aC1jbi9ycGMuaHRtbCNtb3RyaXgtJUU0JUJEJUJGJUU3JTk0JUE4JUU2JThDJTg3JUU1JThEJTk3">https://www.baiduyun.wiki/zh-cn/rpc.html#motrix-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97<i class="fa fa-external-link-alt"></i></span>）在这里能找到。</p>
 <h2 id="两种下载方式的对比"><a href="#两种下载方式的对比" class="headerlink" title="两种下载方式的对比"></a>两种下载方式的对比</h2><p>2种下载方式的下载速度，显然油猴脚本的「下载助手」中的 RPC 下载速度更好，但不确定是否具备普遍性。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/27/1595861918637-1595861918639.png" alt="title"></p>
