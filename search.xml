@@ -714,7 +714,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>依然是在群晖中打开 Docker，在注册表中搜索 <code>cloudreve</code> ，选择 <code>xavierniu/cloudreve</code>，版本选择 <code>latest</code>，这个版本是基于最新的Cloudreve V3制作的。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/26/1595765817375-1595765817407.png" alt="title"></p>
-<p>SSH登录到群晖，假设 docker 建在在 volume1 上；</p>
+<p>SSH登录到群晖，假设 docker 建在 volume1 上；</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建目录和文件</span></span><br><span class="line">mkdir -p /volume1/docker/cloudreve \</span><br><span class="line">    &amp;&amp; touch /volume1/docker/cloudreve/conf.ini \</span><br><span class="line">    &amp;&amp; touch /volume1/docker/cloudreve/cloudreve.db</span><br></pre></td></tr></table></figure>
 
 <p>会在 <code>docker</code> 目录中创建 <code>cloudreve</code> 目录，并在<code>cloudreve</code> 目录生成了2个空的文件。</p>
@@ -744,13 +744,13 @@
 <blockquote>
 <p>Cloudreve 在首次启动时，会创建初始管理员账号，请注意保管管理员密码，此密码只会在首次启动时出现。如果您忘记初始管理员密码，需要删除同级目录下的cloudreve.db，重新启动主程序以初始化新的管理员账户。</p>
 </blockquote>
-<p>完成 https 设置后，在浏览器中输入 https://域名:5213，用管理员账号密码登录，进入「管理面板」。</p>
+<p>完成 https 设置后，在浏览器中输入 https://域名:5213，用管理员账号、密码登录，进入「管理面板」。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595949379894-1595949379897.png" alt="title"></p>
 <p>进入「管理面板」</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595949480622-1595949480625.png" alt="title"></p>
 <p>「添加存储策略」</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595949896291-1595949896294.png" alt="title"></p>
-<h2 id="存储设置"><a href="#存储设置" class="headerlink" title="存储设置"></a>存储设置</h2><p>以 OneDrive 为例，前提是你得有 OneDrive for Business账号才行。</p>
+<h2 id="存储设置"><a href="#存储设置" class="headerlink" title="存储设置"></a>存储设置</h2><p>以 OneDrive 为例，前提是你得有 OneDrive for Business 账号才行。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595951592318-1595951592320.png" alt="title"></p>
 <p>按照页面提示依次执行即可。我加了2个，想测试动态切换，但是没找到地方。但是后面介绍的清玖云盘是可以的，也许这是捐赠版才有的功能？</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/29/1595955100978-1595955101003.png" alt="title"></p>
@@ -781,7 +781,7 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/29/1595993975221-1595993975228.png" alt="title"></p>
 <p>Windows 上用 RaiDrive 测试了也不行</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596110014598-1596110014659.png" alt="title"></p>
-<p>不仅仅是我们自己搭建的不行，连清玖云盘也不行，在网上搜了一圈，有说是因为了 nginx 反代导致的，也有人说是因为使用了 https 导致的，简单做了能想到的测试，都未能见效，只能先埋个坑，等有时间了再仔细研究研究。</p>
+<p>不仅仅是我们自己搭建的不行，连清玖云盘也不行，在网上搜了一圈，有说是因为了 nginx 反代导致的，也有人说是因为使用了 https 导致的，不排除是软件本身的 Bug。简单做了能想到的测试，都未能见效，只能先埋个坑，等有时间了再来仔细研究。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Nsb3VkcmV2ZS9DbG91ZHJldmU=">https://github.com/cloudreve/Cloudreve<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3hhdmllcm5pdS9jbG91ZHJldmU=">https://hub.docker.com/r/xavierniu/cloudreve<i class="fa fa-external-link-alt"></i></span></p>
