@@ -714,7 +714,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>依然是在群晖中打开 Docker，在注册表中搜索 <code>cloudreve</code> ，选择 <code>xavierniu/cloudreve</code>，版本选择 <code>latest</code>，这个版本是基于最新的Cloudreve V3制作的。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/26/1595765817375-1595765817407.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>SSH登录到群晖，假设 docker 建在在 volume1 上；</p>
+<p>SSH登录到群晖，假设 docker 建在在 volume1 上；</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建目录和文件</span></span><br><span class="line">mkdir -p /volume1/docker/cloudreve \</span><br><span class="line">    &amp;&amp; touch /volume1/docker/cloudreve/conf.ini \</span><br><span class="line">    &amp;&amp; touch /volume1/docker/cloudreve/cloudreve.db</span><br></pre></td></tr></table></figure>
 
 <p>会在 <code>docker</code> 目录中创建 <code>cloudreve</code> 目录，并在<code>cloudreve</code> 目录生成了2个空的文件。</p>
@@ -727,13 +727,13 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 假设当前登陆用户为root</span></span><br><span class="line">id root</span><br></pre></td></tr></table></figure>
 
 <p>会得到类似于下面的一段代码</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uid=1000(root) gid=1001(root)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">uid=1000(root) gid=1000(root)</span><br></pre></td></tr></table></figure>
 
-<p>则PUID填入1000，PGID填入1001</p>
+<p>则PUID填入1000，PGID填入1000</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595944434472-1595944434474.png" alt="title"></p>
 <h2 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h2><p>勾选启用自动重新启动</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595944497978-1595944497981.png" alt="title"></p>
-<h1 id="设置-1"><a href="#设置-1" class="headerlink" title="设置"></a>设置</h1><p>很多功能需要 https 才能使用，比如存储策略。</p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>很多功能需要 https 才能使用，比如存储策略。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595949969285-1595949969288.png" alt="title"></p>
 <h2 id="反向代理设置"><a href="#反向代理设置" class="headerlink" title="反向代理设置"></a>反向代理设置</h2><p>进入群晖的 “控制面板” –&gt; “Synology 应用程序门户” –&gt; “反向代理服务器” 页面 (找不到的话请点击高级模式) ，如图添加一条 “反向代理服务器规则”。（“来源端口” 你自己定义，“目的地端口” ）</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/28/1595950375295-1595950375298.png" alt="title"></p>
