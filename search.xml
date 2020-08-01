@@ -1013,20 +1013,60 @@
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>因为主要是在群晖上建各种站点，所以还是在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>xzxiaoshan</code> ，选择 <code>xzxiaoshan/certbot</code>，版本选择 <code>latest</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596081068633-1596081068636.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>添加两个文件夹<br>| 文件夹 | 装载路径 |<br>| :–: | :–: |<br>| <code>docker/certbot/logs</code> | <code>/var/log/letsencrypt</code> |<br>| <code>docker/certbot/letsencrypt</code> | <code>/etc/letsencrypt</code> |</p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>添加两个文件夹</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">docker/certbot/logs</td>
+<td align="center">/var/log/letsencrypt</td>
+</tr>
+<tr>
+<td align="center">docker/certbot/letsencrypt</td>
+<td align="center">/etc/letsencrypt</td>
+</tr>
+</tbody></table>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596081762755-1596081762761.png" alt="title"></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>以腾讯云为例<br>| 可变 | 值|<br>| :–: | :–: |<br>| PDNS | txy |<br>| TXY_TOKEN | 腾讯的SecretKey |<br>| TXY_KEY | 腾讯的SecretId |<br>| CERT_PARAMS | –email <span class="exturl" data-url="bWFpbHRvOmV4YW1wbGVAcXEuY29t">example@qq.com<i class="fa fa-external-link-alt"></i></span> -d example.com -d *.example.com |</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>以腾讯云为例</p>
+<table>
+<thead>
+<tr>
+<th align="center">可变</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">PDNS</td>
+<td align="center">txy</td>
+</tr>
+<tr>
+<td align="center">TXY_TOKEN</td>
+<td align="center">腾讯的SecretKey</td>
+</tr>
+<tr>
+<td align="center">TXY_KEY</td>
+<td align="center">腾讯的SecretId</td>
+</tr>
+<tr>
+<td align="center">CERT_PARAMS</td>
+<td align="center">–email <span class="exturl" data-url="bWFpbHRvOmV4YW1wbGVAcXEuY29t">example@qq.com<i class="fa fa-external-link-alt"></i></span> -d example.com -d *.example.com</td>
+</tr>
+</tbody></table>
 <blockquote>
 <p>因为都有key，开始想当然的把 SecretKey 填在了 TXY_KEY ，把 SecretId 填在了 TXY_TOKEN ，结果折腾了半天一直出错，囧<del>~</del></p>
 </blockquote>
 <p>参数说明</p>
 <ul>
 <li>PDNS参数：阿里云aly、腾讯云txy、华为云hwy、GoDaddy godaddy</li>
-<li>ALY_KEY 和 ALY_TOKEN：阿里云 API key 和 Secrec 官方申请文档（ <span class="exturl" data-url="aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20va25vd2xlZGdlX2RldGFpbC8zODczOC5odG1s">https://help.aliyun.com/knowledge_detail/38738.html<i class="fa fa-external-link-alt"></i></span> ）。</li>
-<li>TXY_KEY 和 TXY_TOKEN：腾讯云 API 密钥官方申请文档。（ <span class="exturl" data-url="aHR0cHM6Ly9jb25zb2xlLmNsb3VkLnRlbmNlbnQuY29tL2NhbS9jYXBp">https://console.cloud.tencent.com/cam/capi<i class="fa fa-external-link-alt"></i></span> ）</li>
-<li>HWY_KEY 和 HWY_TOKEN: 华为云 API 密钥官方申请文档。（ <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmh1YXdlaWNsb3VkLmNvbS9kZXZnLWFwaXNpZ24vYXBpLXNpZ24tcHJvdmlkZS5odG1s">https://support.huaweicloud.com/devg-apisign/api-sign-provide.html<i class="fa fa-external-link-alt"></i></span> ）</li>
-<li>GODADDY_KEY 和 GODADDY_TOKEN：GoDaddy API 密钥官方申请文档。（ <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuZ29kYWRkeS5jb20vZ2V0c3RhcnRlZA==">https://developer.godaddy.com/getstarted<i class="fa fa-external-link-alt"></i></span> ）</li>
-<li>支持的域名后缀详见文件domain.ini（ <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3h6eGlhb3NoYW4vY2VydGJvdC9tYXN0ZXIvY2VydGJvdC1hdS9kb21haW4uaW5p">https://raw.githubusercontent.com/xzxiaoshan/certbot/master/certbot-au/domain.ini<i class="fa fa-external-link-alt"></i></span> ）。</li>
+<li>ALY_KEY 和 ALY_TOKEN：阿里云 API key 和 Secrec 官方申请文档【 <span class="exturl" data-url="aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20va25vd2xlZGdlX2RldGFpbC8zODczOC5odG1s">https://help.aliyun.com/knowledge_detail/38738.html<i class="fa fa-external-link-alt"></i></span> 】。</li>
+<li>TXY_KEY 和 TXY_TOKEN：腾讯云 API 密钥官方申请文档【 <span class="exturl" data-url="aHR0cHM6Ly9jb25zb2xlLmNsb3VkLnRlbmNlbnQuY29tL2NhbS9jYXBp">https://console.cloud.tencent.com/cam/capi<i class="fa fa-external-link-alt"></i></span> 】</li>
+<li>HWY_KEY 和 HWY_TOKEN: 华为云 API 密钥官方申请文档【 <span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0Lmh1YXdlaWNsb3VkLmNvbS9kZXZnLWFwaXNpZ24vYXBpLXNpZ24tcHJvdmlkZS5odG1s">https://support.huaweicloud.com/devg-apisign/api-sign-provide.html<i class="fa fa-external-link-alt"></i></span> 】</li>
+<li>GODADDY_KEY 和 GODADDY_TOKEN：GoDaddy API 密钥官方申请文档【 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuZ29kYWRkeS5jb20vZ2V0c3RhcnRlZA==">https://developer.godaddy.com/getstarted<i class="fa fa-external-link-alt"></i></span> 】</li>
+<li>支持的域名后缀详见文件domain.ini 【 <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3h6eGlhb3NoYW4vY2VydGJvdC9tYXN0ZXIvY2VydGJvdC1hdS9kb21haW4uaW5p">https://raw.githubusercontent.com/xzxiaoshan/certbot/master/certbot-au/domain.ini<i class="fa fa-external-link-alt"></i></span> 】</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596082642836-1596082642843.png" alt="title"></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="证书自动同步"><a href="#证书自动同步" class="headerlink" title="证书自动同步"></a>证书自动同步</h2><p>群晖 –&gt; “控制面板” –&gt; “计划的任务” –&gt; “用户定义的脚本” –&gt; “任务设置”</p>
