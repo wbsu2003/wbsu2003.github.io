@@ -1013,7 +1013,7 @@
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>因为主要是在群晖上建各种站点，所以还是在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>xzxiaoshan</code> ，选择 <code>xzxiaoshan/certbot</code>，版本选择 <code>latest</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596081068633-1596081068636.png" alt="title"></p>
-<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>添加两个文件夹<br>| 文件夹 | 装载路径 |<br>| :–: | :–: |<br>| docker/certbot/logs | /var/log/letsencrypt |<br>| docker/certbot/letsencrypt | /etc/letsencrypt |</p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>添加两个文件夹<br>| 文件夹 | 装载路径 |<br>| :—-: | :—-: |<br>| docker/certbot/logs | /var/log/letsencrypt |<br>| docker/certbot/letsencrypt | /etc/letsencrypt |</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/07/30/1596081762755-1596081762761.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>以腾讯云为例<br>| 可变 | 值|<br>| :–: | :–: |<br>| PDNS | txy |<br>| TXY_TOKEN | 腾讯的SecretKey |<br>| TXY_KEY | 腾讯的SecretId |<br>| CERT_PARAMS | –email <span class="exturl" data-url="bWFpbHRvOmV4YW1wbGVAcXEuY29t">example@qq.com<i class="fa fa-external-link-alt"></i></span> -d example.com -d *.example.com |</p>
 <blockquote>
