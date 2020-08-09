@@ -3,14 +3,14 @@
   <entry>
     <title>HomeAssistant设置https访问后的问题</title>
     <url>/2020/08/09/HomeAssistant%E8%AE%BE%E7%BD%AEhttps%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</url>
-    <content><![CDATA[<p>之前 HomeAssistant 在浏览器中是这样打开的  <code>http://域名</code></p>
-<p>最近因为测试的几个软件都需要 SSL 支持，所以准备全面升级到 https，拟定的方案是利用群晖的反代 + 内网穿透来实现。，所以升级完成后，应该是这样的 <code>https://域名</code></p>
+    <content><![CDATA[<p>之前 HomeAssistant 在浏览器中是这样打开的  <code>http://ha.xxx.ml</code></p>
+<p>最近因为测试的几个软件都需要 SSL 支持，所以准备全面升级到 https，拟定的方案是利用群晖的反代 + 内网穿透来实现。，所以升级完成后，应该是这样的 <code>https://ha.xxx.ml</code></p>
 <h1 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h1><p>还是用的 frp ，但之前采用的一个域名一条记录的方式显然已经不适合反向代理，frpc.ini 需要按下面这样的进行修改，也可以用到《<a href="https://laosu.ml/2020/07/31/%E5%85%8D%E8%B4%B9%E7%9A%84%E6%B3%9B%E5%9F%9F%E5%90%8Dhttps%E8%AF%81%E4%B9%A6%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F/">免费的泛域名https证书自动续期</a>》里介绍的 SSL 证书自动续期。</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[http]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">81</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.xxsu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[https]</span></span><br><span class="line"><span class="attr">type</span> = https</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">444</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.xxsu.ml</span><br></pre></td></tr></table></figure>
 
 <h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>直接用的群晖的反向代理，这里「来源」中的端口要和 <code>frpc.ini</code> 中 <code>local_port</code> 一致</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/02/1596350538307-1596350538309.png" alt="title"></p>
-<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>设置反代完成后，在浏览器中输入 <code>https://ha.laosu.ml</code></p>
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>设置反代完成后，在浏览器中输入 <code>https://ha.xxx.ml</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/02/1596351283877-1596351283881.png" alt="title"></p>
 <p>但是登陆完成后，却一直连接不上</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/02/1596346985529-1596346985576.png" alt="title"></p>
@@ -23,7 +23,7 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/02/1596357088477-1596357088478.png" alt="title"></p>
 <p>SSH连接后打开 <code>/usr/syno/share/nginx/Portal.mustache</code></p>
 <blockquote>
-<p>切记，修改前先备份，先备份，先备份，重要的事情总是要说三遍，这是一种习惯</p>
+<p>切记，修改前先备份，先备份，先备份，重要的事情总是要说三遍，备份是一种好习惯</p>
 </blockquote>
 <p>在location部分中添加以下内容:</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">proxy_set_headerUpgrade   $http_upgrade;</span><br><span class="line">proxy_set_headerConnection   "upgrade";</span><br><span class="line">proxy_read_timeout  86400;</span><br></pre></td></tr></table></figure>
