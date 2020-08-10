@@ -2842,7 +2842,7 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/10/1597067376151-1597067376188.png" alt="title"></p>
 <p>可是从时间看，还有1个多月呢</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/10/1597067515305-1597067515308.png" alt="title"></p>
-<p>进到 <code>coding.net</code> 后台设置查看，显示证书状态申请失败</p>
+<p>进到 <code>coding.net</code> 后台设置查看，显示证书状态为<code>申请失败</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/10/1597067546952-1597067546953.png" alt="title"></p>
 <h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><p>从错误信息看，<code>185.199.108.153</code> 是 github的 IP 地址，根据之前 DNSPOD 设置的域名解析规则，Coding Pages 的解析线路是默认，Github Pages 解析线路是境外，所以根据域名解析规则，Let’s Encrypt 在境外只能访问到 Github Pages 的域名验证信息，而无法访问 Coding Pages 的域名验证信息。所以 Coding Pages 在帮我们申请证书时，就无法通过 Let’s Encrypt 的域名验证，证书也就申请不到了。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/10/1597067649105-1597067649109.png" alt="title"></p>
