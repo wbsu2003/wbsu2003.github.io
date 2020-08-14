@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="WebStack-Laravel具备完整的前后台，可以拿来制作自己的网址导航。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给群晖弄个漂亮的导航页（上）">
+<meta property="og:url" content="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="WebStack-Laravel具备完整的前后台，可以拿来制作自己的网址导航。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596522249190-1596522249198.png">
+<meta property="article:published_time" content="2020-08-14T11:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-14T13:29:43.071Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="WebStack">
+<meta property="article:tag" content="Laravel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596522249190-1596522249198.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>给群晖弄个漂亮的导航页（上） | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          给群晖弄个漂亮的导航页（上）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-14 19:00:00 / 修改时间：21:29:43" itemprop="dateCreated datePublished" datetime="2020-08-14T19:00:00+08:00">2020-08-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">WebStack-Laravel具备完整的前后台，可以拿来制作自己的网址导航。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596522249190-1596522249198.png" itemprop="contentUrl">
+        </div>
+        <h1 id="部署篇"><a href="#部署篇" class="headerlink" title="部署篇"></a>部署篇</h1><p>还是在群晖上以 Docker 方式安装。</p>
+<p>在注册表中搜索 <code>webstack-Laravel</code> ，选择 <code>arvon2014/webstack-laravel</code>，下载镜像。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596512543973-1596512543980.png" alt="title"></p>
+<p>安装比较简单，端口如果不冲突，可以直接用默认的 <code>8000</code> ，只要修改环境中的几个参数即可。</p>
+<p>参数说明</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">INSTALL_DIR</td>
+<td align="center">容器内的部署目录</td>
+</tr>
+<tr>
+<td align="center">DB_HOST</td>
+<td align="center">数据库地址，默认127.0.0.1</td>
+</tr>
+<tr>
+<td align="center">DB_PORT</td>
+<td align="center">数据库端口，默认3306</td>
+</tr>
+<tr>
+<td align="center">DB_DATABASE</td>
+<td align="center">数据库名称,默认homestead</td>
+</tr>
+<tr>
+<td align="center">DB_USERNAME</td>
+<td align="center">数据库用户名,默认homestead</td>
+</tr>
+<tr>
+<td align="center">DB_PASSWORD</td>
+<td align="center">数据库密码,默认secret</td>
+</tr>
+<tr>
+<td align="center">LOGIN_COPTCHA</td>
+<td align="center">是否启动控制台验证码，默认true</td>
+</tr>
+</tbody></table>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>请根据实际情况填写相应的内容，我在群晖已经安装了 <code>MariaDB 5</code>，所以可以直接用。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596438632222-1596438632223.png" alt="title"></p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>直接启动容器，右键进入「详情」</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596513747566-1596513747572.png" alt="title"></p>
+<p>「终端机」 =&gt; 「新增」 =&gt; 「通过命令启动」=&gt; 「请输入一个命令」=&gt; 「sh」</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596428483404-1596428483411.png" alt="title"></p>
+<p>进入命令行模式。后文中如无特别说明，所有命令都在这个模式下执行。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596514083397-1596514083404.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成 KEY</span></span><br><span class="line">php artisan key:generate</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596428851677-1596428851686.png" alt="title"></p>
+<p>用 <code>phpMyAdmin</code> 在 <code>MariaDB</code> 数据库中新建用户和库，勾选「创建与用户同名的数据库并授予所有权限」</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596503924253-1596503924289.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#迁移数据</span></span><br><span class="line">php artisan migrate:refresh --seed</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596433754582-1596433754585.png" alt="title"></p>
+<p>重启容器！重启容器！重启容器！否则页面会有错误信息。</p>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>前端地址：<code>http://群晖IP:8000/</code> </p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596433908716-1596433908726.png" alt="title"></p>
+<h2 id="后台"><a href="#后台" class="headerlink" title="后台"></a>后台</h2><p>后台地址：<code>http://群晖IP:8000/admin</code><br>默认账号：<code>admin</code><br>默认密码：<code>admin</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/06/1596691411909-1596691411942.png" alt="title"></p>
+<h2 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h2><h3 id="问题1：数据库报错"><a href="#问题1：数据库报错" class="headerlink" title="问题1：数据库报错"></a>问题1：数据库报错</h3><p>类似这样的问题</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596429756119-1596429756125.png" alt="title"></p>
+<p>这需要我们先建好 <code>homestead</code> 库。</p>
+<p>其他还可能会遇到数据库权限等问题，需要我们根据提示仔细排查。</p>
+<h3 id="问题2：网页报错"><a href="#问题2：网页报错" class="headerlink" title="问题2：网页报错"></a>问题2：网页报错</h3><p>遇到下面这种情况</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/03/1596428080642-1596428080682.png" alt="title"></p>
+<p>需要执行生成 KEY 操作</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#生成 KEY</span></span><br><span class="line">php artisan key:generate</span><br></pre></td></tr></table></figure>
+
+<p>这个 KEY 会写入到 <code>.env</code> 文件的 <code>APP_KEY</code> 字段</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596518949046-1596518949078.png" alt="title"></p>
+<h1 id="进阶篇"><a href="#进阶篇" class="headerlink" title="进阶篇"></a>进阶篇</h1><h2 id="图标显示异常"><a href="#图标显示异常" class="headerlink" title="图标显示异常"></a>图标显示异常</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/05/1596607378688-1596607378696.png" alt="title"></p>
+<p>后台中图片显示异常，需要我们将 <code>.env</code> 中 <code>APP_URL=</code> 后面的 <code>http://localhost</code> 删除</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑环境文件</span></span><br><span class="line">vi .env</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596514973420-1596514973422.png" alt="title"></p>
+<p>保存退出后，需重启容器才能生效</p>
+<h2 id="支持-https"><a href="#支持-https" class="headerlink" title="支持 https"></a>支持 https</h2><p>需要修改 <code>admin.php</code> 文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 config/admin.php 文件 中 'https' =&gt; env('ADMIN_HTTPS', true),</span></span><br><span class="line">vi config/admin.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/04/1596511457683-1596511457690.png" alt="title"></p>
+<p>保存退出后，需重启容器才能生效</p>
+<h2 id="修改-composer-镜像源"><a href="#修改-composer-镜像源" class="headerlink" title="修改 composer 镜像源"></a>修改 composer 镜像源</h2><p>由于默认情况下执行 composer 各种命令是去国外的 composer 官方镜像源获取需要安装的具体软件信息，所以在不使用代理、不翻墙的情况下，从国内访问国外服务器的速度相对比较慢</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更换阿里巴巴提供的 Composer 全量镜像源</span></span><br><span class="line">composer config repo.packagist composer https://mirrors.aliyun.com/composer/</span><br></pre></td></tr></table></figure>
+
+<h2 id="插件应用"><a href="#插件应用" class="headerlink" title="插件应用"></a>插件应用</h2><p>laravel-admin 支持安装扩展工具来帮助丰富你的后台功能，目前在<span class="exturl" data-url="aHR0cHM6Ly9sYXJhdmVsLWFkbWluLm9yZy9leHRlbnNpb25z">https://laravel-admin.org/extensions<i class="fa fa-external-link-alt"></i></span> 下面已经有了几十个扩展可供安装使用。</p>
+<h3 id="文件管理插件"><a href="#文件管理插件" class="headerlink" title="文件管理插件"></a>文件管理插件</h3><p>基于web接口的本地文件管理插件，代码主页：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhcmF2ZWwtYWRtaW4tZXh0ZW5zaW9ucy9tZWRpYS1tYW5hZ2Vy">https://github.com/laravel-admin-extensions/media-manager<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装插件</span></span><br><span class="line">composer require laravel-admin-ext/media-manager -vvv</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/05/1596603782860-1596603782868.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入插件</span></span><br><span class="line">php artisan admin:import media-manager</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/05/1596608187858-1596608187860.png" alt="title"></p>
+<p>编辑 <code>config/admin.php</code>，增加下列内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* media-manager */</span></span><br><span class="line"><span class="string">'extensions'</span> =&gt; [</span><br><span class="line"></span><br><span class="line">    <span class="string">'media-manager'</span> =&gt; [</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// Select a local disk that you configured in `config/filesystem.php`</span></span><br><span class="line">        <span class="string">'disk'</span> =&gt; <span class="string">'public'</span></span><br><span class="line">    ],</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<p>刷新后台页面，菜单栏会多出 <code>Media manager</code> ,打开地址： <code>http://localhost/admin/media</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/05/1596608468380-1596608468387.png" alt="title"></p>
+<h3 id="汉化插件"><a href="#汉化插件" class="headerlink" title="汉化插件"></a>汉化插件</h3><p>一个将操作按钮汉化的插件</p>
+<p>代码主页：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3hpYW94dWFuNi9sYXJhdmVsLWFkbWluLWdyaWQ=">https://github.com/xiaoxuan6/laravel-admin-grid<i class="fa fa-external-link-alt"></i></span></p>
+<p>生效前</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/07/1596788238118-1596788238125.png" alt="title"></p>
+<p>生效后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/07/1596786540985-1596786540992.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">composer require james.xue/laravel-admin-sortable</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装插件</span></span><br><span class="line">Laravel-Admin &gt;= 1.7 安装 1.2.0</span><br><span class="line">composer require james.xue/laravel-admin-grid:1.2.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># Laravel-Admin &lt; 1.7 安装 1.1.0</span></span><br><span class="line">composer require james.xue/laravel-admin-grid:1.1.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/07/1596785403585-1596785403589.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>WebStack-Laravel官方代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h1aS1oby9XZWJTdGFjay1MYXJhdmVs">https://github.com/hui-ho/WebStack-Laravel<i class="fa fa-external-link-alt"></i></span></p>
+<p>Webstack网址导航<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dlYlN0YWNrUGFnZS9XZWJTdGFja1BhZ2UuZ2l0aHViLmlv">https://github.com/WebStackPage/WebStackPage.github.io<i class="fa fa-external-link-alt"></i></span></p>
+<p>后台框架：laravel-admin<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3otc29uZy9sYXJhdmVsLWFkbWlu">https://github.com/z-song/laravel-admin<i class="fa fa-external-link-alt"></i></span></p>
+<p>在 Synology NAS 上使用 Laravel Framework<br>地址：<span class="exturl" data-url="aHR0cDovL3NhbW1peG9mdC5ibG9nc3BvdC5jb20vMjAxOC8wMS9zeW5vbG9neS1uYXMtbGFyYXZlbC1mcmFtZXdvcmsuaHRtbA==">http://sammixoft.blogspot.com/2018/01/synology-nas-laravel-framework.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>laravel-admin自动生成模块，及相关基础配置<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2MTAwNzYzL2FydGljbGUvZGV0YWlscy84MzA4OTgxOA==">https://blog.csdn.net/qq_36100763/article/details/83089818<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\10\免费在线流程图Draw.io\" rel="bookmark">免费在线流程图Draw.io</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\07\31\免费的泛域名https证书自动续期\" rel="bookmark">免费的泛域名https证书自动续期</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\28\frp基础设置示例详解\" rel="bookmark">frp基础设置示例详解</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\26\全面升级frp\" rel="bookmark">全面升级frp</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/" title="给群晖弄个漂亮的导航页（上）">https://laosu.ml/2020/08/14/给群晖弄个漂亮的导航页（上）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/WebStack/" rel="tag"><i class="fa fa-tag"></i> WebStack</a>
+              <a href="/tags/Laravel/" rel="tag"><i class="fa fa-tag"></i> Laravel</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88Synology%20Chat%E7%AF%87%EF%BC%89/" rel="prev" title="搭建自己的聊天服务器（Synology Chat篇）">
+      <i class="fa fa-chevron-left"></i> 搭建自己的聊天服务器（Synology Chat篇）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#部署篇"><span class="nav-number">1.</span> <span class="nav-text">部署篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">1.2.</span> <span class="nav-text">设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端"><span class="nav-number">1.3.</span> <span class="nav-text">前端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台"><span class="nav-number">1.4.</span> <span class="nav-text">后台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排错"><span class="nav-number">1.5.</span> <span class="nav-text">排错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题1：数据库报错"><span class="nav-number">1.5.1.</span> <span class="nav-text">问题1：数据库报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题2：网页报错"><span class="nav-number">1.5.2.</span> <span class="nav-text">问题2：网页报错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶篇"><span class="nav-number">2.</span> <span class="nav-text">进阶篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图标显示异常"><span class="nav-number">2.1.</span> <span class="nav-text">图标显示异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-https"><span class="nav-number">2.2.</span> <span class="nav-text">支持 https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-composer-镜像源"><span class="nav-number">2.3.</span> <span class="nav-text">修改 composer 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件应用"><span class="nav-number">2.4.</span> <span class="nav-text">插件应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件管理插件"><span class="nav-number">2.4.1.</span> <span class="nav-text">文件管理插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汉化插件"><span class="nav-number">2.4.2.</span> <span class="nav-text">汉化插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">156</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">93k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:25</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
