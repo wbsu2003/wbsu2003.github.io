@@ -25,24 +25,24 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="记录第一次遇到“Error spawn failed”错误的解决过程。">
+  <meta name="description" content="koel是一款网页版的开源个人音乐流媒体播放器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="遇到“Error spawn failed”错误">
-<meta property="og:url" content="https://laosu.ml/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/index.html">
+<meta property="og:title" content="开源的音乐流媒体服务器koel">
+<meta property="og:url" content="https://laosu.ml/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="记录第一次遇到“Error spawn failed”错误的解决过程。">
+<meta property="og:description" content="koel是一款网页版的开源个人音乐流媒体播放器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png">
-<meta property="article:published_time" content="2020-05-05T04:50:00.000Z">
-<meta property="article:modified_time" content="2020-05-05T09:06:41.818Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/18/1597754181020-1597754181052.png">
+<meta property="article:published_time" content="2020-08-18T11:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-18T12:36:37.802Z">
 <meta property="article:author" content="杨浦老苏">
-<meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="blog">
-<meta property="article:tag" content="deploy_git">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="音乐">
+<meta property="article:tag" content="Laravel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/18/1597754181020-1597754181052.png">
 
-<link rel="canonical" href="https://laosu.ml/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/">
+<link rel="canonical" href="https://laosu.ml/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/">
 
 
 <script id="page-configurations">
@@ -68,7 +68,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>遇到“Error spawn failed”错误 | 老苏的blog</title>
+  <title>开源的音乐流媒体服务器koel | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -241,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -254,7 +254,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          遇到“Error spawn failed”错误
+          开源的音乐流媒体服务器koel
         </h1>
 
         <div class="post-meta">
@@ -265,7 +265,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-05 12:50:00 / 修改时间：17:06:41" itemprop="dateCreated datePublished" datetime="2020-05-05T12:50:00+08:00">2020-05-05</time>
+              <time title="创建时间：2020-08-18 19:00:00 / 修改时间：20:36:37" itemprop="dateCreated datePublished" datetime="2020-08-18T19:00:00+08:00">2020-08-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,8 +293,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -304,7 +304,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>884</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -313,7 +313,7 @@
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               <span>1 分钟</span>
             </span>
-            <div class="post-description">记录第一次遇到“Error spawn failed”错误的解决过程。</div>
+            <div class="post-description">koel是一款网页版的开源个人音乐流媒体播放器。</div>
 
         </div>
       </header>
@@ -325,22 +325,114 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" itemprop="contentUrl">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/18/1597754181020-1597754181052.png" itemprop="contentUrl">
         </div>
-        <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>昨晚在修改_config.yml后，执行hexo g -d时遇到了错误：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Error</span>: Spawn failed</span><br><span class="line">at ChildProcess. (D:\develop\hexo-home\node_modules\hexo-util\lib\spawn.js:<span class="number">52</span>:<span class="number">19</span>)</span><br><span class="line">at ChildProcess.emit (events.js:<span class="number">198</span>:<span class="number">13</span>)</span><br><span class="line">at ChildProcess.cp.emit (D:\develop\hexo-home\node_modules\cross-spawn\lib\enoent.js:<span class="number">40</span>:<span class="number">29</span>)</span><br><span class="line">at Process.ChildProcess._handle.onexit (internal/child_process.js:<span class="number">248</span>:<span class="number">12</span>)</span><br></pre></td></tr></table></figure>
+        <p><strong>什么是koel？</strong></p>
+<blockquote>
+<p>koel是一款网页版的开源个人音乐流媒体播放器，前端基于 vue , 后端基于 laravel PHP Framework 。采用了现代 Web 技术，例如 CSS 网格、音频和拖放 API 等等。遵守 MIT 开源协议。安装 PHP 环境后，可采用 MYSQL 数据库，搭建在服务器上，也可部署<br>到 Docker 上。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596953637215-1596953637241.png" alt="title"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前我们介绍并搭建过 <code>airsonic</code>， 一款基于 Java 开发的 Web 音乐应用</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596975148546-1596975148548.png" alt="title"></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>先建好数据库</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596972977127-1596972977128.png" alt="title"></p>
+<p>接下来用 Docker 安装 koel</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596958725025-1596958725026.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/docker/koel/covers</td>
+<td align="center">/var/www/html/public/img/covers</td>
+</tr>
+<tr>
+<td align="center">/docker/koel/music</td>
+<td align="center">/music</td>
+</tr>
+</tbody></table>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596972065366-1596972065391.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>默认是80，别冲突就可以</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596972146683-1596972146685.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
+<thead>
+<tr>
+<th align="center">可变</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DB_CONNECTION</td>
+<td align="center">mysql</td>
+</tr>
+<tr>
+<td align="center">DB_HOST</td>
+<td align="center">192.168.0.199</td>
+</tr>
+<tr>
+<td align="center">DB_DATABASE</td>
+<td align="center">koel</td>
+</tr>
+<tr>
+<td align="center">DB_USERNAME</td>
+<td align="center">koel</td>
+</tr>
+<tr>
+<td align="center">DB_PASSWORD</td>
+<td align="center">LALZTx6mxba7</td>
+</tr>
+</tbody></table>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596974907068-1596974907070.png" alt="title"></p>
+<h1 id="第一次运行"><a href="#第一次运行" class="headerlink" title="第一次运行"></a>第一次运行</h1><p>SSH 连接到群晖，运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker exec -it &lt;container_name_for_koel&gt; bash</span></span><br><span class="line">docker <span class="built_in">exec</span> -it hyzual-koel1 bash</span><br></pre></td></tr></table></figure>
 
-<p>开始以为是改配置文件导致的，回退后发现问题并没有得到有效的解决，问了度娘才知道，原因可能是因为上传中断，导致本地blog和远端blog的版本不一致，解决办法是删除blog根目录下的 <code>.deploy_git</code>文件夹，然后再依次执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo  g</span><br><span class="line">hexo  d</span><br></pre></td></tr></table></figure>
+<p>连接成功后，接着运行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化项目，包括设置账号和密码</span></span><br><span class="line">php artisan koel:init</span><br></pre></td></tr></table></figure>
 
-<p>问题解决了，不过忘记了截图，在网上找了一张。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/05/20190404135506907-1588655512017.png" alt="title"></p>
-<p>（图片来源：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz77yJ">https://blog.csdn.net/njc_sec/article/details/89021083）<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<p>【已知问题】koel:init will fail at the stage where it checks front-end assets. This is known and is due to the absence of node.js and yarn. koel’s frontend assets are already built in this image so this step is not necessary.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596977266710-1596977266712.png" alt="title"></p>
+<p>浏览器中打开 <code>http://群晖IP:2080</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596977079654-1596977079656.png" alt="title"></p>
+<p>登录成功后</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/09/1596977010631-1596977010633.png" alt="title"></p>
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>用 <code>https://域名</code> 访问，返回空白页面，查看网页源代码，发现均为 <code>http</code> 协议，怀疑是不支持 https 协议导致的，根据 <code>Laravel</code> 的特性，应该有单独的设置项。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker exec -it &lt;container_name_for_koel&gt; bash</span></span><br><span class="line">docker <span class="built_in">exec</span> -it hyzual-koel1 bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597153839744-1597153839749.png" alt="title"></p>
+<p>因为 <code>Docker</code> 中未安装 <code>vi</code>，所以需要先安装编辑器</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597149967253-1597149967259.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vi</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597150104653-1597150104658.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597150138920-1597150138924.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597150204755-1597150204757.png" alt="title"></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 .env 文件</span></span><br><span class="line">vi .env</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597153234326-1597153234328.png" alt="title"></p>
+<p>重启容器后，一切正常。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>歌曲的上传</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597157118561-1597157118563.png" alt="title"></p>
+<p>临时用 XLD 转码一张孙露的专辑《一抹伤》做测试</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/12/1597218246423-1597218246426.png" alt="title"></p>
+<p>或者直接放到 <code>/music</code> 目录，再扫描</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597157235681-1597157235684.png" alt="title"></p>
+<p>播放列表</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/11/1597157280779-1597157280781.png" alt="title"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>颜值不错，很像 Spotify，可惜音乐格式只支持 <code>mp3</code>，这点肯定比不上 <code>airsonic</code>，但是系统占用小于 <code>airsonic</code>，如果你的收藏是 <code>mp3</code>，那这款应用值得一试。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/12/1597193888864-1597193888906.png" alt="title"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>hexo 踩过的坑<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95YW5pc3lvdW5nLmNvbS8yMDE5LzA5LzIxL2hleG8tJUU4JUI4JUE5JUU4JUJGJTg3JUU3JTlBJTg0JUU1JTlEJTkxLw==">https://yanisyoung.com/2019/09/21/hexo-%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Error spawn failed<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sc3R5Lnh5ei8yMDE5LzEwLzAxL0Vycm9yJTIwc3Bhd24lMjBmYWlsZWQv">https://lsty.xyz/2019/10/01/Error%20spawn%20failed/<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo 搭建个人博客部署环节spawn failed及解决<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25qY19zZWMvYXJ0aWNsZS9kZXRhaWxzLzg5MDIxMDgz">https://blog.csdn.net/njc_sec/article/details/89021083<i class="fa fa-external-link-alt"></i></span></p>
-<p>hexo发生error：spawn failed错误的解决方法<br>地址：<span class="exturl" data-url="aHR0cHM6Ly8xMTg3MTAwNTQ2LmdpdGh1Yi5pby8yMDE5LzExLzI0L3NwYXduLWZhaWxlZC8=">https://1187100546.github.io/2019/11/24/spawn-failed/<i class="fa fa-external-link-alt"></i></span></p>
+<p>koel 官方代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tvZWwva29lbA==">https://github.com/koel/koel<i class="fa fa-external-link-alt"></i></span>)</p>
+<p>Koel:一款超酷的私有音乐面板（基于larvel+vue）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzExOTguaHRtbA==">https://baiyue.one/archives/1198.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>开源音乐流媒体应用：Koel<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zaXlhODkuY29tL2Jsb2cva29lbA==">http://www.siya89.com/blog/koel<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -374,16 +466,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\05\12\在Coding上部署Hexo并实现和Github双线访问\" rel="bookmark">在Coding上部署Hexo并实现和Github双线访问</a></div>
+      <div class="popular-posts-title"><a href="\2020\08\16\给群晖弄个漂亮的导航页（下）\" rel="bookmark">给群晖弄个漂亮的导航页（下）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\05\06\在Netlify上部署Hexo\" rel="bookmark">在Netlify上部署Hexo</a></div>
+      <div class="popular-posts-title"><a href="\2020\08\14\给群晖弄个漂亮的导航页（上）\" rel="bookmark">给群晖弄个漂亮的导航页（上）</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\04\28\Hexo-theme-next主题\" rel="bookmark">Hexo-theme-next主题</a></div>
+      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\04\29\在GitHub上搭建Blog\" rel="bookmark">在GitHub上搭建Blog</a></div>
+      <div class="popular-posts-title"><a href="\2020\07\31\免费的泛域名https证书自动续期\" rel="bookmark">免费的泛域名https证书自动续期</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\05\28\frp基础设置示例详解\" rel="bookmark">frp基础设置示例详解</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -402,7 +497,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2020/05/05/%E9%81%87%E5%88%B0%E2%80%9CError%20spawn%20failed%E2%80%9D%E9%94%99%E8%AF%AF/" title="遇到“Error spawn failed”错误">https://laosu.ml/2020/05/05/遇到“Error spawn failed”错误/</a>
+    <a href="https://laosu.ml/2020/08/18/%E5%BC%80%E6%BA%90%E7%9A%84%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8koel/" title="开源的音乐流媒体服务器koel">https://laosu.ml/2020/08/18/开源的音乐流媒体服务器koel/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -443,9 +538,9 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
-              <a href="/tags/blog/" rel="tag"><i class="fa fa-tag"></i> blog</a>
-              <a href="/tags/deploy-git/" rel="tag"><i class="fa fa-tag"></i> deploy_git</a>
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag"><i class="fa fa-tag"></i> 音乐</a>
+              <a href="/tags/Laravel/" rel="tag"><i class="fa fa-tag"></i> Laravel</a>
           </div>
 
         
@@ -454,13 +549,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/05/04/%E4%B8%AA%E4%BA%BA%E4%B8%93%E5%B1%9E%E7%9A%84%E9%9F%B3%E4%B9%90%E5%BA%93/" rel="prev" title="个人专属的音乐库">
-      <i class="fa fa-chevron-left"></i> 个人专属的音乐库
+    <a href="/2020/08/16/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="prev" title="给群晖弄个漂亮的导航页（下）">
+      <i class="fa fa-chevron-left"></i> 给群晖弄个漂亮的导航页（下）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/06/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%97%A4%E6%9C%88%E5%BC%80%E4%BA%86/" rel="next" title="复旦大学的藤月开了">
-      复旦大学的藤月开了 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -520,7 +612,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">2.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">2.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">2.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">2.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一次运行"><span class="nav-number">3.</span> <span class="nav-text">第一次运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遇到问题"><span class="nav-number">4.</span> <span class="nav-text">遇到问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">7.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
