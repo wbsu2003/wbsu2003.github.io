@@ -4740,4 +4740,109 @@
         <tag>项目管理软件</tag>
       </tags>
   </entry>
+  <entry>
+    <title>搭建自己的聊天服务器（Element篇）</title>
+    <url>/2020/09/01/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88Element%E7%AF%87%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>什么是 Matrix 协议 ？</strong></p>
+<blockquote>
+<p>Matrix 是一種用於即時通訊的開放協定。它允許擁有一個通訊服務提供商帳戶的用戶與不同服務提供商的用戶進行網路聊天，IP語音和影片電話。也就是說，它旨在使不同服務提供商之間的即時通訊無縫工作，就像使用電子郵件一樣。採用該協定的軟體有Riot.im。 [維基百科]</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598077660389-1598077660394.png" alt="title"></p>
+<p>上图展示了不同 Matrix home server 上的客户之间是如何通讯的，这是一种类似电子邮件的方式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598081495380-1598081495382.png" alt="title"></p>
+<p>架构图展示的是不同服务器之间的关系</p>
+<p><strong>什么是 Element ？</strong></p>
+<blockquote>
+<p>Element 原来叫 Riot.im，是一个基于 Matrix 协议的协作平台，可以在 iOS、Android、Web 端运行，完全由自身控制的通用安全聊天应用程序。支持多大25种语言（支持中文），且还在不断地增加！可以应用到：即时通讯、视频会议、智能通知、机器人等。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/21/1597997280169-1597997280181.png" alt="title"></p>
+<p>您可以在 <span class="exturl" data-url="aHR0cHM6Ly9tYXRyaXgub3JnL2RvY3MvcHJvamVjdHMvdHJ5LW1hdHJpeC1ub3cv">https://matrix.org/docs/projects/try-matrix-now/<i class="fa fa-external-link-alt"></i></span> 找到支持 Matrix 协议的各种资源，包括服务器、客户端及 SDK 等等。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>element 只是支持 Matrix 协议的客户端，其客户端涵盖了 Web, Android, iOS, macOS, Windows &amp; Linux等几个主流平台，所以我们需要自己搭建 Matrix 服务器，当然也可以直接加入已有的 Matrix 服务器。</p>
+<p>公共服务器列表：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGVsbG8tbWF0cml4Lm5ldC9wdWJsaWNfc2VydmVycy5waHA=">https://www.hello-matrix.net/public_servers.php<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="安装服务端Synapse"><a href="#安装服务端Synapse" class="headerlink" title="安装服务端Synapse"></a>安装服务端Synapse</h2><p>在 <code>Docker</code> 注册表中搜索 <code>Synapse</code> ，选择 <code>matrixdotorg/synapse</code>，版本选择 <code>latest</code>。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/21/1597999012573-1597999012578.png" alt="title"></p>
+<p>SSH 登录到群晖</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成配置文件</span></span><br><span class="line">docker run -it --rm \</span><br><span class="line">    -v /volume1/docker/matrix:/data \</span><br><span class="line">    -e SYNAPSE_SERVER_NAME=mx.xxsu.ml \</span><br><span class="line">    -e SYNAPSE_REPORT_STATS=yes \</span><br><span class="line">    matrixdotorg/synapse:latest generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">docker run -d --name synapse \</span><br><span class="line">    -v /volume1/docker/matrix:/data \</span><br><span class="line">    -p 8008:8008 \</span><br><span class="line">    matrixdotorg/synapse:latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="打开注册"><a href="#打开注册" class="headerlink" title="打开注册"></a>打开注册</h3><p>修改 <code>/volume1/docker/matrix/homeserver.yaml</code> 中的参数</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Enable registration for new users.</span></span><br><span class="line"><span class="comment"># 允许注册新用户，默认值是 false</span></span><br><span class="line"><span class="attr">enable_registration:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="新建用户"><a href="#新建用户" class="headerlink" title="新建用户"></a>新建用户</h3><p>当然你也可以关闭注册，自己在后台新建用户</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">register_new_matrix_user -c /data/homeserver.yaml http://localhost:8008</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598072386115-1598072386117.png" alt="title"></p>
+<h2 id="安装-Web-端-riot-web"><a href="#安装-Web-端-riot-web" class="headerlink" title="安装 Web 端 riot-web"></a>安装 Web 端 riot-web</h2><p>在 <code>Docker</code> 注册表中搜索 <code>vectorim</code> ，选择 <code>vectorim/riot-web</code>，版本选择 <code>latest</code>。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/21/1597996900806-1597996900840.png" alt="title"></p>
+<h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>关于 <code>config.json</code>，详细的说明文档在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZlY3Rvci1pbS9lbGVtZW50LXdlYi9ibG9iL2RldmVsb3AvZG9jcy9jb25maWcubWQ=">https://github.com/vector-im/element-web/blob/develop/docs/config.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>可以在这里 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ZlY3Rvci1pbS9lbGVtZW50LXdlYi9ibG9iL2RldmVsb3AvY29uZmlnLnNhbXBsZS5qc29u">https://github.com/vector-im/element-web/blob/develop/config.sample.json<i class="fa fa-external-link-alt"></i></span> 直接复制粘贴 <code>config.sample.json</code> 的内容。</p>
+<p>之后直接在卷里 <code>添加文件</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598029798594-1598029798599.png" alt="title"></p>
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>端口只要不冲突即可</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598030925417-1598030925420.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>第一次运行居然显示不支持浏览器</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598031227607-1598031227612.png" alt="title"></p>
+<p>而实际上我的浏览器已经是最新版本的 <code>Chrome</code> 了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598030814939-1598030814946.png" alt="title"></p>
+<p>修改语言</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598032446000-1598032446005.png" alt="title"></p>
+<p>中文看起来习惯多了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598032629803-1598032629806.png" alt="title"></p>
+<h2 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h2><p>如果已经在后台建好了账号，可以直接选择 <code>登入</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598073300784-1598073300787.png" alt="title"></p>
+<p>需要手动修改服务器地址，如果没有备案，记得把端口也带上</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598073771395-1598073771398.png" alt="title"></p>
+<p>输入账号、密码</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598073626932-1598073626934.png" alt="title"></p>
+<p>登录成功后，需要设置安全备份</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074032507-1598074032510.png" alt="title"></p>
+<p>安全密钥是这样的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074091967-1598074091971.png" alt="title"></p>
+<p>安全密码设置</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074145492-1598074145495.png" alt="title"></p>
+<p>如果密码不符合要求，会有相应的提示</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074281177-1598074281179.png" alt="title"></p>
+<p>这个密码够强悍，可自己也记不住，还是要靠 <code>bitwarden</code> 才行</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074398221-1598074398224.png" alt="title"></p>
+<p>个人感觉如果是在不同的机器上使用 <code>Element</code> ，还是安全密码更方便一些</p>
+<p>首界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598074665651-1598074665653.png" alt="title"></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>除网页版之外，在 <span class="exturl" data-url="aHR0cHM6Ly9yb2NrZXQuY2hhdC9pbnN0YWxsLw==">https://element.io/get-started<i class="fa fa-external-link-alt"></i></span> 可以下载桌面和移动端应用</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598076807180-1598076807182.png" alt="title"></p>
+<p>Android移动端如果下载存在问题，可以去 <code>F-Droid</code> 下载</p>
+<p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9mLWRyb2lkLm9yZy9wYWNrYWdlcy9pbS52ZWN0b3IuYXBwLw==">https://f-droid.org/packages/im.vector.app/<i class="fa fa-external-link-alt"></i></span></p>
+<p>可以拉到底直接下载 <code>apk</code> 文件，也可以先下载 <code>F-Droid</code> 客户端，不过速度有点慢，不行可以多下几次。</p>
+<h2 id="网页版"><a href="#网页版" class="headerlink" title="网页版"></a>网页版</h2><h3 id="加联系人"><a href="#加联系人" class="headerlink" title="加联系人"></a>加联系人</h3><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598078287029-1598078287030.png" alt="title"></p>
+<h3 id="建聊天室"><a href="#建聊天室" class="headerlink" title="建聊天室"></a>建聊天室</h3><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598078092973-1598078092977.png" alt="title"></p>
+<p>邀请用户</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598078207415-1598078207418.png" alt="title"></p>
+<h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><p>选 <code>Other</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079470743-1598079470745.png" alt="title"></p>
+<p>自己输入服务器地址</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079499071-1598079499074.png" alt="title"></p>
+<p>注册或者登陆</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079659304-1598079659306.png" alt="title"></p>
+<p>登陆后会收到邀请</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079751509-1598079751511.png" alt="title"></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079775395-1598079775397.png" alt="title"></p>
+<h2 id="音视频呼叫"><a href="#音视频呼叫" class="headerlink" title="音视频呼叫"></a>音视频呼叫</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/22/1598079885811-1598079885816.png" alt="title"></p>
+<p>不需要依赖第三方应用，开箱即用，这点比较方便。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>目前测试的几款通讯软件，虽然各有特点，但毕竟都号称是 <code>slack</code> 的替代品，所以用法大同小异，稍稍用用就习惯了</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>[资源分享] Riot-IM：是一个开源免费的即时通讯聊天协作工具，功能丰富且跨平台——Riot-IM<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5zb29sY28uY29tL3Bvc3QvMzA5ODhfMV8xLmh0bWw=">http://www.soolco.com/post/30988_1_1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>一款开源免费的多功能聊天室：Riot.im安装教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9lcmF0cy5jb20vYXJjaGl2ZXMvNTk1Lw==">https://www.moerats.com/archives/595/<i class="fa fa-external-link-alt"></i></span></p>
+<p>借美国禁用微信，再谈去中心化的即时通信与Matrix协议<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXR0ZXJzLm5ld3MvQHd6bWtua2d6aGhuLyVFNSU4MCU5RiVFNyVCRSU4RSVFNSU5QiVCRCVFNyVBNiU4MSVFNyU5NCVBOCVFNSVCRSVBRSVFNCVCRiVBMS0lRTUlODYlOEQlRTglQjAlODglRTUlOEUlQkIlRTQlQjglQUQlRTUlQkYlODMlRTUlOEMlOTYlRTclOUElODQlRTUlOEQlQjMlRTYlOTclQjYlRTklODAlOUElRTQlQkYlQTElRTQlQjglOEVtYXRyaXglRTUlOEQlOEYlRTglQUUlQUUtYmFmeXJlaWZodW01c2l5Z3czemJiMnFzdW5zYmdzaTRvbDdraDJ5bGdnYzVxMnpjdmtkZWE3cHByaW0=">https://matters.news/@wzmknkgzhhn/%E5%80%9F%E7%BE%8E%E5%9B%BD%E7%A6%81%E7%94%A8%E5%BE%AE%E4%BF%A1-%E5%86%8D%E8%B0%88%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E7%9A%84%E5%8D%B3%E6%97%B6%E9%80%9A%E4%BF%A1%E4%B8%8Ematrix%E5%8D%8F%E8%AE%AE-bafyreifhum5siygw3zbb2qsunsbgsi4ol7kh2ylggc5q2zcvkdea7pprim<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装Matrix系统（Riot.im）的服务端Synapse<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC81YzQ0NWQ4Njk4YTQ=">https://www.jianshu.com/p/5c445d8698a4<i class="fa fa-external-link-alt"></i></span></p>
+<p>How to install Matrix Synapse Home Server<br>地址：<span class="exturl" data-url="aHR0cHM6Ly91cGNsb3VkLmNvbS9jb21tdW5pdHkvdHV0b3JpYWxzL2luc3RhbGwtbWF0cml4LXN5bmFwc2Uv">https://upcloud.com/community/tutorials/install-matrix-synapse/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>即时通讯</tag>
+        <tag>IM</tag>
+        <tag>element</tag>
+      </tags>
+  </entry>
 </search>
