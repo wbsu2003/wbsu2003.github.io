@@ -25,29 +25,23 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="介绍远程访问NAS的几个方案，以及群晖app访问中遇到的问题。">
+  <meta name="description" content="obsidian 是一款支持双向链接的新型笔记软件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="群晖app访问遇到的端口问题">
-<meta property="og:url" content="https://laosu.ml/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="能构建知识库的笔记软件obsidian试用">
+<meta property="og:url" content="https://laosu.ml/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="介绍远程访问NAS的几个方案，以及群晖app访问中遇到的问题。">
+<meta property="og:description" content="obsidian 是一款支持双向链接的新型笔记软件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1512442565-3265-4ae00000bbe868f3aa00-1588481517092.jpg">
-<meta property="article:published_time" content="2020-04-28T03:40:00.000Z">
-<meta property="article:modified_time" content="2020-05-03T04:52:43.511Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598696170979-1598696170983.png">
+<meta property="article:published_time" content="2020-09-09T12:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-09T11:48:50.429Z">
 <meta property="article:author" content="杨浦老苏">
-<meta property="article:tag" content="群晖">
-<meta property="article:tag" content="frp">
-<meta property="article:tag" content="VPS">
-<meta property="article:tag" content="NAS">
-<meta property="article:tag" content="黑群">
-<meta property="article:tag" content="QuickConnect">
-<meta property="article:tag" content="ngrok">
-<meta property="article:tag" content="ZeroTier">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="双向链接">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1512442565-3265-4ae00000bbe868f3aa00-1588481517092.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598696170979-1598696170983.png">
 
-<link rel="canonical" href="https://laosu.ml/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://laosu.ml/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/">
 
 
 <script id="page-configurations">
@@ -73,7 +67,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>群晖app访问遇到的端口问题 | 老苏的blog</title>
+  <title>能构建知识库的笔记软件obsidian试用 | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -246,7 +240,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -259,7 +253,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          群晖app访问遇到的端口问题
+          能构建知识库的笔记软件obsidian试用
         </h1>
 
         <div class="post-meta">
@@ -268,16 +262,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-04-28 11:40:00" itemprop="dateCreated datePublished" datetime="2020-04-28T11:40:00+08:00">2020-04-28</time>
+              <time title="创建时间：2020-09-09 20:00:00 / 修改时间：19:48:50" itemprop="dateCreated datePublished" datetime="2020-09-09T20:00:00+08:00">2020-09-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-03 12:52:43" itemprop="dateModified" datetime="2020-05-03T12:52:43+08:00">2020-05-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -304,8 +292,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -315,16 +303,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
-            <div class="post-description">介绍远程访问NAS的几个方案，以及群晖app访问中遇到的问题。</div>
+            <div class="post-description">obsidian 是一款支持双向链接的新型笔记软件。</div>
 
         </div>
       </header>
@@ -336,50 +324,72 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/05/03/1512442565-3265-4ae00000bbe868f3aa00-1588481517092.jpg" itemprop="contentUrl">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598696170979-1598696170983.png" itemprop="contentUrl">
         </div>
-        <p><strong>什么是 NAS</strong></p>
+        <p><strong>什么是obsidian？</strong></p>
 <blockquote>
-<p>NAS（网络连接存储）是与家庭或办公室网络连接的智能存储设备。可以将所有家人和同事的文件存储在 NAS 上（从重要文档到珍贵的照片、音乐和视频集）。使用网页浏览器或移动应用程序可以通过 Internet 访问文件并使用 NAS 提供的各种服务。</p>
+<p>Obsidian 是一款支持 macOS、Windows、Linux 多平台的 Markdown 编辑器，同时也支持双向链接，带有效果相当惊艳的网状笔记视图，它还支持标签管理、多种插件（例如日记、实时预览、星标、自定义CSS 样式等），是一款功能强大的知识库软件。</p>
 </blockquote>
-<p><strong>什么是 黑群</strong></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Obisidian 最主要的特点是采用纯文本的 <code>Markdown</code> 文件，而且所有文件均存放于本地，可以使用任何形式的网盘/Git 进行同步，并且免费使用，当然如果你想的话，官方也即将提供加密同步服务——$4/月。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598697978047-1598697978050.png" alt="title"></p>
+<p>除此之外官方还提供发布分享服务，当然也是需要付费的，对我而言，<code>Obsidian</code> 的本地功能用于资料的梳理已完全足够了。</p>
+<p>我目前同步用的是 <code>Syncthing</code>，关于  <code>Syncthing</code> 可以参考上一篇文章 《》</p>
+<p>至于发布，除了一个月发几篇公众号之外，其他都是工作笔记，不存在发布的问题，所以暂时可以不用考虑。</p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="设置库"><a href="#设置库" class="headerlink" title="设置库"></a>设置库</h2><p>第一次运行</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598492776803-1598492776810.png" alt="title"></p>
+<p>新建</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598494497636-1598494497643.png" alt="title"></p>
+<p>首次首界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598494543978-1598494543986.png" alt="title"></p>
+<h2 id="设置中文"><a href="#设置中文" class="headerlink" title="设置中文"></a>设置中文</h2><p>左下角【Setting】-&gt;【About】-&gt;【Language】，设置为中文</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598494727192-1598494727200.png" alt="title"></p>
+<p><code>relaunch</code> 之后就是中文界面了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598495816906-1598495816914.png" alt="title"></p>
+<h2 id="中文的使用帮助"><a href="#中文的使用帮助" class="headerlink" title="中文的使用帮助"></a>中文的使用帮助</h2><p>在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phY2tpZXhpYW8vb2JzaWRpYW4=">https://github.com/Jackiexiao/obsidian<i class="fa fa-external-link-alt"></i></span> 可以找到中文版的帮助</p>
+<p>直接下载 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0phY2tpZXhpYW8vb2JzaWRpYW4vYXJjaGl2ZS9tYXN0ZXIuemlw">https://github.com/Jackiexiao/obsidian/archive/master.zip<i class="fa fa-external-link-alt"></i></span></p>
+<p>解压后用 <code>obsidian</code> 打开。左下角 <code>打开其他库</code> 或者 <code>Open another vault</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598496641899-1598496641901.png" alt="title"></p>
+<p>我是直接将 <code>中文帮助</code> 目录丢到了刚才新建的库 <code>KW</code> 里</p>
 <blockquote>
-<p>黑群指的是，非正规购买的群晖nas 而是在普通电脑上装群晖nas的系统。作者并不鼓励或支持使用盗版，只是用于研究和了解群晖系统，强烈不建议正式的使用，尤其是用于重要的数据备份。</p>
+<p>但是这样会导致图看不到，所最好还是把整个文件夹丢进去比较好</p>
 </blockquote>
-<p>既然是NAS那必须要支持远程访问，要想从外网访问家庭内网，目前可用的有这么几个方案：</p>
-<blockquote>
-<ol>
-<li><p>官方提供了QuickConnect（简称QC），但咱用的是黑裙，能用各种软件已经不错了，哪好意思再去蹭群晖的QC资源；</p>
-</li>
-<li><p>非常幸运的一个有公网 IPv4 地址，只要在路由器做端口映射就能解决问题，但目前好像基本不可能了，毕竟 IPv4 的资源都快用完了； </p>
-</li>
-<li><p>用frp、ngrok类的内网穿透软件，这个有免费的，也有收费的，当然如果你有VPS主机，也可以自己来搭建，只是做起来有一定的门槛；</p>
-</li>
-<li><p>用ZeroTier组个虚拟局域网，100个设备内免费，可是需要在每个入网的设备安装虚拟服务和网卡（如果有支持OpenWRT的路由器应该就没这么麻烦了），弄不好有可能还需要自己来架设moon服务器来协助P2P打洞；</p>
-</li>
-<li><p>购买内网穿透的硬件，比如花生棒、公网IP盒子一类的，操作简单，但是有流量方面的限制；</p>
-</li>
-</ol>
-</blockquote>
-<p>今天我们讨论的是frp方案，群晖里已安装了frpc客户端，下面是frpc.ini里的相关设置：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[www]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">custom_domains</span> = www.abc.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[nas]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">31.198</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">custom_domains</span> = nas.abc.ml</span><br></pre></td></tr></table></figure>
-
-<p>用Moments、DS note、Drive都挺正常的，以Drive为例</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/8cee490a2dc91ed32bcdcbedc3b1e28-1587802236285.jpg" alt="title"></p>
-<p>登录成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/0e03e7c66bdb97b4d9be64175f24577-1587802254924.jpg" alt="title"></p>
-<p>同样的设置，群晖管家、DS file却一直登录失败</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/f958c9513503734d3fc4049d307a592-1587802269940.jpg" alt="title"></p>
-<p>最后借用了之前发的一篇文章《RaiDrive挂载frp映射的webdav网盘》中的思路，给地址后面了加了个80端口。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/3591e2f12d305de65f4d38f403d74af-1587802297733.jpg" alt="title"></p>
-<p>大功告成！</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/04/25/7f33abd8283a829d413e1f445ec66e2-1587802344202.jpg" alt="title"></p>
-<blockquote>
-<p> <strong>总结</strong>：看来以后类似的问题要多试试80端口大法，包治百病啊，呵呵~</p>
-</blockquote>
-<p>参考文档</p>
-<blockquote>
-<p>群晖官网的介绍，<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY24vemgtY24vc29sdXRpb24vd2hhdF9pc19uYXM=">https://www.synology.cn/zh-cn/solution/what_is_nas<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598496774941-1598496774949.png" alt="title"></p>
+<p>返回到 <code>obsidian</code> 主界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598496813275-1598496813280.png" alt="title"></p>
+<h2 id="图谱"><a href="#图谱" class="headerlink" title="图谱"></a>图谱</h2><p>选中 <code>插件列表</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598496925268-1598496925278.png" alt="title"></p>
+<p>点击圆点</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598496988239-1598496988249.png" alt="title"></p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/27/1598497122956-1598497122966.png" alt="title"></p>
+<h2 id="尝试最新版"><a href="#尝试最新版" class="headerlink" title="尝试最新版"></a>尝试最新版</h2><p>在 <code>Obsidian</code> 的首页 <span class="exturl" data-url="aHR0cHM6Ly9vYnNpZGlhbi5tZC8=">https://obsidian.md/<i class="fa fa-external-link-alt"></i></span>，就能看到和自己平台对应的版本</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/download-1599651894564.png" alt="title"></p>
+<p>但是如果你想吃螃蟹，参与内部版本的测试，则需要在GitHub才能找到：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29ic2lkaWFubWQvb2JzaWRpYW4tcmVsZWFzZXMvcmVsZWFzZXM=">https://github.com/obsidianmd/obsidian-releases/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/github_download-1599651943859.png" alt="title"></p>
+<p>但是我们解压出来是 <code>.asar</code>要怎么样使用呢？以 <code>Mac</code> 为例，选中 <code>Obsidian</code> 的图标右键 –&gt; 显示包内容</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/content-1599651978786.png" alt="title"></p>
+<p>进入 <code>Contents</code> 目录 –&gt;  <code>Resources</code> 目录， 替换掉 <code>obsidian.asar</code> 文件，在替换前记得备份，完成后再看版本</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/version-1599652013356.png" alt="title"></p>
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><p>工具本身作为一个 <code>Markdown</code> 编辑器还是很容易上手的，但是想要提高也不太容易，B站有些关于 <code>Obsidian</code> 的视频还是不错的，重要的不是工具，而是方法，<code>Obsidian</code>背后的逻辑是卡片盒笔记法，这需要我们持续不断的实践</p>
+<h1 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h1><p>插件本身和 <code>Obsidian</code> 没啥关系，但是对于记笔记这件事却有很大的帮助，当然如果你访问不了 <code>Chrome 应用商店</code>，那还是直接跳过吧。</p>
+<h2 id="TabCopy"><a href="#TabCopy" class="headerlink" title="TabCopy"></a>TabCopy</h2><p>TabCopy 能够一键复制网页的标题和网址，这对需要记录一些资料的标题及链接或需要将网页分享给他人查看时非常方便。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598712218798-1598712218800.png" alt="title"></p>
+<p>像我的参考文档中的引用格式</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/Quote-1599652050068.png" alt="title"></p>
+<p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFiY29weS9taWNkbGxpaGdvcHBtZWpwZWNta2lsZ2dtYWFnZmRtYj91dG1fc291cmNlPWNocm9tZS1udHAtaWNvbg==">https://chrome.google.com/webstore/detail/tabcopy/micdllihgoppmejpecmkilggmaagfdmb?utm_source=chrome-ntp-icon<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="Roam-Highlighter"><a href="#Roam-Highlighter" class="headerlink" title="Roam-Highlighter"></a>Roam-Highlighter</h2><p>这应该是为 <code>Roam Research</code> 做的插件，可以方便的将 Web 中的文字高亮并导入到  <code>Roam Researc</code> 中，既然是在剪贴板中，当然也能很方便的导入 <code>Obsidian</code> </p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598712191795-1598712191797.png" alt="title"></p>
+<p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvcm9hbS1oaWdobGlnaHRlci9tY29pbWllZ2xtaGRqZG9wbGhwY21pZmdwbGtiZmlicD91dG1fc291cmNlPWNocm9tZS1udHAtaWNvbg==">https://chrome.google.com/webstore/detail/roam-highlighter/mcoimieglmhdjdoplhpcmifgplkbfibp?utm_source=chrome-ntp-icon<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="Web-Clipper"><a href="#Web-Clipper" class="headerlink" title="Web Clipper"></a>Web Clipper</h2><p>支持 Notion、GitHub、OneNote、我来等各种笔记，也可以将网页转成 <code>Markdown</code> 格式直接下载到本地，这是个开源的插件</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598712361844-1598712361846.png" alt="title"></p>
+<p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvd2ViLWNsaXBwZXIvbWhmYm9maW9rbXBwZ2RsaWFrbWluYmdkZ2NtYmhiYWM/dXRtX3NvdXJjZT1jaHJvbWUtbnRwLWljb24=">https://chrome.google.com/webstore/detail/web-clipper/mhfbofiokmppgdliakminbgdgcmbhbac?utm_source=chrome-ntp-icon<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="GitHub加速"><a href="#GitHub加速" class="headerlink" title="GitHub加速"></a>GitHub加速</h2><p>这个插件和笔记都没关系，只是如果你经常要去下载 <code>Obsidian</code> 内测版的话，有了这个插件会快很多</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/09/github-1599652092868.png" alt="title"></p>
+<p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvZ2l0aHViJUU1JThBJUEwJUU5JTgwJTlGL21mbmtmbGlkam5sYWRua2xkZm9ubmFpY2xqcHBhaHBnP3V0bV9zb3VyY2U9Y2hyb21lLW50cC1pY29u">https://chrome.google.com/webstore/detail/github%E5%8A%A0%E9%80%9F/mfnkflidjnladnkldfonnaicljppahpg?utm_source=chrome-ntp-icon<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vYnNpZGlhbi5tZC8=">https://obsidian.md/<i class="fa fa-external-link-alt"></i></span></p>
+<p>How I use Obsidian to manage my goals, tasks, notes, and software development knowledge base<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5pc2FuZXdzLmNvbS9ob3ctaS11c2Utb2JzaWRpYW4tdG8tbWFuYWdlLW15LWdvYWxzLXRhc2tzLW5vdGVzLWFuZC1zb2Z0d2FyZS1kZXZlbG9wbWVudC1rbm93bGVkZ2UtYmFzZS8=">https://www.anisanews.com/how-i-use-obsidian-to-manage-my-goals-tasks-notes-and-software-development-knowledge-base/<i class="fa fa-external-link-alt"></i></span></p>
+<p>从卡片链接到大脑联想，基于 Obsidian 的卡片盒笔记法实践 - 少数派<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC82MDgwMg==">https://sspai.com/post/60802<i class="fa fa-external-link-alt"></i></span></p>
+<p>Chrome扩展程序——TabCopy：一键复制网页标题和网址_Erik_ly的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTIzMTgwNzQvYXJ0aWNsZS9kZXRhaWxzLzc3NDM1NzI0">https://blog.csdn.net/u012318074/article/details/77435724<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -413,19 +423,13 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\04\28\群晖上的Zerotier GUI一直显示offline的原因\" rel="bookmark">群晖上的Zerotier GUI一直显示offline的原因</a></div>
+      <div class="popular-posts-title"><a href="\2020\08\29\你现在用什么做笔记？\" rel="bookmark">你现在用什么做笔记？</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\05\26\全面升级frp\" rel="bookmark">全面升级frp</a></div>
+      <div class="popular-posts-title"><a href="\2020\04\29\GitNote的简单使用记录\" rel="bookmark">GitNote的简单使用记录</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\05\28\frp基础设置示例详解\" rel="bookmark">frp基础设置示例详解</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\09\04\Syncthing文件夹同步神器\" rel="bookmark">Syncthing文件夹同步神器</a></div>
+      <div class="popular-posts-title"><a href="\2020\08\03\在线文档系统MrDoc\" rel="bookmark">在线文档系统MrDoc</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -444,7 +448,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2020/04/28/%E7%BE%A4%E6%99%96app%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E7%AB%AF%E5%8F%A3%E9%97%AE%E9%A2%98/" title="群晖app访问遇到的端口问题">https://laosu.ml/2020/04/28/群晖app访问遇到的端口问题/</a>
+    <a href="https://laosu.ml/2020/09/09/%E8%83%BD%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E7%AC%94%E8%AE%B0%E8%BD%AF%E4%BB%B6obsidian%E8%AF%95%E7%94%A8/" title="能构建知识库的笔记软件obsidian试用">https://laosu.ml/2020/09/09/能构建知识库的笔记软件obsidian试用/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -485,14 +489,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
-              <a href="/tags/frp/" rel="tag"><i class="fa fa-tag"></i> frp</a>
-              <a href="/tags/VPS/" rel="tag"><i class="fa fa-tag"></i> VPS</a>
-              <a href="/tags/NAS/" rel="tag"><i class="fa fa-tag"></i> NAS</a>
-              <a href="/tags/%E9%BB%91%E7%BE%A4/" rel="tag"><i class="fa fa-tag"></i> 黑群</a>
-              <a href="/tags/QuickConnect/" rel="tag"><i class="fa fa-tag"></i> QuickConnect</a>
-              <a href="/tags/ngrok/" rel="tag"><i class="fa fa-tag"></i> ngrok</a>
-              <a href="/tags/ZeroTier/" rel="tag"><i class="fa fa-tag"></i> ZeroTier</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E6%8E%A5/" rel="tag"><i class="fa fa-tag"></i> 双向链接</a>
           </div>
 
         
@@ -501,13 +499,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/28/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%9A%84Zerotier%20GUI%E4%B8%80%E7%9B%B4%E6%98%BE%E7%A4%BAoffline%E7%9A%84%E5%8E%9F%E5%9B%A0/" rel="prev" title="群晖上的Zerotier GUI一直显示offline的原因">
-      <i class="fa fa-chevron-left"></i> 群晖上的Zerotier GUI一直显示offline的原因
+    <a href="/2020/09/04/Syncthing%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8C%E6%AD%A5%E7%A5%9E%E5%99%A8/" rel="prev" title="Syncthing文件夹同步神器">
+      <i class="fa fa-chevron-left"></i> Syncthing文件夹同步神器
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/28/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85WordPress/" rel="next" title="手动安装WordPress">
-      手动安装WordPress <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -567,6 +562,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-number">2.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置库"><span class="nav-number">2.1.</span> <span class="nav-text">设置库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置中文"><span class="nav-number">2.2.</span> <span class="nav-text">设置中文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文的使用帮助"><span class="nav-number">2.3.</span> <span class="nav-text">中文的使用帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图谱"><span class="nav-number">2.4.</span> <span class="nav-text">图谱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">2.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试最新版"><span class="nav-number">2.6.</span> <span class="nav-text">尝试最新版</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶"><span class="nav-number">3.</span> <span class="nav-text">进阶</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chrome插件"><span class="nav-number">4.</span> <span class="nav-text">chrome插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TabCopy"><span class="nav-number">4.1.</span> <span class="nav-text">TabCopy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Roam-Highlighter"><span class="nav-number">4.2.</span> <span class="nav-text">Roam-Highlighter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-Clipper"><span class="nav-number">4.3.</span> <span class="nav-text">Web Clipper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub加速"><span class="nav-number">4.4.</span> <span class="nav-text">GitHub加速</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
