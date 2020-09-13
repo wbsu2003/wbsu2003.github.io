@@ -263,7 +263,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-13 00:00:00 / 修改时间：22:39:31" itemprop="dateCreated datePublished" datetime="2020-09-13T00:00:00+08:00">2020-09-13</time>
+              <time title="创建时间：2020-09-13 00:00:00 / 修改时间：22:56:16" itemprop="dateCreated datePublished" datetime="2020-09-13T00:00:00+08:00">2020-09-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,91 +317,15 @@
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
             <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/29/1598691118229-1598691118231.png" itemprop="contentUrl">
         </div>
-          <p><strong>什么是稍后阅读?</strong></p>
-<blockquote>
-<p>稍后阅读即是将网页（文字、图片、多媒体）等内容，通过用户操作，在网络浏览器及服务器中进行保存，或发送到指定云存储平台及邮箱，可以满足用户的移动阅读需求。【百度百科】</p>
-</blockquote>
-<p><strong>什么是Wallabag？</strong></p>
-<blockquote>
-<p>wallabag 是一款可自行托管的 PHP 应用程序，可以让你不会丢失任何内容。只需要点击保存，然后在你有时间时阅读。wallabag 同时包含各种第三方开发的浏览器扩展和手机应用，可进入软件下载页面获取。</p>
-</blockquote>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖的 <code>Docker</code> 中搜索 <code>Wallabag</code>，选第一个，这是官方的版本，版本 <code>latest</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/30/1598788179972-1598788179997.png" alt="title"></p>
-<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
-<thead>
-<tr>
-<th align="center">文件/文件夹</th>
-<th align="center">装载路径</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">/docker/wallabag/images</td>
-<td align="center">/var/www/wallabag/web/assets/images</td>
-</tr>
-</tbody></table>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/w%E5%8D%B7ok.png-1599836898992.png" alt="title"></p>
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>不冲突就行</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/w%E7%AB%AF%E5%8F%A3-1599836943100.png" alt="title"></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>数据库支持 <code>SQLite</code>、<code>MariaDB / MySQL</code>、<code>PostgreSQL</code>、<code>Redis</code>，本来想用群晖套件原来已安装的 <code>MariaDB</code> ，但一直报错，按照官方对于<code>SYMFONY__ENV__DATABASE_HOST</code> 的描述，当使用 <code>MySQL</code> 时，这个字段只能填<code>the name of the mariadb container</code>，所以最后还是用了 <code>SQLite</code></p>
-<table>
-<thead>
-<tr>
-<th align="center">可变</th>
-<th align="center">值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">SYMFONY__ENV__DOMAIN_NAME</td>
-<td align="center">缺省值 “<span class="exturl" data-url="aHR0cHM6Ly95b3VyLXdhbGxhYmFnLXVybC1pbnN0YW5jZS5jb23igJ0=">https://your-wallabag-url-instance.com”<i class="fa fa-external-link-alt"></i></span></td>
-</tr>
-</tbody></table>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/w%E7%8E%AF%E5%A2%83ok-1599837032541.png" alt="title"></p>
-<p>这个参数必须要填，不然web界面是这样的</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/login_error-1599837069108.png" alt="title"></p>
-<p>从代码看，当你不设置的时候，用了缺省值，因此导致了图片等异常</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/link_error-1599837097748.png" alt="title"></p>
-<p>设置正确的域名后，登录界面已经可以正常显示</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/login-1599837114901.png" alt="title"></p>
-<h1 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h1><p>可以在后台找到浏览器插件和移动端的下载地址</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/13/1600007262033-1600007262064.png" alt="title"></p>
-<h2 id="浏览器插件安装"><a href="#浏览器插件安装" class="headerlink" title="浏览器插件安装"></a>浏览器插件安装</h2><p>后台生成 <code>Client ID</code> 和 <code>Client secret</code>，这个在配置Chrome插件时会用到</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/Client_ID-1599837147646.png" alt="title"></p>
-<p>设置界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/w%E6%8F%92%E4%BB%B6-1599837169391.png" alt="title"></p>
-<p>填入参数</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/ID_%E5%AF%86%E7%A0%81ok-1599837194398.png" alt="title"></p>
-<h2 id="移动端安装"><a href="#移动端安装" class="headerlink" title="移动端安装"></a>移动端安装</h2><p>因为是自建的，所以要选<code>其他</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/android_wallabag1-1599837226877.jpg" alt="title"></p>
-<p>填写地址、账号和密码</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/android_wallabag2-1599837239484.jpg" alt="title"></p>
-<h1 id="使用和设置"><a href="#使用和设置" class="headerlink" title="使用和设置"></a>使用和设置</h1><h2 id="图片保存到本地"><a href="#图片保存到本地" class="headerlink" title="图片保存到本地"></a>图片保存到本地</h2><p>这样可以确保即便源站删除了，你这里的图片也不会因为源站的改变而受到影响。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/local_image-1599837343381.png" alt="title"></p>
-<p>测试的时候发现，因为 <code>加载 wallabag API...</code> 明显时间变长了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/save_image-1599837406757.png" alt="title"></p>
-<p>有时候容易出现错误</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/save_error-1599837432884.png" alt="title"></p>
-<p>猜测可能跟网络、SQLite 等等相关，Android 上要好很多。</p>
-<h2 id="保存文章的方式"><a href="#保存文章的方式" class="headerlink" title="保存文章的方式"></a>保存文章的方式</h2><ul>
-<li>通过chrome插件收藏，在浏览器上点击图标 </li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/13/1600007553618-1600007553621.png" alt="title"></p>
-<ul>
-<li>在wallabag的后台，直接输入要保存的网页的 url</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/13/1600007735441-1600007735443.png" alt="title"></p>
-<ul>
-<li>手机上公众号的文章收藏方法，和之前我们分享的《<a href="https://laosu.ml/2020/06/30/%E5%A6%82%E4%BD%95%E6%94%B6%E8%97%8F%E5%BE%AE%E4%BF%A1%E5%86%85%E5%AE%B9%E5%88%B0%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0/">如何收藏微信内容到为知笔记</a>》一样，需要通过浏览器打开之后，再分享到 <code>wallabag</code></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/android_wallabag4-1599837273111.jpg" alt="title"></p>
-<p>最后展示一张完整的首页界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/11/first-1599837298400.png" alt="title"></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>保存网页、稍后阅读，自建 Wallabag 服务也是一种选择 - 少数派<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC81Mjk3OQ==">https://sspai.com/post/52979<i class="fa fa-external-link-alt"></i></span></p>
-<p>自建稍后阅读服务之 Wallabag<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9idXN5LmltL3Bvc3QvcmVhZC1pdC1sYXRlci13YWxsYWJhZy8=">https://busy.im/post/read-it-later-wallabag/<i class="fa fa-external-link-alt"></i></span></p>
-<p>重温 wallabag：Instapaper 的开源替代品 - 知乎<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MjY2NTk4OA==">https://zhuanlan.zhihu.com/p/42665988<i class="fa fa-external-link-alt"></i></span></p>
-<p>【NAS玩机十一年高阶玩家教程系列其二：wallabag】_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2Fvb3cycm05Lw==">https://post.smzdm.com/p/aoow2rm9/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-
+          <p>wallabag 可以先保存，然后在你有时间时阅读。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/13/%E7%94%A8Wallabag%E6%90%AD%E5%BB%BA%E7%A8%8D%E5%90%8E%E9%98%85%E8%AF%BB/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
