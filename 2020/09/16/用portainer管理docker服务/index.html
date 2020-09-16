@@ -34,7 +34,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/1600255143400-1600255143446.png">
 <meta property="article:published_time" content="2020-09-16T11:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-16T11:21:45.154Z">
+<meta property="article:modified_time" content="2020-09-16T11:26:57.521Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -266,7 +266,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-09-16 19:00:00 / 修改时间：19:21:45" itemprop="dateCreated datePublished" datetime="2020-09-16T19:00:00+08:00">2020-09-16</time>
+              <time title="创建时间：2020-09-16 19:00:00 / 修改时间：19:26:57" itemprop="dateCreated datePublished" datetime="2020-09-16T19:00:00+08:00">2020-09-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -366,13 +366,13 @@
 <h2 id="连接Docker服务"><a href="#连接Docker服务" class="headerlink" title="连接Docker服务"></a>连接Docker服务</h2><p>用管理员登录后，需要配置连接到 docker 服务</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup01-1600227838611.png" alt="title"></p>
 <p>首先我们需要让群晖的docker服务允许通过TCP进行连接，用 SSH 连到群晖上，编辑文件 <code>/var/packages/Docker/etc/dockerd.json</code> ，并新增一行：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"hosts" : [ "tcp://192.168.0.233:2375", "unix:///var/run/docker.sock" ],</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"hosts" : [ "tcp://192.168.0.199:2375", "unix:///var/run/docker.sock" ],</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup02-1600227865839.png" alt="title"></p>
 <p>其中的 IP 需要改成群晖主机的 IP 地址，然后用保存。接下来重启群晖的 docker 服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">synoservice --restart pkgctl-Docker</span><br></pre></td></tr></table></figure>
 
-<p>在之前的连接docker终端的界面，Name 随便填写，Endpoint URL 填写群晖的 IP 和端口2375，TLS 选择关闭，然后点击 Connect 按钮。</p>
+<p>在之前的连接 docker 终端的界面，<code>Name</code> 随便填写，<code>Endpoint URL</code> 填写群晖的 IP 和端口2375，TLS 选择关闭，然后点击 <code>Connect</code> 按钮。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup03-1600227888287.png" alt="title"></p>
 <p>连接之后就能看到我们新建的 <code>Endpoint</code></p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup04-1600227909597.png" alt="title"></p>
