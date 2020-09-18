@@ -161,7 +161,7 @@
 <h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><p>执行以下标准命令启动 <code>watchtower</code> 容器，并每 5 分钟一次检查所有容器的镜像是否为最新版，如发现镜像更新将会自动停止容器，删除容器，拉取最新镜像，再以之前启动容器的命令启动容器</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">    --name watchtower \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    containrrr/watchtower</span><br></pre></td></tr></table></figure>
 
-<h2 id="指定容器更新"><a href="#指定容器更新" class="headerlink" title="指定容器更新"></a>指定容器更新</h2><p>如无需自动更新所有稳定运行的容器，可以配置仅更新指定容器，只需要在命令后加上容器名。例如只更新nginx和redis。</p>
+<h2 id="指定容器更新"><a href="#指定容器更新" class="headerlink" title="指定容器更新"></a>指定容器更新</h2><p>如无需自动更新所有稳定运行的容器，可以配置仅更新指定容器，只需要在命令后加上容器名。例如只更新 <code>nginx</code> 和 <code>redis</code>。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">    --name watchtower \</span><br><span class="line">    --restart always \</span><br><span class="line">    -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">    containrrr/watchtower \</span><br><span class="line">    --cleanup \</span><br><span class="line">    nginx redis</span><br></pre></td></tr></table></figure>
 
 <h2 id="远程主机"><a href="#远程主机" class="headerlink" title="远程主机"></a>远程主机</h2><p>缺省情况下，<code>watchtower</code>监控的是本地的 <code>docker daemon</code>，但是也可以监控另一台机器上的 docker，比如我本机 IP 是 <code>192.168.0.199</code>，而另一台蜗牛星际的 IP 是 <code>192.168.0.198</code></p>
