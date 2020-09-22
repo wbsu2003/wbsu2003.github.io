@@ -5244,7 +5244,7 @@
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker03-1600232169422.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>在浏览器中输入 <code>http://群晖IP:61208</code>，即可看到主界面</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/index01-1600232212596.png" alt="title"></p>
-<p>但是跟官网的图片比，好像右下角缺了一大块，仔细对比之后发现应该是缺了 <code>docker</code> 的信息，和 <code>portainer</code>、<code>watchtower</code> 不同，<code>glances</code> 并没找到对远程终端的支持。</p>
+<p>但是跟官网的图片比，好像右下角缺了一大块，仔细对比之后发现缺了 <code>docker</code> 的信息，和 <code>portainer</code>、<code>watchtower</code> 不同，<code>glances</code> 并没找到对远程终端的支持。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/index02-1600232229777.png" alt="title"></p>
 <p>所以问题应该出在 <code>/var/run/docker.sock</code>，这是 <code>Docker API</code> 的主要入口,简单地说，它是 Docker 守护进程（Docker daemon）默认监听的 Unix 域套接字（Unix domain socket），容器中的进程可以通过它与 Docker 守护进程进行通信。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/1600233408261-1600233408269.png" alt="title"></p>
