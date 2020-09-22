@@ -5295,4 +5295,64 @@
         <tag>deploy_git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Glances监视群晖运行状况</title>
+    <url>/2020/09/22/Glances%E7%9B%91%E8%A7%86%E7%BE%A4%E6%99%96%E8%BF%90%E8%A1%8C%E7%8A%B6%E5%86%B5/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>glances</code> ，选择第一个 <code>nicolargo/glances</code>，版本 <code>latest</code>。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker01-1600232128459.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker02-1600232156260.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker03-1600232169422.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>在浏览器中输入 <code>http://群晖IP:61208</code>，即可看到主界面</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/index01-1600232212596.png" alt="title"></p>
+<p>但是跟官网的图片比，好像右下角缺了一大块，仔细对比之后发现应该是缺了 <code>docker</code> 的信息，和 <code>portainer</code>、<code>watchtower</code> 不同，<code>glances</code> 并没找到对远程终端的支持。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/index02-1600232229777.png" alt="title"></p>
+<p>所以问题应该出在 <code>/var/run/docker.sock</code>，这是 <code>Docker API</code> 的主要入口,简单地说，它是 Docker 守护进程（Docker daemon）默认监听的 Unix 域套接字（Unix domain socket），容器中的进程可以通过它与 Docker 守护进程进行通信。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/1600233408261-1600233408269.png" alt="title"></p>
+<blockquote>
+<p>图片来自<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmZ1bmRlYnVnLmNvbS8yMDE3LzA0LzE3L2Fib3V0LWRvY2tlci1zb2NrLw==">https://blog.fundebug.com/2017/04/17/about-docker-sock/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h2><p>黑群晖老版本无法直接访问 var 目录,所以无法通过配置 -v <code>/var/run/docker.sock:/var/run/docker.sock</code> 来完成，所以我们要用<br> <code>sudo ln -s /var/run/docker.sock /volume1/docker/docker.sock</code> 把你当前群晖的 docker.sock 映射到 docker 共享目录（我安装在了 volume1 ），同时为避免重启后软链会消失，需要把它加到计划任务中。</p>
+<p>转到 <code>控制面板</code> –&gt; <code>任务计划</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task01-1600232366408.png" alt="title"></p>
+<p><code>新增</code> –&gt; <code>计划的任务</code> –&gt; <code>用户定义的脚本</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task02-1600232386590.png" alt="title"></p>
+<p>在 <code>创建任务</code> 窗口的 <code>常规</code> 选项卡上，确保将 <code>用户账号</code> 选择为 <code>root</code>，填入 <code>任务名称</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task03-1600232399083.png" alt="title"></p>
+<p>在 <code>创建任务</code> 窗口的 <code>计划</code> 选项卡上，在 <code>日期</code> –&gt; <code>在以下的天中运行</code> 下，选择 <code>每日</code> 。在 <code>时间</code> –&gt; <code>运行频率</code> 下，选择 <code>每1小时</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task04-1600232413872.png" alt="title"></p>
+<p>在 <code>创建任务</code> 窗口的 <code>任务设置</code> 选项卡上，在 <code>运行命令</code> –&gt; <code>用户定义的脚本</code>中，粘贴 <code>sudo ln -s /var/run/docker.sock /volume1/docker/docker.sock</code> 到文本框中，然后按 <code>确定</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task05-1600232425336.png" alt="title"></p>
+<p>在新创建的任务，右键单击 <code>运行</code> 立即运行一次</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task06-1600232436204.png" alt="title"></p>
+<p>需要确认</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/task07-1600232446903.png" alt="title"></p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>软链接在 <code>File Station</code> 是看不到的，所以我们不能再用 GUI 来修改或者创建了，但是命令行创建成功后，可以在 GUI 中查看 </p>
+<p>通过SSH进入Synology，运行以下docker run命令</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">docker run -d --restart=<span class="string">"always"</span> --name=<span class="string">"nicolargo-glances1"</span> -p 61208-61209:61208-61209 -e GLANCES_OPT=<span class="string">"-w"</span> -v /volume1/docker/docker.sock:/var/run/docker.sock:ro --pid host docker.io/nicolargo/glances</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/ssh01-1600232476479.png" alt="title"></p>
+<p>再回到浏览器，刷新一下</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/index03-1600232489329.png" alt="title"></p>
+<p>容器的信息已经有了，我们在 GUI 中 找到 <code>nicolargo-glances1</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/22/1600775620347-1600775620409.png" alt="title"></p>
+<p>先停止，然后进入编辑，是可以看到文件夹映射的</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/22/1600775684921-1600775684924.png" alt="title"></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Glances - An Eye on your system<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9uaWNvbGFyZ28uZ2l0aHViLmlvL2dsYW5jZXMv">https://nicolargo.github.io/glances/<i class="fa fa-external-link-alt"></i></span></p>
+<p>nicolargo/glances: Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pY29sYXJnby9nbGFuY2Vz">https://github.com/nicolargo/glances<i class="fa fa-external-link-alt"></i></span></p>
+<p>Docker — Glances 3.1.4 documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nbGFuY2VzLnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9kb2NrZXIuaHRtbA==">https://glances.readthedocs.io/en/latest/docker.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>关于/var/run/docker.sock<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmZ1bmRlYnVnLmNvbS8yMDE3LzA0LzE3L2Fib3V0LWRvY2tlci1zb2NrLw==">https://blog.fundebug.com/2017/04/17/about-docker-sock/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>性能监视</tag>
+        <tag>运维</tag>
+        <tag>可视化</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
 </search>
