@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Bililive-go 是一个支持多种直播平台的直播录制工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国庆在家玩录播">
+<meta property="og:url" content="https://laosu.ml/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="Bililive-go 是一个支持多种直播平台的直播录制工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png">
+<meta property="article:published_time" content="2020-09-30T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-01T07:43:37.908Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="录播">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>国庆在家玩录播 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          国庆在家玩录播
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-30 13:00:00" itemprop="dateCreated datePublished" datetime="2020-09-30T13:00:00+08:00">2020-09-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-01 15:43:37" itemprop="dateModified" datetime="2020-10-01T15:43:37+08:00">2020-10-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">Bililive-go 是一个支持多种直播平台的直播录制工具。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png" itemprop="contentUrl">
+        </div>
+        <p>上一篇我们研究了如何在家里直播，今天我们来研究下怎么进行录播，这样我们就不用担心错过什么了，比如说网课，体育比赛等等。</p>
+<p>和 <code>LiveGo</code> 一样，<code>Bililive-go</code> 也是基于 <code>Go</code> 语言开发的项目，如果你正在学习 <code>Go</code> 语言，可以到这里看看，<span class="exturl" data-url="aHR0cHM6Ly9zaG9ja2VybGkubmV0L3Bvc3QvZ28tYXdlc29tZS8=">https://shockerli.net/post/go-awesome/<i class="fa fa-external-link-alt"></i></span>，作者汇聚了大量 <code>Go</code> 语言开发的优秀资源，涵盖了软件开发的方方面面，非常👍。</p>
+<p>根据官方的资料显示，目前 <code>Bililive-go</code> 支持的平台</p>
+<table>
+<thead>
+<tr>
+<th>站点</th>
+<th>url</th>
+<th>支持情况</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>哔哩哔哩直播</td>
+<td>live.bilibili.com</td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>熊猫直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5wYW5kYS50dg==">www.panda.tv<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>战旗直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy56aGFucWkudHY=">www.zhanqi.tv<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>斗鱼直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5kb3V5dS5jb20=">www.douyu.com<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>火猫直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5odW9tYW8uY29t">www.huomao.com<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>龙珠直播</td>
+<td>longzhu.com</td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>虎牙直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5odXlhLmNvbQ==">www.huya.com<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>全民直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5xdWFubWluLnR2">www.quanmin.tv<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>CC 直播</td>
+<td>cc.163.com</td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>一直播</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy55aXpoaWJvLmNvbQ==">www.yizhibo.com<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>twitch</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy50d2l0Y2gudHY=">www.twitch.tv<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+<tr>
+<td>OPENREC</td>
+<td><span class="exturl" data-url="aHR0cDovL3d3dy5vcGVucmVjLnR2">www.openrec.tv<i class="fa fa-external-link-alt"></i></span></td>
+<td>滋瓷</td>
+</tr>
+</tbody></table>
+<p>对直播行业不是太了解，不知道是不是主流的直播平台都覆盖到了？测试的时候才知道 <code>熊猫直播</code><br>已经停止运营了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601520711839-1601520711841.png" alt="title"></p>
+<p>我试了 <code>哔哩哔哩</code> 和 <code>斗鱼</code> ，还是可以正常使用的。话不多说，继续我们今天的环境安装。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>bililive</code> ，选择第一个 <code>chigusa/bililive-go</code>，版本 <code>latest</code>。</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker01-1601520267478.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
+<thead>
+<tr>
+<th align="center">文件/文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">群晖的本地目录</td>
+<td align="center">/srv/bililive</td>
+</tr>
+</tbody></table>
+<p>这里我挂载到了 <code>airdisk</code> 用 <code>samba</code> 协议映射到群晖的盘上</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker02-1601520285720.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>找个不冲突的端口就可</p>
+<table>
+<thead>
+<tr>
+<th align="center">本地端口</th>
+<th align="center">容器端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">4880</td>
+<td align="center">8080</td>
+</tr>
+</tbody></table>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker03-1601520302918.png" alt="title"></p>
+<h1 id="录制"><a href="#录制" class="headerlink" title="录制"></a>录制</h1><h2 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h2><p>在浏览器中输入 <code>http://群晖IP:4880</code>，就可以看到主界面了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/web01-1601520323760.png" alt="title"></p>
+<p><code>系统状态</code>中的信息</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/web02-1601520337927.png" alt="title"></p>
+<h2 id="录制B站"><a href="#录制B站" class="headerlink" title="录制B站"></a>录制B站</h2><p>在 <code>B站</code> 找到直播的入口 ，随便选了个试试</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili01-1601520352073.png" alt="title"></p>
+<p>选中打开后，复制浏览器地址栏的地址</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521670811-1601521670817.png" alt="title"></p>
+<p>添加房间，粘贴地址，点 <code>OK</code> 确定</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521774163-1601521774164.png" alt="title"></p>
+<p>列表中可以看到已经在 <code>录制中</code> 了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521809230-1601521809232.png" alt="title"></p>
+<p>在 <code>File Station</code> 中已经能看到录制的文件了，格式是 <code>flv</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521892818-1601521892821.png" alt="title"></p>
+<p>可以通过点击 <code>停止监控</code> 来停止录像</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili06-1601520413719.png" alt="title"></p>
+<p>确定后，列表中的 <code>运行状态</code> 会改变</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili07-1601520421414.png" alt="title"></p>
+<p>再回到  <code>File Station</code> ，右键直接播放，会显示格式不支持</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili08-1601520430229.png" alt="title"></p>
+<p>用 <code>airdisk</code> 播放试试</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601522190230-1601522190232.png" alt="title"></p>
+<p>即便是远程模式，也很流畅</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601522288057-1601522288060.png" alt="title"></p>
+<p><code>斗鱼</code> 的也是一样的操作</p>
+<h1 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h1><p>录制功能很强大，但是这个毕竟不是完整的应用而是个开发的框架，需要根据实际应用进行完善，程序提供了 <code>Http Rest API</code> 接口，所以开发 <code>WEB</code> 应用还是很简单快捷的。</p>
+<h2 id="不能删除直播间"><a href="#不能删除直播间" class="headerlink" title="不能删除直播间"></a>不能删除直播间</h2><p>遇到房间不能删除的情况，只能在 <code>终端机</code> 中手动修改 <code>config.yml</code> 文件，配置文件为 <code>/etc/bililive-go/config.yml</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930195841-1601520500966.png" alt="title"></p>
+<p>把不需要的房间整行删除，重启容器就可以了</p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930200512-1601520531398.png" alt="title"></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config.yml 说明</span></span><br><span class="line"><span class="attr">rpc:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>           <span class="comment"># 是否开启API</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8080</span>    <span class="comment"># 监听地址</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">""</span>               <span class="comment"># token</span></span><br><span class="line">  <span class="attr">tls:</span>                    <span class="comment"># tls配置</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">cert_file:</span> <span class="string">""</span></span><br><span class="line">    <span class="attr">key_file:</span> <span class="string">""</span></span><br><span class="line"><span class="attr">debug:</span> <span class="literal">false</span>              <span class="comment"># debug模式</span></span><br><span class="line"><span class="attr">interval:</span> <span class="number">15</span>              <span class="comment"># 直播间状态查询间隔时间（秒）</span></span><br><span class="line"><span class="attr">out_put_path:</span> <span class="string">./</span>          <span class="comment"># 输出文件路径</span></span><br><span class="line"><span class="attr">live_rooms:</span>               <span class="comment"># 直播间url</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://www.panda.tv/10300</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://live.bilibili.com/1010</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="重启容器后开始录制"><a href="#重启容器后开始录制" class="headerlink" title="重启容器后开始录制"></a>重启容器后开始录制</h2><p>重启容器会导致原来已经停止监控的房间又开始处于 <code>录制中</code> 或 <code>监控中</code>，目前只能手动停止</p>
+<h2 id="不支持定时录制"><a href="#不支持定时录制" class="headerlink" title="不支持定时录制"></a>不支持定时录制</h2><p>不支持定时录制，但没有视频流的时候，也就是没直播的时候会显示 <code>监控中</code>，当有视频流的时候才会录制，状态会显示 <code>录制中</code></p>
+<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930201141-1601520544629.png" alt="title"></p>
+<p>如果你正在做录播项目，基于 <code>Bililive-go</code> 可以让你事倍功半。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>GitHub - hr3lxphr6j/bililive-go: 一个直播录制工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hyM2x4cGhyNmovYmlsaWxpdmUtZ28=">https://github.com/hr3lxphr6j/bililive-go<i class="fa fa-external-link-alt"></i></span></p>
+<p>n1化身全网直播录制工具，妈妈再也不用担心我上网课走神了_软件应用_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FscHd2d3ZvLw==">https://post.smzdm.com/p/alpwvwvo/<i class="fa fa-external-link-alt"></i></span></p>
+<p>bililive-go的使用 - A trivial blog.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jYXByaWNjaW8ubW9lL2FyY2hpdmVzLzM0Lw==">https://capriccio.moe/archives/34/<i class="fa fa-external-link-alt"></i></span></p>
+<p>BRITE’S BLOG.人生在世，看得穿，又看得远者prevail everywhere.: 用VPS实现一些方便的功能<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9icml0ZW1pbmcuYmxvZ3Nwb3QuY29tLzIwMTkvMTIvdnBzLmh0bWw=">https://briteming.blogspot.com/2019/12/vps.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Go 语言优秀资源整理，为项目落地加速🏃[2020.08.17更新] - 格物<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zaG9ja2VybGkubmV0L3Bvc3QvZ28tYXdlc29tZS8=">https://shockerli.net/post/go-awesome/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\01\Snapdrop实现P2P局域网文件互传\" rel="bookmark">Snapdrop实现P2P局域网文件互传</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\04\Syncthing文件夹同步神器\" rel="bookmark">Syncthing文件夹同步神器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\18\watchtower自动化更新docker镜像\" rel="bookmark">watchtower自动化更新docker镜像</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/09/30/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/" title="国庆在家玩录播">https://laosu.ml/2020/09/30/国庆在家玩录播/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/%E5%BD%95%E6%92%AD/" rel="tag"><i class="fa fa-tag"></i> 录播</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/26/%E5%B0%8F%E7%B1%B3%E6%89%8B%E6%9C%BA%E9%99%8D%E7%BA%A7%E8%AE%B0%E5%BD%95/" rel="prev" title="小米手机降级记录">
+      <i class="fa fa-chevron-left"></i> 小米手机降级记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/01/Snapdrop%E5%AE%9E%E7%8E%B0P2P%E5%B1%80%E5%9F%9F%E7%BD%91%E6%96%87%E4%BB%B6%E4%BA%92%E4%BC%A0/" rel="next" title="Snapdrop实现P2P局域网文件互传">
+      Snapdrop实现P2P局域网文件互传 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#录制"><span class="nav-number">2.</span> <span class="nav-text">录制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主界面"><span class="nav-number">2.1.</span> <span class="nav-text">主界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#录制B站"><span class="nav-number">2.2.</span> <span class="nav-text">录制B站</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在后面"><span class="nav-number">3.</span> <span class="nav-text">写在后面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不能删除直播间"><span class="nav-number">3.1.</span> <span class="nav-text">不能删除直播间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启容器后开始录制"><span class="nav-number">3.2.</span> <span class="nav-text">重启容器后开始录制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不支持定时录制"><span class="nav-number">3.3.</span> <span class="nav-text">不支持定时录制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">178</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">125k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:54</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
