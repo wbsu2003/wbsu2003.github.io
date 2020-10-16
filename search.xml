@@ -5601,7 +5601,7 @@
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/%E6%9E%B6%E6%9E%84-1600260803126.png" alt="title"></p>
 <p>关于 guacamole 更多的介绍，可以到这里看看：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1RlbERyYWdvbi9ndWFjYW1vbGU=">https://github.com/TelDragon/guacamole<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>根据 apache guacamole 官方文档，官方的 docker 涉及到3个独立的容器，分别是 <code>guacamole/guacd</code>、<code>guacamole/guacamol</code>、<code>mysql</code> 或者 <code>postgresql</code>，这种遵循单一原则的分离更有利于升级、维护，但是我们只是临时的测试环境，即便是使用也是偶尔和数量很少的用户，所以我个人更喜欢用单容器，有点类似虚拟机，在一个容器中跑多个应用，就算是挂了，重启容器就行了。</p>
-<p>基于上述的原因，我们今天选择的镜像是 <code>oznu/guacamole</code>，这是一个多合一的镜像，包含了 <code>guacd server</code> ，<code>guacamole web client</code> 和 <code>postgres database</code>，支持x64 和 ARM 平台。 </p>
+<p>基于上述的原因，我们今天选择的镜像是 <code>oznu/guacamole</code>，这是一个多合一的镜像，包含了 <code>guacd server</code> ，<code>guacamole web client</code> 和 <code>postgres database</code>，支持 x64 和 ARM 平台。 </p>
 <p>之前我们已经安装过 portainer 来管理 docker，所以我们今天尝试用 portainer 来安装 guacamole。</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker1-1600260893774.png" alt="title"></p>
 <p>其中</p>
