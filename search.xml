@@ -5598,57 +5598,57 @@
 <p>Apache Guacamole 是无客户端远程桌面网关，是基于 HTML5 的远程桌面控制框架。它支持标准协议，例如 VNC，RDP和SSH。</p>
 </blockquote>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用 guacamole 的主要原因是可以从任何地方远程访问一个或多个桌面，而无需安装客户端，这给我们带来了很大的便利，几乎可以在带有网络浏览器的任何设备上使用 guacamole，而且代理或防火墙的存在不会阻止 guacamole 的使用。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/%E6%9E%B6%E6%9E%84-1600260803126.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/%E6%9E%B6%E6%9E%84-1600260803126.png" alt="title"></p>
 <p>关于 guacamole 更多的介绍，可以到这里看看：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1RlbERyYWdvbi9ndWFjYW1vbGU=">https://github.com/TelDragon/guacamole<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>根据 apache guacamole 官方文档，官方的 docker 涉及到3个独立的容器，分别是 <code>guacamole/guacd</code>、<code>guacamole/guacamol</code>、<code>mysql</code> 或者 <code>postgresql</code>，这种遵循单一原则的分离更有利于升级、维护，但是我们只是临时的测试环境，即便是使用也是偶尔和数量很少的用户，所以我个人更喜欢用单容器，有点类似虚拟机，在一个容器中跑多个应用，就算是挂了，重启容器就行了。</p>
 <p>基于上述的原因，我们今天选择的镜像是 <code>oznu/guacamole</code>，这是一个多合一的镜像，包含了 <code>guacd server</code> ，<code>guacamole web client</code> 和 <code>postgres database</code>，支持 x64 和 ARM 平台。 </p>
 <p>之前我们已经安装过 portainer 来管理 docker，所以我们今天尝试用 portainer 来安装 guacamole。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker1-1600260893774.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/docker1-1600260893774.png" alt="title"></p>
 <p>其中</p>
 <blockquote>
 <p>① 是容器的名称<br>② 是镜像的名称<br>③ 前面是主机的端口，不冲突就可，后面是容器的端口<br>④ 是重启的策略<br>⑤ 是部署按钮</p>
 </blockquote>
 <p>点击⑤开始部署，部署的时间取决于网络</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/docker2-1600260918381.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/docker2-1600260918381.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3080</code>，就可以看到登录界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/login-1600260935535.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/login-1600260935535.png" alt="title"></p>
 <p>缺省的用户名和密码都是 <code>guacadmin</code></p>
 <p>右上角 <code>guacadmin</code> –&gt; <code>设置</code> –&gt; <code>连接</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup1-1600260977020.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup1-1600260977020.png" alt="title"></p>
 <h2 id="SSH-连接"><a href="#SSH-连接" class="headerlink" title="SSH 连接"></a>SSH 连接</h2><p>选择 <code>SSH</code> 协议</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup2-1600261007887.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup2-1600261007887.png" alt="title"></p>
 <p>只要输入主机IP和端口即可，我这里输入了群晖的IP</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup3-1600261022509.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup3-1600261022509.png" alt="title"></p>
 <p>输入账号、密码就能成功看到界面</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup4-1600261045349.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup4-1600261045349.png" alt="title"></p>
 <p> 除了命令，还支持常用的 tab 补全和 vi，这不就是个 web 版的 ssh 吗？</p>
 <h2 id="RDP-连接"><a href="#RDP-连接" class="headerlink" title="RDP 连接"></a>RDP 连接</h2><p>windows主机新建用于远程登录的用户</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows1-1600261074886.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows1-1600261074886.png" alt="title"></p>
 <p>远程桌面中 <code>允许远程连接到此计算机</code>，选择用户</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows2-1600261094711.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows2-1600261094711.png" alt="title"></p>
 <p>选择添加</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows3-1600261120369.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows3-1600261120369.png" alt="title"></p>
 <p>文本框中输入用户 <code>RDP</code> 之后，点检查名称，会自动补全，确定就可以了 </p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows4-1600261132672.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows4-1600261132672.png" alt="title"></p>
 <p>自动返回上一个界面，确定即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows5-1600261144014.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows5-1600261144014.png" alt="title"></p>
 <p>回到 <code>guacamole</code> 的 <code>连接</code> 设置界面，这次选择 <code>RDP</code> 协议</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup5-1600261158041.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup5-1600261158041.png" alt="title"></p>
 <p>同样只要输入主机IP和端口即可</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/setup6-1600261172647.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/setup6-1600261172647.png" alt="title"></p>
 <p>选择用户</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows6-1600261187005.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows6-1600261187005.png" alt="title"></p>
 <p>输入密码</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows7-1600261198341.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows7-1600261198341.png" alt="title"></p>
 <p>登录成功后</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/windows8-1600261210725.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/windows8-1600261210725.png" alt="title"></p>
 <p>从操作看还是比较流畅的</p>
 <h2 id="主机切换"><a href="#主机切换" class="headerlink" title="主机切换"></a>主机切换</h2><p>在后台首页能看到登录过的主机</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/web1-1600261225206.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/web1-1600261225206.png" alt="title"></p>
 <p>可以通过点击主机界面的右下角在不同的主机间进行切换</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/web2-1600261236854.png" alt="title"><br><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/web3-1600261245798.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/web2-1600261236854.png" alt="title"><br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/web3-1600261245798.png" alt="title"></p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>从协议看，还支持 <code>VNC</code>、<code>Telnet</code>、<code>Kubernetes</code>，有兴趣的可以自行研究。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/09/16/%E5%8D%8F%E8%AE%AE-1600261262006.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/09/16/%E5%8D%8F%E8%AE%AE-1600261262006.png" alt="title"></p>
 <p>对我而言，支持 <code>SSH</code> 和  <code>RDP</code> 已经足够了， <code>TeamViewer</code> 和 <code>向日葵</code> 都可以卸了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Apache Guacamole™<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ndWFjYW1vbGUuYXBhY2hlLm9yZy8=">https://guacamole.apache.org/<i class="fa fa-external-link-alt"></i></span></p>
