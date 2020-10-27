@@ -5228,49 +5228,6 @@
       </tags>
   </entry>
   <entry>
-    <title>自建网络测速服务器</title>
-    <url>/2020/10/27/%E8%87%AA%E5%BB%BA%E7%BD%91%E7%BB%9C%E6%B5%8B%E9%80%9F%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-    <content><![CDATA[<p>Speedtest 是开源项目，github上的代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0">https://github.com/librespeed/speedtest<i class="fa fa-external-link-alt"></i></span></p>
-<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9saWJyZXNwZWVkLm9yZy8=">https://librespeed.org/<i class="fa fa-external-link-alt"></i></span>，即开即用，不需要注册，也没有广告，干净又清爽</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601703563672-1601703563674.png" alt="title"></p>
-<p>没找到国内的服务器，除了美国就是欧洲</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601703851361-1601703851363.png" alt="title"></p>
-<p>选个 <code>New York</code> 的随便试试</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601704256390-1601704256392.png" alt="title"></p>
-<p>这样的结果让我说什么呢？</p>
-<p>既然是开源的，我们也可以自己搭建，正好可以用来测试外网访问群晖的速度。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>speedtest</code> ，选择第一个 <code>adolfintel/speedtest</code>，双击直接下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601694882991-1601694882992.png" alt="title"></p>
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>找一个空闲的端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695165788-1601695165789.png" alt="title"></p>
-<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在浏览器中输入 <code>http://群晖IP:8180</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695344304-1601695344306.png" alt="title"></p>
-<p>先试试局域网，测试机和群晖接在同一个千兆路由上，理论上应该是可以到千兆的，事实上也确实如此</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695416780-1601695416782.png" alt="title"></p>
-<p>接下来我们设置反代，从外网来访问</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695685888-1601695685890.png" alt="title"></p>
-<p>618 时买的腾讯主机是 <code>1Mbps</code> 带宽的，上面就跑了个 <code>frp server</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601701187551-1601701187553.png" alt="title"></p>
-<p>从结果看下载带宽跑满了，但是上传为啥是 0 呢？再来一次</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601704804665-1601704804666.png" alt="title"></p>
-<p>看来上传确实不行，下回换个时间段再来测试。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>LibreSpeed - Speedtest 官网主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9saWJyZXNwZWVkLm9yZy8=">https://librespeed.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>librespeed/speedtest 代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0">https://github.com/librespeed/speedtest<i class="fa fa-external-link-alt"></i></span></p>
-<p>NAS折腾笔记 篇二：打造专属测速服务器，群晖/威联通安装speedtest 自建 测速服务器 方便内外网测速_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EwNzhwNHc5Lw==">https://post.smzdm.com/p/a078p4w9/<i class="fa fa-external-link-alt"></i></span></p>
-<p>网络测速工具 | speedtest测速工具搭建指南_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzcwMjc0NC8=">https://post.smzdm.com/p/702744/<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>网络</tag>
-        <tag>测速</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>给路由器加个风扇</title>
     <url>/2020/06/22/%E7%BB%99%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8A%A0%E4%B8%AA%E9%A3%8E%E6%89%87/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>家里的老路由日常温度一般都在80°朝上，据说温度太高会导致网络卡顿、断线，但是说实话平时没啥感觉，可能主要是因为没打游戏，实时性要求不高吧。但是不管怎么样，高温容易导致老化，为了让它能寿命长一点，撸了一个 12cm 的 USB 静音风扇，毕竟马上就要天热了。</p>
@@ -6144,6 +6101,53 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自建Speedtest网络测速服务器</title>
+    <url>/2020/10/27/%E8%87%AA%E5%BB%BASpeedtest%E7%BD%91%E7%BB%9C%E6%B5%8B%E9%80%9F%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<p>Speedtest 是开源项目，github上的代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0">https://github.com/librespeed/speedtest<i class="fa fa-external-link-alt"></i></span></p>
+<p>官网地址：<span class="exturl" data-url="aHR0cHM6Ly9saWJyZXNwZWVkLm9yZy8=">https://librespeed.org/<i class="fa fa-external-link-alt"></i></span>，即开即用，不需要注册，也没有广告，干净又清爽</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601703563672-1601703563674.png" alt="title"></p>
+<p>没找到国内的服务器，除了美国就是欧洲</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601703851361-1601703851363.png" alt="title"></p>
+<p>选个 <code>New York</code> 的随便试试</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601704256390-1601704256392.png" alt="title"></p>
+<p>这样的结果让我说什么呢？</p>
+<p>既然是开源的，我们也可以自己搭建，正好可以用来测试外网访问群晖的速度。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>speedtest</code> ，选择第一个 <code>adolfintel/speedtest</code>，双击直接下载。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601694882991-1601694882992.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>找一个空闲的端口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695165788-1601695165789.png" alt="title"></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在浏览器中输入 <code>http://群晖IP:8180</code> 就能看到主界面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695344304-1601695344306.png" alt="title"></p>
+<p>先试试局域网，测试机和群晖接在同一个千兆路由上，理论上应该是可以到千兆的，事实上也确实如此</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695416780-1601695416782.png" alt="title"></p>
+<p>接下来我们设置反代，从外网来访问</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601695685888-1601695685890.png" alt="title"></p>
+<p>618 时买的腾讯主机是 <code>1Mbps</code> 带宽的，上面就跑了个 <code>frp server</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601701187551-1601701187553.png" alt="title"></p>
+<p>从结果看下载带宽跑满了，但是上传为啥是 0 呢？再来一次</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/10/03/1601704804665-1601704804666.png" alt="title"></p>
+<p>看来上传确实不行，下回换个时间段再来测试。</p>
+<h1 id="Android-客户端"><a href="#Android-客户端" class="headerlink" title="Android 客户端"></a>Android 客户端</h1><p>Android 客户端也是开源的，github上的代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0LWFuZHJvaWQ=">https://github.com/librespeed/speedtest-android<i class="fa fa-external-link-alt"></i></span></p>
+<p>下载的版本是对应官方公网服务器的，要想测试自己的服务器，需要修改 <code>ServerList.json</code> 文件，具体的修改方法请参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0LWFuZHJvaWQvYmxvYi9tYXN0ZXIvZG9jLm1k">https://github.com/librespeed/speedtest-android/blob/master/doc.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>个人觉得没啥必要，所以就这样吧。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>LibreSpeed - Speedtest 官网主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9saWJyZXNwZWVkLm9yZy8=">https://librespeed.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>librespeed/speedtest 代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpYnJlc3BlZWQvc3BlZWR0ZXN0">https://github.com/librespeed/speedtest<i class="fa fa-external-link-alt"></i></span></p>
+<p>NAS折腾笔记 篇二：打造专属测速服务器，群晖/威联通安装speedtest 自建 测速服务器 方便内外网测速_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EwNzhwNHc5Lw==">https://post.smzdm.com/p/a078p4w9/<i class="fa fa-external-link-alt"></i></span></p>
+<p>网络测速工具 | speedtest测速工具搭建指南_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzcwMjc0NC8=">https://post.smzdm.com/p/702744/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>网络</tag>
+        <tag>测速</tag>
+        <tag>Speedtest</tag>
       </tags>
   </entry>
 </search>
