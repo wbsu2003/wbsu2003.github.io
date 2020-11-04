@@ -2724,7 +2724,7 @@
     <url>/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/</url>
     <content><![CDATA[<p><strong>WireGuard是什么？</strong></p>
 <blockquote>
-<p>WireGuard是由 Jason A. Donenfeld 开发的开放原始码 VPN 程序及协议，基于 Linux 核心实现，利用 Curve25519 进行秘钥交换，ChaCha20 用于加密，Poly1305 用于资料认证，BLAKE2 用于杂凑函数运算，支持 IPv4 和 IPv6 的第3层。</p>
+<p>WireGuard是由 Jason A. Donenfeld 开发的开源 VPN 程序及协议，基于 Linux 核心实现，利用 Curve25519 进行秘钥交换，ChaCha20 用于加密，Poly1305 用于资料认证，BLAKE2 用于杂凑函数运算，支持 IPv4 和 IPv6 的第3层。</p>
 </blockquote>
 <p><strong>零信任网络是什么？</strong></p>
 <blockquote>
@@ -2751,15 +2751,15 @@
 <h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>Tailscale 是一个开源项目，客户端基本上覆盖了主流平台</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026143142.png" alt=""></p>
 <p>但对于我们来说，最主要的是要在外网访问家里的群晖，所以首先需要解决的是有没有能在群晖上运行的版本。</p>
-<h2 id="群晖套件"><a href="#群晖套件" class="headerlink" title="群晖套件"></a>群晖套件</h2><p>官方没有相应的版本，所以只能使用第三方的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZQ==">https://github.com/nirev/synology-tailscale<i class="fa fa-external-link-alt"></i></span></p>
-<p>在这张报表里找不到您的设备</p>
+<h2 id="群晖套件"><a href="#群晖套件" class="headerlink" title="群晖套件"></a>群晖套件</h2><p>官方没有相应的版本，所以只能使用第三方的套件 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZQ==">https://github.com/nirev/synology-tailscale<i class="fa fa-external-link-alt"></i></span></p>
+<p>如果在这张报表里找不到您的设备</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026163004.png" alt=""></p>
 <p>可以在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY29tL3poLWNuL2tub3dsZWRnZWJhc2UvRFNNL3R1dG9yaWFsL0NvbXBhdGliaWxpdHlfUGVyaXBoZXJhbHMvV2hhdF9raW5kX29mX0NQVV9kb2VzX215X05BU19oYXZl">https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have<i class="fa fa-external-link-alt"></i></span> 查找对应的 CPU 类型</p>
 <p>比如 DS3617xs</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026163359.png" alt=""></p>
-<p>其实也不用这么麻烦，只要搞清楚自己的CPU是x86还是arm，是32位还是64位就可以了，反正就4个版本，直接下载了x86的64位的版本</p>
+<p>其实也不用这么麻烦，只要搞清楚自己的 CPU 是 x86 还是 arm ，是 32 位还是 64 位就可以了，反正就4个版本，直接下载了 x86 的 64位 的版本。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026175735.png" alt=""></p>
-<p>如果下错了版本，会显示不兼容，比如我安装32位的版本</p>
+<p>如果下错了版本，会显示不兼容，比如我安装 32 位的版本</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026165701.png" alt=""></p>
 <p>手动安装</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026175931.png" alt=""></p>
@@ -2770,13 +2770,13 @@
 <p>复制红框内的内容，在浏览器中打开，用你的账号登录</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026200437.png" alt=""></p>
 <h2 id="其他nas"><a href="#其他nas" class="headerlink" title="其他nas"></a>其他nas</h2><p>可以到这里看看 <span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwNzQvY29ubmVjdC10by15b3VyLW5hcw==">https://tailscale.com/kb/1074/connect-to-your-nas<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p>安装客户端</p>
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p>直接在 APP Store 里搜索 <code>Tailscale</code> ，支持 MacOS 10.13 及之后的系统版本。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144539.png" alt=""></p>
 <p>运行</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144637.png" alt=""></p>
 <p>允许添加 VPN 配置</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144727.png" alt=""></p>
-<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>安装客户端</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>需要说明的是只支持 windows 7 之后的系统版本。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026154958.png" alt=""></p>
 <p>安装虚拟网卡的驱动</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026155124.png" alt=""></p>
@@ -2785,12 +2785,12 @@
 <p>点 <code>Log in</code> 跳转到浏览器中登录验证</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103195734.png" alt=""></p>
 <h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>Android 客户端的下载比较费周折，官方只提供了 Google Play 这里就不细说了。</p>
-<p>有一点需要说明，群晖上使用 <code>1.1.335</code>版本时，Android 怎么也连不上，但是群晖升级到 <code>1.1.540</code>版本后，Android 就能正常连接了。</p>
+<p>有一点需要说明，群晖上使用 <code>1.1.335</code> 版本时，我的 Android 手机怎么也连不上，但是群晖升级到 <code>1.1.540</code> 版本后，Android 就能正常连接了。</p>
 <blockquote>
 <p>目前 <code>1.1.540</code> 的版本还是 unstable 的，如果没遇到问题不建议安装这个版本。</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZS9wdWxsLzMy">https://github.com/nirev/synology-tailscale/pull/32<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>尝试在 VPS 上安装，不知道这样做了 SSH 会不会更快一些？</p>
+<h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>尝试在 VPS 上安装的，不知道这样做了 SSH 会不会更快一些？</p>
 <ol>
 <li>安装 Yum repository manager</li>
 </ol>
@@ -2805,7 +2805,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191139.png" alt=""></p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191252.png" alt=""></p>
 <ol start="3">
-<li>使用 systemctl 启用和启动服务</li>
+<li>使用 <code>systemctl</code> 启用和启动服务</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl enable --now tailscaled</span><br></pre></td></tr></table></figure>
 
@@ -2815,12 +2815,12 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo tailscale up</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103192343.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201104195711.png" alt=""></p>
 <p>复制红框内的内容，在浏览器中打开，用你的账号登录。</p>
 <ol start="5">
-<li><p>进入 admin console 可以看到新加入的设备IP</p>
+<li><p>进入 <code>admin console</code> 可以看到新加入的设备IP</p>
 </li>
-<li><p>获取您的 Tailscale IP 地址，当然在回头也能看到</p>
+<li><p>获取您的 Tailscale IP 地址，当然在后台也能看到</p>
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ip addr show tailscale0</span><br></pre></td></tr></table></figure>
@@ -2835,7 +2835,7 @@
 <p>比如在设备列表中的群晖主机</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026200613.png" alt=""></p>
 <blockquote>
-<p>默认情况下，每个设备都会收到100.xyz范围内的IP地址。该IP地址是根据设备和授权凭证自动分配的，无法手动更改。这个是和 zerotier 不一样的。</p>
+<p>默认情况下，每个设备都会收到100.xyz范围内的IP地址。该 IP 地址是根据设备和授权凭证自动分配的，无法手动更改。这个是和 zerotier 不一样的。</p>
 </blockquote>
 <p>从外网 ping 群晖在 Tailscale 中的 IP，偶有丢包</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201027090003.png" alt=""></p>
@@ -2853,10 +2853,11 @@
 <p>smb 协议映射到群晖的共享目录，然后拷贝</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028131938.png" alt=""></p>
 <p>如果这样不够直观的话，用网页下载方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028132842.png" alt=""></p>
-<p>和 <code>Speedtest</code> 的测试结果非常接近，显然比通过 frp 服务强多了，虽然腾讯的 vps 也跑满了带宽，但是毕竟只是 1Mbps 的小水管， P2P 真不是盖的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201104200215.png" alt=""></p>
+<p>和 <code>Speedtest</code> 的测试结果非常接近，显然比通过 frp 服务做的内网穿透强多了，虽然腾讯的 vps 也跑满了带宽，但是毕竟只是 1Mb/s 的小水管， 差了 30 倍左右，当然这不是 frp 的问题，是因为做 frps 的 vps 带宽太小了，如果要提升到 3Mb/s ，每年要多花300多，要想达到 30Mb/s，一年估计起码多出1~2万。</p>
 <p>当然效果还需要持续观察，毕竟 zerotier 偶尔也是可以打洞成功的，只是 zerotier 大部分时间需要走服务器中转，即便搭建了 moon 服务器也是一样，这也是我一直关注新的替代产品的主要原因。</p>
-<p>我个人觉得 VPN 比内网穿透更简单，也更安全。因为我是给自己用，又不是对外提供服务，唯一的不便也就是要安装客户端，但节省了公网架设服务器的费用，还是值得尝试的。</p>
+<p>我个人觉得 VPN 比 frp、nps 等内网穿透软件更简单，也更安全。因为我是给自己用，又不是对外提供服务，唯一的不便也就是要安装客户端，但节省了公网架设服务器的费用和带宽费用，还是很值得尝试的。</p>
+<p>因为群晖的 Tailscale 版本暂时还不支持子网，所以这次我们暂时没有讨论其他不能安装 Tailscale 客户端的设备。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Tailscale 主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tLw==">https://tailscale.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Tailscale 代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhaWxzY2FsZQ==">https://github.com/tailscale<i class="fa fa-external-link-alt"></i></span></p>
