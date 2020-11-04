@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Tailscale可以为任何规模的团队提供简单的安全保障，用在家庭网也很香。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="外网访问群晖的新方案Tailscale">
+<meta property="og:url" content="https://laosu.ml/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="Tailscale可以为任何规模的团队提供简单的安全保障，用在家庭网也很香。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103201100.png">
+<meta property="article:published_time" content="2020-11-04T11:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-04T11:17:40.789Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="vpn">
+<meta property="article:tag" content="内网穿透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103201100.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>外网访问群晖的新方案Tailscale | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          外网访问群晖的新方案Tailscale
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-04 19:00:00 / 修改时间：19:17:40" itemprop="dateCreated datePublished" datetime="2020-11-04T19:00:00+08:00">2020-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">Tailscale可以为任何规模的团队提供简单的安全保障，用在家庭网也很香。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103201100.png" itemprop="contentUrl">
+        </div>
+        <p><strong>WireGuard是什么？</strong></p>
+<blockquote>
+<p>WireGuard是由Jason A. Donenfeld開發的開放原始碼VPN程式及協定，基於Linux核心實現，利用Curve25519進行金鑰交換，ChaCha20用於加密，Poly1305用於資料認證，BLAKE2用於雜湊函式運算，支援IPv4和IPv6的第3層。 【維基百科】</p>
+</blockquote>
+<p><strong>零信任网络是什么？</strong></p>
+<blockquote>
+<p>“零信任”是一个安全术语也是一个安全概念，它将网络防御的边界缩小到单个或更小的资源组，其中心思想是企业不应自动信任内部或外部的任何人/事/物、不应该根据物理或网络位置对系统授予完全可信的权限，应在授权前对任何试图接入企业系统的人/事/物进行验证、对数据资源的访问只有当资源需要的时候才授予。简单来说，“零信任”的策略就是不相信任何人。除非网络明确知道接入者的身份，否则任谁都无法接入到网络。</p>
+</blockquote>
+<p><strong>Tailscale是什么？</strong></p>
+<blockquote>
+<p>Tailscale 是基于 WireGuard 的网状 VPN 替代产品，可将您的计算机，数据库和服务安全地连接在一起，而无需任何代理。</p>
+</blockquote>
+<p>Tailscale 是一家自称为新型虚拟隐私网络 (VPN) 初创公司，成立于2019年，是由一群前谷歌软件工程师创立的初创公司，该公司完全是远程办公，其产品 Tailscale 正式推出之际，正值许多公司不得不适应远程办公。</p>
+<p>其技术基于谷歌的零信任 BeyondCorp 架构，并使用 WireGuard 协议构建，使用 OAuth2（SSO），OpenID 或SAML 进行身份验证，并在客户端和服务器之间创建点对点的完全加密连接。</p>
+<p>传统的VPN技术使用预共享密钥（PSK）对用户进行身份验证。而 Tailscale 的技术不需要硬件或基础设施，对协调服务器的身份验证使用的是已经存在的服务，无论是组织自己的OAuth2 服务还是 Google Apps 或 Office 365 之类的第三方服务。这种与现有身份提供商的紧密集成意味着不需要维护单独的授权用户列表，而且新员工和新员工团队成员或添加双因素身份验证比传统的 VPN 产品更简单。</p>
+<p>目前主要的 Mesh VPN 解决方案：</p>
+<ol>
+<li>Tinc</li>
+<li>Zerotier</li>
+<li>Nebula</li>
+<li>Tailscale</li>
+</ol>
+<p>之前我用过 zerotier ，感觉 Tailscale 设置上比 zerotier 更简单一些，免费版和 zerotier 一样，支持 100 台设备。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026212105.png" alt=""></p>
+<p>但是似乎免费版只能用 Google 账号和 Microsoft 账号登录。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026212431.png" alt=""></p>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>Tailscale 是一个开源项目，客户端基本上覆盖了主流平台</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026143142.png" alt=""></p>
+<p>但对于我们来说，最主要的是要在外网访问家里的群晖，所以首先需要解决的是有没有能在群晖上运行的版本。</p>
+<h2 id="群晖套件"><a href="#群晖套件" class="headerlink" title="群晖套件"></a>群晖套件</h2><p>官方没有相应的版本，所以只能使用第三方的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZQ==">https://github.com/nirev/synology-tailscale<i class="fa fa-external-link-alt"></i></span></p>
+<p>在这张报表里找不到您的设备</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026163004.png" alt=""></p>
+<p>可以在 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2xvZ3kuY29tL3poLWNuL2tub3dsZWRnZWJhc2UvRFNNL3R1dG9yaWFsL0NvbXBhdGliaWxpdHlfUGVyaXBoZXJhbHMvV2hhdF9raW5kX29mX0NQVV9kb2VzX215X05BU19oYXZl">https://www.synology.com/zh-cn/knowledgebase/DSM/tutorial/Compatibility_Peripherals/What_kind_of_CPU_does_my_NAS_have<i class="fa fa-external-link-alt"></i></span> 查找对应的 CPU 类型</p>
+<p>比如 DS3617xs</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026163359.png" alt=""></p>
+<p>其实也不用这么麻烦，只要搞清楚自己的CPU是x86还是arm，是32位还是64位就可以了，反正就4个版本，直接下载了x86的64位的版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026175735.png" alt=""></p>
+<p>如果下错了版本，会显示不兼容，比如我安装32位的版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026165701.png" alt=""></p>
+<p>手动安装</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026175931.png" alt=""></p>
+<p>再次检查</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026180435.png" alt=""></p>
+<p>安装完成后，需要SSH登录到群晖。执行 <code>sudo tailscale up</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026200335.png" alt=""></p>
+<p>复制红框内的内容，在浏览器中打开，用你的账号登录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026200437.png" alt=""></p>
+<h2 id="其他nas"><a href="#其他nas" class="headerlink" title="其他nas"></a>其他nas</h2><p>可以到这里看看 <span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzEwNzQvY29ubmVjdC10by15b3VyLW5hcw==">https://tailscale.com/kb/1074/connect-to-your-nas<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><p>安装客户端</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144539.png" alt=""></p>
+<p>运行</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144637.png" alt=""></p>
+<p>允许添加 VPN 配置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026144727.png" alt=""></p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>安装客户端</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026154958.png" alt=""></p>
+<p>安装虚拟网卡的驱动</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026155124.png" alt=""></p>
+<p>如果安装了360，需要同意而不是阻止</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026155347.png" alt=""></p>
+<p>点 <code>Log in</code> 跳转到浏览器中登录验证</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103195734.png" alt=""></p>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>Android 客户端的下载比较费周折，官方只提供了 Google Play 这里就不细说了。</p>
+<p>有一点需要说明，群晖上使用 <code>1.1.335</code>版本时，Android 怎么也连不上，但是群晖升级到 <code>1.1.540</code>版本后，Android 就能正常连接了。</p>
+<blockquote>
+<p>目前 <code>1.1.540</code> 的版本还是 unstable 的，如果没遇到问题不建议安装这个版本。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZS9wdWxsLzMy">https://github.com/nirev/synology-tailscale/pull/32<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h2><p>尝试在 VPS 上安装，不知道这样做了 SSH 会不会更快一些？</p>
+<ol>
+<li>安装 Yum repository manager</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191018.png" alt=""></p>
+<ol start="2">
+<li>添加 Tailscale 库并安装</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-config-manager --add-repo https:&#x2F;&#x2F;pkgs.tailscale.com&#x2F;stable&#x2F;centos&#x2F;7&#x2F;tailscale.repo</span><br><span class="line"></span><br><span class="line">sudo yum install tailscale</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191139.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191252.png" alt=""></p>
+<ol start="3">
+<li>使用 systemctl 启用和启动服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable --now tailscaled</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191539.png" alt=""></p>
+<ol start="4">
+<li>验证登录到你的 Tailscale 网络</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tailscale up</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103192343.png" alt=""></p>
+<p>复制红框内的内容，在浏览器中打开，用你的账号登录。</p>
+<ol start="5">
+<li><p>进入 admin console 可以看到新加入的设备IP</p>
+</li>
+<li><p>获取您的 Tailscale IP 地址，当然在回头也能看到</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr show tailscale0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103191935.png" alt=""></p>
+<ol start="7">
+<li>为了避免失效总需要验证，建议开启 <code>Disable Key Expiry</code></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103192932.png" alt=""></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>所有设备的 IP，可以在 <code>Admin console</code> 中查到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201027144501.png" alt=""></p>
+<p>比如在设备列表中的群晖主机</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201026200613.png" alt=""></p>
+<blockquote>
+<p>默认情况下，每个设备都会收到100.xyz范围内的IP地址。该IP地址是根据设备和授权凭证自动分配的，无法手动更改。这个是和 zerotier 不一样的。</p>
+</blockquote>
+<p>从外网 ping 群晖在 Tailscale 中的 IP，偶有丢包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201027090003.png" alt=""></p>
+<p>有时也会存在连续性的丢包</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201030090805.png" alt=""></p>
+<p>利用之前安装的测速软件 <code>Speedtest</code> 来测个速度</p>
+<ul>
+<li>输入 frp 映射的域名，测速结果</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201027085727.png" alt=""></p>
+<ul>
+<li>输入后台获取到的 Tailscale 的 IP 地址 + 端口，测速结果</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201027085533.png" alt=""></p>
+<p>smb 协议映射到群晖的共享目录，然后拷贝</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028131938.png" alt=""></p>
+<p>如果这样不够直观的话，用网页下载方式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028132842.png" alt=""></p>
+<p>和 <code>Speedtest</code> 的测试结果非常接近，显然比通过 frp 服务强多了，虽然腾讯的 vps 也跑满了带宽，但是毕竟只是 1Mbps 的小水管， P2P 真不是盖的。</p>
+<p>当然效果还需要持续观察，毕竟 zerotier 偶尔也是可以打洞成功的，只是 zerotier 大部分时间需要走服务器中转，即便搭建了 moon 服务器也是一样，这也是我一直关注新的替代产品的主要原因。</p>
+<p>我个人觉得 VPN 比内网穿透更简单，也更安全。因为我是给自己用，又不是对外提供服务，唯一的不便也就是要安装客户端，但节省了公网架设服务器的费用，还是值得尝试的。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Tailscale 主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tLw==">https://tailscale.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tailscale 代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhaWxzY2FsZQ==">https://github.com/tailscale<i class="fa fa-external-link-alt"></i></span></p>
+<p>nirev/synology-tailscale: 群晖版代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pcmV2L3N5bm9sb2d5LXRhaWxzY2FsZQ==">https://github.com/nirev/synology-tailscale<i class="fa fa-external-link-alt"></i></span></p>
+<p>How Tailscale works · Tailscale Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2Jsb2cvaG93LXRhaWxzY2FsZS13b3Jrcy8=">https://tailscale.com/blog/how-tailscale-works/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Rethinking VPN: Tailscale startup packages Wireguard with network security • The Register<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGhlcmVnaXN0ZXIuY29tLzIwMjAvMDQvMDIvcmV0aGlua2luZ192cG5fdGFpbHNjYWxlX3N0YXJ0dXBfcGFja2FnZXMv">https://www.theregister.com/2020/04/02/rethinking_vpn_tailscale_startup_packages/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Digging unconventional and mesh VPNs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly91bmRpc2Nsb3NlZC5ibG9nL21lc2gtdnBuLw==">https://undisclosed.blog/mesh-vpn/<i class="fa fa-external-link-alt"></i></span></p>
+<p>A programmer’s note | Tailscale：不一样的VPN<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnNodWtlYmV0YS5jb20vMjAyMC8wNS8xNS90YWlsc2NhbGUlRUYlQkMlOUElRTQlQjglOEQlRTQlQjglODAlRTYlQTAlQjclRTclOUElODR2cG4v">https://blog.shukebeta.com/2020/05/15/tailscale%EF%BC%9A%E4%B8%8D%E4%B8%80%E6%A0%B7%E7%9A%84vpn/<i class="fa fa-external-link-alt"></i></span></p>
+<p>TAILSCALE种子轮融资300万加元 – North America Incubator<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubmFpbmN1YmF0b3IuY29tLzIzMDQuaHRtbA==">https://www.naincubator.com/2304.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\01\Snapdrop实现P2P局域网文件互传\" rel="bookmark">Snapdrop实现P2P局域网文件互传</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\27\自建Speedtest网络测速服务器\" rel="bookmark">自建Speedtest网络测速服务器</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\06\21\轻量级内网穿透代理服务器nps试用\" rel="bookmark">轻量级内网穿透代理服务器nps试用</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\23\BT Web客户端工具live-torrent\" rel="bookmark">BT Web客户端工具live-torrent</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/" title="外网访问群晖的新方案Tailscale">https://laosu.ml/2020/11/04/外网访问群晖的新方案Tailscale/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fa fa-tag"></i> 网络</a>
+              <a href="/tags/vpn/" rel="tag"><i class="fa fa-tag"></i> vpn</a>
+              <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag"><i class="fa fa-tag"></i> 内网穿透</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/01/%E7%BB%99%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85firefox%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="prev" title="给群晖安装firefox浏览器">
+      <i class="fa fa-chevron-left"></i> 给群晖安装firefox浏览器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端"><span class="nav-number">1.</span> <span class="nav-text">客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#群晖套件"><span class="nav-number">1.1.</span> <span class="nav-text">群晖套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他nas"><span class="nav-number">1.2.</span> <span class="nav-text">其他nas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MacOS"><span class="nav-number">1.3.</span> <span class="nav-text">MacOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">1.4.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">1.5.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Centos"><span class="nav-number">1.6.</span> <span class="nav-text">Centos</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">193</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">144k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:11</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
