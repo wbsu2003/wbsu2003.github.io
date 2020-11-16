@@ -34,10 +34,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png">
 <meta property="article:published_time" content="2020-11-16T11:00:00.000Z">
-<meta property="article:modified_time" content="2020-11-16T11:55:05.857Z">
+<meta property="article:modified_time" content="2020-11-16T12:08:38.325Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Markdown">
 <meta property="article:tag" content="静态页面">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png">
@@ -265,7 +265,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-16 19:00:00 / 修改时间：19:55:05" itemprop="dateCreated datePublished" datetime="2020-11-16T19:00:00+08:00">2020-11-16</time>
+              <time title="创建时间：2020-11-16 19:00:00 / 修改时间：20:08:38" itemprop="dateCreated datePublished" datetime="2020-11-16T19:00:00+08:00">2020-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +304,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.3k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -327,7 +327,7 @@
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
             <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png" itemprop="contentUrl">
         </div>
-        <p>因为工作需要，要将 Markdown 格式编写的产品说明书转成 html 格式，以便在网页上发布。经同事推荐，使用了 Facebook 开源的一个静态网站生成器 Docusaurus ，从功能上看和 hexo 非常类似，可以根据 Markdown 文件生成静态页面，从而可以直接部署到 Github Pages 之类的纯静态环境。</p>
+        <p>因为工作需要，需要将 <code>Markdown</code> 格式编写的产品说明书转成 <code>html</code> 格式，以便在网页上发布。经同事推荐，使用了 <code>Facebook</code> 开源的一个静态网站生成器 <code>Docusaurus</code> ，从功能上看和 <code>hexo</code> 非常类似，可以根据 <code>Markdown</code> 文件生成静态页面，从而可以直接部署到 <code>Github Pages</code> 之类的纯静态环境。</p>
 <p>第一次用，所以简单记录下安装和配置过程。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>主要参考了官网的说明，<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNhdXJ1cy5jbi9kb2NzLw==">https://www.docusaurus.cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="系统需求"><a href="#系统需求" class="headerlink" title="系统需求"></a>系统需求</h2><ul>
@@ -366,11 +366,11 @@
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111161819.png" alt=""></p>
 <p>默认情况下，浏览器将打开 <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDozMDAw">http://localhost:3000<i class="fa fa-external-link-alt"></i></span></p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111161138.png" alt=""></p>
-<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p>官方要求 <code>markdown</code> 文件的开头是</p>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p>官方要求 <code>markdown</code> 文件的开头是这样的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">id: greeting</span><br><span class="line">title: Hello</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p><code>id</code> 是用来配置侧边栏的，<code>title</code> 就是文章标题，会显示在侧边栏。但是我没有写 <code>id</code> 和 <code>title</code>，不知道会有什么影响。</p>
-<p>帮助文档是在 <code>obsidian</code> 中完成的，我把 <code>my-website/docs</code> 原有的4个文档删掉，将其全部拷进去，目录结构是这样的</p>
+<p>我的帮助文档是在 <code>obsidian</code> 中完成的，我把 <code>my-website/docs</code> 原有的4个文档删掉，将其全部拷进去，目录结构是这样的</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201113172220.png" alt=""></p>
 <h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><h2 id="侧边栏配置"><a href="#侧边栏配置" class="headerlink" title="侧边栏配置"></a>侧边栏配置</h2><p>根目录下的 <code>sidebars.js</code> 就是侧边栏的配置文件。</p>
 <p>下面是 <code>sidebars.js</code> 默认的内容，这是个两级目录，其中 <code>Docusaurus</code>、<code>Features</code> 是一级目录，4个文档本身是二级目录</p>
@@ -380,7 +380,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  docs: &#123;</span><br><span class="line">    Guides: [</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">'category'</span>,</span><br><span class="line">        label: <span class="string">'Docs'</span>,</span><br><span class="line">        collapsed: <span class="literal">false</span>,</span><br><span class="line">        items: [<span class="string">'markdown-features'</span>, <span class="string">'sidebar'</span>, <span class="string">'versioning'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>我全部用的相对路径</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  在线帮助: &#123;</span><br><span class="line">      网校快速入门: [</span><br><span class="line">          &#123;</span><br><span class="line">              type: <span class="string">'category'</span>,</span><br><span class="line">              label: <span class="string">'基本介绍'</span>,</span><br><span class="line">              collapsed: <span class="literal">false</span>,</span><br><span class="line">              items: [<span class="string">'A网校快速入门/01、基本介绍/1.1. 概览'</span>, <span class="string">'A网校快速入门/01、基本介绍/1.2. 机构注册'</span>, <span class="string">'A网校快速入门/01、基本介绍/1.3. 用户登录'</span>],</span><br><span class="line">          &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  在线帮助: &#123;</span><br><span class="line">      网校快速入门: [</span><br><span class="line">          &#123;</span><br><span class="line">              type: <span class="string">'category'</span>,</span><br><span class="line">              label: <span class="string">'基本介绍'</span>,</span><br><span class="line">              collapsed: <span class="literal">false</span>,</span><br><span class="line">              items: [<span class="string">'A网校快速入门/01、基本介绍/1.1. 概览'</span>, <span class="string">'A网校快速入门/01、基本介绍/1.2. 机构注册'</span>],</span><br><span class="line">          &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>关于详细的配置，可以查看 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNhdXJ1cy5jbi9kb2NzL2RvY3MtaW50cm9kdWN0aW9u">https://www.docusaurus.cn/docs/docs-introduction<i class="fa fa-external-link-alt"></i></span>，才开始用，就不误人子弟了。</p>
 <h2 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h2><p>根目录下的 <code>docusaurus.config.js</code> 就是站点配置文件，可以配置站点信息、页头、页脚。</p>
@@ -396,6 +396,9 @@
 <p>改为</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baseUrl: <span class="string">'/helpdoc/'</span>,</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>这一步只影响预览，也就是只影响 <code>yarn run start</code> 的显示效果； </p>
+</blockquote>
 <ul>
 <li>第二步，修改  <code>package.json</code> 文件</li>
 </ul>
@@ -405,6 +408,9 @@
 <p>改为输出目录为 <code>helpdoc</code></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"build": "docusaurus build --out-dir helpdoc",</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>这一步影响的是构建后的结果，也就是 <code>yarn run build</code> 的输出结果；</p>
+</blockquote>
 <ul>
 <li>第三步、开始构建</li>
 </ul>
@@ -422,8 +428,8 @@
 <li>第五步、将 <code>helpdoc</code> 发布到网站</li>
 </ul>
 <p>最终的效果，可以在 <span class="exturl" data-url="aHR0cDovL3BpYy52aW5jbGFzcy5jbi9oZWxwZG9jLw==">http://pic.vinclass.cn/helpdoc/<i class="fa fa-external-link-alt"></i></span> 看到。</p>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NodWRvbmd2aXA=">初冬<i class="fa fa-external-link-alt"></i></span> 给我推荐了这个工具，让我能够快速完成发布任务，并且给了我很多好的建议；</p>
-<p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plcm9tZXhpb25n">Jerome Xiong<i class="fa fa-external-link-alt"></i></span> 不仅帮我解决了编译的输出路径问题，并且帮我发布到了公网；</p>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NodWRvbmd2aXA=">初冬<i class="fa fa-external-link-alt"></i></span> 给我推荐了这个工具，让我能够快速完成发布任务，同时也给了我很多好的建议；</p>
+<p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plcm9tZXhpb25n">Jerome Xiong<i class="fa fa-external-link-alt"></i></span> 不仅帮我解决了编译的输出路径问题，并且帮我把帮助文件发布到了公网；</p>
 <p>再次感谢两位小帅哥~💐💐💐</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>安装 · Docusaurus<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL2RvY3MvemgtQ04vbmV4dC9pbnN0YWxsYXRpb24=">https://docusaurus.io/docs/zh-CN/next/installation<i class="fa fa-external-link-alt"></i></span></p>
@@ -536,7 +542,7 @@
           
           <div class="post-tags">
               <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
-              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/Markdown/" rel="tag"><i class="fa fa-tag"></i> Markdown</a>
               <a href="/tags/%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/" rel="tag"><i class="fa fa-tag"></i> 静态页面</a>
           </div>
 
@@ -707,7 +713,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:16</span>
+    <span title="站点阅读时长">2:17</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
   </div>
