@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Docusaurus 是 Facebook 开源的一个静态网站生成器，主要用来给开源项目生成帮助文档或博客。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Docusaurus生成帮助文档">
+<meta property="og:url" content="https://laosu.ml/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="Docusaurus 是 Facebook 开源的一个静态网站生成器，主要用来给开源项目生成帮助文档或博客。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png">
+<meta property="article:published_time" content="2020-11-29T05:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-16T11:51:40.559Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="静态页面">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>用Docusaurus生成帮助文档 | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用Docusaurus生成帮助文档
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-29 13:00:00" itemprop="dateCreated datePublished" datetime="2020-11-29T13:00:00+08:00">2020-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-16 19:51:40" itemprop="dateModified" datetime="2020-11-16T19:51:40+08:00">2020-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">Docusaurus 是 Facebook 开源的一个静态网站生成器，主要用来给开源项目生成帮助文档或博客。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201110225103.png" itemprop="contentUrl">
+        </div>
+        <p>因为工作需要，要将 Markdown 格式编写的产品说明书转成 html 格式，以便在网页上发布。经同事推荐，使用了 Facebook 开源的一个静态网站生成器 Docusaurus ，从功能上看和 hexo 非常类似，可以根据 Markdown 文件生成静态页面，从而可以直接部署到 Github Pages 之类的纯静态环境。</p>
+<p>第一次用，所以简单记录下安装和配置过程。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>主要参考了官网的说明，<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNhdXJ1cy5jbi9kb2NzLw==">https://www.docusaurus.cn/docs/<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="系统需求"><a href="#系统需求" class="headerlink" title="系统需求"></a>系统需求</h2><ul>
+<li>Node.js &gt;= 10.15.1 或更高版本（可以通过运行 node -v 命令进行检查）。你可以使用 nvm 在已经安装了 Node.js 的计算机上管理多个版本的 Node.js</li>
+</ul>
+<p>Node.js的官网：<span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Rvd25sb2FkLw==">https://nodejs.org/en/download/<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111145843.png" alt=""></p>
+<p>我的 MacOS 上已经安装过 Node.js，而且版本也符合要求，所以这一步可以略过。</p>
+<ul>
+<li>Yarn &gt;= 1.5 版本（可以通过运行 yarn version 命令进行检查）。Yarn 是 JavaScript 生态中的高性能软件包管理工具，可取代 npm。虽然这不是严格必须的，但强烈推荐。</li>
+</ul>
+<p>Yarn的官网： <span class="exturl" data-url="aHR0cHM6Ly9jbGFzc2ljLnlhcm5wa2cuY29tL2VuLw==">https://classic.yarnpkg.com/en/<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111145514.png" alt=""></p>
+<p>MacOS 上可以通过 Homebrew 包管理器安装 Yarn，如果没有安装 Node.js 它也可以安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install yarn</span><br></pre></td></tr></table></figure>
+
+<p>但是遇到了错误</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111151339.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~ % brew install yarn</span><br><span class="line">Error: yarn: undefined method &#96;license&#39; for Formulary::FormulaNamespace0a0774ce52ae9d0d13f74ff9102c9a37::Yarn:Class</span><br><span class="line">~ %</span><br></pre></td></tr></table></figure>
+
+<p>查了半天也没找到原因，只能换脚本安装方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- -L https:&#x2F;&#x2F;yarnpkg.com&#x2F;install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>这回非常顺利</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111153335.png" alt=""></p>
+<h1 id="新建项目网站"><a href="#新建项目网站" class="headerlink" title="新建项目网站"></a>新建项目网站</h1><p>创建一个包含脚手架文件的新目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx @docusaurus&#x2F;init@next init my-website classic</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111160255.png" alt=""></p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>假设您选择了经典模板并将站点命名为 my-website，您将在新目录 <code>my-website/</code> 下看到以下文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">my-website</span><br><span class="line">├── blog</span><br><span class="line">│   ├── 2019-05-28-hola.md</span><br><span class="line">│   ├── 2019-05-29-hello-world.md</span><br><span class="line">│   └── 2020-05-30-welcome.md</span><br><span class="line">├── docs</span><br><span class="line">│   ├── doc1.md</span><br><span class="line">│   ├── doc2.md</span><br><span class="line">│   ├── doc3.md</span><br><span class="line">│   └── mdx.md</span><br><span class="line">├── src</span><br><span class="line">│   ├── css</span><br><span class="line">│   │   └── custom.css</span><br><span class="line">│   └── pages</span><br><span class="line">│       ├── styles.module.css</span><br><span class="line">│       └── index.js</span><br><span class="line">├── static</span><br><span class="line">│   └── img</span><br><span class="line">├── docusaurus.config.js</span><br><span class="line">├── package.json</span><br><span class="line">├── README.md</span><br><span class="line">├── sidebars.js</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111160615.png" alt=""></p>
+<h2 id="运行开发服务器"><a href="#运行开发服务器" class="headerlink" title="运行开发服务器"></a>运行开发服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-website</span><br><span class="line">yarn run start</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111161819.png" alt=""></p>
+<p>默认情况下，浏览器将打开 <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDozMDAw">http://localhost:3000<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201111161138.png" alt=""></p>
+<h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p>官方要求 <code>markdown</code> 文件的开头是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">id: greeting</span><br><span class="line">title: Hello</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p><code>id</code> 是用来配置侧边栏的，<code>title</code> 就是文章标题，会显示在侧边栏。但是我没有写 <code>id</code> 和 <code>title</code>，不知道会有什么影响。</p>
+<p>帮助文档是在 <code>obsidian</code> 中完成的，我把 <code>my-website/docs</code> 原有的4个文档删掉，将其全部拷进去，目录结构是这样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201113172220.png" alt=""></p>
+<h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><h2 id="侧边栏配置"><a href="#侧边栏配置" class="headerlink" title="侧边栏配置"></a>侧边栏配置</h2><p>根目录下的 <code>sidebars.js</code> 就是侧边栏的配置文件。</p>
+<p>下面是 <code>sidebars.js</code> 默认的内容，这是个两级目录，其中 <code>Docusaurus</code>、<code>Features</code> 是一级目录，4个文档本身是二级目录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  someSidebar: &#123;</span><br><span class="line">    Docusaurus: [<span class="string">'doc1'</span>, <span class="string">'doc2'</span>, <span class="string">'doc3'</span>],</span><br><span class="line">    Features: [<span class="string">'mdx'</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>下面的例子是个三级目录，<code>Guides</code> 是一级目录，label 中的 <code>Docs</code> 是二级目录，items 中 3个文档是三级目录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  docs: &#123;</span><br><span class="line">    Guides: [</span><br><span class="line">      &#123;</span><br><span class="line">        type: <span class="string">'category'</span>,</span><br><span class="line">        label: <span class="string">'Docs'</span>,</span><br><span class="line">        collapsed: <span class="literal">false</span>,</span><br><span class="line">        items: [<span class="string">'markdown-features'</span>, <span class="string">'sidebar'</span>, <span class="string">'versioning'</span>],</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我全部用的相对路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  在线帮助: &#123;</span><br><span class="line">      网校快速入门: [</span><br><span class="line">          &#123;</span><br><span class="line">              type: <span class="string">'category'</span>,</span><br><span class="line">              label: <span class="string">'基本介绍'</span>,</span><br><span class="line">              collapsed: <span class="literal">false</span>,</span><br><span class="line">              items: [<span class="string">'A网校快速入门/01、基本介绍/1.1. 概览'</span>, <span class="string">'A网校快速入门/01、基本介绍/1.2. 机构注册'</span>, <span class="string">'A网校快速入门/01、基本介绍/1.3. 用户登录'</span>],</span><br><span class="line">          &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>关于详细的配置，可以查看 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNhdXJ1cy5jbi9kb2NzL2RvY3MtaW50cm9kdWN0aW9u">https://www.docusaurus.cn/docs/docs-introduction<i class="fa fa-external-link-alt"></i></span>，才开始用，就不误人子弟了。</p>
+<h2 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h2><p>根目录下的 <code>docusaurus.config.js</code> 就是站点配置文件，可以配置站点信息、页头、页脚。</p>
+<p>这部分的配置，可以在 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWlzdGVybWEuY29tL2FyY2hpdmVzLzg3Mi8=">https://www.misterma.com/archives/872/<i class="fa fa-external-link-alt"></i></span> 找到详细的说明。</p>
+<h2 id="修改默认的首页"><a href="#修改默认的首页" class="headerlink" title="修改默认的首页"></a>修改默认的首页</h2><p>首页文件位于 <code>src/pages/index.js</code>，根据自己的需要改吧</p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><ul>
+<li>第一步、修改 <code>docusaurus.config.js</code>文件</li>
+</ul>
+<p>因为我们最终要把帮助文档放在 <code>helpdoc</code>中，（比如：<code>http://pic.vinclass.cn/helpdoc/</code>），而不是根目录中，所以要修改 <code>docusaurus.config.js</code> 文件中的 <code>baseUrl</code></p>
+<p>从</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baseUrl: <span class="string">'/'</span>,</span><br></pre></td></tr></table></figure>
+
+<p>改为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baseUrl: <span class="string">'/helpdoc/'</span>,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二步，修改  <code>package.json</code> 文件</li>
+</ul>
+<p>需要修改相对于当前工作空间的新输出目录的完整路径，这部分的内容在  <code>package.json</code> 文件中，将默认值 <code>build</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"build": "docusaurus build",</span><br></pre></td></tr></table></figure>
+
+<p>改为输出目录为 <code>helpdoc</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"build": "docusaurus build --out-dir helpdoc",</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第三步、开始构建</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn run build</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201113152027.png" alt=""></p>
+<ul>
+<li>第四步、预览</li>
+</ul>
+<p>用 <code>python</code> 起个 web 服务，用来预览生产的静态文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-website&#x2F;</span><br><span class="line">python -m SimpleHTTPServer 80</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中输入： <code>http://localhost/helpdoc</code>，如果一切正常，就可以发布了。</p>
+<ul>
+<li>第五步、将 <code>helpdoc</code> 发布到网站</li>
+</ul>
+<p>最终的效果，可以在 <span class="exturl" data-url="aHR0cDovL3BpYy52aW5jbGFzcy5jbi9oZWxwZG9jLw==">http://pic.vinclass.cn/helpdoc/<i class="fa fa-external-link-alt"></i></span> 看到。</p>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NodWRvbmd2aXA=">初冬<i class="fa fa-external-link-alt"></i></span> 给我推荐了这个工具，让我能够快速完成发布任务，并且给了我很多好的建议；</p>
+<p>感谢 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2plcm9tZXhpb25n">Jerome Xiong<i class="fa fa-external-link-alt"></i></span> 不仅帮我解决了编译的输出路径问题，并且帮我发布到了公网；</p>
+<p>再次感谢两位小帅哥~💐💐💐</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>安装 · Docusaurus<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2N1c2F1cnVzLmlvL2RvY3MvemgtQ04vbmV4dC9pbnN0YWxsYXRpb24=">https://docusaurus.io/docs/zh-CN/next/installation<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装 | Docusaurus 中文文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNhdXJ1cy5jbi9kb2NzL2luc3RhbGxhdGlvbg==">https://www.docusaurus.cn/docs/installation<i class="fa fa-external-link-alt"></i></span></p>
+<p>使用 Docusaurus 为开源项目生成帮助文档 - Mr. Ma’s Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubWlzdGVybWEuY29tL2FyY2hpdmVzLzg3Mi8=">https://www.misterma.com/archives/872/<i class="fa fa-external-link-alt"></i></span></p>
+<p>几款制作帮助文档的工具汇总 - 米扑博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1pbXZwLmNvbS9hcnRpY2xlLzM4NzUyLmh0bWw=">https://blog.mimvp.com/article/38752.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\23\BT Web客户端工具live-torrent\" rel="bookmark">BT Web客户端工具live-torrent</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\10\01\Snapdrop实现P2P局域网文件互传\" rel="bookmark">Snapdrop实现P2P局域网文件互传</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\04\Syncthing文件夹同步神器\" rel="bookmark">Syncthing文件夹同步神器</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/11/29/%E7%94%A8Docusaurus%E7%94%9F%E6%88%90%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" title="用Docusaurus生成帮助文档">https://laosu.ml/2020/11/29/用Docusaurus生成帮助文档/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+              <a href="/tags/%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/" rel="tag"><i class="fa fa-tag"></i> 静态页面</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/12/searX%E7%94%A8%E5%A4%84%E4%B8%8D%E5%A4%A7%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%81%9A%E5%90%88%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="prev" title="searX用处不大的个人聚合搜索引擎">
+      <i class="fa fa-chevron-left"></i> searX用处不大的个人聚合搜索引擎
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统需求"><span class="nav-number">1.1.</span> <span class="nav-text">系统需求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建项目网站"><span class="nav-number">2.</span> <span class="nav-text">新建项目网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目结构"><span class="nav-number">2.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行开发服务器"><span class="nav-number">2.2.</span> <span class="nav-text">运行开发服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据"><span class="nav-number">2.3.</span> <span class="nav-text">导入数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改"><span class="nav-number">3.</span> <span class="nav-text">修改</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#侧边栏配置"><span class="nav-number">3.1.</span> <span class="nav-text">侧边栏配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#站点配置"><span class="nav-number">3.2.</span> <span class="nav-text">站点配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改默认的首页"><span class="nav-number">3.3.</span> <span class="nav-text">修改默认的首页</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布"><span class="nav-number">4.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#鸣谢"><span class="nav-number">5.</span> <span class="nav-text">鸣谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">196</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">150k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:16</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
