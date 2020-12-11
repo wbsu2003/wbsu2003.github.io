@@ -238,6 +238,202 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/12/29/Heimdall%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/29/Heimdall%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5/" class="post-title-link" itemprop="url">heimdall打造个人导航页</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-29 13:00:00" itemprop="dateCreated datePublished" datetime="2020-12-29T13:00:00+08:00">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-11 18:45:10" itemprop="dateModified" datetime="2020-12-11T18:45:10+08:00">2020-12-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/29/Heimdall%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/29/Heimdall%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201130215704.png" itemprop="contentUrl">
+        </div>
+          <p>经常在群晖上搭建各种服务，而每个应用都需要用到自己对应的端口，数量一多就很容易忘记，所以非常需要一个导航网页，之前我们介绍过 <code>webstack</code></p>
+<blockquote>
+<p><a href="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/">给群晖弄个漂亮的导航页（上）</a><br><a href="https://laosu.ml/2020/08/16/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8B%EF%BC%89/">给群晖弄个漂亮的导航页（下）</a></p>
+</blockquote>
+<p>而今天我们要推荐的是另一个非常漂亮的导航面板 <code>heimdall</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201130223506.png" alt=""></p>
+<p>有没有觉得这图上很多图标看起来很熟悉？因为我们之前已经介绍过其中的一部分了</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>heimdall</code> ，选择第一个 <code>linuxserver/heimdall</code>，版本 <code>latest</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201130231329.png" alt=""></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 docker 文件夹中，创建一个新文件夹，并将其命名为 <code>heimdall</code>，然后在 <code>heimdall</code> 文件夹中创建两个个新文件夹：将一个命名为 <code>config</code>，另一个命名为 <code>lang</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205185355.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/docker/heimdall/config</td>
+<td align="center">/config</td>
+</tr>
+<tr>
+<td align="center">/docker/heimdall/lang</td>
+<td align="center">/var/www/localhost/heimdall/resources/lang</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201201224113.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205185627.png" alt=""></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>443和80显然是不能用的，找个不冲突的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201201224531.png" alt=""></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
+<thead>
+<tr>
+<th align="center">可变</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">TZ</td>
+<td align="center">Asia/Shanghai</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205181752.png" alt=""></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖:4480</code>，就能看到主界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205183230.png" alt=""></p>
+<h2 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205185825.png" alt=""></p>
+<p>默认的语言中没有中文，所以我决定从 <code>en</code> 目录中把 <code>app.php</code> 拷贝出来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205190024.png" alt=""></p>
+<p>我用了比较笨的办法，把 <code>app.php</code>文件中后面的内容逐个拷贝到百度翻译里</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205195558.png" alt=""></p>
+<p>再把翻译完的内容粘贴回 <code>app.php</code> 文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205200633.png" alt=""></p>
+<blockquote>
+<p>保存文件的时候，记得编码格式选择UTF-8，为如果不是UTF-8，中文可能会乱码；</p>
+</blockquote>
+<p>然后我把 <code>app.php</code> 文件放到了 <code>de</code> 目录，替换到了里面原来的 <code>app.php</code> 文件，然后再回到主界面，将语言设置为德文</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205200253.png" alt=""></p>
+<p>设置成功就变成了中文了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205201256.png" alt=""></p>
+<h2 id="添加应用和网站"><a href="#添加应用和网站" class="headerlink" title="添加应用和网站"></a>添加应用和网站</h2><p>在应用名称中输入 <code>port</code>，就会自动匹配</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205205351.png" alt=""></p>
+<p>因为 <code>heimdall</code> 默认支持很多常用的应用，所以会自动填写该应用程序的图标，并为图块提供默认颜色。 </p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205201950.png" alt=""></p>
+<p>保存之后</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201205203027.png" alt=""></p>
+<p>加了几个之后，在 PC 上的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206100805.png" alt=""></p>
+<p>在手机上的效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206101125.png" alt=""></p>
+<h2 id="添加搜索"><a href="#添加搜索" class="headerlink" title="添加搜索"></a>添加搜索</h2><p>可以在主界面添加搜索栏</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206101844.png" alt=""></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>还支持多用户，换背景等功能，需要大家自己慢慢摸索，最后放一张官网的动图，演示了 <code>heimdall</code> 大部分的功能</p>
+<p><img src="https://camo.githubusercontent.com/bcfd4f74c93b25bea7b14eacbafd649206bf754a3d4b596329968f0ee569cf3c/68747470733a2f2f692e696d6775722e636f6d2f4d72433451704e2e676966" alt=""></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>Heimdall Application Dashboard 官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZWltZGFsbC5zaXRlLw==">https://heimdall.site/<i class="fa fa-external-link-alt"></i></span> </p>
+<p>GitHub - linuxserver/Heimdall: An Application dashboard and launcher<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpbnV4c2VydmVyL0hlaW1kYWxs">https://github.com/linuxserver/Heimdall<i class="fa fa-external-link-alt"></i></span> </p>
+<p>How to Install Heimdall on Your Synology NAS – Marius Hosting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJpdXNob3N0aW5nLmNvbS9ob3ctdG8taW5zdGFsbC1oZWltZGFsbC1vbi15b3VyLXN5bm9sb2d5LW5hcy8=">https://mariushosting.com/how-to-install-heimdall-on-your-synology-nas/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖Docker安装heimdall并汉化打造你自己的专属首页 – 克罗诺博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hybm8uY24vbmFzLzIxMDcuaHRtbA==">https://www.chrno.cn/nas/2107.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>私有云存储 篇三：Heimdall 目前国内最难安装也是最好用的NAS主页/导航页_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E1a3FtbHpsLw==">https://post.smzdm.com/p/a5kqmlzl/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+    </div>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/12/07/%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E4%B9%8B%E7%94%B5%E5%AD%90%E7%99%BD%E6%9D%BFwbo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1287,123 +1483,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="杨浦老苏">
-      <meta itemprop="description" content="折腾各种好玩的东西">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老苏的blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/" class="post-title-link" itemprop="url">外网访问群晖的新方案Tailscale</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-11-04 19:00:00 / 修改时间：21:41:20" itemprop="dateCreated datePublished" datetime="2020-11-04T19:00:00+08:00">2020-11-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103201100.png" itemprop="contentUrl">
-        </div>
-          <p>Tailscale可以为任何规模的团队提供简单的安全保障，用在家庭网也很香。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    
-    
-    
-    
-    <div>
-      
-    </div>
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1473,7 +1552,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1552,12 +1631,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">159k</span>
+    <span title="站点总字数">161k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:25</span>
+    <span title="站点阅读时长">2:26</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
   </div>
