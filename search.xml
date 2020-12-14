@@ -3539,69 +3539,6 @@
       </tags>
   </entry>
   <entry>
-    <title>安装人人影视看美剧</title>
-    <url>/2020/12/14/%E5%AE%89%E8%A3%85%E4%BA%BA%E4%BA%BA%E5%BD%B1%E8%A7%86%E7%9C%8B%E7%BE%8E%E5%89%A7/</url>
-    <content><![CDATA[<p>人人影视客户端，是一个下载视频的利器，上面的的影视资源很多，而且还带搜索功能，可以直接搜索外部的资源。之前用过 <code>windows</code> 版本，今天我们研究下第三方基于官方 WEB 远程管理版封装的 <code>docker</code> 版本。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>rrshare</code> ，我选择了第六个 <code>dreaminess/rrshareweb</code>，之所以选择这个是因为更新日期比较近吧，因为网上的教程用的镜像已经是2年前的了，这个镜像只有一个版本，所以双击就可以下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201122202940.png" alt=""></p>
-<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
-<thead>
-<tr>
-<th align="center">文件夹</th>
-<th align="center">装载路径</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">/your downloads</td>
-<td align="center">/download</td>
-</tr>
-</tbody></table>
-<p>只需要将上面的 <code>/your downloads</code> 改为你自己的下载路径即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128204856.png" alt=""></p>
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>全部用的默认的端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128203755.png" alt=""></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖:3001</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128204039.png" alt=""></p>
-<p>默认的 <code>解锁密码</code> 是 <code>123456</code>，可以在设置中进行修改；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128205057.png" alt=""></p>
-<p><code>存储路径</code> 改为前面设置的 <code>/download</code>，如果不一致可能会出问题。</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>在左侧 <code>最新更新</code> 里随便下了一个，速度可以达到 4~20MB/s</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142422.png" alt=""></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142521.png" alt=""></p>
-<p>正常速度</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142846.png" alt=""></p>
-<p>最大峰值，但是并没有跑满我的带宽（理论上我的带宽应该要到 25MB/s ） </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201211213819.png" alt=""></p>
-<p>当然可以直接通过右上角的下载图标进行添加下载链接，不过支持的协议格式是人人影视自家的格式：yyets开头的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201129110030.png" alt=""></p>
-<h2 id="追剧"><a href="#追剧" class="headerlink" title="追剧"></a>追剧</h2><p>去官网注册一个人人影视的账号，注册地址：<span class="exturl" data-url="aHR0cDovL3d3dy5ycnlzMjAyMC5jb20v">http://www.rrys2020.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>如果习惯用客户端，可以到下载页面：<span class="exturl" data-url="aHR0cDovL2FwcC5ycnlzLnR2Lw==">http://app.rrys.tv/<i class="fa fa-external-link-alt"></i></span>，挑选适合自己平台的客户端。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206160217.png" alt=""></p>
-<p>因为 <code>自动下载</code> 默认勾选了 <code>只下载订阅</code>，所以在登录你的人人影视账号之后，所有被收藏的内容，当有最新发布时，都会被客户端自动下载。如果你喜欢美剧，用来追剧是不错的选择。</p>
-<blockquote>
-<p>如果勾选了 <code>全部下载</code>，那么在 <code>最新更新</code> 里出现的都会被自动下载；</p>
-</blockquote>
-<h2 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h2><p>除了前面提到的客户端，还有一个值得关注的基于 Flutter 的客户端，这是个开源项目，其 Android 客户端支持边下边看的功能。</p>
-<p>github地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZvdmU3L3l5ZXRzX2ZsdXR0ZXI=">https://github.com/Vove7/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
-<p>gitee地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vVm92ZS95eWV0c19mbHV0dGVy">https://gitee.com/Vove/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>YYeTs 人人影视|字幕组官方下载站<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5ycnlzMjAyMC5jb20v">http://www.rrys2020.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>人人影视客户端,人人影视PC客户端,人人视频PC客户端,人人影视APP,人人影视下载器,IOS,安卓,WINDOWS,MAC客户端下载|YYeTs人人影视唯一官方客户端下载页<br>地址：<span class="exturl" data-url="aHR0cDovL2FwcC5ycnlzLnR2Lw==">http://app.rrys.tv/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Vove7/yyets_flutter: 人人影视客户端 for Flutter<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZvdmU3L3l5ZXRzX2ZsdXR0ZXI=">https://github.com/Vove7/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
-<p>NAS 篇九：群晖安装人人影视docker，追剧神器！（据说还可以挖矿）_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FwejNsbTQ3Lw==">https://post.smzdm.com/p/apz3lm47/<i class="fa fa-external-link-alt"></i></span></p>
-<p>群晖NAS | 利用Docker安装使用人人影视客户端 | 喵斯基部落<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9ld2FoLmNvbS9hcmNoaXZlcy8xODc0Lmh0bWw=">https://www.moewah.com/archives/1874.html<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>各种折腾</category>
-      </categories>
-      <tags>
-        <tag>群晖</tag>
-        <tag>下载</tag>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>协同工作之电子白板wbo</title>
     <url>/2020/12/07/%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E4%B9%8B%E7%94%B5%E5%AD%90%E7%99%BD%E6%9D%BFwbo/</url>
     <content><![CDATA[<p><code>WBO</code> 是一个免费、开源的在线协作白板，它允许多用户同时在一个大型虚拟板上画图。该白板对所有连接的用户实时更新，并且始终可用。它可以用于许多应用场景，包括艺术，娱乐，设计，教学等等。我们可以先在 <span class="exturl" data-url="aHR0cDovL3diby5vcGhpci5kZXY=">演示服务器<i class="fa fa-external-link-alt"></i></span> 上进行体验。</p>
@@ -7372,6 +7309,69 @@
         <tag>Kanboard</tag>
         <tag>kanban</tag>
         <tag>项目管理软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装人人影视追美剧</title>
+    <url>/2020/12/14/%E5%AE%89%E8%A3%85%E4%BA%BA%E4%BA%BA%E5%BD%B1%E8%A7%86%E8%BF%BD%E7%BE%8E%E5%89%A7/</url>
+    <content><![CDATA[<p>人人影视客户端，是一个下载视频的利器，上面的的影视资源很多，而且还带搜索功能，可以直接搜索外部的资源。之前用过 <code>windows</code> 版本，今天我们研究下第三方基于官方 WEB 远程管理版封装的 <code>docker</code> 版本。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>rrshare</code> ，我选择了第六个 <code>dreaminess/rrshareweb</code>，之所以选择这个是因为更新日期比较近吧，因为网上的教程用的镜像已经是2年前的了，这个镜像只有一个版本，所以双击就可以下载。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201122202940.png" alt=""></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/your downloads</td>
+<td align="center">/download</td>
+</tr>
+</tbody></table>
+<p>只需要将上面的 <code>/your downloads</code> 改为你自己的下载路径即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128204856.png" alt=""></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>全部用的默认的端口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128203755.png" alt=""></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖:3001</code>，就能看到主界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128204039.png" alt=""></p>
+<p>默认的 <code>解锁密码</code> 是 <code>123456</code>，可以在设置中进行修改；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201128205057.png" alt=""></p>
+<p><code>存储路径</code> 改为前面设置的 <code>/download</code>，如果不一致可能会出问题。</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>在左侧 <code>最新更新</code> 里随便下了一个，速度可以达到 4~20MB/s</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142422.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142521.png" alt=""></p>
+<p>正常速度</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206142846.png" alt=""></p>
+<p>最大峰值，但是并没有跑满我的带宽（理论上我的带宽应该要到 25MB/s ） </p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201211213819.png" alt=""></p>
+<p>当然可以直接通过右上角的下载图标进行添加下载链接，不过支持的协议格式是人人影视自家的格式：yyets开头的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201129110030.png" alt=""></p>
+<h2 id="追剧"><a href="#追剧" class="headerlink" title="追剧"></a>追剧</h2><p>去官网注册一个人人影视的账号，注册地址：<span class="exturl" data-url="aHR0cDovL3d3dy5ycnlzMjAyMC5jb20v">http://www.rrys2020.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>如果习惯用客户端，可以到下载页面：<span class="exturl" data-url="aHR0cDovL2FwcC5ycnlzLnR2Lw==">http://app.rrys.tv/<i class="fa fa-external-link-alt"></i></span>，挑选适合自己平台的客户端。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201206160217.png" alt=""></p>
+<p>因为 <code>自动下载</code> 默认勾选了 <code>只下载订阅</code>，所以在登录你的人人影视账号之后，所有被收藏的内容，当有最新发布时，都会被客户端自动下载。如果你喜欢美剧，用来追剧是不错的选择。</p>
+<blockquote>
+<p>如果勾选了 <code>全部下载</code>，那么在 <code>最新更新</code> 里出现的都会被自动下载；</p>
+</blockquote>
+<h2 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h2><p>除了前面提到的客户端，还有一个值得关注的基于 Flutter 的客户端，这是个开源项目，其 Android 客户端支持边下边看的功能。</p>
+<p>github地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZvdmU3L3l5ZXRzX2ZsdXR0ZXI=">https://github.com/Vove7/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
+<p>gitee地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vVm92ZS95eWV0c19mbHV0dGVy">https://gitee.com/Vove/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>YYeTs 人人影视|字幕组官方下载站<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5ycnlzMjAyMC5jb20v">http://www.rrys2020.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>人人影视客户端,人人影视PC客户端,人人视频PC客户端,人人影视APP,人人影视下载器,IOS,安卓,WINDOWS,MAC客户端下载|YYeTs人人影视唯一官方客户端下载页<br>地址：<span class="exturl" data-url="aHR0cDovL2FwcC5ycnlzLnR2Lw==">http://app.rrys.tv/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Vove7/yyets_flutter: 人人影视客户端 for Flutter<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZvdmU3L3l5ZXRzX2ZsdXR0ZXI=">https://github.com/Vove7/yyets_flutter<i class="fa fa-external-link-alt"></i></span></p>
+<p>NAS 篇九：群晖安装人人影视docker，追剧神器！（据说还可以挖矿）_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FwejNsbTQ3Lw==">https://post.smzdm.com/p/apz3lm47/<i class="fa fa-external-link-alt"></i></span></p>
+<p>群晖NAS | 利用Docker安装使用人人影视客户端 | 喵斯基部落<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9ld2FoLmNvbS9hcmNoaXZlcy8xODc0Lmh0bWw=">https://www.moewah.com/archives/1874.html<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>下载</tag>
+        <tag>Docker</tag>
       </tags>
   </entry>
 </search>
