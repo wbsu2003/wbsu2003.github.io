@@ -7650,4 +7650,56 @@
         <tag>RDP</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux性能监控工具Netdata</title>
+    <url>/2020/12/28/Linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7Netdata/</url>
+    <content><![CDATA[<p>Netdata 是一款免费开源的 Linux 系统性能实时监控工具，使用 Netdata 我们可以轻松地跟踪大量指标：处理器使用情况，内存消耗，I / O操作，网络使用情况等统计信息，实时地洞察其运行的系统（包括Web服务器，数据库，应用程序）上发生的一切。Netdata 可以自主运行，无需任何第三方组件，也可以集成到现有的监视工具链（Prometheus，Graphite，OpenTSDB，Kafka，Grafana等），最重要的是它占用资源少。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028164550.png" alt=""></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>netdata</code> ，选择第一个 <code>netdata/netdata/</code>，版本选 <code>latest</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028160038.png" alt=""></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201028164345.png" alt=""></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在浏览器中输入 <code>http://群晖IP:19999</code>,就可以看到主界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215192535.png" alt=""></p>
+<p>按照说明，Netdata 每秒都会收集927个指标，将其显示在286个图表中，并通过82个警报进行监视。右侧的菜单树，可以快速的切换。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215195406.png" alt=""></p>
+<ul>
+<li>cpu</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215195659.png" alt=""></p>
+<ul>
+<li>disk</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215195756.png" alt=""></p>
+<ul>
+<li>ram</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215195847.png" alt=""></p>
+<ul>
+<li>network</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215195922.png" alt=""></p>
+<p>这里都是单节点的监控数据，如果要同时监控多台设备，需要登录到 <span class="exturl" data-url="aHR0cHM6Ly9hcHAubmV0ZGF0YS5jbG91ZC8=">https://app.netdata.cloud/<i class="fa fa-external-link-alt"></i></span>，而且每台设备都需要安装 agent 。借助 <code>Netdata Cloud</code>，我们就可以构建新的仪表板，将来自任意数量的分布式系统的关键指标集中在一个地方。</p>
+<p>针对集群的部署的方式有好几种，可以在官网的说明上找到 <span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5uZXRkYXRhLmNsb3VkL2RvY3MvYWdlbnQvc3RyZWFtaW5n">https://learn.netdata.cloud/docs/agent/streaming<i class="fa fa-external-link-alt"></i></span>。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在浏览器中 <code>http://群晖IP:19999/netdata.conf</code>，找到 <code># config directory =</code> 设置。列出的值是系统的 <code>config</code> 目录。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215202234.png" alt=""></p>
+<p>接下来我们就可以找到这个文件，根据我们的需要进行修改了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201215201826.png" alt=""></p>
+<p>要想用好这个工具，还是要花很多时间去阅读官网的文档，最后用一张官网的功能和体系架构图来展示一下 <code>Netdata</code> 的强大。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201217194555.png" alt=""></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>netdata/netdata: Real-time performance monitoring, done right! <span class="exturl" data-url="aHR0cHM6Ly93d3cubmV0ZGF0YS5jbG91ZA==">https://www.netdata.cloud<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25ldGRhdGEvbmV0ZGF0YQ==">https://github.com/netdata/netdata<i class="fa fa-external-link-alt"></i></span></p>
+<p>Netdata - Monitor everything in real time for free with Netdata<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubmV0ZGF0YS5jbG91ZC8=">https://www.netdata.cloud/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Learn Netdata 帮助文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5uZXRkYXRhLmNsb3VkL2RvY3M=">https://learn.netdata.cloud/docs<i class="fa fa-external-link-alt"></i></span></p>
+<p>在电脑桌面实现对NAS与路由器的负载监控（基于Netdata和Wall_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2FtbTVsNnE0Lw==">https://post.smzdm.com/p/amm5l6q4/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>各种折腾</category>
+      </categories>
+      <tags>
+        <tag>群晖</tag>
+        <tag>docker</tag>
+        <tag>运维</tag>
+      </tags>
+  </entry>
 </search>
