@@ -25,16 +25,16 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。">
+  <meta name="description" content="群晖上不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker中运行百度网盘客户端">
 <meta property="og:url" content="https://laosu.ml/2020/12/31/Docker%E4%B8%AD%E8%BF%90%E8%A1%8C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。">
+<meta property="og:description" content="群晖上不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121213047.png">
 <meta property="article:published_time" content="2020-12-31T11:00:00.000Z">
-<meta property="article:modified_time" content="2020-12-31T11:03:54.513Z">
+<meta property="article:modified_time" content="2020-12-31T11:14:11.963Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -267,7 +267,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-12-31 19:00:00 / 修改时间：19:03:54" itemprop="dateCreated datePublished" datetime="2020-12-31T19:00:00+08:00">2020-12-31</time>
+              <time title="创建时间：2020-12-31 19:00:00 / 修改时间：19:14:11" itemprop="dateCreated datePublished" datetime="2020-12-31T19:00:00+08:00">2020-12-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,7 +315,7 @@
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               <span>1 分钟</span>
             </span>
-            <div class="post-description">不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。</div>
+            <div class="post-description">群晖上不需要再运行臃肿的虚拟机系统了，可通过远程 VNC 客户端进行管理。</div>
 
         </div>
       </header>
@@ -329,10 +329,10 @@
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
             <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121213047.png" itemprop="contentUrl">
         </div>
-        <blockquote>
-<p>今天是2020年的最后一天，这一年我们过得实”鼠”不易，不管怎么样，平安就好！<br>明天就是2021年了，希望朋友们在新的一年里“牛”转乾坤，祝新年快乐~</p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><blockquote>
+<p>今天是2020年的最后一天，这一年我们过得实”鼠”不易，但不管怎么样，我们已经迈过去了，平安就好！<br>明天就是2021年了，希望朋友们在新的一年里“牛”转乾坤，祝新年快乐~</p>
 </blockquote>
-<p>个人不太喜欢百度网盘，但奈何身边朋友们分享文件用的最多的还是它，虽然转存比较快，但是如果不是会员的话，下载一定会让你抓狂。所以如果不想买会员的话，只能用时间来弥补，比如一台不关机的主机或者虚拟机</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>个人不太喜欢百度网盘，但奈何身边朋友们分享文件用的最多的还是它，虽然转存比较快，但是如果不是会员的话，下载一定会让你抓狂。所以如果不想买会员的话，只能用时间来弥补，比如一台不关机的主机或者虚拟机。</p>
 <p>之前大家需要在群晖上安装 windows 虚拟机跑百度网盘客户端，而现在我们可以直接在开销更小的 <code>docker</code> 中运行百度网盘客户端了。</p>
 <h1 id="安装-royzheng-baidunetdisk"><a href="#安装-royzheng-baidunetdisk" class="headerlink" title="安装 royzheng/baidunetdisk"></a>安装 royzheng/baidunetdisk</h1><p>在 docker 注册表中搜索 <code>baidunetdisk</code> ，选择第三个 <code>royzheng/baidunetdisk</code>，只有一个版本，双击直接下载。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201231090859.png" alt=""></p>
@@ -374,7 +374,7 @@
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><blockquote>
 <p>其实在安装 <code>royzheng/baidunetdisk</code> 之前，我尝试过 <code>johnshine/baidunetdisk-crossover-vnc</code> 和 <code>johngong/baidunetdisk</code>，但是在我的机器上都不成功，具体原因不明。</p>
 </blockquote>
-<p>下面我把安装的过程贴出来，请大家指正</p>
+<p>下面我把安装的过程贴出来，请大家指正。</p>
 <h2 id="安装-johnshine-baidunetdisk-crossover-vnc-的过程"><a href="#安装-johnshine-baidunetdisk-crossover-vnc-的过程" class="headerlink" title="安装 johnshine/baidunetdisk-crossover-vnc 的过程"></a>安装 johnshine/baidunetdisk-crossover-vnc 的过程</h2><p>在 docker 注册表中搜索 <code>baidu</code> ，选择第三个 <code>johnshine/baidunetdisk-crossover-vnc</code>，版本 <code>latest</code>。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2020/11/21/1605964810866-1605964810888.png" alt="title"></p>
 <h3 id="端口-1"><a href="#端口-1" class="headerlink" title="端口"></a>端口</h3><p>直接用的默认值，不冲突就好，其中 <code>6080</code> 是 web 服务的端口，<code>5901</code> 是 VNC 连接端口</p>
@@ -581,7 +581,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-royzheng-baidunetdisk"><span class="nav-number">1.</span> <span class="nav-text">安装 royzheng&#x2F;baidunetdisk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">3.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-johnshine-baidunetdisk-crossover-vnc-的过程"><span class="nav-number">3.1.</span> <span class="nav-text">安装 johnshine&#x2F;baidunetdisk-crossover-vnc 的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷-1"><span class="nav-number">3.1.2.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境-1"><span class="nav-number">3.1.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-johngong-baidunetdisk-的过程"><span class="nav-number">3.2.</span> <span class="nav-text">安装 johngong&#x2F;baidunetdisk 的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口-2"><span class="nav-number">3.2.1.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境-2"><span class="nav-number">3.2.3.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-royzheng-baidunetdisk"><span class="nav-number">3.</span> <span class="nav-text">安装 royzheng&#x2F;baidunetdisk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">3.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">3.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">3.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">4.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-johnshine-baidunetdisk-crossover-vnc-的过程"><span class="nav-number">5.1.</span> <span class="nav-text">安装 johnshine&#x2F;baidunetdisk-crossover-vnc 的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境-1"><span class="nav-number">5.1.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-johngong-baidunetdisk-的过程"><span class="nav-number">5.2.</span> <span class="nav-text">安装 johngong&#x2F;baidunetdisk 的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口-2"><span class="nav-number">5.2.1.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷-2"><span class="nav-number">5.2.2.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境-2"><span class="nav-number">5.2.3.</span> <span class="nav-text">环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
