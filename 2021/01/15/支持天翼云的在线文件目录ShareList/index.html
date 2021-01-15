@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ShareList 是一个易用的网盘工具，支持快速挂载 GoogleDrive、OneDrive、天翼云盘等，可通过插件扩展功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支持天翼云的在线文件目录ShareList">
+<meta property="og:url" content="https://laosu.ml/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="ShareList 是一个易用的网盘工具，支持快速挂载 GoogleDrive、OneDrive、天翼云盘等，可通过插件扩展功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/14/1610614844718-1610614844722.png">
+<meta property="article:published_time" content="2021-01-15T11:00:00.000Z">
+<meta property="article:modified_time" content="2021-01-15T11:37:37.463Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="网盘">
+<meta property="article:tag" content="onedrive">
+<meta property="article:tag" content="天翼云盘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/14/1610614844718-1610614844722.png">
+
+<link rel="canonical" href="https://laosu.ml/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>支持天翼云的在线文件目录ShareList | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          支持天翼云的在线文件目录ShareList
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-01-15 19:00:00 / 修改时间：19:37:37" itemprop="dateCreated datePublished" datetime="2021-01-15T19:00:00+08:00">2021-01-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">ShareList 是一个易用的网盘工具，支持快速挂载 GoogleDrive、OneDrive、天翼云盘等，可通过插件扩展功能。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/14/1610614844718-1610614844722.png" itemprop="contentUrl">
+        </div>
+        <p>之前我们分享过『<a href="https://laosu.ml/2020/12/25/%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95Z-file/">在线文件目录Z-file</a>』，<code>ShareList</code> 从功能上来说和 <code>Z-file</code> 基本一样，但是相对来说支持的国产网盘比较多，包括天翼云、和彩云等等，甚至连阿里刚推出的 <code>Teambition</code> 网盘都已经支持了。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
+<p>在注册表中搜索 <code>sharelist</code> ，选择第二个 <code>reruin/sharelist</code>，版本选择 <code>latest</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610089676827-1610089676872.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>sharelist</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>docker/sharelist</code></td>
+<td align="center"><code>/sharelist/cache</code></td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/15/1610710362028-1610710362061.png" alt="title"></p>
+<blockquote>
+<p>后台设置完成后，会在 <code>/docker/sharelis</code> 目录中生成两个文件，<code>config.json</code> 和 <code>db.json</code>；</p>
+</blockquote>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>直接用了默认的端口 <code>33001</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">本地端口</th>
+<th align="center">容器端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">33001</td>
+<td align="center">33001</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610090481589-1610090481597.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:33001</code>，第一次需要初始化。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610090594361-1610090594369.png" alt="title"></p>
+<blockquote>
+<p><code>口令</code> 是后台的管理密码，必须要记住</p>
+<p><code>网站标题</code> 是显示在左上角的网站的名称</p>
+<p><code>虚拟路径</code> 中点击 <code>FileSystem</code> 会展开一个下拉列表，展示了支持的网站</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610090855687-1610090855697.png" alt="title"></p>
+<p>不仅支持常用的GD（GoogleDrive）、OD（OneDrive）、连阿里刚推出的 <code>Teambition</code> 网盘都支持了。</p>
+<p>建议只设前两项，第三项就用默认 <code>FileSystem</code>，然后点保存就可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092152924-1610092152927.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在浏览器中输入 <code>http://群晖IP:33001/manage</code>，打开后台设置界面</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images//mynote/2021/01/08/1610092247515-1610092247522.png" alt="title"></p>
+<p>输入之前设置的密码，登录成功后即可看到后台的参数设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092384655-1610092384663.png" alt="title"></p>
+<p>往下拉到最下面，可以看到 <code>虚拟路径</code> 设置，而且已经变成了中文了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092482527-1610092482534.png" alt="title"></p>
+<h2 id="天翼云"><a href="#天翼云" class="headerlink" title="天翼云"></a>天翼云</h2><p>选择了 <code>天翼云 账号登录版</code>，后面的路径建议填 <code>/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092552822-1610092552825.png" alt="title"></p>
+<p><code>保存</code> 之后，浏览器中新开一个窗口输入 <code>http://群晖IP:33001/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092695658-1610092695660.png" alt="title"></p>
+<p>输入天翼云的账号、密码后点 <code>验证</code>，通过后会直接显示天翼云盘的文件列表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610092851969-1610092851972.png" alt="title"></p>
+<blockquote>
+<p><code>天翼云 API版</code> 没测试成功，应该是已经不支持这种模式了。</p>
+</blockquote>
+<h2 id="和彩云"><a href="#和彩云" class="headerlink" title="和彩云"></a>和彩云</h2><p>回到后台管理界面，在 <code>虚拟路径</code> 中添加</p>
+<p>选择 <code>和彩云 账号登录版</code>，后面的路径建议填 <code>/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610093052217-1610093052222.png" alt="title"></p>
+<p><code>保存</code> 之后，浏览器中新开一个窗口输入 <code>http://群晖IP:33001/</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610094582576-1610094582578.png" alt="title"></p>
+<p>选择下面一个</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610094671826-1610094671828.png" alt="title"></p>
+<p>输入账号、密码，密码后点 <code>验证</code>，通过后会直接显示文件列表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/08/1610094879587-1610094879594.png" alt="title"></p>
+<h1 id="常用设置"><a href="#常用设置" class="headerlink" title="常用设置"></a>常用设置</h1><h2 id="中转"><a href="#中转" class="headerlink" title="中转"></a>中转</h2><p>因为我挂载的是国内的网盘，所以我没启用中转视频也可以很流畅的播放，但是如果你挂载的是GD或者OD，建议一定要启用；</p>
+<blockquote>
+<p>按官方的说法：某些挂载源因使用了Cookie的原因，会强制中转；</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610538836777-1610538836781.png" alt="title"></p>
+<h2 id="目录加密"><a href="#目录加密" class="headerlink" title="目录加密"></a>目录加密</h2><p>在需要加密的目录内新建 <code>.passwd</code> 文件，<code>type</code> 为验证方式，<code>data</code> 为验证内容。</p>
+<p>目前只支持用户名密码对加密（由auth.basic插件实现）。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">type: basic </span><br><span class="line">data: </span><br><span class="line">  - user1:111111 </span><br><span class="line">  - user2:aaaaaa</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>data</code> 中为用户名：密码。也就是 <code>user1</code> 用户可使用密码 <code>111111</code> 验证，<code>user2</code> 用户可使用密码 <code>aaaaaa</code> 验证。</p>
+<p>天翼云盘并不支持直接上传<code>.passwd</code> 文件，而和彩云是支持的；</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210115152249.png" alt=""></p>
+<p>处理办法也很简单，需先重命名为 <code>passwd</code>，一定不要有后缀，上传完成之后，再重命名为 <code>.passwd</code> 就可以了。</p>
+<h2 id="WebDAV-导出"><a href="#WebDAV-导出" class="headerlink" title="WebDAV 导出"></a>WebDAV 导出</h2><p>这是我最看重的功能，这里<code>WebDAV</code> 功能指的是将挂载内容以 <code>WebDAV</code> 方式对外分享，但不支持写入、删除、重命名、复制等操作。该功能默认是启用的，而且是匿名的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610545201317-1610545201317.png" alt="title"></p>
+<p>在 <code>RaiDrive</code> 中挂载，其中：</p>
+<blockquote>
+<p>192.168.0.199 为 群晖的IP<br>33001 为 <code>ShareList</code> 映射的端口<br>账户勾选<code>匿名</code>，会自动填入 <code>anonymous</code></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610545143986-1610545143988.png" alt="title"></p>
+<p>进入盘符后，可以看到我们挂载成功的两个云盘变成了两个文件夹</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610546429329-1610546429331.png" alt="title"></p>
+<p>接下来就可以直接用 <code>PotPlayer</code> 之类的播放器直接看电影了。如果是移动端，可以用 <code>nPlauer</code>试试。</p>
+<p>如果你曾经薅过天翼云 <code>30T</code> 的羊毛，都可以它用来建个视频网站了。</p>
+<blockquote>
+<p>注意：这里的 WebDAV 是只读的，当你试图向目录中拷贝文件时，会提示需要权限；</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610547289275-1610547289275.png" alt="title"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>更多的用法可以参考<span class="exturl" data-url="aHR0cHM6Ly9yZXJ1aW4uZ2l0aHViLmlvL3NoYXJlbGlzdC9kb2NzLyMvemgtY24v">官方的在线文档(https://reruin.github.io/sharelist/docs/#/zh-cn)<i class="fa fa-external-link-alt"></i></span></p>
+<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><h2 id="SMB-服务"><a href="#SMB-服务" class="headerlink" title="SMB 服务"></a>SMB 服务</h2><p><code>ShareList</code> 还支持将挂载内容以 <code>SMB</code> 服务形式分享，默认是禁用的，需要我们在后台选择启用才能使用。按官方的说明，该功能还是实验功能，暂只支持 <code>SMB1.0</code> 且为只读模式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/13/1610539253129-1610539253132.png" alt="title"></p>
+<p>这个功能和 <code>WebDAV</code> 差不多，只是能支持的设备和设置会更简单，可惜未能设置成功，开始怀疑是因为群晖本身启用了 <code>SMB</code> 服务的缘故，但停掉群晖本身的 <code>SMB</code> 服务也依然未能实现。</p>
+<p>在 <code>终端机</code> 里运行 <code>npm run dev</code> ，显示应该是已经启用了，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210115101735.png" alt=""></p>
+<p>但是并不能被识别，有知道的朋友给指导一下吧。谢谢~</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>reruin/sharelist: 快速分享 GoogleDrive OneDrive<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlcnVpbi9zaGFyZWxpc3Q=">https://github.com/reruin/sharelist<i class="fa fa-external-link-alt"></i></span></p>
+<p>ShareList（原GDLIST） - 支持Google Drive/OneDrive多网盘同时挂载 | 喵斯基部落<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9ld2FoLmNvbS9hcmNoaXZlcy8xNDYyLmh0bWw=">https://www.moewah.com/archives/1462.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Windows10使用sharelist本地挂载天翼云_Isrror的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ0MjA5NTQyL2FydGljbGUvZGV0YWlscy8xMDg1MTgzMzM=">https://blog.csdn.net/qq_44209542/article/details/108518333<i class="fa fa-external-link-alt"></i></span> </p>
+<p>挂载各类网盘——Sharelist的介绍与使用 | Blog By LTrump<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnhxaC5tYS9fcG9zdHMvMjAyMC0wMy0yNC0lRTYlOEMlODIlRTglQkQlQkQlRTUlOTAlODQlRTclQjElQkIlRTclQkQlOTElRTclOUIlOTgtU2hhcmVsaXN0JUU3JTlBJTg0JUU0JUJCJThCJUU3JUJCJThEJUU0JUI4JThFJUU0JUJEJUJGJUU3JTk0JUE4Lw==">https://blog.xqh.ma/_posts/2020-03-24-%E6%8C%82%E8%BD%BD%E5%90%84%E7%B1%BB%E7%BD%91%E7%9B%98-Sharelist%E7%9A%84%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\25\在线文件目录Z-file\" rel="bookmark">在线文件目录Z-file</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\31\Docker中运行百度网盘客户端\" rel="bookmark">Docker中运行百度网盘客户端</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\28\Linux性能监控工具Netdata\" rel="bookmark">Linux性能监控工具Netdata</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2021/01/15/%E6%94%AF%E6%8C%81%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9A%84%E5%9C%A8%E7%BA%BF%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95ShareList/" title="支持天翼云的在线文件目录ShareList">https://laosu.ml/2021/01/15/支持天翼云的在线文件目录ShareList/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/%E7%BD%91%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 网盘</a>
+              <a href="/tags/onedrive/" rel="tag"><i class="fa fa-tag"></i> onedrive</a>
+              <a href="/tags/%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98/" rel="tag"><i class="fa fa-tag"></i> 天翼云盘</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/12/Linux%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7Netdata%EF%BC%88%E4%BF%AE%E8%AE%A2%EF%BC%89/" rel="prev" title="Linux性能监控工具Netdata（修订）">
+      <i class="fa fa-chevron-left"></i> Linux性能监控工具Netdata（修订）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置"><span class="nav-number">3.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#天翼云"><span class="nav-number">3.1.</span> <span class="nav-text">天翼云</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#和彩云"><span class="nav-number">3.2.</span> <span class="nav-text">和彩云</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用设置"><span class="nav-number">4.</span> <span class="nav-text">常用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中转"><span class="nav-number">4.1.</span> <span class="nav-text">中转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录加密"><span class="nav-number">4.2.</span> <span class="nav-text">目录加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebDAV-导出"><span class="nav-number">4.3.</span> <span class="nav-text">WebDAV 导出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题"><span class="nav-number">5.</span> <span class="nav-text">遗留问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SMB-服务"><span class="nav-number">5.1.</span> <span class="nav-text">SMB 服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">6.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">209</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（github/coding）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">175k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:39</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
