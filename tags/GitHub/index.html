@@ -378,7 +378,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">212</span>
+        <span class="site-state-item-count">213</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -591,6 +591,24 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 
 </body>
 </html>
+ptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
       appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
       placeholder: "有什么想法和需求，可以留个言",
       avatar     : 'mm',
