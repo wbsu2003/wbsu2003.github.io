@@ -32,14 +32,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Bililive-go 是一个支持多种直播平台的直播录制工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/logo-1601520222470.png">
 <meta property="article:published_time" content="2020-10-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-07T03:05:05.909Z">
+<meta property="article:modified_time" content="2021-01-21T05:37:52.758Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
+<meta property="article:tag" content="docker">
 <meta property="article:tag" content="录播">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/logo-1601520222470.png">
 
 <link rel="canonical" href="https://laosu.ml/2020/10/07/%E5%9B%BD%E5%BA%86%E5%9C%A8%E5%AE%B6%E7%8E%A9%E5%BD%95%E6%92%AD/">
 
@@ -262,10 +263,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-07 09:00:00 / 修改时间：11:05:05" itemprop="dateCreated datePublished" datetime="2020-10-07T09:00:00+08:00">2020-10-07</time>
+              <time title="创建时间：2020-10-07 09:00:00" itemprop="dateCreated datePublished" datetime="2020-10-07T09:00:00+08:00">2020-10-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-21 13:37:52" itemprop="dateModified" datetime="2021-01-21T13:37:52+08:00">2021-01-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -324,7 +331,7 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/logo-1601520222470.png" itemprop="contentUrl">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/logo-1601520222470.png" itemprop="contentUrl">
         </div>
         <p>上一篇我们研究了如何在家里直播，今天我们来研究下怎么进行录播，这样我们就不用担心错过什么了，比如说网课，体育比赛等等。</p>
 <p>和 <code>LiveGo</code> 一样，<code>Bililive-go</code> 也是基于 <code>Go</code> 语言开发的项目，如果你正在学习 <code>Go</code> 语言，可以到这里看看，<span class="exturl" data-url="aHR0cHM6Ly9zaG9ja2VybGkubmV0L3Bvc3QvZ28tYXdlc29tZS8=">https://shockerli.net/post/go-awesome/<i class="fa fa-external-link-alt"></i></span>，作者汇聚了大量 <code>Go</code> 语言开发的优秀资源，涵盖了软件开发的方方面面，非常👍。</p>
@@ -399,10 +406,10 @@
 </tr>
 </tbody></table>
 <p>对直播行业不是太了解，不知道是不是主流的直播平台都覆盖到了？测试的时候才知道 <code>熊猫直播</code> 已经停止运营了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601520711839-1601520711841.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601520711839-1601520711841.png" alt="title"></p>
 <p>我试了 <code>哔哩哔哩</code> 和 <code>斗鱼</code> ，还是可以正常使用的。话不多说，继续我们今天的环境安装。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>bililive</code> ，选择第一个 <code>chigusa/bililive-go</code>，版本 <code>latest</code>。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker01-1601520267478.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/docker01-1601520267478.png" alt="title"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
 <thead>
 <tr>
@@ -416,7 +423,7 @@
 </tr>
 </tbody></table>
 <p>这里我挂载到了 <code>airdisk</code> 用 <code>samba</code> 协议映射到群晖的盘上</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker02-1601520285720.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/docker02-1601520285720.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>找个不冲突的端口就可</p>
 <table>
 <thead>
@@ -430,42 +437,42 @@
 <td align="center">8080</td>
 </tr>
 </tbody></table>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/docker03-1601520302918.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/docker03-1601520302918.png" alt="title"></p>
 <h1 id="录制"><a href="#录制" class="headerlink" title="录制"></a>录制</h1><h2 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a>主界面</h2><p>在浏览器中输入 <code>http://群晖IP:4880</code>，就可以看到主界面了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/web01-1601520323760.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/web01-1601520323760.png" alt="title"></p>
 <p><code>系统状态</code>中的信息</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/web02-1601520337927.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/web02-1601520337927.png" alt="title"></p>
 <h2 id="录制B站"><a href="#录制B站" class="headerlink" title="录制B站"></a>录制B站</h2><p>在 <code>B站</code> 找到直播的入口 ，随便选了个试试</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili01-1601520352073.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/bili01-1601520352073.png" alt="title"></p>
 <p>选中打开后，复制浏览器地址栏的地址</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521670811-1601521670817.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601521670811-1601521670817.png" alt="title"></p>
 <p>添加房间，粘贴地址，点 <code>OK</code> 确定</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521774163-1601521774164.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601521774163-1601521774164.png" alt="title"></p>
 <p>列表中可以看到已经在 <code>录制中</code> 了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521809230-1601521809232.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601521809230-1601521809232.png" alt="title"></p>
 <p>在 <code>File Station</code> 中已经能看到录制的文件了，格式是 <code>flv</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601521892818-1601521892821.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601521892818-1601521892821.png" alt="title"></p>
 <p>可以通过点击 <code>停止监控</code> 来停止录像</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili06-1601520413719.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/bili06-1601520413719.png" alt="title"></p>
 <p>确定后，列表中的 <code>运行状态</code> 会改变</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili07-1601520421414.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/bili07-1601520421414.png" alt="title"></p>
 <p>再回到  <code>File Station</code> ，右键直接播放，会显示格式不支持</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/bili08-1601520430229.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/bili08-1601520430229.png" alt="title"></p>
 <p>用 <code>airdisk</code> 播放试试</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601522190230-1601522190232.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601522190230-1601522190232.png" alt="title"></p>
 <p>即便是远程模式，也很流畅</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/1601522288057-1601522288060.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/1601522288057-1601522288060.png" alt="title"></p>
 <p><code>斗鱼</code> 上也是一样的操作</p>
 <h1 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h1><p>录制功能很强大，但是这个毕竟不是完整的应用而是个开发的框架，需要根据实际应用进行完善，程序提供了 <code>Http Rest API</code> 接口，所以开发 <code>WEB</code> 应用还是很简单快捷的。</p>
 <h2 id="不能删除直播间"><a href="#不能删除直播间" class="headerlink" title="不能删除直播间"></a>不能删除直播间</h2><p>遇到房间不能删除的情况，只能在 <code>终端机</code> 中手动修改 <code>config.yml</code> 文件，配置文件为 <code>/etc/bililive-go/config.yml</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930195841-1601520500966.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/Pasted%20image%2020200930195841-1601520500966.png" alt="title"></p>
 <p>把不需要的房间整行删除，重启容器就可以了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930200512-1601520531398.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/Pasted%20image%2020200930200512-1601520531398.png" alt="title"></p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config.yml 说明</span></span><br><span class="line"><span class="attr">rpc:</span> </span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>           <span class="comment"># 是否开启API</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8080</span>    <span class="comment"># 监听地址</span></span><br><span class="line">  <span class="attr">token:</span> <span class="string">""</span>               <span class="comment"># token</span></span><br><span class="line">  <span class="attr">tls:</span>                    <span class="comment"># tls配置</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">cert_file:</span> <span class="string">""</span></span><br><span class="line">    <span class="attr">key_file:</span> <span class="string">""</span></span><br><span class="line"><span class="attr">debug:</span> <span class="literal">false</span>              <span class="comment"># debug模式</span></span><br><span class="line"><span class="attr">interval:</span> <span class="number">15</span>              <span class="comment"># 直播间状态查询间隔时间（秒）</span></span><br><span class="line"><span class="attr">out_put_path:</span> <span class="string">./</span>          <span class="comment"># 输出文件路径</span></span><br><span class="line"><span class="attr">live_rooms:</span>               <span class="comment"># 直播间url</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://www.panda.tv/10300</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">https://live.bilibili.com/1010</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="重启容器后开始录制"><a href="#重启容器后开始录制" class="headerlink" title="重启容器后开始录制"></a>重启容器后开始录制</h2><p>重启容器会导致原来已经停止监控的房间又开始处于 <code>录制中</code> 或 <code>监控中</code>，目前只能手动停止</p>
 <h2 id="不支持定时录制"><a href="#不支持定时录制" class="headerlink" title="不支持定时录制"></a>不支持定时录制</h2><p>不支持定时录制，但没有视频流的时候，也就是没直播的时候会显示 <code>监控中</code>，当有视频流的时候才会录制，状态会显示 <code>录制中</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/10/01/Pasted%20image%2020200930201141-1601520544629.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/01/Pasted%20image%2020200930201141-1601520544629.png" alt="title"></p>
 <p>如果你正在做录播项目，基于 <code>Bililive-go</code> 可以让你事倍功半。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>GitHub - hr3lxphr6j/bililive-go: 一个直播录制工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hyM2x4cGhyNmovYmlsaWxpdmUtZ28=">https://github.com/hr3lxphr6j/bililive-go<i class="fa fa-external-link-alt"></i></span></p>
@@ -506,19 +513,19 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\10\23\BT Web客户端工具live-torrent\" rel="bookmark">BT Web客户端工具live-torrent</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2020\12\31\Docker中运行百度网盘客户端\" rel="bookmark">Docker中运行百度网盘客户端</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\08\09\HomeAssistant设置https访问遇到的坑\" rel="bookmark">HomeAssistant设置https访问后的问题</a></div>
+      <div class="popular-posts-title"><a href="\2020\12\28\Linux性能监控工具Netdata\" rel="bookmark">Linux性能监控工具Netdata</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\01\12\Linux性能监控工具Netdata（修订）\" rel="bookmark">Linux性能监控工具Netdata（修订）</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -579,6 +586,7 @@
           
           <div class="post-tags">
               <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
               <a href="/tags/%E5%BD%95%E6%92%AD/" rel="tag"><i class="fa fa-tag"></i> 录播</a>
           </div>
 
@@ -668,7 +676,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -753,12 +761,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">177k</span>
+    <span title="站点总字数">180k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:41</span>
+    <span title="站点阅读时长">2:43</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
   </div>

@@ -32,16 +32,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="一款轻量级、高性能、功能强大的内网穿透代理服务器，用过的人都说简单易用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592748418615-1592748418619.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592748418615-1592748418619.png">
 <meta property="article:published_time" content="2020-06-21T11:25:00.000Z">
-<meta property="article:modified_time" content="2020-06-21T14:31:57.648Z">
+<meta property="article:modified_time" content="2021-01-21T06:43:09.197Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="内网穿透">
 <meta property="article:tag" content="nps">
 <meta property="article:tag" content="nas">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592748418615-1592748418619.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592748418615-1592748418619.png">
 
 <link rel="canonical" href="https://laosu.ml/2020/06/21/%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8nps%E8%AF%95%E7%94%A8/">
 
@@ -264,10 +264,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-21 19:25:00 / 修改时间：22:31:57" itemprop="dateCreated datePublished" datetime="2020-06-21T19:25:00+08:00">2020-06-21</time>
+              <time title="创建时间：2020-06-21 19:25:00" itemprop="dateCreated datePublished" datetime="2020-06-21T19:25:00+08:00">2020-06-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-21 14:43:09" itemprop="dateModified" datetime="2021-01-21T14:43:09+08:00">2021-01-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -326,7 +332,7 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592748418615-1592748418619.png" itemprop="contentUrl">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592748418615-1592748418619.png" itemprop="contentUrl">
         </div>
         <p><strong>什么是 nps</strong></p>
 <blockquote>
@@ -335,10 +341,10 @@
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>1、一台具有公网IP的服务器，系统可以是Windows、Linux。<br>2、根据自己服务器和客户端的系统，下载对应的源码、安装包或者镜像文件；<br>3、准备一个有效的域名，国内主机可能需要备案。</p>
 <h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>官方提供了三种安装方式，包括用安装包安装、源码安装和docker安装。我们用最省事的安装包，下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NubGgvbnBzL3JlbGVhc2Vz">https://github.com/cnlh/nps/releases<i class="fa fa-external-link-alt"></i></span></p>
 <p>因为是 VPS 是 CentOS 7，所以下载了 <code>linux_amd64_server.tar.gz</code>，目前最新的版本是v0.26.8</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592712013620-1592712013672.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592712013620-1592712013672.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载安装包</span></span><br><span class="line">https://github.com/ehang-io/nps/releases/download/v0.26.8/linux_amd64_server.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建目录</span></span><br><span class="line">mkdir /usr/<span class="built_in">local</span>/nps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">tar -zxvf  linux_amd64_server.tar.gz -C /usr/<span class="built_in">local</span>/nps/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 nps 目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nps/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册为服务</span></span><br><span class="line">./npc install</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592714295496-1592714295502.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592714295496-1592714295502.png" alt="title"></p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>上图显示配置文件在 <code>/etc/nps</code>。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nps/conf/nps.conf</span><br></pre></td></tr></table></figure>
 
@@ -349,37 +355,37 @@
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 nps</span></span><br><span class="line">nps start</span><br></pre></td></tr></table></figure>
 
 <p>这个时候在浏览器中输入 <code>http://laosu.ml:8081</code>，就可以看到 web 管理界面了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592719175374-1592719175376.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592719175374-1592719175376.png" alt="title"></p>
 <p>第一次建议不带 <code>start</code> 参数，可以进到 console 模式，实时显示运行状态。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592719764128-1592719764132.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592719764128-1592719764132.png" alt="title"></p>
 <h2 id="web-设置"><a href="#web-设置" class="headerlink" title="web 设置"></a>web 设置</h2><p>新增客户端</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592719828417-1592719828420.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592719828417-1592719828420.png" alt="title"></p>
 <p>先用 nas 试试</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592723368417-1592723368419.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592723368417-1592723368419.png" alt="title"></p>
 <p>添加成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592723486512-1592723486517.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592723486512-1592723486517.png" alt="title"></p>
 <p>因为还没有安装客户端，所以添加完成后，连接显示还是 <code>离线</code> 的。</p>
 <h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>这次我们下载群晖的版本</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592723959630-1592723959633.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592723959630-1592723959633.png" alt="title"></p>
 <p>打开 <code>套件中心</code>，选择 <code>手动安装</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592724340683-1592724340686.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592724340683-1592724340686.png" alt="title"></p>
 <p>选择刚才下载的 <code>npc_syno.spk</code></p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592724392925-1592724392927.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592724392925-1592724392927.png" alt="title"></p>
 <p>安装完成后，运行 nps 客户端</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592724048862-1592724048864.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592724048862-1592724048864.png" alt="title"></p>
 <p>返回 web 管理界面。可以看到客户端已经在线了</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592724174737-1592724174741.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592724174737-1592724174741.png" alt="title"></p>
 <h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><p>添加隧道，把 nas 的后台管理界面映射到公网</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592725120087-1592725120091.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592725120087-1592725120091.png" alt="title"></p>
 <p>填写 nas 后台管理页面的端口 5000</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592725481508-1592725481512.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592725481508-1592725481512.png" alt="title"></p>
 <p>添加成功</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592725602665-1592725602667.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592725602665-1592725602667.png" alt="title"></p>
 <p>在浏览器中输入 <code>http://laosu.ml:5000</code> 就可以看到 nas的后台了，效果和我们在局域网中访问<br> <code>192.168.0.199:5000</code> 是一样的。</p>
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592725777524-1592725777528.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592725777524-1592725777528.png" alt="title"></p>
 <h1 id="卸载-nps"><a href="#卸载-nps" class="headerlink" title="卸载 nps"></a>卸载 nps</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停止 nps 服务</span></span><br><span class="line">nps stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索 nps 目录</span></span><br><span class="line">whereis nps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除相关目录</span></span><br><span class="line">rm -rf /usr/bin/nps</span><br><span class="line">rm -rf /etc/nps</span><br><span class="line">rm -rf /usr/<span class="built_in">local</span>/nps</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/06/21/1592713556221-1592713556224.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/21/1592713556221-1592713556224.png" alt="title"></p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>具备可视化操作界面，而且增加隧道只要在服务器端操作即可，这些都比 frp 强，但是感觉目前还没有 frp 成熟，文档也不多，遇到问题有点抓瞎。等有空了再慢慢研究其他功能。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>nps官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9laGFuZy1pby5naXRodWIuaW8vbnBzLyMv">https://ehang-io.github.io/nps/#/<i class="fa fa-external-link-alt"></i></span></p>
@@ -426,10 +432,10 @@
       <div class="popular-posts-title"><a href="\2020\12\31\Docker中运行百度网盘客户端\" rel="bookmark">Docker中运行百度网盘客户端</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
+      <div class="popular-posts-title"><a href="\2020\12\28\Linux性能监控工具Netdata\" rel="bookmark">Linux性能监控工具Netdata</a></div>
     </li>
   </ul>
 <div class="post-widgets">
@@ -581,7 +587,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -666,12 +672,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">177k</span>
+    <span title="站点总字数">180k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:41</span>
+    <span title="站点阅读时长">2:43</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
   </div>
