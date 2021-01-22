@@ -3419,7 +3419,7 @@
   </entry>
   <entry>
     <title>在Gitee上搭建Hexo Blog</title>
-    <url>/2021/01/29/%E5%9C%A8Gitee%E4%B8%8A%E6%90%AD%E5%BB%BAHexo%20Blog/</url>
+    <url>/2021/01/22/%E5%9C%A8Gitee%E4%B8%8A%E6%90%AD%E5%BB%BAHexo%20Blog/</url>
     <content><![CDATA[<p>为了这个 <code>Blog</code> 的访问速度，我们已经折腾了好几次，</p>
 <blockquote>
 <p><a href="https://laosu.ml/2020/04/29/%E5%9C%A8GitHub%E4%B8%8A%E6%90%AD%E5%BB%BABlog/">在GitHub上搭建Blog</a><br><a href="https://laosu.ml/2020/05/06/%E5%9C%A8Netlify%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">在Netlify上部署Hexo</a><br><a href="https://laosu.ml/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/">在Coding上部署Hexo并实现和Github双线访问</a></p>
@@ -3427,7 +3427,7 @@
 <p>但是最近 <code>Coding</code> 升级后可能因为域名没有备案被迁移到了香港的主机，导致访问速度变的非常慢，而且发布也不像原来可以直接刷新预览，而是有一个发布、部署的过程，这个过程有可能需要好几分钟，因此有必要再折腾折腾 <code>Gitee</code> ，虽然 <code>Gitee pages</code> 需要手动发布并且不支持自定义域名，但眼下似乎没有更好的选择 。</p>
 <p><strong>什么是Gitee？</strong></p>
 <blockquote>
-<p>Gitee即码云，是开源中国于 2013 年推出的基于 Git 的代码托管和协作开发平台，提供本土化的代码托管服务。同时 Gitee 也提供了开源软体的发布和沟通社区，供开发者在其中进行技术交流与沟通。</p>
+<p>Gitee即码云，是开源中国于 2013 年推出的基于 Git 的代码托管和协作开发平台，提供本土化的代码托管服务。同时 Gitee 也提供了开源软件的发布和沟通社区，供开发者在其中进行技术交流与沟通。根据官方介绍，开发者超过 600 万，托管项目超过 1500 万，汇聚几乎所有本土原创开源项目，并于 2016 年推出企业版，提供企业级代码托管服务，成为开发领域领先的 SaaS 服务提供商。</p>
 </blockquote>
 <p>关于 Coding 升级踩坑的问题，可以看看这篇文章 <span class="exturl" data-url="aHR0cHM6Ly9hc3VyYWRhLnpvbmUvcG9zdC9DT0RJTkctUGFnZXMtVXBncmFkZS1Uby1UZW5jZW50Q2xvdWQv">CODING Pages 静态网站升级腾讯云新版踩坑小记(https://asurada.zone/post/CODING-Pages-Upgrade-To-TencentCloud/)<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h1><p>首先你得要有一个 <span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20v">Gitee<i class="fa fa-external-link-alt"></i></span> 码云账号，没有的话就注册一个。</p>
@@ -3467,8 +3467,8 @@
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/19/1611046899138-1611046899145.png" alt="title"></p>
 <h1 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h1><p>复制项目地址，我选的是 <code>SSH</code> 而不是用默认的 <code>HTTPS</code> ，比如我的地址是 <code>git@gitee.com:wbsu2003/wbsu2003.git</code></p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/19/1611048048508-1611048048517.png" alt="title"></p>
-<p>修改 _config.yml</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">repo:</span> </span><br><span class="line"></span><br><span class="line"> <span class="attr">gitee:</span> <span class="string">git@gitee.com:wbsu2003/wbsu2003.git</span> </span><br><span class="line"></span><br><span class="line"> <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>修改 hexo根目录下的 _config.yml 文件</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> </span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:wbsu2003/wbsu2003.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@e.coding.net:laosu/blog/blog.git</span></span><br><span class="line">    <span class="attr">gitee:</span> <span class="string">git@gitee.com:wbsu2003/wbsu2003.git</span>  </span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="添加公钥"><a href="#添加公钥" class="headerlink" title="添加公钥"></a>添加公钥</h1><p>在 <code>Gitee</code>添加自己电脑的 <code>ssh key</code>，这样每次更新代码到 <code>Gitee</code> 就不用再输入密码了</p>
 <p>生成 <code>SSH公钥</code> 的方法可以参考 <a href="https://gitee.com/help/articles/4181" target="_blank" rel="noopener">生成/添加SSH公钥<br>(https://gitee.com/help/articles/4181)</a></p>
