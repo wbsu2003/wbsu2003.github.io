@@ -25,16 +25,16 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="将 Hexo 生成的静态 Blog 托管在 vercel.com 上。">
+  <meta name="description" content="将 Hexo 生成的静态 blog 托管在 vercel.com 上。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vercel上部署Hexo">
+<meta property="og:title" content="Vercel上搭建Hexo并测试">
 <meta property="og:url" content="https://laosu.ml/2021/01/29/Vercel%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="将 Hexo 生成的静态 Blog 托管在 vercel.com 上。">
+<meta property="og:description" content="将 Hexo 生成的静态 blog 托管在 vercel.com 上。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210120160925.png">
 <meta property="article:published_time" content="2021-01-29T11:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-29T11:16:52.785Z">
+<meta property="article:modified_time" content="2021-01-29T11:30:36.302Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="GitHub">
 <meta property="article:tag" content="Hexo">
@@ -69,7 +69,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>Vercel上部署Hexo | 老苏的blog</title>
+  <title>Vercel上搭建Hexo并测试 | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -255,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Vercel上部署Hexo
+          Vercel上搭建Hexo并测试
         </h1>
 
         <div class="post-meta">
@@ -266,7 +266,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-01-29 19:00:00 / 修改时间：19:16:52" itemprop="dateCreated datePublished" datetime="2021-01-29T19:00:00+08:00">2021-01-29</time>
+              <time title="创建时间：2021-01-29 19:00:00 / 修改时间：19:30:36" itemprop="dateCreated datePublished" datetime="2021-01-29T19:00:00+08:00">2021-01-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -305,16 +305,16 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
-            <div class="post-description">将 Hexo 生成的静态 Blog 托管在 vercel.com 上。</div>
+            <div class="post-description">将 Hexo 生成的静态 blog 托管在 vercel.com 上。</div>
 
         </div>
       </header>
@@ -330,7 +330,15 @@
         </div>
         <p><strong>什么是 Vercel？</strong></p>
 <blockquote>
-<p>Vercel (之前也叫 Zeit 或 now.sh )是一家云部署服务的公司，支持静态托管以及 Serverless 服务。 支持从 Github, GitLab, Bitbucket 等代码仓库中自动拉取代码 然后进行项目打包和部署等功能。</p>
+<p>Vercel (之前也叫 Zeit 或 now.sh )是一家云部署服务的公司，支持静态托管以及 Serverless 服务。 支持从 Github, GitLab, Bitbucket 等代码仓库中自动拉取代码，然后进行项目打包和部署等功能。</p>
+</blockquote>
+<p><strong>什么是 Freenom？</strong></p>
+<blockquote>
+<p>Freenom是世界上第一个也是唯一的免费域名提供商。</p>
+</blockquote>
+<p><strong>什么是 DNSPod？</strong></p>
+<blockquote>
+<p>DNSPod 是国内提供智能 DNS 产品的网站，致力于为各类网站提供高质量的电信、网通、教育网双线或者三线智能 DNS 免费解析。</p>
 </blockquote>
 <h1 id="Vercel账号"><a href="#Vercel账号" class="headerlink" title="Vercel账号"></a>Vercel账号</h1><p>浏览器中打开 <code>https://vercel.com/</code> ，不需要注册，直接用 <code>github</code> 的账号</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611107684285-1611107684314.png" alt="title"></p>
@@ -351,10 +359,10 @@
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611109298564-1611109298573.png" alt="title"></p>
 <p>项目名称默认带 <code>-</code> ，我的是 <code>wbsu2003-github-io</code>，直接改成 <code>wbsu2003</code> ，这会让默认的域名短一点。</p>
 <blockquote>
-<p>默认的域名：<code>https://&lt;PROJECT NAME&gt;.vercel.app/</code></p>
+<p>默认分配的域名：<code>https://&lt;PROJECT NAME&gt;.vercel.app/</code></p>
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611111954038-1611111954045.png" alt="title"></p>
-<p>框架我从下拉框选过 <code>Hexo</code> ，但是发布之后会出 <code>404</code> 错误，用缺省的 <code>Other</code> 反而正常，很可能跟 <code>Hexo</code> 的版本有关系。</p>
+<p>上图中框架我从下拉框选过 <code>Hexo</code> ，但是发布之后会出 <code>404</code> 错误，用缺省的 <code>Other</code> 反而正常，很可能跟 <code>Hexo</code> 的版本有关系。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611111816046-1611111816052.png" alt="title"></p>
 <p>开始发布</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611112043461-1611112043468.png" alt="title"></p>
@@ -397,13 +405,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ns1.vercel-dns.com</span><br><span class="line">ns2.vercel-dns.com</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611122173659-1611122173667.png" alt="title"></p>
-<p>回到 <code>freenom</code></p>
+<p>转到 <code>Freenom</code>，我的域名提供商那里，修改 Nameservers</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611122224547-1611122224554.png" alt="title"></p>
-<p>提交后返回 <code>Vercel</code>，</p>
+<p>提交后返回 <code>Vercel</code>，会开始自动申请 SSL 证书</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/20/1611122324061-1611122324068.png" alt="title"></p>
-<p>本来到这里就应该可以了，但是很奇怪的是如果不用科学上网，是访问不到 <code>https://laosu.cf/</code> 的，经过摸索，发现还需要在 DNSPOD 解析一下</p>
+<p>本来到这里就应该可以了，但是很奇怪的是如果不用科学上网，是访问不到 <code>https://laosu.cf/</code> 的，经过摸索，发现还需要在 DNSPod 解析一下。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/23/1611373243070-1611373243079.png" alt="title"></p>
-<p>因为没有用 DNSPOD 平台默认的 DNS 服务器，所以会报 DNS 错误，但是没关系，等 <code>https://laosu.cf/</code> 能正常访问后，可以全部停止解析，然后就一切正常了。</p>
+<p>因为没有用 DNSPod 平台默认的 DNS 服务器，所以会报 DNS 错误，但是没关系，等 <code>https://laosu.cf/</code> 能正常访问后，可以全部停止解析，然后就一切正常了。</p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><ol>
 <li>零配置部署：只要完成前面的 <code>导入 git 仓库</code> 步骤，之后只要 <code>Hexo</code> 提交到 <code>Github</code> ，就会自动部署。</li>
 <li>访问速度虽然不上 <code>Gitee Pages</code>，但是比 <code>Github Pages</code> 好。</li>
@@ -517,7 +525,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2021/01/29/Vercel%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/" title="Vercel上部署Hexo">https://laosu.ml/2021/01/29/Vercel上部署Hexo/</a>
+    <a href="https://laosu.ml/2021/01/29/Vercel%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/" title="Vercel上搭建Hexo并测试">https://laosu.ml/2021/01/29/Vercel上部署Hexo/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
