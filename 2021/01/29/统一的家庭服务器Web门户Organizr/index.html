@@ -25,23 +25,24 @@
     var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Pi-Hole 是 Linux 网络级的广告和 Internet 跟踪器阻止应用程序，能够阻止传统的网站广告以及非常规位置的广告。">
+  <meta name="description" content="基于 PHP 开发的应用导航，可以让你丢掉书签。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源广告拦截器Pi-hole">
-<meta property="og:url" content="https://laosu.ml/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/index.html">
+<meta property="og:title" content="统一的家庭服务器Web门户Organizr">
+<meta property="og:url" content="https://laosu.ml/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/index.html">
 <meta property="og:site_name" content="老苏的blog">
-<meta property="og:description" content="Pi-Hole 是 Linux 网络级的广告和 Internet 跟踪器阻止应用程序，能够阻止传统的网站广告以及非常规位置的广告。">
+<meta property="og:description" content="基于 PHP 开发的应用导航，可以让你丢掉书签。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229152548.png">
-<meta property="article:published_time" content="2021-01-04T11:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-04T12:25:16.344Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610773448808-1610773448814.png">
+<meta property="article:published_time" content="2021-01-29T11:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-01T11:40:01.608Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
+<meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229152548.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610773448808-1610773448814.png">
 
-<link rel="canonical" href="https://laosu.ml/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/">
+<link rel="canonical" href="https://laosu.ml/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/">
 
 
 <script id="page-configurations">
@@ -67,7 +68,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>开源广告拦截器Pi-hole | 老苏的blog</title>
+  <title>统一的家庭服务器Web门户Organizr | 老苏的blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
     <script>
@@ -240,7 +241,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -253,7 +254,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          开源广告拦截器Pi-hole
+          统一的家庭服务器Web门户Organizr
         </h1>
 
         <div class="post-meta">
@@ -262,10 +263,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-04 19:00:00 / 修改时间：20:25:16" itemprop="dateCreated datePublished" datetime="2021-01-04T19:00:00+08:00">2021-01-04</time>
+              <time title="创建时间：2021-01-29 19:00:00" itemprop="dateCreated datePublished" datetime="2021-01-29T19:00:00+08:00">2021-01-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-01 19:40:01" itemprop="dateModified" datetime="2021-02-01T19:40:01+08:00">2021-02-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -292,8 +299,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -303,7 +310,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -312,7 +319,7 @@
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               <span>2 分钟</span>
             </span>
-            <div class="post-description">Pi-Hole 是 Linux 网络级的广告和 Internet 跟踪器阻止应用程序，能够阻止传统的网站广告以及非常规位置的广告。</div>
+            <div class="post-description">基于 PHP 开发的应用导航，可以让你丢掉书签。</div>
 
         </div>
       </header>
@@ -324,37 +331,53 @@
 
       
         <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229152548.png" itemprop="contentUrl">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610773448808-1610773448814.png" itemprop="contentUrl">
         </div>
-        <blockquote>
-<p>今天是2021年的第一个工作日，新年新气象，让我们一起加油！</p>
+        <p><strong>什么是 Organizr ？</strong></p>
+<blockquote>
+<p><code>Organizr</code> 是所有服务器应用程序的前端管理器。它可以将所有常用网站或媒体应用程序组织到一个仪表板中。只需将您喜欢的网站添加到 <code>Organizr</code> 中，它们就会在左侧显示为 <code>标签</code>。只需单击一下，即可在同一窗口中打开任何站点。</p>
 </blockquote>
-<p>Pi-hole 是一款开源且免费的 DNS 沉洞服务器（DNS sinkhole），能够在不安装任何客户端侧软件的前提下为设备提供网络内容屏蔽服务，非常轻量易用。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229154116.png" alt=""></p>
-<p>不用安装客户端，这对机顶盒、智能电视、手机、PAD等设备是非常方便的。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>pihole</code> ，选择第一个 <code>pihole/pihole</code>，版本 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229144344.png" alt=""></p>
-<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>pihole</code>，然后在 <code>pihole</code> 文件夹中创建两个新的子文件夹：分别命名为 <code>pihole</code>，和 <code>dnsmasq.d</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229152312.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610779534359-1610779534361.png" alt="title"></p>
+<p>我们之前已经介绍过的相似应用：</p>
+<blockquote>
+<p><a href="https://laosu.ml/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89/">给群晖弄个漂亮的导航页（上）</a><br><a href="https://laosu.ml/2020/08/16/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8B%EF%BC%89/">给群晖弄个漂亮的导航页（下）</a><br><a href="https://laosu.ml/2020/12/11/Heimdall%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%AF%BC%E8%88%AA%E9%A1%B5/">Heimdall打造个人导航页</a></p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
+<p>在注册表中搜索 <code>organizr</code> ，选择第四个 <code>organizr/organizr</code>，这是官方的镜像，版本选择 <code>latest</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610774249606-1610774249607.png" alt="title"></p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>organizr</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610774926012-1610774926013.png" alt="title"></p>
 <table>
 <thead>
 <tr>
-<th align="center">文件/文件夹</th>
+<th align="center">文件夹</th>
 <th align="center">装载路径</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/pihole/pihole</td>
-<td align="center">/etc/pihole/</td>
-</tr>
-<tr>
-<td align="center">/docker/pihole/dnsmasq.d</td>
-<td align="center">/etc/dnsmasq.d/</td>
+<td align="center"><code>docker/organizr</code></td>
+<td align="center"><code>/config</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210101165510.png" alt=""></p>
-<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>勾选 <code>使用与 Docker Host 相同的网络</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210101164630.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610775183755-1610775183758.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>要避免端口冲突，所以重新指定了本地端口</p>
+<table>
+<thead>
+<tr>
+<th align="center">本地端口</th>
+<th align="center">容器端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">3443</td>
+<td align="center">80</td>
+</tr>
+<tr>
+<td align="center">3680</td>
+<td align="center">443</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610775363483-1610775363484.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -363,63 +386,126 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">WEB_PORT</td>
-<td align="center"><code>4880</code>等任意值，请根据需要设置</td>
+<td align="center">TZ</td>
+<td align="center">默认为 <code>Etc/UTC</code>，修改为 <code>Asia/Shanghai</code></td>
 </tr>
 <tr>
-<td align="center">WEBPASSWORD</td>
-<td align="center">web登录密码，请根据需要设置</td>
+<td align="center">PGID</td>
+<td align="center"><code>&lt;gid&gt;</code></td>
 </tr>
 <tr>
-<td align="center">DNSMASQ_LISTENING</td>
-<td align="center">local</td>
+<td align="center">PUID</td>
+<td align="center"><code>&lt;uid&gt;</code></td>
 </tr>
 <tr>
-<td align="center">ServerIP</td>
-<td align="center">默认值为 0.0.0.0，需要修改为群晖本机的局域网IP</td>
+<td align="center">fpm</td>
+<td align="center">默认值为 <code>false</code></td>
+</tr>
+<tr>
+<td align="center">branch</td>
+<td align="center">默认值为 <code>v2-master</code></td>
 </tr>
 </tbody></table>
-<p>其中前三项是需要新加的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229161930.png" alt=""></p>
-<p>最后一项是需要修改的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201229161458.png" alt=""></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>有几种<span class="exturl" data-url="aHR0cHM6Ly9kaXNjb3Vyc2UucGktaG9sZS5uZXQvdC9ob3ctZG8taS1hY2Nlc3MtcGktaG9sZXMtZGFzaGJvYXJkLWFkbWluLWludGVyZmFjZS8zMTY4">访问仪表板的方法<i class="fa fa-external-link-alt"></i></span>：</p>
-<ol>
-<li><code>http://&lt;IP_ADDPRESS_OF_YOUR_PI_HOLE&gt;/admin/</code></li>
-<li><code>http://pi.hole/admin/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
-<li><code>http://pi.hole/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
-</ol>
-<p>所以我们在浏览器中输入 <code>http://群晖IP:4880/admin</code>就能看到主界面，如果看不到，再等一会！！！！！</p>
 <blockquote>
-<p>在我的机器上会需要等很长时间，不知道是不是因为内存小的缘故，因为在参考文档《How to Install Pi-Hole on Your Synology NAS – Marius Hosting》中提到，在群晖 NAS 上安装 Pi-hole 需要至少 6G 内存，而我的只有 4G 内存。 </p>
+<ul>
+<li>参数fpm：Used to enable php to use the socket rather than TCP, often increases performance. Valid values are(comma separated) <code>true</code>, <code>false</code></li>
+<li>参数branch：Used to switched between branches of organizr. Valid values are(comma separated) <code>v2-master</code>, <code>master</code>, <code>v2-develop</code>, <code>develop</code>, <code>dev</code></li>
+</ul>
 </blockquote>
+<p>PUID和PGID 的获取方法在 <a href="https://laosu.ml/2020/07/30/%E5%88%A9%E7%94%A8Cloudreve%E6%90%AD%E5%BB%BA%E8%87%AA%E7%94%A8%E7%BD%91%E7%9B%98/">利用Cloudreve搭建自用网盘</a> 一文中简单介绍过。主要是为了解决有时在使用卷（-v标志）时，主机 OS 和容器之间可能会出现的权限问题。</p>
+<p>SSH登录群晖后，运行 <code>id user</code>，会得到类似于下面的一段代码</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ id &lt;dockeruser&gt;</span><br><span class="line">   uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610872896874-1610872896909.png" alt="title"></p>
+<p>将获取到的 <code>uid</code> 填入到 <code>PUID</code>，<code>gid</code> 填入到 <code>PGID</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610873235113-1610873235114.png" alt="title"></p>
+<h2 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h2><p>记得勾选 <code>启动自动重新启动</code>，因为后面容器会根据 <code>branch</code> 参数更新代码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610782019425-1610782019428.png" alt="title"></p>
+<p>全部设置完成后，点 <code>应用</code>。往常 <code>应用</code> 之后就可以使用，但是这次因为有代码更新，所以要等代码更新之后才行。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610778852218-1610778852221.png" alt="title"></p>
+<p>从日志看有拉取动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610776613932-1610776613934.png" alt="title"></p>
+<p>我的机器上速度比较慢</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610776039569-1610776039569.png" alt="title"></p>
+<p>安装完成后，docker会自动重启</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610781436018-1610781436019.png" alt="title"></p>
+<h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="首次设置"><a href="#首次设置" class="headerlink" title="首次设置"></a>首次设置</h2><p>在浏览器中输入 <code>http://群晖IP:3680</code>，就能看到主界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610783067682-1610783067684.png" alt="title"></p>
+<p>右上角可以选择界面语言，但是不管选 <code>chinese</code> 还是 <code>chinese(Traditional)</code>，都显示的繁体中文</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610783407233-1610783407235.png" alt="title"></p>
+<p>安装类型选择 <code>个人版本</code>，然后 <code>Next</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610783277318-1610783277319.png" alt="title"></p>
+<p>管理信息中输入账号、密码和邮箱，然后 <code>Next</code></p>
 <blockquote>
-<p>但是等到什么时候刷新才行呢，我发现只要 <code>pihole</code> 或者 <code>dnsmasq.d</code> 里有文件的时候就可以了。</p>
+<p>我虽然没有安装 Emby 和 Plex ，但是安装了 Jellyfin</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210101174321.png" alt=""></p>
-<p>点击左侧菜单栏的 <code>Login</code>，输入密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210101174454.png" alt=""></p>
-<p>然后就可以根据需要进行设置了。</p>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="添加规则"><a href="#添加规则" class="headerlink" title="添加规则"></a>添加规则</h2><p>有个开源项目 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">anti-AD<i class="fa fa-external-link-alt"></i></span>：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">https://github.com/privacy-protection-tools/anti-AD<i class="fa fa-external-link-alt"></i></span>，在这里能找到适用于 <code>Pi-hole</code> 的规则</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210103134652.png" alt=""></p>
-<p>复制规则的链接，在 <code>Group Management</code> -&gt; <code>Adlists</code> 里面添加到 <code>Pi-hole</code> 中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210103134917.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610783938262-1610783938263.png" alt="title"></p>
+<p>安全部分主要输入 <code>Hash密码</code> 和 <code>注册密码</code>，<code>API密码</code> 是自动生成的，然后 <code>Next</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610784110185-1610784110187.png" alt="title"></p>
+<p>给资料库取个名字，路径用了建议的，然后 <code>Next</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610784320911-1610784320912.png" alt="title"></p>
+<p>设置完成</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610784401326-1610784401331.png" alt="title"></p>
+<p>自动跳转</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610784481082-1610784481083.png" alt="title"></p>
+<h2 id="添加新标签"><a href="#添加新标签" class="headerlink" title="添加新标签"></a>添加新标签</h2><p><code>标签编辑器</code> –&gt; <code>标签</code> –&gt; <code>+</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610784777154-1610784777156.png" alt="title"></p>
+<p>以 <code>Jellyfin</code> 为例</p>
 <blockquote>
-<p>除了这个项目，你还能找到其他的 <code>Pi-hole</code> 过滤规则</p>
+<ul>
+<li>标签名称：Jellyfin</li>
+<li>标签URL：Jellyfin URL</li>
+<li>标签本地网址：留空</li>
+<li>PING URL：留空</li>
+<li>Tab Auto Action：无</li>
+<li>Tab Auto Action Minutes：0</li>
+<li>选择图片：搜索 <code>jellyfin</code> 以找到 jellyfin 图标。</li>
+<li>选择图示：留空</li>
+</ul>
 </blockquote>
-<h2 id="更新规则"><a href="#更新规则" class="headerlink" title="更新规则"></a>更新规则</h2><p>在 <code>Tools</code> -&gt; <code>Update Gravity</code> 里面点一下“Update”，开始更新屏蔽域名表</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/03/1609653221769-1609653221795.png" alt="title"></p>
-<p>一共导入了 <code>43177</code> 条规则。</p>
-<h2 id="添加-DNS"><a href="#添加-DNS" class="headerlink" title="添加 DNS"></a>添加 DNS</h2><p><code>Pi-hole</code> 采用的是使用本地 <code>DNS</code> 服务器的方式在局域网中进行过滤，所以我们需要设置 <code>Pi-hole</code> 为当前网络的<code>DNS</code>。</p>
-<h3 id="单个设备设置-DNS"><a href="#单个设备设置-DNS" class="headerlink" title="单个设备设置 DNS"></a>单个设备设置 DNS</h3><p>您可以在网络上的所有设备上将 <code>群晖 IP</code> 添加为 <code>DNS</code>。</p>
-<h3 id="路由器上设置-DNS"><a href="#路由器上设置-DNS" class="headerlink" title="路由器上设置 DNS"></a>路由器上设置 DNS</h3><p>登录路由器，并通过更改 <code>DNS</code> 来在路由器级别阻止广告。这样，您就不必在每个设备上都单独进行操作了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610790589182-1610790589184.png" alt="title"></p>
+<p>默认并没有 <code>生效</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610799092345-1610799092347.png" alt="title"></p>
+<p><code>生效</code> 之后就会出现在左侧的导航栏</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610799289275-1610799289278.png" alt="title"></p>
+<p>因为类型选了 <code>iFrame</code> 而不是 <code>New Window</code>，所以是在同一个页面里打开了 <code>Jellyfin</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/16/1610799985470-1610799985475.png" alt="title"></p>
+<h2 id="设置首页"><a href="#设置首页" class="headerlink" title="设置首页"></a>设置首页</h2><p><code>标签编辑器</code> –&gt; <code>主页项目</code> –&gt; <code>JELLYFIN</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610853885077-1610853885080.png" alt="title"></p>
+<p>勾选 <code>启动</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610854308246-1610854308248.png" alt="title"></p>
+<p>在 <code>Jellyfin</code> 中新建 API 秘钥</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610853218903-1610853218904.png" alt="title"></p>
+<p>复制 <code>API 秘钥</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610853322000-1610853322003.png" alt="title"></p>
+<p>返回到 <code>Organizr</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610853423942-1610853423945.png" alt="title"></p>
+<p>点 <code>测试连接</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610854563048-1610854563051.png" alt="title"></p>
+<p>如果测试成功，右下角有提示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610854504456-1610854504461.png" alt="title"></p>
+<p>点左侧的 <code>homepage</code>，会看到 <code>Jellyfin</code> 中新增的影片</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610853529136-1610853529138.png" alt="title"></p>
+<h2 id="手机上访问"><a href="#手机上访问" class="headerlink" title="手机上访问"></a>手机上访问</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210116212407.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210116212517.jpg" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210116212658.jpg" alt=""></p>
+<h2 id="自定义外观"><a href="#自定义外观" class="headerlink" title="自定义外观"></a>自定义外观</h2><p>在 <code>定制</code> 中，可以更改 <code>登录</code> 页面的外观，主题（默认为 <code>Organizr</code> 或蓝色），样式（浅色，深色或水平），或添加自己的自定义CSS。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610854879566-1610854879567.png" alt="title"></p>
+<p>通过应用集成，<code>Organizr</code> 简化了访问站点的方式，当然你也可以在 <code>Organizr</code> 中添加任何常用的网站。</p>
+<h1 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h1><p>当有新版本时，右下角会弹出提示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611709930927-1611709930963.png" alt="title"></p>
+<p>选择 <code>Update Now</code> 即开始升级，有进度条提示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611709948793-1611709948796.png" alt="title"></p>
+<p>升级完成，右下角会显示 <code>Update Sucessful</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611709972459-1611709972462.png" alt="title"></p>
+<p>版本顺利的从刚安装时的 <code>2.1.120</code> 升级到了 <code>2.1.165</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611710297814-1611710297847.png" alt="title"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Pi-hole – Network-wide protection<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9waS1ob2xlLm5ldC8=">https://pi-hole.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>pi-hole/pi-hole: A black hole for Internet advertisements<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvcGktaG9sZQ==">https://github.com/pi-hole/pi-hole<i class="fa fa-external-link-alt"></i></span></p>
-<p>pi-hole/docker-pi-hole: Pi-hole in a docker container<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvZG9ja2VyLXBpLWhvbGUvI3J1bm5pbmctcGktaG9sZS1kb2NrZXI=">https://github.com/pi-hole/docker-pi-hole/#running-pi-hole-docker<i class="fa fa-external-link-alt"></i></span></p>
-<p>Block Ads on your Network with Pi-Hole Hosted on Synology – NAS Hosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nZWVrZWQuaG9zdC9ibG9jay1hZHMtb24teW91ci1uZXR3b3JrLXdpdGgtcGktaG9sZS1ob3N0ZWQtb24tc3lub2xvZ3kv">https://geeked.host/block-ads-on-your-network-with-pi-hole-hosted-on-synology/<i class="fa fa-external-link-alt"></i></span></p>
-<p>How to Install Pi-Hole on Your Synology NAS – Marius Hosting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJpdXNob3N0aW5nLmNvbS9ob3ctdG8taW5zdGFsbC1waS1ob2xlLW9uLXlvdXItc3lub2xvZ3ktbmFzLw==">https://mariushosting.com/how-to-install-pi-hole-on-your-synology-nas/<i class="fa fa-external-link-alt"></i></span> </p>
-<p>privacy-protection-tools/anti-AD: 致力于成为中文区命中率最高的广告过滤列表，实现精确的广告屏蔽和隐私保护。anti-AD现已支持AdGuardHome，dnsmasq， Surge，Pi-Hole，smartdns等网络组件。完全兼容常见的广告过滤工具所支持的各种广告过滤列表格式<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">https://github.com/privacy-protection-tools/anti-AD<i class="fa fa-external-link-alt"></i></span></p>
+<p>Organizr – Forget Bookmarks<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vcmdhbml6ci5hcHAv">https://organizr.app/<i class="fa fa-external-link-alt"></i></span></p>
+<p>causefx/Organizr: HTPC/Homelab Services Organizer - Written in PHP<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhdXNlZngvT3JnYW5penI=">https://github.com/causefx/Organizr<i class="fa fa-external-link-alt"></i></span></p>
+<p>Organizr/docker-organizr: Docker image for Organizr<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL09yZ2FuaXpyL2RvY2tlci1vcmdhbml6ciNwYXJhbWV0ZXJz">https://github.com/Organizr/docker-organizr#parameters<i class="fa fa-external-link-alt"></i></span></p>
+<p>Organizr 官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yZ2FuaXpyLmFwcC8=">https://docs.organizr.app/<i class="fa fa-external-link-alt"></i></span></p>
+<p>The Ultimate Organizr V2 Setup Guide for Windows - Smarthome Pursuits<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbWFydGhvbWVwdXJzdWl0cy5jb20vaW5zdGFsbC1vcmdhbml6ci12Mi13aW5kb3dzLw==">https://smarthomepursuits.com/install-organizr-v2-windows/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -453,10 +539,10 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2020\12\31\Docker中运行百度网盘客户端\" rel="bookmark">Docker中运行百度网盘客户端</a></div>
@@ -484,7 +570,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://laosu.ml/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/" title="开源广告拦截器Pi-hole">https://laosu.ml/2021/01/04/开源广告拦截器Pi-hole/</a>
+    <a href="https://laosu.ml/2021/01/29/%E7%BB%9F%E4%B8%80%E7%9A%84%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8Web%E9%97%A8%E6%88%B7Organizr/" title="统一的家庭服务器Web门户Organizr">https://laosu.ml/2021/01/29/统一的家庭服务器Web门户Organizr/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -527,6 +613,7 @@
           <div class="post-tags">
               <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
               <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag"><i class="fa fa-tag"></i> 导航</a>
           </div>
 
         
@@ -535,12 +622,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/31/Docker%E4%B8%AD%E8%BF%90%E8%A1%8C%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E5%AE%A2%E6%88%B7%E7%AB%AF/" rel="prev" title="Docker中运行百度网盘客户端">
-      <i class="fa fa-chevron-left"></i> Docker中运行百度网盘客户端
+    <a href="/2021/01/25/%E5%9C%A8VMware%E4%B8%8A%E8%B7%91Linux%20Mint/" rel="prev" title="在VMware上跑Linux Mint">
+      <i class="fa fa-chevron-left"></i> 在VMware上跑Linux Mint
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/01/08/%E5%9C%A8%E7%BA%BF%E6%96%87%E6%A1%A3%E5%88%86%E4%BA%AB%E5%B7%A5%E5%85%B7ShowDoc/" rel="next" title="在线文档分享工具ShowDoc">
-      在线文档分享工具ShowDoc <i class="fa fa-chevron-right"></i>
+    <a href="/2021/01/29/Vercel%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/" rel="next" title="Vercel上部署Hexo">
+      Vercel上部署Hexo <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -601,7 +688,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络"><span class="nav-number">1.2.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加规则"><span class="nav-number">3.1.</span> <span class="nav-text">添加规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新规则"><span class="nav-number">3.2.</span> <span class="nav-text">更新规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-DNS"><span class="nav-number">3.3.</span> <span class="nav-text">添加 DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单个设备设置-DNS"><span class="nav-number">3.3.1.</span> <span class="nav-text">单个设备设置 DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由器上设置-DNS"><span class="nav-number">3.3.2.</span> <span class="nav-text">路由器上设置 DNS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.3.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级设置"><span class="nav-number">1.4.</span> <span class="nav-text">高级设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置"><span class="nav-number">2.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首次设置"><span class="nav-number">2.1.</span> <span class="nav-text">首次设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加新标签"><span class="nav-number">2.2.</span> <span class="nav-text">添加新标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置首页"><span class="nav-number">2.3.</span> <span class="nav-text">设置首页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机上访问"><span class="nav-number">2.4.</span> <span class="nav-text">手机上访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义外观"><span class="nav-number">2.5.</span> <span class="nav-text">自定义外观</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#升级"><span class="nav-number">3.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
