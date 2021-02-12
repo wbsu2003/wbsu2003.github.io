@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="TgrQYowsV7">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"laosu.ml","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="qBittorrent 是一款开源、免费、跨平台的种子和磁力链接下载工具。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装下载工具qBittorrent">
+<meta property="og:url" content="https://laosu.ml/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="qBittorrent 是一款开源、免费、跨平台的种子和磁力链接下载工具。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
+<meta property="article:published_time" content="2020-02-12T03:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-12T02:29:39.599Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="群晖">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="下载">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
+
+<link rel="canonical" href="https://laosu.ml/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>安装下载工具qBittorrent | 老苏的blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165372529-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-165372529-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">老苏的blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.ml/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="杨浦老苏">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安装下载工具qBittorrent
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-12 11:00:00" itemprop="dateCreated datePublished" datetime="2020-02-12T11:00:00+08:00">2020-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-12 10:29:39" itemprop="dateModified" datetime="2021-02-12T10:29:39+08:00">2021-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">qBittorrent 是一款开源、免费、跨平台的种子和磁力链接下载工具。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+            <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png" itemprop="contentUrl">
+        </div>
+        <p>牛年大吉，新春快乐，阖家幸福</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096839922-1613096839927.png" alt="title"></p>
+<p><strong>什么是 qBittorrent？</strong></p>
+<blockquote>
+<p><code>qBittorrent</code> 是一款开源免费的种子和磁力链接下载工具，支持 <code>Windows</code>、<code>Mac</code> 和 <code>Linux</code>，是一个跨平台的自由 <code>BitTorrent</code> 客户端，其图形用户接口由 <code>Qt</code> 写成。使用<code>libtorrent</code> 作为后端。由 Christophe Dumez 在贝尔福 - 蒙贝利亚尔理工大学时开始开发。</p>
+</blockquote>
+<p>我下载的需求不大，一直用的玩客云，这玩意儿现在淘宝上还不到50块，比买迅雷会员合算多了，插个移动硬盘就成了下载机，又经济又实惠。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210119202444.png" alt=""></p>
+<p>但为啥又要折腾下载软件呢？因为 <code>qBittorrent</code> 支持 RSS 订阅，可以实现自动化的更新，这会让我们以后的折腾变得更有趣。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>qbittorrent</code> ，选择第三个 <code>johngong/qbittorrent</code>，版本 <code>latest</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611716629429-1611716629469.png" alt="title"></p>
+<p>这个版本集成了 <code>Trackers</code> 自动更新，可以帮我们省一些事情。</p>
+<h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
+<thead>
+<tr>
+<th align="center">文件夹</th>
+<th align="center">装载路径</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/docker/qbittorrent/config</td>
+<td align="center">/config</td>
+<td align="center">配置文件的目录</td>
+</tr>
+<tr>
+<td align="center">/docker/qbittorrent/downloads</td>
+<td align="center">/Downloads</td>
+<td align="center">下载文件的目录</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611717860067-1611717860070.png" alt="title"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突</p>
+<table>
+<thead>
+<tr>
+<th align="center">本地端口</th>
+<th align="center">容器端口</th>
+<th align="center">类型</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">6881</td>
+<td align="center">6881</td>
+<td align="center">TCP</td>
+<td align="center">BT下载监听端口</td>
+</tr>
+<tr>
+<td align="center">6881</td>
+<td align="center">6881</td>
+<td align="center">UDP</td>
+<td align="center">BT下载DHT监听端口</td>
+</tr>
+<tr>
+<td align="center">8989</td>
+<td align="center">8989</td>
+<td align="center">TCP</td>
+<td align="center">web访问端口</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611717904227-1611717904232.png" alt="title"></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
+<thead>
+<tr>
+<th align="center">可变</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">UID</td>
+<td align="center"><code>&lt;uid&gt;</code> 默认为 0</td>
+</tr>
+<tr>
+<td align="center">GID</td>
+<td align="center"><code>&lt;gid&gt;</code> 默认为 0</td>
+</tr>
+<tr>
+<td align="center">TRACKERSAUTO</td>
+<td align="center">自动更新 qBittorrent 的 trackers ,默认开启此功能</td>
+</tr>
+<tr>
+<td align="center">UMASK</td>
+<td align="center">umask设置，默认为022</td>
+</tr>
+<tr>
+<td align="center">WEBUIPORT</td>
+<td align="center">默认为8989，如果前面改了，这里也要改</td>
+</tr>
+<tr>
+<td align="center">TZ</td>
+<td align="center">系统时区设置，默认为Asia/Shanghai</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意事项：</p>
+<ol>
+<li><code>WEBUIPORT</code> 要根据前面本地端口的设置而修改，如果不一致可能会导致无法访问。</li>
+<li>默认的 <code>UID</code> 和 <code>GID</code> 均为 0，这是 <code>root</code> 用户，如果你要使用，请勿将对权限敏感的文件夹映射到此文件夹。<code>UID</code> 和 <code>GID</code> 要通过运行 <code>id user</code> 命令来获得。或者像我一样用 <code>1000</code>，这代表第一个用户。</li>
+<li>其他值保持默认就可以。</li>
+</ol>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611718253432-1611718253441.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8989</code>，就能看到主界面了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103003951.png" alt=""></p>
+<blockquote>
+<p>默认的用户名：admin，密码：adminadmin</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201103003907.png" alt=""></p>
+<p>登录成功</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719062262-1611719062272.png" alt="title"></p>
+<h2 id="搜索和下载"><a href="#搜索和下载" class="headerlink" title="搜索和下载"></a>搜索和下载</h2><p>设置中，默认勾选了 <code>使用我的路由器的 UPnP / NAT-PMP 功能来转发端口</code>，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/17/1610878034131-1610878034134.png" alt="title"></p>
+<p>但还需要在路由器开启 <code>UPnP / NAT-PMP</code> 功能。每个路由器不同，我用的电信送的磊科 MG1200AC ，在 <code>路由器设置</code> –&gt; <code>开发者模式</code> 中可以启用和关闭。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611761715522-1611761715552.png" alt="title"></p>
+<p>找到右上侧的 <code>搜索</code>，输入你要搜索的内容</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610874947128-1610874947130.png" alt="title"></p>
+<p>选中你想下载的资源，双击</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610875028214-1610875028215.png" alt="title"></p>
+<p>开始下载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/01/17/1610875096483-1610875096484.png" alt="title"></p>
+<p>如果下载速度慢可能是种子问题也可能是网络环境问题</p>
+<h2 id="启用-Jackett-插件"><a href="#启用-Jackett-插件" class="headerlink" title="启用 Jackett 插件"></a>启用 Jackett 插件</h2><p>默认启用了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901927050-1611901927058.png" alt="title"></p>
+<p>但不做任何修改会提示 API 错误</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901483359-1611901483367.png" alt="title"></p>
+<p>按提示找到 <code>/docker/qbittorrent/config/qBittorrent/data/nova3/engines</code> 下的 <code>jackett.json</code>，右键 <code>用文本编辑器打开</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901688264-1611901688272.png" alt="title"></p>
+<p><code>api_key</code> 可以在 <code>Jackett</code> 主界面的右上角找到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611902029591-1611902029593.png" alt="title"></p>
+<p><code>url</code> 根据实际的地址填写，保存即可。再次搜索就会有结果返回了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611902252235-1611902252246.png" alt="title"></p>
+<h2 id="支持-https"><a href="#支持-https" class="headerlink" title="支持 https"></a>支持 https</h2><p>点 <code>注册以处理磁力链接</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739192454-1611739192491.png" alt="title"></p>
+<p>显示需要支持 https 才可以，其实我好像是能直接添加磁力链接下载的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739230481-1611739230488.png" alt="title"></p>
+<p>首先，在 <code>控制面板</code> –&gt; <code>Synology 应用程序门口</code> –&gt; <code>反向代理服务器</code> 中新增规则</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739417129-1611739417133.png" alt="title"></p>
+<p>停止容器，找到 <code>/docker/qbittorrent/config/qBittorrent/config</code> 目录中的 <code>qBittorrent.conf</code> 文件，习惯在修改前先备份一份。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739831171-1611739831174.png" alt="title"></p>
+<p>找到 <code>WebUI\HostHeaderValidation=true</code> , 将 <code>true</code> 改为 <code>false</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611738123706-1611738123712.png" alt="title"></p>
+<p>改为重新启动容器就可以了。</p>
+<blockquote>
+<p>如果不改这一行，访问时会显示 <code>Unanthorized</code></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611738150322-1611738150329.png" alt="title"></p>
+<h2 id="RSS-订阅"><a href="#RSS-订阅" class="headerlink" title="RSS 订阅"></a>RSS 订阅</h2><p>直接点开右上角的 <code>RSS</code> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719471781-1611719471788.png" alt="title"></p>
+<p>回到设置中，勾选 <code>启用获取 RSS 订阅</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719602070-1611719602077.png" alt="title"></p>
+<p>如果你要想使用 RSS 下载，还需要勾选 <code>启用 RSS Torrent 自动下载</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719854767-1611719854770.png" alt="title"></p>
+<ol>
+<li>转到 <code>qBittorrent</code> 的 <code>RSS</code> 选项卡。</li>
+<li>点击 <code>新 RSS订阅</code> </li>
+<li>在弹出界面中的 URL 地址中输入在上一篇文章《<a href="https://laosu.ml/2021/02/08/%E8%B5%84%E6%BA%90%E8%81%9A%E5%90%88%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8Jackett/">资源聚合搜索神器Jackett</a>》中生成的带查询结果的RSS， 然后单击“确定” 。 </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.0.199:9117&#x2F;api&#x2F;v2.0&#x2F;indexers&#x2F;zooqle&#x2F;results&#x2F;torznab&#x2F;api?apikey&#x3D;4dekwddu91wlil50ho1xrj17fz008aaa&amp;t&#x3D;search&amp;cat&#x3D;5000,103583&amp;q&#x3D;西部世界</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/28/1611824577129-1611824577162.png" alt="title"></p>
+<p>添加完成后</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210129112330.png" alt=""></p>
+<p>转到 <code>RSS 下载器</code> 并按照打开的屏幕截图中的示例设置一些规则，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210129140822.png" alt=""></p>
+<p>qBittorrent 就会根据你的设置，把订阅的并符合下载规则的资源自动下载。但这个功能要慎用，如果设置不当，可能会下载一堆你不需要的东西回来。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>折腾群晖笔记：使用群晖 Docker 安装qbittorrent QB下载器 PT离线下载神器_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E1azY0NTg3Lw==">https://post.smzdm.com/p/a5k64587/<i class="fa fa-external-link-alt"></i></span></p>
+<p>蜗牛星际NAS 篇三：qBittorrent下载器安装配置_办公软件_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F6NWV6eDkwLw==">https://post.smzdm.com/p/az5ezx90/<i class="fa fa-external-link-alt"></i></span></p>
+<p>How to configure Jackett plugin · qbittorrent/search-plugins Wiki · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3FiaXR0b3JyZW50L3NlYXJjaC1wbHVnaW5zL3dpa2kvSG93LXRvLWNvbmZpZ3VyZS1KYWNrZXR0LXBsdWdpbg==">https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin<i class="fa fa-external-link-alt"></i></span></p>
+<p>[筆記] 使用qBittorrent WebUI訂閱RSS自動下載教學 | NPCHK Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ucGNoay5pbmZvL3FiaXR0b3JyZW50LXdlYi1yc3MtYXV0by1kb3dubG9hZC8=">https://npchk.info/qbittorrent-web-rss-auto-download/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\31\Docker中运行百度网盘客户端\" rel="bookmark">Docker中运行百度网盘客户端</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\09\22\Glances实时监视群晖运行状况\" rel="bookmark">Glances实时监视群晖运行状况</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\11\Heimdall打造个人导航页\" rel="bookmark">Heimdall打造个人导航页</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2020\12\28\Linux性能监控工具Netdata\" rel="bookmark">Linux性能监控工具Netdata</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\01\12\Linux性能监控工具Netdata（修订）\" rel="bookmark">Linux性能监控工具Netdata（修订）</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://laosu.ml/2020/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/" title="安装下载工具qBittorrent">https://laosu.ml/2020/02/12/安装下载工具qBittorrent/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/uploads/wechat-qcode_430.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+              <a href="/tags/%E4%B8%8B%E8%BD%BD/" rel="tag"><i class="fa fa-tag"></i> 下载</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/%E8%8B%8F%E7%8E%89%E4%BA%912019%E5%B9%B4%E5%BA%A6%E4%BD%9C%E5%93%81%EF%BC%886P%EF%BC%89/" rel="next" title="苏玉云2019年度作品（6P）">
+      苏玉云2019年度作品（6P） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷"><span class="nav-number">1.1.</span> <span class="nav-text">卷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.3.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行"><span class="nav-number">2.</span> <span class="nav-text">运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索和下载"><span class="nav-number">2.1.</span> <span class="nav-text">搜索和下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用-Jackett-插件"><span class="nav-number">2.2.</span> <span class="nav-text">启用 Jackett 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持-https"><span class="nav-number">2.3.</span> <span class="nav-text">支持 https</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSS-订阅"><span class="nav-number">2.4.</span> <span class="nav-text">RSS 订阅</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">220</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      本站其他站点
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://laosu.ml/" title="https:&#x2F;&#x2F;laosu.ml">主站（Vercel）</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy5naXRlZS5pbw==" title="https:&#x2F;&#x2F;wbsu2003.gitee.io">国内推荐（Gitee）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5nYQ==" title="https:&#x2F;&#x2F;laosu.ga">备站（Github）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS50aw==" title="https:&#x2F;&#x2F;laosu.tk">备站（Netlify）</span>
+        </li>
+        <li class="links-of-blogroll-item">
+          <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（Coding）</span>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">193k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:55</span>
+</div>
+  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 强力驱动
+  </div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<!--2020.05.03新增flagconuter计数-->
+<a href="https://info.flagcounter.com/BEXu" target="_blank" rel="noopener"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BUTckXRS3vyMif8j9Uew9Oss-9Nh9j0Va',
+      appKey     : 'nOAIpShvNuyNcMR7pBi6zXfA',
+      placeholder: "有什么想法和需求，可以留个言",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
