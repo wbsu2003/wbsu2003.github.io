@@ -9084,10 +9084,10 @@
 <p>老外的原帖：<span class="exturl" data-url="aHR0cHM6Ly94cGVub2xvZ3kuY29tL2ZvcnVtL3RvcGljLzEyNDA2LWhvdy10by1maXgtc29ycnktdGhhdC1wYWdlLWRvZXNudC1leGlzdC8=">https://xpenology.com/forum/topic/12406-how-to-fix-sorry-that-page-doesnt-exist/<i class="fa fa-external-link-alt"></i></span></p>
 <p>中文教程：<span class="exturl" data-url="aHR0cHM6Ly9zYW4uY2kvNTIyLmh0bWw=">https://san.ci/522.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p>上次遇到后我就备份 <code>libsynopkg.so.1</code> 和 <code>libsynoshare.so.6</code>这两个文件，所以我一点都不担心，直接用 <code>putty</code> 连上群辉，一顿操作猛如虎</p>
+<p>上次遇到后我就备份了 <code>libsynopkg.so.1</code> 和 <code>libsynoshare.so.6</code>这两个文件，所以我一点都不担心，直接用 <code>putty</code> 连上群辉，一顿操作猛如虎</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">cp /tmp/lib/libsynopkg.so.1 /lib/</span><br><span class="line">cp /tmp/lib/libsynoshare.so.6 /lib/</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
-<p>把两个文件移动到了 <code>lib</code> 目录，重启之后很顺利的进入了群晖的后台页面，但是和上一次完全恢复不同，最直观的异常出现在右侧的小工具上，『存储』一直显示 <code>加载中</code>，『系统状况』除了 <code>系统名称</code>，其他的都无法加载。</p>
+<p>把两个文件复制到了 <code>lib</code> 目录，重启之后很顺利的进入了群晖的后台页面，但是和上一次完全恢复不同，最直观的异常出现在右侧的小工具上，『存储』一直显示 <code>加载中</code>，『系统状况』除了 <code>系统名称</code>，其他的都无法加载。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/13/1613205375189-1613205375190.png" alt="title"></p>
 <p>之后陆续又发现：</p>
 <ol>
