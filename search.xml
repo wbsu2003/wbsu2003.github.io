@@ -9116,7 +9116,7 @@
 <p>首先打开 <code>/var/log/ha.log</code> 文件，在文件最底部找到了同样的报错信息</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">synoscgi_SYNO.Core.SHA.DSM.Message_1_should_alert_unbind[1857]: APIRunner.cpp:758 cannot open library: lib&#x2F;SYNO.Core.SHA.so. error &#x3D; &#x2F;lib&#x2F;libsynostoragemgmt.so: invalid ELF header</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2021/02/13/1613206961792-1613206961793.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/13/1613206961792-1613206961793.png" alt="title"></p>
 <p>说明问题是一样的，也是 <code>libsynostoragemgmt.so</code> 文件有问题，因为这个文件没有备份，所以需要找到原始固件解压。</p>
 <ol>
 <li>官网直接下载 ds3617xs 固件文件（.pat格式），一定要和你的版本是一致的；</li>
