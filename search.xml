@@ -826,7 +826,7 @@
   <entry>
     <title>NAS上用docker-speedtest-analyser自动测速</title>
     <url>/2021/03/01/NAS%E4%B8%8A%E7%94%A8docker-speedtest-analyser%E8%87%AA%E5%8A%A8%E6%B5%8B%E9%80%9F/</url>
-    <content><![CDATA[<p>之前我们折腾过 <a href="https://laosu.ml/2020/10/27/%E8%87%AA%E5%BB%BASpeedtest%E7%BD%91%E7%BB%9C%E6%B5%8B%E9%80%9F%E6%9C%8D%E5%8A%A1%E5%99%A8/">《自建Speedtest网络测速服务器》</a>］，主要用来测试从外网访问 <code>NAS</code> 的速度，而今天要折腾的 <code>Docker Speedtest analyser</code> 是 <code>github</code> 上的一个开源项目，安装在 <code>NAS</code> 上，每隔一段时间自动运行一次测速 ，并把一天中速度测试结果以折线图形式显示在 <code>Web</code> 界面中，这样就可以获取到 <code>NAS</code> 上网的真实速度了。</p>
+    <content><![CDATA[<p>之前我们折腾过 <a href="https://laosu.ml/2020/10/27/%E8%87%AA%E5%BB%BASpeedtest%E7%BD%91%E7%BB%9C%E6%B5%8B%E9%80%9F%E6%9C%8D%E5%8A%A1%E5%99%A8/">《自建Speedtest网络测速服务器》</a>，主要用来测试从外网访问 <code>NAS</code> 的速度，而今天要折腾的 <code>Docker Speedtest analyser</code> 是 <code>github</code> 上的一个开源项目，安装在 <code>NAS</code> 上，每隔一段时间自动运行一次测速 ，并把一天中速度测试结果以折线图形式显示在 <code>Web</code> 界面中，这样就可以获取到 <code>NAS</code> 上网的真实速度了。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>roest</code> ，选择第一个 <code>roest/docker-speedtest-analyser</code>，版本选择 <code>latest</code>。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/08/1612791015936-1612791015961.png" alt="title"></p>
@@ -846,7 +846,7 @@
 <td align="center"><code>/var/www/html/data/</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/09/1612837121381-1612837121441.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/02/09/1612837121381-1612837121441.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突，请根据您自己的情况设置。</p>
 <table>
 <thead>
@@ -889,7 +889,7 @@
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8181</code>，就能看到主界面了，不过第一次因为没有数据，显得空空的。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/09/1612838792039-1612838792041.png" alt="title"></p>
 <p>点击右上角的 <code>start manual speedtest</code> 按钮</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/09/1612838953045-1612838953049.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/mynote/2021/02/09/1612838953045-1612838953049.png" alt="title"></p>
 <p>测速结束后，坐标轴上会有第一次测速的结果</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/09/1612839051698-1612839051702.png" alt="title"></p>
 <p>再测一次，数据非常接近</p>
