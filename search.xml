@@ -4057,7 +4057,7 @@
   <entry>
     <title>如何获取PUID和PGID</title>
     <url>/2021/03/12/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96PUID%E5%92%8CPGID/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近用了一些 <code>LinuxServer.io</code> 社区维护的 Docker 镜像，这个社区是由一群来自世界各地的志同道合的爱好者组成的，主要目标是通过简洁明了的文档提供易于使用且精简的 Docker 镜像。他们已经在网络上构建和维护了大量的Docker 镜像，下图只是其中的一小部分</p>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近用了一些 <code>LinuxServer.io</code> 社区维护的 Docker 镜像，这个社区是由一群来自世界各地的志同道合的爱好者组成的，主要目标是通过简洁明了的文档提供易于使用且精简的 Docker 镜像。他们已经在网络上构建和维护了大量的 Docker 镜像，下图只是其中的一小部分</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/02/1614666119271-1614666119281.png" alt="title"></p>
 <p>这些 Docker 镜像的质量相当高，并且有一个特点就是在环境变量中使用了 <code>PUID</code> 和 <code>PGID</code> 变量，按照官方的说法，<code>虽然 Docker 目前已经支持了 --user 参数。但我们的镜像目前还不兼容，所以我们还是建议继续使用 PUID 和 PGID。</code></p>
 <h1 id="为什么要用"><a href="#为什么要用" class="headerlink" title="为什么要用"></a>为什么要用</h1><ol>
@@ -4106,6 +4106,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/02/1614674789791-1614674789798.png" alt="title"></p>
 <p>如果一切正常，很快就会收到一封这样的邮件</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/02/1614674979250-1614674979258.png" alt="title"></p>
+<p>这个获得的结果和之前通过 SSH 获得的结果是完全一致的。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>什么是PUID和PGID · LinuxServer | 中文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9saW51eHNlcnZlci53YXRlcmNhbG14LmNvbS9nZW5lcmFsL3VuZGVyc3RhbmRpbmctcHVpZC1hbmQtcGdpZC5odG1s">https://linuxserver.watercalmx.com/general/understanding-puid-and-pgid.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>Understanding PUID and PGID - LinuxServer.io<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmxpbnV4c2VydmVyLmlvL2dlbmVyYWwvdW5kZXJzdGFuZGluZy1wdWlkLWFuZC1wZ2lk">https://docs.linuxserver.io/general/understanding-puid-and-pgid<i class="fa fa-external-link-alt"></i></span></p>
