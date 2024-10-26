@@ -31,7 +31,7 @@
 <meta property="og:description" content="AV.initialize(&quot;5BkfIgenQClAqLcksLR0dxhL-MdYXbMMI&quot;, &quot;ofYWxJvn09f0L4cloFAJpEA8&quot;);   AV.useAVCloudUS();    var time &#x3D; 0   var n &#x3D; 100 &#x2F;&#x2F;最终最多只返回100条结果（包含了标题为空的）   var m &#x3D; 1 &#x2F;&#x2F;序号从1开始   var title">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-12T16:03:27.000Z">
-<meta property="article:modified_time" content="2024-10-26T13:48:21.272Z">
+<meta property="article:modified_time" content="2024-10-26T13:51:41.535Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -77,6 +77,36 @@
 <!--2023.01.16新增-->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
      crossorigin="anonymous"></script>
+
+<!--2024.10.26 新增-->
+function detectAdBlocker(callback) {
+    // 创建一个新的图片元素
+    const testImage = new Image();
+    
+    // 设置一个虚拟的广告 URL
+    testImage.src = 'https://example.com/ads/test.jpg';
+    
+    // 监听加载事件
+    testImage.onload = function() {
+        // 如果加载成功，说明没有广告拦截
+        callback(false);
+    };
+
+    // 监听错误事件
+    testImage.onerror = function() {
+        // 如果加载失败，说明可能有广告拦截
+        callback(true);
+    };
+}
+
+// 使用示例
+detectAdBlocker(function(isBlocked) {
+    if (isBlocked) {
+        console.log('广告拦截插件已启用');
+    } else {
+        console.log('没有检测到广告拦截插件');
+    }
+});
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
