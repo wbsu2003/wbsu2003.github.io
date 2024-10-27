@@ -98,13 +98,15 @@ function detectAdBlocker(callback) {
 }
 
 // 使用示例
-detectAdBlocker(function(isBlocked) {
-    if (isBlocked) {
-        console.log('广告拦截插件已启用');
-    } else {
-        console.log('没有检测到广告拦截插件');
-    }
-});
+    document.addEventListener('DOMContentLoaded', function() {
+        detectAdBlocker(function(isBlocked) {
+            if (isBlocked) {
+                console.log('广告拦截插件已启用');
+            } else {
+                console.log('没有检测到广告拦截插件');
+            }
+        });
+    });
 </script>
 
   <noscript>
