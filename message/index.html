@@ -31,7 +31,7 @@
 <meta property="og:description" content="折腾各种好玩的东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-03T14:08:26.000Z">
-<meta property="article:modified_time" content="2024-10-27T01:14:13.102Z">
+<meta property="article:modified_time" content="2024-10-27T01:17:46.332Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -78,37 +78,39 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
      crossorigin="anonymous"></script>
 
-<!--2024.10.26 新增-->
-<script>
-function detectAdBlocker(callback) {
-    // 创建一个新的图片元素
-    const testImage = new Image();
-    
-    // 设置一个虚拟的广告 URL
-    testImage.src = 'https://example.com/ads/test.jpg';
-    
-    // 监听加载事件
-    testImage.onload = function() {
-        // 如果加载成功，说明没有广告拦截
-        callback(false);
-    };
-
-    // 监听错误事件
-    testImage.onerror = function() {
-        // 如果加载失败，说明可能有广告拦截
-        callback(true);
-    };
-}
-
-// 使用示例
-detectAdBlocker(function(isBlocked) {
-    if (isBlocked) {
-        console.log('广告拦截插件已启用');
-    } else {
-        console.log('没有检测到广告拦截插件');
-    }
-});
-</script>
+<!--2024.10.27 新增-->
+<script src="./js/adblockDetector.js"></script>
+	<script>
+	// Configure the adblock detector
+	(function(){
+		var enabledEl = document.getElementById('adb-enabled');
+		var disabledEl = document.getElementById('adb-not-enabled');
+		function adBlockDetected() {
+			enabledEl.style.display = 'block';
+			disabledEl.style.display = 'none';
+		}
+		function adBlockNotDetected() {
+			disabledEl.style.display = 'block';
+			enabledEl.style.display = 'none';
+		}
+		
+		if(typeof window.adblockDetector === 'undefined') {
+			adBlockDetected();
+		} else {
+			window.adblockDetector.init(
+				{
+					debug: true,
+					found: function(){
+						adBlockDetected();
+					},
+					notFound: function(){
+						adBlockNotDetected();
+					}
+				}
+			);
+		}
+	}());
+	</script>
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
