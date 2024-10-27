@@ -31,7 +31,7 @@
 <meta property="og:description" content="折腾各种好玩的东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-03T14:08:26.000Z">
-<meta property="article:modified_time" content="2024-10-27T04:11:39.747Z">
+<meta property="article:modified_time" content="2024-10-27T04:14:05.449Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -85,7 +85,7 @@ function detectAdBlocker(callback) {
     const testImage = new Image();
     
     // 设置一个虚拟的广告 URL
-    testImage.src = 'https://example.com/ads/test.jpg';
+    testImage.src = 'https://laosu.tech/ads/ads.jpg';
     
     // 监听加载事件
     testImage.onload = function() {
@@ -101,15 +101,15 @@ function detectAdBlocker(callback) {
 }
 
 // 使用示例
-    document.addEventListener('DOMContentLoaded', function() {
-        detectAdBlocker(function(isBlocked) {
-            if (isBlocked) {
-                console.log('广告拦截插件已启用');
-            } else {
-                console.log('没有检测到广告拦截插件');
-            }
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    detectAdBlocker(function(isBlocked) {
+        if (isBlocked) {
+            console.log('广告拦截插件已启用');
+        } else {
+            console.log('没有检测到广告拦截插件');
+        }
     });
+});
 </script>
 
   <noscript>

@@ -82,7 +82,7 @@ function detectAdBlocker(callback) {
     const testImage = new Image();
     
     // 设置一个虚拟的广告 URL
-    testImage.src = 'https://example.com/ads/test.jpg';
+    testImage.src = 'https://laosu.tech/ads/ads.jpg';
     
     // 监听加载事件
     testImage.onload = function() {
@@ -98,15 +98,15 @@ function detectAdBlocker(callback) {
 }
 
 // 使用示例
-    document.addEventListener('DOMContentLoaded', function() {
-        detectAdBlocker(function(isBlocked) {
-            if (isBlocked) {
-                console.log('广告拦截插件已启用');
-            } else {
-                console.log('没有检测到广告拦截插件');
-            }
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    detectAdBlocker(function(isBlocked) {
+        if (isBlocked) {
+            console.log('广告拦截插件已启用');
+        } else {
+            console.log('没有检测到广告拦截插件');
+        }
     });
+});
 </script>
 
   <noscript>
