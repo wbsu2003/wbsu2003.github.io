@@ -146,19 +146,6 @@
                     const message = "检测到广告拦截插件。请禁用它以继续浏览。";
                     console.log(message);
                     showOverlay(); // 显示遮罩
-                    //alert(message);
-                    
-                    // 重新检查广告拦截插件
-                    const checkInterval = setInterval(function() {
-                        detectAdBlocker(function(isBlocked) {
-                            if (!isBlocked) {
-                                clearInterval(checkInterval);
-                                console.log('感谢您禁用广告拦截插件！现在可以继续浏览。');
-                                //alert("感谢您禁用广告拦截插件！现在可以继续浏览。");
-                                // 可以添加其他页面逻辑，允许访问内容
-                            }
-                        });
-                    }, 3000); // 每3秒检查一次
                 } else {
                     console.log('没有检测到广告拦截插件');
                 }
