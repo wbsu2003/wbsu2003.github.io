@@ -31,7 +31,7 @@
 <meta property="og:description" content="折腾各种好玩的东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-03T14:08:26.000Z">
-<meta property="article:modified_time" content="2024-10-27T07:03:25.813Z">
+<meta property="article:modified_time" content="2024-10-27T07:11:58.671Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -105,6 +105,9 @@
             border-radius: 10px;
             background-color: rgba(255, 0, 0, 0.8);
         }
+        .no-scroll {
+            overflow: hidden; /* 禁止滚动 */
+        }
     </style>
 
 <script>
@@ -127,6 +130,10 @@
         function showOverlay() {
             const overlay = document.getElementById('overlay');
             overlay.style.display = 'flex';
+
+            // 禁止页面滚动
+            document.body.classList.add('no-scroll');
+
             overlay.innerHTML = `
                 <div id="message">
                     <h2>检测到广告拦截插件</h2>

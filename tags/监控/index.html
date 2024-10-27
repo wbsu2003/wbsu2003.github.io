@@ -102,6 +102,9 @@
             border-radius: 10px;
             background-color: rgba(255, 0, 0, 0.8);
         }
+        .no-scroll {
+            overflow: hidden; /* 禁止滚动 */
+        }
     </style>
 
 <script>
@@ -124,6 +127,10 @@
         function showOverlay() {
             const overlay = document.getElementById('overlay');
             overlay.style.display = 'flex';
+
+            // 禁止页面滚动
+            document.body.classList.add('no-scroll');
+
             overlay.innerHTML = `
                 <div id="message">
                     <h2>检测到广告拦截插件</h2>
