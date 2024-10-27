@@ -31,7 +31,7 @@
 <meta property="og:description" content="折腾各种好玩的东西">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-03T14:08:26.000Z">
-<meta property="article:modified_time" content="2024-10-27T06:16:45.685Z">
+<meta property="article:modified_time" content="2024-10-27T06:33:13.645Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -79,6 +79,34 @@
      crossorigin="anonymous"></script>
 
 <!--2024.10.27新增-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #message {
+            text-align: center;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 0, 0, 0.8);
+        }
+    </style>
+
 <script>
         function detectAdBlocker(callback) {
             const testImage = new Image();
@@ -96,6 +124,18 @@
             };
         }
 
+        function showOverlay() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.display = 'flex';
+            overlay.innerHTML = `
+                <div id="message">
+                    <h2>检测到广告拦截插件</h2>
+                    <p>请禁用广告拦截插件以继续浏览此页面。</p>
+                    <p>感谢您的支持！</p>
+                </div>
+            `;
+        }
+
         function checkAdBlocker() {
             detectAdBlocker(function(isBlocked) {
                 if (isBlocked) {
@@ -111,6 +151,7 @@
                                 console.log('感谢您禁用广告拦截插件！现在可以继续浏览。');
                                 //alert("感谢您禁用广告拦截插件！现在可以继续浏览。");
                                 // 可以添加其他页面逻辑，允许访问内容
+                                showOverlay(); // 显示遮罩
                             }
                         });
                     }, 3000); // 每3秒检查一次
