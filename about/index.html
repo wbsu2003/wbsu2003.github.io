@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112030925238.png">
 <meta property="og:image" content="https://laosu.tech/uploads/wechat-qcode.jpg">
 <meta property="article:published_time" content="2020-04-30T14:13:09.000Z">
-<meta property="article:modified_time" content="2024-10-28T03:44:30.464Z">
+<meta property="article:modified_time" content="2024-10-28T03:46:57.864Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖,多媒体,github,网盘,路由器,docker,tailscale,zerotier">
 <meta name="twitter:card" content="summary">
@@ -119,9 +119,9 @@
         function detectAdBlocker(callback) {
             const testImage = new Image();
             // 使用一个可访问的真实广告 URL
-            testImage.src = 'https://v2.euqq.cn/syjpc/qmtz-wxmsrl-1080-420-5-23-r.gif';
+            //testImage.src = 'https://v2.euqq.cn/syjpc/qmtz-wxmsrl-1080-420-5-23-r.gif';
             //testImage.src = 'https://v4.sogowan.com/20241024/Bj2nbPUW0KCpe71o.gif';
-            //testImage.src = 'https://cdn.wwads.cn/creatives/i2Pn6tVwsn49BRfOaOrd7OHcRL5kgr1jwGqNlStj.png';
+            testImage.src = 'https://cdn.wwads.cn/creatives/i2Pn6tVwsn49BRfOaOrd7OHcRL5kgr1jwGqNlStj.png';
 
             
             testImage.onload = function() {
@@ -156,7 +156,7 @@
                 if (isBlocked) {
                     const message = "检测到广告拦截插件。请禁用它以继续浏览。";
                     console.log(message);
-                    showOverlay(); // 显示遮罩
+                    //showOverlay(); // 显示遮罩
                 } else {
                     console.log('没有检测到广告拦截插件');
                 }
