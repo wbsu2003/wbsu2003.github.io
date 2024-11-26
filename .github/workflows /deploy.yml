@@ -1,0 +1,16 @@
+# Action 的名字
+name: Hexo Auto Deploy
+
+on:
+  # 触发条件1：main 分支收到 push 后执行任务。
+  push:
+    branches:
+      - main
+  # 触发条件2：手动按钮
+  workflow_dispatch:
+
+  steps:
+      - name: Deploy hexo
+        run: |
+          # 如果遇到 Spawn failed，需要删除 blog 根目录下的 .deploy_git 文件夹，默认不打开   
+          rm -rf .deploy_git/
