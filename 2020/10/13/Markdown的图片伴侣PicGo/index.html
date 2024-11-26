@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="GitHub 图床免费，但是国内访问的话图片显示不太稳定。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602589093926-1602589093957.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602589093926-1602589093957.png">
 <meta property="article:published_time" content="2020-10-13T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T13:50:54.360Z">
+<meta property="article:modified_time" content="2024-11-26T13:53:41.468Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Markdown">
 <meta property="article:tag" content="图床">
 <meta property="article:tag" content="CDN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602589093926-1602589093957.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602589093926-1602589093957.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/10/13/Markdown%E7%9A%84%E5%9B%BE%E7%89%87%E4%BC%B4%E4%BE%A3PicGo/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602589093926-1602589093957.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602589093926-1602589093957.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 21:50:54" itemprop="dateModified" datetime="2024-11-26T21:50:54+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 21:53:41" itemprop="dateModified" datetime="2024-11-26T21:53:41+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,7 +510,7 @@
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近被两个问题困扰：</p>
 <p>1、之前用 gitnote 写作时，图片都是自动上传到 github 的，因为我启用了 gitnote 自带的 github 图床插件，所以当已完成的 md 文档发布到 hexo 时，不需要考虑图片的问题。而从 gitnote 转到 obsidian 后，粘贴的图片都在本地创建的 <code>附件目录</code> 中，在发布前还需要手动上传到图床，加上发布到微信公众号还需要单独上传图片，相当于一张图片要上传2次。</p>
 <p>2、因为 DNS 污染的原因，github 图床的图片显示并不稳定，有时候能看到图，有时候会变成</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602559204537-1602559204563.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602559204537-1602559204563.png" alt="title"></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>针对问题1：首先想到了 PicGo ，这个图床工具大名鼎鼎，免费、开源、支持Windows、MacOS 和 Linux，相信用 Markdown 来写文档的朋友们都应该知道，它的界面友好，支持的图床也多，支持拖拽上传，使用很方便，最重要的是支持插件系统，功能扩展很方便。</p>
 <p>以前一直没用主要是 gitnote 本身支持图床，包括 MWeb 也是一样；毕竟外置的工具再怎么好用也比不上内置的方便。</p>
 <p>但目前 obsidian 还没有开放插件，所以只能用第三方工具来迂回解决。</p>
@@ -518,9 +518,9 @@
 <p>所以最好的办法当然是能让读者直接能访问到 github 上的图片，而解决这个问题可以通过 jsDelivr CDN 来进行全球加速，只是不确定这种方法是不是对 jsDelivr 的滥用？</p>
 <p>除了 jsDelivr 外，还有 staticaly ，官网地址： <span class="exturl" data-url="aHR0cHM6Ly9zdGF0aWNhbGx5LmlvLw==">https://statically.io/<i class="fa fa-external-link-alt"></i></span>  也是免费不限流量的，而 Cloudflare  免费账户每天 10 万次请求，一般用用肯定是够的。</p>
 <h1 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h1><p>关于用 PicGo 设置免费的 github 图床，可以看这篇文章 「<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAyMzIyMjEzNw==">GitHub + jsDelivr + PicGo打造免费图床<i class="fa fa-external-link-alt"></i></span>」，照着文档一步一步做就可以了。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@maste/picgo/20201013001524.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201013001524.png"></p>
 <p><code>设定自定义域名</code> 决定了图片上传成功后返回的字符串，你可以选择 <code>Markdown</code> 、<code>HTML</code> 等不同的格式。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602573583123-1602573583132.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602573583123-1602573583132.png" alt="title"></p>
 <p>我们可以利用 <code>设定自定义域名</code> 将上传成功的图片地址从 github 地址自动转换为 jsDelivr 地址。</p>
 <p>开始 <code>设定自定义域名</code> 中只是替换了域名部分</p>
 <p>从 </p>
@@ -559,7 +559,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.laosu.fun/gitnote-images/mynote/2020/10/13/1602571758405-1602571758418.png</span><br></pre></td></tr></table></figure>
 
 <p>显示效果：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@maste/mynote/2020/10/13/1602571758405-1602571758418.png" alt="测试图片"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/13/1602571758405-1602571758418.png" alt="测试图片"></p>
 <h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>用 jsDelivr 不仅能加速图片，也可以为 Hexo 博客进行 CDN 加速，不过我的博客之前已经做了双线，暂时先这么用着吧。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>PicGo 官网主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tb2x1bmVyZmlubi5jb20vUGljR28v">https://molunerfinn.com/PicGo/<i class="fa fa-external-link-alt"></i></span></p>
