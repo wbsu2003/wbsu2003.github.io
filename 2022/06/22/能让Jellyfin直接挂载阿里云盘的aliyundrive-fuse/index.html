@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206220838136.png">
 <meta property="article:published_time" content="2022-06-22T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T14:36:35.015Z">
+<meta property="article:modified_time" content="2024-11-26T14:49:09.462Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 22:36:35" itemprop="dateModified" datetime="2024-11-26T22:36:35+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 22:49:09" itemprop="dateModified" datetime="2024-11-26T22:49:09+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,13 +501,13 @@
 <p>为了保险起见，昨天下午一点多又去做了一次，结果后做的都出来了，但周一做的依然还没出来，我不禁怀疑，是管子遗失了吗？这运气也是没谁了</p>
 <p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206212306938.png"></p>
 <hr>
-<p>自从阿里云盘可以挂载为 <code>WebDAV</code> 之后，老苏一直在琢磨怎么 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzExLzEwLyVFNSVCMCU4NndlYmRhdiVFNiU4QyU4MiVFOCVCRCVCRCVFNiU4OCU5MCVFNCVCOCVCQSVFNyVCRSVBNCVFNiU5OSU5NiVFNyU5QSU4NCVFNiU5QyVBQyVFNSU5QyVCMCVFNyU5QiU5OA==">将webdav挂载成为群晖的本地盘<i class="fa fa-external-link-alt"></i></span>，目的就是让 <code>Jellyfin</code> 、<code>AirSonic</code> 等多媒体软件可以直接使用阿里云盘中的多媒体资源，因为这些软件都不支持直接访问 <code>WebDAV</code> 资源。</p>
+<p>自从阿里云盘可以挂载为 <code>WebDAV</code> 之后，老苏一直在琢磨怎么 <a href="https://laosu.tech/2021/11/10/%E5%B0%86webdav%E6%8C%82%E8%BD%BD%E6%88%90%E4%B8%BA%E7%BE%A4%E6%99%96%E7%9A%84%E6%9C%AC%E5%9C%B0%E7%9B%98">将webdav挂载成为群晖的本地盘</a>，目的就是让 <code>Jellyfin</code> 、<code>AirSonic</code> 等多媒体软件可以直接使用阿里云盘中的多媒体资源，因为这些软件都不支持直接访问 <code>WebDAV</code> 资源。</p>
 <p>之前的方案比较折腾，需要挂载两次：阿里云盘 –&gt; <code>WebDAV</code>  –&gt; 本地盘，现在 <code>aliyundrive-webdav</code> 的作者又推出了 <code>aliyundrive-fuse</code>，可以让你越过中间的 <code>WebDAV</code>，直接将阿里云盘挂载成服务器的本地盘，虽然是只读，不支持写入，但用来做媒体播放是没问题的。</p>
 <p><strong>什么是 aliyundrive-fuse ？</strong></p>
 <blockquote>
 <p>阿里云盘 <code>FUSE</code> 磁盘挂载，主要用于配合 <code>Emby</code> 或者 <code>Jellyfin</code> 观看阿里云盘内容。</p>
 </blockquote>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="获取refresh-token"><a href="#获取refresh-token" class="headerlink" title="获取refresh token"></a>获取refresh token</h2><p><code>refresh token</code> 的获取方法可以参考 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA4LzA0LyVFOCU4MyVCRCVFNSVCMCU4NiVFOSU5OCVCRiVFOSU4NyU4QyVFNCVCQSU5MSVFNyU5QiU5OCVFNiU4QyU4MiVFOCVCRCVCRCVFNCVCOCVCQXdlYmRhdiVFNyU5QSU4NHdlYmRhdi1hbGl5dW5kcml2ZXI=">能将阿里云盘挂载为webdav的webdav-aliyundriver<i class="fa fa-external-link-alt"></i></span>』</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="获取refresh-token"><a href="#获取refresh-token" class="headerlink" title="获取refresh token"></a>获取refresh token</h2><p><code>refresh token</code> 的获取方法可以参考 『 <a href="https://laosu.tech/2021/08/04/%E8%83%BD%E5%B0%86%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E6%8C%82%E8%BD%BD%E4%B8%BAwebdav%E7%9A%84webdav-aliyundriver">能将阿里云盘挂载为webdav的webdav-aliyundriver</a>』</p>
 <blockquote>
 <p>老苏不确定这两种方法是否依然有效，如果都失效了，您就百度一下吧</p>
 </blockquote>
@@ -518,7 +518,7 @@
 
 <p>这条命令在群晖重启后需要重新执行，可以把这句命令，通过 <code>任务计划</code> 加到开机脚本中，具体方法可以参考👇下文：</p>
 <blockquote>
-<p>『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA2LzIxLyVFNyVCRSVBNCVFNiU5OSU5NiVFNCVCOCU4QSVFOSU4MCU5QSVFOCVCRiU4N1JjbG9uZUJyb3dzZXIlRTYlOEMlODIlRTglQkQlQkQlRTQlQkElOTElRTclOUIlOTgjJUU1JTkxJUJEJUU0JUJCJUE0JUU4JUExJThDJUU1JUFFJTg5JUU4JUEzJTg1">群晖上通过RcloneBrowser挂载云盘<i class="fa fa-external-link-alt"></i></span> 』 的命令行安装部分</p>
+<p>『 <a href="https://laosu.tech/2021/06/21/%E7%BE%A4%E6%99%96%E4%B8%8A%E9%80%9A%E8%BF%87RcloneBrowser%E6%8C%82%E8%BD%BD%E4%BA%91%E7%9B%98#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85">群晖上通过RcloneBrowser挂载云盘</a> 』 的命令行安装部分</p>
 </blockquote>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>因为用到了 <code>fuse</code> 挂载云存储，所以我们还是会采用命令行方式来进行安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 aliyunfuse 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/aliyunfuse/media</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/aliyunfuse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name aliyundrive-fuse \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --privileged \</span><br><span class="line">   --device /dev/fuse:/dev/fuse \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/media:/mnt/aliyundrive:shared \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e REFRESH_TOKEN=&lt;你的 refresh token&gt; \</span><br><span class="line">   messense/aliyundrive-fuse</span><br></pre></td></tr></table></figure>
@@ -538,7 +538,7 @@
 <p>可以去掉 <code>--device</code> 部分，改为下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 硬件不支持硬解的一键启动</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name jellyfin \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/cache:/cache \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/media:/media \</span><br><span class="line">   -p 8096:8096 \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   jellyfin/jellyfin</span><br></pre></td></tr></table></figure>
 
-<p>如果你希望 <code>Jellyfin</code> 支持 <code>DLNA</code>，可以参考『  <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIyLzAzLzIzLyVFNyU5NCVBOFBvcnRhaW5lciVFNSVBRSU4OSVFOCVBMyU4NUplbGx5ZmluJUU1JUFBJTkyJUU0JUJEJTkzJUU2JTlDJThEJUU1JThBJUExJUU1JTk5JUE4JUVGJUJDJTg4JUU1JUFFJTg5JUU4JUEzJTg1JUU3JUFGJTg3JUVGJUJDJTg5">用Portainer安装Jellyfin媒体服务器（安装篇）<i class="fa fa-external-link-alt"></i></span>』一文中的安装脚本</p>
+<p>如果你希望 <code>Jellyfin</code> 支持 <code>DLNA</code>，可以参考『  <a href="https://laosu.tech/2022/03/23/%E7%94%A8Portainer%E5%AE%89%E8%A3%85Jellyfin%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%AE%89%E8%A3%85%E7%AF%87%EF%BC%89">用Portainer安装Jellyfin媒体服务器（安装篇）</a>』一文中的安装脚本</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>虽然 <code>aliyundrive-fuse</code> 并不能指定挂载的目录，但 <code>jellyfin</code> 是可以设置位置的</p>
 <p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206192041602.png"></p>
 <p>刚挂载还没开始刮削，所以只能看到目录</p>

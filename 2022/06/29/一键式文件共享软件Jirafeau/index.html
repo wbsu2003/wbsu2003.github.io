@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204121951736.png">
 <meta property="article:published_time" content="2022-06-29T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T14:36:34.979Z">
+<meta property="article:modified_time" content="2024-11-26T14:49:09.426Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 22:36:34" itemprop="dateModified" datetime="2024-11-26T22:36:34+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 22:49:09" itemprop="dateModified" datetime="2024-11-26T22:49:09+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -566,7 +566,7 @@
 <h2 id="cloudflared-隧道"><a href="#cloudflared-隧道" class="headerlink" title="cloudflared 隧道"></a>cloudflared 隧道</h2><p>测试了也可以正常使用，没有特殊设置，只需要在 <code>config.yaml</code> 中增加下面的示例</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hostname:</span> <span class="string">share.laosu.ml</span></span><br><span class="line">  <span class="attr">service:</span> <span class="string">http://192.168.0.197:2180</span></span><br></pre></td></tr></table></figure>
 
-<p>然后去 <code>DNS</code> 中增加一条 <code>CNAME</code> 解析就可以，如果不会还不会的话，可以去看老苏写的『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIyLzA0LzA1LyVFNSU4NSU4RCVFOCVCNCVCOSVFNyU5QSU4NENsb3VkZmxhcmVkJUU1JUFFJTlFJUU3JThFJUIwJUU1JUE0JTk2JUU3JUJEJTkxJUU4JUFFJUJGJUU5JTk3JUFFJUU3JUJFJUE0JUU2JTk5JTk2Lw==">免费的Cloudflared实现外网访问群晖<i class="fa fa-external-link-alt"></i></span> 』</p>
+<p>然后去 <code>DNS</code> 中增加一条 <code>CNAME</code> 解析就可以，如果不会还不会的话，可以去看老苏写的『 <a href="https://laosu.tech/2022/04/05/%E5%85%8D%E8%B4%B9%E7%9A%84Cloudflared%E5%AE%9E%E7%8E%B0%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96/">免费的Cloudflared实现外网访问群晖</a> 』</p>
 <h2 id="修改设置"><a href="#修改设置" class="headerlink" title="修改设置"></a>修改设置</h2><p>不管你是反代还是 <code>cloudflared 隧道</code> ，虽然是用域名访问，但是上传成功后的链接还是显示的局域网 <code>IP</code></p>
 <p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204121517950.png"></p>
 <p>需要我们找到 <code>cfg</code> 目录下的 <code>config.local.php</code> 文件</p>

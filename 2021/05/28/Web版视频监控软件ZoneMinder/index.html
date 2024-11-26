@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210523222809.png">
 <meta property="article:published_time" content="2021-05-28T10:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T14:36:34.979Z">
+<meta property="article:modified_time" content="2024-11-26T14:49:09.426Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 22:36:34" itemprop="dateModified" datetime="2024-11-26T22:36:34+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 22:49:09" itemprop="dateModified" datetime="2024-11-26T22:49:09+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,7 +507,7 @@
 <p>之前，老苏一直用 <code>iSpy</code> 来当监控主机， 不过 <code>iSpy</code> 只能运行在 <code>Windows</code> 平台，这样不得不多开一台主机，在全世界都在提倡节能减排的时候，我们也应该有所行动。</p>
 <p>这次我们要安装的 <code>ZoneMinder</code> 是基于 <code>Web</code> 的，完全可以安装在群晖中，这样就可以节省出一台主机的电量了。</p>
 <blockquote>
-<p>关于 <code>iSpy</code> 可以看看老苏之前写的 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIwLzA3LzEwLyVFNyU5NCVBOCVFNiU5NyVBNyVFNyU5NCVCNSVFOCU4NCU5MSVFNSU4MSU5QSVFNyU5QiU5MSVFNiU4RSVBNyVFNCVCOCVCQiVFNiU5QyVCQQ==">用旧电脑做监控主机<i class="fa fa-external-link-alt"></i></span> 』</p>
+<p>关于 <code>iSpy</code> 可以看看老苏之前写的 『 <a href="https://laosu.tech/2020/07/10/%E7%94%A8%E6%97%A7%E7%94%B5%E8%84%91%E5%81%9A%E7%9B%91%E6%8E%A7%E4%B8%BB%E6%9C%BA">用旧电脑做监控主机</a> 』</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 5</code> 中新建用户 <code>zm</code>，创建同名的库 <code>zm</code> 并授予所有权限。</p>
 <p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210523133957.png"></p>
@@ -647,7 +647,7 @@
 <p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210523182936.png"></p>
 <p>和老苏之前介绍的 <code>iSpy</code> 一样，摄像头还有非常多的设置，比如存储、时间戳等一大堆的配置选项，这个就看你的需求了。</p>
 <h2 id="接入-HomeAssistant"><a href="#接入-HomeAssistant" class="headerlink" title="接入 HomeAssistant"></a>接入 HomeAssistant</h2><blockquote>
-<p>关于 <code>HomeAssistant</code> 可以看看老苏之前写的 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIwLzA1LzI0LyVFNyVCRSVBNCVFNiU5OSU5NiVFNCVCOCU4QSVFNyU5NCVBOGRvY2tlciVFNSVBRSU4OSVFOCVBMyU4NWhvbWVhc3Npc3RhbnQ=">群晖上用docker安装homeassistant<i class="fa fa-external-link-alt"></i></span> 』</p>
+<p>关于 <code>HomeAssistant</code> 可以看看老苏之前写的 『 <a href="https://laosu.tech/2020/05/24/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8docker%E5%AE%89%E8%A3%85homeassistant">群晖上用docker安装homeassistant</a> 』</p>
 </blockquote>
 <h3 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h3><p>编辑 <code>configuration.yaml</code> ，加入下面这段代码</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">zoneminder:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.199</span><span class="string">:3380</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/zm/</span></span><br><span class="line">      <span class="attr">path_zms:</span> <span class="string">/zm/cgi-bin/nph-zms</span></span><br><span class="line">      <span class="attr">ssl:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">verify_ssl:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">zm</span></span><br><span class="line">      <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line"></span><br><span class="line"><span class="attr">camera:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">platform:</span> <span class="string">zoneminder</span></span><br></pre></td></tr></table></figure>
