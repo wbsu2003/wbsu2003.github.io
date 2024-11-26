@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Mayan EDMS 是一个开源的电子文档管理系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408281741083.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408281741083.png">
 <meta property="article:published_time" content="2024-09-16T03:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="电子书">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408281741083.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408281741083.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/09/16/%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FMayan%20EDMS%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408281741083.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408281741083.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,7 +506,7 @@
 <blockquote>
 <p><code>Mayan EDMS</code> 是一个文档管理系统。其主要目的是存储、检查和分类文件，重点是保存文档的上下文和业务信息。它还可以对这些文件进行 <code>OCR</code>、预览、标记、签名、发送和接收。其他值得关注的功能包括其工作流系统、基于角色的访问控制和 <code>REST API</code>。<code>Mayan EDMS</code> 使用 <code>Django Web</code> 应用程序框架，以 <code>Python</code> 语言编写。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408281456675.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408281456675.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <ol>
@@ -600,41 +600,41 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 mayan 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/mayan/&#123;app,data,rabbitmq,redis,staging,watch&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 mayan 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/mayan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408282105736.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408282105736.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>启动的时间会比较长，不排除是老苏机器性能的原因</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408282136544.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408282136544.png"></p>
 <p>当看到容器 <code>mayan-web</code> 的 <code>cpu</code> 占用降下来之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408282145007.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408282145007.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:8744</code> 就能看到登录界面</p>
 <blockquote>
 <p>第一次会显示登录凭证，要保存好</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272026308.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272026308.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272035515.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272035515.png"></p>
 <p>第一件事情应该是修改密码，提高安全性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272044862.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272044862.png"></p>
 <p><code>Documents</code> –&gt; <code>New document</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272049058.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272049058.png"></p>
 <p>语言这块没整明白，<code>Chinese</code> 居然是按方言的，除了 <code>Mandrin Chinese</code> 外，还有 <code>Gan Chinese</code>、<code>Hakka Chinese</code>、<code>Yue Chinese</code>、<code>Wu Chinese</code>、<code>Xiang Chinese</code> 、<code>Southern Min</code> 等等</p>
 <p>关于语言可以参考 <code>wiki</code> 的说明：<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGlzdF9vZl9sYW5ndWFnZXNfYnlfbnVtYmVyX29mX25hdGl2ZV9zcGVha2Vycw==">https://en.wikipedia.org/wiki/List_of_languages_by_number_of_native_speakers<i class="fa fa-external-link-alt"></i></span></p>
 <p>书籍拖到方框区域即可上传</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272057622.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272057622.png"></p>
 <p>一次可以上传多个</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272058482.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272058482.png"></p>
 <p>在 <code>Recently accessed</code> 中能找到上传的文档</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272124686.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272124686.png"></p>
 <p>点击标题可以预览 <code>pdf</code> 文档</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408272125623.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408272125623.png"></p>
 <p>但 <code>epub</code> 就不行。老苏搜一下支持的文档格式，是这么写的，<code>Multiple page PDF, office files, and TIFF files are supported.</code></p>
 <h2 id="中文界面"><a href="#中文界面" class="headerlink" title="中文界面"></a>中文界面</h2><p><code>User</code> –&gt; <code>Users Details</code>  –&gt; <code>Locale profile</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408291702572.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408291702572.png"></p>
 <p>找到红色按钮 <code>Actions</code> –&gt;  <code>Edit locale profile</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408291705432.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408291705432.png"></p>
 <p><code>Language</code> 中找到 <code>Chinese(Simplified)</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408291707685.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408291707685.png"></p>
 <p><code>Save</code> 之后，界面就是中文了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408291709592.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408291709592.png"></p>
 <p>官方有演示视频</p>
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113038455734860&bvid=BV1dtsTePExB&cid=25618023775&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 

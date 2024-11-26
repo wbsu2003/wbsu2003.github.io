@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="爱盼是一个免费开源的网盘资源搜索项目，使用了第三方的 API，能让你方便地访问和搜索网盘资源。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152240029.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152240029.png">
 <meta property="article:published_time" content="2024-11-16T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网盘">
 <meta property="article:tag" content="搜索">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152240029.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152240029.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/11/16/%E7%BD%91%E7%9B%98%E8%81%9A%E5%90%88%E6%90%9C%E7%B4%A2%E9%A1%B9%E7%9B%AEAipan%EF%BC%88%E7%88%B1%E7%9B%BC%EF%BC%89/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152240029.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152240029.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -520,15 +520,15 @@
 <li>电视直播：内置部分 <code>m3u8</code> 视频源</li>
 <li>博客功能：支持博客功能</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152023012.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152023012.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>老苏采用的是官方镜像，但没什么资料，只能参考 <code>vercel</code> 版的部署说明和源码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152034179.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152034179.png"></p>
 <p>在注册表中搜索 <code>aipan-netdisk-search</code> ，选择第一个 <code>unilei/aipan-netdisk-search</code>，版本选择 <code>amd64</code>。</p>
 <blockquote>
 <p> <code>latest</code> 版对应的是   <code>arm64</code> ，如果选择了错误的平台，运行时会显示 <code>standard_init_linux.go:230: exec user process caused: exec format error</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411151330615.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411151330615.png"></p>
 <h2 id="env-txt"><a href="#env-txt" class="headerlink" title="env.txt"></a>env.txt</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># user</span></span><br><span class="line"><span class="attr">ADMIN_USER</span>=laosu</span><br><span class="line"><span class="attr">ADMIN_PASSWORD</span>=yp_laosu</span><br><span class="line"><span class="attr">ADMIN_EMAIL</span>=wbsu2003@gmail.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># app</span></span><br><span class="line"><span class="attr">JWT_SECRET</span>=XnKZDR7OmPce9SxBjbPOqyMnMKDMdLLWNJP9iqsrYNk=</span><br><span class="line"></span><br><span class="line"><span class="comment"># db</span></span><br><span class="line"><span class="attr">POSTGRES_DB</span>=aipan</span><br><span class="line"><span class="attr">POSTGRES_USER</span>=aipan</span><br><span class="line"><span class="attr">POSTGRES_PASSWORD</span>=aipan</span><br><span class="line"><span class="attr">DATABASE_SCHEMA</span>=public</span><br><span class="line"><span class="attr">DATABASE_URL</span>=postgresql://<span class="variable">$&#123;POSTGRES_USER&#125;</span>:<span class="variable">$&#123;POSTGRES_PASSWORD&#125;</span>@postgres:<span class="number">5432</span>/<span class="variable">$&#123;POSTGRES_DB&#125;</span></span><br></pre></td></tr></table></figure>
 
 <table>
@@ -585,34 +585,34 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 aipan 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/aipan/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 aipan 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/aipan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose --env-file env.txt up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411151702978.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411151702978.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3295</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411151705925.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411151705925.png"></p>
 <h2 id="网盘搜索"><a href="#网盘搜索" class="headerlink" title="网盘搜索"></a>网盘搜索</h2><p>可以搜索一部影片，会返回网盘资源</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152058884.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152058884.png"></p>
 <p>也可以切换到在线观看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152100713.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152100713.png"></p>
 <h2 id="音乐搜索"><a href="#音乐搜索" class="headerlink" title="音乐搜索"></a>音乐搜索</h2><p>点右上角的音乐图标</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152326424.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152326424.png"></p>
 <p>或者在浏览器中输入 <code>http://群晖IP:3295/music</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152320839.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152320839.png"></p>
 <p>点搜索</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152320112.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152320112.png"></p>
 <h2 id="电视-TV"><a href="#电视-TV" class="headerlink" title="电视 TV"></a>电视 TV</h2><p>点击左上角的 <code>电视 TV</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152102833.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152102833.png"></p>
 <p>或者在浏览器中直接输入 <code>http://群晖IP:3295/tv</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152106161.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152106161.png"></p>
 <p>点 <code>频道</code> 后，左侧会出现频道列表，可以切换观看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152108247.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152108247.png"></p>
 <p>老苏安装的版本 <code>Alist</code> 设置不了，可能是需要在后台设置的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152125677.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152125677.png"></p>
 <h2 id="最新资源"><a href="#最新资源" class="headerlink" title="最新资源"></a>最新资源</h2><p>在浏览器中输入 <code>http://群晖IP:3295/latest-sources</code> ，但没看到东西</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152323905.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152323905.png"></p>
 <p>不确定是什么原因，既然主页上没有入口，有可能已经废弃了</p>
 <h2 id="后台"><a href="#后台" class="headerlink" title="后台"></a>后台</h2><p>在浏览器中输入 <code>http://群晖IP:3295/login</code> 就能看到后台界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152039673.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152039673.png"></p>
 <p>但是老苏安装的这个版本无法登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152127989.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152127989.png"></p>
 <p>这个在官方上有人提了 <code>issues</code></p>
 <ul>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VuaWxlaS9haXBhbi1uZXRkaXNrLXNlYXJjaC9pc3N1ZXMvNjc=">https://github.com/unilei/aipan-netdisk-search/issues/67<i class="fa fa-external-link-alt"></i></span></p>
@@ -621,18 +621,18 @@
 </li>
 </ul>
 <p>按作者的提示查了数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152140583.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152140583.png"></p>
 <p>发现有 <code>User</code> 表，但是字段是空的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152143776.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152143776.png"></p>
 <p>作者讲解了注册逻辑</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152242695.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152242695.png"></p>
 <p>老苏也尝试着看了下代码</p>
 <ul>
 <li>调用 <code>findUserByEmail(email)</code> 检查用户是否已存在。</li>
 <li>如果用户存在，调用 <code>loginUser(email, password)</code> 进行登录，并返回相应的成功消息和数据。</li>
 <li>如果用户不存在，调用 <code>registerUser()</code> 进行用户注册，并返回相应的成功消息，指示用户已成功注册。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411152344854.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411152344854.png"></p>
 <p>但是这么多人反馈同样的问题，很可能不是因为设置导致的，而真的就是一个 <code>bug</code> </p>
 <p>因为不确定密码的加密方式，所以无法手动添加用户记录，来进行后面的功能探索，等作者更新之后吧</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>

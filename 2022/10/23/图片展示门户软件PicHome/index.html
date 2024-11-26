@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="PicHome 是用于欧奥图文档系统的图片展示门户，图片搜索引擎。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210100019699.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210100019699.png">
 <meta property="article:published_time" content="2022-10-23T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="图床">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210100019699.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210100019699.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/10/23/%E5%9B%BE%E7%89%87%E5%B1%95%E7%A4%BA%E9%97%A8%E6%88%B7%E8%BD%AF%E4%BB%B6PicHome/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210100019699.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210100019699.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,7 +498,7 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>本文是 <code>6</code> 月下旬开始写的，但发现只能一个人用，增加用户数还需要另外购买 <code>license</code> 才能成为升级为团队版。所以如果你只是自己一个人用，可以继续往下看，否则就直接忽略吧~</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241556111.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241556111.png"></p>
 <hr>
 <p><strong>什么是 PicHome ？</strong></p>
 <blockquote>
@@ -513,15 +513,15 @@
 <p><code>Billfish</code> 也是图片收集及管理工具，但所有功能完全免费。无论是数万张图片、还是各类字体、音视频、设计源文件等等，<code>Billfish</code> 都可以帮你快速分类整理。官网地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsbGZpc2guY24v">https://www.billfish.cn/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>直接用群晖的 <code>MariaDB 10</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建了名为 <code>pichome</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设密码为 <code>pichome</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241531467.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241531467.png"></p>
 <h2 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>pichome</code> ，选择第一个 <code>oaooa/pichome</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241427169.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241427169.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>pichome</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -537,7 +537,7 @@
 <td align="center">存放 <code>web</code> 代码文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101113092.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101113092.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -554,9 +554,9 @@
 </tr>
 </tbody></table>
 <p>容器端口默认为 <code>9000</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101115840.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101115840.png"></p>
 <p>需要修改</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101116260.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101116260.png"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -581,7 +581,7 @@
 <td align="center">数据库密码</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101118549.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101118549.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pichome 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pichome/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pichome 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pichome</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart always \</span><br><span class="line">   --name pichome \</span><br><span class="line">   -p 5258:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/www/html \</span><br><span class="line">   -e MYSQL_SERVER=192.168.0.197:3307 \</span><br><span class="line">   -e MYSQL_DATABASE=pichome \</span><br><span class="line">   -e MYSQL_USER=pichome \</span><br><span class="line">   -e MYSQL_PASSWORD=pichome \</span><br><span class="line">   oaooa/pichome</span><br></pre></td></tr></table></figure>
 
@@ -592,63 +592,63 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pichome 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pichome/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pichome 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pichome</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5258</code> 就能看到安装界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241537081.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241537081.png"></p>
 <h2 id="向导"><a href="#向导" class="headerlink" title="向导"></a>向导</h2><p>开始安装后，会对环境进行检测</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241537249.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241537249.png"></p>
 <p>接下来检测文件和目录权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241538265.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241538265.png"></p>
 <p>接下来设置数据库信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241539143.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241539143.png"></p>
 <ul>
 <li> 【注意】：数据库服务器，因为采用的是 <code>docker</code> 而不是源代码安装，所以这里不能使用  <code>localhost</code>，要用群晖主机 IP + 端口</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241543130.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241543130.png"></p>
 <p>勾选 <code>强制安装</code></p>
 <blockquote>
 <p>如果你已经装过，并且有了数据，请慎重选择</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241548525.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241548525.png"></p>
 <p>开始安装</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241549118.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241549118.png"></p>
 <p>安装完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241550062.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241550062.png"></p>
 <p>设置管理员</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241551369.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241551369.png"></p>
 <p>可能会跳到一个空白的页面，不要慌，重新打开 <code>http://群晖IP:5258</code> 即可看到登录框</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241552410.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241552410.png"></p>
 <p>登录成功后的主界面还是空的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206241554065.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206241554065.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>右上角图标点开，可以进入设置，可以对个人、站点和库分别进行设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101130806.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101130806.png"></p>
 <p>先设置库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101132571.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101132571.png"></p>
 <p>显示 <code>连接正常</code> 就可以了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101133375.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101133375.png"></p>
 <p>在 <code>/docker/pichome/data/library</code> 目录中拷入两个文件夹的图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101138146.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101138146.png"></p>
 <p><code>更新</code> 一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101139613.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101139613.png"></p>
 <p>导入成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101146245.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101146245.png"></p>
 <p>回到首页，图片就出来了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210230948996.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210230948996.png"></p>
 <h2 id="在线升级"><a href="#在线升级" class="headerlink" title="在线升级"></a>在线升级</h2><p><code>系统工具</code> –&gt; <code>在线检测</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101157657.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101157657.png"></p>
 <p>执行 <code>自动升级</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101158035.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101158035.png"></p>
 <p>需要确认</p>
 <blockquote>
 <p>有数据的话最好备份一下，防止出现意外情况</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101159385.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101159385.png"></p>
 <p>升级过程是向导式的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101141701.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101141701.png"></p>
 <p>升级成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101142656.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101142656.png"></p>
 <p>再次刷新</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101202818.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101202818.png"></p>
 <p>检测版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101203705.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101203705.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>欧奥PicHome-Eagle图片共享展示,门户,搜索系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vYW9vYS5jb20vcGljaG9tZS5odG1s">https://oaooa.com/pichome.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>zyx0814/Pichome: 欧奥PicHome是用于欧奥图文档系统的图片展示门户，图片搜索引擎。也能够用于Eagle等其他图库软件的图片展示门户。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3p5eDA4MTQvUGljaG9tZQ==">https://github.com/zyx0814/Pichome<i class="fa fa-external-link-alt"></i></span></p>

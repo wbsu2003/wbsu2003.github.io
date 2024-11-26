@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Dim 是一个简介、漂亮的自托管媒体管理器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201270945743.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201270945743.png">
 <meta property="article:published_time" content="2022-02-11T03:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201270945743.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201270945743.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/11/%E7%94%A8Dim%E6%90%AD%E5%BB%BA%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201270945743.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201270945743.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,11 +510,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统是否支持显卡硬件转码</span></span><br><span class="line"><span class="built_in">ls</span> /dev/dri</span><br></pre></td></tr></table></figure>
 
 <p><code>DS3617xs</code> 显然是不支持</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261708339.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261708339.png"></p>
 <p>而另一台 <code>DS918+</code> 则是支持</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261709796.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261709796.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，将其命名为 <code>dim</code>，然后在其中建两个子目录 <code>config</code> 和 <code>media</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201252117585.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201252117585.png"></p>
 <p>其实 <code>Dim</code> 是个单容器的项目，但是官方没有在 <code>Docker Hub</code> 上托管镜像，这就有点尴尬了，所以老苏决定还是用 <code>portainer</code> 来安装。</p>
 <p>官方提供了 <code>docker-compose.yml</code> 文件，原版在这里：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0R1c2stTGFicy9kaW0vYmxvYi9tYXN0ZXIvZG9ja2VyLWNvbXBvc2UtdGVtcGxhdGUueW1s">https://github.com/Dusk-Labs/dim/blob/master/docker-compose-template.yml<i class="fa fa-external-link-alt"></i></span> </p>
 <blockquote>
@@ -527,33 +527,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&quot;3.8&quot;</span></span><br><span class="line">services:</span><br><span class="line">  dim:</span><br><span class="line">    container_name: dim</span><br><span class="line">    image: ghcr.io/dusk-labs/dim:dev</span><br><span class="line">    ports:</span><br><span class="line">      - 8585:8000</span><br><span class="line">    volumes:</span><br><span class="line">      - /volume2/docker/dim/config:/opt/dim/config</span><br><span class="line">      - /volume2/docker/dim/media:/media</span><br><span class="line">      <span class="comment"># 像下面这样添加更多文件夹:</span></span><br><span class="line">      <span class="comment"># - /&lt;host_media_path&gt;:/media2</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <code>poratiner</code> 左侧菜单找到 <code>Stack</code> –&gt; <code>Add stack</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201141901198.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201141901198.png"></p>
 <p>将上面的内容贴入 <code>Web editor</code>，别忘了填上 <code>Name</code></p>
 <blockquote>
 <p><code>Name</code> 注意不要用大写字母和特殊字符</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261740004.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261740004.png"></p>
 <p>点最下面的 <code>Deploy the stack</code>，然后等待完成</p>
 <blockquote>
 <p>下载镜像的速度有点慢，说实话挺煎熬的，老苏是先用命令行 <code>docker pull ghcr.io/dusk-labs/dim:dev</code> 下载之后再执行 <code>docker-compose.yml</code>，虽然不会加速，但是好歹能看到下载的进度，所以感觉要好很多😂</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201252138841.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201252138841.png"></p>
 <p>不出意外的话，在 <code>Containers</code> 中应该可以看到容器 <code>dim</code> 正在 <code>running</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261753085.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261753085.png"></p>
 <p>在群晖 <code>Docker</code> 管理器中也是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261755082.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261755082.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8585</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261758069.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261758069.png"></p>
 <h2 id="注册管理员"><a href="#注册管理员" class="headerlink" title="注册管理员"></a>注册管理员</h2><p>第一次需要注册账号，注册的第一个用户就是管理员</p>
 <blockquote>
 <p>密码不能少于 <code>8</code> 位</p>
 </blockquote>
 <p>登录之后就是主界面，开始并没有内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261821782.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261821782.png"></p>
 <p>点中间橘黄色的 <code>Add library</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261845019.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261845019.png"></p>
 <p>开始扫描加载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201261847013.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201261847013.png"></p>
 <p>扫描完成后的 <code>Libraries</code> 界面</p>
 <blockquote>
 <ol>
@@ -561,32 +561,32 @@
 <li>如果不将 <code>themoviedb.org</code> 加入科学上网，在手动匹配的时候会没有反应；</li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262147823.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262147823.png"></p>
 <p><code>Dashboard</code> 界面还是非常炫酷的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262225367.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262225367.png"></p>
 <h2 id="注册新用户"><a href="#注册新用户" class="headerlink" title="注册新用户"></a>注册新用户</h2><p>除了管理员之外，如果再注册用户，需要提供 <code>Invite token</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262222273.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262222273.png"></p>
 <p>管理员登录后，<code>Preferences</code> –&gt; <code>Invites</code> –&gt; <code>Generate a new token</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262230046.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262230046.png"></p>
 <p>新生成的 <code>Token</code> ，状态是 <code>Available</code>，可以用于注册用户，当 <code>Token</code> 注册了用户之后，状态会变成注册的用户名</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262247555.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262247555.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p> <code>Dim</code> 作为轻量级媒体服务器，基本的播放都是没问题的，不仅可以选择播放质量</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262310038.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262310038.png"></p>
 <p>还可以设置硬件转码，当然首先要设备支持才行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201262311720.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201262311720.png"></p>
 <blockquote>
 <p>老苏并没有验证硬件转码，不过 <code>VA-API</code> 应该没问题，是否支持 <code>QSV</code> 就不确定了，虽然有驱动，但毕竟 <code>Dim</code> 不像 <code>Jellyfin</code> 有专门的设置项</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111119649.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111119649.png"></p>
 <p> <code>Dim</code> 从功能上不如 <code>Jellyfin</code> 多，但设置比 <code>Jellyfin</code> 简单，没有一堆让你晕晕乎乎的专业名词，这是 <code>Dim</code> 的优点。</p>
 <p> 要说缺点，就是在影片的识别方面还亟待提高。总的来说还是值得持续关注。</p>
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>如果镜像实在下不动，可以到老苏的天翼云共享</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9jbG91ZC4xODkuY24vd2ViL3NoYXJlP2NvZGU9ZWFVYnVxYWFZenlx">https://cloud.189.cn/web/share?code=eaUbuqaaYzyq<i class="fa fa-external-link-alt"></i></span>（访问码：mf6h）</p>
 <p>中下载 <code>ghcr-io-dusk-labs-dim(dev).syno.tar</code> 文件，然后将其上传到群晖的一个目录中</p>
 <p>打开群晖 <code>docker</code> 管理器，<code>映像</code> –&gt; <code>新增</code> –&gt; <code>从文件添加</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111059325.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111059325.png"></p>
 <p>选择上传的文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111102271.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111102271.png"></p>
 <p>然后在 <code>SSH</code> 客户端中执行下面👇的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name dim \</span><br><span class="line">--device /dev/dri/renderD128:/dev/dri/renderD128 \</span><br><span class="line">-p 8585:8000 \</span><br><span class="line">-v /volume1/docker/dim/config:/opt/dim/config \</span><br><span class="line">-v /volume1/docker/dim/media:/media \</span><br><span class="line">ghcr.io/dusk-labs/dim:dev</span><br></pre></td></tr></table></figure>
 

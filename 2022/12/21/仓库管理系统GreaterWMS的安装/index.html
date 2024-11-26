@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="GreaterWMS 是完全开源的仓库管理系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202051963.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202051963.png">
 <meta property="article:published_time" content="2022-12-21T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.016Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="仓库管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202051963.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202051963.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/12/21/%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FGreaterWMS%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202051963.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202051963.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,7 +496,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>去医院也不需要核酸了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212210835693.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212210835693.png"></p>
 <hr>
 <blockquote>
 <p>本文是应网友 <code>ubuntu</code> 和 <code>Nathan</code> 要求写的；因为看起来 <code>Nathan</code> 比较着急，就突击了一下，因为时间仓促，错误在所难免，敬请谅解~</p>
@@ -508,7 +508,7 @@
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><ul>
 <li> <code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210411131200.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210411131200.png"></p>
 <blockquote>
 <ul>
 <li>名称：随意；</li>
@@ -518,16 +518,16 @@
 <ul>
 <li> <code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210411131711.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210411131711.png"></p>
 <h2 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h2><p>用 <code>SSH</code> 客户端连到群晖，依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 docker 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 国内用户使用 gitee 克隆项目到您的本地或服务器</span></span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/Singosgu/GreaterWMS.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 国外用户还是用 github</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/GreaterWMS/GreaterWMS.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> GreaterWMS</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201357772.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201357772.png"></p>
 <h2 id="修改-docker-compose-yml"><a href="#修改-docker-compose-yml" class="headerlink" title="修改 docker-compose.yml"></a>修改 docker-compose.yml</h2><p>主要就是端口，本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
 <p>在 <code>GreaterWMS</code> 根目录中找到 <code>docker-compose.yml</code> 文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201431937.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201431937.png"></p>
 <p>默认 <code>docker-compose.yml</code> 中的端口设置是👇这样的</p>
 <table>
 <thead>
@@ -548,7 +548,7 @@
 <td align="center"><code>8000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201427781.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201427781.png"></p>
 <p>老苏找了两个连续的空闲本地端口做了修改</p>
 <table>
 <thead>
@@ -572,20 +572,20 @@
 <blockquote>
 <p>官方的说明文档中，关于端口比较混乱，一会儿 <code>8000</code>，一会儿 <code>8008</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201429228.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201429228.png"></p>
 <h2 id="修改-baseurl-txt"><a href="#修改-baseurl-txt" class="headerlink" title="修改 baseurl.txt"></a>修改 baseurl.txt</h2><p>在 <code>File Station</code> 中找到 <code>/docker/GreaterWMS/templates/public/statics/baseurl.txt</code> 文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201419350.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201419350.png"></p>
 <p>将 <code>http://127.0.0.1:8000</code> ，改为本机 <code>IP</code> + 本地端口，老苏群晖 <code>IP</code> 为 <code>192.168.0.197</code>，结合前面修改的端口，所以这里改为  <code>http://192.168.0.197:8286</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201435177.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201435177.png"></p>
 <h2 id="修改-nginx-conf"><a href="#修改-nginx-conf" class="headerlink" title="修改 nginx.conf"></a>修改 nginx.conf</h2><blockquote>
 <p>默认 <code>docker-compose.yml</code> 中并没有启用 <code>nginx</code>，所以改不改应该没啥关系；</p>
 </blockquote>
 <p>在 <code>GreaterWMS</code> 根目录中找到 <code>nginx.conf</code> 文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201437719.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201437719.png"></p>
 <p>找到 <code>server 127.0.0.1:8008;</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201440679.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201440679.png"></p>
 <p>改为 <code>server 192.168.0.197:8285;</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201442314.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201442314.png"></p>
 <h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>准备工作完成后，就可以开始启动了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
@@ -593,65 +593,65 @@
 <p>按照官方的<strong>特别备注</strong>：执行 <code>docker-compose up -d</code> 后会自动下载前端依赖，有时会下载失败，导致前端无法启动，此时先执行 <code>docker-compose down</code> 再<code>docker-compose up -d</code> 重新下载，直至成功为止。</p>
 </blockquote>
 <p>第一次运行会拉取镜像，容量不小</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201443706.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201443706.png"></p>
 <p>看到两个 <code>done</code> 就完成了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201445939.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201445939.png"></p>
 <p>可以进群晖的容器看一下状态</p>
 <blockquote>
 <p>前端内存占用多，后端CPU占用高，而且一直都比较稳定；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201453214.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201453214.png"></p>
 <p>一般不出意外的话，应该都是能正常工作的</p>
 <h2 id="编译前端"><a href="#编译前端" class="headerlink" title="编译前端"></a>编译前端</h2><blockquote>
 <p>不编译的话，访问后端地址不能登录，会一直显示网络错误</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入前端容器  </span></span><br><span class="line">docker <span class="built_in">exec</span> -it greaterwms_front /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译前端代码  </span></span><br><span class="line">quasar build</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201549305.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201549305.png"></p>
 <p>编译完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201607941.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201607941.png"></p>
 <p>我们可以在 <code>/docker/GreaterWMS/templates/dist/spa</code> 中看到生成的前端代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201617830.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201617830.png"></p>
 <p>然后先删再启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键卸载</span></span><br><span class="line">docker-compose down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201618617.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201618617.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>是否可以浏览还需要看日志</p>
 <p>后端要看到 <code>Starting development server at http://0.0.0.0:8000/</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201902397.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201902397.png"></p>
 <p>前端要看到 <code>ℹ ｢wds｣: Project is running at http://0.0.0.0:8080/</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201905696.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201905696.png"></p>
 <p>现在可以开始访问了，在浏览器中输入 <code>http://群晖IP:8285</code> 或者 <code>http://群晖IP:8286</code>都是能看到主界面的，所不同的是，从 <code>8285</code> 打开的话，右下角有个绿色的 <code>vConsole</code> 按钮，感觉像是调试用的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201456537.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201456537.png"></p>
 <p>首先注册一个管理员账号，完成后就是主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201457032.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201457032.png"></p>
 <p>右上角选择语言为 <code>中文简体</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201506383.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201506383.png"></p>
 <p>功能就留个需要的人自己研究吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201515763.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201515763.png"></p>
 <h1 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h1><p>主页可以找到 <code>Android</code> 的客户端</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201944358.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201944358.png"></p>
 <h2 id="安装-SAI"><a href="#安装-SAI" class="headerlink" title="安装 SAI"></a>安装 SAI</h2><p>但是格式不是常用的 <code>apk</code>，而是 <code>apks</code>，需要先安装 <code>SAI（Split APKs Installer）</code>，再用 <code>SAI</code> 来安装 <code>GWMS.apks</code></p>
 <p>可以在 <code>F-Droid</code>下载 <code>SAI</code> 应用：<span class="exturl" data-url="aHR0cHM6Ly9mLWRyb2lkLm9yZy9wYWNrYWdlcy9jb20uYWVmeXIuc2FpLmZkcm9pZC8=">https://f-droid.org/packages/com.aefyr.sai.fdroid/<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>不能使用 <code>https://192.168.0.198:8286</code> 登录，所以老苏试了反代用域名访问，是可以的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202014222.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202014222.png"></p>
 <p>没问题的话还是全选了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202015203.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202015203.png"></p>
 <h2 id="应用设置"><a href="#应用设置" class="headerlink" title="应用设置"></a>应用设置</h2><p>启动 <code>APP</code> 应用之后，可以选择 <code>中文简体</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201953517.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201953517.jpg"></p>
 <p>进入 <code>设置</code> –&gt; <code>服务器</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201954351.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201954351.jpg"></p>
 <p>设置 <code>请求地址</code> 为后端地址 <code>https://gwms.laosu.ml:444/</code></p>
 <blockquote>
 <p>一定不要忘记最后面的 <code>/</code>，否则可能报 <code>服务器错误</code> 或者登陆失败；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201955456.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201955456.jpg"></p>
 <p><code>OPENID</code> 是必填的，可以在网页端获得</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201959827.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201959827.png"></p>
 <p>完成之后可以点 <code>登录</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202010984.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202010984.png"></p>
 <p>登录成功之后就可以使用了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212202019909.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212202019909.jpg"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>老苏用的默认的 <code>docker-compose.yml</code> ，只是修改了端口，这种安装方式使用的是 <code>SQLite</code> 数据库，如果要用 <code>MySQL</code> 和 <code>Nginx</code> ，可以尝试取消注释</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>GreaterWMS/GreaterWMS: This Inventory management system is the currently Ford Asia Pacific after-sales logistics warehousing supply chain process . After I leave Ford , I start this project . In order to help some who need it . OneAPP Type . Support scanner PDA, mobile APP, desktop exe, website as well .<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0dyZWF0ZXJXTVMvR3JlYXRlcldNUw==">https://github.com/GreaterWMS/GreaterWMS<i class="fa fa-external-link-alt"></i></span></p>

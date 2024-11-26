@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Slink 是一个使用 Symfony 和 SvelteKit 构建的自托管图像共享平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021150733.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021150733.png">
 <meta property="article:published_time" content="2024-04-19T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.417Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.052Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="图床">
 <meta property="article:tag" content="图片">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021150733.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021150733.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/04/19/%E8%87%AA%E6%89%98%E7%AE%A1%E5%9B%BE%E5%83%8F%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1Slink/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021150733.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021150733.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,7 +500,7 @@
 <blockquote>
 <p><code>Slink</code> 是一个使用 <code>Symfony</code> 和 <code>SvelteKit</code> 构建的自托管图像共享平台。<code>Slink</code> 解决了不依赖第三方服务与朋友、家人、同事共享图像的问题。它还为艺术家提供了一个与社区分享作品的平台。此外，开发人员可能会发现它对于自托管个人项目的屏幕截图很有用，然后可以在 <code>GitHub</code>、投资组合、博客等上使用。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021027547.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021027547.png"></p>
 <h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>本文开始折腾时，遇到了登录问题，具体表现为登录之后没有任何反应，日志和开发者工具中也没有任何信息，后来无意中发现是因为环境变量 <code>ORIGIN</code> 使用了局域网地址 <code>http://192.168.0.197:3847</code> 导致的，但具体原因老苏并没有弄明白</p>
 <p>另外，如果需要在网页上直接访问剪贴板，也需要采用 <code>https</code>协议才行</p>
 <p>因此在开始前，需要先做反向代理。本次老苏采用的是 <code>tailscale + npm</code> 方案</p>
@@ -523,19 +523,19 @@
 </tr>
 </tbody></table>
 <p>在 <code>npm</code> 中的设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021006647.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021006647.png"></p>
 <p><code>SSL</code> 都勾选了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021009573.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021009573.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>anirdev</code> ，选择第一个 <code>anirdev/slink</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v1.0.0-rc.6</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301616334.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301616334.png"></p>
 <blockquote>
 <p>放了几天之后，再次折腾时， <code>latest</code> 版本对应为<code>v1.0.0-rc.9</code>，目前看起来更新非常频繁</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404020922921.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404020922921.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>slink</code>，并在其中建两个子文件夹 <code>data</code> 和 <code>images</code></p>
 <table>
 <thead>
@@ -556,7 +556,7 @@
 <td align="center">存放图片文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301622469.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301622469.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -572,7 +572,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301623194.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301623194.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -594,9 +594,9 @@
 </tr>
 </tbody></table>
 <p>将 <code>ORIGIN</code> 修改为前面准备的域名</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021110065.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021110065.png"></p>
 <p>再新增两个参数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021111732.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021111732.png"></p>
 <p>更多的环境变量参数，请参考官方文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FuZHJpaS1rcnl2b3ZpYXovc2xpbmsjY29uZmlndXJhdGlvbg==">https://github.com/andrii-kryvoviaz/slink#configuration<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 slink 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/slink/&#123;data,images&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 slink 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/slink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name slink \</span><br><span class="line">   -p 3847:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/var/data \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/images:/app/slink/images \</span><br><span class="line">   -e ORIGIN=https://slink.laosu.cf \</span><br><span class="line">   -e USER_APPROVAL_REQUIRED=<span class="literal">true</span> \</span><br><span class="line">   -e STORAGE_PROVIDER=<span class="built_in">local</span> \</span><br><span class="line">   anirdev/slink:latest</span><br></pre></td></tr></table></figure>
@@ -608,33 +608,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 slink 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/slink/&#123;data,images&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 slink 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/slink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>https://slink.laosu.cf</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301502628.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301502628.png"></p>
 <h2 id="注册用户"><a href="#注册用户" class="headerlink" title="注册用户"></a>注册用户</h2><p><code>Slink</code> 必须登录才能上传图像。不允许匿名上传，所以第一件事情是注册并登录</p>
 <blockquote>
 <p>需要使用高强度的密码，例如：<code>eX@mp1e-P@ssw0rd!</code>，否则会提示 <code>The password strength is too low. Please use a stronger password.</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301746151.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301746151.png"></p>
 <p>注册成功后，会获取到你的用户 <code>ID</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404020938354.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404020938354.png"></p>
 <h2 id="用户批准"><a href="#用户批准" class="headerlink" title="用户批准"></a>用户批准</h2><p>因为启用了用户批准（<code>USER_APPROVAL_REQUIRED=true</code>），所以必须使用 <code>CLI</code> 命令手动激活用户，如果不激活直接登录，会返回错误：<code>Invalid credentials. Please check your email and password and try again.</code></p>
 <blockquote>
 <p>在未来的版本中，将添加管理面板来管理用户及其状态。</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过邮件地址激活用户</span></span><br><span class="line">docker <span class="built_in">exec</span> -it slink slink user:activate --email=&lt;user-email&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例，将 &lt;user-email&gt; 替换为刚注册的 email 地址</span></span><br><span class="line">docker <span class="built_in">exec</span> -it slink slink user:activate --email=wbsu2003@gmail.com</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403301930382.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403301930382.png"></p>
 <p>或者</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过用户ID激活用户</span></span><br><span class="line">docker <span class="built_in">exec</span> -it slink slink user:activate --uuid=&lt;user-id&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例，将 &lt;user-id&gt; 替换为注册后获取的用户 ID</span></span><br><span class="line">docker <span class="built_in">exec</span> -it slink slink user:activate --uuid=7e6ecb25-c257-4362-9edd-12363bbd0515</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404020947115.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404020947115.png"></p>
 <p>登录成功后，就可以开始上传图片了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404020948560.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404020948560.png"></p>
 <h2 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h2><p>除了选取和拖拽文件外</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021123706.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021123706.png"></p>
 <p>因为使用了 <code>https</code> 协议，截屏的文件是可以直接粘贴上传的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021122601.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021122601.png"></p>
 <p>目前 <code>Dashboard</code> 和 <code>Settings</code> 还没开放，喜欢的可以持续关注</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404021126051.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404021126051.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>andrii-kryvoviaz/slink: Self-hosted image sharing service. Currently, under development.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FuZHJpaS1rcnl2b3ZpYXovc2xpbms=">https://github.com/andrii-kryvoviaz/slink<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>

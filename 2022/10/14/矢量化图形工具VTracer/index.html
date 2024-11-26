@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="VTracer 是位图到矢量图的转化器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209142353986.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209142353986.png">
 <meta property="article:published_time" content="2022-10-14T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="图片">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209142353986.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209142353986.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/10/14/%E7%9F%A2%E9%87%8F%E5%8C%96%E5%9B%BE%E5%BD%A2%E5%B7%A5%E5%85%B7VTracer/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209142353986.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209142353986.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,7 +507,7 @@
 </blockquote>
 <p><code>VTracer</code> 及其核心库是在 <code>Rust</code> 中实现的，而我们折腾的这个 <code>webapp</code> 是基于 <code>Rust + wasm</code> 平台实现的，官方没有提供 <code>Dockerfile</code> ，老苏是第一次接触，官方的说明又太简洁，所以走了比较多的弯路，好在最后可以正常运行了</p>
 <p>第一版没啥意义，就是研究环境搭建，目录结构，编出来的镜像高达 <code>2.7G</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131314962.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131314962.png"></p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">16.5</span> as build-base</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; apt-get install -y git build-essential curl musl-dev</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install rust</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> curl https://sh.rustup.rs -sSf | bash -s -- -y </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add .cargo/bin to PATH</span></span><br><span class="line"><span class="keyword">ENV</span> PATH=<span class="string">&quot;/root/.cargo/bin:$&#123;PATH&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Check cargo is visible</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> cargo --<span class="built_in">help</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># install wasm-pack</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#RUN npm install -g wasm-pack </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app/webapp/app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> wasm-pack build</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
 
 <p>下面是采用多阶段构建的最终版本的 <code>Dockerfile</code>，只有不到 <code>50M</code></p>
@@ -518,7 +518,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>vtracer</code> ，选择第二个 <code>wbsu2003/vtracer</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210101433052.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210101433052.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -534,7 +534,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209150959873.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209150959873.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name vtracer \</span><br><span class="line">   -p 7930:80 \</span><br><span class="line">   wbsu2003/vtracer</span><br></pre></td></tr></table></figure>
 
@@ -545,7 +545,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vtracer</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vtracer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vtracer 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vtracer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7930</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151009965.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151009965.png"></p>
 <ul>
 <li>① 是菜单区，用的最多的应该是 <code>Download as SVG</code>，就是把转好的位图下载保存为 <code>SVG</code> 格式；</li>
 <li>② 是图片区，把需要转换的位图拖拽、粘贴到这里；</li>
@@ -553,7 +553,7 @@
 <li>④ 是参数区，可以根据需要调整相关的参数设置；</li>
 </ul>
 <p>蓝图转换的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151019210.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151019210.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>visioncortex/vtracer: Raster to Vector Graphics Converter<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Zpc2lvbmNvcnRleC92dHJhY2Vy">https://github.com/visioncortex/vtracer<i class="fa fa-external-link-alt"></i></span></p>
 <p>vtracer-webapp - crates.io: Rust Package Registry<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jcmF0ZXMuaW8vY3JhdGVzL3Z0cmFjZXItd2ViYXBw">https://crates.io/crates/vtracer-webapp<i class="fa fa-external-link-alt"></i></span></p>

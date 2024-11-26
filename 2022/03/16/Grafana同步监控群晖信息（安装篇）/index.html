@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Grafana是一款用 Go 语言开发的开源数据可视化工具，可以做数据监控和数据统计，带有告警功能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061407297.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061407297.png">
 <meta property="article:published_time" content="2022-03-16T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="homeassistant">
 <meta property="article:tag" content="智能家居">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061407297.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061407297.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/03/16/Grafana%E5%90%8C%E6%AD%A5%E7%9B%91%E6%8E%A7%E7%BE%A4%E6%99%96%E4%BF%A1%E6%81%AF%EF%BC%88%E5%AE%89%E8%A3%85%E7%AF%87%EF%BC%89/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061407297.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061407297.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,22 +506,22 @@
 </blockquote>
 <h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>grafana</code> ，居然找不到 <code>grafana/grafana</code>，这个问题在群晖的论坛里也有人问：<span class="exturl" data-url="aHR0cHM6Ly9jb21tdW5pdHkuc3lub2xvZ3kuY29tL2VudS9mb3J1bS8xL3Bvc3QvMTQ5MDk4">Can’t find Grafana in Docker Registry?<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181056741.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181056741.png"></p>
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><p>其实不光是 <code>grafana</code>，很多镜像都有同样的问题，可以用 <code>SSH</code> 客户端登录到群晖用命令行下载😳</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull grafana/grafana</span><br></pre></td></tr></table></figure>
 
 <h2 id="portainer"><a href="#portainer" class="headerlink" title="portainer"></a>portainer</h2><p>也可以用 <code>portainer</code> 来下载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201182108343.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201182108343.png"></p>
 <p>下载完成后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201182115760.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201182115760.png"></p>
 <h2 id="群晖docker"><a href="#群晖docker" class="headerlink" title="群晖docker"></a>群晖docker</h2><p>虽然不能在注册表中找到，但是在 <span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2dyYWZhbmEvZ3JhZmFuYQ==">https://hub.docker.com/r/grafana/grafana<i class="fa fa-external-link-alt"></i></span> 是能看到的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202051321849.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202051321849.png"></p>
 <p>所以可以从群晖 <code>docker</code> 管理器中的添加， <code>映像</code> –&gt; <code>新增</code> –&gt; <code>从 URL 添加</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202051323949.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202051323949.png"></p>
 <p>输入 <code>URL</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202051326388.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202051326388.png"></p>
 <p>等待版本确认</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202051329347.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202051329347.png"></p>
 <p>接下来就是等待下载完成</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="命令行-1"><a href="#命令行-1" class="headerlink" title="命令行"></a>命令行</h2><p>如果熟悉命令行，可能这是最快捷的安装方式，在 <code>SSH</code> 客户端的命令行中执行下面的命令即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/grafana</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者直接安装</span></span><br><span class="line">docker run -d \</span><br><span class="line">--name=grafana \</span><br><span class="line">-p 3330:3000 \</span><br><span class="line">grafana/grafana</span><br></pre></td></tr></table></figure>
@@ -530,7 +530,7 @@
 <blockquote>
 <p> <code>portainer</code> 的安装请看 『<span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIwLzA5LzE2LyVFNyU5NCVBOHBvcnRhaW5lciVFNyVBRSVBMSVFNyU5MCU4NmRvY2tlciVFNiU5QyU4RCVFNSU4QSVBMS8=">用portainer管理docker服务<i class="fa fa-external-link-alt"></i></span>』，但是需要<strong>注意</strong>，搜索时请找 <code>portainer/portainer-ce</code> 而不是 <code>portainer/portainer</code>，原因看👇下图：</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201141736939.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201141736939.png"></p>
 <blockquote>
 <p>和 <code>grafana</code> 一样，不太好找，如果你熟悉命令行，安装会更快捷：</p>
 </blockquote>
@@ -540,18 +540,18 @@
 <p>也可以在群晖管理器中通过 <code>从 URL 添加</code> ：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3BvcnRhaW5lci9wb3J0YWluZXItY2U=">https://hub.docker.com/r/portainer/portainer-ce<i class="fa fa-external-link-alt"></i></span> 来下载安装</p>
 </blockquote>
 <p>从 <code>Containers</code> –&gt; <code>Add container</code> 进入安装界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181903868.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181903868.png"></p>
 <h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><p>设置 <code>Name</code> 和 <code>Image</code> </p>
 <ul>
 <li><code>Name</code> 是创建的容器的名称</li>
 <li><code>Image</code> 是镜像的名称</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181907755.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181907755.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
 <p>点 <code>publish a new network port</code> 新建端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181911887.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181911887.png"></p>
 <table>
 <thead>
 <tr>
@@ -564,15 +564,15 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181913209.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181913209.png"></p>
 <h3 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h3><p>在 <code>Advanced container setting</code> 中找到 <code>Restart policy</code>，选择 <code>Always</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181922208.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181922208.png"></p>
 <p>完成上述设置后，可以在 <code>Access control</code> 中点 <code>Deploy the container</code> 进行发布运行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181925295.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181925295.png"></p>
 <p>按钮会变成 <code>Deployment in progress...</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181927694.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181927694.png"></p>
 <p>等右上角出现 <code>Container successfully created</code> 就安装成功了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181942581.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181942581.png"></p>
 <h2 id="群晖docker-1"><a href="#群晖docker-1" class="headerlink" title="群晖docker"></a>群晖docker</h2><p>如果已经下载了镜像，也可以用群晖自带的 <code>docker</code> 管理器安装，这个容器比较简单，只要设置端口即可正常运行。</p>
 <h3 id="端口-1"><a href="#端口-1" class="headerlink" title="端口"></a>端口</h3><table>
 <thead>
@@ -586,11 +586,11 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202041649441.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202041649441.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3330</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181945668.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181945668.png"></p>
 <p>默认的账号为 <code>admin</code>，密码为 <code>admin</code>，输入完成后会要求更改密码，登录成功后就是主界面了，界面的整体风格跟之前介绍的 <code>InfluxDB</code> 非常类似</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201181951212.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201181951212.png"></p>
 <p>下一篇我们将进入设置环节，介绍在如何 <code>Grafana</code> 中同步显示群晖的信息</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>grafana/grafana: The tool for beautiful monitoring and metric analytics &amp; dashboards for Graphite, InfluxDB &amp; Prometheus &amp; More<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dyYWZhbmEvZ3JhZmFuYQ==">https://github.com/grafana/grafana<i class="fa fa-external-link-alt"></i></span></p>

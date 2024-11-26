@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Outline 是使用 React 和 Node.js 为您的团队构建的快速、协作的知识库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181441419.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181441419.png">
 <meta property="article:published_time" content="2022-03-02T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Markdown">
 <meta property="article:tag" content="wiki">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181441419.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181441419.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/03/02/%E5%9F%BA%E4%BA%8EOutline%E6%9E%84%E5%BB%BA%E5%9B%A2%E9%98%9F%E7%9A%84%E7%9F%A5%E8%AF%86%E5%BA%93%EF%BC%88%E4%B8%8B%E7%AF%87%EF%BC%89/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181441419.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181441419.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,18 +499,18 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>本文所需用到的 <code>2</code> 个文件都放在这里👉：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAzL3N5bm9sb2d5L3RyZWUvbWFpbi9vdXRsaW5lL2RvY2tlcg==">https://github.com/wbsu2003/synology/tree/main/outline/docker<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203011437442.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203011437442.png"></p>
 <p>文件下载后，还需要做些微调，比如要填入从 <code>Slack</code> 中获取的  <code>Client ID</code> 和 <code>Client Secret</code> ，域名要替换为你上篇中准备好的 <code>2</code> 个。</p>
 <blockquote>
 <p>老苏已经尽可能的把需要改动的地方减到了最少🙂</p>
 </blockquote>
 <h1 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h1><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>outline</code>，在其中再建两个子目录，分别是 <code>data</code> 、 <code>fakes3</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202111182254421.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202111182254421.png"></p>
 <p>接下来用 <code>SSH</code> 客户端登录到群晖，下载需要的文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/outline/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker.env.txt 下载到 outline 目录</span></span><br><span class="line">curl -sSL https://raw.githubusercontent.com/wbsu2003/synology/main/outline/docker/docker.env.txt -o docker.env.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 国内用户如果下不动的话试试下面加代理这个</span></span><br><span class="line">curl -sSL https://ghproxy.com/https://raw.githubusercontent.com/wbsu2003/synology/main/outline/docker/docker.env.txt -o docker.env.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 下载到 outline 目录</span></span><br><span class="line">curl -sSL https://raw.githubusercontent.com/wbsu2003/synology/main/outline/docker/docker-compose.yml -o docker-compose.yml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 国内用户如果下不动的话试试下面加代理这个</span></span><br><span class="line">curl -sSL https://ghproxy.com/https://raw.githubusercontent.com/wbsu2003/synology/main/outline/docker/docker-compose.yml -o docker-compose.yml</span><br></pre></td></tr></table></figure>
 
 <p>下载的方式很多，不一定非要用命令行，也可以复制、粘贴，最终的目录结构是下面👇这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203011501466.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203011501466.png"></p>
 <h1 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h1><h2 id="docker-env-txt"><a href="#docker-env-txt" class="headerlink" title="docker.env.txt"></a>docker.env.txt</h2><p>环境变量有点多，老苏是基于官方的 <code>.env.sample</code> 文件修改的，原文件的地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL291dGxpbmUvb3V0bGluZS9ibG9iL21haW4vLmVudi5zYW1wbGU=">https://github.com/outline/outline/blob/main/.env.sample<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p>老苏之所以不是用的默认的 <code>.env</code> 而是用了 <code>docker.env.txt</code> 命名环境变量文件，只是为了在群晖上方便编辑；</p>
@@ -557,7 +557,7 @@
 <li><code>URL</code> 用的是前面填写的 <code>OUTLINE_URL</code> 中的域名</li>
 <li><code>PORT</code> 是 <code>Outline</code> 的内部端口，默认即可，不要去改</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202111182226502.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202111182226502.png"></p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DATABASE_URL</span>=postgres://<span class="variable">$&#123;POSTGRES_USER&#125;</span>:<span class="variable">$&#123;POSTGRES_PASSWORD&#125;</span>@<span class="variable">$&#123;POSTGRES_HOST&#125;</span>:<span class="number">5432</span>/<span class="variable">$&#123;POSTGRES_DB&#125;</span></span><br><span class="line"><span class="attr">PGSSLMODE</span>=disable</span><br></pre></td></tr></table></figure>
 
 <p>数据库部分保持默认即可</p>
@@ -603,7 +603,7 @@
 
 <p>这部分可能需要修改的也是外部端口</p>
 <p>假设你想增加其他的认证方式，比如微软的，首先需要在 <code>docker.env.txt</code> 填入相应的值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181130634.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181130634.png"></p>
 <p>然后在上面👆添加即可</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">AZURE_CLIENT_ID=$&#123;AZURE_CLIENT_ID&#125;</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">AZURE_CLIENT_SECRET=$&#123;AZURE_CLIENT_SECRET&#125;</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">AZURE_RESOURCE_APP_ID=$&#123;AZURE_RESOURCE_APP_ID&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -611,51 +611,51 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键运行</span></span><br><span class="line">docker-compose --env-file docker.env.txt up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键运行（显示日志）</span></span><br><span class="line">docker-compose --env-file docker.env.txt up</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键删除</span></span><br><span class="line">docker-compose --env-file docker.env.txt down</span><br></pre></td></tr></table></figure>
 
 <p>非常简单，只要一条命令就能启动</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181250103.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181250103.png"></p>
 <p>第一次启动 <code>outline</code> 会停止</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191445994.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191445994.png"></p>
 <p>从日志看被 <code>PostgreSQL</code> 拒绝了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191449504.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191449504.png"></p>
 <p>直接再次启动 <code>ot-outline</code> 即可，这次可以正常的写入数据了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191452125.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191452125.png"></p>
 <p>时间很短</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191454713.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191454713.png"></p>
 <p>开始 <code>ot-outline</code> 的 <code>CPU</code> 会比较高，但很快就会降下来</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171158703.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171158703.png"></p>
 <p>删除也只要一条命令就可以</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181226365.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181226365.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:6070</code> 就能看到主界面</p>
 <blockquote>
 <p>没有设置任何第三方登录的界面</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202170923821.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202170923821.png"></p>
 <blockquote>
 <p>设置了微软认证的界面</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171110301.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171110301.png"></p>
 <p>跳转验证</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171113210.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171113210.png"></p>
 <p>认证成功后一直卡在👆上一个页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171338347.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171338347.png"></p>
 <blockquote>
 <p>设置了 <code>slack</code> 认证的界面</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171550192.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171550192.png"></p>
 <p>申请权限，点 <code>允许</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171554695.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171554695.png"></p>
 <p>会收到邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171552613.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171552613.png"></p>
 <p>终于看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171556049.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171556049.png"></p>
 <p>如果注销了，<code>使用电子邮件继续</code> 就是填 <code>Slack</code> 的注册邮件地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181426419.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181426419.png"></p>
 <p>新建个文档试试，从写作上看和 <code>notion</code> 比较像，支持块操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171559338.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171559338.png"></p>
 <p>如果现在上传图片，左下角会显示下面的错误，因为 <code>minio</code> 并未自动初始化</p>
 <blockquote>
 <p>有两种方式可以进行初始化，一种是增加 <code>minio/mc</code> 容器，一种是进入 <code>minio Console</code> 手动添加 <code>bucket</code>，老苏选择了后一种，感觉只是为了初始化增加个容器没必要，而且后续还需要通过 <code>Console</code> 来管理上传的图片</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202181237744.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202181237744.png"></p>
 <p>需要我们通过 <code>http://192.168.0.197:9101</code> 来访问 <code>console</code>，手动创建名为  <code>outline</code> 的 <code>bucket</code></p>
 <blockquote>
 <p>如果不会的，可以看看老苏之前写的 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzEyLzIyLyVFNiU4QiVBNSVFNiU5QyU4OSVFOCU4NyVBQSVFNSVCNyVCMSVFNyU5QSU4NE1pbklPJUU1JUFGJUI5JUU4JUIxJUExJUU1JUFEJTk4JUU1JTgyJUE4JUU2JTlDJThEJUU1JThBJUExJUU1JTk5JUE4">拥有自己的MinIO对象存储服务器<i class="fa fa-external-link-alt"></i></span> 』</p>
@@ -665,13 +665,13 @@
 <li><code>Nginx Proxy Manager</code> 的 <code>Advanced</code> 中的代码</li>
 <li><code>docker.env.txt</code> 文件中的 <code>AWS_S3_UPLOAD_BUCKET_NAME</code> 也要改</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191348853.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191348853.png"></p>
 <p>测试粘贴一张图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191623098.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191623098.png"></p>
 <p>在 <code>minio console</code> 中可以找到刚刚上传的图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202191625471.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202191625471.png"></p>
 <p>最后记录下版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202171620832.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202171620832.png"></p>
 <p>因为这个迭代比较快，很可能过一段时间就会有比较大的变化</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p><code>Outline</code> 支持的认证中还有 <code>OIDC</code>，也就是 <code>OpenID Connect</code> ，老苏正在研究的 <code>Authelia</code> 正好可以提供这种认证方式（虽然还是 <code>β</code> 版），如果一切顺利，就可以让 <code>Outline</code> 实现本地认证了。不过还需要一些铺垫，起码得先介绍 <code>Authelia</code>吧。</p>
 <p>技术上都已经调通了，只是最近工作比较忙，还需要时间来整理文字和图片。</p>

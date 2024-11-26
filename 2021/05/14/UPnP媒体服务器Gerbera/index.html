@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Gerbera使您可以通过家庭网络流式传输数字媒体，并在各种UPnP兼容设备上使用它。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416181448.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416181448.png">
 <meta property="article:published_time" content="2021-05-14T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416181448.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416181448.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/05/14/UPnP%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8Gerbera/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416181448.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416181448.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,7 +509,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>gerbera</code> ，选择第一个 <code>gerbera/gerbera</code>，版本选择 <code>latest</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615467477614-1615467477647.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615467477614-1615467477647.png" alt="title"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，将其命名为 <code>gerbera</code> ，当然也可以指向一个多媒体文件存放的目录。</p>
 <table>
 <thead>
@@ -528,60 +528,60 @@
 <blockquote>
 <p>建议将 <code>/content</code> 设置为只读</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615468409502-1615468409526.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615468409502-1615468409526.png" alt="title"></p>
 <h2 id="网络-amp-端口"><a href="#网络-amp-端口" class="headerlink" title="网络 &amp; 端口"></a>网络 &amp; 端口</h2><p>默认情况下，端口 49494/tcp（HTTP）和 1900/udp（SSDP组播）是公开的</p>
 <p>UPnP 依赖于使客户端和服务器能够通过 IP 组播进行通信。默认的 <code>docker bridge</code> 网络设置不支持多播。实现此目的的最简单方法是 <code>使用与Docker Host相同的网络</code> 。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615468666025-1615468666028.png" alt="title"> </p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615468666025-1615468666028.png" alt="title"> </p>
 <p>不需要再设置端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615468696916-1615468696918.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615468696916-1615468696918.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:49494</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615469002182-1615469002184.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615469002182-1615469002184.png" alt="title"></p>
 <p>点 <code>Database</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/12/1615517662093-1615517662146.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/12/1615517662093-1615517662146.png" alt="title"></p>
 <p><code>File System</code> 则是另一种展示方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/13/1615630678663-1615630678665.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/13/1615630678663-1615630678665.png" alt="title"></p>
 <p><code>Clients</code> 可以看到客户端连接的情况</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/12/1615517883507-1615517883520.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/12/1615517883507-1615517883520.png" alt="title"></p>
 <p><code>Config</code> 设置的显示分为3种模式，分别是 <code>Minimal</code>、<code>Standard</code>、<code>Expert</code></p>
 <ul>
 <li>Minimal</li>
 </ul>
 <p>一些最基础的设置项</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/12/1615518802720-1615518802729.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/12/1615518802720-1615518802729.png" alt="title"></p>
 <ul>
 <li>Standard</li>
 </ul>
 <p>相比 <code>Minimal</code> 模式，<code>Standard</code> 模式多了 <code>Storage</code>、<code>UI</code> 和 <code>Scripting</code> 设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/12/1615518842908-1615518842917.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/12/1615518842908-1615518842917.png" alt="title"></p>
 <ul>
 <li>Expert</li>
 </ul>
 <p>相比 <code>Standard</code> 模式，<code>Expert</code> 模式又多了 <code>Transcoding</code> 和 <code>Client Detection</code> 设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/12/1615518967150-1615518967159.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/12/1615518967150-1615518967159.png" alt="title"></p>
 <h2 id="可能会遇到的异常"><a href="#可能会遇到的异常" class="headerlink" title="可能会遇到的异常"></a>可能会遇到的异常</h2><p>很奇怪在某些情况下，在 <code>Google Chrome</code> 浏览器中会一直显示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/11/1615469502689-1615469502692.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/11/1615469502689-1615469502692.png" alt="title"></p>
 <p>或者 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/13/1615611184800-1615611184832.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/13/1615611184800-1615611184832.png" alt="title"></p>
 <p>但是同一台机器上换成 <code>Microsoft Edge</code> 就完全正常了，或者换成另一台机器上 <code>Google Chrome</code> 浏览器也是正常的。</p>
 <p>好在 Web 并不是重点，我没有改变任何设置，唯一可能用得上的应该是转码，将媒体转换成设备支持的格式，但我并没尝试，有兴趣的可以自己试试。</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="Windows-平台"><a href="#Windows-平台" class="headerlink" title="Windows 平台"></a>Windows 平台</h2><p>除了系统的资源管理器外，还可以在 <code>Microsoft Store</code> 中搜索 <code>dlna browser</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/13/1615631737964-1615631737968.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/13/1615631737964-1615631737968.png" alt="title"></p>
 <p>这是个免费的应用，下图中上面那个就是刚安装的 <code>Gerbera</code> 服务器，下面那个 <code>OTCloud</code> 熟悉的朋友应该一眼就知道这货是 <code>玩客云</code>。</p>
 <p>支持和 <code>Web</code> 上一样逐级展开</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/13/1615632164512-1615632164514.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/13/1615632164512-1615632164514.png" alt="title"></p>
 <p>内置播放器，支持直接播放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/13/1615632363871-1615632363875.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/13/1615632363871-1615632363875.png" alt="title"></p>
 <h2 id="Android-平台"><a href="#Android-平台" class="headerlink" title="Android 平台"></a>Android 平台</h2><p>Android 平台上支持 UPnP/DLNA 的 APP 还是很多的，简单推荐几个，至于哪个适合您，只能根据您的需求进行验证了。</p>
 <h3 id="BubbleUPnP"><a href="#BubbleUPnP" class="headerlink" title="BubbleUPnP"></a>BubbleUPnP</h3><p>BubbleUPnP 是用的比较多的一款 Android APP，即是客户端也是 UPnP 流媒体服务器，当它启动后，你可以在 <code>DLNA Browser</code> 发现多了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/14/1615702023385-1615702023387.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/14/1615702023385-1615702023387.png" alt="title"></p>
 <p>在 BubbleUPnP 中 找到 <code>Library</code>，可以扫描到局域网中的 UPnP 服务器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/14/1615701560547-1615701560582.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/14/1615701560547-1615701560582.png" alt="title"></p>
 <h3 id="nPlayer"><a href="#nPlayer" class="headerlink" title="nPlayer"></a>nPlayer</h3><p>在网络中选择 <code>UPnP/DLNA</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/14/1615702894714-1615702894718.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/14/1615702894714-1615702894718.png" alt="title"></p>
 <h3 id="威动影音"><a href="#威动影音" class="headerlink" title="威动影音"></a>威动影音</h3><p>国人开发的，支持内置播放器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/03/14/1615702590818-1615702590820.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/03/14/1615702590818-1615702590820.png" alt="title"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实支持 <code>UPnP/DLNA</code> 的服务端还是很多的，包括我们常用的 Plex、Emby、Jellyfin ，我看了下我用的 Jellyfin ，里面有 DLNA 的设置界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210317103111.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210317103111.png"></p>
 <p>所以个人觉得没必要单独装一个 UPnP 服务。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>gerbera/gerbera: UPnP Media Server for 2021<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dlcmJlcmEvZ2VyYmVyYQ==">https://github.com/gerbera/gerbera<i class="fa fa-external-link-alt"></i></span></p>

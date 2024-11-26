@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="YOURLS 就是 Your Own URL Shortener，是一个使用 PHP 编写的，非常强大的短链接平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310172251992.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310172251992.png">
 <meta property="article:published_time" content="2023-12-13T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="短链接">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310172251992.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310172251992.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/12/13/%E7%BE%A4%E6%99%96%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%9F%AD%E9%93%BE%E6%8E%A5%E6%9C%8D%E5%8A%A1Yourls/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310172251992.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310172251992.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,12 +500,12 @@
 <p><code>YOURLS</code>是一组 <code>PHP</code> 脚本，允许您在服务器上运行您自己的 <code>URL</code> 缩短器。您将完全控制您的数据、详细统计数据、分析、插件等。它是免费且开源的。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>yourls</code> 的空数据库</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310171339845.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310171339845.png"></p>
 <p>所以根据上面的设置，最后得到的数据库相关的参数如下：</p>
 <ul>
 <li>数据库主机：<code>192.168.0.197</code>，与群晖主机 <code>IP</code> 一致；</li>
@@ -525,7 +525,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>1.9.2</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310171322151.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310171322151.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>yourls</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -541,7 +541,7 @@
 <td align="center">存放网页文件等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171617035.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171617035.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -557,7 +557,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171618468.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171618468.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -594,7 +594,7 @@
 <td align="center">网站地址</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171635360.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171635360.png"></p>
 <p>更多环境变量的说明，可以参考官方文档：<span class="exturl" data-url="aHR0cHM6Ly95b3VybHMub3JnL2RvY3MvZ3VpZGUvZXNzZW50aWFscy9jb25maWd1cmF0aW9u">https://yourls.org/docs/guide/essentials/configuration<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 yourls 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/yourls/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 yourls 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/yourls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name yourls-web \</span><br><span class="line">   -p 8027:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/www/html \</span><br><span class="line">   -e YOURLS_DB_HOST=192.168.0.197:3307 \</span><br><span class="line">   -e YOURLS_DB_USER=yourls \</span><br><span class="line">   -e YOURLS_DB_PASS=123456 \</span><br><span class="line">   -e YOURLS_DB_NAME=yourls \</span><br><span class="line">   -e YOURLS_USER=admin \</span><br><span class="line">   -e YOURLS_PASS=admin \</span><br><span class="line">   -e YOURLS_SITE=http://192.168.0.197:8027 \</span><br><span class="line">   yourls</span><br></pre></td></tr></table></figure>
@@ -609,34 +609,34 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 yourls 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/yourls/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 yourls 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/yourls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8027</code> 会看到错误的显示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171557974.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171557974.png"></p>
 <p>实际上应该是要访问 <code>http://群晖IP:8027/admin</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171600469.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171600469.png"></p>
 <p>点 <code>Install YOURLS</code> 开始安装</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171601803.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171601803.png"></p>
 <p><code>YOURLS Administration Page</code> 跳转到登录页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171602757.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171602757.png"></p>
 <p>输入前面设置的 <code>YOURLS_USER</code>  和 <code>YOURLS_PASS</code> 的值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171604256.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171604256.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171606573.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171606573.png"></p>
 <p>以 <code>https://laosu.cf</code> 为例</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171607749.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171607749.png"></p>
 <p>默认生成的 <code>url</code> 够短的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310171609550.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310171609550.png"></p>
 <p>当然实际应用中，还需要内网穿透到公网，<code>url</code> 长度主要取决于你的域名的长短了</p>
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>官方在 <code>GitHub</code> 上总结了非常多的插件，大约有 <code>200</code> 多个，可以根据自己的需求找到想使用的插件。</p>
 <blockquote>
 <p>官方插件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1lPVVJMUy9hd2Vzb21l">https://github.com/YOURLS/awesome<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>进入 <code>Manage Plugins</code>，默认安装了 <code>6</code> 个插件，但实际上并没有激活</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181037581.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181037581.png"></p>
 <p>老苏看了下文档，使用插件的基本流程如下：</p>
 <ul>
 <li>将插件拷贝到 <code>/yourls/data/user/plugins/插件名/</code> 目录下；</li>
 <li>然后在管理页面激活插件；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181038471.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181038471.png"></p>
 <p>所有的插件都可以使用这样的方式安装启用，有兴趣可以试试</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>YOURLS/YOURLS: 🔗 Y̲our O̲wn U̲R̲L̲ S̲hortener - the 𝑑𝑒 𝑓𝑎𝑐𝑡𝑜 standard self hosted URL shortener in PHP<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1lPVVJMUy9ZT1VSTFM=">https://github.com/YOURLS/YOURLS<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Funkwhale 是一款开源的去中心化的音乐社交平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210521190634.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210521190634.png">
 <meta property="article:published_time" content="2021-05-21T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta property="article:tag" content="音乐">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210521190634.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210521190634.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/05/21/%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%BC%80%E6%BA%90%E9%9F%B3%E4%B9%90%E6%9C%8D%E5%8A%A1%E5%99%A8Funkwhale/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210521190634.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210521190634.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,13 +509,13 @@
 <blockquote>
 <p>这是个多合一的镜像，包含了 <code>Postgres</code>，<code>Redis</code>，<code>Nginx</code> 以及所有需要的文件和配置。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508094647.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508094647.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>funkwhale</code>，然后在 <code>funkwhale</code> 文件夹中再创建两个新的子文件夹，分别命名为 <code>data</code> 和 <code>music</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508101025.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508101025.png"></p>
 <p><code>/data</code> 目录是数据持久化的关键，需修改目录的权限，否则很可能因为权限问题导致容器停止运行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 funkwhale 目录中执行</span></span><br><span class="line"><span class="built_in">chmod</span> 777 data</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508113551.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508113551.png"></p>
 <table>
 <thead>
 <tr>
@@ -538,7 +538,7 @@
 <blockquote>
 <p>如果不需要数据持久化，可以不挂载 <code>/data</code> 目录<br>如果不打算从网页上传音乐文件，<code>/music</code> 目录可以设为只读；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508101946.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508101946.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>找一个不冲突的端口就行</p>
 <table>
 <thead>
@@ -552,7 +552,7 @@
 <td align="center">80</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508102037.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508102037.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -578,12 +578,12 @@
 </tr>
 </tbody></table>
 <p>其中前三项为新增，第四项为修改，要修改为你自己的域名，如果域名带端口，把端口也一并带上，其他的都用的默认值；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508102907.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508102907.png"></p>
 <blockquote>
 <p>熟悉的都知道老苏用了 <code>frp</code> 来做内网穿透，测试发现在这种模式下， <code>NESTED_PROXY</code> 设不设，或者设为0或者1，似乎并没有任何影响。</p>
 </blockquote>
 <p>相对应的反向代理设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508102437.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508102437.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="创建超级用户"><a href="#创建超级用户" class="headerlink" title="创建超级用户"></a>创建超级用户</h2><blockquote>
 <p>超级用户（SuperUser）在老苏看来应该就是管理员吧</p>
 </blockquote>
@@ -594,52 +594,52 @@
 <li>容器必须在运行状态才能执行上面的命令；</li>
 <li>密码至少8个字符，不能都是数字，当然也不能太通用了；</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508120012.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508120012.png"></p>
 <h2 id="开放用户注册"><a href="#开放用户注册" class="headerlink" title="开放用户注册"></a>开放用户注册</h2><p>在浏览器中输入 <code>http://群晖IP:3030</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508131512.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508131512.png"></p>
 <p>用刚才注册的超级用户登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508133133.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508133133.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508141014.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508141014.png"></p>
 <p>在 <code>管理</code> –&gt; <code>设置</code> –&gt; <code>注册者</code> 中，可以开启用户注册，默认是没有开启的，只能由管理员邀请才行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508141759.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508141759.png"></p>
 <h2 id="启用-Subsonic-API"><a href="#启用-Subsonic-API" class="headerlink" title="启用 Subsonic API"></a>启用 Subsonic API</h2><p>在 <code>管理</code> –&gt; <code>设置</code> –&gt; <code>Subsonic</code> 中，默认 <code>Enabled Subsonic API</code> 是启用的，但就安全性而言，<code>Subsonic</code> 协议并不理想，所以如果你并不打算使用客户端，可以关闭这个选项</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508145952.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508145952.png"></p>
 <p>只是启用还不行，还需要进一步的设置。在 <code>管理员</code> –&gt; <code>设置</code> –&gt; <code>Subsonic API 密码</code> 中，为支持 <code>Subsonic API</code> 的音乐播放器设置单独的密码，只要点 <code>请求密码</code> 就可以了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508142705.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508142705.png"></p>
 <p>解锁 <code>Subsonic</code> 之后，官方提供的能和 <code>Funkwhale</code> 配套使用的客户端：<span class="exturl" data-url="aHR0cHM6Ly9mdW5rd2hhbGUuYXVkaW8vYXBwcy8=">https://funkwhale.audio/apps/<i class="fa fa-external-link-alt"></i></span></p>
 <p>老苏用的是 <code>android</code> 客户端 <code>Subsonic Music Streamer</code> 并没有在上面的列表中，但还是可以正常使用</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508150750.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508150750.png"></p>
 <p>所以老苏推荐你看看 <code>Subsonic Apps</code> 列表：<span class="exturl" data-url="aHR0cDovL3d3dy5zdWJzb25pYy5vcmcvcGFnZXMvYXBwcy5qc3A=">http://www.subsonic.org/pages/apps.jsp<i class="fa fa-external-link-alt"></i></span></p>
 <p>这里比官方推荐的 <code>app</code> 更丰富，应该能找到适合你的</p>
 <h2 id="导入音乐"><a href="#导入音乐" class="headerlink" title="导入音乐"></a>导入音乐</h2><p>找到 <code>在库中上传第三方内容</code> –&gt; <code>开始吧</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508152952.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508152952.png"></p>
 <p>填入相关说明后，<code>创建库</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508153154.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508153154.png"></p>
 <p>这个时候就拥有了你自己的音乐库了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508153510.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508153510.png"></p>
 <p>转到 <code>上传</code> 页面 –&gt; <code>导入</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508154606.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508154606.png"></p>
 <p>即可将 <code>/music</code> 目录中的音乐文件导入到你的音乐库中</p>
 <blockquote>
 <p>老苏只拷了3首歌，还是上次研究 <code>音乐解锁unlock-music</code> 留在硬盘里的</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210521191524.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210521191524.png"></p>
 <p>这个时候能看到库的详情了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508154733.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508154733.png"></p>
 <h1 id="听歌"><a href="#听歌" class="headerlink" title="听歌"></a>听歌</h1><p>回到网站首页，可以看到 <code>最近添加</code> 中已经有了刚才加的 3 首歌</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508155159.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508155159.png"></p>
 <p>可以直接播放，也可以添加到播放列表</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508155347.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508155347.png"></p>
 <p>建了一个播放列表</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508160912.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508160912.png"></p>
 <p>手机 app <code>Subsonic</code> 上的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508161050.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508161050.png"></p>
 <h1 id="发布实例"><a href="#发布实例" class="headerlink" title="发布实例"></a>发布实例</h1><p> 如果你想把 <code>Funkwhale</code> 服务器变成一个公共实例，首先要完善服务器的信息</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508170407.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508170407.png"></p>
 <p> 接下来到 <span class="exturl" data-url="aHR0cHM6Ly9uZXR3b3JrLmZ1bmt3aGFsZS5hdWRpby8=">https://network.funkwhale.audio/<i class="fa fa-external-link-alt"></i></span>  添加或者删除你的实例</p>
 <p> 之后可以在 <span class="exturl" data-url="aHR0cHM6Ly9uZXR3b3JrLmZ1bmt3aGFsZS5hdWRpby9kYXNoYm9hcmRzL2Qvb3ZlcnZpZXcvZnVua3doYWxlLW5ldHdvcmstb3ZlcnZpZXc/b3JnSWQ9MSZyZWZyZXNoPTJo">https://network.funkwhale.audio/dashboards/d/overview/funkwhale-network-overview?orgId=1&amp;refresh=2h<i class="fa fa-external-link-alt"></i></span> 找到实例的详情</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210508170707.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210508170707.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>GitHub - ellisist/funkwhale: Forked from <span class="exturl" data-url="aHR0cHM6Ly9jb2RlLmVsaW90YmVycmlvdC5jb20vZnVua3doYWxlL2Z1bmt3aGFsZQ==">https://code.eliotberriot.com/funkwhale/funkwhale<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2VsbGlzaXN0L2Z1bmt3aGFsZQ==">https://github.com/ellisist/funkwhale<i class="fa fa-external-link-alt"></i></span></p>
 <p>GitHub - michaelmob/docker-funkwhale: All-in-one funkwhale docker image.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY2hhZWxtb2IvZG9ja2VyLWZ1bmt3aGFsZQ==">https://github.com/michaelmob/docker-funkwhale<i class="fa fa-external-link-alt"></i></span></p>

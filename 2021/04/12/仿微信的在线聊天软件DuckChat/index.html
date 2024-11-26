@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="DuckChat 是一款开源、可私有化部署、仿微信界面的即时通讯系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png">
 <meta property="article:published_time" content="2021-04-12T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.016Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="IM">
 <meta property="article:tag" content="即时通讯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/04/12/%E4%BB%BF%E5%BE%AE%E4%BF%A1%E7%9A%84%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6DuckChat/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,27 +510,27 @@
 <li><p> 在 <span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vYWxvbmU4OC9kdWNrY2hhdA==">https://gitee.com/alone88/duckchat<i class="fa fa-external-link-alt"></i></span> 下载源代码。</p>
 </li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324104302.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324104302.png"></p>
 <blockquote>
 <p>注意：gitee 需要登录才能下载。</p>
 </blockquote>
 <ol start="3">
 <li> 将下载的 zip 解压到 <code>duckchat</code> 目录</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324105141.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324105141.png"></p>
 <h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>用 SSH 客户端连到群晖。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 duckchat 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/duckchat</span><br></pre></td></tr></table></figure>
 
 <p>因为默认的 <code>http</code> 端口使用了 80 ，所以要指定端口来启动服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh duckchat.sh -http=11180</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324105935.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324105935.png"></p>
 <p>启动成功后，可以在 Docker 中看到状态</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110212.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110212.png"></p>
 <p>安装设置完成后，<code>duckchat</code> 目录中多了一个 <code>duckchat_private</code> 目录，存储了数据库和日志文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324111357.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324111357.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在浏览器中输入 <code>http://群晖IP:11180</code>，就可以看到登录界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121041.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121041.png"></p>
 <p>填写 <code>邀请码</code>，默认是用的 <code>SQLite</code> 做数据库</p>
 <blockquote>
 <p>注意：邀请码一定要填，后面用户注册需要用到，不填是注册不了的。</p>
@@ -564,36 +564,36 @@
 <td align="center"><code>duckchat@akaxin</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121210.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121210.png"></p>
 <blockquote>
 <p>注意：此 MySQL 无法从宿主机直接访问，必须在 Docker 内部访问。</p>
 </blockquote>
 <p>然后 <code>初始化数据</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110551.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110551.png"></p>
 <p>注册一个用户</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110916.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110916.png"></p>
 <p><code>下一步</code>，输入前面设置的<code>邀请码</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121630.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121630.png"></p>
 <p><code>注册并登陆</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121755.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121755.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="Web-端"><a href="#Web-端" class="headerlink" title="Web 端"></a>Web 端</h2><p><code>DuckChat</code> 天然支持 <code>Web</code> 网页，这种方式免去了安装客户端的烦恼，做到了即开即用，在浏览器中输入 <code>http://群晖IP:11180</code> 即可。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324125655.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324125655.png"></p>
 <h2 id="Android-端"><a href="#Android-端" class="headerlink" title="Android 端"></a>Android 端</h2><p>因为官网已经关闭，所以原来的下载地址已经失效了，不过用度娘还是能找到的，我下的版本是 <code>v1.1.0</code></p>
 <p>从启动界面看，<code>DuckChat</code>  给自己定位是社交浏览器，而不仅仅是个聊天工具</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135055.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135055.png"></p>
 <p>在 <code>Web</code> 端没有找到生成二维码的地方，所以需要我们手动输入服务器的地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135256.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135256.png"></p>
 <blockquote>
 <p>注意：官网已关闭，所以 <code>试用站点</code> 是连不上的；</p>
 </blockquote>
 <p>连接服务器成功后，需要登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135530.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135530.png"></p>
 <p>登录成功后，主页会显示错误，原因还是官网已经关闭导致的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135638.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135638.png"></p>
 <p><code>通讯录</code> 界面，能看到好友和群组</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135724.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135724.png"></p>
 <p><code>我</code> 界面，能看到版本信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135823.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135823.png"></p>
 <h2 id="iOS-端"><a href="#iOS-端" class="headerlink" title="iOS 端"></a>iOS 端</h2><p>没有 iOS 设备，所以没试，按官方的说法可以在 <span class="exturl" data-url="aHR0cHM6Ly9pdHVuZXMuYXBwbGUuY29tL2NuL2FwcC9kdWNrY2hhdC9pZDE0MzQxNTM1MTI/bD1lbiZtdD04">AppStore官方下载<i class="fa fa-external-link-alt"></i></span>，只是这么久没人维护，不知道是否已经被下架了？</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>没有找到手机客户端 APP 的源代码，所以最多只能当个网页聊天系统来用。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>

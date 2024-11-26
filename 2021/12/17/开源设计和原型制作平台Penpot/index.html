@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Penpot 是第一个面向跨域团队的开源设计和原型制作平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210513004539.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210513004539.png">
 <meta property="article:published_time" content="2021-12-17T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="原型">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210513004539.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210513004539.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/12/17/%E5%BC%80%E6%BA%90%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%8E%9F%E5%9E%8B%E5%88%B6%E4%BD%9C%E5%B9%B3%E5%8F%B0Penpot/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210513004539.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210513004539.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,7 +506,7 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 docker-compose.yaml</span></span><br><span class="line">wget https://raw.githubusercontent.com/penpot/penpot/main/docker/images/docker-compose.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 config.env</span></span><br><span class="line">wget https://raw.githubusercontent.com/penpot/penpot/main/docker/images/config.env</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210522143354.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210522143354.png"></p>
 <h2 id="docker-compose-yaml"><a href="#docker-compose-yaml" class="headerlink" title="docker-compose.yaml"></a>docker-compose.yaml</h2><p><code>docker-compose.yaml</code> 主要就是看看要不要改端口，虽然涉及到 <code>5</code> 个容器，但是只有前端对外暴露了端口 <code>9001</code>，如果这个端口没有冲突的话，这个文件就不用改了</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">penpot-frontend:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&quot;penpotapp/frontend:latest&quot;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9001</span><span class="string">:80</span></span><br></pre></td></tr></table></figure>
 
@@ -526,18 +526,18 @@
 <p>在 <code>penpot</code> 目录中执行一键启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 penpot 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/penpot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210522134217.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210522134217.png"></p>
 <p>不出意外的话，你会看到 <code>5</code> 个 <code>done</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112111641680.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112111641680.png"></p>
 <p>容器都处于正常运行中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112111644041.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112111644041.png"></p>
 <p>其他可能用到的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键停止</span></span><br><span class="line">docker-compose stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键重启</span></span><br><span class="line">docker-compose restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键删除</span></span><br><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
 
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>老苏没有公网 <code>IP</code>，用 <code>frp</code> 做的内网穿透，但做了泛域名解析，不了解的可以翻翻老苏以前的文章</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112111828624.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112111828624.png"></p>
 <p>进入 <code>自定义标题</code>，新增 <code>WebSocket</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112152633.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112152633.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>老苏尝试过用 <code>88</code> 邮箱配置 <code>SMTP</code>，虽然老苏之前在很多项目都成功配置过 <code>SMTP</code>，但是这一次失败了，所以没办法通过网页注册用户。</p>
 <blockquote>
 <p>大家有兴趣可以试试在 <code>config.env</code> 配置其他的邮箱</p>
@@ -545,28 +545,28 @@
 <p>如果在未配置 <code>SMTP</code> 的情况下启动应用程序，需要创建一个用户才能登录到该应用程序。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">docker <span class="built_in">exec</span> -ti penpot_penpot-backend_1 ./manage.sh create-profile</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112111703445.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112111703445.png"></p>
 <h2 id="开始运行"><a href="#开始运行" class="headerlink" title="开始运行"></a>开始运行</h2><p>在浏览器中输入 <code>http://群晖IP:9001</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210522134255.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210522134255.png"></p>
 <p>输入创建好的用户邮件和密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/0520210522145145.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/0520210522145145.png"></p>
 <p>但是怎么也登不进去，浏览器一直返回 <code>401</code> 错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to load resource: the server responded with a status of 401 (Unauthorized)</span><br></pre></td></tr></table></figure>
 
 <p>需要改为域名登录，也就是 <code>https://pp.laosu.ml</code> 才行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112140174.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112140174.png"></p>
 <p>老苏自己用，所以选择了 <code>Fly solo</code>，如果是团队使用，那就选 <code>Team up</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112146473.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112146473.png"></p>
 <p>界面是中文的，不需要特别设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112150038.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112150038.png"></p>
 <h2 id="导入模板"><a href="#导入模板" class="headerlink" title="导入模板"></a>导入模板</h2><p>可以在这里找到库和模板：<span class="exturl" data-url="aHR0cHM6Ly9wZW5wb3QuYXBwL2xpYnJhcmllcy10ZW1wbGF0ZXMuaHRtbA==">https://penpot.app/libraries-templates.html<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112213020.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112213020.png"></p>
 <p>老苏导入了 <code>Ant-Design-UI-Kit-Lite</code> 和 <code>Interactive-music-app</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112112216224.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112112216224.png"></p>
 <p>进入编辑状态</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112120958273.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112120958273.png"></p>
 <p>原型演示，还支持交互</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112120956062.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112120956062.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>Penpot</code> 拥有多款 <code>UI</code> 组件与样式、交互式原型以及项目设计示例与模板，帮你更快完成项目设计工作。此外，该平台还支持团队多人实时协作编辑，设计稿添加注释等多种团队协作工具。老苏觉得对于产品设计人员而言，是非常有用。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Penpot - Design Freedom for Teams<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wZW5wb3QuYXBwLw==">https://penpot.app/<i class="fa fa-external-link-alt"></i></span></p>

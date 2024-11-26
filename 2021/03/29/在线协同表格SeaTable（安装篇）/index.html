@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="像电子表格一样简单，像数据库一样强大的 SeaTable 。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210322115503.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210322115503.png">
 <meta property="article:published_time" content="2021-03-29T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="表格">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210322115503.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210322115503.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/03/29/%E5%9C%A8%E7%BA%BF%E5%8D%8F%E5%90%8C%E8%A1%A8%E6%A0%BCSeaTable%EF%BC%88%E5%AE%89%E8%A3%85%E7%AF%87%EF%BC%89/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210322115503.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210322115503.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,7 +508,7 @@
 <li>  seaf-server：存储附件（文件和图像）</li>
 </ul>
 <p>下图显示了不同组件如何协同工作：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210322093908.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210322093908.png"></p>
 <ul>
 <li>  MariaDB，Memcache 和 Redis 在各自的 Docker 容器中运行。</li>
 <li>  Redis 用于将消息从 dtable-web / dtable-server 发送到 dtable-events</li>
@@ -525,12 +525,12 @@
 <p>SeaTable 官方文档要求 4 核和 8GB RAM，这个要求对我的小 NUC 来说有点挑战，但是还是值得一试的。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>seatable</code>，然后在 <code>seatable</code> 文件夹中再创建一个新的子文件夹命名为 <code>mysql</code> 。</p>
 <p>在 <code>mysql</code>文件夹上右键–&gt;<code>属性</code>，获取文件的 <code>所在位置</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323093214.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323093214.png"></p>
 <blockquote>
 <p>MySQL 数据的卷目录将用到这个路径</p>
 </blockquote>
 <p>在 <code>seatable</code>文件夹上右键–&gt;<code>属性</code>，获取文件的 <code>所在位置</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323093558.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323093558.png"></p>
 <blockquote>
 <p>SeaTable 数据的卷目录将用到这个路径</p>
 </blockquote>
@@ -556,11 +556,11 @@
 <blockquote>
 <p>注意：您应该在 <code>docker-compose.yml</code> 文件所在的目录中运行上述命令。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323102429.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323102429.png"></p>
 <p>稍等片刻，下载镜像的时间取决于您的网络，我的网络不太好，过程中总是出现</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: net/http: TLS handshake <span class="built_in">timeout</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323113236.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323113236.png"></p>
 <p>如果报错，您可以再继续执行</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
 
@@ -569,15 +569,15 @@
 <blockquote>
 <p>日志在 <code>Docker</code> –&gt; <code>容器</code> –&gt; <code>SeaTable</code> –&gt; <code>详情</code> –&gt; <code>日志</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323114953.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323114953.png"></p>
 <p>然后按键盘的 <code>Ctrl + C</code> 来结束初始化命令。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323115039.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323115039.png"></p>
 <h2 id="启动-Docker-容器"><a href="#启动-Docker-容器" class="headerlink" title="启动 Docker 容器"></a>启动 Docker 容器</h2><p>使用以下命令启动 SeaTable 容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323115337.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323115337.png"></p>
 <p>在 Docker 中你能看到 4 个相关的容器已经启动了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323121031.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323121031.png"></p>
 <h2 id="启动-SeaTable-服务"><a href="#启动-SeaTable-服务" class="headerlink" title="启动 SeaTable 服务"></a>启动 SeaTable 服务</h2><p>现在，您可以启动 SeaTable 服务并创建管理员账号</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 SeaTable 服务</span></span><br><span class="line">docker <span class="built_in">exec</span> -d seatable /shared/seatable/scripts/seatable.sh start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个管理员帐户</span></span><br><span class="line">docker <span class="built_in">exec</span> -it seatable /shared/seatable/scripts/seatable.sh superuser</span><br></pre></td></tr></table></figure>
 
@@ -585,43 +585,43 @@
 <blockquote>
 <p>第一个命令使用 -d 参数表示要在后台运行的服务;<br>第二个命令使用 -it 参数表示它是一个交互式命令;</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323152041.png" alt="涂抹邮箱"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323152041.png" alt="涂抹邮箱"></p>
 <p>接下来，您可以通过浏览器访问 <code>SeaTable</code> 网页了。</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:16080</code>，就可以看到登录界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323152224.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323152224.png"></p>
 <p>用上一步创建的 <code>superuser</code> 的邮箱和密码登录，登录成功就可以看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323152354.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323152354.png"></p>
 <h2 id="设置中文"><a href="#设置中文" class="headerlink" title="设置中文"></a>设置中文</h2><p>右上角 <code>Avatar</code> –&gt; <code>Setting</code> –&gt; <code>Language Setting</code>  从下拉框中选择 <code>简体中文</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323152924.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323152924.png"></p>
 <p>会自动刷新为中文界面</p>
 <h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><p>右上角 <code>Avatar</code> –&gt; <code>进入系统管理</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323153345.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323153345.png"></p>
 <p>在这里可以对用户进行管理，添加插件等操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210323153657.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210323153657.png"></p>
 <h1 id="表单编辑问题"><a href="#表单编辑问题" class="headerlink" title="表单编辑问题"></a>表单编辑问题</h1><p>什么都正常，包括导入excel</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324090707.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324090707.png"></p>
 <p>虽然在导入时有时候会显示服务器忙</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324085335.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324085335.png"></p>
 <p>但是只要编辑就开始转圈，开始还我以为是我机器不行呢，直到朋友 <code>Eduna</code> 告诉我，他也一直在转圈，而我知道他的机器应该是没有性能瓶颈的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324085156.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324085156.png"></p>
 <p>打开浏览器的调试模式，发现 <code>dtable-server</code> 的链接没有带端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210327000831.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210327000831.png"></p>
 <blockquote>
 <p>后来发现论坛里有人反馈了同样的问题： <span class="exturl" data-url="aHR0cHM6Ly9iYnMuc2VhdGFibGUuY24vdC90b3BpYy80MTY=">https://bbs.seatable.cn/t/topic/416<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>这需要修改 <code>dtable_web_settings.py</code> 文件中的 <code>DTABLE_SERVER_URL</code>、<code>DTABLE_SOCKET_URL</code>、<code>DTABLE_WEB_SERVICE_URL</code>、<code>FILE_SERVER_ROOT</code>，加上端口 <code>16080</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210327112915.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210327112915.png"></p>
 <p><code>ccnet.conf</code> 文件中的 <code>SERVICE_URL</code> 也需要加上端口 <code>16080</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210328133519.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210328133519.png"></p>
 <blockquote>
 <p>这两个文件在 <code>/docker/seatable/seatable/conf</code> 目录中</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210328133717.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210328133717.png"></p>
 <p>保存后需要重启 <code>SeaTable</code> 服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -d seatable /shared/seatable/scripts/seatable.sh restart</span><br></pre></td></tr></table></figure>
 
 <p>然后就可以编辑了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20210327113555.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20210327113555.png"></p>
 <p>周五将发布『在线协同表格SeaTable（设置篇）』，讲讲怎么导入和使用模板，敬请期待~</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>seatable/seatable: SeaTable: easy like a spreadsheet, powerful like a database<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXRhYmxlL3NlYXRhYmxl">https://github.com/seatable/seatable<i class="fa fa-external-link-alt"></i></span></p>

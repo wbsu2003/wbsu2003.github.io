@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="neno 是仿照浮墨的开源版本。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061654340.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061654340.png">
 <meta property="article:published_time" content="2022-08-22T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.016Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061654340.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061654340.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/22/%E4%BB%BF%E7%85%A7%E6%B5%AE%E5%A2%A8%E7%9A%84%E5%BC%80%E6%BA%90%E7%AC%94%E8%AE%B0neno/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061654340.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061654340.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +511,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>wbsu2003</code> ，找到 <code>wbsu2003/neno</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061605592.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061605592.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -527,7 +527,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061606283.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061606283.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name neno \</span><br><span class="line">   -p 3434:80 \</span><br><span class="line">   wbsu2003/neno</span><br></pre></td></tr></table></figure>
 
@@ -538,49 +538,49 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 neno </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/neno</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/neno</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3434</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061408797.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061408797.png"></p>
 <h2 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h2><p>进入 <code>设置</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061409868.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061409868.png"></p>
 <p>登录 <code>github</code>，右上角进入 <code>setting</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061506761.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061506761.png"></p>
 <p>左侧菜单拉到底，找到 <code>Developer settings</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061507171.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061507171.png"></p>
 <p>进入 <code>Personal access tokens</code>，点 <code>Generate new token</code> 新建 <code>token</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061432756.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061432756.png"></p>
 <ul>
 <li><code>Note</code>：是用来标识的，知道这个 <code>token</code> 是给哪个应用的；</li>
 <li><code>Expiration</code>：设置过期时间，一般不建议像老苏这样设置不过期的；</li>
 <li><code>Select scopes</code>：只要操作存储库就够了；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061512393.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061512393.png"></p>
 <p>完成后点最下面的 <code>Generate token</code> 按钮</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061518699.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061518699.png"></p>
 <p><code>Make sure to copy your personal access token now. You won’t be able to see it again!</code></p>
 <p>所以要做好备份，如果忘记了，那只能重建了。</p>
 <h2 id="创建-repository"><a href="#创建-repository" class="headerlink" title="创建 repository"></a>创建 repository</h2><p>在右上角 <code>new repository</code> 创建一个新的存储库，类型设为 <code>Private</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061443959.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061443959.png"></p>
 <p>完成之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061445391.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061445391.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><ul>
 <li><code>用户 Token</code>：将获取的 <code>Personal access tokens</code> 填入 ；</li>
 <li><code>用户名</code>：为 <code>github</code> 用户；</li>
 <li><code>neno 数据存储仓库</code>：为上一步新建的私有仓库；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061430876.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061430876.png"></p>
 <h2 id="写笔记"><a href="#写笔记" class="headerlink" title="写笔记"></a>写笔记</h2><p>发第一条笔记</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061425627.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061425627.png"></p>
 <p>回到仓库可以看到有数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061450401.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061450401.png"></p>
 <p>进入目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061533310.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061533310.png"></p>
 <p>格式是 <code>json</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061453474.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061453474.png"></p>
 <p>手机上的测试</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061629959.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061629959.jpg"></p>
 <p>发送成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061630802.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061630802.jpg"></p>
 <p>图片保存在 <code>picData</code> 目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208061631194.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208061631194.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>neno</code> 的功能还是比较多的</p>
 <ul>
 <li>  <strong>svelte+tailwindcss 构建的 PWA 应用</strong></li>

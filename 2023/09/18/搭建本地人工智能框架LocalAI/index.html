@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="LocalAI 是一个用于本地推理的，与 OpenAI API 规范兼容的 REST API。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309141115869.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309141115869.png">
 <meta property="article:published_time" content="2023-09-18T00:45:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309141115869.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309141115869.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/09/18/%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A1%86%E6%9E%B6LocalAI/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309141115869.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309141115869.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,7 +502,7 @@
 </blockquote>
 <p>最吸引老苏的有两点，一个是不需要 <code>GPU</code>，另一点上可以使用消费级硬件，所以准备搭一个试试，至于后续用来干什么，到时候再说</p>
 <p>官方倒是提供了很多示例，比较常见的是机器人，比如：<code>Discord bot</code>、<code>Slack bot</code> 或者 <code>Telegram bot</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309140847519.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309140847519.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <h2 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h2><p>官方没有在 <code>docker hub</code> 上发布镜像，而是发布到了 <code>quay.io</code></p>
 <p>用 <code>SSH</code> 客户端登录到群晖后，依次执行下面的命令</p>
@@ -515,17 +515,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果拉不动的话加个代理</span></span><br><span class="line">docker pull quay.dockerproxy.com/go-skynet/local-ai:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名镜像（如果是通过代理下载的）</span></span><br><span class="line">docker tag quay.dockerproxy.com/go-skynet/local-ai:latest quay.io/go-skynet/local-ai:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除代理镜像（如果是通过代理下载的）</span></span><br><span class="line">docker rmi quay.dockerproxy.com/go-skynet/local-ai:latest</span><br></pre></td></tr></table></figure>
 
 <p>下载完成后，可以在 <code>映像</code> 中找到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202309122132491.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202309122132491.png"></p>
 <h2 id="docker-compose-安装"><a href="#docker-compose-安装" class="headerlink" title="docker-compose 安装"></a>docker-compose 安装</h2><p>将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.6&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">api:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">quay.io/go-skynet/local-ai:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">localai</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8668</span><span class="string">:8080</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./models:/models:cached</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MODELS_PATH=/models</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;/usr/bin/local-ai&quot;</span> ]</span><br></pre></td></tr></table></figure>
 
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202309122254731.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202309122254731.png"></p>
 <p>从日志可以看到，和 <code>Serge</code> 一样，需要 <code>AVX2</code> 指令兼容的 <code>CPU</code></p>
 <h2 id="模型文件"><a href="#模型文件" class="headerlink" title="模型文件"></a>模型文件</h2><p>如果你运行过 <code>Serge</code>，原来下载的 <code>gpt4all.bin</code> 文件是可以直接用的，因为 <code>LocalAI</code> 与 <code>llama.cpp</code> 支持的模型兼容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131643936.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131643936.png"></p>
 <p>否则的话，需要自己下模型文件</p>
 <blockquote>
 <p>老苏把 <code>gpt4all.bin</code>  文件放在了阿里云盘： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWxpeXVuZHJpdmUuY29tL3MvR1FxczM5aWlweWE=">https://www.aliyundrive.com/s/GQqs39iipya<i class="fa fa-external-link-alt"></i></span> </p>
@@ -535,7 +535,7 @@
 <blockquote>
 <p>老苏目前只测试了 <code>gpt4all.bin</code>，所以没法给大家提供指导意见，不要问我下哪个模型。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131748158.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131748158.png"></p>
 <p>当然，<code>LocalAI</code> 是支持多模型文件的，你可以根据需要下载多个模型文件</p>
 <p>关于模型这块，可以看官方文档：<span class="exturl" data-url="aHR0cHM6Ly9sb2NhbGFpLmlvL21vZGVscy8=">https://localai.io/models/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>如果你在浏览器中直接输入 <code>http://群晖IP:8668</code>，会返回 <code>404</code> 错误</p>
@@ -562,16 +562,16 @@
 <li><code>temperature</code> ：用于控制生成文本的多样性。<code>temperature</code> 值越高，生成的文本越随机和多样化，但可能会牺牲一些准确性。相反，<code>temperature</code> 值越低，生成的文本越保守和一致，更加符合模型的训练数据；</li>
 </ul>
 <p>现在来聊个天，比如 <code>how old are you?</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131636358.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131636358.png"></p>
 <p>看看支不支持中文聊天？</p>
 <blockquote>
 <p>提问只要修改 <code>prompt</code> 后面的内容，回答看 <code>text</code> 后面的内容；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131647694.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131647694.png"></p>
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><p>如果你不会 <code>API</code> 工具，用命令行也是可以的，用 <code>SSH</code> 客户端登录到群晖后，执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl http://192.168.0.197:8668/v1/completions -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">     &quot;model&quot;: &quot;gpt4all.bin&quot;,</span></span><br><span class="line"><span class="string">     &quot;prompt&quot;: &quot;how old are you?&quot;,</span></span><br><span class="line"><span class="string">     &quot;temperature&quot;: 0.7</span></span><br><span class="line"><span class="string">   &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131519308.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131519308.png"></p>
 <p>返回的结果在 <code>https://www.json.cn</code> 格式化之后</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span>  </span><br><span class="line">    <span class="attr">&quot;object&quot;</span><span class="punctuation">:</span><span class="string">&quot;text_completion&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span><span class="string">&quot;gpt4all.bin&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;choices&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span>  </span><br><span class="line">        <span class="punctuation">&#123;</span>  </span><br><span class="line">            <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">            <span class="attr">&quot;finish_reason&quot;</span><span class="punctuation">:</span><span class="string">&quot;stop&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">            <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span><span class="string">&quot;I&#x27;m sorry, but as an AI language model, I don&#x27;t have a physical age. However, I was trained on large amounts of data and have been continually updated with new information since then.&quot;</span>  </span><br><span class="line">        <span class="punctuation">&#125;</span>  </span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;usage&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span>  </span><br><span class="line">        <span class="attr">&quot;prompt_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">        <span class="attr">&quot;completion_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">        <span class="attr">&quot;total_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span>  </span><br><span class="line">    <span class="punctuation">&#125;</span>  </span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -579,7 +579,7 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span>  </span><br><span class="line">    <span class="attr">&quot;object&quot;</span><span class="punctuation">:</span><span class="string">&quot;text_completion&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;model&quot;</span><span class="punctuation">:</span><span class="string">&quot;gpt4all.bin&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;choices&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span>  </span><br><span class="line">        <span class="punctuation">&#123;</span>  </span><br><span class="line">            <span class="attr">&quot;index&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">            <span class="attr">&quot;finish_reason&quot;</span><span class="punctuation">:</span><span class="string">&quot;stop&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">            <span class="attr">&quot;text&quot;</span><span class="punctuation">:</span><span class="string">&quot;I&#x27;m sorry, but as an AI language model I do not have a specific age. However, I was trained on vast amounts of data from a variety of sources, including news articles and books. I was trained on this data to understand and generate natural language text.&quot;</span>  </span><br><span class="line">        <span class="punctuation">&#125;</span>  </span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;usage&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span>  </span><br><span class="line">        <span class="attr">&quot;prompt_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">        <span class="attr">&quot;completion_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span>  </span><br><span class="line">        <span class="attr">&quot;total_tokens&quot;</span><span class="punctuation">:</span><span class="number">0</span>  </span><br><span class="line">    <span class="punctuation">&#125;</span>  </span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>虽然老苏用的同一个模型文件，但是感觉上 <code>LocalAI</code> 比 <code>Serge</code> 要快一些，当然也可能是因为 <code>618</code> 升级了内存的缘故</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309131742551.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309131742551.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>go-skynet/LocalAI: :robot: Self-hosted, community-driven, local OpenAI-compatible API. Drop-in replacement for OpenAI running LLMs on consumer-grade hardware. Free Open Source OpenAI alternative. No GPU required. LocalAI is an API to run ggml compatible models: llama, gpt4all, rwkv, whisper, vicuna, koala, gpt4all-j, cerebras, falcon, dolly, starcoder, and many other<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNreW5ldC9Mb2NhbEFJ">https://github.com/go-skynet/LocalAI<i class="fa fa-external-link-alt"></i></span></p>
 <p>LocalAI :: LocalAI documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sb2NhbGFpLmlvLw==">https://localai.io/<i class="fa fa-external-link-alt"></i></span></p>

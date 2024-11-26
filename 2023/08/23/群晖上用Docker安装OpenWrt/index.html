@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="OpenWrt 是适用于嵌入式设备的一个 Linux 发行版。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307140923836.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307140923836.png">
 <meta property="article:published_time" content="2023-08-23T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="软路由">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307140923836.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307140923836.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/08/23/%E7%BE%A4%E6%99%96%E4%B8%8A%E7%94%A8Docker%E5%AE%89%E8%A3%85OpenWrt/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307140923836.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307140923836.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -525,10 +525,10 @@
 </tr>
 </tbody></table>
 <h2 id="查看网卡信息"><a href="#查看网卡信息" class="headerlink" title="查看网卡信息"></a>查看网卡信息</h2><p>登录到群晖上，执行 <code>ifconfig</code> 命令，显示当前网络配置信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132152521.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132152521.png"></p>
 <p>其中，<code>docker0</code> 是 一个虚拟网桥，它用来为 <code>Docker</code> 的容器提供网络连接服务，而 <code>docker-xx</code>则是各个容器的网络接口</p>
 <p>往下拉，还会看到其他的网络接口，而 <code>eth0</code> 通常表示第一个以太网接口，也就是我们的主网卡</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132159853.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132159853.png"></p>
 <h2 id="开启混杂模式"><a href="#开启混杂模式" class="headerlink" title="开启混杂模式"></a>开启混杂模式</h2><p>在正常模式下，当网卡接收到数据包时，会验证它是否属于自己。如果不是，会丢弃数据包，但在混杂模式下，则会接收所有经过网卡的数据包，包括不是发给本机的包</p>
 <p>网上大部分用的命令是 </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip <span class="built_in">link</span> <span class="built_in">set</span> eth0 promisc on</span><br></pre></td></tr></table></figure>
@@ -539,7 +539,7 @@
 <h2 id="创建-macvlan-网络"><a href="#创建-macvlan-网络" class="headerlink" title="创建 macvlan 网络"></a>创建 macvlan 网络</h2><p><code>macvlan</code> 是一种 <code>Linux</code> 的网络驱动，它可以让容器或虚拟机直接连接到物理网络，而不需要使用 <code>NAT</code> 或桥接。<code>macvlan</code> 会为每个容器或虚拟机分配一个独立的 <code>MAC</code> 地址，这样它们就可以在网络上被识别和访问</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 macvlan 网络</span></span><br><span class="line">docker network create -d macvlan \</span><br><span class="line">   --subnet=192.168.0.0/24 \</span><br><span class="line">   --gateway=192.168.0.1 \</span><br><span class="line">   -o parent=eth0 \</span><br><span class="line">   macnet</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307141941209.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307141941209.png"></p>
 <p>其中：</p>
 <ul>
 <li><code>192.168.0.0/24</code> 是老苏当前局域网的网段</li>
@@ -548,12 +548,12 @@
 <li> <code>macnet</code> 为要创建的子网名称，可以随便取</li>
 </ul>
 <p>你需要根据自己的网段进行修改。完成后，可以通过 <code>docker network ls</code> 查看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132238128.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132238128.png"></p>
 <h2 id="网络配置文件"><a href="#网络配置文件" class="headerlink" title="网络配置文件"></a>网络配置文件</h2><p>在 <code>docker</code> 目录中新建 <code>openwrt</code> 及子目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 openwrt 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/openwrt/data/lock</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 openwrt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/openwrt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 network.conf 文件</span></span><br><span class="line"><span class="built_in">touch</span> network.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑 network.conf 文件</span></span><br><span class="line">vi network.conf</span><br></pre></td></tr></table></figure>
 
 <p>现在的目录结构是这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132244590.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132244590.png"></p>
 <p>将下面的内容写入到 <code>network.conf</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">config interface <span class="string">&#x27;loopback&#x27;</span></span><br><span class="line">        option ifname <span class="string">&#x27;lo&#x27;</span></span><br><span class="line">        option proto <span class="string">&#x27;static&#x27;</span></span><br><span class="line">        option ipaddr <span class="string">&#x27;127.0.0.1&#x27;</span></span><br><span class="line">        option netmask <span class="string">&#x27;255.0.0.0&#x27;</span></span><br><span class="line"></span><br><span class="line">config globals <span class="string">&#x27;globals&#x27;</span></span><br><span class="line">        option packet_steering <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line">config interface <span class="string">&#x27;lan&#x27;</span></span><br><span class="line">        option <span class="built_in">type</span> <span class="string">&#x27;bridge&#x27;</span></span><br><span class="line">        option ifname <span class="string">&#x27;eth0&#x27;</span></span><br><span class="line">        option proto <span class="string">&#x27;static&#x27;</span></span><br><span class="line">        option netmask <span class="string">&#x27;255.255.255.0&#x27;</span></span><br><span class="line">        option ip6assign <span class="string">&#x27;60&#x27;</span></span><br><span class="line">        option ipaddr <span class="string">&#x27;192.168.0.11&#x27;</span></span><br><span class="line">        option gateway <span class="string">&#x27;192.168.0.1&#x27;</span></span><br><span class="line">        option dns <span class="string">&#x27;8.8.8.8 114.114.114.114&#x27;</span></span><br><span class="line"></span><br><span class="line">config interface <span class="string">&#x27;vpn0&#x27;</span></span><br><span class="line">        option ifname <span class="string">&#x27;tun0&#x27;</span></span><br><span class="line">        option proto <span class="string">&#x27;none&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -578,7 +578,7 @@
 <h2 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h2><p>这一步，是假设后续你更改了 <code>network.conf</code> 文件，就会需要进入容器内重新加载网络配置，而不需要重启容器，这样会更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it openwrt /bin/ash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载网络配置</span></span><br><span class="line">/etc/init.d/network restart</span><br><span class="line"></span><br><span class="line"><span class="comment">#退出容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307142209093.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307142209093.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><blockquote>
 <p>这里需要特别说明的是，即便你启用了 <code>tailscale</code> 子网路由，从远程访问 <code>http://192.168.0.11</code> 也是无法打开登录界面的，需要在局域网登录后，在 <code>Web</code> 管理页面取消 <code>只允许内网访问</code> 才行</p>
 </blockquote>
@@ -586,15 +586,15 @@
 <blockquote>
 <p>默认用户： <code>root</code>，密码为空</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132314791.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132314791.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132316241.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132316241.png"></p>
 <p>首先当然是设置密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307132336113.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307132336113.png"></p>
 <p>默认情况下，是开启了 <code>Dropbear</code> 实例的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307142057080.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307142057080.png"></p>
 <p>所以你可以用 <code>SSH</code> 客户端登录到 <code>OpenWrt</code>，账号密码和 <code>Web</code> 是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307142055929.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307142055929.png"></p>
 <p>接下来，就是慢慢学习了，如果有时间的话 &#128514;</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>SuLingGG/OpenWrt-Docker: Build OpenWrt Docker Images For Raspberry Pi 1~4 (Daily Update)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N1TGluZ0dHL09wZW5XcnQtRG9ja2Vy">https://github.com/SuLingGG/OpenWrt-Docker<i class="fa fa-external-link-alt"></i></span></p>

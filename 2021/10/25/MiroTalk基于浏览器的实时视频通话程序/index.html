@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="🚀基于浏览器 WebRTC 技术实现的实时视频通话、聊天室和屏幕共享应用🚀">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061914708.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061914708.png">
 <meta property="article:published_time" content="2021-10-25T10:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="ngrok">
 <meta property="article:tag" content="视频会议">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061914708.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061914708.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/10/25/MiroTalk%E5%9F%BA%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%AE%9E%E6%97%B6%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D%E7%A8%8B%E5%BA%8F/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061914708.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061914708.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +514,7 @@
 </blockquote>
 <p>官网提供了 <code>Dockerfile</code> 和 <code>docker-compose.yml</code>，从 <code>docker-compose.yml</code> 看是可以直接运行而不用预先构建</p>
 <p><code>Dockerfile</code> 在构建过程中各种报错，应该是跟网络有关</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061108868.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061108868.png"></p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">14</span>-alpine </span><br><span class="line"><span class="comment"># https://hub.docker.com/_/node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /usr/src/app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 尝试使用 https 而不是 http</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> sed -i -e <span class="string">&#x27;s/http:/https:/&#x27;</span> /etc/apk/repositories</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用阿里镜像 https://mirrors.aliyun.com</span></span><br><span class="line"><span class="comment">#RUN sed -i &#x27;s/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g&#x27; /etc/apk/repositories</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache \</span></span><br><span class="line"><span class="language-bash">bash \</span></span><br><span class="line"><span class="language-bash">vim</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> .env.template ./.env</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [ <span class="string">&quot;npm&quot;</span>, <span class="string">&quot;start&quot;</span> ]</span></span><br></pre></td></tr></table></figure>
 
 <p>解决报错经历的过程：</p>
@@ -526,14 +526,14 @@
 <p>构建镜像和容器运行的基本命令如下👇</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载原代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/miroslavpejic85/mirotalk.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 github 慢或者访问不了</span></span><br><span class="line">git <span class="built_in">clone</span> https://hub.fastgit.org/miroslavpejic85/mirotalk.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> mirotalk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t wbsu2003/mirotalk:v1 . --network=host</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成容器(使用ngrok)</span></span><br><span class="line">docker run -it --name=mirotalk \</span><br><span class="line">-p 3330:3000 \</span><br><span class="line">-e NGROK_ENABLED=<span class="literal">true</span> \</span><br><span class="line">-e NGROK_AUTH_TOKEN=&lt;Your ngrok Authtoken&gt; \ <span class="comment"># 你的 ngrok Authtoken</span></span><br><span class="line">wbsu2003/mirotalk:v1</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061700582.png" alt="ngrok"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061700582.png" alt="ngrok"></p>
 <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>镜像中内置了 <code>ngrok</code>，打开 <span class="exturl" data-url="aHR0cHM6Ly9uZ3Jvay5jb20v">https://ngrok.com<i class="fa fa-external-link-alt"></i></span> ，如果没有账号可以注册一个，然后点 <code>Get started for free</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061458613.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061458613.png"></p>
 <p>获取你的 <code>Authtoken</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061500703.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061500703.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>mirotalk</code> ，选择第二个 <code>wbsu2003/mirotalk</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061243168.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061243168.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行</p>
 <table>
 <thead>
@@ -547,7 +547,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061248528.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061248528.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -568,40 +568,40 @@
 <td align="center">默认为 <code>mirotalk_default_secret</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061507006.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061507006.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>打开日志，找到 <code>server_tunnel</code> 后面的地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061512164.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061512164.png"></p>
 <p>在浏览器中打开这个地址就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061252363.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061252363.png"></p>
 <p>点 <code>TRY NOW</code> 新建一个呼叫</p>
 <blockquote>
 <p>默认房间号是随机生成的，你可以自己起名字</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061309766.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061309766.png"></p>
 <blockquote>
 <p>需要 <code>https</code> 协议才能让浏览器使用音视频设备，如果你用 <code>http://群晖IP:3330</code> 访问会一直卡在 <code>Loading</code>，浏览器中的错误是 <code>net::ERR_CERT_COMMON_NAME_INVALID</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061257745.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061257745.png"></p>
 <p>选 <code>允许</code>，否则不会有图像和声音</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061519908.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061519908.png"></p>
 <p>给自己取个名字，然后 <code>Join meeting</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061521117.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061521117.png"></p>
 <p>接下来就可以邀请别人入会了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061522281.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061522281.png"></p>
 <p>用另外一台机器打开发送的链接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061534311.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061534311.png"></p>
 <p>分享支持 <code>整个屏幕</code>、<code>窗口</code> 和 <code>Chrome 标签页</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061544299.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061544299.png"></p>
 <p>屏幕共享</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061538899.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061538899.png"></p>
 <p>白板</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061539244.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061539244.png"></p>
 <p>录像成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061558240.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061558240.png"></p>
 <p>停止时会自动下载，格式是 <code>webm</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061601472.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061601472.png"></p>
 <p>会议需要的常用功能都能在 <code>MiroTalk</code> 找到，让老苏很意外的是居然还有游戏</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061541761.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061541761.png"></p>
 <p>大家可以自己安装体验一下，如果不想安装又想体验，可以去官方提供的地址👇</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9taXJvdGFsay5oZXJva3VhcHAuY29tLw==">https://mirotalk.herokuapp.com<i class="fa fa-external-link-alt"></i></span></li>
@@ -611,13 +611,13 @@
 <blockquote>
 <p>其实老苏在用 <code>frp</code> 之前一直用的就是 <code>ngrok</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061332907.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061332907.png"></p>
 <p>看了一下浏览器中的错误是 <code>net::ERR_CONNECTION_REFUSED</code></p>
 <blockquote>
 <p>老苏的域名没有备案，所以是需要 <code>域名+端口</code> 访问的</p>
 </blockquote>
 <p>但是 <code>MiroTalk</code> 会吃掉后面的端口，不清楚导致的原因，所以只能先这么地了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110061847877.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110061847877.png"></p>
 <p>还可以考虑一键部署到 <code>Heroku</code> 或者 <code>Railway</code></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>miroslavpejic85/mirotalk: 🚀 Powered by WebRTC, Real-time video call, chat room and screen sharing entirely browser based 🚀<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pcm9zbGF2cGVqaWM4NS9taXJvdGFsaw==">https://github.com/miroslavpejic85/mirotalk<i class="fa fa-external-link-alt"></i></span></p>

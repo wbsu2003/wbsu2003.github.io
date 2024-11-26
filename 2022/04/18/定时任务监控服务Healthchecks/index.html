@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Healthchecks 是用 Python &amp; Django 编写的 cron 监控工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291158573.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291158573.png">
 <meta property="article:published_time" content="2022-04-18T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.393Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291158573.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291158573.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/04/18/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1Healthchecks/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291158573.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291158573.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,29 +509,29 @@
 </blockquote>
 <p><code>Healthchecks</code> 带有 <code>Web</code> 仪表板、<code>API</code>、<code>25+</code> 个用于发送通知的集成、每月电子邮件报告、<code>WebAuthn 2FA</code> 支持、团队管理功能：项目、团队成员、只读访问。</p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>用局域网 <code>IP</code> 访问虽然能看到主界面，但是登录后会显示跨域问题，官方文档中 <span class="exturl" data-url="aHR0cHM6Ly9oZWFsdGhjaGVja3MuaW8vZG9jcy9zZWxmX2hvc3RlZF9kb2NrZXI=">https://healthchecks.io/docs/self_hosted_docker<i class="fa fa-external-link-alt"></i></span> 的 <code>TLS Termination</code> 章节写了要求，但是没给出具体配置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112312021649.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112312021649.png"></p>
 <p>老苏用 <code>Nginx Proxy Manager</code> 做了反代，准备用域名 <code>https://hc.laosu.ml</code> 来访问（你要准备自己的域名，不是用老苏的）</p>
 <blockquote>
 <p>其中 <code>http://192.168.0.197:8000</code> 为群晖的 <code>IP</code> + <code>Healthchecks</code> 的端口</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204142237206.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204142237206.png"></p>
 <p><code>SSL</code> 部分都勾选了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204142239643.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204142239643.png"></p>
 <p>还需在 <code>Advanced</code> –&gt; <code>Custom Nginx Configuration</code> 中填入下面的脚本，否则和在局域网访问结果一样</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span>              http://192.168.0.197:8000;</span><br><span class="line">  <span class="attribute">proxy_set_header</span>        X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span>        X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  <span class="attribute">proxy_set_header</span>        X-Forwarded-Proto https;</span><br><span class="line">  <span class="attribute">proxy_set_header</span>        Host <span class="variable">$http_host</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271842450.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271842450.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>healthchecks</code> ，选择第二个 <code>galexrt/healthchecks</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>如果需要最新的版本，只能用命令行 <code>docker pull ghcr.io/galexrt/healthchecks:main</code> 下载，因为这个镜像自 <code>v1.22.0</code> 之后，不再推送到 <code>Docker Hub</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112301951419.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112301951419.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>healthchecks</code>，再建一个子目录 <code>data</code>，需要给 <code>data</code> 赋予 <code>Everyone</code> 用户 <code>读写权限</code></p>
 <blockquote>
 <p>如果这一步没做，会导致容器启动时 <code>SQLite</code> 数据库创建失败，最终引起 <code>CPU</code> 占用高居不下</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112311947960.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112311947960.png"></p>
 <table>
 <thead>
 <tr>
@@ -546,7 +546,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011321199.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011321199.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -566,7 +566,7 @@
 <td align="center"><code>8000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112302100394.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112302100394.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -629,14 +629,14 @@
 <li>虽然设了邮箱，但老苏并没有验证过发邮件，<code>PING_EMAIL_DOMAIN</code> 可能应该是要设为 <code>88.com</code> ；</li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011335295.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011335295.png"></p>
 <p><code>TZ</code> 记得要改为 <code>Asia/Shanghai</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011332064.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011332064.png"></p>
 <p><code>DEBUG</code> 记得要改为 <code>False</code>，否则 <code>Web</code> 界面的顶部会显示 <code>Running in debug mode, do not use in production.</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202150959570.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202150959570.png"></p>
 <p>更多的环境参数可以参考：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2dhbGV4cnQvaGVhbHRoY2hlY2tzLw==">https://hub.docker.com/r/galexrt/healthchecks/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>https://hc.laosu.ml</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011341363.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011341363.png"></p>
 <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>要登录还需要创建一个 <code>Healthchecks</code> 超级用户，需进入终端机</p>
 <blockquote>
 <p>方法：「终端机」 =&gt; 「新增」 =&gt; 「通过命令启动」=&gt; 「请输入一个命令」=&gt; 「sh」</p>
@@ -645,11 +645,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建超级用户</span></span><br><span class="line">python3 /healthchecks/manage.py createsuperuser</span><br></pre></td></tr></table></figure>
 
 <p>输入邮件和密码即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011338801.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011338801.png"></p>
 <h2 id="添加项目"><a href="#添加项目" class="headerlink" title="添加项目"></a>添加项目</h2><p>在浏览器中输入 <code>https://hc.laosu.ml</code> ，用上一步创建的账号登录，默认会把自己作为第一个监控项目</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011115831.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011115831.png"></p>
 <p>通过 <code>Add Check</code> 可以添加您要监控的单个服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201011144329.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201011144329.png"></p>
 <p>设置很简单，而且右上角提供了在线帮助，点 <code>Docs</code> 菜单随时可以查阅</p>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p><code>healthchecks</code> 可用于提供监测服务，比如监测 <code>Docker</code> 的监控状况。</p>
 <p>例如：每 <code>60</code> 秒用 <code>curl</code> 检测一次容器是否能在 <code>10</code> 秒内回应请求</p>
@@ -676,22 +676,22 @@
 </li>
 </ol>
 <p>老苏用了第二个方法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204141628827.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204141628827.png"></p>
 <p>添加 <code>healthchecks</code> 之后，用 <code>docker ps</code> 查看 <code>STATUS</code> 状态会有标识</p>
 <blockquote>
 <p>如果要查看日志，可以用 <code>docker inspect --format=&#39;&#123;&#123;json .State.Health&#125;&#125;&#39; webamp</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202150918126.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202150918126.png"></p>
 <p>或者从 <code>portainer</code> 中查看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203121325560.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203121325560.png"></p>
 <p>过一会儿，状态会从 <code>starting</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204142247879.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204142247879.png"></p>
 <p>转变为 <code>healthy</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204142301203.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204142301203.png"></p>
 <p>对于 <code>unhealthy</code> 的容器，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202150925910.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202150925910.png"></p>
 <p>或者</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202150928457.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202150928457.png"></p>
 <p>可以采用 <code>Docker Autoheal</code> 来监控和重启，不过老苏还没开始研究。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>healthchecks/healthchecks: A cron monitoring tool written in Python &amp; Django<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlYWx0aGNoZWNrcy9oZWFsdGhjaGVja3M=">https://github.com/healthchecks/healthchecks<i class="fa fa-external-link-alt"></i></span></p>

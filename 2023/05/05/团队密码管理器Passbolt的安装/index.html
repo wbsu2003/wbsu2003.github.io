@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Passbolt 是一款为协作而设计的免费开源的密码管理器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301231442248.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301231442248.png">
 <meta property="article:published_time" content="2023-05-05T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="密码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301231442248.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301231442248.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/05/05/%E5%9B%A2%E9%98%9F%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8Passbolt%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301231442248.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301231442248.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -615,30 +615,30 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 passbolt 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/passbolt/&#123;data,gpg,jwt&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 passbolt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/passbolt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 &#123;gpg,jwt&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222055597.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222055597.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>要等一会儿，可能时间有点长，日志中看到 <code>Passbolt installation success! Enjoy! ☮</code> 才表示安装成功，老苏的小机器上花了 <code>36</code> 秒</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222218414.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222218414.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:7380</code> 就能看到主界面</p>
 <blockquote>
 <p>虽然支持多语言切换，但是很遗憾没有中文</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222038909.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222038909.png"></p>
 <p>运行之前，还需要创建管理员账号</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建您的第一个管理员用户</span></span><br><span class="line">docker exec passbolt su -m -c &quot;bin/cake passbolt register_user -u your@email.com -f yourname -l surname -r admin&quot; -s /bin/sh www-data</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示例</span></span><br><span class="line">docker exec pb-passbolt su -m -c &quot;bin/cake passbolt register_user -u wbsu2003@gmail.com -f lao -l su -r admin&quot; -s /bin/sh www-data</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222215368.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222215368.png"></p>
 <p>用创建的管理员邮件 <code>wbsu2003@gmail.com</code> 登录，并勾选 <code>I accept the terms</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222100002.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222100002.png"></p>
 <p>需要检查邮箱来获得认证链接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222102118.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222102118.png"></p>
 <p>如果邮件设置没问题，一会儿就会收到邮件，点中间的 <code>get started</code> 进行验证</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301231155687.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301231155687.png"></p>
 <p>看到这个界面就验证 <code>OK</code> 了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222147901.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222147901.png"></p>
 <p>点 <code>Download extension</code> 下载插件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222149538.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222149538.png"></p>
 <p>安装成功后，主界面也有提示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222150487.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222150487.png"></p>
 <p>现在要设置主密码，以后只要记住主密码就可以了</p>
 <ul>
 <li>长度至少为 <code>8</code>个字符</li>
@@ -646,15 +646,15 @@
 <li>包含字母和数字</li>
 <li>包含特殊字符（如 <code>/</code>或<code>*</code>或 <code>%</code>）</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222151850.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222151850.png"></p>
 <p>最后会生成一个包含密钥的恢复工具包，其实就是个 <code>txt</code> 文件，文件的内容是 <code>PGP PRIVATE KEY</code>，它会自动下载，一定要保存到安全的地方</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222157723.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222157723.png"></p>
 <p>选一个颜色并输入 <code>3</code>个字符</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222158847.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222158847.png"></p>
 <p>设置完成后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301222159613.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301222159613.png"></p>
 <p><code>sign out</code> 之后会回到登录界面，只要输入主密码即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301231431680.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301231431680.png"></p>
 <p>接下来就可以新建密码开始使用了，从官方的说明看，目前已经支持浏览器扩展和移动端应用，桌面应用程序即将推出。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Passbolt | The open source password manager for teams<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucGFzc2JvbHQuY29tLw==">https://www.passbolt.com/<i class="fa fa-external-link-alt"></i></span></p>

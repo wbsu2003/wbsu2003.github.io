@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="RSS Funnel 是一个多功能的 RSS 工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403250926243.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403250926243.png">
 <meta property="article:published_time" content="2024-03-25T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.393Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="RSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403250926243.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403250926243.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/03/25/%E5%A4%9A%E5%8A%9F%E8%83%BD%E7%9A%84RSS%E5%B7%A5%E5%85%B7RSS%20Funnel/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403250926243.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403250926243.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +514,7 @@
 <li>又有更多用法：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nob3V5YS9yc3MtZnVubmVsL3dpa2kvRmlsdGVyLWNvbmZpZw==">https://github.com/shouya/rss-funnel/wiki/Filter-config<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p><code>RSS Funnel</code> 是通过一个名为 <code>funnel.yaml</code> 的配置文件，来定义源和服务器设置的，原本老苏博客上的 <code>RSS</code> 源只提供了摘要而不是全文</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403181632419.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403181632419.png"></p>
 <p>下面是老苏准备的一个示例文件，可以提取到全文</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">endpoints:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">path:</span> <span class="string">/laosu-blog.xml</span></span><br><span class="line">    <span class="attr">note:</span> <span class="string">老苏的博客</span></span><br><span class="line">    <span class="attr">source:</span> <span class="string">https://laosu.tech/atom.xml</span></span><br><span class="line">    <span class="attr">filters:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">full_text:</span> &#123;&#125;</span><br><span class="line">      <span class="bullet">-</span> <span class="attr">simplify_html:</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
 
@@ -530,7 +530,7 @@
 </ul>
 <p>更多<code>filters</code> 参数设置请参考官方文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nob3V5YS9yc3MtZnVubmVsL3dpa2kvRmlsdGVyLWNvbmZpZw==">https://github.com/shouya/rss-funnel/wiki/Filter-config<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="ghcr-io-镜像下载"><a href="#ghcr-io-镜像下载" class="headerlink" title="ghcr.io 镜像下载"></a>ghcr.io 镜像下载</h2><p>官方的镜像没有发布在 <code>docker hub</code>，而是在 <code>ghcr.io</code>，所以直接用命令行来安装。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403162023021.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403162023021.png"></p>
 <p>在 <code>SSH</code> 客户端中依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull ghcr.io/shouya/rss-funnel:latest</span><br></pre></td></tr></table></figure>
 
@@ -581,17 +581,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 rss-funnel 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/rss-funnel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 rss-funnel 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/rss-funnel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 funnel.yaml 和 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:4090</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403162044242.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403162044242.png"></p>
 <p>点击链接可以看到每篇文章都是显示的全文</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403162039622.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403162039622.png"></p>
 <p>切换到 <code>Raw</code> 模式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403181645880.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403181645880.png"></p>
 <p>访问 <code>http://群晖IP:4090/laosu-blog.xml</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403181650563.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403181650563.png"></p>
 <p>虽然中文都显示为乱码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403181736655.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403181736655.png"></p>
 <p>但不影响在 <code>FreshRSS</code> 中订阅</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403181736252.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403181736252.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>shouya/rss-funnel: An RSS multi-tool<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nob3V5YS9yc3MtZnVubmVs">https://github.com/shouya/rss-funnel<i class="fa fa-external-link-alt"></i></span></p>
 <p>RSS Funnel Inspector<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yc3MtZnVubmVsLWRlbW8uZmx5LmRldi8=">https://rss-funnel-demo.fly.dev<i class="fa fa-external-link-alt"></i></span></p>

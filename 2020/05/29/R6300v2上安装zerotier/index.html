@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="记录了在网件路由器R6300v2上安装zerotier的过程和遇到的坑">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png">
 <meta property="article:published_time" content="2020-05-29T13:57:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="netgear">
 <meta property="article:tag" content="路由器">
 <meta property="article:tag" content="R6300V2">
 <meta property="article:tag" content="zerotier">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/29/R6300v2%E4%B8%8A%E5%AE%89%E8%A3%85zerotier/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,7 +497,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><h1 id="过程回顾"><a href="#过程回顾" class="headerlink" title="过程回顾"></a>过程回顾</h1><h2 id="安装-opkg-软件源"><a href="#安装-opkg-软件源" class="headerlink" title="安装 opkg 软件源"></a>安装 opkg 软件源</h2><p>winscp + putty 登录到路由器上。先要在路由器中设置允许ssh登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590203251195-1590203251197.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590203251195-1590203251197.png" alt="title"></p>
 <h3 id="创建软件安装目录"><a href="#创建软件安装目录" class="headerlink" title="创建软件安装目录"></a>创建软件安装目录</h3><p>依次执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /jffs</span><br><span class="line"><span class="built_in">mkdir</span> /jffs/opt</span><br><span class="line"><span class="built_in">ln</span> -nsf /jffs/opt /tmp/opt</span><br></pre></td></tr></table></figure>
 
@@ -507,14 +507,14 @@
 <p>执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://qnapware.zyxmon.org/binaries-armv7/installer/entware_install_arm.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590166646192-1590166646246.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590166646192-1590166646246.png" alt="title"></p>
 <ul>
 <li>然后运行脚本：</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./entware_install_arm.sh</span><br></pre></td></tr></table></figure>
 
 <p>等待脚本运行完毕，看到 Congratulations! 就说明安装成功了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590167344866-1590167344868.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590167344866-1590167344868.png" alt="title"></p>
 <h3 id="自动挂载opt分区"><a href="#自动挂载opt分区" class="headerlink" title="自动挂载opt分区"></a>自动挂载opt分区</h3><p>在/jffs/scripts位置建立文件，可以先在电脑上建立文本文件，再用WinSCP传进去文件名: <code>post-mount</code></p>
 <p>内容如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ln</span> -nsf /jffs/opt /tmp/opt</span><br></pre></td></tr></table></figure>
@@ -526,65 +526,65 @@
 <h2 id="安装、配置-zerotier"><a href="#安装、配置-zerotier" class="headerlink" title="安装、配置 zerotier"></a>安装、配置 zerotier</h2><h3 id="安装-zerotier"><a href="#安装-zerotier" class="headerlink" title="安装 zerotier"></a>安装 zerotier</h3><p>依次执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install zerotier</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590168332375-1590168332377.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590168332375-1590168332377.png" alt="title"></p>
 <h3 id="运行-zerotier"><a href="#运行-zerotier" class="headerlink" title="运行 zerotier"></a>运行 zerotier</h3><p>依次执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modprobe tun</span><br><span class="line">zerotier-one -d</span><br><span class="line">zerotier-cli info</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590168486543-1590168486546.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590168486543-1590168486546.png" alt="title"></p>
 <p>居然是offline？</p>
 <h3 id="加入申请到的网络ID"><a href="#加入申请到的网络ID" class="headerlink" title="加入申请到的网络ID"></a>加入申请到的网络ID</h3><p>执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli <span class="built_in">join</span> 8b***********9</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590168884793-1590168884794.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590168884793-1590168884794.png" alt="title"></p>
 <h3 id="获取-ip-值"><a href="#获取-ip-值" class="headerlink" title="获取 ip 值"></a>获取 ip 值</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590202519667-1590202519727.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590202519667-1590202519727.png" alt="title"></p>
 <p>显示 <code>REQUESTING_CONFIGURATION PRIVATE zt0 -</code> 而不是IP，进入zerotier的后台设置界面，也没看到需要授权的设备，所以可以肯定存在问题。</p>
 <p>仔细翻看原帖子的跟帖，也有不少人和我遇到同样的问题。接下来开始各种尝试。</p>
-<h3 id="开启从互联网设置"><a href="#开启从互联网设置" class="headerlink" title="开启从互联网设置"></a>开启从互联网设置</h3><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590203097622-1590203097624.png" alt="title"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590203068306-1590203068309.png" alt="title"></p>
+<h3 id="开启从互联网设置"><a href="#开启从互联网设置" class="headerlink" title="开启从互联网设置"></a>开启从互联网设置</h3><p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590203097622-1590203097624.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590203068306-1590203068309.png" alt="title"></p>
 <p>故障依旧</p>
 <p>查了很多文档后发现 Entware 还可以安装到 U盘，虽然会让路由器后面带个小辫子，但是总归还是要尝试一下的。</p>
 <h2 id="将-Entware-装到-U盘"><a href="#将-Entware-装到-U盘" class="headerlink" title="将 Entware 装到 U盘"></a>将 Entware 装到 U盘</h2><p>梅林固件自带一个entware.sh的安装脚本，但是要求必须插上一个 ext4 等 linux 文件系统的 U盘。可以找个 U盘，用 DiskGenius 可以格式化成 ext4 格式。</p>
 <p>执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590205045828-1590205045831.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590205045828-1590205045831.png" alt="title"></p>
 <p>可以看到 U盘 挂载成功，netgear是 U盘的卷标，接下来执行。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entware-setup.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590205205693-1590205205695.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590205205693-1590205205695.png" alt="title"></p>
 <p>安装 zerotier</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590205562115-1590205562117.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590205562115-1590205562117.png" alt="title"></p>
 <p>依次运行：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modprobe tun</span><br><span class="line">zerotier-one -d</span><br><span class="line">zerotier-cli info</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590206488931-1590206488932.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590206488931-1590206488932.png" alt="title"></p>
 <p>成功上线，而且是最新的1.4.6版本</p>
 <p>执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli <span class="built_in">join</span> 8b***********9</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590207762304-1590207762307.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590207762304-1590207762307.png" alt="title"></p>
 <p>这次居然是加入网络ID失败，在执行一次，很莫名其妙的又ok了，接下来执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590208320717-1590208320723.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590208320717-1590208320723.png" alt="title"></p>
 <p>显示 <code>ACCESS_DENIED PRIVATE</code>，这是需要在zerotier后台页面授权，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590208451665-1590208451668.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590208451665-1590208451668.png" alt="title"></p>
 <p>勾选之后，再次执行：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590208598768-1590208598772.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590208598768-1590208598772.png" alt="title"></p>
 <p>可以看到已经获取到了后台分配的IP地址。先查询下所有iptables情况：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -v -L INPUT -n --line-numbers </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590209134536-1590209134539.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590209134536-1590209134539.png" alt="title"></p>
 <p>添加一条 <code>iptables</code>:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT 1 -i ztyqb3hz7p -j ACCEPT</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590209538703-1590209538706.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590209538703-1590209538706.png" alt="title"></p>
 <p>如果你不确定虚拟网卡的名词，可以用 <code>ifconfig</code> 查一下。我这里的虚拟网卡名即为: <code>ztyqb3hz7p</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590211715737-1590211715740.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590211715737-1590211715740.png" alt="title"></p>
 <p>重启zerotier</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall zerotier-one</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
 
@@ -598,7 +598,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;iptables -t nat -A PREROUTING -d 192.168.191.10 -p tcp --dport 80 -j DNAT --to-destination 192.168.0.1:80&quot;</span> &gt;&gt; /jffs/scripts/nat-start</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/opt/etc/init.d/S90zerotier-one.sh&quot;</span> &gt;&gt; /jffs/scripts/nat-start</span><br><span class="line"><span class="built_in">chmod</span> a+rx /jffs/scripts/*</span><br></pre></td></tr></table></figure>
 
 <p>启动脚本放到相应目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590212628810-1590212628814.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590212628810-1590212628814.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 /opt/etc/init.d/S90zerotier-one.sh</span><br></pre></td></tr></table></figure>
 
 <p>S90zerotier-one.sh 脚本内容：</p>
@@ -616,7 +616,7 @@
 <p>获取脚本文件的权限，命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> a+rx /jffs/scripts/firewall-start</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/23/1590213979104-1590213979107.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/23/1590213979104-1590213979107.png" alt="title"></p>
 <h2 id="设置entware开机生效"><a href="#设置entware开机生效" class="headerlink" title="设置entware开机生效"></a>设置entware开机生效</h2><p>重启后在日志中看到 <code>admin: Could not start Entware</code></p>
 <p>在/jffs/scripts位置建立文件<code>post-mount</code> , 把u盘中的 entware 挂载到 opt，内容如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$1</span>&quot;</span> = <span class="string">&quot;/tmp/mnt/netgear&quot;</span> ] ; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">ln</span> -nsf <span class="variable">$1</span>/entware /tmp/opt</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>

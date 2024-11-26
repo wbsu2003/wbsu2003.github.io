@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="SerpBear 是一款开源搜索引擎位置跟踪应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052207339.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052207339.png">
 <meta property="article:published_time" content="2023-01-25T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="搜索">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052207339.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052207339.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/01/25/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BD%8D%E7%BD%AE%E8%B7%9F%E8%B8%AA%E5%BA%94%E7%94%A8SerpBear/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052207339.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052207339.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,18 +510,18 @@
 </ul>
 <p>从特点的描述看，可能对 <code>SEO</code> 优化有帮助，但是说实话，老苏并不太了解这方面的东西；</p>
 <p>来一张官方的动图自己感受一下，再决定是否要继续往下看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212051856320.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212051856320.gif"></p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p><code>SerpBear</code>使用第三方网站抓取工具，如 <code>ScrapingAnt</code>、<code>ScrapingRobot</code> 或您给定的代理 <code>ips</code> 来抓取谷歌搜索结果，以查看您的域名是否出现在给定关键字的搜索结果中。</p>
 <p>老苏以<code>ScrapingAnt</code> 为例，每月可以免费查找 <code>10,000</code> 次，需要先注册以获取 <code>API</code>。</p>
 <p>打开 <span class="exturl" data-url="aHR0cHM6Ly9zY3JhcGluZ2FudC5jb20v">https://scrapingant.com<i class="fa fa-external-link-alt"></i></span> 注册用户</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011119178.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011119178.png"></p>
 <p>登录后可以获取到 <code>API token</code>，保存好，后面会用到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011123911.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011123911.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>serpbear</code> ，选择第一个 <code>towfiqi/serpbear</code>，双击直接下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052048457.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052048457.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>serpbear</code>，并在其中建一个子文件夹 <code>data</code>，需要给 <code>data</code> 目录新增 <code>Everyone</code> 的读写权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212041146339.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212041146339.png"></p>
 <table>
 <thead>
 <tr>
@@ -536,7 +536,7 @@
 <td align="center">存放数据库和设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052055691.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052055691.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -552,7 +552,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052055668.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052055668.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -588,7 +588,7 @@
 <blockquote>
 <p><code>SECRET</code> 和 <code>APIKEY</code> 老苏还是用 <code>birwarden</code> 的密码生成器生成的，当然也可以用 <code>openssl rand -base64 长度</code> 来生成</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212052106516.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212052106516.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 serpbear 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/serpbear/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/serpbear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name serpbear \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   -p 3377:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/data \</span><br><span class="line">   -e USER=admin \</span><br><span class="line">   -e PASSWORD=0123456789 \</span><br><span class="line">   -e SECRET=4715aed3216f7b0a38e6b534a958362654e96d10fbc04700770d572af3dce43625dd \</span><br><span class="line">   -e APIKEY=5saedXklbslhnapihe2pihp3pih4fdnakhjwq5 \</span><br><span class="line">   -e SESSION_DURATION=24 \</span><br><span class="line">   -e NEXT_PUBLIC_APP_URL=http://192.168.0.197:3377 \</span><br><span class="line">   towfiqi/serpbear</span><br></pre></td></tr></table></figure>
 
@@ -599,27 +599,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 serpbear 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/serpbear/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/serpbear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3377</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011104065.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011104065.png"></p>
 <p>用前面设定的 <code>USER</code> 和 <code>PASSWORD</code> 登录，然后添加您的第一个域名</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011042092.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011042092.png"></p>
 <p>比如 <code>laosu.ml</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011042322.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011042322.png"></p>
 <p>添加完成就可看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011105577.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011105577.png"></p>
 <p>进入 <code>Settings</code> 设置方法和 <code>API</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011124282.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011124282.png"></p>
 <p>添加您的关键字并开始跟踪</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011742679.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011742679.png"></p>
 <p>开始的时候关键词后面都有红色感叹号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011743590.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011743590.png"></p>
 <p>直接点关键词，搜索结果还是空的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011744021.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011744021.png"></p>
 <p>第二天感叹号消失了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212060911146.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212060911146.png"></p>
 <p>再点关键词就有搜索结果了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212060913654.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212060913654.png"></p>
 <p>回到 <span class="exturl" data-url="aHR0cHM6Ly9hcHAuc2NyYXBpbmdhbnQuY29tL2Rhc2hib2FyZA==">https://app.scrapingant.com/dashboard<i class="fa fa-external-link-alt"></i></span> ，也能看到相应的记录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212011746066.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212011746066.png"></p>
 <blockquote>
 <p>如果你仔细，你会发现时间是对不上的，原因是老苏删了装，装了删，测试各种安装方式，尽力确保少犯错误，直接可用；</p>
 </blockquote>

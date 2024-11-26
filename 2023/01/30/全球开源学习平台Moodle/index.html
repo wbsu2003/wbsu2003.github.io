@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Moodle 是一个全球开源的在线教育系统（慕课）。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201203289.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201203289.png">
 <meta property="article:published_time" content="2023-01-30T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="远程教学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201203289.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201203289.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/01/30/%E5%85%A8%E7%90%83%E5%BC%80%E6%BA%90%E5%AD%A6%E4%B9%A0%E5%B9%B3%E5%8F%B0Moodle/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201203289.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201203289.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,13 +503,13 @@
 </blockquote>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>1、为什么没用群晖自带的 <code>MariaDB</code> ?</p>
 <p>老苏本来是想用群晖自带的 <code>MariaDB 10</code> 数据库，但是会连不上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212191805732.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212191805732.png"></p>
 <p>原因没搞明白，所以老苏最后还是采用了容器安装 <code>MariaDB</code> 的方式</p>
 <p>2、安装过程比较长</p>
 <p>安装过程中，日志中显示<code>INFO  ==&gt; Running Moodle install script</code> 时安装时间比较长，没搞明白是在初始化数据库还是在下载代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212191727868.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212191727868.png"></p>
 <p>从日志看大概有 <code>6</code> 分钟</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212192155437.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212192155437.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>与 <code>docker</code> 相关的环境变量</p>
 <table>
 <thead>
@@ -598,40 +598,40 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 moodle 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/moodle/&#123;data,db&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 moodle 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/moodle</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 &#123;data,db&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8488</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212191736645.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212191736645.png"></p>
 <p>点右上角的 <code>Log in</code>，用我们安装时的 <code>MOODLE_USERNAME</code> 和 <code>MOODLE_PASSWORD</code> 中设置的账号、密码登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201040925.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201040925.png"></p>
 <p>登录成功后的主界面仪表板</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201042233.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201042233.png"></p>
 <h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p><code>Site administration</code> –&gt; <code>General</code> –&gt; <code>-   Notifications</code></p>
 <p>拉到最下面，可以看到我们安装的 <code>Moodle</code> 的版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201111931.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201111931.png"></p>
 <p>打开网址：<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5tb29kbGUub3JnL2xhbmdwYWNrLzQuMS8=">https://download.moodle.org/langpack/4.1/<i class="fa fa-external-link-alt"></i></span> 下拉可以找到简体中文的语言包</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201115377.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201115377.png"></p>
 <p>下载解压到 <code>/docker/moodle/data/lang</code> 目录中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201141467.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201141467.png"></p>
 <h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>当然更方便的办法是直接安装，<code>Site administration</code> –&gt; <code>Language</code>  –&gt; <code>Language packs</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201122125.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201122125.png"></p>
 <p>右侧 <code>Available language packs</code> 中搜索 <code>chinese</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201121875.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201121875.png"></p>
 <p>安装 <code>Ctrl</code> 多选之后，点 <code>Install selected language pack(s)</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201123469.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201123469.png"></p>
 <p>安装完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201124260.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201124260.png"></p>
 <p>点 <code>Update all installed language packs</code> 刷新一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201127460.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201127460.png"></p>
 <p><code>Site administration</code> –&gt; <code>Language</code>  –&gt; <code>Language settings</code>，下拉框中已经有中文了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201129021.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201129021.png"></p>
 <p>选择完成后，点 <code>Save changes</code></p>
 <h3 id="生效"><a href="#生效" class="headerlink" title="生效"></a>生效</h3><blockquote>
 <p>因为老苏是同时弄的，所以并不清楚是哪种方式生效了，当然最好是两种都行 &#128514;</p>
 </blockquote>
 <p>主界面管理员菜单中会多出 <code>Language</code> 菜单</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201146979.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201146979.png"></p>
 <p>选择 <code>简体中文</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201147996.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201147996.png"></p>
 <p>界面就切换为中文了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212201148498.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212201148498.png"></p>
 <p>官方还提供了中文版的使用说明：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1vb2RsZS5vcmcvYWxsL3poLyVFOSVBNiU5NiVFOSVBMSVCNQ==">https://docs.moodle.org/all/zh/首页<i class="fa fa-external-link-alt"></i></span>，所以上手应该不难吧</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>moodle/moodle: 源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21vb2RsZS9tb29kbGU=">https://github.com/moodle/moodle<i class="fa fa-external-link-alt"></i></span></p>

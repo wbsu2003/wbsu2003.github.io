@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Cypht 是一个简单、轻量级和现代的 Webmail 客户端，它将多个帐户聚合到一个界面中。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311458672.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311458672.png">
 <meta property="article:published_time" content="2023-02-10T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="email">
 <meta property="article:tag" content="邮件">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311458672.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311458672.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/02/10/%E5%BC%80%E6%BA%90%E7%9A%84%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AFCypht/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311458672.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311458672.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,15 +505,15 @@
 <p>  <code>Cypht</code> 是一个简单、轻量级和现代的 <code>Webmail</code> 客户端，它将多个帐户聚合到一个界面中。除了电子邮件帐户，它还支持 <code>Atom/RSS</code> 源。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>数据库直接用的群晖的 <code>MariaDB 10</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建了名为 <code>cypht</code> 的数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311032883.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311032883.png"></p>
 <blockquote>
 <p>为了便于说明，我们假设数据库密码为 <code>123456</code></p>
 </blockquote>
 <h2 id="安装-Cypht"><a href="#安装-Cypht" class="headerlink" title="安装 Cypht"></a>安装 Cypht</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>cypht</code> ，选择第一个 <code>sailfrog/cypht-docker</code>，双击直接下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311127771.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311127771.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>cypht</code>，并在其中建一个子文件夹 <code>users</code></p>
 <table>
 <thead>
@@ -529,7 +529,7 @@
 <td align="center">存放用户</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311130343.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311130343.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -546,9 +546,9 @@
 </tr>
 </tbody></table>
 <p>默认暴露的端口有点多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311131606.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311131606.png"></p>
 <p>不用的端口老苏都删掉了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311132474.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311132474.png"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -594,7 +594,7 @@
 </tr>
 </tbody></table>
 <p>更多环境变量的说明：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3NhaWxmcm9nL2N5cGh0LWRvY2tlcg==">https://hub.docker.com/r/sailfrog/cypht-docker<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311507807.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311507807.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 cypht 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/cypht/users</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 cypht 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/cypht</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name cypht \</span><br><span class="line">   -p 8017:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/users:/var/lib/hm3/users \</span><br><span class="line">   -e CYPHT_AUTH_USERNAME=admin \</span><br><span class="line">   -e CYPHT_AUTH_PASSWORD=admin_password \</span><br><span class="line">   -e CYPHT_DB_CONNECTION_TYPE=host \</span><br><span class="line">   -e CYPHT_DB_HOST=192.168.0.197:3307 \</span><br><span class="line">   -e CYPHT_DB_NAME=cypht \</span><br><span class="line">   -e CYPHT_DB_USER=cypht \</span><br><span class="line">   -e CYPHT_DB_PASS=123456 \</span><br><span class="line">   -e CYPHT_SESSION_TYPE=DB \</span><br><span class="line">   -e CYPHT_DEFAULT_SETTING_TIMEZONE=Asia/Shanghai \</span><br><span class="line">   sailfrog/cypht-docker:latest</span><br></pre></td></tr></table></figure>
 
@@ -606,44 +606,44 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 cypht 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/cypht/users</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 cypht 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/cypht</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8017</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311103900.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311103900.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311103180.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311103180.png"></p>
 <h2 id="设置邮箱"><a href="#设置邮箱" class="headerlink" title="设置邮箱"></a>设置邮箱</h2><p><code>Settings</code> –&gt; <code>Servers</code> –&gt; <code>Add an E-mail Account</code></p>
 <p>以老苏的 <code>wbsu2003@hotmail.com</code> 为例，目前支持的邮箱类型挺多的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311408599.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311408599.png"></p>
 <blockquote>
 <p>注意，邮箱类型是 <code>Office365</code> 而不是 <code>Outlook.com</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311342315.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311342315.png"></p>
 <p>输入 <code>E-Mail Password</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311143722.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311143722.png"></p>
 <p>如果设置错误，点 <code>Connect</code>  之后，右上角会显示 <code>Authentication failed</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311347060.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311347060.png"></p>
 <p>设置成功之后，左侧菜单就有 <code>Email</code>了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311351675.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311351675.png"></p>
 <h2 id="非支持列表中的邮箱"><a href="#非支持列表中的邮箱" class="headerlink" title="非支持列表中的邮箱"></a>非支持列表中的邮箱</h2><p>以老苏的 <code>wbsu2003@88.com</code> 为例</p>
 <p>首先设置  <code>SMTP</code> 服务，这是发送邮件需要的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311411838.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311411838.png"></p>
 <p>输入账号密码之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311414094.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311414094.png"></p>
 <p>点 <code>Save</code> 保存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311416156.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311416156.png"></p>
 <p>接下来设置 <code>IMAP</code> 服务，这是收邮件需要的</p>
 <blockquote>
 <p>当然你也可以用 <code>POP3</code> 服务</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311418907.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311418907.png"></p>
 <p>输入账号密码之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311419467.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311419467.png"></p>
 <p>点 <code>Save</code> 保存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311420955.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311420955.png"></p>
 <h2 id="添加-RSS"><a href="#添加-RSS" class="headerlink" title="添加 RSS"></a>添加 RSS</h2><p><code>Settings</code> –&gt; <code>Servers</code> –&gt; <code>AAdd an RSS/ATOM Feed</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311353798.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311353798.png"></p>
 <p>添加成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311355801.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311355801.png"></p>
 <p>左侧菜单点 <code>Everything</code>，邮件和 <code>RSS</code> 完美的融合在同一个界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301311421750.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301311421750.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>jasonmunro/cypht: Cypht: Lightweight Open Source webmail written in PHP and JavaScript<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phc29ubXVucm8vY3lwaHQ=">https://github.com/jasonmunro/cypht<i class="fa fa-external-link-alt"></i></span></p>
 <p>Cypht<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jeXBodC5vcmcv">https://cypht.org/<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="AnyLink 是一个企业级远程办公 ssl vpn 软件，可以支持多人同时在线使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301801595.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301801595.png">
 <meta property="article:published_time" content="2021-12-27T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="vpn">
 <meta property="article:tag" content="内网穿透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301801595.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301801595.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/12/27/%E4%BC%81%E4%B8%9A%E7%BA%A7%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%ACvpn%E8%BD%AF%E4%BB%B6AnyLink/">
@@ -394,7 +394,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301801595.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301801595.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -435,7 +435,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,11 +510,11 @@
 <p><code>OTP</code> 软件挺多的，比如老苏用的 <code>Microsoft Authenticator</code>，还有 <code>Google Authenticator</code> 等等，<code>AnyLink</code> 官方推荐用 <code>FreeOTP</code></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>anylink</code> ，选择第二个 <code>bjdgyc/anylink</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041054428.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041054428.png"></p>
 <h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>勾选 <code>使用高权限执行容器</code>，并点击 <code>是</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041116420.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041116420.png"></p>
 <h2 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h2><p>勾选 <code>启用自动重新启动</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041352552.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041352552.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>anylink</code></p>
 <table>
 <thead>
@@ -528,10 +528,10 @@
 <td align="center"><code>/app/conf</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041354697.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041354697.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041104220.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041104220.png"></p>
 <p><code>443</code> 默认是被占用的，所以需要修改端口</p>
 <table>
 <thead>
@@ -549,30 +549,30 @@
 <td align="center"><code>8800</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041117681.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041117681.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:12080</code> 就能看到管理后台的登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041146812.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041146812.png"></p>
 <blockquote>
 <p>默认账号：<code>admin</code>； 密码：<code>123456</code></p>
 </blockquote>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041147815.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041147815.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在日志中，你会看到两条警告⚠️信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041151715.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041151715.png"></p>
 <p>进入 <code>终端机</code>，「终端机」 =&gt; 「新增」 =&gt; 「通过命令启动」=&gt; 「请输入一个命令」=&gt; 「bash」</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041153831.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041153831.png"></p>
 <p>依次执行下面👇的命令 </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 Passwd</span></span><br><span class="line">./anylink tool -p 123456</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 jwt secret</span></span><br><span class="line">./anylink tool -s</span><br></pre></td></tr></table></figure>
 
 <p>将红框中生成的内容保存，后面会用到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111041453889.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111041453889.png"></p>
 <p>如果你想改后台登录密码，比如改为 <code>abcdef</code>，就执行下面的命令生成对应的 <code>Passwd</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301731239.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301731239.png"></p>
 <h2 id="设置-server-toml"><a href="#设置-server-toml" class="headerlink" title="设置 server.toml"></a>设置 server.toml</h2><p>下载 <code>server-sample.toml</code> 文件，地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JqZGd5Yy9hbnlsaW5rL2Jsb2IvbWFpbi9zZXJ2ZXIvY29uZi9zZXJ2ZXItc2FtcGxlLnRvbWw=">https://github.com/bjdgyc/anylink/blob/main/server/conf/server-sample.toml<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p>这是国人开发的项目，老苏也想用 <code>gitee</code> 的地址，不过打开 <code>server-sample.toml</code> 文件会显示👇</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112270954922.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112270954922.png"></p>
 <p>如果你熟悉命令行，也可以用命令行下载</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 anylink 目录</span></span><br><span class="line"><span class="built_in">cd</span> /valume2/docker/anylink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 server.toml 文件</span></span><br><span class="line">curl -sSL https://raw.githubusercontent.com/bjdgyc/anylink/main/server/conf/server-sample.toml -o server.toml</span><br></pre></td></tr></table></figure>
 
@@ -615,63 +615,63 @@
 <li><code>jwt_secret</code> 必须改，不然会存在安全风险</li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111161133118.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111161133118.png"></p>
 <blockquote>
 <ol start="3">
 <li><code>link_addr</code>须增加，官方的 <code>demo</code> 中并没有，是根据参考文档 <code>2</code> 增加的，比如老苏用了 <code>vpn.laosu.ml</code></li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111161402272.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111161402272.png"></p>
 <blockquote>
 <ol start="4">
 <li>老苏是在 <code>dnspod.cn</code> 上做域名解析的，直接在那申请了 <code>TrustAsia</code> 的证书</li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301522124.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301522124.png"></p>
 <p>下载的证书解压后，使用 <code>nginx</code> 目录下的证书</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301527643.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301527643.png"></p>
 <p>原来的文件名比较长，老苏改短了，配置中做相应的修改</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301534009.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301534009.png"></p>
 <blockquote>
 <ol start="5">
 <li><code>ipv4_cidr</code> 如果修改了地址段，相应的 <code>ipv4_gateway</code>、<code>ipv4_start</code>、<code>ipv4_end</code> 都要跟着一起修改，老苏家里用的是 <code>0</code> 网段，老读者都知道老苏群晖的主机 <code>IP</code> 为 <code>192.168.0.197</code>，所以这里改成了 <code>192.168.0.0/24</code>，相应的 <code>ipv4_gateway</code> 改为了 <code>192.168.0.1</code>；<code>ipv4_start</code> 分了 <code>192.168.0.220</code>，<code>ipv4_end</code> 分了 <code>192.168.0.230</code>，总共就 <code>10</code> 个 <code>IP</code></li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111161137712.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111161137712.png"></p>
 <p>将 <code>server.toml</code> 、以及 <code>2</code> 个证书文件上传到 <code>anylink</code> 目录，现在目录中有 <code>4</code> 个文件了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301529728.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301529728.png"></p>
 <p>重启容器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111161142650.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111161142650.png"></p>
 <h2 id="邮件配置"><a href="#邮件配置" class="headerlink" title="邮件配置"></a>邮件配置</h2><p>这是为了添加用户时，发邮件通知用的。进管理后台，<code>基础信息</code> –&gt; <code>其他设置</code> –&gt; <code>邮件配置</code>，还是用的 <code>88</code> 邮箱做示例</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301553653.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301553653.png"></p>
 <h2 id="添加用户组"><a href="#添加用户组" class="headerlink" title="添加用户组"></a>添加用户组</h2><p>进管理后台，<code>用户组信息</code>–&gt; <code>用户组列表</code>，<code>添加</code> 用户组</p>
 <blockquote>
 <p>老苏把 <code>DNS</code> 指向了主路由，其实用默认的 <code>114.114.114.114</code> 也是可以的</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301556551.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301556551.png"></p>
 <h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h2><p>进管理后台，<code>用户信息</code> –&gt; <code>用户列表</code>，<code>添加</code> 用户</p>
 <blockquote>
 <p>老苏先禁用了 <code>OTP</code>，但是开启 <code>OTP</code> 的情况也是做了测试验证的</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301631104.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301631104.png"></p>
 <p>如果邮箱没问题，很快就会收到邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301634527.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301634527.png"></p>
 <p>如果要显示二维码，进管理后台，<code>基础信息</code> –&gt; <code>其他设置</code> –&gt; <code>其他设置</code>， <code>vpn对外地址</code> 填写 <code>link_addr</code> 加上端口即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112011531985.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112011531985.png"></p>
 <p>二维码主要是给 <code>OPT</code> 软件扫码用的，用于生成登录时需要的动态码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112011532484.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112011532484.png"></p>
 <h2 id="frp-设置"><a href="#frp-设置" class="headerlink" title="frp 设置"></a>frp 设置</h2><p>如果你是有公网 <code>IP</code> 的，只要路由器放行 <code>12443</code> 就可以了，协议为 <code>TCP</code>；老苏用的是 <code>frp</code>，需要在 <code>frpc.ini</code> 中增加下面👇这段</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[anylink]</span></span><br><span class="line"><span class="comment"># 2021.11.30 新增 for AnyLink 测试</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.197</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">12443</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">12443</span></span><br><span class="line"><span class="attr">custom_domains</span> = vpn.laosu.ml</span><br></pre></td></tr></table></figure>
 
 <p>保存之后，重启 <code>frpc</code> 容器</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>终于可以开始使用了，<code>AnyConnect</code> 客户端可以去 <code>Stille</code> 大神的 『 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaW9pb3guY29tL2FyY2hpdmVzLzg5Lmh0bWw=">OpenWRT 路由器 OpenConnect VPN 详细图文教程 - 基础配置篇<i class="fa fa-external-link-alt"></i></span> 』中找，大神将 <code>AnyConnect</code> 客户端按平台整理好了，致敬！</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301653988.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301653988.png"></p>
 <p><code>AnyConnect</code> 客户端只要装 <code>VPN</code> 模块即可，其他的用不上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112271135707.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112271135707.png"></p>
 <p>安装完成后启动 <code>AnyConnect</code> 客户端，将 <code>link_addr</code> 加上端口填入即可，客户端没有其他的任何设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112010909796.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112010909796.png"></p>
 <p>完成后点  <code>Connect</code>，如果前面设置没有问题的话，应该会弹出登录窗口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301700533.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301700533.png"></p>
 <blockquote>
 <p>【说明】：</p>
 <ol>
@@ -681,11 +681,11 @@
 </ol>
 </blockquote>
 <p>输入密码之后，会弹出 <code>Banner</code>，这是个欢迎页面，内容可以在管理后台设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301701777.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301701777.png"></p>
 <p>点 <code>Accept</code> 接受之后，就可以像在家里一样，直接用 <code>192.168.0.xx</code> 来访问家里的设备了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111301705647.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111301705647.png"></p>
 <p>不用了可以点 <code>Disconnect</code> 断开连接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112011453002.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112011453002.png"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
 <li>不要和 <code>tailscale</code> 一起用</li>
 <li>《中华人民共和国计算机信息网络国际联网管理暂行规定》第六条：“计算机信息网络直接进行国际联网，必须使用邮电部国家公用电信网提供的国际出入口信道。任何单位和个人不得自行建立或者使用其他信道进行国际联网。”</li>

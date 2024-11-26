@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Appsmith 是一个用于构建应用程序的低代码、开源框架。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031220327.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031220327.png">
 <meta property="article:published_time" content="2021-10-11T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="低代码">
 <meta property="article:tag" content="表格">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031220327.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031220327.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/10/11/%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6Appsmith/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031220327.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031220327.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,17 +501,17 @@
 <p><code>Appsmith</code> 是一个用于构建内部应用程序的低代码、开源框架。通过拖放组件来构建完全自定义的管理面板、<code>CRUD</code> 应用程序和工作流。使用 <code>30</code> 多个 <code>React</code> 组件来构建没有 <code>HTML/CSS</code> 的页面。构建速度提高 <code>10</code> 倍。</p>
 </blockquote>
 <p>其工作原理👇并不复杂</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022010575.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022010575.png"></p>
 <h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>因为需要数据来演示，所以老苏在 <span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9pbmRleC1vdGhlci5odG1s">https://dev.mysql.com/doc/index-other.html<i class="fa fa-external-link-alt"></i></span> 下载了 <code>world database</code>，解压出来的 <code>SQL</code> 脚本可以在 <code>phpMyAdmin</code> 中直接导入</p>
 <blockquote>
 <p>至于 <code>MariaDB</code> 的版本无所谓，老苏还是用了 <code>MariaDB 5</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022131203.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022131203.png"></p>
 <p>虽然只有 <code>3</code> 张表，但都是有数据的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022132347.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022132347.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>appsmith-ce</code> ，选择第一个 <code>appsmith/appsmith-ce</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022003888.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022003888.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>appsmith</code>，并在  <code>appsmith</code> 目录下建一个子目录 <code>stacks</code></p>
 <table>
 <thead>
@@ -527,7 +527,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022016619.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022016619.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就可以</p>
 <table>
 <thead>
@@ -549,71 +549,71 @@
 <td align="center"><code>9001</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022018957.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022018957.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>稍等一会儿（应该不超过 <code>1</code> 分钟吧），在浏览器中输入 <code>http://群晖IP:9280</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022023391.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022023391.png"></p>
 <p>点橘黄色的按钮 <code>GET STARTED</code> ，首先需要填写一些信息，主要是 <code>Email</code> 和 <code>Password</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022031215.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022031215.png"></p>
 <p>默认两个都是启用的，老苏给取消了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022032385.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022032385.png"></p>
 <p>完成后进入了主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022034372.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022034372.png"></p>
 <h1 id="第一个应用"><a href="#第一个应用" class="headerlink" title="第一个应用"></a>第一个应用</h1><p>点正中间的橘黄色按钮 <code>BUILD MY FIRST APP</code> 开始我们的第一个应用</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022038340.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022038340.png"></p>
 <h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p>首先要选择数据源</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022051301.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022051301.png"></p>
 <p>前面我们已经准备好了，所以选择 <code>Mysql</code>，如果 <code>Test</code> 没问题，就可以点 <code>Save</code> 保存了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022142541.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022142541.png"></p>
 <h2 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h2><p>点 <code>GENERATE NEW PAGE</code> 就可以开始创建新页面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022216459.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022216459.png"></p>
 <p>你要做的就是在下拉框中选<code>表</code>和要查询的<code>字段</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022219363.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022219363.png"></p>
 <p>点 <code>Generate Page</code> 创建页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022223977.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022223977.png"></p>
 <p>生成的页面中有一个 <code>Table</code> 来显示、增加和删除数据，可以在 <code>Form</code> 中进行修改</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022234444.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022234444.png"></p>
 <p>点右上角的 <code>Deploy</code> 发布即可生成一个页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022231296.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022231296.png"></p>
 <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>但是这种页面是固定格式的，返回的是所有的数据，如果你需要个性化的应用，就需要通过拖拽 <code>Widget</code> ，搭建自己的应用界面</p>
 <blockquote>
 <p>设定一个目标 –&gt; 根据选定的国家，显示属于这个国家的城市</p>
 </blockquote>
 <p>新建页面，选择 <code>Build with Drag &amp; Drop</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110030914747.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110030914747.png"></p>
 <p>首先需要通过顶部的菜单确定应用的类型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110030917033.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110030917033.png"></p>
 <p>然后建 <code>2</code> 个查询</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031227468.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031227468.png"></p>
 <p>一个是 <code>get_Country</code>，用来查询所有的国家名称</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> `Name` <span class="keyword">FROM</span> `country`</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031054529.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031054529.png"></p>
 <p>在右侧 <code>Suggested widgets</code> 中绑定到 <code>SELECT</code> 组件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031253525.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031253525.png"></p>
 <p><code>SELECT</code> 组件的属性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031057458.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031057458.png"></p>
 <p>再建一个查询 <code>get_City</code>，根据选定的国家来显示这个国家的城市</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `city` <span class="keyword">WHERE</span> `CountryCode` <span class="operator">=</span> (<span class="keyword">SELECT</span> `Code` <span class="keyword">FROM</span> `country` <span class="keyword">WHERE</span> country.Name <span class="operator">=</span> &#123;&#123;Select1.selectedOptionValue&#125;&#125; ) </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031103886.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031103886.png"></p>
 <p>在右侧 <code>Add New Widget</code> 中绑定到 <code>TABLE</code> 组件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031256809.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031256809.png"></p>
 <p><code>TABLE</code> 组件的属性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031104998.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031104998.png"></p>
 <p>为了实现联动，也就是当 <code>SELECT</code> 组件下拉框中的国家发生变化时，<code>TABLE</code> 组件中的城市能同步变化，需要在 <code>SELECT</code> 组件的 <code>Action</code> 中的 <code>onOptionChage</code> 事件中，触发 <code>get_City.run()</code> 查询这个国家的所有城市 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031106034.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031106034.png"></p>
 <p>最终的 <code>UI</code> 效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031053469.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031053469.png"></p>
 <p>老苏录制了一张动图，这样更容易理解和展示已实现的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031122159.gif"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031122159.gif"></p>
 <h2 id="发布和分享"><a href="#发布和分享" class="headerlink" title="发布和分享"></a>发布和分享</h2><p>右上角有 <code>Share</code> 和 <code>Deploy</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031154686.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031154686.png"></p>
 <p> 发布（<code>Deploy</code>）后，可以在不同的页面进行切换</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031156349.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031156349.png"></p>
 <p>邀请（<code>Share</code> ）：把链接发给别人来使用你发布的应用</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031157341.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031157341.png"></p>
 <p>还可以给邀请用户设置不同的权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110031206367.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110031206367.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>通过上面的案例，总结出在 <code>Appsmith</code> 中创建应用程序的五个简单步骤：</p>
 <ul>
 <li>连接任何数据源：您可以将任何数据库与 <code>Appsmith</code> 集成，包括 <code>REST API</code>、<code>MySQL</code>、<code>Postgres</code>、<code>MongoDB</code>、<code>Google Sheets</code> 等；</li>
@@ -623,7 +623,7 @@
 <li>协作和部署：只需单击一下，即可邀请您的同事和朋友与您合作并部署您的应用程序。</li>
 </ul>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>如果你打开 <code>http://群晖IP:9201</code>，你会看到一个 <code>Supervisor</code> 进程管理界面，可以用来启停服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110022024309.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110022024309.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>appsmithorg/appsmith: Build completely custom admin panels and internal tools. Use 30+ react components to build pages without HTML/CSS.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FwcHNtaXRob3JnL2FwcHNtaXRo">https://github.com/appsmithorg/appsmith<i class="fa fa-external-link-alt"></i></span></p>
 <p>Appsmith<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwc21pdGguY29tLw==">https://www.appsmith.com/<i class="fa fa-external-link-alt"></i></span></p>

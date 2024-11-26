@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Picsur 是一个类似于 Imgur 的简单易用的、可自行托管的图片分享服务，内置转换功能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404011932850.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404011932850.png">
 <meta property="article:published_time" content="2024-06-15T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="图床">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404011932850.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404011932850.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/15/%E7%AE%80%E5%8D%95%E6%98%93%E7%94%A8%E7%9A%84%E5%A4%9A%E5%8A%9F%E8%83%BD%E5%9B%BE%E5%BA%8APicsur/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404011932850.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404011932850.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,7 +505,7 @@
 </blockquote>
 <p>官方提供了在线演示，为了防止服务器耗尽磁盘空间，并防止人们使用它来托管有问题的图像，上传的图片每五分钟删除一次，最大文件大小为 <code>16MB</code>，地址：<span class="exturl" data-url="aHR0cHM6Ly9waWNzdXIub3JnLw==">https://picsur.org<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="ghcr-io-镜像下载"><a href="#ghcr-io-镜像下载" class="headerlink" title="ghcr.io 镜像下载"></a>ghcr.io 镜像下载</h2><p>官方的镜像没有发布在 <code>docker hub</code>，而是在 <code>ghcr.io</code>，所以直接用命令行来安装。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312135208.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312135208.png"></p>
 <p>在 <code>SSH</code> 客户端中依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull ghcr.io/caramelfur/picsur:latest</span><br></pre></td></tr></table></figure>
 
@@ -519,33 +519,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 picsur 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/picsur/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 picsur 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/picsur</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8455</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312001660.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312001660.png"></p>
 <p>点右上角 <code>Login</code> 登录，默认用户名是<code>admin</code>，默认密码是环境变量 <code>PICSUR_ADMIN_PASSWORD</code>中设置的值</p>
 <blockquote>
 <p>【注意】：只有 <code>登录</code> 按钮，没有 <code>注册</code>的入口</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312003523.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312003523.png"></p>
 <p>登录成功后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312008878.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312008878.png"></p>
 <p>上传一张图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312053168.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312053168.png"></p>
 <p>原始图片为 <code>png</code>，被转成了默认的 <code>jpg</code> 格式，提供了 <code>Markdown</code> 等嵌入代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312054507.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312054507.png"></p>
 <p>上传的图片，可以在 <code>My Images</code> 中找到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312109354.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312109354.png"></p>
 <h2 id="原始图像"><a href="#原始图像" class="headerlink" title="原始图像"></a>原始图像</h2><p>默认情况下，<code>Picsur</code> 不会保留您的原始图像文件。因为对于大多数用途来说，这是不需要的，并且它可以节省磁盘空间。</p>
 <p>如果您想启用此功能，可以转至<code>settings --&gt; general</code>，然后启用<code>Keep original file</code> 为 <code>Yes</code>。保存设置后，将保留原始文件</p>
 <blockquote>
 <p>【注意】：<code>exif</code> 数据不会从原始图像中删除。因此，请确保您不会意外共享敏感数据。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403312213950.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403312213950.png"></p>
 <h2 id="注册用户"><a href="#注册用户" class="headerlink" title="注册用户"></a>注册用户</h2><p>默认情况下，用户无法注册自己的帐户。这是为了防止用户意外允许任何人上传到他们的实例。</p>
 <p>如果你想允许这样做，也是可以的。要更改此设置，请转至 <code>settings --&gt; roles --&gt; guest --&gt; edit</code>，然后授予访客角色权限 <code>Register</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404012013277.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404012013277.png"></p>
 <p>保存角色后，<code>注册</code> 按钮将出现在登录页面上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404012014121.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404012014121.png"></p>
 <p>现在可以注册新用户了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202404012032577.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202404012032577.png"></p>
 <p>其他的功能可以慢慢摸索</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>CaramelFur/Picsur: An easy to use, selfhostable image sharing service like Imgur with built in converting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NhcmFtZWxGdXIvUGljc3Vy">https://github.com/CaramelFur/Picsur<i class="fa fa-external-link-alt"></i></span></p>

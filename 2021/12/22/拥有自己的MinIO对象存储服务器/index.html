@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MinIO 是一种流行的开源对象存储服务器，与 Amazon S3 云存储服务兼容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181333599.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181333599.png">
 <meta property="article:published_time" content="2021-12-22T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="存储">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181333599.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181333599.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/12/22/%E6%8B%A5%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84MinIO%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E5%99%A8/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181333599.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181333599.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,12 +504,12 @@
 </blockquote>
 <p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>minio</code> ，选择第一个 <code>minio/minio</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181233744.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181233744.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>minio</code>，并在 <code>minio</code> 中建一个子目录 <code>config</code></p>
 <blockquote>
 <p>写完之后老苏发现，其实最好是建 <code>2</code> 个子目录，分别是 <code>data</code> 和 <code>config</code> 会更合理，否则很容易把 <code>config</code> 作为 <code>Buckets</code> 给误删除了</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181832903.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181832903.png"></p>
 <table>
 <thead>
 <tr>
@@ -532,7 +532,7 @@
 <blockquote>
 <p>两个子目录的话，把 <code>docker/minio/data</code> 指向 <code>/data</code>，把数据和设置完全隔离开</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181249868.png" alt="两个文件夹"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181249868.png" alt="两个文件夹"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -553,9 +553,9 @@
 </tr>
 </tbody></table>
 <p>默认只显示了 <code>API</code> 端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181241518.png" alt="1个端口"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181241518.png" alt="1个端口"></p>
 <p><code>Console</code> 的端口需要我们点 <code>+</code> 号手动添加</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181246420.png" alt="2个端口"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181246420.png" alt="2个端口"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -579,20 +579,20 @@
 <li>这个用户是管理员，权限比较高</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181252615.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181252615.png"></p>
 <blockquote>
 <p>【重要】：命令只有第一次会执行，所以如果你忘记了这一步，只能从头再来一次😓</p>
 </blockquote>
 <p>命令中输入：<code>minio server /data --console-address &quot;:9001&quot;</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181256877.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181256877.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>先看日志，显示的都还是 <code>docker</code> 内部地址和端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181302670.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181302670.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:9901</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181303161.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181303161.png"></p>
 <p>用 <code>环境变量</code> 中设置的管理员账号、密码登录，登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181304048.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181304048.png"></p>
 <h2 id="修改地址"><a href="#修改地址" class="headerlink" title="修改地址"></a>修改地址</h2><p>如果你仔细的话，你会发现上图中显示的 <code>SERVERS</code> 地址还是 <code>172.17.0.10</code>，这是一个 <code>docker</code> 内部的网络</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191001546.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191001546.png"></p>
 <table>
 <thead>
 <tr>
@@ -618,32 +618,32 @@
 </ul>
 </blockquote>
 <p>接下来我们要做的是停止容器，在 <code>环境变量</code> 中增加上面两个值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191010590.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191010590.png"></p>
 <p>再次启动容器后，进入日志，你会发现地址都已改过来了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191011335.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191011335.png"></p>
 <p><code>Dashboard</code> 中也改过来了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191021521.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191021521.png"></p>
 <h2 id="创建-Buckets"><a href="#创建-Buckets" class="headerlink" title="创建 Buckets"></a>创建 Buckets</h2><p><code>Buckets</code> –&gt; <code>Create Bucket</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181630623.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181630623.png"></p>
 <p>当前的 <code>test</code> 里是空的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181632998.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181632998.png"></p>
 <p>上传一张图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181631081.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181631081.png"></p>
 <p>默认是存储策略是 <code>Private</code> ，可以根据需要设置为 <code>Public</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112181640410.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112181640410.png"></p>
 <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p><code>Users</code> –&gt; <code>Create User</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112182057293.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112182057293.png"></p>
 <p>其中 <code>Access Key</code> 类似于用户名，而 <code>Secret Key</code> 类似于密码，存储策略老苏选了 <code>readwrite</code></p>
 <blockquote>
 <p><code>Secret Key</code> 不能少于 <code>8</code> 位</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112182103362.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112182103362.png"></p>
 <blockquote>
 <p>这个用户也可以用来登录 <code>Console</code>，只是权限没那么高</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112221023486.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112221023486.png"></p>
 <h2 id="应用验证"><a href="#应用验证" class="headerlink" title="应用验证"></a>应用验证</h2><p>老苏本来想用群晖自带的 <code>Cloud Sync</code> 或者 <code>Hyper Backup</code> 来做测试，但是都没成功，从 『 <span class="exturl" data-url="aHR0cHM6Ly9oa3Vib3RhLndvcmRwcmVzcy5jb20vMjAyMC8xMS8yOS9zeW5vbG9neXMtZHNtLWFuZC1taW5pb3MtczMv">https://hkubota.wordpress.com/2020/11/29/synologys-dsm-and-minios-s3/<i class="fa fa-external-link-alt"></i></span> 』一文看，有点麻烦，主要是群晖不是按 <code>https://aaa.com/bucket</code> 访问，而是按 <code>https://bucket.aaa.com</code> 访问，所以老苏放弃了，另外找了个带图形界面的客户端 <code>S3 Browser</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191740726.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191740726.png"></p>
 <p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9zM2Jyb3dzZXIuY29tLw==">https://s3browser.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p><code>S3 Browser</code> 的设置很简单，不过只支持 <code>windows</code> 平台</p>
 <blockquote>
@@ -653,9 +653,9 @@
 <li>用后面创建的普通用户，尽量不要用<code>环境变量</code>中设置的管理员账号</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191754174.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191754174.png"></p>
 <p>完成后点 <code>Add new account</code>，就可以看到前面建的  <code>Buckets</code> 以及已经上传的文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112191751877.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112191751877.png"></p>
 <h2 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h2><p>一般来说支持远程挂载网盘的软件都支持 <code>S3</code> 存储，但老苏没具体验证，大家可以自己试试</p>
 <ul>
 <li><p><code>Windows</code> 上除了上面介绍的 <code>S3 Browser</code>，最常用的应该是 <code>RaiDrive</code></p>
@@ -665,7 +665,7 @@
 <li><p>跨平台的可以试试 <code>RcloneBrowser</code>，从文档 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pbi5pby9kb2NzL3JjbG9uZS13aXRoLW1pbmlvLXNlcnZlci5odG1s">https://docs.min.io/docs/rclone-with-minio-server.html<i class="fa fa-external-link-alt"></i></span> 看需要设置 <code>Region</code>，可以在设置中搞定</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112212106037.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112212106037.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本文应网友要求而写，但因为接触的时间比较短，老苏对 <code>MinIO</code> 的了解还非常有限，错漏之处，敬请谅解~！</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>minio/minio: High Performance, Kubernetes Native Object Storage<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbmlvL21pbmlv">https://github.com/minio/minio<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="paperless-ng 可以扫描、索引、保存你的纸质文档。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061940345.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061940345.png">
 <meta property="article:published_time" content="2022-03-30T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="电子书">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061940345.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061940345.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/03/30/%E6%97%A0%E7%BA%B8%E5%8C%96%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FPaperless-ng/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061940345.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061940345.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,9 +502,9 @@
 <p>老苏并没有扫描仪，之所以装 <code>Paperless-ng</code> 只是想看看 <code>pdf</code> 文档相关的功能，比如是否支持笔记、标注等等</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>paperless-ng</code> ，选择第一个 <code>linuxserver/paperless-ng</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151338033.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151338033.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，将其命名为 <code>paperless</code>，然后在 <code>paperless</code> 中再建两个子目录，分别命名为 <code>config</code> 和 <code>data</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151351917.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151351917.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +524,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151406743.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151406743.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -540,7 +540,7 @@
 <td align="center"><code>8000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151410021.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151410021.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -568,36 +568,36 @@
 <blockquote>
 <p><code>REDIS_URL</code> 用于指定要使用的外部 <code>redis</code> 实例，不填的话将使用内置的 <code>redis</code> 实例</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151409069.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151409069.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8182</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151412329.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151412329.png"></p>
 <p>登录成功后的主界面</p>
 <blockquote>
 <p>默认的账号、密码是：<code>admin/admin</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151514382.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151514382.png"></p>
 <p>上传 <code>pdf</code> 文档</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201151539667.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201151539667.png"></p>
 <p>老苏随便传了 <code>2</code> 本小人书</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061719322.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061719322.png"></p>
 <p>笔记是没有的，不过可以通过 <code>content</code> 保存一些内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061726905.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061726905.png"></p>
 <p>阅读上，和 <code>Calibre</code> 差不多，可能也是用的 <code>pdf.js</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061828192.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061828192.png"></p>
 <p>目前还不支持中文，有点小遗憾</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061839853.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061839853.png"></p>
 <p><code>Paperless-ng</code> 使用 <code>Django REST Framework</code> 标准 <code>API</code> 接口。您可以在<code>http://群晖IP:8182/api/</code> 访问</p>
 <p>关于 <code>api</code> 的详细说明，请阅读官方文档： <span class="exturl" data-url="aHR0cHM6Ly9wYXBlcmxlc3MtbmcucmVhZHRoZWRvY3MuaW8vZW4vbGF0ZXN0L2FwaS5odG1s">https://paperless-ng.readthedocs.io/en/latest/api.html<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061844923.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061844923.png"></p>
 <h1 id="相关应用"><a href="#相关应用" class="headerlink" title="相关应用"></a>相关应用</h1><p>目前 <code>Paperless-ng</code> 有很多周边的应用，比如：</p>
 <h2 id="Scan-to-Paperless"><a href="#Scan-to-Paperless" class="headerlink" title="Scan to Paperless"></a>Scan to Paperless</h2><p>顾名思义，是扫描和处理（裁剪、反扫描、<code>OCR</code> 等）你的文件到 <code>Paperless-ng</code> ，支持通过 <code>docker</code> 直接部署在群晖上</p>
 <p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NicnVubmVyL3NjYW4tdG8tcGFwZXJsZXNz">https://github.com/sbrunner/scan-to-paperless<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="Paperless-App"><a href="#Paperless-App" class="headerlink" title="Paperless App"></a>Paperless App</h2><p>这是 <code>Paperless-ng</code> 的移动端，同时支持 <code>Android/iOS</code> 应用程序，还可以用智能手机摄像头来扫描文档，不过作者说没有用于测试此功能的 <code>iOS</code> 设备</p>
 <p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JhdWVyai9wYXBlcmxlc3NfYXBw">https://github.com/bauerj/paperless_app<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061848210.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061848210.png"></p>
 <h2 id="Paperless-Desktop"><a href="#Paperless-Desktop" class="headerlink" title="Paperless Desktop"></a>Paperless Desktop</h2><p>这是用于 <code>Paperless-ng</code> 的桌面应用，使用了 <code>REST API</code> 接口来管理扫描文档，基于 <code>electron</code> 开发，所以支持在 <code>Mac</code>、<code>Linux</code> 和 <code>Windows</code> 上运行</p>
 <p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Rob21hc2JydWVnZ2VtYW5uL3BhcGVybGVzcy1kZXNrdG9w">https://github.com/thomasbrueggemann/paperless-desktop<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202061904135.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202061904135.png"></p>
 <p>当然不止这些，老苏只是是挑了些自己觉得有用的而已</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>jonaswinkler/paperless-ng: A supercharged version of paperless: scan, index and archive all your physical documents<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pvbmFzd2lua2xlci9wYXBlcmxlc3Mtbmc=">https://github.com/jonaswinkler/paperless-ng<i class="fa fa-external-link-alt"></i></span></p>

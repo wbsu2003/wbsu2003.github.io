@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="基于 docker 研究了 Smokeping 主从模式的安装部署。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102202077.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102202077.png">
 <meta property="article:published_time" content="2023-02-18T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102202077.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102202077.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/02/18/Smokeping%E7%9A%84%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E9%83%A8%E7%BD%B2/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102202077.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102202077.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,9 +503,9 @@
 <p>因为有了前文铺垫，本文的设置文件仅提到需要修改的部分。老苏不是网络专家，如果文中任何错误，请不吝指出</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>不过这次用到的镜像 <code>ivyavanmahajan/smokeping</code>有点老了，已经是 <code>2</code> 年之前的了，<code>Tags</code> 只有一个 <code>latest</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102027827.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102027827.png"></p>
 <p>还有个 <code>divyavanmahajan/smokeping-slave</code> ，但实际上老苏没用这个镜像来做从服务，因为 <code>divyavanmahajan/smokeping</code> 已经包含了 <code>Slave</code> 模式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142101377.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142101377.png"></p>
 <p>从描述看，镜像是基于 <code>linuxserver/smokeping</code> 改造的，所以理论上你也可以基于最新的版本重新编译试试，能不能成功我就不知道了。</p>
 <p>镜像老归老，并不影响使用，接下来进入今天的正题</p>
 <h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>主服务容器只用到了 <code>linuxserver</code> 镜像最常用的 <code>3</code> 个变量</p>
@@ -567,18 +567,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 root 身份进入主服务容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it --user root smokeping-master /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改权限</span></span><br><span class="line"><span class="built_in">chown</span> 1000:1000 /etc/smokeping/smokeping_secrets</span><br></pre></td></tr></table></figure>
 
 <p>原本的 <code>root:root</code> 会变成 <code>abc:user</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102106190.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102106190.png"></p>
 <h2 id="连接凭证"><a href="#连接凭证" class="headerlink" title="连接凭证"></a>连接凭证</h2><p>接下来需要处理从服务器连接主服务器时，要用到的凭证，否则你会在从服务器的日志中看到下面的错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WARNING: No secret found for slave slave1</span><br><span class="line"></span><br><span class="line">Sent data to Server. Server said WARNING: No secret found for slave slave1</span><br><span class="line"></span><br><span class="line">ERROR: we did not get config from the master. Maybe we are not configured as a slave for any of the targets on the master ?</span><br></pre></td></tr></table></figure>
 
 <p>查看 <code>/etc/smokeping/smokeping_secrets</code> 中的密码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 /etc/smokeping/smokeping_secrets 中的密码</span></span><br><span class="line"><span class="built_in">cat</span> /etc/smokeping/smokeping_secrets</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302101411096.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302101411096.png"></p>
 <p>我们可以用原有的，也可以加一组账号密码，比如 <code>slave1:12345678</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 追加账号、密码</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;slave1:12345678&#x27;</span>&gt;&gt;/etc/smokeping/smokeping_secrets</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302101414841.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302101414841.png"></p>
 <p>现在从服务容器日志应该变成下面👇这样了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">WARNING: I don&#x27;t know the slave slave1 ignoring it</span><br><span class="line"></span><br><span class="line">Sent data to Server. Server said WARNING: I don&#x27;t know the slave slave1 ignoring it</span><br><span class="line"></span><br><span class="line">ERROR: we did not get config from the master. Maybe we are not configured as a slave for any of the targets on the master ?</span><br></pre></td></tr></table></figure>
 
@@ -588,19 +588,19 @@
 </blockquote>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+slave1</span><br><span class="line"><span class="attr">display_name</span>=slave1</span><br><span class="line"><span class="attr">color</span>=<span class="number">00</span>ff00</span><br><span class="line"><span class="attr">location</span>=Shanghai</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302101420116.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302101420116.png"></p>
 <h2 id="Target-文件"><a href="#Target-文件" class="headerlink" title="Target 文件"></a>Target 文件</h2><p>在 <code>config/Target</code> 中，新增下面部分</p>
 <blockquote>
 <p>上海联通和上海移动的地址可能不对，一直没数据。应用的时候需要自己改改，这里只是个示意；</p>
 </blockquote>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">slaves</span> = slave1 slave2</span><br><span class="line"></span><br><span class="line">+dest1</span><br><span class="line"><span class="attr">slaves</span> = slave1</span><br><span class="line"><span class="attr">menu</span> = slave1</span><br><span class="line"><span class="attr">title</span> = slave1</span><br><span class="line"></span><br><span class="line">++ sh-dianxing</span><br><span class="line"><span class="attr">menu</span> = 上海电信</span><br><span class="line"><span class="attr">title</span> = 上海电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">116.228</span>.<span class="number">111.118</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"></span><br><span class="line">++ sh-liantong</span><br><span class="line"><span class="attr">menu</span> = 上海联通</span><br><span class="line"><span class="attr">title</span> = 上海联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">210.22</span>.<span class="number">84.3</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"></span><br><span class="line">++ sh-yidong</span><br><span class="line"><span class="attr">menu</span> = 上海移动</span><br><span class="line"><span class="attr">title</span> = 上海移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">117.131</span>.<span class="number">19.23</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102145679.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102145679.png"></p>
 <h2 id="Alerts-文件"><a href="#Alerts-文件" class="headerlink" title="Alerts 文件"></a>Alerts 文件</h2><p>还需要在 <code>config/Alerts</code> 中，新增 <code>rttdetect</code> 和 <code>lossdetect</code>，其他的看提示吧</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+rttdetect</span><br><span class="line"><span class="attr">type</span> = rtt</span><br><span class="line"><span class="attr">pattern</span> = &lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&gt;<span class="number">20</span>,&gt;<span class="number">20</span>,&gt;<span class="number">20</span></span><br><span class="line"><span class="attr">comment</span> = 连续<span class="number">3</span>次延时<span class="number">20</span>以上</span><br><span class="line"></span><br><span class="line">+lossdetect</span><br><span class="line"><span class="attr">type</span> = loss</span><br><span class="line"><span class="attr">pattern</span> = ==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,&gt;<span class="number">0</span>%,&gt;<span class="number">0</span>%,&gt;<span class="number">0</span>%</span><br><span class="line"><span class="attr">comment</span> = 突然有丢包</span><br></pre></td></tr></table></figure>
 
 <h2 id="重启主服务容器"><a href="#重启主服务容器" class="headerlink" title="重启主服务容器"></a>重启主服务容器</h2><p>改完上述几个设置文件之后，可能会需要重启主服务容器，以便让设置生效</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102132406.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102132406.png"></p>
 <p>这个时候，从服务容器日志中会显示主服务关闭了连接</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARNING Master said 500 Server closed connection without sending any data back</span><br></pre></td></tr></table></figure>
 
@@ -608,11 +608,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Sending to server:</span><br><span class="line"></span><br><span class="line">/dest1/sh-yidong	1676036574	U:20:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U</span><br><span class="line">/dest1/sh-dianxing	1676036574	U:0:3.2800000000e-03:2.1200000000e-03:2.6800000000e-03:3.0500000000e-03:3.0600000000e-03:3.1100000000e-03:3.1500000000e-03:3.1900000000e-03:3.2000000000e-03:3.2600000000e-03:3.2600000000e-03:3.2800000000e-03:3.3600000000e-03:3.4300000000e-03:3.4900000000e-03:3.5000000000e-03:3.5800000000e-03:3.6000000000e-03:3.6300000000e-03:3.6600000000e-03:4.0300000000e-03</span><br><span class="line">/dest1/sh-liantong	1676036574	U:20:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U:U</span><br><span class="line"></span><br><span class="line">Sent data to Server. Server said OK</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8580</code> 就能看到 <code>slave1</code> 传来的数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102151810.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102151810.png"></p>
 <p>刚开始数据还比较少</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302102154566.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302102154566.png"></p>
 <p>第二天就不一样了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302110930724.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302110930724.png"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p><code>Smokeping</code> 反代存在截端口现象，例如老苏反代后通过 <code>https://smokeping.laosu.ml:444</code> 访问，但是会跳转到 <code>https://smokeping.laosu.ml/smokeping/</code> ，从而导致访问失败</p>
 <p>如果你和老苏一样用 <code>npm</code> 反代，可以在 <code>npm</code> 的 <code>Advance</code> 中加入下面的代码</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;  </span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>:<span class="number">444</span>;  </span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For   <span class="variable">$proxy_add_x_forwarded_for</span>;  </span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Protocol <span class="variable">$scheme</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span>  http://192.168.0.197:8580;  </span><br><span class="line">    <span class="attribute">proxy_redirect</span> http:// https://;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

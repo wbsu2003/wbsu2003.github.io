@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="AnythingLLM 是可以与任何内容聊天的私人 ChatGPT，是高效、可定制、开源的企业级文档聊天机器人解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051655219.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051655219.png">
 <meta property="article:published_time" content="2024-03-11T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051655219.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051655219.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/03/11/%E7%94%A8AnythingLLM%E6%9E%84%E5%BB%BA%E4%B8%93%E5%B1%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051655219.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051655219.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -513,27 +513,27 @@
 <li>极其高效的成本节约措施，用于管理非常大的文档。您将永远不会为嵌入的大型文档或转录付费超过一次。比其他文档聊天机器人解决方案更省成本，降低 <code>90%</code>。  </li>
 <li>提供完整的开发者 <code>API</code>，用于自定义集成！</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051545348.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051545348.gif"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>anythingllm</code> ，选择第一个 <code>mintplexlabs/anythingllm</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051347947.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051347947.png"></p>
 <h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>勾选 <code>使用高权限执行容器</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051409729.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051409729.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>anythingllm</code>，并在其中建一个子文件夹 <code>data</code></p>
 <p>在本机上新建一个 <code>env.txt</code> 文件，上传到 <code>data</code> 目录中，在文件中写入下面的内容</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">SERVER_PORT</span>=<span class="number">3001</span></span><br><span class="line"><span class="attr">STORAGE_DIR</span>=<span class="string">&quot;/app/server/storage&quot;</span></span><br><span class="line"><span class="attr">UID</span>=<span class="string">&#x27;1000&#x27;</span></span><br><span class="line"><span class="attr">GID</span>=<span class="string">&#x27;1000&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051345839.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051345839.png"></p>
 <p>现在的目录结构</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051346400.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051346400.png"></p>
 <p>默认 <code>data</code> 目录，<code>Everyone</code> 只有读权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051349105.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051349105.png"></p>
 <p>要给 <code>data</code> 目录赋予 <code>Everyone</code> 读写权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051354640.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051354640.png"></p>
 <p>对于 <code>env.txt</code> 文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051355110.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051355110.png"></p>
 <p>同样也要给予 <code>Everyone</code> 读写权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051357521.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051357521.png"></p>
 <table>
 <thead>
 <tr>
@@ -556,7 +556,7 @@
 <blockquote>
 <p>前一项是通过 <code>添加文件夹</code>，后一项通过 <code>添加文件</code> 进行挂载</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051412926.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051412926.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -572,7 +572,7 @@
 <td align="center"><code>3001</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051413731.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051413731.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 anythingllm 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/anythingllm/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 anythingllm 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/anythingllm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 data 目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R 777 data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 env.txt 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 env.txt 文件权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 env.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --cap-add SYS_ADMIN \</span><br><span class="line">   --name anythingllm \</span><br><span class="line">   -p 3014:3001 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/server/storage \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/env.txt:/app/server/.env \</span><br><span class="line">   mintplexlabs/anythingllm</span><br></pre></td></tr></table></figure>
 
@@ -583,60 +583,60 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 anythingllm 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/anythingllm/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 anythingllm 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/anythingllm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 data 目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R 777 data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 env.txt 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 env.txt 文件权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 env.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>启动过程有点长，要稍等一会儿，当日志中显示 <code>Primary server in HTTP mode listening on port 3001</code> 时</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051426028.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051426028.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:3014</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051428566.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051428566.png"></p>
 <h2 id="设置向导"><a href="#设置向导" class="headerlink" title="设置向导"></a>设置向导</h2><p>点中间的 <code>Get started</code> 开始设置向导</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051430558.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051430558.png"></p>
 <ul>
 <li><code>LLM Preference</code></li>
 </ul>
 <p>如果你有 <code>OpenAI</code> 的 <code>key</code>，可以选这个试试。不过老苏没有，正好前一段装了 <code>Ollama</code>  还没删，所以 <code>LLM</code> 就选择了 <code>Ollama</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051433497.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051433497.png"></p>
 <ul>
 <li><code>Embedding Preference</code></li>
 </ul>
 <p>选择了默认的 <code>AnythingLLM Embedder</code>，这是 <code>AnythingLLM</code> 自带的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051434100.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051434100.png"></p>
 <ul>
 <li><code>Vector Database Connection</code></li>
 </ul>
 <p>选择了默认的 <code>LanceDB</code>，这同样是 <code>AnythingLLM</code> 自带的 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051435257.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051435257.png"></p>
 <p>接下来是设置 <code>logo</code> 和用户</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051437101.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051437101.png"></p>
 <p>这是我们选择的数据处理和隐私</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051439626.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051439626.png"></p>
 <p>创建工作空间</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051441125.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051441125.png"></p>
 <p>设置完成后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051441540.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051441540.png"></p>
 <p>这个时候你再打开 <code>env.txt</code> 文件，已经根据你的设置做了改变</p>
 <blockquote>
 <p>所以是完全可以通过设置来跳过向导的；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051640362.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051640362.png"></p>
 <h2 id="上传文档"><a href="#上传文档" class="headerlink" title="上传文档"></a>上传文档</h2><p>点上传按钮</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051443130.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051443130.png"></p>
 <p>打开上传界面，可以上传文档，也可以指定网站</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051446100.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051446100.png"></p>
 <p>网上下了一份 <code>华为投资控股有限公司2022年年度报告</code></p>
 <blockquote>
 <p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly93d3ctZmlsZS5odWF3ZWkuY29tL21pbmlzaXRlL21lZGlhL2FubnVhbF9yZXBvcnQvYW5udWFsX3JlcG9ydF8yMDIyX2NuLnBkZg==">https://www-file.huawei.com/minisite/media/annual_report/annual_report_2022_cn.pdf<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051500546.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051500546.png"></p>
 <p>选中上传完成的文件，点  <code>Move 1 file to workspace</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051501952.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051501952.png"></p>
 <p>将文件移入工作空间</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051502430.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051502430.png"></p>
 <p>点 <code>Save and Embed</code> 开始处理文档，等待处理完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051503195.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051503195.png"></p>
 <h2 id="开始提问"><a href="#开始提问" class="headerlink" title="开始提问"></a>开始提问</h2><p>进入工作空间</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051513626.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051513626.png"></p>
 <p>开始提问</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051523206.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051523206.png"></p>
 <p>答案感觉上都跟文档对不上，老苏切换  <code>Chat Model</code> 为 <code>gemma:2b</code> 时，又总是超时，可能原因还是机器太弱了吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/03/202403051539568.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/03/202403051539568.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Mintplex-Labs/anything-llm: A multi-user ChatGPT for any LLMs and vector database. Unlimited documents, messages, and storage in one privacy-focused app. Now available as a desktop application!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRwbGV4LUxhYnMvYW55dGhpbmctbGxt">https://github.com/Mintplex-Labs/anything-llm<i class="fa fa-external-link-alt"></i></span></p>
 <p>Ollama - AnythingLLM by Mintplex Labs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnVzZWFueXRoaW5nLmNvbS9mZWF0dXJlLW92ZXJ2aWV3L2xsbS1zZWxlY3Rpb24vb2xsYW1h">https://docs.useanything.com/feature-overview/llm-selection/ollama<i class="fa fa-external-link-alt"></i></span></p>

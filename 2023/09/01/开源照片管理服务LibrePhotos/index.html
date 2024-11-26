@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="LibrePhotos 是一个自托管的开源照片管理服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212338025.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212338025.png">
 <meta property="article:published_time" content="2023-09-01T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="相册">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212338025.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212338025.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/09/01/%E5%BC%80%E6%BA%90%E7%85%A7%E7%89%87%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1LibrePhotos/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212338025.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212338025.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,7 +506,7 @@
 <blockquote>
 <p><code>UhuruPhotos</code> 是一款功能齐全，使用 <code>Jetpack Compose</code>和最新的 <code>android</code> 技术编写的 <code>LibrePhotos android</code> 客户端。它借鉴了 <code>Google Photos</code> 的很多想法，旨在成为功能齐全的相册替代品，包括离线支持、备份和同步等功能。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212212480.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212212480.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><p>将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <blockquote>
@@ -538,39 +538,39 @@
 </ul>
 <p>其他参数，除了 <code>dbPass</code> 可以按需要修改外，其他的直接用默认值就可以，除非你清楚每个参数的用途</p>
 <p>如果执行时遇到下面的错误，请用 <code>UTF-8</code> 格式保存 <code>env.txt</code> 文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211510726.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211510726.png"></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 librephotos 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/librephotos/&#123;data/&#123;cache,db,logs,protected_media&#125;,pictures&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 librephotos 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/librephotos</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 和 env.txt 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose --env-file env.txt up -d</span><br></pre></td></tr></table></figure>
 
 <p>目录结构</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211611112.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211611112.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3068</code> ，第一次会看到注册页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211605536.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211605536.png"></p>
 <p>然后需要登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211600577.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211600577.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211608991.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211608991.png"></p>
 <p>需要点 <code>Edit User</code> 按钮来设置路径，直接点击下面的 <code>data</code> 或者直接输入 <code>/data</code>，点 <code>Save</code> 保存即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211615562.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211615562.png"></p>
 <p>右下角会提示开始扫描</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211617369.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211617369.png"></p>
 <p>鼠标移到右上角的红点，可以看到照片处理进度</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211620708.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211620708.png"></p>
 <p>变成绿色时，表示已处理完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211621163.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211621163.png"></p>
 <p>虽然支持 <code>AI</code>，但期望值不要太高了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211730691.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211730691.png"></p>
 <h2 id="android-客户端"><a href="#android-客户端" class="headerlink" title="android 客户端"></a>android 客户端</h2><p>这是一个第三方的移动客户端，下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NhdnZhc2RhbGtpdHNpcy91aHVydXBob3Rvcy1hbmRyb2lk">https://github.com/savvasdalkitsis/uhuruphotos-android<i class="fa fa-external-link-alt"></i></span></p>
 <p>选择右侧的 <code>Manage media on mypersonal cloud</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212313392.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212313392.jpg"></p>
 <p>输入服务器地址、账号和密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212314302.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212314302.jpg"></p>
 <p>设置 <code>Allow</code>允许通知</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212316335.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212316335.jpg"></p>
 <p>从 <code>Media without date</code> 分类中查看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212317314.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212317314.jpg"></p>
 <p>虽然还处于早期阶段，但它已经具备了很多功能，例如：与 <code>LibrePhotos</code> 服务器定期后台同步等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308212326829.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308212326829.jpg"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>LibrePhotos/librephotos: Self hosted alternative to Google Photos<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpYnJlUGhvdG9zL2xpYnJlcGhvdG9z">https://github.com/LibrePhotos/librephotos<i class="fa fa-external-link-alt"></i></span></p>
 <p>LibrePhotos/librephotos-docker<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpYnJlUGhvdG9zL2xpYnJlcGhvdG9zLWRvY2tlcg==">https://github.com/LibrePhotos/librephotos-docker<i class="fa fa-external-link-alt"></i></span></p>

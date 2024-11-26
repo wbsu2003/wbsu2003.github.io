@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="🌎 Misskey是一个开源、去中心化的社交媒体平台，永远免费！🚀">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122130664.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122130664.png">
 <meta property="article:published_time" content="2023-02-22T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="ActivityPub">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122130664.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122130664.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/02/22/%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%BC%80%E6%BA%90%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0Misskey/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122130664.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122130664.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -532,33 +532,33 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 misskey 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/misskey/&#123;.config,files,pdata,rdata&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 misskey 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/misskey</span><br></pre></td></tr></table></figure>
 
 <p>将 <code>docker-compose.yml</code> 放入 <code>misskey</code> 根目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122046152.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122046152.png"></p>
 <p>将 <code>docker.yml</code> 放入 <code>.config</code> 目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122047518.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122047518.png"></p>
 <p>接下来需要初始化数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库</span></span><br><span class="line">docker-compose run --<span class="built_in">rm</span> web pnpm run init</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302121908813.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302121908813.png"></p>
 <p>运行需要一些时间，没问题的话会看到 <code>Migration</code>成功的提示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302121905957.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302121905957.png"></p>
 <p>现在可以一键启动了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>当在 <code>misskey-web</code> 容器日志中看到 <code>All workers started</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302121929872.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302121929872.png"></p>
 <p>就可以在浏览器中输入 <code>http://群晖IP:3838</code> 开始访问了，默认就支持中文，需要先配置管理账号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122054919.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122054919.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122055596.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122055596.png"></p>
 <p>发个帖子</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122109113.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122109113.png"></p>
 <p>发帖成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122110930.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122110930.png"></p>
 <p>功能就留给大家慢慢摸索吧</p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>如果要远程使用，或者加入 <code>ActivityPub</code>，需要做反代处理，还是以 <code>npm</code> 为例</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122112617.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122112617.png"></p>
 <p>老苏还是习惯全部勾选</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302122113444.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302122113444.png"></p>
 <p>只是随便点了点，暂时没发现有什么异常</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>misskey-dev/misskey: 🌎 An interplanetary microblogging platform 🚀<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pc3NrZXktZGV2L21pc3NrZXk=">https://github.com/misskey-dev/misskey<i class="fa fa-external-link-alt"></i></span></p>

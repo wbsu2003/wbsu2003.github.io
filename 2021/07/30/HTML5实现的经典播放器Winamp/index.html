@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="用 HTML5 和 JavaScript 重新实现的 Winamp 2.9，具有完整的皮肤支持。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727163842.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727163842.png">
 <meta property="article:published_time" content="2021-07-30T10:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727163842.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727163842.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/07/30/HTML5%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%BB%8F%E5%85%B8%E6%92%AD%E6%94%BE%E5%99%A8Winamp/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727163842.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727163842.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,7 +501,7 @@
 </blockquote>
 <p><code>Winamp</code> 是一个超级经典的音频播放器，曾经统治过桌面端的音乐播放器市场，当年是很多人的装机必备，以丰富的插件支持和皮肤效果著称，但后来因大公司的内部斗争，最终被其它播放器给取代了。目前最新的版本不是百度百科说的 5.57 版 ，而是 5.8 版本，支持多国语言。</p>
 <p>其实今天我们要介绍的并不是 <code>Winamp</code> 本身，而是用 <code>HTML5</code> 和 <code>JavaScript</code> 复刻的 <code>Winamp 2.9</code>，一个可以在浏览器里运行的 <code>Webamp</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727114751.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727114751.png"></p>
 <p>不愿意折腾的可以直接在这里试用：<span class="exturl" data-url="aHR0cHM6Ly93ZWJhbXAub3JnLw==">https://webamp.org/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="镜像构建"><a href="#镜像构建" class="headerlink" title="镜像构建"></a>镜像构建</h1><p>老苏构建镜像一般在 <code>CentOS</code> 虚拟机里，不建议在群晖上这么干，虽然群晖也是 <code>Linux</code> 系统，但是主要是作为无头机用的。</p>
 <p>首先当然是下载源代码</p>
@@ -510,16 +510,16 @@
 <p>如果 <code>git</code> 下载代码出现下面👇的错误</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error: RPC failed; result=35, HTTP code = 0</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727151853.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727151853.png"></p>
 <p>可以通过设置 <code>git</code> 的 <code>http</code> 缓存大小，解决了这个问题</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果 20M 不行就 50M</span></span><br><span class="line">git config --global http.postBuffer 20M</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727151817.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727151817.png"></p>
 <p>代码下载成功后依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> webamp/packages/webamp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">yarn install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> demo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包</span></span><br><span class="line">yarn run build</span><br></pre></td></tr></table></figure>
 
 <p>打包完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727140057.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727140057.png"></p>
 <p>和我们之前介绍的发现导航nav不同，<code>Webamp</code> 因为不需要修改配置文件，所以可以考虑直接把编译的静态文件，也就是把 <code>built</code> 目录直接丢给 <code>nginx</code></p>
 <blockquote>
 <p>相关文章：<span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA3LzI2LyVFNCVCOCU4MCVFNCVCOCVBQSVFOSU5RCU5RSVFNSVCOCVCOCVFNSVCQyVCQSVFNSVBNCVBNyVFNyU5QSU4NCVFOSU5RCU5OSVFNiU4MCU4MSVFNSVBRiVCQyVFOCU4OCVBQSVFNyVCRCU5MSVFNyVBQiU5OW5hdi8=">一个非常强大的静态导航网站nav<i class="fa fa-external-link-alt"></i></span></p>
@@ -527,14 +527,14 @@
 <p><code>Dockerfile</code> 要放在代码 <code>webamp/packages/webamp/demo</code> 目录中</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nginx:<span class="number">1.12</span>-alpine</span><br><span class="line"><span class="keyword">MAINTAINER</span> laosu&lt;wbsu2003@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> /built /usr/share/nginx/html</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727152316.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727152316.png"></p>
 <p>开始构建镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建镜像  </span></span><br><span class="line">docker build -t wbsu2003/webamp:v1 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成容器  </span></span><br><span class="line">docker run -d -p 7080:80 --restart=always --name webamp wbsu2003/webamp:v1</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210730132220.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210730132220.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>webamp</code> ，选择第一个 <code>wbsu2003/webamp</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727160201.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727160201.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行</p>
 <table>
 <thead>
@@ -548,27 +548,27 @@
 <td align="center">80</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727160322.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727160322.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7080</code>，就看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727155948.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727155948.png"></p>
 <p>因为是复刻的，所以也支持右键菜单</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727161207.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727161207.png"></p>
 <p>除了内置的几首外，也可以加载本地的 <code>mp3</code> 文件，随便拖了几首 <code>mp3</code> 到 <code>playlist</code> 中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727160714.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727160714.png"></p>
 <p>菜单上本来应该还可以 <code>Dropbox</code> 中的音乐文件，但是因为安全问题未开放，具体看这里：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhcHRiYXJpdG9uZS93ZWJhbXAvaXNzdWVzLzc1MA==">https://github.com/captbaritone/webamp/issues/750<i class="fa fa-external-link-alt"></i></span></p>
 <p>这个是 <code>Mac OSX</code> 的皮肤，太复古了，也不知道是哪一年的 <code>MacOX</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210727161824.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210727161824.png"></p>
 <h1 id="chrome实时字幕"><a href="#chrome实时字幕" class="headerlink" title="chrome实时字幕"></a>chrome实时字幕</h1><p>如果听英文歌曲，可以尝试下 <code>chrome</code> 的实时字幕，这个功能需要 <code>chrome</code>  89 及以上版本，该功能默认没有开启，需要在 <code>设置</code> –&gt; <code>高级</code> –&gt; <code>无障碍</code> 中启用，也可以在控制界面启用</p>
 <blockquote>
 <p>控制界面只有在 <code>chrome</code> 播放音视频的时候才会出现在插件栏</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210730160713.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210730160713.png"></p>
 <p>浏览器插件栏上可以打开控制界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210728151320.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210728151320.png"></p>
 <p>实时字幕目前只支持英文</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210728151000.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210728151000.png"></p>
 <p>字幕（歌词）会出现在屏幕下方的中间，至于准不准确老苏就不知道了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210728151212.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210728151212.png"></p>
 <p>泡上一壶茶，慢慢享受音乐🎵吧，enjoy it ~</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>captbaritone/webamp: Winamp 2 reimplemented for the browser<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhcHRiYXJpdG9uZS93ZWJhbXA=">https://github.com/captbaritone/webamp<i class="fa fa-external-link-alt"></i></span></p>

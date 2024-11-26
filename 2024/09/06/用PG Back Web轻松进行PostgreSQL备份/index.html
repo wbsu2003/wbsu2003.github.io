@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="PG Back Web 🐘 使用用户友好的 Web 界面轻松进行 PostgreSQL 备份！🌐💾">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061647406.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061647406.png">
 <meta property="article:published_time" content="2024-09-06T09:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061647406.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061647406.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/09/06/%E7%94%A8PG%20Back%20Web%E8%BD%BB%E6%9D%BE%E8%BF%9B%E8%A1%8CPostgreSQL%E5%A4%87%E4%BB%BD/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061647406.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061647406.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -513,17 +513,17 @@
 <li>🎯<strong>为每个人设计</strong>：从个人开发者到团队。</li>
 <li>⏱️<strong>节省时间</strong>：自动备份，不再需要手动任务。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408032012718.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408032012718.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>pgbackweb</code> ，选择第一个 <code>eduardolat/pgbackweb</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>最近不知道是调整了算法还是什么原因，总之搜出来都是乱七八糟的</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408041337941.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408041337941.png"></p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>0.1.2</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408041339519.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408041339519.png"></p>
 <h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <h3 id="步骤1"><a href="#步骤1" class="headerlink" title="步骤1"></a>步骤1</h3><p>启动一个 <code>PostgreSQL</code> 容器，这个容器是给 <code>PG Back Web</code> 使用的，用于记录用户信息、数据库连接信息、存储信息、备份计划等</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pgbackweb 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/pgbackweb/&#123;data,minio&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pgbackweb 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/pgbackweb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器 PostgreSQL</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name pbw-postgres \</span><br><span class="line">   -p 5433:5432 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/lib/postgresql/data \</span><br><span class="line">   -e POSTGRES_DB=pgbackweb \</span><br><span class="line">   -e POSTGRES_USER=postgres \</span><br><span class="line">   -e POSTGRES_PASSWORD=password \</span><br><span class="line">   postgres:15</span><br></pre></td></tr></table></figure>
@@ -547,7 +547,7 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建名为 db-backup 的存储桶</span></span><br><span class="line">docker <span class="built_in">exec</span> -it pbw-minio sh -c <span class="string">&quot;/usr/bin/mc alias set myminio http://localhost:9000 root password &amp;&amp; /usr/bin/mc mb myminio/db-backup&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061719833.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061719833.png"></p>
 <h3 id="步骤3"><a href="#步骤3" class="headerlink" title="步骤3"></a>步骤3</h3><p>启动 <code>pgbackweb</code> 容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name pbw-pgbackweb \</span><br><span class="line">   -p 8085:8085 \</span><br><span class="line">   -e PBW_ENCRYPTION_KEY=my_secret_key \</span><br><span class="line">   -e PBW_POSTGRES_CONN_STRING=<span class="string">&quot;postgresql://postgres:password@192.168.0.197:5433/pgbackweb?sslmode=disable&quot;</span> \</span><br><span class="line">    eduardolat/pgbackweb:latest</span><br></pre></td></tr></table></figure>
 
@@ -562,7 +562,7 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pgbackweb 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/pgbackweb/&#123;data,minio&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pgbackweb 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/pgbackweb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建名为 db-backup 的存储桶</span></span><br><span class="line">docker <span class="built_in">exec</span> -it pbw-minio sh -c <span class="string">&quot;/usr/bin/mc alias set myminio http://localhost:9000 root password &amp;&amp; /usr/bin/mc mb myminio/db-backup&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061720685.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061720685.png"></p>
 <p>如果你细心的话，会发现 <code>PBW_POSTGRES_CONN_STRING</code> 的值在 <code>docker cli</code> 和 <code>docker-compose</code> 安装时，存在差异，这是</p>
 <ul>
 <li><p> <code>docker cli</code> 采用了独立安装的容器，各容器并不在一个网络中，所以 <code>PostgreSQL</code> 的地址用了主机 <code>IP</code> + 本机端口的方式</p>
@@ -571,11 +571,11 @@
 </li>
 </ul>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8085</code> ，第一次会看到注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408032126755.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408032126755.png"></p>
 <p>创建成功后，还需要登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408032128735.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408032128735.png"></p>
 <p>主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202408032129561.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202408032129561.png"></p>
 <p>创建一个数据库</p>
 <blockquote>
 <p>以 <code>Comentario</code> 的数据库为例</p>
@@ -585,9 +585,9 @@
 <li><code>Version</code>：是指要连接的数据库的版本，<code>Comentario</code>  用的是 <code>postgres:16-alpine</code>;</li>
 <li><code>Connection string</code>：根据 <code>Comentario</code> 的设置，连接字符串是 <code>postgresql://postgres:postgres@192.168.0.197:5434/comentario</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061026575.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061026575.png"></p>
 <p>设置完成后点 <code>Test connection</code> 进行测试，如果看到连接成功，就可以点 <code>Save</code> 保存了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061032809.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061032809.png"></p>
 <p>接下来需要设置 <code>Destinations</code> </p>
 <ul>
 <li><code>Name</code>：易于识别就行；</li>
@@ -597,9 +597,9 @@
 <li><code>Access key</code>：如果没有单独创建的话，就用 <code>MINIO_ROOT_USER</code> 的值也行；</li>
 <li><code>Secret key</code>：如果没有单独创建的话，就用  <code>MINIO_ROOT_PASSWORD</code> 的值也行；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061517664.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061517664.png"></p>
 <p>如果测试没问题，点 <code>Save</code> 保存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061618542.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061618542.png"></p>
 <p>接下来就可以备份了</p>
 <ul>
 <li><code>Name</code>：易于识别即可；</li>
@@ -612,13 +612,13 @@
 <li><code>Activate backup</code>：是否激活备份；</li>
 <li><code>Options</code>：一些可选项，不知道怎么设，保持默认就行；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061622875.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061622875.png"></p>
 <p>点 <code>Save</code> 保存之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061630536.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061630536.png"></p>
 <p>点闪电图标，直接备份</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061631248.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061631248.png"></p>
 <p>查看执行的状态</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202408061633825.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202408061633825.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>eduardolat/pgbackweb: 🐘 Effortless PostgreSQL backups with a user-friendly web interface! 🌐💾<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2VkdWFyZG9sYXQvcGdiYWNrd2Vi">https://github.com/eduardolat/pgbackweb<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>

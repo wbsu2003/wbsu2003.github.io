@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Fider 是一个功能请求和建议的反馈门户。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301621894.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301621894.png">
 <meta property="article:published_time" content="2024-02-05T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.421Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.056Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="论坛">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301621894.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301621894.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/05/%E9%9C%80%E6%B1%82%E5%92%8C%E5%BB%BA%E8%AE%AE%E6%90%9C%E9%9B%86%E5%B9%B3%E5%8F%B0Fider/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301621894.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301621894.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +499,7 @@
 <blockquote>
 <p><code>Fider</code>  是一个功能请求和建议的反馈门户。为您的客户/访客提供发言权，让他们告诉您他们的需求。花更少的时间猜测，花更多的时间构建正确的产品。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401300915267.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401300915267.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>涉及到两个容器，采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:13</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">fider-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">fider</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">fideruser</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">s0m3g00dp4ssw0rd</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">app:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">getfider/fider:stable</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">fider-web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3423</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">BASE_URL:</span> <span class="string">http://192.168.0.197:3423</span></span><br><span class="line">      <span class="attr">DATABASE_URL:</span> <span class="string">postgres://fideruser:s0m3g00dp4ssw0rd@db:5432/fider?sslmode=disable</span></span><br><span class="line">      <span class="attr">JWT_SECRET:</span> <span class="string">VERY_STRONG_SECRET_SHOULD_BE_USED_HERE</span></span><br><span class="line">      <span class="attr">EMAIL_NOREPLY:</span> <span class="string">wbsu2003@88.com</span></span><br><span class="line">      <span class="attr">EMAIL_SMTP_HOST:</span> <span class="string">smtp.88.com</span></span><br><span class="line">      <span class="attr">EMAIL_SMTP_PORT:</span> <span class="string">&#x27;25&#x27;</span></span><br><span class="line">      <span class="attr">EMAIL_SMTP_USERNAME:</span> <span class="string">wbsu2003@88.com</span></span><br><span class="line">      <span class="attr">EMAIL_SMTP_PASSWORD:</span> <span class="string">&lt;你的第三方邮件客户端密码&gt;</span></span><br><span class="line">      <span class="attr">EMAIL_SMTP_ENABLE_STARTTLS:</span> <span class="string">&#x27;false&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -578,32 +578,32 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 fider 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/fider/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 fider 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/fider</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3423</code> 就能看到注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401300941258.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401300941258.png"></p>
 <p>提交之后，会往你填的邮箱发一封确认邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401300945249.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401300945249.png"></p>
 <p>如果你的 <code>SMTP</code> 设置无误的话，很快就会收到一封激活邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301018247.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301018247.png"></p>
 <p>点邮件中的链接进行激活</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301035499.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301035499.png"></p>
 <p>① 是管理员的相关设置，包括显示名称和头像等等；<br>② 是站点的相关设置，可惜目前还不支持中文界面；</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301040398.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301040398.png"></p>
 <p>如果设置为 <code>Private Site</code> ，就只有已注册的用户、受邀请的用户和来自受信任的 <code>OAuth</code> 提供商的用户才能访问此站点。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301047549.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301047549.png"></p>
 <p>从微信后台挑了两条</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301556692.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301556692.png"></p>
 <p>最后的效果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301557896.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301557896.png"></p>
 <p>别人可以在建议后面讨论</p>
 <blockquote>
 <p>当然需要先登录（<code>Sign In</code>）才行</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301558332.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301558332.png"></p>
 <p>管理员可以回应状态</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301606568.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301606568.png"></p>
 <p>用户则可以查看到建议的状态，是列入了计划还是被拒绝了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301608397.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301608397.png"></p>
 <p>对于关心的主题，还可以订阅</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401301610090.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401301610090.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>getfider/fider: Open platform to collect and prioritize feedback<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dldGZpZGVyL2ZpZGVy">https://github.com/getfider/fider<i class="fa fa-external-link-alt"></i></span></p>
 <p>Prioritize what your customers really need · Fider<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9maWRlci5pby8=">https://fider.io/<i class="fa fa-external-link-alt"></i></span></p>

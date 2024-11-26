@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Maxun 可让您在 2 分钟内训练机器人并自动抓取网页数据。网页数据提取再简单不过了！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411251012892.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411251012892.png">
 <meta property="article:published_time" content="2024-11-25T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="低代码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411251012892.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411251012892.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/11/25/%E5%BC%80%E6%BA%90%E6%97%A0%E4%BB%A3%E7%A0%81%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96%E5%B9%B3%E5%8F%B0Maxun/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411251012892.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411251012892.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,7 +516,7 @@
 <li><strong>支持代理</strong>：用户可以连接外部代理，以绕过反机器人保护。</li>
 <li><strong>云服务</strong>：<code>Maxun</code> 提供托管云版本，用户可以在不管理基础设施的情况下进行大规模数据提取。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241158696.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241158696.gif"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>虽然说是采用 <code>docker</code> 部署，但第一步还是需要下载 <code>Maxun</code> 的源码</p>
 <h2 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h2><p>群晖上下载源码，首先需要有 <code>Git</code> 客户端，不管是用套件还是容器都可以</p>
@@ -526,9 +526,9 @@
 <p>下载代码的步骤如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 docker 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载源码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/getmaxun/maxun.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行 maxun 目录</span></span><br><span class="line"><span class="built_in">cd</span> maxun</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241241058.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241241058.png"></p>
 <p>在 <code>FileStation</code> 中查看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241244933.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241244933.png"></p>
 <h2 id="修改文件"><a href="#修改文件" class="headerlink" title="修改文件"></a>修改文件</h2><p>在开始运行前，还需要做一些必要的修改</p>
 <h3 id="env-txt"><a href="#env-txt" class="headerlink" title="env.txt"></a>env.txt</h3><p>为了方便编辑，老苏将 <code>ENVEXAMPLE</code>改名为了 <code>env.txt</code>。这是环境变量文件，包括了 <code>Maxun</code> 相关的设置</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># App Setup</span></span><br><span class="line"><span class="attr">NODE_ENV</span>=production                     <span class="comment"># Set to &#x27;development&#x27; or &#x27;production&#x27; as required</span></span><br><span class="line"><span class="attr">JWT_SECRET</span>=a9Z<span class="variable">$kLq7</span>^f03GzNw!bP9dH4xV6sT2yXl3O8vR@uYq3          <span class="comment"># Replace with a secure JWT secret key</span></span><br><span class="line"><span class="attr">DB_NAME</span>=maxun                           <span class="comment"># Your PostgreSQL database name</span></span><br><span class="line"><span class="attr">DB_USER</span>=postgres                        <span class="comment"># PostgreSQL username</span></span><br><span class="line"><span class="attr">DB_PASSWORD</span>=postgres                    <span class="comment"># PostgreSQL password</span></span><br><span class="line"><span class="attr">DB_HOST</span>=postgres                        <span class="comment"># Host for PostgreSQL in Docker</span></span><br><span class="line"><span class="attr">DB_PORT</span>=<span class="number">5432</span>                            <span class="comment"># Port for PostgreSQL (default: 5432)</span></span><br><span class="line"><span class="attr">ENCRYPTION_KEY</span>=f4d5e6a7b8c9d0e1f23456789abcdef01234567890abcdef123456789abcdef0      <span class="comment"># Key for encrypting sensitive data (passwords and proxies)</span></span><br><span class="line"><span class="attr">MINIO_ENDPOINT</span>=minio                    <span class="comment"># MinIO endpoint in Docker</span></span><br><span class="line"><span class="attr">MINIO_PORT</span>=<span class="number">9000</span>                         <span class="comment"># Port for MinIO (default: 9000)</span></span><br><span class="line"><span class="attr">MINIO_ACCESS_KEY</span>=minio_access_key       <span class="comment"># MinIO access key</span></span><br><span class="line"><span class="attr">MINIO_SECRET_KEY</span>=minio_secret_key       <span class="comment"># MinIO secret key</span></span><br><span class="line"><span class="attr">REDIS_HOST</span>=redis                        <span class="comment"># Redis host in Docker</span></span><br><span class="line"><span class="attr">REDIS_PORT</span>=<span class="number">6379</span>                         <span class="comment"># Redis port (default: 6379)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Backend URLs</span></span><br><span class="line"><span class="attr">BACKEND_URL</span>=http://<span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">5174</span>        <span class="comment"># Internal URL for backend service</span></span><br><span class="line"><span class="attr">VITE_BACKEND_URL</span>=http://<span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">5174</span>   <span class="comment"># URL used by frontend to connect to backend</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Optional Google OAuth settings for Google Sheet Integration</span></span><br><span class="line"><span class="attr">GOOGLE_CLIENT_ID</span>=your_google_client_id</span><br><span class="line"><span class="attr">GOOGLE_CLIENT_SECRET</span>=your_google_client_secret</span><br><span class="line"><span class="attr">GOOGLE_REDIRECT_URI</span>=your_google_redirect_uri</span><br><span class="line"></span><br><span class="line"><span class="comment"># Telemetry Settings - Please keep it enabled. Keeping it enabled helps us understand how the product is used and assess the impact of any new changes. </span></span><br><span class="line"><span class="attr">MAXUN_TELEMETRY</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
@@ -553,31 +553,31 @@
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>然后执行下面的命令，再新建 <code>3</code> 个目录，分别用于持久化数据库等</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 maxun 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/maxun/&#123;mdata,pdata,rdata&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 maxun 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/maxun</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose --env-file env.txt up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241311037.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241311037.png"></p>
 <p>涉及镜像较多，执行启动过程也比较长，如果出现超时，可以通过命令，避免出现下面的情况</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置 Docker Compose 在与 Docker daemon 交互时的超时时间</span></span><br><span class="line"><span class="built_in">export</span> COMPOSE_HTTP_TIMEOUT=6000</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231240371.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231240371.png"></p>
 <p>如果没意外的话，会启动 <code>6</code> 个容器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241331464.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241331464.png"></p>
 <p>如果某个容器不能启动，可以看看详细的日志</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5174</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231328901.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231328901.png"></p>
 <p>第一次需要点 <code>Register</code> 注册账号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231330230.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231330230.png"></p>
 <p>注册成功后，会跳转到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231625270.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231625270.png"></p>
 <p>点 <code>Create Robot</code>，输入要抓取的网址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231633293.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231633293.png"></p>
 <p>点 <code>Start Training Robot</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231635006.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231635006.png"></p>
 <p>等一会儿，如果出现空白，很可能是后端容器挂了，也有可能是你访问的网站的问题</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411231820772.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411231820772.png"></p>
 <p>正常的话是会看到页面的，这里面用到了 <code>Playwright</code></p>
 <blockquote>
 <p><code>Playwright</code> 是一个由 <code>Microsoft</code> 开发的用于浏览器测试和网页抓取的开源自动化库。于 <code>2020</code> 年推出，它的功能类似于 <code>Selenium</code>、<code>Pyppeteer</code> 等，都可以驱动浏览器进行各种自动化操作。<code>Playwright</code> 提供了使用单个 <code>API</code> 在 <code>Chromium</code>、<code>Firefox</code> 和 <code>WebKit</code> 中自动执行浏览器任务的能力。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/11/202411241030662.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/11/202411241030662.png"></p>
 <p>接下来可以在界面上选择元素，具体使用方法可以看官方的视频</p>
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113535799597604&bvid=BV1JBBsYBEMy&cid=26952404105&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 

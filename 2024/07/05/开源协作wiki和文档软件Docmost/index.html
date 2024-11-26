@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Docmost 是开源协作 wiki 和文档软件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041437421.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041437421.png">
 <meta property="article:published_time" content="2024-07-05T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="在线文档">
 <meta property="article:tag" content="wiki">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041437421.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041437421.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/05/%E5%BC%80%E6%BA%90%E5%8D%8F%E4%BD%9Cwiki%E5%92%8C%E6%96%87%E6%A1%A3%E8%BD%AF%E4%BB%B6Docmost/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041437421.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041437421.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,9 +501,9 @@
 <blockquote>
 <p><code>Docmost</code> 是一款开源协作 wiki 和文档软件。它是 <code>Confluence</code> 和 <code>Notion</code> 等软件的开源替代品。使用 <code>Docmost</code> 可以无缝创建、协作和共享知识。非常适合管理您的 <code>wiki</code>、知识库、文档等。目前 <code>Docmost</code> 处于测试阶段。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031111516.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031111516.png"></p>
 <p>软件的主要特点</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041316858.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041316858.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>因为涉及多个容器，采用了 <code>docker-compose</code> 方式安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">docmost:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docmost/docmost:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docmost-app</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">APP_URL:</span> <span class="string">&#x27;http://192.168.0.197:3140&#x27;</span></span><br><span class="line">      <span class="attr">APP_SECRET:</span> <span class="string">&#x27;G6phWvAVU2JRStChrmJx&#x27;</span></span><br><span class="line">      <span class="attr">DATABASE_URL:</span> <span class="string">&#x27;postgresql://docmost:STRONG_DB_PASSWORD@db:5432/docmost?schema=public&#x27;</span></span><br><span class="line">      <span class="attr">REDIS_URL:</span> <span class="string">&#x27;redis://redis:6379&#x27;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3140:3000&quot;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/app/data/storage</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:16-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docmost-db</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">docmost</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">docmost</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">STRONG_DB_PASSWORD</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./db:/var/lib/postgresql/data</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis:7.2-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docmost-redis</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis:/data</span></span><br></pre></td></tr></table></figure>
@@ -578,7 +578,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 docmost 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/docmost/&#123;data,db,redis&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 docmost 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/docmost</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限，否则上传图片会失败</span></span><br><span class="line"><span class="built_in">chmod</span> a+rw data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3140</code> 就能看到注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031418110.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031418110.png"></p>
 <ul>
 <li><code>Workspace Name</code>：工作区名称</li>
 <li><code>Your Name</code>：用户名</li>
@@ -586,58 +586,58 @@
 <li><code>Password</code>：密码，不能少于 <code>8</code> 个字符</li>
 </ul>
 <p>注册成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031422348.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031422348.png"></p>
 <h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><p>进入工作区</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031728752.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031728752.png"></p>
 <p>新建 <code>New page</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031730231.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031730231.png"></p>
 <p>和 <code>Notion</code> 一样采用了块操作模式，输入 <code>/</code> 可创建代码块、<code>todo list</code> 等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407031729629.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407031729629.png"></p>
 <p>基于 <code>Docmost</code> 写下了本文</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041329344.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041329344.png"></p>
 <p>回到 <code>Home</code> 能看到刚刚更新的文档</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041332004.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041332004.png"></p>
 <p>右上角是 <code>Docmost</code> 的相关设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041333515.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041333515.png"></p>
 <p>比如我想给创建的空间  <code>General</code> 改个名</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041339996.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041339996.png"></p>
 <p>修改 <code>Name</code> 就可以</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041340656.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041340656.png"></p>
 <p>保存之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041341027.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041341027.png"></p>
 <p>再回到 <code>Home</code>，名字已经改过来了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041342080.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041342080.png"></p>
 <p>按个人习惯又增加了几个</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041346784.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041346784.png"></p>
 <h2 id="协作"><a href="#协作" class="headerlink" title="协作"></a>协作</h2><p>像工作相关的部分，我们可以邀请成员进行协作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041348446.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041348446.png"></p>
 <p>当然前提是我们在安装时，设置了邮件相关的环境变量才行</p>
 <blockquote>
 <p>需要给容器 <code>docmost-app</code> 增加下面这些内容</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MAIL_DRIVER: <span class="string">&#x27;smtp&#x27;</span></span><br><span class="line">SMTP_HOST: <span class="string">&#x27;smtp.88.com&#x27;</span></span><br><span class="line">SMTP_PORT: <span class="string">&#x27;465&#x27;</span></span><br><span class="line">SMTP_USERNAME: <span class="string">&#x27;wbsu2003@88.com&#x27;</span></span><br><span class="line">SMTP_PASSWORD: <span class="string">&#x27;&lt;第三方邮件客户端密码&gt;&#x27;</span></span><br><span class="line">MAIL_FROM_ADDRESS: <span class="string">&#x27;wbsu2003@88.com&#x27;</span></span><br><span class="line">MAIL_FROM_NAME: <span class="string">&#x27;Docmost&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041439370.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041439370.png"></p>
 <p>发个邀请</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041405563.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041405563.png"></p>
 <p>如果邮件设置没问题，应该很快就会收到邀请邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041409513.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041409513.png"></p>
 <p>点 <code>Accept Invite</code> 接受邀请，会跳转到注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041412079.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041412079.png"></p>
 <p>默认可能还什么都看不到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041416316.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041416316.png"></p>
 <p>回到主账号，添加组，这是为了方便后面授权</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041417314.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041417314.png"></p>
 <p>填写组名并添加成员</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041419301.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041419301.png"></p>
 <p>创建完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041419236.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041419236.png"></p>
 <p>然后到空间里授权</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041421144.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041421144.png"></p>
 <p>默认权限分为三种</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041421593.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041421593.png"></p>
 <p>另一个账号刷新一下就可以了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407041422704.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407041422704.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>docmost/docmost: Docmost is an open source collaborative documentation and wiki software. It is an open-source alternative to the likes of Confluence and Notion.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvY21vc3QvZG9jbW9zdA==">https://github.com/docmost/docmost<i class="fa fa-external-link-alt"></i></span></p>
 <p>Open-source collaborative wiki and documentation software | Docmost<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2Ntb3N0LmNvbS8=">https://docmost.com/<i class="fa fa-external-link-alt"></i></span></p>

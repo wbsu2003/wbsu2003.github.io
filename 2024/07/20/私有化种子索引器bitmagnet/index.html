@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="bitmagnet 是一个集成了 BitTorrent 索引器、DHT 网络爬虫、内容分类器以及带有 Web UI 和 GraphQL API 的种子搜索引擎。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171402683.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171402683.png">
 <meta property="article:published_time" content="2024-07-20T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="搜索">
 <meta property="article:tag" content="BitTorrent">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171402683.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171402683.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/20/%E7%A7%81%E6%9C%89%E5%8C%96%E7%A7%8D%E5%AD%90%E7%B4%A2%E5%BC%95%E5%99%A8bitmagnet/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171402683.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171402683.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,7 +505,7 @@
 <p><code>bitmagnet</code> 是一个自托管的 <code>BitTorrent</code> 索引器、<code>DHT</code> 爬虫、内容分类器和 <code>torrent</code> 搜索引擎，带有 <code>Web UI</code>、<code>GraphQL API</code> 和 <code>Servarr</code> 堆栈集成。</p>
 </blockquote>
 <p>需要注意的是，该软件目前还处于 <code>alpha</code> 阶段。它已准备好预览一些有趣且独特的功能，但在 <code>1.0</code> 版本（目前理论上）发布之前可能会出现错误，以及 <code>API</code> 和数据库架构更改。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407161522522.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407161522522.png"></p>
 <p><strong>什么是 DHT ？</strong></p>
 <blockquote>
 <p>分布式哈希表（<code>Distributed Hash Table</code>）是一种去中心化的分布式系统，用于存储和查找数据。它通过哈希函数将数据映射到网络中的多个节点上，每个节点负责存储一部分数据，并通过协作实现高效的数据存储和查找。</p>
@@ -515,7 +515,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v0.9.4</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171345311.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171345311.png"></p>
 <p>官方为我们提供了两个示例：</p>
 <ul>
 <li><p>完整的安装示例，请参考：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JpdG1hZ25ldC1pby9iaXRtYWduZXQvYmxvYi9tYWluL2RvY2tlci1jb21wb3NlLnltbA==">https://github.com/bitmagnet-io/bitmagnet/blob/main/docker-compose.yml<i class="fa fa-external-link-alt"></i></span></p>
@@ -530,11 +530,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 bitmagnet 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/bitmagnet/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 bitmagnet 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/bitmagnet</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3333</code> 就能看到主界面，刚开始什么都没有</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407161556903.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407161556903.png"></p>
 <p>等待一段时间后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407161723971.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407161723971.png"></p>
 <p>一天之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171026137.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171026137.png"></p>
 <h2 id="服务集成"><a href="#服务集成" class="headerlink" title="服务集成"></a>服务集成</h2><p><code>bitmagnet</code> 的 <code>HTTP</code> 服务器在 <code>/torznab</code> 路径下提供一个端点，使其能够与支持 <code>Torznab</code> 规范的任何应用程序集成，尤其是<code>Servarr</code> 堆栈中的应用程序（如 <code>Prowlarr</code>、<code>Sonarr</code>、<code>Radarr</code> 等）。</p>
 <blockquote>
 <p>文章传送门： <a href="https://laosu.tech/2022/02/18/Prowlarr%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%B4%A2%E5%BC%95%E8%81%9A%E5%90%88%E5%99%A8">Prowlarr：一个新的索引聚合器</a></p>
@@ -543,17 +543,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 prowlarr 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/prowlarr/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 prowlarr 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/prowlarr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  --name=prowlarr \</span><br><span class="line">  -p 9696:9696 \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">  -e PUID=1000 \</span><br><span class="line">  -e PGID=1000 \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  linuxserver/prowlarr</span><br></pre></td></tr></table></figure>
 
 <p>登录 <code>Prowlarr</code> 后，在主界面选择</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171301363.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171301363.png"></p>
 <p>输入 <code>generic torznab</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171302243.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171302243.png"></p>
 <p>选中进行编辑，只要 <code>Prowlarr</code> 能够访问 <code>bitmagnet</code> 的地址 <code>http://群晖IP:3333/torznab</code> 即可，无需进一步配置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171307552.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171307552.png"></p>
 <p>单击 <code>测试</code> 按钮，如果显示为绿色的勾， <code>保存</code> 即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171310251.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171310251.png"></p>
 <p>现在我们就有一个索引器了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171311052.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171311052.png"></p>
 <p>尝试搜索 <code>猩球崛起</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407171348016.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407171348016.png"></p>
 <p>居然没有找到第 <code>4</code> 部，再让它爬几天试试</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>bitmagnet-io/bitmagnet: A self-hosted BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JpdG1hZ25ldC1pby9iaXRtYWduZXQ=">https://github.com/bitmagnet-io/bitmagnet<i class="fa fa-external-link-alt"></i></span></p>

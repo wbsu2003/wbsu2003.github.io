@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="regex-vis.com 是一个辅助学习、编写和验证正则表达式的工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401251044300.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401251044300.png">
 <meta property="article:published_time" content="2024-02-03T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401251044300.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401251044300.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7regex-vis/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401251044300.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401251044300.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +511,7 @@
 <li>正则表达式的可视化编辑</li>
 <li>正则表达式的测试。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401151712059.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401151712059.gif"></p>
 <p>官方提供了站点：<span class="exturl" data-url="aHR0cHM6Ly9yZWdleC12aXMuY29tLw==">https://regex-vis.com<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><blockquote>
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
@@ -524,7 +524,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>regex-vis</code> ，选择第三个 <code>wbsu2003/regex-vis</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250903638.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250903638.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -540,7 +540,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250922348.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250922348.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name regex-vis \</span><br><span class="line">   -p 3420:80 \</span><br><span class="line">   wbsu2003/regex-vis</span><br></pre></td></tr></table></figure>
 
@@ -551,18 +551,18 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 regex-vis </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/regex-vis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 regex-vis 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/regex-vis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3420</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250923816.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250923816.png"></p>
 <p>默认是英文的，可以选择简体中文</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250924128.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250924128.png"></p>
 <p>你输入一个正则表达式后，会生成它的可视化图形。</p>
 <blockquote>
 <p>老苏是网上找的校验身份证的正则表达式，只是用于演示软件的功能，不表示其正确或者无缺陷；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250927632.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250927632.png"></p>
 <p>然后你可以在图形中点选或框选单个或多个节点，并在右侧的操作面板上对它们进行操作。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401250936627.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401250936627.png"></p>
 <p>最后来验证一下，绿色表示数据验证通过</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401251034037.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401251034037.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Bowen7/regex-vis: 🎨 Regex visualizer &amp; editor<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Jvd2VuNy9yZWdleC12aXM=">https://github.com/Bowen7/regex-vis<i class="fa fa-external-link-alt"></i></span></p>
 <p>Regex Vis<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdleC12aXMuY29tLw==">https://regex-vis.com/<i class="fa fa-external-link-alt"></i></span></p>

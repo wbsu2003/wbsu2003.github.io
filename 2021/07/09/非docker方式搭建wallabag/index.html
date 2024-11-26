@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="采用源代码方式安装的 wallabag 。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707171732.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707171732.png">
 <meta property="article:published_time" content="2021-07-09T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.421Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.056Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="稍后阅读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707171732.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707171732.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/07/09/%E9%9D%9Edocker%E6%96%B9%E5%BC%8F%E6%90%AD%E5%BB%BAwallabag/">
@@ -390,7 +390,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707171732.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707171732.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -431,7 +431,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,7 +502,7 @@
 <p>坦率的说，老苏不建议在群晖上使用除了 <code>docker</code> 和 <code>套件</code> 之外的方式来安装服务，因为很容易把机器搞乱（后面有提到切换 PHP 版本带来的问题，虽然这个问题最终得到了解决），除非你和老苏一样，生产和测试不是在一台主机，并且有良好的备份习惯。</p>
 <p>下面的操作有一定的风险，除非你确定知道自己在做什么。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装前先说下老苏测试机的环境</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709150625.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709150625.png"></p>
 <table>
 <thead>
 <tr>
@@ -529,12 +529,12 @@
 </tbody></table>
 <p>之所以要特别提到版本是因为老苏担心不同版本可能会存在各种差异</p>
 <h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 5</code> 中新建用户 <code>wallabag</code>，创建同名的库 <code>wallabag</code> 并授予所有权限。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210704154439.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210704154439.png"></p>
 <h2 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h2><p>不要用 <code>git</code> 下载，因为 <code>git</code> 下载的代码缺 <code>vendor</code> 目录，这个目录是项目的依赖包，如果你想自己编译生成 <code>vendor</code> 目录，需要在群晖上安装一堆东西，老苏不建议这么干，所以推荐直接到 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbGxhYmFnL3dhbGxhYmFnL3JlbGVhc2Vz">https://github.com/wallabag/wallabag/releases<i class="fa fa-external-link-alt"></i></span> 下载最新的 <code>wallabag-2.x.x.tar.gz</code> 压缩包。</p>
 <blockquote>
 <p>不要下 <code>Source code</code> ，因为也不带依赖包；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210705113916.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210705113916.png"></p>
 <p>将下载的压缩包上传到 <code>web</code> 目录，并用 SSH 客户端登录到群晖</p>
 <blockquote>
 <p>老苏的 web station 安装在 volume2 上，这里要根据你自己的卷标进行修改</p>
@@ -542,12 +542,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 web station 根目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> wallabag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩(不包含原目录)</span></span><br><span class="line">tar -zxvf ./wallabag-2.4.2.tar.gz --strip-components 1 -C wallabag/</span><br></pre></td></tr></table></figure>
 
 <p>现在的目录结构是这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210705141808.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210705141808.png"></p>
 <h2 id="切换-PHP-版本"><a href="#切换-PHP-版本" class="headerlink" title="切换 PHP 版本"></a>切换 PHP 版本</h2><p>在 SSH 客户端的命令行查询 PHP 的版本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取 php 版本</span></span><br><span class="line">php -v</span><br></pre></td></tr></table></figure>
 
 <p>不出意外的话，应该是 5.6 版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210705145830.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210705145830.png"></p>
 <blockquote>
 <p>如果你足够仔细的话会发现这个版本是 <code>5.6.11</code>，并不是我们前面记录的 <code>5.6.40</code>，老苏的好习惯又一次拯救了自己，因为老苏不仅在群晖上备份了，还顺手用 <code>WinSCP</code> 下载到了电脑一份。</p>
 </blockquote>
@@ -555,14 +555,14 @@
 <blockquote>
 <p>官方写的是 **compatible with PHP &gt;= 7.2 (maybe not 7.4).**，但是用 7.2 安装并不成功，会提示需要  &gt;=  7.2.5，所以别纠结了，直接上 7.3</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707155128.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707155128.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名原来 5.6 版本的 PHP，这一步很重要</span></span><br><span class="line"><span class="built_in">mv</span> /bin/php /bin/php56</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 7.3 版本的替换</span></span><br><span class="line"><span class="built_in">cp</span> -a /volume2/@appstore/PHP7.3/usr/local/bin/php73 /bin/php</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取 php 版本</span></span><br><span class="line">php -v</span><br></pre></td></tr></table></figure>
 
 <p>这次应该是显示 7.3 版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707152445.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707152445.png"></p>
 <p> <strong>【注意】</strong>：这么做是有后遗症的，会导致 <code>文本编辑器</code> 打开文件任何文件都是空的。</p>
 <p> 老苏也尝试过用 <code>PHP 7.2</code> 来替换， 但 <code>文本编辑器</code> 打开文件会显示 <code>无法联机，请检查你的网络设置。</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709135653.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709135653.png"></p>
 <p>还有没有其他遗留问题，老苏也不能确定，不过这个问题最终得到了解决，之所以放到最后而不是在这里讲，并不是老苏想卖关子，而是有个执行顺序的问题。</p>
 <h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p> 在 <code>app/config</code>子目录中找到 <code>parameters.yml</code> 文件并打开修改（因为上面的问题，老苏是下载到本地改完了再上传替换的，就是因为文本编辑器经常要使用，所以很容易发现了异常）</p>
 <ul>
@@ -570,22 +570,22 @@
 <li>database_password：默认为 <code>null</code>，改为前面设置的密码；</li>
 <li>domain_name：默认为 <code>https://your-wallabag-url-instance.com</code>，老苏改为了 IP + 端口，之所以用端口是为了能像 <code>docker</code> 一样方便做反向代理，具体设置在后面的 <code>web station</code> 部分，当然你也可以一步到位，直接填写域名。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709163337.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709163337.png"></p>
 <h2 id="设置-web-station"><a href="#设置-web-station" class="headerlink" title="设置 web station"></a>设置 web station</h2><p>因为没有启用 <code>个人网站</code> ，所以没安装 <code>Apache</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707154850.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707154850.png"></p>
 <p>至于为什么安装了这么多 PHP 版本，说实话老苏自己也忘记了，但是这不重要，<code>wallabag</code> 只要有 <code>PHP 7.3</code> 就行</p>
 <p><code>PHP 设置</code> ，如果已经存在就 <code>编辑</code>，如果不存在就 <code>新增</code></p>
 <ul>
 <li> <code>PHP 版本</code> 必须是对应的 <code>PHP 7.3</code></li>
 <li> <code>扩展名</code> 其实就是用到的第三方插件，因为不好截图我把需要勾选的依次列一下，<code>bcmath</code>、<code>gd</code>、<code>intl</code>、<code>mysqli</code>、<code>pdomysql</code>、<code>sockets</code>、<code>zip</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707160213.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707160213.png"></p>
 <p>接下来设置 <code>虚拟主机</code> –&gt; <code>新增</code> –&gt; <code>基于端口</code></p>
 <ul>
 <li>端口对应前面设置文件中的端口，前面设的 <code>5080</code>；</li>
 <li>文档根目录不是 <code>wallabag</code>，而是它的子目录 <code>web</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707155716.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707155716.png"></p>
 <h2 id="控制台命令"><a href="#控制台命令" class="headerlink" title="控制台命令"></a>控制台命令</h2><p>软件开发有三个主要阶段，开发 -&gt; 测试 -&gt; 上线，所以对应了三种环境配置：</p>
 <ul>
 <li>  <strong>DEV</strong> – 开发环境。</li>
@@ -604,17 +604,17 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  Clears the cache </span></span><br><span class="line"><span class="comment"># 如果设置错误或更新了用于清除缓存</span></span><br><span class="line">php bin/console cache:clear --<span class="built_in">env</span>=prod</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210706212405.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210706212405.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># wallabag installer 包括创建第一个用户</span></span><br><span class="line">php bin/console wallabag:install --<span class="built_in">env</span>=prod</span><br></pre></td></tr></table></figure>
 
 <p>安装分为四步，第一步是 <code>Checking system requirements</code>，如果都是 OK 那就恭喜你了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707110425.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707110425.png"></p>
 <p>第二步是 <code>Setting up database</code>，直接 <code>yes</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707135202.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707135202.png"></p>
 <p>第三步是 <code>Administration setup</code>，依次输入用户名、密码有邮箱</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707140600.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707140600.png"></p>
 <p>第四步是 <code>Config setup</code>，不需要输入，直接显示结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707140645.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707140645.png"></p>
 <p>看到 <code>[OK] wallabag has been successfully installed.</code> 就是安装成功了。</p>
 <h2 id="文件夹权限"><a href="#文件夹权限" class="headerlink" title="文件夹权限"></a>文件夹权限</h2><p>这是为了避免出现 <code>Permission denied</code> 这样的错误信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 依次执行</span></span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/var</span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/bin</span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/app/config</span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/vendor</span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/data</span><br><span class="line"><span class="built_in">chown</span> -R http:http /volume2/web/wallabag/web</span><br></pre></td></tr></table></figure>
@@ -623,7 +623,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示文件内容</span></span><br><span class="line"><span class="built_in">cat</span> /etc/nginx/app.d/server.webstation-vhost.conf</span><br></pre></td></tr></table></figure>
 
 <p>找到端口对应的 <code>5080</code>，以及下面对应的配置文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707162011.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707162011.png"></p>
 <blockquote>
 <p>conf.d 后面那串字符是不同的，要按自己的修改</p>
 </blockquote>
@@ -632,17 +632,17 @@
 <p>将下面的内容粘贴进去，用 <code>:wq</code> 保存并退出</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    # try to serve file directly, fallback to app.php</span><br><span class="line">    try_files $uri /app.php$is_args$args;</span><br><span class="line">&#125;</span><br><span class="line">location ~ ^/app\.php(/|$) &#123;</span><br><span class="line">    # if, for some reason, you are still using PHP 5,</span><br><span class="line">    # then replace /run/php/php7.0 by /var/run/php5</span><br><span class="line">    fastcgi_pass unix:/run/php/php7.0-fpm.sock;</span><br><span class="line">    fastcgi_split_path_info ^(.+\.php)(/.*)$;</span><br><span class="line">    include fastcgi_params;</span><br><span class="line">    # When you are using symlinks to link the document root to the</span><br><span class="line">    # current version of your application, you should pass the real</span><br><span class="line">    # application path instead of the path to the symlink to PHP</span><br><span class="line">    # FPM.</span><br><span class="line">    # Otherwise, PHP&#x27;s OPcache may not properly detect changes to</span><br><span class="line">    # your PHP files (see https://github.com/zendtech/ZendOptimizerPlus/issues/126</span><br><span class="line">    # for more information).</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;</span><br><span class="line">    fastcgi_param DOCUMENT_ROOT $realpath_root;</span><br><span class="line">    # Prevents URIs that include the front controller. This will 404:</span><br><span class="line">    # http://domain.tld/app.php/some-path</span><br><span class="line">    # Remove the internal directive to allow URIs like this</span><br><span class="line">    internal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># return 404 for all other php files not matching the front controller</span><br><span class="line"># this prevents access to other php files you don&#x27;t want to be accessible.</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">    return 404;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">error_log /var/log/nginx/wallabag_error.log;</span><br><span class="line">access_log /var/log/nginx/wallabag_access.log;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707162846.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707162846.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新加载配置文件</span></span><br><span class="line"><span class="built_in">sudo</span> nginx -s reload</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>见证奇迹的时刻终于到了，在浏览器中输入 <code>http://群晖IP:5080</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707141514.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707141514.png"></p>
 <p>用前面创建的用户 <code>wallabag</code> 登录，进入 <code>Quickstart</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707143759.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707143759.png"></p>
 <p>首先当然是 <code>Configure the application</code> –&gt; <code>MORE</code> –&gt;  <code>SETTINGS</code> –&gt; <code>language</code> 中选择 <code>简体中文</code> –&gt; <code>SAVE</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707143533.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707143533.png"></p>
 <p>不需要重启也不需要刷新</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210707143654.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210707143654.png"></p>
 <p>和之前折腾过的 <code>docker</code> 版本似乎存在不少差异，有兴趣也可以看看老苏之前写的文章：</p>
 <blockquote>
 <p><span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIwLzA5LzEzLyVFNyU5NCVBOFdhbGxhYmFnJUU2JTkwJUFEJUU1JUJCJUJBJUU3JUE4JThEJUU1JTkwJThFJUU5JTk4JTg1JUU4JUFGJUJC">用Wallabag搭建稍后阅读<i class="fa fa-external-link-alt"></i></span></p>
@@ -650,12 +650,12 @@
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>老苏发现在 <code>user.conf.dir</code> 中有这么一段话，<code>if, for some reason, you are still using PHP 5, then replace /run/php/php7.0 by /var/run/php5</code>，让老苏有了新的想法，那就是在确保程序已经能正常运行的情况下，将 <code>PHP 7.3</code> 再换回到 <code>PHP 5.6</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名原来 7.3 版本的 PHP</span></span><br><span class="line"><span class="built_in">mv</span> /bin/php /bin/php73</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名原来 5.6 版本的 PHP</span></span><br><span class="line"><span class="built_in">mv</span> /bin/php56 /bin/php</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证 php 版本</span></span><br><span class="line">php -v</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709164015.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709164015.png"></p>
 <p>现在 <code>文本编辑器</code> 恢复了正常，同时网页也不影响使用，为了证实确实有效，老苏还特意重启了几次。</p>
 <p> 还有一点需要说明的，<code>bin</code> 目录中原始的 <code>php</code> 一定要备份好，一旦丢失，就算你把 <code>/volume2/@appstore/PHP5.6/usr/local/bin/php56</code> 拷贝过来，<code>文本编辑器</code> 依然还是会空白，虽然这两个都是 <code>PHP 5.6</code> ，但是版本其实并不一样</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709154539.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709154539.png"></p>
 <p> 虽然只是小版本的差异，但文件大小了差了很多</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210709154744.png"></p>
+<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210709154744.png"></p>
 <p>虽然结果是正确的，但过程这么折腾，一定是有哪里还没做对，让老苏静静~</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>wallabag/wallabag: wallabag is a self hostable application for saving web pages: Save and classify articles. Read them later. Freely.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbGxhYmFnL3dhbGxhYmFn">https://github.com/wallabag/wallabag<i class="fa fa-external-link-alt"></i></span></p>

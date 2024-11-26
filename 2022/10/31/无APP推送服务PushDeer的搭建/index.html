@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="PushDeer 是一个开源的无 APP 推送解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301136508.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301136508.png">
 <meta property="article:published_time" content="2022-10-31T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="消息推送">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301136508.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301136508.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/10/31/%E6%97%A0APP%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1PushDeer%E7%9A%84%E6%90%AD%E5%BB%BA/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301136508.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301136508.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,7 +496,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>周六休息了一天，周日继续</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210291621851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210291621851.png"></p>
 <hr>
 <p>本文是应网友 <code>水杯与蚂蚁</code> 的要求折腾的；</p>
 <p><strong>PushDeer 是什么？</strong></p>
@@ -523,7 +523,7 @@
 <p>这个 <code>api</code> 不仅仅是源代码中的 <code>api</code> 目录中的内容，老苏还把安装成功后的 <code>vendor</code> 目录放进去了；</p>
 </blockquote>
 <p>和官方的源代码构建相比，好处是你在安装之前不需要先下载源代码，安装过程中也不用从网上下载依赖库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210242127382.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210242127382.png"></p>
 <p>所以不存在失败的情况，但是坏处是：</p>
 <ol>
 <li>不能跟随官方使用最新的代码；</li>
@@ -550,16 +550,16 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pushdeer 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pushdeer/&#123;app,data&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pushdeer 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pushdeer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210251402335.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210251402335.png"></p>
 <blockquote>
 <p>如提示 <code>docker</code>服务未安装/找不到/未启动，可在 <code>docker-compose</code> 前加 <code>sudo</code> 再试</p>
 </blockquote>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>虽然不用再下载依赖库，但是启动还是要花点时间的，理论上要在日志中看到 <code>end</code>才行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210251548778.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210251548778.png"></p>
 <p>群晖上也可以看到的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210251556858.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210251556858.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:8820</code> 就能看到主界面，如果还是不行，那就多刷几次</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210242333716.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210242333716.png"></p>
 <p>按照官方的说法，看到这个界面表示容器已经启动。</p>
 <blockquote>
 <p>⚠️ 自架服务器端需每年2月拉取一次更新推送证书</p>
@@ -574,32 +574,32 @@
 </li>
 </ul>
 <p>但是发现不支持自架版，没有找到入口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210251855546.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210251855546.jpg"></p>
 <p>后来发现官方已经关闭了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301155491.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301155491.png"></p>
 <h2 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h2><p>虽然还不支持 <code>Android</code> 的快应用，但是已经支持 <code>iOS App Clips</code>，老苏借了一台 <code>iphone</code> 测试，只要用摄像头扫描主页的二维码即可</p>
 <blockquote>
 <p>要求  <code>ios14+</code> 系统</p>
 </blockquote>
 <p>懒得截图，直接盗了官方的动图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210310856032.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210310856032.gif"></p>
 <p>先注册设备后才可以获得 <code>key</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301217109.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301217109.png"></p>
 <p>然后你可以在浏览器中用后面的地址直接给 <code>iphone</code> 发消息 <code>http://192.168.0.197:8820/message/push?pushkey=&lt;key&gt;&amp;text=要发送的内容</code></p>
 <p>例如：<span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMC4xOTc6ODgyMC9tZXNzYWdlL3B1c2g/cHVzaGtleT1QRFUxVE4xV1VRMUFiTzM0QTA5ZGhlN0Q1N251d2pFUzkzV1NGJnRleHQ9JUU4JTgwJTgxJUU4JThCJThGJUU5JTlBJThGJUU0JUJFJUJGJUU1JThGJTkxJUU3JTlBJTg0">http://192.168.0.197:8820/message/push?pushkey=PDU1TN1WUQ1AbO34A09dhe7D57nuwjES93WSF&amp;text=老苏随便发的<i class="fa fa-external-link-alt"></i></span></p>
 <p>发送成功或者失败，都会有返回值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301405911.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301405911.png"></p>
 <p>如果是 <code>ok</code>，<code>iOS</code> 手机上会看到发送的消息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301408375.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301408375.png"></p>
 <p>因为反复重装调试，所以老苏遇到过下面这样的错误，这是因为注册设备用到了<code>device token</code>，应用一旦重装，<code>device token</code>会变，所以需要重新注册一次</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210301619885.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210301619885.png"></p>
 <h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>这个应该是对二次开发有用，官方有 <code>Swagger</code>格式的在线文档：<span class="exturl" data-url="aHR0cHM6Ly9pbG92aW50aXQuZ2l0aHViLmlvL3B1c2hkZWVyLWFwaS1kb2M=">https://ilovintit.github.io/pushdeer-api-doc<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210252139561.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210252139561.png"></p>
 <p>顶部有个 <code>PushDeerOS.json</code> 的地址，建议将这个文件下载到本地，然后用 <code>API</code> 调试工具，比如 <code>Postman</code>、<code>ApiPost</code>、<code>Apifox</code>，直接导入了下载的 <code>PushDeerOS.json</code>文件</p>
 <blockquote>
 <p>这次老苏用了 <code>Apifox</code>，各种操作所需要的<code>token</code> 可以在日志中获找到</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210252135241.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210252135241.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>pushdeer.com<br>地址：<span class="exturl" data-url="aHR0cDovL3B1c2hkZWVyLmNvbS8=">http://pushdeer.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>pushdeer: 此为PushDeer在国内的镜像仓库，pr和issue请提交到GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vZWFzeWNoZW4vcHVzaGRlZXI=">https://gitee.com/easychen/pushdeer<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Screego 通过浏览器实现多用户高清晰度的屏幕共享，可以高质量、低延迟将您的屏幕演示给远程的同事看，让研发人员专注于技术交流，不用担心共享屏幕是否模糊、延迟。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121112329.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images/picgo/20201121112329.png">
 <meta property="article:published_time" content="2020-11-27T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="WebRTC">
 <meta property="article:tag" content="屏幕共享">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121112329.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images/picgo/20201121112329.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/11/27/%E5%8D%8F%E5%90%8C%E5%B7%A5%E4%BD%9C%E4%B9%8B%E5%B1%8F%E5%B9%95%E5%85%B1%E4%BA%ABScreego/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121112329.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121112329.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,36 +498,36 @@
     
     <div class="post-body" itemprop="articleBody"><p><code>Screego</code> 是 <code>GitHub</code> 上一款用 <code>Golang</code> 开发的开源的屏幕共享工具，支持多用户，基于 <code>WebRTC</code> 进行安全传输，并集成了 <code>TURN</code> 服务，可通过 <code>Docker</code> 或二进制文件快速完成安装，拥有更低延迟、更高质量的屏幕共享体验。</p>
 <p>使用起来非常简单，只要通过创建一个房间就可以进行屏幕的共享了，可以选择共享的内容。包括屏幕共享、应用共享和 chrome 标签页共享三种模式。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121113751.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121113751.png"></p>
 <p>将当前房间的链接发送给他人，他人就可以加入进这个房间，从而进行多人的屏幕共享，可以先体验下官方的 Demo 预览：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuc2NyZWVnby5uZXQv">app.screego.net<i class="fa fa-external-link-alt"></i></span>；</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>screego</code> ，只有一个 <code>screego/server</code>，我选择的版本是 <code>amd64-1.1.1</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121121812.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121121812.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>直接用的默认值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121142921.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121142921.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>因为我用的 <code>frps</code> ，所以 <code>SCREEGO_EXTERNAL_IP</code> 填的是 <code>vps</code> 的公网 IP 地址。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121123326.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121123326.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5050</code> 就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121143218.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121143218.png"></p>
 <p>但是在 <code>http</code> 协议下是不能共享的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121143523.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121143523.png"></p>
 <p>在控制面板中设置反向代理服务，就可以在浏览器中输入刚才反代的域名，通过 <code>https</code> 来访问了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121143838.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121143838.png"></p>
 <p><code>NAT</code> 只能选择 <code>STUN</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121150015.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121150015.png"></p>
 <p><code>TURN</code> 一直是灰的，先不管了，点 <code>CREATE ROOM</code> 进房间</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121160035.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121160035.png"></p>
 <p>点击 <code>Start Presentation</code> 可以自主选择共享的内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121144423.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121144423.png"></p>
 <p>把屏幕2上 <code>potplayer</code> 正在播放的电影共享了出来</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121145732.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121145732.png"></p>
 <p><code>Android</code> 手机和另一台 <code>Win10</code> 电脑，都正常接收到了串流。感觉上手机端的延时要小的多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121160344.jpg"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121160344.jpg"></p>
 <p>软件本身不能调整方向，只能利用手机的旋转</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121162500.jpg"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121162500.jpg"></p>
 <p>除了用电影测试实时性，也用文档和代码测试了清晰度，自己感受一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121163049.jpg"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121163049.jpg"></p>
 <p>网页还可以放大</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/20201121163139.jpg"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/20201121163139.jpg"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
 <li>支持简单的用户验证，但是我们没进行这方面的设置，有兴趣的自己研究下文档</li>
 <li>传输的实时图像没有丢帧，图像清晰、流畅，而且延时非常低</li>

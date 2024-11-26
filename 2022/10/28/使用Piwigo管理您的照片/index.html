@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Piwigo 是一款可以用来管理您的图片集与其他媒体的网站程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151605379.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151605379.png">
 <meta property="article:published_time" content="2022-10-28T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="相册">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151605379.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151605379.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/10/28/%E4%BD%BF%E7%94%A8Piwigo%E7%AE%A1%E7%90%86%E6%82%A8%E7%9A%84%E7%85%A7%E7%89%87/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151605379.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151605379.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,24 +496,24 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>25号~27号，完成了三天三检</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210261908496.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210261908496.png"></p>
 <p>加上今天，就四天四检了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210280858995.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210280858995.png"></p>
 <hr>
 <p><strong>什么是 Piwigo ？</strong></p>
 <blockquote>
 <p> <code>Piwigo</code> 是一款可以用来管理您的图片集与其他媒体的网站程序。专为组织、团队和个人而设计，有超过 200 个插件和主题可用。从中型图片集到巨大的图库，<code>Piwigo</code> 都能替您省时省力，轻松搞定。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>piwigo</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131659466.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131659466.png"></p>
 <h2 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>piwigo</code> ，选择第一个 <code>linuxserver/piwigo</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131223925.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131223925.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>piwigo</code>，并在其中建两个子文件夹，分别是 <code>config</code> 和 <code>gallery</code></p>
 <table>
 <thead>
@@ -534,7 +534,7 @@
 <td align="center">存放相册</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209210936414.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209210936414.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -551,9 +551,9 @@
 </tr>
 </tbody></table>
 <p>默认开启了两个 端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209210937265.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209210937265.png"></p>
 <p>老苏一般用 <code>80</code> 来做反代，因为用 <code>443</code> 的话还要在本地放证书，麻烦！不用的端口可以直接删除</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209210938220.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209210938220.png"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -574,7 +574,7 @@
 <td align="center">时区设置，默认设置为 <code>Asia/Shanghai</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209210939254.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209210939254.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 piwigo 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/piwigo/&#123;config,gallery&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 piwigo 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/piwigo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --name=piwigo \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/gallery:/gallery \</span><br><span class="line">  -p 7580:80 \</span><br><span class="line">  -e PUID=1000 \</span><br><span class="line">  -e PGID=1000 \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  linuxserver/piwigo:latest</span><br></pre></td></tr></table></figure>
 
@@ -588,7 +588,7 @@
 <blockquote>
 <p>系统支持简体中文，如果识别成了别的语言，可以手动修改 <code>图库默认语言</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131706597.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131706597.png"></p>
 <p>按照我们之前的数据库设置，相应的值如下👇：</p>
 <ul>
 <li><code>MySQL 主机地址</code>：填局域网 <code>IP</code> + 端口，老苏的是 <code>192.168.0.197:3307</code>；</li>
@@ -597,20 +597,20 @@
 <li><code>数据库名称</code>：数据库库名为 <code>piwigo</code></li>
 <li><code>表名称前缀</code>：保持默认的就可以；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131708879.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131708879.png"></p>
 <p>安装完成之后，就可以开始添加照片了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209131710392.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209131710392.png"></p>
 <p>先要创建一个相册</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151452558.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151452558.png"></p>
 <p>然后就可以开始上传照片了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151455753.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151455753.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>与其他类似的相册比，老苏觉得 <code>Piwigo</code> 有 <code>三多</code>：</p>
 <p>1、主题多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151505517.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151505517.png"></p>
 <p>2、插件多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151457563.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151457563.png"></p>
 <p>3、应用多</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209151503825.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209151503825.png"></p>
 <p>如果不纠结于人脸识别等 <code>AI</code> 功能，<code>Piwigo</code> 也是一个不错的选择。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Piwigo/Piwigo: Manage your photos with Piwigo, a full featured open source photo gallery application for the web. Star us on Github! More than 200 plugins and themes available. Join us and contribute!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Bpd2lnby9QaXdpZ28=">https://github.com/Piwigo/Piwigo<i class="fa fa-external-link-alt"></i></span></p>

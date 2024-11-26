@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Benotes 是一个开源的自托管笔记和书签网络应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211302101481.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211302101481.png">
 <meta property="article:published_time" content="2022-12-07T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="书签">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211302101481.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211302101481.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/12/07/%E5%BC%80%E6%BA%90%E7%9A%84%E7%AC%94%E8%AE%B0%E5%92%8C%E4%B9%A6%E7%AD%BE%E5%BA%94%E7%94%A8Benotes/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211302101481.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211302101481.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,7 +498,7 @@
     
     <div class="post-body" itemprop="articleBody"><p>只隔了一天，上海又发布了新的优化措施，只要不去第一条有特殊防疫要求的场所，核酸可以不做了，但是场所码还是要扫的</p>
 <p>最近谁要请我吃饭，最好提前打个招呼，不然被拦在饭店外面就尴尬了 &#128514;</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212061730847.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212061730847.png"></p>
 <hr>
 <p><strong>什么是 Benotes ？</strong></p>
 <blockquote>
@@ -517,12 +517,12 @@
 <li>  也可以通过 <code>Docker</code> 或 <code>Heroku</code> 托管</li>
 <li>  通过每日备份保护您的数据</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301145082.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301145082.png"></p>
 <blockquote>
 <p>【注意】：该项目目前处于<strong>测试阶段</strong>。您可能会遇到错误或错误。</p>
 </blockquote>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>数据库直接用的群晖的 <code>MariaDB 10</code>，在 <code>phpMyAdmin</code> 中创建了名为 <code>benotes</code> 的数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301147344.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301147344.png"></p>
 <blockquote>
 <p>为了便于说明，我们假设数据库密码为 <code>123456</code></p>
 </blockquote>
@@ -618,36 +618,36 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 benotes 和 子目录</span></span><br><span class="line"><span class="comment"># storage 目录用来存放 SQLite 数据库，对外暴露需要映射 /var/www/storage 目录，用 MariaDB 可以不用建</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/benotes/&#123;logs,storage&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 benotes 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/benotes</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 和 .env 文件放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问应用程序服务</span></span><br><span class="line">docker-compose <span class="built_in">exec</span> --user application benotes sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 做一些必要的工作，如数据库迁移和管理员帐户创建</span></span><br><span class="line">sh docker/install.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301349309.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301349309.png"></p>
 <p>输入 <code>yes</code> 开始数据库迁移</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301404072.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301404072.png"></p>
 <p>然后设置管理员，用户名回车就可以，设置邮件和密码即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301405595.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301405595.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8347</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301421356.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301421356.png"></p>
 <p>登录成功之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301421940.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301421940.png"></p>
 <h2 id="收藏网站"><a href="#收藏网站" class="headerlink" title="收藏网站"></a>收藏网站</h2><p>选中 <code>Uncategorized</code>，点 <code>Create</code> 创建一个 <code>Post</code>，内容中只要输入一个 <code>URL</code>，例如老苏的博客地址： <code>https://laosu.ml/</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301530971.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301530971.png"></p>
 <p>点 <code>Save</code> 之后，主界面就有了，可以看到已经抓到了网站的 <code>title</code> 等信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301531663.png"></p>
-<h2 id="收藏文章"><a href="#收藏文章" class="headerlink" title="收藏文章"></a>收藏文章</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301541185.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301531663.png"></p>
+<h2 id="收藏文章"><a href="#收藏文章" class="headerlink" title="收藏文章"></a>收藏文章</h2><p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301541185.png"></p>
 <p>虽然获取到了文章的信息，但是图片没出来，主要是因为 <code>jsdelivr</code> 在国内没有备案</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301543878.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301543878.png"></p>
 <p>把 <code>cdn.jsdelivr.net</code> 加入科学上网的白名单，就 <code>OK</code>了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301545459.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301545459.png"></p>
 <p>从数据库看，图片只是链接，并没有抓下来</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301557666.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301557666.png"></p>
 <h2 id="新建类型"><a href="#新建类型" class="headerlink" title="新建类型"></a>新建类型</h2><p>新建一个 <code>Collection</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301610787.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301610787.png"></p>
 <p>保存之后，就出现在左侧菜单中了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301610178.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301610178.png"></p>
 <p>刚开始我们建的都是放在 <code>Uncategorized</code> 中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301611554.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301611554.png"></p>
 <p>选择需要更改的书签，点 <code>Transfer</code> 即可更改</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301614445.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301614445.png"></p>
 <p>点左侧的 <code>群晖</code>，已经更新成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211301616335.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211301616335.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>fr0tt/benotes: An open source self hosted notes and bookmarks taking web app.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyMHR0L2Jlbm90ZXM=">https://github.com/fr0tt/benotes<i class="fa fa-external-link-alt"></i></span></p>
 <p>Benotes<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iZW5vdGVzLm9yZy8=">https://benotes.org/<i class="fa fa-external-link-alt"></i></span></p>

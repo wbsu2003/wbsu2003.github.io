@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Airsonic 是一个免费的基于网络的音乐流媒体软件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270954324.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270954324.png">
 <meta property="article:published_time" content="2022-08-10T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta property="article:tag" content="反向代理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270954324.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270954324.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/10/Airsonic%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270954324.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270954324.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,9 +497,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>才消停了 <code>2</code> 天而已，周二中午突然收到通知，小区被临时封闭管理了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208091301754.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208091301754.png"></p>
 <p>几个小时之后再次通知，解除小区临时管控，调整为对其所在楼栋进行临时管控</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208091532295.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208091532295.png"></p>
 <p>这一天过的实在是太刺激了，老苏差点准备在公司打地铺 &#128514;  </p>
 <hr>
 <blockquote>
@@ -516,7 +516,7 @@
 <h1 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h1><p>网友 <code>司徒</code> 反馈 <code>Airsonic</code> 反代之后会从 <code>https</code> 跳转到 <code>http</code>，但老苏测试后还发现会截掉端口。</p>
 <p>因为老苏没有备案的缘故，所以不能使用 <code>80</code> 和 <code>443</code> 端口，反代后的域名都是要带端口的，比如 <code>https://airsonic.laosu.ml:444</code></p>
 <p>而实际上 <code>Airsonic</code> 登录成功之后会变成 <code>http://airsonic.laosu.ml/index</code>，从而导致不能正常访问，即便手动添加了端口，也只能出来左侧和上面的菜单而已</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262331738.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262331738.png"></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>如果你和老苏一样用 <code>nginx proxy manager</code>（以下简称为 <code>npm</code>） 做反代，可以只看方案一；</p>
 <p>方案一只要通过在 <code>npm</code> 中新增 <code>Custom Nginx Configuration</code> 代码，即可实现反代后正常访问；</p>
 <p>如果你是用群晖自带的反代，可以看方案二；</p>
@@ -537,9 +537,9 @@
 <p>如果你已经安装了，检测下环境变量，如果还没有的话记得添加上 <code>JAVA_OPTS=-Dserver.forward-headers-strategy=native</code>;</p>
 <p>第二步修改 <code>airsonic.properties</code> 文件；</p>
 <p>第三步需要我们用 <code>npm</code> 对 <code>Airsonic</code> 进行反代处理</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270007356.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270007356.png"></p>
 <p><code>SSL</code> 中都勾选了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270008135.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270008135.png"></p>
 <p>最重要的是在 <code>Advanced</code> –&gt; <code>Custom Nginx Configuration</code> 添加下面👇的代码</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># Proxy to the Airsonic server</span></span><br><span class="line">   <span class="section">location</span> / &#123;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Real-IP  <span class="variable">$remote_addr</span>;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-For </span><br><span class="line"><span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-Proto https;</span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-Host <span class="variable">$http_host</span>;</span><br><span class="line">       <span class="comment">#proxy_set_header X-Forwarded-Port $server_port;</span></span><br><span class="line">       <span class="attribute">proxy_set_header</span> X-Forwarded-Port <span class="number">444</span>; </span><br><span class="line">       <span class="comment">#proxy_set_header Host $http_host;</span></span><br><span class="line">       <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>:<span class="number">444</span>;</span><br><span class="line">       <span class="attribute">proxy_max_temp_file_size</span> <span class="number">0</span>;</span><br><span class="line">       <span class="attribute">proxy_pass</span>  http://192.168.0.197:4040;</span><br><span class="line">       <span class="attribute">proxy_redirect</span> http:// https://;</span><br><span class="line">   &#125; </span><br></pre></td></tr></table></figure>
 
@@ -571,15 +571,15 @@
 <p>然后执行下面的命令进行安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 airsonic 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/airsonic/&#123;certs，data,music,playlists,podcasts&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 airsonic 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/airsonic</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml、nginx.conf 放入当前目录</span></span><br><span class="line"><span class="comment"># 将域名对应的证书 privkey.pem 和 fullchain.pem 放入 certs 目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207271014045.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207271014045.png"></p>
 <p>第二步也是修改 <code>airsonic.properties</code> 文件；</p>
 <p>第三步用群晖反代，当然你用 <code>npm</code> 也是可以的，这里老苏就是用 <code>npm</code> 做示例，原理是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270024747.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270024747.png"></p>
 <blockquote>
 <p>需要注意，这里用的不是 <code>http</code> 协议而是 <code>https</code>协议，因为虽然本地端口都是 <code>4040</code>，但指向的 <code>nginx</code> 的容器端口是 <code>443</code> </p>
 </blockquote>
 <p><code>SSL</code> 中都是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270008135.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270008135.png"></p>
 <p>到这里就设置完成了，这个方案是为了兼容群晖自带的反代，所以不需要设置 <code>Advanced</code> –&gt; <code>Custom Nginx Configuration</code></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>见证奇迹的时刻到了</p>
 <ul>
@@ -589,9 +589,9 @@
 </li>
 </ul>
 <p>如果上面的设置没问题，应该就可以正常访问了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270029680.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270029680.png"></p>
 <h1 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h1><p>老苏发现一个 <code>linux</code> 平台的桌面音乐播放客户端 <code>Sublime Music</code>，适用于 <code>Subsonic</code> 兼容的服务器。目前支持 <code>Subsonic API</code>  的服务器包括了 <code>Revel/Gonic/Subsonic/Airsonic/*sonic</code> ，<code>Sublime Music</code> 采用了 <code>Python</code> 和 <code>GTK+</code> 构建，<code>UI</code> 挺酷的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207291542566.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207291542566.png"></p>
 <p>有需要的同学可以去看看：</p>
 <ul>
 <li>官网：<span class="exturl" data-url="aHR0cHM6Ly9zdWJsaW1lbXVzaWMuYXBwLw==">https://sublimemusic.app/<i class="fa fa-external-link-alt"></i></span></li>

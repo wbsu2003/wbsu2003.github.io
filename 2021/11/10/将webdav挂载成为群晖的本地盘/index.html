@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="基于 davfs2 构建的 WebDAV 客户端，可以将 WebDAV 服务器挂载到群晖。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110121902639.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110121902639.png">
 <meta property="article:published_time" content="2021-11-10T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.393Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="WebDAV">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110121902639.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110121902639.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/10/%E5%B0%86webdav%E6%8C%82%E8%BD%BD%E6%88%90%E4%B8%BA%E7%BE%A4%E6%99%96%E7%9A%84%E6%9C%AC%E5%9C%B0%E7%9B%98/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110121902639.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110121902639.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,15 +508,15 @@
 </ul>
 </blockquote>
 <p>一开始老苏选择了 <code>远程连接</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110041733395.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110041733395.png"></p>
 <p>选择 <code>WebDAV</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110041734664.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110041734664.png"></p>
 <p>因为没设置 <code>WebDAV</code> 账号、密码，所以只需要填 <code>IP</code> 和端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110041736204.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110041736204.png"></p>
 <p>应用之后就可以像访问群晖的本地盘一样使用了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110041739661.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110041739661.png"></p>
 <p>但是老苏发现这种方式不能被 <code>docker</code> 识别，因为在 <code>添加文件夹</code> 中找不到我们刚才挂载成功的 <code>WebDAV</code> 目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110082045516.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110082045516.png"></p>
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>老苏找到了 <code>davfs2</code>，这是一个 <code>Linux</code> 文件系统驱动程序，允许您把 <code>WebDAV</code> 资源挂载到您的 <code>Linux</code> 文件系统中，就像它们是本地磁盘一样。但是唯一的问题是需要下源代码自己编译，这对大部分人来说还是比较麻烦的。</p>
 <p>当然也有现成的 <code>WebDAV Client</code>，比如 <code>efrecon/webdav-client</code>。</p>
 <p>老苏抱着折（学习）腾（研究）的目的，还是想自己尝试基于 <code>davfs2</code> 构建一个 <code>docker</code> 版的 <code>WebDAV Client</code>。</p>
@@ -539,7 +539,7 @@
 <p>举个栗子，下面是直接在编译 <code>Docker</code> 的 <code>CentOS</code> 上挂载 <code>webdav-aliyundriver</code> 映射的阿里云盘</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建共享挂载点</span></span><br><span class="line">mount --<span class="built_in">bind</span> /mnt /mnt</span><br><span class="line">mount --make-shared /mnt</span><br><span class="line"></span><br><span class="line">docker run -d \</span><br><span class="line">--name webdav-client \</span><br><span class="line">--privileged \</span><br><span class="line">--device /dev/fuse \</span><br><span class="line">-e WEBDRIVE_USER=admin \</span><br><span class="line">-e WEBDRIVE_PASSWORD=123456 \</span><br><span class="line">-e WEBDRIVE_URL=http://192.168.0.199:8123/ \</span><br><span class="line">-e PUID=1000 \</span><br><span class="line">-v /mnt/webdav:/mnt/webdrive:shared \</span><br><span class="line">wbsu2003/webdav-client</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110110003595.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110110003595.png"></p>
 <h1 id="群晖验证"><a href="#群晖验证" class="headerlink" title="群晖验证"></a>群晖验证</h1><p>安装方法和 <code>RcloneBrowser</code> 比较类似，如果你还不了解，可以看看老苏之前写的 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA2LzIxLyVFNyVCRSVBNCVFNiU5OSU5NiVFNCVCOCU4QSVFOSU4MCU5QSVFOCVCRiU4N1JjbG9uZUJyb3dzZXIlRTYlOEMlODIlRTglQkQlQkQlRTQlQkElOTElRTclOUIlOTgv">群晖上通过RcloneBrowser挂载云盘<i class="fa fa-external-link-alt"></i></span> 』</p>
 <h2 id="第一步、建目录"><a href="#第一步、建目录" class="headerlink" title="第一步、建目录"></a>第一步、建目录</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>webdav</code></p>
 <h2 id="第二步、共享挂载"><a href="#第二步、共享挂载" class="headerlink" title="第二步、共享挂载"></a>第二步、共享挂载</h2><blockquote>
@@ -552,29 +552,29 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker: Error response from daemon: linux mounts: path /volume1/docker/webdav is mounted on /volume1 but it is not a shared mount.</span><br></pre></td></tr></table></figure>
 
 <p>这条命令在群晖重启后需要重新执行，所以我们可以把这句命令，通过 <code>任务计划</code> 加到开机脚本中</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233810.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233810.png"></p>
 <p>这是一个触发任务，事件是开机</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233845.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233845.png"></p>
 <p>邮件发不发看个人需要，主要是运行脚本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233951.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233951.png"></p>
 <h2 id="第三步、启动容器"><a href="#第三步、启动容器" class="headerlink" title="第三步、启动容器"></a>第三步、启动容器</h2><p>在 <code>ssh</code> 客户端中执行下面👇的命令即可</p>
 <blockquote>
 <p>除了挂载的卷，其他跟在 <code>CentOS</code> 上是一模一样的</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name webdav-client \</span><br><span class="line">--privileged \</span><br><span class="line">--device /dev/fuse \</span><br><span class="line">-e WEBDRIVE_USER=admin \</span><br><span class="line">-e WEBDRIVE_PASSWORD=123456 \</span><br><span class="line">-e WEBDRIVE_URL=http://192.168.0.199:8123/ \</span><br><span class="line">-e PUID=1000 \</span><br><span class="line">-v /volume1/docker/webdav:/mnt/webdrive:shared \</span><br><span class="line">wbsu2003/webdav-client</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110121452684.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110121452684.png"></p>
 <p>容器运行成功后，在 <code>FileStation</code> 中查看，已经获取到了云盘的目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110121450349.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110121450349.png"></p>
 <p>可以像本地资源一样使用，现在来试试 <code>Airsonic</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110121514166.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110121514166.png"></p>
 <p>开始扫描，记得勾选 <code>快速模式</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110121516527.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110121516527.png"></p>
 <p>但是播放就不行了，就算是预览个图片感觉都很慢，可能跟 <code>WebDAV</code> 的机制有关系，反正对老苏来说没有什么实际意义</p>
 <h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><ol>
 <li>和 <code>RcloneBrowser</code> 、<code>CloudDrive</code> 一样，在复制的时候也会报错，看来基于容器的 <code>fuse</code> 映射在群晖的 <code>FileStation</code> 上是无解的</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110121525049.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110121525049.png"></p>
 <ol start="2">
 <li><p>不支持密码和账号为空的 <code>WebDAV</code> 挂载，返回错误 <code>/sbin/mount.davfs:/etc/davfs2/secrets:69: malformed line</code>，但是因为问题 <code>1</code> 的缘故，老苏已经不想再继续下去</p>
 </li>
@@ -582,7 +582,7 @@
 </li>
 </ol>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>如果你需要一个通用的 <code>WebDAV Client</code>，建议去试试 <code>efrecon/webdav-client</code>，比老苏写的严谨，在容器停止的时候，做了 <code>unmount</code> 处理，规避了很多问题，比如导致 <code>FileStation</code> 不能列出文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110122253777.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110122253777.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成容器</span></span><br><span class="line">docker run -it --<span class="built_in">rm</span> \</span><br><span class="line">    --device /dev/fuse \</span><br><span class="line">    --cap-add SYS_ADMIN \</span><br><span class="line">    --security-opt <span class="string">&quot;apparmor=unconfined&quot;</span> \</span><br><span class="line">    --<span class="built_in">env</span> <span class="string">&quot;WEBDRIVE_USERNAME=&lt;YourUserName&gt;&quot;</span> \</span><br><span class="line">    --<span class="built_in">env</span> <span class="string">&quot;WEBDRIVE_PASSWORD=&lt;SuperSecretPassword&gt;&quot;</span> \</span><br><span class="line">    --<span class="built_in">env</span> <span class="string">&quot;WEBDRIVE_URL=https://dav.box.com/dav&quot;</span> \</span><br><span class="line">    --<span class="built_in">env</span> <span class="string">&quot;DAVFS2_ASK_AUTH=0&quot;</span> \</span><br><span class="line">    -v /mnt/tmp:/mnt/webdrive:rshared \</span><br><span class="line">    efrecon/webdav-client</span><br></pre></td></tr></table></figure>
 
 <p>不过都是基于同样的技术实现的，所以遗留 <code>问题 1</code> 也同样存在，速度各方面也没太大的差异</p>

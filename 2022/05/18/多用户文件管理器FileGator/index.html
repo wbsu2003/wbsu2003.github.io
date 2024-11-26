@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="FileGator 是强大的多用户文件管理器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203242131450.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203242131450.png">
 <meta property="article:published_time" content="2022-05-18T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.393Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网盘">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203242131450.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203242131450.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/05/18/%E5%A4%9A%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8FileGator/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203242131450.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203242131450.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,9 +506,9 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>filegator</code> ，选择第一个 <code>maxime1907/filegator</code>，双击直接下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203232015444.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203232015444.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>filegator</code>，并建两个子文件夹 <code>/data</code> 和 <code>/config</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203232355714.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203232355714.png"></p>
 <table>
 <thead>
 <tr>
@@ -528,7 +528,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203232356967.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203232356967.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -549,9 +549,9 @@
 </tr>
 </tbody></table>
 <p>默认有2个端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203232357945.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203232357945.png"></p>
 <p>老苏局域网用不上 <code>443</code> ，反代也用不上 <code>443</code>，所以删了只留下了 <code>80</code> 端口，你要留着也没问题</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203232358692.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203232358692.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -572,7 +572,7 @@
 <td align="center">设为 <code>1000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203240002529.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203240002529.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 filegator 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/filegator/&#123;config,data&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 filegator 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/filegator</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --name=filegator \</span><br><span class="line">  -e PUID=1000 \</span><br><span class="line">  -e PGID=1000 \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  -p 2580:80 \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  maxime1907/filegator</span><br></pre></td></tr></table></figure>
 
@@ -586,13 +586,13 @@
 <blockquote>
 <p>默认的账号：<code>admin</code>，密码：<code>admin123</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203240003291.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203240003291.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203242104723.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203242104723.png"></p>
 <p>软件的功能比较简单，上一张官方的动图一看就明白</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203240006422.gif"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203240006422.gif"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>默认情况下，用户存储在 <code>json</code> 文件中。该文件在 <code>File Station</code> 中的目录是 <code>/docker/filegator/config/www/private/users.json</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205160929984.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205160929984.png"></p>
 <p>对于某些用例，这就足够了。因为不需要数据库，能使应用程序更轻巧。但也可以设置基于数据库或者第三方认证，详细的设置可以参考官方文档： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmZpbGVnYXRvci5pby9jb25maWd1cmF0aW9uL2F1dGguaHRtbA==">https://docs.filegator.io/configuration/auth.html<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>filegator/filegator: Powerful Multi-User File Manager<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZpbGVnYXRvci9maWxlZ2F0b3I=">https://github.com/filegator/filegator<i class="fa fa-external-link-alt"></i></span></p>

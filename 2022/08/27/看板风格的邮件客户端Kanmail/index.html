@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Kanmail 是一款功能类似看板的电子邮件客户端。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208260005414.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208260005414.png">
 <meta property="article:published_time" content="2022-08-27T02:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="email">
 <meta property="article:tag" content="邮件">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208260005414.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208260005414.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/27/%E7%9C%8B%E6%9D%BF%E9%A3%8E%E6%A0%BC%E7%9A%84%E9%82%AE%E4%BB%B6%E5%AE%A2%E6%88%B7%E7%AB%AFKanmail/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208260005414.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208260005414.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,7 +497,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>老苏觉得<code>Kanmail</code> 的界面和想法比较不错，但是没想到虽然可以免费下载，但是想要继续使用，还需要购买许可证，所以不建议大家安装，看看就好了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252315657.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252315657.png"></p>
 <hr>
 <p><strong>什么是 Kanmail ？</strong></p>
 <blockquote>
@@ -506,10 +506,10 @@
 <p>官方最新版本的下载：<span class="exturl" data-url="aHR0cHM6Ly9rYW5tYWlsLmlvL2Rvd25sb2Fk">https://kanmail.io/download<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>kanmail</code> ，选择第一个 <code>fizzadar/kanmail</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252230065.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252230065.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>kanmail</code>，并在其中建一个子文件夹 <code>data</code></p>
 <p>需要给 <code>data</code> 目录 <code>Everyone</code> 的写入权限，否则容器在启动是会因为写入文件和目录失败而导致容器停止</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252044360.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252044360.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +524,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252106516.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252106516.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -541,9 +541,9 @@
 </tr>
 </tbody></table>
 <p>默认没有暴露端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252106414.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252106414.png"></p>
 <p>需要点 <code>+</code> 号自己添加</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252107368.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252107368.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kanmail 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/kanmail/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 kanmail 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/kanmail</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> -R 777 ./data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name kanmail \</span><br><span class="line">   -p 4420:4420 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/home/kanmail/.config/kanmail/ \</span><br><span class="line">   fizzadar/kanmail</span><br></pre></td></tr></table></figure>
 
@@ -554,24 +554,24 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kanmail 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/kanmail/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 kanmail 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/kanmail</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> 777 ./data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:4420</code> 就能看到设置界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252142242.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252142242.png"></p>
 <p>首先要添加一个账号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252143151.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252143151.png"></p>
 <p>选择了 <code>Custom IMAP/SMTP</code>，还是用常用的 <code>88邮箱</code> 做测试</p>
 <ul>
 <li>收件设置不支持 <code>pop</code>，只能使用 <code>imap</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252210101.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252210101.png"></p>
 <ul>
 <li>发件设置</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252146858.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252146858.png"></p>
 <p>添加完成之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252211938.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252211938.png"></p>
 <p>点 <code>Start using Kanmail</code> 开始使用的默认主界面，<code>Kanmail</code> 使用 <code>IMAP</code> 协议同步电子邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252233194.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252233194.png"></p>
 <p>通过箭头指向的 <code>+</code> 号，可以创建看板，增加诸如：<code>紧急</code>、<code>待回复</code>、<code>稍后处理</code> 、<code>不用处理</code> 等不同的区域，直接拖拽就可以将邮件放入不同的区域</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208252225675.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208252225675.png"></p>
 <p>其他邮件功能和其他的邮件客户端一样的，支持 <code>Archive</code>、<code>Trash</code>、<code>Reply</code>、<code>Reply All</code> 等等；</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Oxygem/Kanmail: An email client that functions like a kanban board.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL094eWdlbS9LYW5tYWls">https://github.com/Oxygem/Kanmail<i class="fa fa-external-link-alt"></i></span></p>

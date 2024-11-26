@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="zjson 是一个强大的 JSON 格式化和编辑工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131202553.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131202553.png">
 <meta property="article:published_time" content="2023-04-26T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131202553.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131202553.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/04/26/%E5%BC%BA%E5%A4%A7%E7%9A%84JSON%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%92%8C%E7%BC%96%E8%BE%91%E5%B7%A5%E5%85%B7zjson/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131202553.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131202553.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -538,7 +538,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>zjson</code> ，选择第一个 <code>wbsu2003/zjson</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131111940.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131111940.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -554,7 +554,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131114366.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131114366.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name zjson \</span><br><span class="line">   -p 3590:80 \</span><br><span class="line">   wbsu2003/zjson</span><br></pre></td></tr></table></figure>
 
@@ -565,12 +565,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 zjson 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/zjson</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 zjson 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/zjson</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3590</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131117885.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131117885.png"></p>
 <p>左上角是一些设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131131569.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131131569.png"></p>
 <p>老苏用的还是上海的天气信息，地址：<span class="exturl" data-url="aHR0cDovL3Qud2VhdGhlci5pdGJveS5uZXQvYXBpL3dlYXRoZXIvY2l0eS8xMDEwMjAxMDA=">http://t.weather.itboy.net/api/weather/city/101020100<i class="fa fa-external-link-alt"></i></span></p>
 <p>转换之后的效果，可阅读性强了不是一星半点</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304131128314.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304131128314.png"></p>
 <p>不过老苏毕竟不是程序员，我也不知道这个工具是不是好用 😅</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>CN-Tower/zjson: A powerful JSON formatting and editing tools. 一个强大的JSON格式化和编辑工具，支持在线版和Electron应用安装。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NOLVRvd2VyL3pqc29u">https://github.com/CN-Tower/zjson<i class="fa fa-external-link-alt"></i></span></p>

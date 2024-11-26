@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="nas-tools 是 NAS 媒体库资源归集、整理自动化工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208011747351.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208011747351.png">
 <meta property="article:published_time" content="2022-09-02T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208011747351.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208011747351.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/09/02/NAS%E5%AA%92%E4%BD%93%E5%BA%93%E8%B5%84%E6%BA%90%E5%BD%92%E9%9B%86%E6%95%B4%E7%90%86%E5%B7%A5%E5%85%B7nas-tools/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208011747351.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208011747351.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -495,7 +495,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202209012317215.png"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202209012317215.png"></p>
 <hr>
 <blockquote>
 <p>本软件是网友 <code>马小胖</code> 推荐的，官方的中文版安装文档还是蛮详细的：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2p4eGdocC9uYXMtdG9vbHMvYmxvYi9tYXN0ZXIvZG9ja2VyL3JlYWRtZS5tZA==">https://github.com/jxxghp/nas-tools/blob/master/docker/readme.md<i class="fa fa-external-link-alt"></i></span>，可以对照着看。本文完成于 7 月初。</p>
@@ -507,7 +507,7 @@
 <p>和 <code>Jellyseerr</code> 类似，<code>nas-tools</code> 依赖的软件非常多，要想用好，需要做大量的设置，当然这是一次性的。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>群晖上安装支持 <code>Docker</code> 和 <code>套件</code> 两种方式，这里我们还是选择用 <code>Docker</code> 安装。除了安装方式不同，设置是一样的。</p>
 <p>在注册表中搜索 <code>nas-tools</code> ，选择第一个 <code>jxxghp/nas-tools</code>，双击直接下载。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042104449.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042104449.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>nastools</code>，并在其中建一个子文件夹 <code>config</code> </p>
 <blockquote>
 <p>老苏假设你已经安装了 <code>jellyfin</code> ，如果没安装可以看看老苏写的 『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIyLzAzLzIzLyVFNyU5NCVBOFBvcnRhaW5lciVFNSVBRSU4OSVFOCVBMyU4NUplbGx5ZmluJUU1JUFBJTkyJUU0JUJEJTkzJUU2JTlDJThEJUU1JThBJUExJUU1JTk5JUE4JUVGJUJDJTg4JUU1JUFFJTg5JUU4JUEzJTg1JUU3JUFGJTg3JUVGJUJDJTg5">用Portainer安装Jellyfin媒体服务器（安装篇）<i class="fa fa-external-link-alt"></i></span> 』，媒体库直接指向了 <code>jellyfin</code> 的媒体库，如果你用的是 <code>emby</code> 或者 <code>plex</code>，原理是一样的。</p>
@@ -531,7 +531,7 @@
 <td align="center">指向 <code>jellyfin</code> 的媒体库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042126794.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042126794.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -548,9 +548,9 @@
 </tr>
 </tbody></table>
 <p>默认没有映射端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042117340.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042117340.png"></p>
 <p>需要点 <code>+</code> 号新增</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042118979.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042118979.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -575,12 +575,12 @@
 <td align="center">启动容器时自动升级程程序，默认值为 <code>true</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042108343.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042108343.png"></p>
 <p>默认的 <code>PUID=0</code> 和 <code>PGID=0</code> 指的是 <code>root</code> 用户，老苏还是用了 <code>PUID=1000</code> 和 <code>PGID=1000</code></p>
 <blockquote>
 <p>用哪个用户，要看你原来安装的媒体管理软件用的是什么用户，假设你之前安装的是 <code>linuxserver/jellyfin</code>，<code>nas-tools</code> 最好使用同样的用户，这样不容易出现权限上的问题</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042116329.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042116329.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 nastools 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/nastools/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 nastools 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/nastools</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器示例</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name nastools \</span><br><span class="line">   -p 3360:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">   -v /volume2/docker/jellyfin/media:/media \</span><br><span class="line">   -e PUID=1000 \</span><br><span class="line">   -e PGID=1000 \</span><br><span class="line">   -e UMASK=000 \</span><br><span class="line">   -e NASTOOL_AUTO_UPDATE=<span class="literal">true</span> \</span><br><span class="line">   jxxghp/nas-tools</span><br></pre></td></tr></table></figure>
 
@@ -594,54 +594,54 @@
 <blockquote>
 <p>默认用户密码：<code>admin/password</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042132965.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042132965.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207042135448.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207042135448.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>介绍了主要的几个设置，但是毕竟不是说明书，不会面面俱到，各种 <code>Key</code> 的申请过程可以自行百度。</p>
 <h3 id="申请-TMDB-API-KEY"><a href="#申请-TMDB-API-KEY" class="headerlink" title="申请 TMDB API KEY"></a>申请 TMDB API KEY</h3><p><code>TMDB API Key</code> 放在基础设置中，也就意味着不配置的话，会导致所有的功能都不能使用。</p>
 <p>关于 <code>TMDB API KEY</code> 申请的详细过程，可以看这篇文章👉：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vcGVuZ2RvbmdsaW4xMzcvYXJ0aWNsZXMvMTQ0MTEwMDIuaHRtbA==">群晖Video Station刮削器使用指南：https://www.cnblogs.com/pengdonglin137/articles/14411002.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>申请到的 <code>API KEY</code> 填到下面👇的位置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207050940924.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207050940924.png"></p>
 <h3 id="通知服务"><a href="#通知服务" class="headerlink" title="通知服务"></a>通知服务</h3><p>目前下面👇支持几种，请根据自己的需要申请</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207050943221.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207050943221.png"></p>
 <blockquote>
 <p>老苏之前用过 <code>Server酱</code>，所以 <code>SCKEY</code> 是现成的，虽然每天只有免费的 <code>5</code> 条，测试应该够用了</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207051141833.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207051141833.png"></p>
 <h3 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h3><p> 目前支持两种，这两种老苏都出过安装教程</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061320441.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061320441.png"></p>
 <p> 以 <code>Jackett</code> 为例，需要获取的 <code>API Key</code> 和 <code>Torznab Feeds</code> 在如下图位置</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061323077.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061323077.png"></p>
 <h3 id="下载器"><a href="#下载器" class="headerlink" title="下载器"></a>下载器</h3><p> 目前支持两种，其中 <code>Qbittorrent</code> 老苏也写过的</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061336752.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061336752.png"></p>
 <p>需要设置好相关的参数</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061334760.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061334760.png"></p>
 <h3 id="媒体服务器"><a href="#媒体服务器" class="headerlink" title="媒体服务器"></a>媒体服务器</h3><p> 目前支持三种，老苏用的是 <code>Jellyfin</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061401376.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061401376.png"></p>
 <p> 需要添加才会有 <code>API 秘钥</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061356478.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061356478.png"></p>
 <p> 输入应用名称是为了方便知道哪个应用在使用这个 <code>API 秘钥</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061357430.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061357430.png"></p>
 <p> 复制 <code>API 秘钥</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061359110.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061359110.png"></p>
 <p> 分别填入 <code>IP</code> 和 <code>Key</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061400488.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061400488.png"></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="资源搜索"><a href="#资源搜索" class="headerlink" title="资源搜索"></a>资源搜索</h3><p>搜索 <code>黑客帝国</code></p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061454035.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061454035.png"></p>
 <p> 点击名称直接下载</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061455966.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061455966.png"></p>
 <p> 应该是添加成功了</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061455461.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061455461.png"></p>
 <p> 能看到下载</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061456669.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061456669.png"></p>
 <p> 下载软件中也是一样</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061456291.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061456291.png"></p>
 <p> 如果设置了消息，还会收到通知</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061506224.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061506224.png"></p>
 <h3 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h3><p> 可以直接订阅</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061458454.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061458454.png"></p>
 <p> 订阅成功之后，可以在订阅管理中找到</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207061508916.png"></p>
+<p> <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207061508916.png"></p>
 <p>当有资源后，会自动下载，否则会一直在 <code>队列中</code></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>jxxghp/nas-tools: NAS媒体库资源归集、整理自动化工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2p4eGdocC9uYXMtdG9vbHM=">https://github.com/jxxghp/nas-tools<i class="fa fa-external-link-alt"></i></span></p>

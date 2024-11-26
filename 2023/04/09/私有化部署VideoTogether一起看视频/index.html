@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="VideoTogether 可以让你和你的家人、朋友一起在线看视频，无论相隔多远。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082201697.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082201697.png">
 <meta property="article:published_time" content="2023-04-09T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082201697.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082201697.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/04/09/%E7%A7%81%E6%9C%89%E5%8C%96%E9%83%A8%E7%BD%B2VideoTogether%E4%B8%80%E8%B5%B7%E7%9C%8B%E8%A7%86%E9%A2%91/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082201697.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082201697.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,22 +504,22 @@
 </blockquote>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果你使用官方服务，只要下载插件就可以，例如：</p>
 <p><code>chrome</code> 插件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209251921398.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209251921398.png"></p>
 <p><code>edge</code> 插件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209251923349.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209251923349.png"></p>
 <p>其他平台（包括移动端）的插件安装，可以看官方的安装说明：<span class="exturl" data-url="aHR0cHM6Ly92aWRlb3RvZ2V0aGVyLmdpdGh1Yi5pby96aC1jbi9ndWlkZS9pbnN0YWxsLmh0bWw=">https://videotogether.github.io/zh-cn/guide/install.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>但是这些插件是不能改地址的，所以，如果你是要自己部署服务，需要的不是官方插件，而是自定义插件</p>
 <p>本文假设你已经安装了 <code>Tampermonkey</code> 插件，也就是我们常说的 <code>油猴</code>，地址：<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9kZXRhaWwvdGFtcGVybW9ua2V5L2RoZGdmZmtrZWJobWtmam9qZWptcGJsZG1wb2Jma2Zv">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082005901.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082005901.png"></p>
 <p>这个插件之前在 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA3LzA1LzExNSVFNyVCRCU5MSVFNyU5QiU5OCVFOCVCNSU4NCVFNiVCQSU5MCVFNCVCOCU4QiVFOCVCRCVCRCVFNSU4OCVCMCVFNyVCRSVBNCVFNiU5OSU5Ni8=">115网盘资源下载到群晖<i class="fa fa-external-link-alt"></i></span> 一文使用过，相信爱折腾的人都不陌生</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>videotogether</code> ，选择第一个 <code>pigeonpig/videotogether</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>老苏折腾时，对应的版本是 <code>0.3.32</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209251726228.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209251726228.png"></p>
 <h2 id="容器名称"><a href="#容器名称" class="headerlink" title="容器名称"></a>容器名称</h2><p>因为后续还有操作，为方便你能直接使用老苏的命令，建议将容器命名为 <code>videotogether</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081920322.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081920322.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -536,9 +536,9 @@
 </tr>
 </tbody></table>
 <p>默认没有暴露端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081904187.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081904187.png"></p>
 <p>需要我们点 <code>+</code> 号自行添加</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081906325.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081906325.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name videotogether \</span><br><span class="line">   -p 5088:5000 \</span><br><span class="line">   pigeonpig/videotogether</span><br></pre></td></tr></table></figure>
 
@@ -549,7 +549,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 videotogether 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/videotogether</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/videotogether</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5088</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209251930230.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209251930230.png"></p>
 <p>老苏还以为出了什么问题，实际上正常就是这样，因为这只是个服务，并不需要在网页上做任何配置</p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="生成油猴脚本"><a href="#生成油猴脚本" class="headerlink" title="生成油猴脚本"></a>生成油猴脚本</h2><blockquote>
 <p>这一步是借助容器内的运行环境，根据你自己的主机地址，生成响应的脚本代码</p>
@@ -560,36 +560,36 @@
 <blockquote>
 <p>注意请勿换行！只填一个，如果公网使用请填写域名，有端口也要带上</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081924327.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081924327.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 release_host 拷入容器内</span></span><br><span class="line">docker <span class="built_in">cp</span> ./release_host videotogether:/app/source/extension/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查容器内部 host 是否正确</span></span><br><span class="line">docker <span class="built_in">exec</span> videotogether <span class="built_in">cat</span> /app/source/extension/config/release_host</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建插件脚本 vt.user.js</span></span><br><span class="line">docker <span class="built_in">exec</span> videotogether python /app/script/build_extension.py</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081925275.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081925275.png"></p>
 <p>接下来打开生成的 <code>vt.user.js</code> 文件，考虑到容器内部不好操作，所以还是要将文件拷出来</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 vt.user.js 拷出容器</span></span><br><span class="line">docker <span class="built_in">cp</span> videotogether:/app/release/vt.user.js ./</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081948336.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081948336.png"></p>
 <p>在文件中搜索 <code>video_together_host</code>，可以看到我们前面设置的地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304081959465.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304081959465.png"></p>
 <h2 id="新建油猴脚本"><a href="#新建油猴脚本" class="headerlink" title="新建油猴脚本"></a>新建油猴脚本</h2><p>在 <code>Chrome</code> 浏览器上打开 <code>油猴</code> 插件，点 <code>添加新脚本</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082013367.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082013367.png"></p>
 <p>会打开一个新的界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082014215.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082014215.png"></p>
 <p>将  <code>video_together_host</code> 的内容复制、粘贴到这里</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082016814.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082016814.png"></p>
 <p>直接保存，不要改任何东西，包括脚本的名字</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082018886.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082018886.png"></p>
 <h2 id="共享本地视频"><a href="#共享本地视频" class="headerlink" title="共享本地视频"></a>共享本地视频</h2><p>在保证房主和成员的设备上 <strong>都有同一份视频文件</strong> 时，打开官网的 <span class="exturl" data-url="aHR0cHM6Ly8yZ2V0aGVyLnZpZGVvL3poLWNuL2d1aWRlL2xvY2FsLmh0bWw=">本地视频<i class="fa fa-external-link-alt"></i></span> 页面</p>
 <p>地址：<span class="exturl" data-url="aHR0cHM6Ly8yZ2V0aGVyLnZpZGVvL3poLWNuL2d1aWRlL2xvY2FsLmh0bWw=">https://2gether.video/zh-cn/guide/local.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>接下来 <code>选择文件</code>，输入房间名和房间密码，点 <code>建房</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082105076.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082105076.png"></p>
 <p>创建房间的就是房主，你可以把房间名和密码分享给你的朋友</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082058827.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082058827.png"></p>
 <p>成员只要安装了基于 <code>油猴</code> 的自定义插件，只要在任意一个有视频的页面，右下角就会有 <code>Video Together</code> 插件界面，只要输入房主给的房间名和密码后，点 <code>加入</code> 就可以进入到房间</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082107249.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082107249.png"></p>
 <p>加入成功后，首先会同步网页，但还需要自己打开文件，这里要<strong>注意</strong>，必须和房主打开的是同一个文件，所以看起来 <code>Video Together</code>服务应该只是同步了一下视频文件的时间戳</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082059600.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082059600.png"></p>
 <h2 id="共享网络视频"><a href="#共享网络视频" class="headerlink" title="共享网络视频"></a>共享网络视频</h2><p>老苏试了下 <code>bilibili</code>，随便打开个视频，建好房间分享就可以</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304082121090.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304082121090.png"></p>
 <p>成员加入房间后直接可以看，不像观看本地视频一样，还需要自己打开文件，相对更简单一些</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>VideoTogether/VideoTogether: Watch video together on any platform / 一起看视频，兼容所有平台<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ZpZGVvVG9nZXRoZXIvVmlkZW9Ub2dldGhlcg==">https://github.com/VideoTogether/VideoTogether<i class="fa fa-external-link-alt"></i></span></p>

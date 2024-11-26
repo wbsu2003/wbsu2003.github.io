@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Nginx Proxy Manager 实际上就是一个带前端管理界面的 Nginx 服务器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031536045.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031536045.png">
 <meta property="article:published_time" content="2022-01-17T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.385Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.020Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="反向代理">
 <meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031536045.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031536045.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/01/17/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8nginx-proxy-manager/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031536045.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031536045.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,16 +502,16 @@
 <p><code>Nginx Proxy Manager</code> 是用于管理 <code>Nginx</code> 代理主机的 <code>Docker</code> 容器，具有简单、强大的界面。它使您可以轻松地转发到您在家里或其他地方运行的网站，包括免费的 <code>SSL</code>，而无需对 <code>Nginx</code> 或 <code>Letsencrypt</code> 了解太多。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 10</code> 中新建用户 <code>npm</code>，创建同名的库 <code>npm</code> 并授予所有权限。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201030958071.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201030958071.png"></p>
 <blockquote>
 <p>老苏试过 <code>MariaDB 5</code>，写数据库有问题，表现为登录不成功，显示 <code>Bad Gateway</code> 错误</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031058622.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031058622.png"></p>
 <h2 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>nginx-proxy-manager</code> ，选择第一个 <code>jc21/nginx-proxy-manager</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031025479.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031025479.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>npm</code>，再建 <code>2</code> 个子目录，分别命名为 <code>data</code> 和 <code>letsencrypt</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031023029.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031023029.png"></p>
 <table>
 <thead>
 <tr>
@@ -531,7 +531,7 @@
 <td align="center">存放自动申请证书</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031029053.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031029053.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -555,7 +555,7 @@
 <td align="center"><code>81</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031031055.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031031055.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -584,16 +584,16 @@
 <td align="center">根据前面的设置，库名为 <code>npm</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031037836.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031037836.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:2081</code> 就能看到主界面</p>
 <blockquote>
 <p>默认的账号：<code>admin@example.com</code>，密码：<code>changeme</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031045336.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031045336.png"></p>
 <p>登录后可以编辑用户信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031116777.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031116777.png"></p>
 <p>之后是密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031119573.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031119573.png"></p>
 <h2 id="frp"><a href="#frp" class="headerlink" title="frp"></a>frp</h2><p>因为老苏的宽带没有公网 <code>IP</code> ，一直以来都是用 <code>frp</code> 做内网穿透，所以首先要对 <code>frpc.ini</code> 做相应的修改</p>
 <blockquote>
 <ul>
@@ -605,11 +605,11 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[http_xxxxxx]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">2080</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[https_xxxxxx]</span></span><br><span class="line"><span class="attr">type</span> = https</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">2443</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.laosu.ml</span><br></pre></td></tr></table></figure>
 
 <h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><p>进入主菜单的 <code>SSL Certificates</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031200113.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031200113.png"></p>
 <p><code>Add SSL Certificate</code> 有两种方式，一种是在线申请，另一种是添加已有证书</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031225397.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031225397.png"></p>
 <p>在线申请和我们在『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIwLzA3LzMxLyVFNSU4NSU4RCVFOCVCNCVCOSVFNyU5QSU4NCVFNiVCMyU5QiVFNSU5RiU5RiVFNSU5MCU4RGh0dHBzJUU4JUFGJTgxJUU0JUI5JUE2JUU4JTg3JUFBJUU1JThBJUE4JUU3JUJCJUFEJUU2JTlDJTlGLw==">免费的泛域名https证书自动续期<i class="fa fa-external-link-alt"></i></span> 』一文中介绍的非常类似，需要选择 <code>DNS</code> 解析服务提供商，以及填写 <code>token</code> 等参数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031237674.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031237674.png"></p>
 <p>老苏因为已经配置了 <code>Certbot</code> 并实现了自动续期，所以只需要导入现有证书就可以了，<code>Name</code> 老苏用了域名，这样比较容易识别</p>
 <blockquote>
 <ul>
@@ -618,11 +618,11 @@
 <li>中间证书 <code>Intermediate Certificate</code> 对应 <code>chain.pem</code></li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031243777.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031243777.png"></p>
 <p>上传成功后，证书存放在 <code>/data/custom_ssl/</code> 目录中以 <code>npm-1</code> 、 <code>npm-2</code> 等子目录保存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031301426.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031301426.png"></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>进入主菜单的 <code>Hosts</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031302999.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031302999.png"></p>
 <p>以将 <code>http://192.168.0.197:5000</code> 映射到 <code>https://nas.laosu.ml</code> 为例</p>
 <blockquote>
 <ul>
@@ -630,13 +630,13 @@
 <li>默认 <code>Cache Aeeets</code>、<code>Block Common Exploits</code>、<code>Websocket Support</code> 建议都勾上</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201170918750.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201170918750.png"></p>
 <p>选择 <code>SSL</code> 证书</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031329998.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031329998.png"></p>
 <p>因为准备用 <code>https</code> 协议访问，所以必须勾选 <code>Force SSL</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031330023.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031330023.png"></p>
 <p>其他的 <code>HTTP/2</code> 和 <code>HSTS</code> 和群晖内置的是一样的，可根据需要勾选，没啥问题的话老苏建议都勾上</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201031335340.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201031335340.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>为什么要另外安装 <code>nginx proxy manager</code> 而不是用群晖内置的反向代理的原因，老苏在一开始就讲了，装完之后老苏还发现了几个优点：</p>
 <ol>
 <li>不用再依赖群晖，这使得老苏将来可以很方便的切换到其他平台</li>
@@ -645,7 +645,7 @@
 </ol>
 <h1 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h1><p>最终 <code>Authelia</code> 并没安装成功，原因是不能在非标的端口上使用。</p>
 <p>由于没有备案的缘故，<code>https</code> 协议不能使用 <code>443</code> 端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201121549191.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201121549191.png"></p>
 <p>假设你用了非标的 <code>444</code>， <code>Authelia</code> 会自动截掉端口（因为 <code>443</code> 是可以不用写的），从而导致资源加载失败👇</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Refused to load the image &#x27;https://auth.laosu.ml/favicon.ico&#x27; because it violates the following Content Security Policy directive: &quot;default-src &#x27;self&#x27;&quot;. Note that &#x27;img-src&#x27; was not explicitly set, so &#x27;default-src&#x27; is used as a fallback.</span><br></pre></td></tr></table></figure>
 

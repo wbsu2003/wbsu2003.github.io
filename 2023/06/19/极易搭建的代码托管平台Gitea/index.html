@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Gitea 是一个极易安装，运行非常快速，安装和使用体验良好的自建 Git 服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306060046726.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306060046726.png">
 <meta property="article:published_time" content="2023-06-19T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306060046726.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306060046726.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/06/19/%E6%9E%81%E6%98%93%E6%90%AD%E5%BB%BA%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0Gitea/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306060046726.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306060046726.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,9 +496,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>这礼拜有点霉啊，先是日常自用的机器上，<code>SSD</code> 挂了，彻底识别不了的那种</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306181835985.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306181835985.jpg"></p>
 <p>隔了两天，用来写文章用的小机器上， <code>500G</code> 的机械硬盘也挂了，重新格了一下，挂在<code>玩客云</code>上当个下载盘用吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306181837194.jpg"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306181837194.jpg"></p>
 <p>好在都有备份，只是 <code>Docker</code> 的恢复有点麻烦， 比如：</p>
 <ul>
 <li><code>HomeAssistant</code>，用的是之前导出的 <code>syno.txz</code>重新导入的，配置文件也没动，但还是各种问题；</li>
@@ -516,12 +516,12 @@
 </blockquote>
 <p>如果不想自己搭建，可以去访问在线 <code>demo</code>：<span class="exturl" data-url="aHR0cHM6Ly90cnkuZ2l0ZWEuaW8v">https://try.gitea.io<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>gitea</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052018039.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052018039.png"></p>
 <p>所以根据上面的设置，最后得到的数据库相关的参数如下：</p>
 <ul>
 <li>数据库主机：<code>192.168.0.197</code>，与群晖主机 <code>IP</code> 一致；</li>
@@ -586,33 +586,33 @@
 <blockquote>
 <p>老苏什么都没改，包括邮件设置和管理员也没设，后面再说</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052046456.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052046456.png"></p>
 <p>有个短暂的加载过程</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052050318.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052050318.png"></p>
 <p>紧接着就是登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052051746.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052051746.png"></p>
 <p>因为开始没有设置管理员，所以第一个注册的用户就是管理员</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052053477.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052053477.png"></p>
 <p>创建成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052054964.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052054964.png"></p>
 <p>设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052057003.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052057003.png"></p>
 <p>管理后台</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052058325.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052058325.png"></p>
 <p>支持从其他仓库迁移</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052150158.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052150158.png"></p>
 <h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p><code>Gitea</code> 配置文件保存在 <code>/data/gitea/conf/app.ini</code> ，在 <code>FileStation</code> 中，对应的路径是 <code>/docker/gitea/data/gitea/conf/app.ini</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052157714.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052157714.png"></p>
 <p>在对 <code>app.ini</code> 做任何修改前，需要添加 <code>Everyone</code>的读写权限</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052244978.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052244978.png"></p>
 <p>否则修改会无效</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052247887.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052247887.png"></p>
 <p>修改了设置后，需要重启容器才能让设置生效</p>
 <h2 id="禁用注册"><a href="#禁用注册" class="headerlink" title="禁用注册"></a>禁用注册</h2><p>如果要禁用注册，之后就只有管理员才能为用户创建帐户，虽然麻烦，但是可能更安全吧</p>
 <p>一种方式是通过环境变量 <code>DISABLE_REGISTRATION=true</code>，另一种则是在 <code>app.ini</code> ，将<code>DISABLE_REGISTRATION</code>从 <code>false</code> 改为 <code>true</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052220514.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052220514.png"></p>
 <p>重启容器后，就不能再注册了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052252157.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052252157.png"></p>
 <h2 id="邮件设置"><a href="#邮件设置" class="headerlink" title="邮件设置"></a>邮件设置</h2><p>因为一开始初始化的时候，我们没有设置邮件，所以现在 <code>app.ini</code> 是下面这样的</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mailer]</span></span><br><span class="line"><span class="attr">ENABLED</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
@@ -620,9 +620,9 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mailer]</span></span><br><span class="line"><span class="attr">ENABLED</span>         = <span class="literal">true</span></span><br><span class="line"><span class="attr">FROM</span>            = wbsu2003@<span class="number">88</span>.com</span><br><span class="line"><span class="attr">MAILER_TYPE</span>     = smtp</span><br><span class="line"><span class="attr">HOST</span>            = smtp.<span class="number">88</span>.com:<span class="number">465</span></span><br><span class="line"><span class="attr">IS_TLS_ENABLED</span>  = <span class="literal">true</span></span><br><span class="line"><span class="attr">USER</span>            = wbsu2003@<span class="number">88</span>.com</span><br><span class="line"><span class="attr">PASSWD</span>          = &lt;第三方邮件客户端&gt;</span><br></pre></td></tr></table></figure>
 
 <p>当创建用户时，如果勾选了邮件通知的话</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052257343.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052257343.png"></p>
 <p>很快就会收到邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202306052255486.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202306052255486.png"></p>
 <h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p><code>Gitea</code> 服务器使用的是 <code>SSH</code> 协议，并且 <code>SSH</code> 端口不是默认的 <code>22</code> 而是 <code>222</code>，老苏搜了一下，有两种方法：</p>
 <blockquote>
 <p>以下内容老苏未验证，请大家自己甄别；</p>

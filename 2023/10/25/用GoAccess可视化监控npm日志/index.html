@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="GoAccess是一个轻量级的开源日志分析器，支持多种日志格式。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132331040.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132331040.png">
 <meta property="article:published_time" content="2023-10-25T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132331040.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132331040.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/10/25/%E7%94%A8GoAccess%E5%8F%AF%E8%A7%86%E5%8C%96%E7%9B%91%E6%8E%A7npm%E6%97%A5%E5%BF%97/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132331040.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132331040.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,13 +509,13 @@
 <p>文章传送门： <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5jZi8yMDIzLzA2LzI1LyVFNyU5NCVBOCVFOCU4NyVBQSVFNSVBRSU5QSVFNCVCOSU4OSVFNSU5RiU5RiVFNSU5MCU4RCVFOCVBRSVCRiVFOSU5NyVBRXRhaWxzY2FsZSVFOCU4QSU4MiVFNyU4MiVCOSMlRTUlQUUlODklRTglQTMlODUtbnBt">用自定义域名访问Tailscale节点<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>所以 <code>npm</code> 日志的路径是 <code>/volume1/docker/npm/data/logs</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308131948429.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308131948429.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>xavierh</code> ，选择第一个 <code>goaccess-for-nginxproxymanager</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v1.1.19</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132135790.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132135790.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
 <thead>
 <tr>
@@ -530,7 +530,7 @@
 <td align="center">挂载 <code>npm</code> 的日志目录</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132139864.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132139864.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -546,7 +546,7 @@
 <td align="center"><code>7880</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132140014.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132140014.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -591,7 +591,7 @@
 <td align="center">语言本地化，设置为 <code>zh_CN.UTF-8</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132217647.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132217647.png"></p>
 <p>更多的环境变量可以参考官方的文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3hhdmllci1oZXJuYW5kZXovZ29hY2Nlc3MtZm9yLW5naW54cHJveHltYW5hZ2VyI2dpdGh1Yi1yZXBv">https://github.com/xavier-hernandez/goaccess-for-nginxproxymanager#github-repo<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name goaccess \</span><br><span class="line">   -p 7880:7880 \</span><br><span class="line">   -v /volume1/docker/npm/data/logs:/opt/log \</span><br><span class="line">   -e PUID=1000 \</span><br><span class="line">   -e PGID=1000 \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e SKIP_ARCHIVED_LOGS=False \</span><br><span class="line">   -e DEBUG=False \</span><br><span class="line">   -e EXCLUDE_IPS=127.0.0.1 \</span><br><span class="line">   -e LOG_TYPE=NPM \</span><br><span class="line">   -e LANG=zh_CN.UTF-8 \</span><br><span class="line">   -e LANGUAGE=zh_CN.UTF-8 \</span><br><span class="line">   xavierh/goaccess-for-nginxproxymanager:latest</span><br></pre></td></tr></table></figure>
@@ -603,9 +603,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 goaccess 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/goaccess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 goaccess 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/goaccess</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7880</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132200411.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132200411.png"></p>
 <p>界面很漂亮，虽然很多指标并不清楚能用来干嘛，不过我觉得网管应该是懂的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308132248387.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308132248387.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>allinurl/goaccess: GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsbGludXJsL2dvYWNjZXNz">https://github.com/allinurl/goaccess<i class="fa fa-external-link-alt"></i></span></p>
 <p>GoAccess - Visual Web Log Analyzer<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nb2FjY2Vzcy5pby8=">https://goaccess.io/<i class="fa fa-external-link-alt"></i></span></p>

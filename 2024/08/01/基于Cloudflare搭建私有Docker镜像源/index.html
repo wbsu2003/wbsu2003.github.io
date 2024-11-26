@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="CF-Workers-docker.io 是一个基于 Cloudflare Workers 的 Docker 镜像代理工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312309119.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312309119.png">
 <meta property="article:published_time" content="2024-08-01T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="代理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312309119.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312309119.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/01/%E5%9F%BA%E4%BA%8ECloudflare%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89Docker%E9%95%9C%E5%83%8F%E6%BA%90/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312309119.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312309119.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,23 +511,23 @@
 <p>其次你要在  <code>cloudflare</code>  中解析域名，虽然 <code>Cloudflare Workers</code> 会自动生成域名，但这个默认的域名你有可能无法访问。</p>
 <p>如果你有科学的手段，其实是不用这么折腾的</p>
 <h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>左侧菜单中 <code>Workers</code> 和 <code>Pages</code> –&gt; 创建</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311610093.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311610093.png"></p>
 <p>创建 <code>Worker</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311612292.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311612292.png"></p>
 <p>默认有个 <code>Hello World</code> 示例</p>
 <ul>
 <li>① 可以改名，比如 <code>docker</code></li>
 <li>③ 是代码示例，不用管</li>
 </ul>
 <p>直接点 <code>部署</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311618308.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311618308.png"></p>
 <p>点 <code>编辑代码</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311622250.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311622250.png"></p>
 <p>将来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L0NGLVdvcmtlcnMtZG9ja2VyLmlvL2Jsb2IvbWFpbi9fd29ya2VyLmpz">https://github.com/cmliu/CF-Workers-docker.io/blob/main/_worker.js<i class="fa fa-external-link-alt"></i></span> 的代码粘贴进去</p>
 <blockquote>
 <p>从路由表看，不仅仅是支持 <code>docker hub</code>，还有我们常用到的 <code>ghcr.io</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311627154.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311627154.png"></p>
 <p>记得修改成自己的域名，如果没有的话，直接用 ② 处显示的默认域名也可以，修改完成后点 <code>Command + s</code> 或者 <code>ctrl + s</code> 保存</p>
 <blockquote>
 <ul>
@@ -535,18 +535,18 @@
 <li>仅支持<code> Cloudflare</code> 上处于活动状态的域，也就是说要有在 <code>Cloudflare</code> 解析的域名才行；</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311635231.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311635231.png"></p>
 <blockquote>
 <p>注意，文件名需要是 <code>worker.js</code>，因为在 <code>wrangler.toml</code> 中的默认设定是这样的</p>
 </blockquote>
 <p>接下来需要点 <code>部署</code>，让代码生效</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311642959.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311642959.png"></p>
 <p>如果你预览显示的是 <code>docker hub</code> 的主页，说明部署成功了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311657361.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311657361.png"></p>
 <p>如果前面代码中填的是自己的域名，还需要通过 <code>添加自定义域</code> 绑定一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311659469.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311659469.png"></p>
 <p>添加完成后，用自己的域名再试试看能否加载出 <code>docker hub</code> 的主页</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312200197.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312200197.png"></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>假设我们前面部署的 <code>worker</code> 域名是 <code>docker.laosu.tech</code></p>
 <h2 id="官方镜像路径前面加域名"><a href="#官方镜像路径前面加域名" class="headerlink" title="官方镜像路径前面加域名"></a>官方镜像路径前面加域名</h2><p>正常下载镜像是👇这样的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只有镜像名的镜像</span></span><br><span class="line">docker pull alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户名/镜像名的镜像</span></span><br><span class="line">docker pull alpine/git</span><br></pre></td></tr></table></figure>
@@ -555,27 +555,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只有镜像名，还需要增加 library 充当用户名</span></span><br><span class="line">docker pull docker.laosu.tech/library/alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户名/镜像名</span></span><br><span class="line">docker pull docker.laosu.tech/alpine/git</span><br></pre></td></tr></table></figure>
 
 <p>有时候速度有点慢，感觉上只有几十K，一个镜像要下好几次才能完成，凑合用吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311938354.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311938354.png"></p>
 <p>下载完成后，镜像的名字是 <code>docker.laosu.tech/library/alpine</code> 而不是 <code>alpine</code>，这点需要特别注意</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312212348.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312212348.png"></p>
 <p>如果想用原始的名称，和之前老苏介绍过的 <code>dockerproxy</code> 一样，需要多几个步骤</p>
 <p>下面以 <code>alpine</code> 为例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重命名镜像</span></span><br><span class="line">docker tag docker.laosu.tech/library/alpine:latest alpine:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除代理镜像</span></span><br><span class="line">docker rmi docker.laosu.tech/library/alpine:latest</span><br></pre></td></tr></table></figure>
 
 <p>这时候再看，显示的就是默认的注册表 <code>Docker Hub</code> 了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312206475.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312206475.png"></p>
 <h2 id="设置注册表"><a href="#设置注册表" class="headerlink" title="设置注册表"></a>设置注册表</h2><p>如果你习惯使用注册表，在设置之前搜索镜像应该是👇这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312005518.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312005518.png"></p>
 <p>设置 –&gt; 新增 –&gt; 编辑注册表</p>
 <ul>
 <li>注册表名称：这个随便你</li>
 <li>注册表 URL：填入 <code>worker</code> 的域名 <code>https://docker.laosu.tech</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312007145.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312007145.png"></p>
 <p>现在可以搜到结果了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312009443.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312009443.png"></p>
 <p>可以直接下载镜像，显示的注册表名称就是你前面设置的，但是实际上镜像的全称还是 <code>docker.laosu.tech/alpine/git</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407312216144.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407312216144.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>cmliu/CF-Workers-docker.io: 这个项目是一个基于 Cloudflare Workers 的 Docker 镜像代理工具。它能够中转对 Docker 官方镜像仓库的请求，解决一些访问限制和加速访问的问题。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NtbGl1L0NGLVdvcmtlcnMtZG9ja2VyLmlv">https://github.com/cmliu/CF-Workers-docker.io<i class="fa fa-external-link-alt"></i></span></p>
 <p>Cloudflare教程：如何注册账户、购买域名、开启免费CDN服务？ - 掘金随想<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9veW91b28uY29tL2Nsb3VkZmxhcmUtdHV0b3JpYWwv">https://oyouoo.com/cloudflare-tutorial/<i class="fa fa-external-link-alt"></i></span></p>

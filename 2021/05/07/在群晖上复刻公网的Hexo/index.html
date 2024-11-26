@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="在群晖上搭建 hexo 编辑、预览、发布环境，实现了远程统一发布。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210422160552.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210422160552.png">
 <meta property="article:published_time" content="2021-05-07T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210422160552.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210422160552.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/05/07/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%A4%8D%E5%88%BB%E5%85%AC%E7%BD%91%E7%9A%84Hexo/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210422160552.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210422160552.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,7 +510,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>hexo</code> ，选择第三个 <code>spurin/hexo</code>，只发布过一个版本，所以双击直接下载了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420110342.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420110342.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>hexo</code>，然后在 <code>hexo</code> 文件夹中再创建 一个新的子文件夹 <code>blog</code>。</p>
 <table>
 <thead>
@@ -526,7 +526,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420111438.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420111438.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行</p>
 <table>
 <thead>
@@ -540,7 +540,7 @@
 <td align="center">4000</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420111503.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420111503.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -564,32 +564,32 @@
 <blockquote>
 <p>用自己的 <code>github</code> 账号是为了后续向 <code>github</code> 发布，会根据你提交的用户和邮箱生成 <code>SSH key</code>，如果只是在群晖上编辑和预览，可以随意。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420111748.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420111748.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:4000</code>，开始并不能看到主界面，在日志中会显示在通过 <code>git</code> 拉取代码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420112730.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420112730.png"></p>
 <p><code>github</code> 在国内的访问并不稳定，所以存在失败的可能性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420112958.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420112958.png"></p>
 <p>如果出现这种情况，请删空 <code>blog</code> 下的文件和目录，重新启动容器即可，注意观察日志</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420113534.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420113534.png"></p>
 <p>正常完成后的目录是这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420113852.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420113852.png"></p>
 <p>当你看到日志中出现 <code>Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code> 时</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420114029.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420114029.png"></p>
 <p>就可以在浏览器中输入 <code>http://群晖IP:4000</code> 看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420114201.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420114201.png"></p>
 <p>而在浏览器中输入 <code>http://群晖IP:4000/admin</code> 即可看到 <code>hexo-admin</code> 的后台管理界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420114409.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420114409.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="安全设置"><a href="#安全设置" class="headerlink" title="安全设置"></a>安全设置</h2><p>如果你是要把 <code>hexo-admin</code> 映射到公网使用，一定要设置密码，否则就变成谁都可以编辑了。这需要在 <code>_config.yml</code> 文件中添加以下参数</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">admin:</span> </span><br><span class="line">  <span class="attr">username:</span> <span class="string">用户名</span> </span><br><span class="line">  <span class="attr">password_hash:</span> <span class="string">md5密码</span> </span><br><span class="line">  <span class="attr">secret:</span> <span class="string">用于加密cookie的密码</span></span><br></pre></td></tr></table></figure>
 
 <p>打开 <code>hexo-admin</code> 界面，点击导航的 <code>settings</code> 选项，点击 <code>Setup authentification here</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420131430.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420131430.png"></p>
 <p>依次输入 <code>Username</code>、<code>Password</code> 和 <code>Secret</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420131537.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420131537.png"></p>
 <p>往下拉，找到生成的代码，复制到 <code>_config.yml</code> 文件中，然后重启 <code>hexo</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420131952.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420131952.png"></p>
 <p>再打开 <code>hexo-admin</code> 就需要登录了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420133413.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420133413.png"></p>
 <h2 id="升级-hexo"><a href="#升级-hexo" class="headerlink" title="升级 hexo"></a>升级 hexo</h2><blockquote>
 <p>升级不是必须的，只是为了保持和我的台式机上的版本一致，方便直接导入配置文件</p>
 </blockquote>
@@ -598,66 +598,66 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> --user root -it spurin-hexo1 /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查 npm 版本</span></span><br><span class="line">npm version</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420140452.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420140452.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级 npm</span></span><br><span class="line">npm install -g npm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再次检查 npm 版本</span></span><br><span class="line">npm version</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420140651.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420140651.png"></p>
 <p>可以看到 <code>npm</code> 已经从 <code>6.14.4</code> 升级到了 <code>7.10.0</code></p>
 <h3 id="升级-hexo-cli"><a href="#升级-hexo-cli" class="headerlink" title="升级 hexo-cli"></a>升级 hexo-cli</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前版本，判断是否需要升级</span></span><br><span class="line">hexo version</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420141126.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420141126.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局升级hexo-cli  </span></span><br><span class="line">npm i hexo-cli -g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再次查看版本，看hexo-cli是否升级成功  </span></span><br><span class="line">hexo version  </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420141424.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420141424.png"></p>
 <p>可以看到 <code>hexo-cli</code> 已经从 <code>3.1.0</code> 升级到了 <code>4.2.0</code></p>
-<h3 id="安装-npm-check"><a href="#安装-npm-check" class="headerlink" title="安装 npm-check"></a>安装 npm-check</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装npm-check，若已安装可以跳过  </span></span><br><span class="line">npm install -g npm-check</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查系统插件是否需要升级  </span></span><br><span class="line">npm-check  </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">![](https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420142115.png)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 安装 npm-upgrade</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># 安装npm-upgrade，若已安装可以跳过  </span></span><br><span class="line">npm install -g npm-upgrade  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 package.json  </span></span><br><span class="line">npm-upgrade</span><br></pre></td></tr></table></figure>
+<h3 id="安装-npm-check"><a href="#安装-npm-check" class="headerlink" title="安装 npm-check"></a>安装 npm-check</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装npm-check，若已安装可以跳过  </span></span><br><span class="line">npm install -g npm-check</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查系统插件是否需要升级  </span></span><br><span class="line">npm-check  </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">![](https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420142115.png)</span><br><span class="line"></span><br><span class="line"><span class="comment">### 安装 npm-upgrade</span></span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># 安装npm-upgrade，若已安装可以跳过  </span></span><br><span class="line">npm install -g npm-upgrade  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 package.json  </span></span><br><span class="line">npm-upgrade</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420145158.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420145158.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新全局插件  </span></span><br><span class="line">npm update -g  </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420145620.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420145620.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新系统插件  </span></span><br><span class="line">npm update --save  </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420145723.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420145723.png"></p>
 <h1 id="复刻"><a href="#复刻" class="headerlink" title="复刻"></a>复刻</h1><p>需要根据实际需要安装相应的主题和依赖的插件；</p>
 <h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>默认用的主题是 <code>landscape</code> ，而我公网上用的是 <code>Next</code>，所以需要另外安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装主题  </span></span><br><span class="line">npm install hexo-theme-next</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420151428.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420151428.png"></p>
 <ol>
 <li>  将 <code>_config.yml</code>  中的 <code>theme</code> 改为 <code>next</code></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421094659.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421094659.png"></p>
 <ol start="2">
 <li>  将 <code>_config.next.yml</code> 放到 <code>_config.yml</code> 同目录</li>
 <li>  将自定义模板拷贝到 <code>source</code> 目录</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421095009.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421095009.png"></p>
 <ol start="4">
 <li> 重启容器后刷新页面，是不是已经跟公网上的一样了</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421095203.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421095203.png"></p>
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>我用的插件应该不算多</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 百度推送插件</span></span><br><span class="line">npm install hexo-baidu-url-submit --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo-generator-index2 插件</span></span><br><span class="line">npm install hexo-generator-index2 --save</span><br><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># symbols_count_time 插件</span></span><br><span class="line">npm install hexo-symbols-count-time --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo-blog-encrypt 插件</span></span><br><span class="line">npm install hexo-blog-encrypt --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo-deployer-git 插件</span></span><br><span class="line">npm install hexo-deployer-git –save</span><br></pre></td></tr></table></figure>
 
 <p>正常启动后的日志</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210420160806.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210420160806.png"></p>
 <h2 id="导入文档"><a href="#导入文档" class="headerlink" title="导入文档"></a>导入文档</h2><p>导入 <code>_posts</code> 目录，其他包括一些左侧的菜单栏，按需要导入，比如 <code>about</code>、<code>categories</code> 等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421113639.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421113639.png"></p>
 <p>刷新页面，前端页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421113748.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421113748.png"></p>
 <p>管理页面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421113839.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421113839.png"></p>
 <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="验证-ssh-key"><a href="#验证-ssh-key" class="headerlink" title="验证 ssh key"></a>验证 ssh key</h2><blockquote>
 <p>验证前需在平台已添加 <code>SSH 公钥</code>，如果你是按照我前面相同的卷设置， <code>id_rsa.pub</code> 密钥在 <code>/docker/hexo/blog/.ssh</code> 目录中</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> --user root -it spurin-hexo1 /bin/bash</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 验证 github </span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 gitee.com 写入 known_hosts</span></span><br><span class="line">ssh-keyscan gitee.com &gt;&gt; ~/.ssh/known_hosts 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证 gitee</span></span><br><span class="line">ssh -T git@gitee.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 e.coding.net 写入 known_hosts</span></span><br><span class="line">ssh-keyscan e.coding.net &gt;&gt; ~/.ssh/known_hosts 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证 Coding</span></span><br><span class="line">ssh -T git@e.coding.net</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制</span></span><br><span class="line"><span class="built_in">cp</span> -r ~/.ssh /app</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421132118.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421132118.png"></p>
 <h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 </span></span><br><span class="line">docker <span class="built_in">exec</span> -it spurin-hexo1 hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发布</span></span><br><span class="line">docker <span class="built_in">exec</span> -it spurin-hexo1 hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>上面的命令需要开启 <code>ssh</code> 客户端，所以更好的办法是利用 <code>hexo-admin</code> 的 <code>Deploy</code> 功能来完成向 <code>github</code> 提交发布的工作，但是在设置前执行会返回错误。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421135738.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421135738.png"></p>
 <ol>
 <li> 在 hexo 的根目录下新建 <code>hexo-pubish.sh</code> 文件</li>
 </ol>
@@ -672,7 +672,7 @@
 <p>增加下面的内容</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deployCommand:</span> <span class="string">&#x27;./hexo-pubish.sh&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421135342.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421135342.png"></p>
 <ol start="3">
 <li> 修改 <code>hexo-publish.sh</code> 权限</li>
 </ol>
@@ -681,7 +681,7 @@
 <ol start="4">
 <li>重启容器后再执行 <code>Deploy</code></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210421143200.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210421143200.png"></p>
 <p>和台式机上 <code>git bash</code> 的输出是一致的。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>从流程上来说，<code>写作--&gt;预览--&gt;发布</code> 基本上是一气呵成，非常完美，但是还是有些小遗憾， 那就是 <code>hexo-admin</code> 的界面不太美观。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>

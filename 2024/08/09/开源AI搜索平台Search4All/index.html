@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Search4All 能让你的 LLM API 支持联网，是个人 AI 搜索辅助工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311331085.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311331085.png">
 <meta property="article:published_time" content="2024-08-09T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="搜索引擎">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311331085.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311331085.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/09/%E5%BC%80%E6%BA%90AI%E6%90%9C%E7%B4%A2%E5%B9%B3%E5%8F%B0Search4All/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311331085.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311331085.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,7 +509,7 @@
 <li>可共享和缓存的搜索结果以提高效率。</li>
 </ul>
 <p>从功能上看，和老苏之前介绍的 <code>FreeAskInternet</code> 差不多，区别就在于 <code>Search4All</code> 对搜索引擎的支持更多一点</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407310955554.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407310955554.png"></p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>软件的安装比较简单，如果你之前已经单独安装过 <code>SearXNG</code>，那么只要安装 <code>Search4All</code> 即可，图形化安装和 <code>docker cli</code> 都只是安装了 <code>Search4All</code></p>
 <p>如果之前没有独立安装过 <code>SearXNG</code>，<code>docker-compose</code> 则展示了一体化安装，可以根据需要跳转到相应的章节</p>
 <p>虽然安装简单，但涉及到的知识点比较多</p>
@@ -535,7 +535,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v0.1.0</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311115364.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311115364.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -551,7 +551,7 @@
 <td align="center"><code>8800</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311120032.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311120032.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -585,7 +585,7 @@
 </tr>
 </tbody></table>
 <p>因为没有 <code>OpenAI API Key</code>，所以我们这里使用了 <code>OpenAI</code> 接口代理，也就是 <code>One API</code> 的相关设置参数来模拟</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404172157465.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404172157465.png"></p>
 <ul>
 <li><code>OPENAI_API_KEY</code>：<code>One API</code> 中的令牌；</li>
 <li><code>OPENAI_BASE_URL</code>：<code>One API</code> 的局域网地址；</li>
@@ -595,9 +595,9 @@
 <li><code>SEARXNG_BASE_URL</code>：填入 <code>SEARXNG</code> 的地址；</li>
 </ul>
 <p>这些参数基本上都已经有了，需要下来一个一个找到并填写值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311125397.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311125397.png"></p>
 <p>只有 <code>SEARXNG_BASE_URL</code> 需要自己添加</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311127180.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311127180.png"></p>
 <p>更多的环境变量，请参考官方文档的说明：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhdHdhbmcyL3NlYXJjaDRhbGwjZW52aXJvbm1lbnQtdmFyaWFibGU=">https://github.com/fatwang2/search4all#environment-variable<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="docker-cli安装"><a href="#docker-cli安装" class="headerlink" title="docker cli安装"></a>docker cli安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name search4all \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   -p 8062:8800 \</span><br><span class="line">   -e OPENAI_API_KEY=sk-bn6M52bOfdxYB3n2Ee717eA2C66b45318f1c95E4D9553d94 \</span><br><span class="line">   -e OPENAI_BASE_URL=http://192.168.0.197:3033/v1 \</span><br><span class="line">   -e LLM_MODEL=kimi \</span><br><span class="line">   -e RELATED_QUESTIONS=1 \</span><br><span class="line">   -e BACKEND=SEARXNG \</span><br><span class="line">   -e SEARXNG_BASE_URL=http://192.168.0.197:8061 \</span><br><span class="line">   fatwang2/search4all</span><br></pre></td></tr></table></figure>
@@ -612,15 +612,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 search4all 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/search4all/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 search4all 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/search4all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8062</code> 就能看到搜索界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404241337727.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404241337727.png"></p>
 <p>随便搜一个</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404241337035.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404241337035.png"></p>
 <p>看看天气</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311128550.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311128550.png"></p>
 <p>看看奖牌🏅</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311130961.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311130961.png"></p>
 <p>对比直接在 <code>SearXNG</code> 中的搜索结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407311156103.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407311156103.png"></p>
 <blockquote>
 <p>【风险提示】：大语言模型提供的答案，准确性是基于搜索引擎返回的结果，所以需要自己核实正确性</p>
 </blockquote>

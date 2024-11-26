@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="追求永无止境，适合的才是最好的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
 <meta property="article:published_time" content="2020-05-16T10:49:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="路由器">
 <meta property="article:tag" content="千兆">
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="光猫">
 <meta property="article:tag" content="WDS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/16/%E7%99%BE%E5%85%86%E5%8D%87%E5%8D%83%E5%85%86%E5%AE%B6%E5%BA%AD%E7%BB%84%E7%BD%91%E6%96%B9%E6%A1%88/">
@@ -395,7 +395,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/wifi-6-logo-1589626596200.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -436,7 +436,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,20 +502,20 @@
     <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下午接到中国电信的客服电话，让我把带宽从100M升到300M，每月好像只要增加20元，这才想起多年前墙里埋的还是五类线，难怪之前玩客云到顶了也就8M左右的下载速度，今天我们先从理论上来研究下怎么把百兆的家庭网络升级成千兆的家庭网络。</p>
 <h1 id="家庭网络的组成"><a href="#家庭网络的组成" class="headerlink" title="家庭网络的组成"></a>家庭网络的组成</h1><p>家庭网络涉及到的主要组成包括：光猫、路由器、网线、网卡，一般来说光猫是运营商提供的，而路由器和网线则是需要我们自己准备的。当然有些套餐也会提供路由器，但对路由器的性能不要有太大的期待。</p>
 <h2 id="光猫"><a href="#光猫" class="headerlink" title="光猫"></a>光猫</h2><p>运营商会根据你的套餐进行更换，我印象中已经更换过3次，从中兴的到华为的，现在用的是Nokia的，对了现在已经改叫电信SDN网关了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/1589633647537-1589633647539.png" alt="title"></p>
 <blockquote>
 <p><strong>什么是SDN？</strong><br>軟體定義網路 (Software-defined networking)是一種新型網路架構。它利用OpenFlow協定將路由器的控制平面從資料平面中分離，改以軟體方式實作。該架構可使網路管理員在不更動硬體裝置的前提下，以中央控制方式用程式重新規劃網路，為控制網路流量提供了新方案，也為核心網路和應用創新提供了良好平台。 【維基百科】</p>
 </blockquote>
 <h2 id="网线"><a href="#网线" class="headerlink" title="网线"></a>网线</h2><p>最好的办法是在装修的时候就预先铺设好，但是技术的发展飞快，就像我这样，虽然预埋了能支持100Mbps的五类线，而当时的ADSL才几兆而已，也才几年功夫现在已经不够用了。</p>
 <p>理论上超五类（CAT5e）的传输速率可达到250Mbps，六类线（CAT6）的传输速率可达到1Gbps，七类线（CAT7）的传输速率可达10Gbps，但从网上很多人的测试效果看，超五类（CAT5e）不仅能上千兆，万兆似乎也不是没可能。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/1589631764532-1589631764534.png" alt="title"></p>
 <p>（图片来自： <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN3aWZpLm5ldC82MTkwLmh0bWw=">https://www.acwifi.net/6190.html<i class="fa fa-external-link-alt"></i></span> ）</p>
 <p>当然你不差钱，也可以直接上八类线。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/1589632645267-1589632645271.png" alt="title"></p>
 <p>（图片来自： 淘宝 ）</p>
 <p>现在这种情况下重新布线显然不可能，但是如果走明线又实在太难看，所以暂时不考虑。</p>
 <h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><p>从20M升到100M时，电信送了个千兆的路由，还算比较稳定，但是一个无线路由覆盖不到房间的边边角角，所以在淘宝上又淘了2个二手的，组成了一个低成本的无缝漫游方案。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/1589634936336-1589634936339.png" alt="title"></p>
 <p>因这货支持黑科技802.11k/v/r协议，解决了 AP 切换的问题，但房间之间的拷贝速度始终受到五类网线的限制。</p>
 <p>在没有NAS以前，这都不是事，但是现在必须要考虑了。</p>
 <h2 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h2><p>网卡现在一般都是千兆的，但是无线网卡就未必了，这个看需要吧。</p>
@@ -534,7 +534,7 @@
 <blockquote>
 <p><strong>什么是电力猫？</strong><br>电力猫全称为电力猫路由器，是通过电线传输网络信号的。 电力猫一套为2只，一主为路由，一扩展器。 电力猫用的传输技术是正交频分复用(OFDM)，简单点说就是把互联网信号和电力信号叠加到一起。 主路由器插上电，接上网线，此时主路由已经把网络信号传输到了电信中。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/16/1589642760585-1589642760588.png" alt="title"></p>
 <p>（图片来自： 淘宝 ）</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>家庭网络如果要升级到千兆，网线，路由器，网卡全部都需要升级到千兆。任何一个环节没跟上，都会影响到网络的速度。</li>

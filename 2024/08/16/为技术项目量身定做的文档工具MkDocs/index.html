@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MkDocs 是一个静态网站生成器，专门用于创建项目文档。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292310980.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292310980.png">
 <meta property="article:published_time" content="2024-08-16T04:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.016Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="markdown">
 <meta property="article:tag" content="在线文档">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292310980.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292310980.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/16/%E4%B8%BA%E6%8A%80%E6%9C%AF%E9%A1%B9%E7%9B%AE%E9%87%8F%E8%BA%AB%E5%AE%9A%E5%81%9A%E7%9A%84%E6%96%87%E6%A1%A3%E5%B7%A5%E5%85%B7MkDocs/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292310980.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292310980.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -519,15 +519,15 @@
 <blockquote>
 <p><code>Material for MkDocs</code> 是基于 <code>MkDocs</code> 的强大文档框架。支持 <code>docker</code> 部署方式。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292239217.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292239217.png"></p>
 <h1 id="新建文档"><a href="#新建文档" class="headerlink" title="新建文档"></a>新建文档</h1><p>在群晖上以 Docker 方式运行。</p>
 <p>首先要在指定的目录中，创建项目文档及配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 mkdocs 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/mkdocs/docs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 mkdocs 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/mkdocs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建站点</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/:/docs \</span><br><span class="line">   squidfunk/mkdocs-material new .</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">注意最后的那个点别漏了</span><br><span class="line"></span><br><span class="line">![](https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292127967.png)</span><br><span class="line"></span><br><span class="line">这将创建以下结构</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">.</span><br><span class="line">├─ docs/</span><br><span class="line">│  └─ index.md</span><br><span class="line">└─ mkdocs.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 mkdocs 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/mkdocs/docs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 mkdocs 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/mkdocs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建站点</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/:/docs \</span><br><span class="line">   squidfunk/mkdocs-material new .</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line">注意最后的那个点别漏了</span><br><span class="line"></span><br><span class="line">![](https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292127967.png)</span><br><span class="line"></span><br><span class="line">这将创建以下结构</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">.</span><br><span class="line">├─ docs/</span><br><span class="line">│  └─ index.md</span><br><span class="line">└─ mkdocs.yml</span><br></pre></td></tr></table></figure>
 
 <p>根目录下会生成 <code>mkdocs.yml</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292126930.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292126930.png"></p>
 <p><code>docs</code> 目录中会生成 <code>index.md</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292130839.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292130839.png"></p>
 <p>新建的 <code>mkdocs.yml</code> 只有一行</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">site_name:</span> <span class="string">My</span> <span class="string">Docs</span></span><br></pre></td></tr></table></figure>
 
@@ -537,22 +537,22 @@
 <blockquote>
 <p>因为包含了了中文，所以记得采用 <code>UTF-8</code> 格式保存</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406301222351.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406301222351.png"></p>
 <h1 id="实时预览"><a href="#实时预览" class="headerlink" title="实时预览"></a>实时预览</h1><p><code>MkDocs</code> 包含一个实时预览服务器，因此您可以在编写文档时预览更改。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 边写边预览</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   -p 5065:8000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/:/docs \</span><br><span class="line">   squidfunk/mkdocs-material</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292207539.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292207539.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:5065</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292150164.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292150164.png"></p>
 <p>你在 <code>index.md</code> 上做的任何修改，不需要刷新页面，会显示出来</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292210111.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292210111.png"></p>
 <p>接下来我们要做的是研究 <code>MkDocs</code> 的高级配置，<span class="exturl" data-url="aHR0cHM6Ly9zcXVpZGZ1bmsuZ2l0aHViLmlvL21rZG9jcy1tYXRlcmlhbC9jcmVhdGluZy15b3VyLXNpdGUvI2FkdmFuY2VkLWNvbmZpZ3VyYXRpb24=">https://squidfunk.github.io/mkdocs-material/creating-your-site/#advanced-configuration<i class="fa fa-external-link-alt"></i></span>，来研究如何改颜色、改字体、设置版本控制等</p>
 <h1 id="生成站点"><a href="#生成站点" class="headerlink" title="生成站点"></a>生成站点</h1><p>完成编辑后，你可以使用以下命令从 <code>Markdown</code> 文件构建静态站点</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/:/docs \</span><br><span class="line">   squidfunk/mkdocs-material build</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292211133.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292211133.png"></p>
 <p>会在根目录生成 <code>site</code> 子目录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406292214836.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406292214836.png"></p>
 <p>此目录的内容构成了您的项目文档。无需操作数据库或服务器，因为它是完全独立的。该网站可以托管在 <code>GitHub Pages</code>、<code>GitLab Pages</code>、您选择的 <code>CDN</code> 或您的私人网络空间上</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>mkdocs/mkdocs: Project documentation with Markdown.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21rZG9jcy9ta2RvY3M=">https://github.com/mkdocs/mkdocs<i class="fa fa-external-link-alt"></i></span></p>

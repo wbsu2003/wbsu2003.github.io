@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Chevereto 是一款自建图床程序，PicGo 则是免费开源的图片上传与管理工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210719185845.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210719185845.png">
 <meta property="article:published_time" content="2021-07-19T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="图床">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210719185845.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210719185845.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/07/19/Chevereto%E9%85%8D%E5%90%88PicGo%E6%89%93%E9%80%A0%E4%B8%AA%E4%BA%BA%E5%9B%BE%E5%BA%8A/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210719185845.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210719185845.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,12 +500,12 @@
 <p>Chevereto 是目前最好的图床之一，功能也非常强大。其免费版和收费版的区别，在于收费版多了硬盘扩展，社交分享功能和技术支持。硬盘扩展指的是使用外部存储，例如：Amazon S3、Google Cloud、阿里云 OSS 等。<code>Chevereto</code> 的安装也非常简单，并且支持简体中文。</p>
 </blockquote>
 <p>从几天前作者发的公告看，如果没有人接手的话，免费版很可能就要终止了，如果这样的话实在太可惜了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210718195159.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210718195159.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 5</code> 中新建用户 <code>chevereto</code>，创建同名的库 <code>chevereto</code> 并授予所有权限。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520135519.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520135519.png"></p>
 <h2 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>chevereto</code> ，选择第一 <code>nmtan/chevereto</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520135832.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520135832.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>chevereto</code>，在 <code>chevereto</code> 再建一个子目录 <code>images</code></p>
 <blockquote>
 <p>默认 chevereto 支持不大于 2M 的图片文件，如果你的文件超过这个值，需要建一个 php.ini 文件，并在文件中加入下面的内容</p>
@@ -515,7 +515,7 @@
 <p>当然你还可以根据内存大小来限制内存的使用，例如</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">memory_limit</span> = <span class="number">2048</span>M</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520142139.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520142139.png"></p>
 <table>
 <thead>
 <tr>
@@ -538,7 +538,7 @@
 <blockquote>
 <p>建议对 <code>php.ini</code> 设置为只读</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520142335.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520142335.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>找一个不冲突的端口 <code>8112</code> </p>
 <table>
 <thead>
@@ -552,7 +552,7 @@
 <td align="center">80</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520142514.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520142514.png"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -588,60 +588,60 @@
 <blockquote>
 <p>除了主机改成了群晖 IP（数据库服务器 IP），密码按实际设置的改动外，其他的都用的默认值</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520142818.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520142818.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8112</code>，就能看到主界面了，但这是一个报错的界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520143012.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520143012.png"></p>
 <p>原因是 PHP 用户 <code>www-data</code> 对文件夹 <code>images</code> 没有写入的权限。</p>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>用 SSH 客户端登录到群晖</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到 chevereto 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/chevereto/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改权限</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> -R 777 images</span><br></pre></td></tr></table></figure>
 
 <p>再刷新页面，应该就可以开始设置了</p>
-<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520144331.png"></p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520144331.png"></p>
 <p>点 <code>Install Chevereto</code> 就可以了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520144516.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520144516.png"></p>
 <p>点 <code>admin dashboard</code> 进入管理界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520144612.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520144612.png"></p>
 <p>有点丑陋</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520144712.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520144712.png"></p>
 <p>先改了个时区和语言</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520145709.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520145709.png"></p>
 <p>在仪表盘的设置中更改了隐私模式，不再对 <code>访客开放</code>，毕竟是自用的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520190300.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520190300.png"></p>
 <h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><p>点右上角的 <code>上传</code>进入上传模式，图片上传支持本地图片上传和拖拽</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520145836.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520145836.png"></p>
 <p>拖了一组图片，可以单独标记和删除</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520150631.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520150631.png"></p>
 <p>开始上传</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520150750.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520150750.png"></p>
 <p>上传完毕</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520150845.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520150845.png"></p>
 <p>按 <code>最新的</code> 的查看</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520151034.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520151034.png"></p>
 <p>选中一张照片打开</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520151149.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520151149.png"></p>
 <h2 id="图片的存储"><a href="#图片的存储" class="headerlink" title="图片的存储"></a>图片的存储</h2><p>从目录结构看是按日期来分类的，同时对图片做了处理，除了原图 <code>AAA.jpg</code> 外，还生成了中等图片 <code>AAA.md.jpg</code> 和 缩略图 <code>AAA.th.jpg</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520152028.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520152028.png"></p>
 <p>虽然存储空间有一丢丢增大，但浏览速度有了很大的提高，同时很容易在文档、论坛中嵌入相应的图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520152611.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520152611.png"></p>
 <h2 id="配合-PicGo"><a href="#配合-PicGo" class="headerlink" title="配合 PicGo"></a>配合 PicGo</h2><p>大家还记得 PicGo 吗？ 老苏曾经写过一篇『 <span class="exturl" data-url="aHR0cHM6Ly93d3cubGFvc3UubWwvMjAyMC8xMC8xMy9NYXJrZG93biVFNyU5QSU4NCVFNSU5QiVCRSVFNyU4OSU4NyVFNCVCQyVCNCVFNCVCRSVBM1BpY0dv">Markdown的图片伴侣PicGo<i class="fa fa-external-link-alt"></i></span> 』</p>
 <p>在 <code>插件设置</code> 中搜索 <code>chevereto</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/05/20210520153216.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/05/20210520153216.png"></p>
 <p>安装完成后 <code>图床设置</code> 中就会多出 <code>Chevereto Uploader</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520193644.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520193644.png"></p>
 <p>回到 <code>仪表板</code> –&gt; <code>设置</code> –&gt; <code>API</code></p>
 <blockquote>
 <p>Chevereto API v1（也被称为Bridge API）允许访客上传图片到你的 Chevereto 驱动的网站上，支持从文件，base64或者图片的链接进行上传。API 的 V1 版本没有速率限制，但是会受到仪表盘中设置的最大上传限制的影响。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520191852.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520191852.png"></p>
 <p>会拿到一串 <code>API v1 密钥</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520192041.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520192041.png"></p>
 <p>填入到 PicGo </p>
 <blockquote>
 <p>Url：http(s)://服务器IP+端口或者域名/api/1/upload</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520193136.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520193136.png"></p>
 <p>上传试试，刷新照片目录就有了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images/picgo/2021/0520210520193405.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images/picgo/2021/0520210520193405.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Chevereto - Open Source Image Hosting Software<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGV2ZXJldG8uY29tLw==">https://chevereto.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Chevereto/Chevereto-Free: Open source image hosting software<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NoZXZlcmV0by9DaGV2ZXJldG8tRnJlZQ==">https://github.com/Chevereto/Chevereto-Free<i class="fa fa-external-link-alt"></i></span></p>

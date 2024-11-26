@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Snipe-IT 是一个用 PHP 编写的免费开源 IT 资产管理系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030935144.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030935144.png">
 <meta property="article:published_time" content="2023-10-18T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="资产管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030935144.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030935144.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/10/18/%E5%BC%80%E6%BA%90IT%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FSnipe-IT/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030935144.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030935144.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,7 +503,7 @@
 <p><code>Snipe-IT</code> 是一个用 <code>PHP</code> 编写的免费开源 <code>IT</code> 资产管理系统。<code>Snipe-IT</code> 专为 <code>IT</code> 资产管理而设计，使 <code>IT</code> 部门能够跟踪谁拥有哪台笔记本电脑、何时购买、有哪些软件许可证和配件可用等等。</p>
 </blockquote>
 <p>整体界面风格和 <code>Pi.Alert</code> 几乎是一样的，应该是使用了同样的框架吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030852267.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030852267.png"></p>
 <p><strong>注意事项</strong></p>
 <blockquote>
 <p>群晖内核版本太低会遇到下面的错误，这个 <code>AH00141</code> 已经遇到多次了，老苏除了换机器，也没找到其他的办法；</p>
@@ -518,7 +518,7 @@
 <blockquote>
 <p>源文件地址：<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3NuaXBlL3NuaXBlLWl0L21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw=">https://raw.githubusercontent.com/snipe/snipe-it/master/docker-compose.yml<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308021751626.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308021751626.png"></p>
 <p>老苏只是看看功能而已，没必要搞的太复杂，所以给精简到了 <code>2</code> 个。将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">snipeit:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">snipe/snipe-it:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">snipeit</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8024:80&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./logs:/var/www/html/storage/logs</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">env.txt</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mariadb:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mariadb</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">snipeit-db</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/mysql</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">env.txt</span></span><br></pre></td></tr></table></figure>
 
@@ -535,26 +535,26 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 snipeit 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/snipeit/&#123;data,logs&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 snipeit 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/snipeit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 和 env.txt 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030905694.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030905694.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><blockquote>
 <p>第一次安装时间挺长的，注意观察容器 <code>snipeit</code> 的日志信息</p>
 </blockquote>
 <p>在浏览器中输入 <code>http://群晖IP:8024</code> ，第一次会看到向导界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022109853.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022109853.png"></p>
 <p>没有设置邮件，所以不用 <code>Send Test</code>，直接点 <code>Next：Create Datebase Tables</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022125835.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022125835.png"></p>
 <p>数据库成功之后，点 <code>Next：Create User</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022155132.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022155132.png"></p>
 <p>设置语言等，主要还是账号信息，完成后点 <code>Next：Save User</code>，就能看到主界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022156595.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022156595.png"></p>
 <h2 id="设置中文"><a href="#设置中文" class="headerlink" title="设置中文"></a>设置中文</h2><p>右上角用户名边上的小三角，找到 <code>Edit Your Profile</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022201454.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022201454.png"></p>
 <p><code>Language</code> 中选择  <code>Chinese Simplified</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308022203577.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308022203577.png"></p>
 <p><code>Save</code> 之后，整个界面就是中文了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308030004734.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308030004734.png"></p>
 <h2 id="新增资产"><a href="#新增资产" class="headerlink" title="新增资产"></a>新增资产</h2><p>现在可以开始初始化设置，比如公司、部门、人员、分组等，然后就可以添加各种资产了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308030842214.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308030842214.png"></p>
 <p>作为一款老牌的软件，网上能找到中文的用户手册</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>snipe/snipe-it: A free open source IT asset/license management system<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NuaXBlL3NuaXBlLWl0">https://github.com/snipe/snipe-it<i class="fa fa-external-link-alt"></i></span></p>

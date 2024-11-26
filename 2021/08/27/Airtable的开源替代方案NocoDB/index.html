@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="NocoDB 是一个开源 NoCode 平台，可将任何 MySQL、PostgreSQL、SQL Server、SQLite 和 MariaDB 转换为智能电子表格。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210827092652.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210827092652.png">
 <meta property="article:published_time" content="2021-08-27T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="表格">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210827092652.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210827092652.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/27/Airtable%E7%9A%84%E5%BC%80%E6%BA%90%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88NocoDB/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210827092652.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210827092652.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,15 +509,15 @@
 </blockquote>
 <p><code>REST API</code> 在之前的『 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5tbC8yMDIxLzA4LzAyLyVFNyVBRSU4MCVFNyVCQSVBNiVFNCVCRCU4NiVFNyVCQiU5RCVFNCVCOCU4RCVFNyVBRSU4MCVFNSU4RCU5NSVFNyU5QSU4NEtvbWdhLw==">简约但绝不简单的Komga<i class="fa fa-external-link-alt"></i></span> 』一文中已经遇到了，而 <code>NocoDB</code> 同时支持 <code>REST API</code>和 <code>GraphQL API</code></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 10</code> 中新建用户 <code>nocodb</code>，创建同名的库 <code>nocodb</code> 并授予所有权限。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804141251.png" alt="10"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804141251.png" alt="10"></p>
 <p>如果使用 <code>MariaDB 5</code>，在创建 <code>table</code> 时会遇到下面👇这样的错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CODE:</span><br><span class="line">ER_TOO_MUCH_AUTO_TIMESTAMP_COLS</span><br></pre></td></tr></table></figure>
 
 <p>从而导致创建失败</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804135833.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804135833.png"></p>
 <h2 id="安装镜像"><a href="#安装镜像" class="headerlink" title="安装镜像"></a>安装镜像</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>nocodb</code> ，选择第一个 <code>nocodb/nocodb</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804110617.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804110617.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>nocodb</code></p>
 <table>
 <thead>
@@ -533,7 +533,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805151127.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805151127.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，这里用了 <code>2380</code> </p>
 <table>
 <thead>
@@ -547,7 +547,7 @@
 <td align="center">8080</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804111443.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804111443.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -564,75 +564,75 @@
 <p>MariaDB 5 默认的端口是 3306，MariaDB 10 默认的端口是 3307</p>
 </blockquote>
 <p>所以根据前面的设置，连接参数应该是 <code>mysql2://192.168.0.197:3307?u=nocodb&amp;p=TWYQDFsgq9Ng&amp;d=nocodb</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805151355.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805151355.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:2380</code>，就看到欢迎界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805151524.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805151524.png"></p>
 <p>跳过欢迎界面之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805152056.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805152056.png"></p>
 <p>第一次需要注册，这个账号将成为管理员账号</p>
 <blockquote>
 <p>密码至少有 8 个字母，其中包括 1 个大写字母、1 个数字和 1 个特殊字母</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804113329.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804113329.png"></p>
 <h2 id="创建新项目"><a href="#创建新项目" class="headerlink" title="创建新项目"></a>创建新项目</h2><p>注册成功之后可以开始新建项目</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805155318.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805155318.png"></p>
 <p>输入项目名称，可以选择生成的 <code>API</code> 类型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805155523.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805155523.png"></p>
 <h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><p>可以通过 <code>+</code> 号创建 <code>table</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804151634.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804151634.png"></p>
 <p>输入表名，然后点 <code>Submit</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805155702.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805155702.png"></p>
 <blockquote>
 <p>id 列是不能禁用的，</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804152216.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804152216.png"></p>
 <p>成功提交后，表格将创建并作为新选项卡打开。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804143303.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804143303.png"></p>
 <h3 id="列"><a href="#列" class="headerlink" title="列"></a>列</h3><p>单击表格右上角的 <code>+</code> 图标</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804152447.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804152447.png"></p>
 <p>弹出表单中可以填写列名、类型、长度等，其中类型非常丰富</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804152623.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804152623.png"></p>
 <p>修改后保存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804152808.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804152808.png"></p>
 <h3 id="行"><a href="#行" class="headerlink" title="行"></a>行</h3><p>点下图中的 <code>+</code> 号可以创建新的行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804153324.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804153324.png"></p>
 <p>输入 <code>title</code> 和 <code>url</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804153514.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804153514.png"></p>
 <p>点右上角的 <code>Save Row</code>，就有数据了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804153613.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804153613.png"></p>
 <p>又加了一行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804155600.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804155600.png"></p>
 <h2 id="REST-API-访问"><a href="#REST-API-访问" class="headerlink" title="REST API 访问"></a>REST API 访问</h2><p>在主界面点最右上角的图标，单击 <code>Copy auth token</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804154033.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804154033.png"></p>
 <p>单击同样的按钮，这次选择 <code>Swagger APIs Doc</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804154530.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804154530.png"></p>
 <p>选择 <code>Schemes</code> 并单击<code>Authorize</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804154705.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804154705.png"></p>
 <p>粘贴复制的令牌，然后单击 <code>Authorize</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804154751.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804154751.png"></p>
 <p>验证成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804154823.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804154823.png"></p>
 <p>用 <code>Get list</code> 接口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804155759.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804155759.png"></p>
 <p>可以查询到我们刚才建的两条数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804155909.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804155909.png"></p>
 <h2 id="从数据库导入项目"><a href="#从数据库导入项目" class="headerlink" title="从数据库导入项目"></a>从数据库导入项目</h2><p>通过连接外部数据库创建项目</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804113551.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804113551.png"></p>
 <p>需要进行数据库配置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804141802.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804141802.png"></p>
 <p>老苏用了之前 <code>兰空图床</code> 的数据库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805160209.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805160209.png"></p>
 <p>点 <code>Test Database Connection</code> 测试数据库连接 </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804114209.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804114209.png"></p>
 <p>没问题的话就点 <code>OK &amp; Save Project</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805160411.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805160411.png"></p>
 <p>可以看到数据都已经过来了，接下来就可以通过 <code>REST API</code> 访问了</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>NocoDB</code> 和我们之前介绍的 <code>SeaTable</code> 非常类似，区别在于 <code>SeaTable</code> 偏向于提供应用模板，而 <code>NocoDB</code> 偏向于提供接口，是一个从数据库到 <code>REST-GraphQL API</code> 的生成器，更方便做二次开发</p>
 <p>按官方的规划，未来可实现拖拽设计页面，这又有点像 <code>Tduck</code>了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/202108262332490.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/202108262332490.png"></p>
 <hr>
 <p>【小彩蛋】：一段时间不操作，界面会变得像黑客帝国</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210804133309.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210804133309.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>nocodb/nocodb: 🔥 🔥 The Open Source Airtable alternative - Powered by Vue.js 🚀 🚀<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25vY29kYi9ub2NvZGI=">https://github.com/nocodb/nocodb<i class="fa fa-external-link-alt"></i></span></p>
 <p>NocoDB Documentation - NocoDB<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm5vY29kYi5jb20v">https://docs.nocodb.com/<i class="fa fa-external-link-alt"></i></span></p>

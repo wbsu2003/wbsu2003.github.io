@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="ClamAV® 是一种开源防病毒引擎，用于检测木马、病毒、恶意软件和其他恶意威胁。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112127862.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112127862.png">
 <meta property="article:published_time" content="2023-07-07T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.401Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.036Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="网络安全">
 <meta property="article:tag" content="防病毒">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112127862.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112127862.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/07/07/%E5%BC%80%E6%BA%90%E9%98%B2%E7%97%85%E6%AF%92%E5%BC%95%E6%93%8EClamAV/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112127862.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112127862.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,7 +505,7 @@
 <p><code>ClamAV</code> 是一个开源 ( <code>GPLv2</code> ) 反病毒工具包，专为邮件网关上的电子邮件扫描而设计。它提供了许多实用程序，包括灵活且可扩展的多线程守护程序、命令行扫描程序和用于自动数据库更新的高级工具。该软件包的核心是一个以共享库形式提供的反病毒引擎。</p>
 </blockquote>
 <p><code>ClamAV</code> 支持多平台安装，包括 <code>Windows</code>、<code>macOS </code>、<code>Linux</code> 、 <code>Docker</code> 等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112106548.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112106548.png"></p>
 <p>但需要注意的是</p>
 <ul>
 <li><code>ClamAV</code> 不是传统的防病毒或端点安全套件；</li>
@@ -524,18 +524,18 @@
 <p>用 <code>SSH</code> 客户端登录到群晖主机，然后在命令行执行下面的命令。在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>clamav</code>，并在其中建一个子文件夹 <code>data</code>，其中 <code>data</code> 子目录是用于保存和持久化病毒库的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 clamav 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/clamav/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 clamav 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/clamav</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull clamav/clamav:latest</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112318240.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112318240.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="下载病毒库"><a href="#下载病毒库" class="headerlink" title="下载病毒库"></a>下载病毒库</h2><p>第一次运行，需要下载和更新病毒库</p>
 <p><code>ClamAV</code> 容器实际上默认同时运行<code>freshclam</code>和<code>clamd</code>守护进程。要控制在容器内启动的服务的行为，需通过环境变量来控制。</p>
 <p>官方的说明：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmNsYW1hdi5uZXQvbWFudWFsL0luc3RhbGxpbmcvRG9ja2VyLmh0bWwjY29udHJvbGxpbmctdGhlLWNvbnRhaW5lcg==">https://docs.clamav.net/manual/Installing/Docker.html#controlling-the-container<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  更新病毒数据库</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   --name clamav \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/lib/clamav \</span><br><span class="line">   -e CLAMAV_NO_FRESHCLAMD=<span class="literal">false</span> \</span><br><span class="line">   clamav/clamav:latest</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306111958749.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306111958749.png"></p>
 <p>下载的时间取决于网络的情况</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306111959377.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306111959377.png"></p>
 <p>当看到 <code> SelfCheck: Database status OK.</code> 时，可以用 <code>Ctrl+C</code> 来退出容器的运行，<code>--rm</code>参数确保容器在退出后会被清理</p>
 <p>回到 <code>FileStation</code>，在 <code>data</code> 中能看到下载的病毒库文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112140684.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112140684.png"></p>
 <h2 id="运行-Clam-D-扫描"><a href="#运行-Clam-D-扫描" class="headerlink" title="运行 Clam(D) 扫描"></a>运行 Clam(D) 扫描</h2><p><code>Docker</code> 无法访问任何的主机文件。因此，要在 <code>Docker</code> 中扫描这些文件，需要使用绑定挂载来挂载它们，以便可以访问。</p>
 <p>例如：将主机目录 <code>/path/to/scan</code> 挂载在容器中作为 <code>/scandir</code> ，然后调用<code>clamcan</code>在 <code>/scandir</code> 上完成扫描</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 扫描主机 /path/to/scan 目录</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   --name clamav \</span><br><span class="line">   -v /path/to/scan:/scandir \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/lib/clamav \</span><br><span class="line">   clamav/clamav:latest \</span><br><span class="line">   clamscan /scandir</span><br></pre></td></tr></table></figure>
@@ -547,7 +547,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例：扫描 docker 目录</span></span><br><span class="line">docker run -it \</span><br><span class="line">   --<span class="built_in">rm</span> \</span><br><span class="line">   --name clamav \</span><br><span class="line">   -v /volume2/docker:/scandir \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/lib/clamav \</span><br><span class="line">   clamav/clamav:latest \</span><br><span class="line">   clamscan /scandir</span><br></pre></td></tr></table></figure>
 
 <p>能直接看到扫描的详情</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306112028392.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306112028392.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Cisco-Talos/clamav: ClamAV - Documentation is here: <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmNsYW1hdi5uZXQv">https://docs.clamav.net<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Npc2NvLVRhbG9zL2NsYW1hdg==">https://github.com/Cisco-Talos/clamav<i class="fa fa-external-link-alt"></i></span></p>
 <p>clamav/README.Docker.md at main · Cisco-Talos/clamav · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Npc2NvLVRhbG9zL2NsYW1hdi9ibG9iL21haW4vUkVBRE1FLkRvY2tlci5tZA==">https://github.com/Cisco-Talos/clamav/blob/main/README.Docker.md<i class="fa fa-external-link-alt"></i></span></p>

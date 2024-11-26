@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Heimdallr是一个无状态的密码管理器&#x2F;生成器">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221607696.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221607696.png">
 <meta property="article:published_time" content="2023-04-05T05:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="密码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221607696.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221607696.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/04/05/%E6%97%A0%E7%8A%B6%E6%80%81%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8Heimdallr/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221607696.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221607696.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,7 +507,7 @@
 <blockquote>
 <p>这个镜像目前只有 <code>latest</code> ，其他版本都是<code>2</code> 年前的；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221502228.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221502228.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -523,7 +523,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221506961.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221506961.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name heimdallr \</span><br><span class="line">   -p 30003:80 \</span><br><span class="line">   eluki/heimdallr-password-manager</span><br></pre></td></tr></table></figure>
 
@@ -534,7 +534,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kavita 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/heimdallr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/heimdallr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:30003</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221106468.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221106468.png"></p>
 <ul>
 <li><code>Service name</code>：这是必填的，是为其生成密码的服务名称，比如用 <code>github</code> 来标识网站 <code>https://www.github.com</code> ；</li>
 <li><code>Common name</code>：这是必填的，一般用账号或者密码 <code>ID</code>，比如用账号 <code>laosu</code>；</li>
@@ -546,9 +546,9 @@
 <li><code>Version</code>：版本信息；</li>
 </ul>
 <p>所以我们生成的第一版的密码是 <code>410&#123;SvE3ge=f7l&#123;4</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221536730.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221536730.png"></p>
 <p>如果我们要给 <code>github</code> 生成新的密码，可以将 <code>Version</code> 设置为 <code>2</code>，然后重新 <code>generate</code>，这时候密码会生成新密码 <code>3SXNg^n2XS)GRs%9</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221540556.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301221540556.png"></p>
 <p>只要以上参数都不变的情况下，每次生成的密码是绝对一致的，但只要有一个参数变化，就像我们举例中的 <code>Version</code> 从 <code>1</code> 变为 <code>2</code>，密码就会有变化，这解决了无状态密码管理器刚出来的时候存在的问题，比如：</p>
 <ul>
 <li>对于同一个网站，如果您想为单个网站保存多个密码，则必须在网站名称中包含用户名；</li>

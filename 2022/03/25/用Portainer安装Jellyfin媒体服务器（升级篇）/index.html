@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Jellyfin 是一套开源的多媒体应用软件，可用于组织、管理和共享数字媒体文件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131650958.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131650958.png">
 <meta property="article:published_time" content="2022-03-25T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.409Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131650958.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131650958.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/03/25/%E7%94%A8Portainer%E5%AE%89%E8%A3%85Jellyfin%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%8D%87%E7%BA%A7%E7%AF%87%EF%BC%89/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131650958.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131650958.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,37 +506,37 @@
 <p>老苏继续使用官方的镜像不是因为固执，只是为了研究</p>
 </blockquote>
 <h1 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h1><p>老苏目前安装的 <code>latest</code> 版对应的 <code>Jellyfin</code> 的版本是 <code>10.7.7</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202092035300.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202092035300.png"></p>
 <p>接下来的操作将在容器内进行，进入容器的方法一般是通过 <code>SSH</code> 客户端执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器名称为 jellyfin 的内部操作</span></span><br><span class="line">docker <span class="built_in">exec</span> -it jellyfin /bin/bash</span><br></pre></td></tr></table></figure>
 
 <p>但既然都已经用了 <code>portainer</code> ，就没必要了再用 <code>SSH</code> 客户端了，因为 <code>portainer</code> 具备和群晖 <code>终端机</code> 一样的功能，而且比 <code>终端机</code> 更好用</p>
 <p>在 <code>Containers</code> 中 <code>Quick actions</code> 下面找到 <code>&gt;_</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202092057269.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202092057269.png"></p>
 <p>点击后进入 <code>Container console</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202092059339.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202092059339.png"></p>
 <p>点 <code>Connect</code> 进入容器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202092100473.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202092100473.png"></p>
 <h1 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h1><p>要查看信息需要先安装相应的软件，比如 <code>vainfo</code> 和 <code>lshw</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新源</span></span><br><span class="line">apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 vainfo、lshw</span></span><br><span class="line">apt install -y vainfo lshw</span><br></pre></td></tr></table></figure>
 
 <p>先查询 <code>jellyfin</code> 容器的相关的信息，内核是 <code>Debian（buster）</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看容器的内核版本</span></span><br><span class="line"><span class="built_in">cat</span> /etc/issue</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">cat</span> /etc/*release</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202100917568.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202100917568.png"></p>
 <p>再查询下显卡信息，显卡确实是 <code>Intel HD Graphics 5500</code>，驱动是 <code>i915/i965</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显卡信息</span></span><br><span class="line">lshw -c display</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者 </span></span><br><span class="line">lshw -c video</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202100919725.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202100919725.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设备列表</span></span><br><span class="line">lspci | grep VGA</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202120053724.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202120053724.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示开机信息</span></span><br><span class="line">dmesg</span><br></pre></td></tr></table></figure>
 
 <p>最后看看驱动，有报错</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 intel 驱动</span></span><br><span class="line">vainfo</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202100920463.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202100920463.png"></p>
 <h1 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h1><p><code>Intel Quick Sync</code> 需要用到 <code>Intel &quot;non-free&quot;</code> 的驱动，这个 <code>&quot;non-free&quot;</code> 不是指要花钱，而是指代码是闭源的，但官方 <code>docker</code> 并没有安装 <code>&quot;non-free&quot;</code> 驱动</p>
 <p><code>Jellyfin</code> 永远不会将 <code>Intel &quot;non-free&quot;</code> 驱动作为其官方 <code>docker</code> 镜像的一部分，因为他们承诺只包含开源软件。而 <code>Linuxserver.io</code> 没有这样的限制，因此他们可以自行决定将 <code>Intel &quot;non-free&quot;</code> 驱动与 <code>Jellyfin</code> 捆绑在其 <code>Jellyfin</code> 容器中</p>
 <blockquote>
@@ -549,11 +549,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 gpg-agent、wget、curl</span></span><br><span class="line">apt install -y gpg-agent wget curl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 intel key</span></span><br><span class="line">wget -qO - https://repositories.intel.com/graphics/intel-graphics.key | apt-key add -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份（可选操作，只是老苏的个人习惯）</span></span><br><span class="line"><span class="built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 intel 源（ubuntu bionic）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu bionic main&#x27;</span> &gt;&gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新源</span></span><br><span class="line">apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尝试安装驱动</span></span><br><span class="line">apt install -y intel-media-va-driver-non-free</span><br></pre></td></tr></table></figure>
 
 <p>装了半天什么都没有</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202121241583.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202121241583.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 aptitude 软件包管理器</span></span><br><span class="line">apt install -y aptitude</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尝试用包管理器安装驱动</span></span><br><span class="line">aptitude install -y intel-media-va-driver-non-free</span><br></pre></td></tr></table></figure>
 
 <p>用包管理器结果也是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202121244672.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202121244672.png"></p>
 <p>【结论】：自 <code>2021</code> 年 <code>10</code> 月 <code>14</code> 日起，<code>intel</code> 已经不再为 <code>Ubuntu 18.04</code> 提供更新的软件包。</p>
 <h2 id="尝试二（失败）"><a href="#尝试二（失败）" class="headerlink" title="尝试二（失败）"></a>尝试二（失败）</h2><p>尝试将 <code>/etc/apt/sources.list</code> 源加上 <code>non-free</code>，需要先安装编辑器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 vim</span></span><br><span class="line">apt install -y  vim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改/etc/apt/sources.list</span></span><br><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
@@ -571,23 +571,23 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这个源安装的版本为（18.4.1+ds1-1）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb http://ftp.cn.debian.org/debian buster main non-free&#x27;</span> &gt;&gt; /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
 
 <p>安装完成后，用 <code>vainfo</code> 检查一下，还是有错误</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111457080.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111457080.png"></p>
 <p>【结论】：受限于内核 <code>Debian（buster）</code>，驱动的版本只有 <code>18.4.1+ds1-1</code> </p>
 <h2 id="尝试三（成功）"><a href="#尝试三（成功）" class="headerlink" title="尝试三（成功）"></a>尝试三（成功）</h2><p>和 <code>linuxserver/jellyfin</code> 一样，采用 <code>Ubuntu 20.04 (focal)</code> 做源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新源</span></span><br><span class="line">apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 gpg-agent、wget、curl</span></span><br><span class="line">apt install -y gpg-agent wget curl</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 intel key。如果不是显示 OK，就需要再次执行，直至显示 OK 为止</span></span><br><span class="line">wget -qO - https://repositories.intel.com/graphics/intel-graphics.key | apt-key add -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 intel 源（ubuntu focal）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal main&#x27;</span> &gt;&gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新源</span></span><br><span class="line">apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查可用的驱动版本</span></span><br><span class="line">apt-cache madison intel-media-va-driver-non-free</span><br></pre></td></tr></table></figure>
 
 <p>这个源的驱动版本很多，但并不能直接安装，还需要先安装依赖包</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202121312148.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202121312148.png"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加 debian bullseye 源作为依赖</span></span><br><span class="line"><span class="comment"># 这个源安装的版本为（21.1.1+ds1-1）</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;deb http://deb.debian.org/debian bullseye main non-free&#x27;</span> &gt;&gt; /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新源</span></span><br><span class="line">apt update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 aptitude 软件包管理器</span></span><br><span class="line">apt install -y aptitude </span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">aptitude install -y libz3-4 libigdgmm11 libigdfcl1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装驱动</span></span><br><span class="line">aptitude install -y intel-media-va-driver-non-free</span><br></pre></td></tr></table></figure>
 
 <p>安装完成后，用 <code>vainfo</code> 检查一下，还是有错误</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111457080.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111457080.png"></p>
 <p>接下来这步非常关键，就是删除 <code>libigdgmm</code> 的副本，来自：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ludGVsL2xpYnZhL2lzc3Vlcy81MzQ=">https://github.com/intel/libva/issues/534<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 非常关键的一步</span></span><br><span class="line"><span class="built_in">ls</span> -al /usr/local/lib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除 libigdgmm</span></span><br><span class="line"><span class="built_in">rm</span> /usr/local/lib/libigdgmm.so.11</span><br><span class="line"><span class="built_in">rm</span> /usr/local/lib/libigdgmm.so.11.1.905</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131453409.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131453409.png"></p>
 <p>再用 <code>vainfo</code> 检查，终于正常了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131501635.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131501635.png"></p>
 <p>下面👇的指令暂时没用上，留着下次折腾的时候用，免得还得临时去百度</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查可用的驱动版本</span></span><br><span class="line">apt-cache madison intel-media-va-driver-non-free</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装驱动</span></span><br><span class="line">apt install -y intel-media-va-driver-non-free</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级驱动</span></span><br><span class="line">apt install --only-upgrade -y intel-media-va-driver-non-free</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除驱动</span></span><br><span class="line">aptitude remove intel-media-va-driver-non-free</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本的驱动</span></span><br><span class="line">aptitude install -y intel-media-va-driver-non-free=21.3.3+i620~u20.04</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询驱动文件</span></span><br><span class="line"><span class="built_in">ls</span> -al /usr/lib/x86_64-linux-gnu/dri/</span><br></pre></td></tr></table></figure>
 
@@ -597,27 +597,27 @@
 <p>查看下 <code>jellyfin-ffmpeg</code> 的版本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 ffmpeg 版本</span></span><br><span class="line">/usr/lib/jellyfin-ffmpeg/ffmpeg</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202092102086.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202092102086.png"></p>
 <p>版本是 <code>4.3.2</code>，最新的 <code>jellyfin-ffmpeg</code> 是 <code>4.4.1</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查可用的版本</span></span><br><span class="line">apt-cache madison jellyfin-ffmpeg</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202141150180.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202141150180.png"></p>
 <p>开始升级，两种方式都挺慢的，可以考虑在容器外下载好了再拷贝到容器中，因为在外面下可以用工具</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一</span></span><br><span class="line">aptitude install -y jellyfin-ffmpeg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二先下载再安装</span></span><br><span class="line">curl -LO https://repo.jellyfin.org/releases/server/debian/stable/ffmpeg/jellyfin-ffmpeg_4.4.1-1-buster_amd64.deb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">dpkg -i jellyfin-ffmpeg_4.4.1-1-buster_amd64.deb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">apt install ./jellyfin-ffmpeg_4.4.1-1-buster_amd64.deb</span><br></pre></td></tr></table></figure>
 
 <p>升级完成后再次查看 <code>ffmpeg</code> 版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202111452718.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202111452718.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>进入<code>控制台</code> –&gt; <code>播放</code> –&gt; <code>硬件加速</code> ，选择 <code>Intel Quick Sync</code>，测试源还是同一个 <code>4K</code> 视频源</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202131524712.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202131524712.png"></p>
 <p><code>Docker</code> 的资源占用一直维持着比较低的水平</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202141231895.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202141234029.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202141231895.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202141234029.png"></p>
 <p>但是转码的时间比较长，不像采用 <code>VAAPI</code> 几乎是即开即看，有转码文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202142101472.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202142101472.png"></p>
 <p>而且看着也有流，但是并不能播放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202142115866.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202142115866.png"></p>
 <p>网页端的播放信息中没有视频信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202142114005.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202142114005.png"></p>
 <p>不确定是显卡不行还是驱动和 <code>ffmpeg</code> 不匹配导致的，暂时不想折腾了</p>
 <h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><p>如果你是新安装，建议用 <code>linuxserver/jellyfin</code> 而不是 <code>jellyfin/jellyfin</code>，因为 <code>jellyfin/jellyfin</code> 装驱动太麻烦了</p>
 <p>当然可能更好用的是 <code>nyanmisaka/jellyfin</code>，不过老苏暂时还没试过</p>

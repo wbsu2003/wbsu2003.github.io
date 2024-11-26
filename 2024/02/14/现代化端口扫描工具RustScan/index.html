@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="RustScan 是一款现代化的端口扫描器，快速、智能、有效。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401110928048.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401110928048.png">
 <meta property="article:published_time" content="2024-02-14T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401110928048.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401110928048.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/14/%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7RustScan/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401110928048.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401110928048.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +514,7 @@
 </ul>
 <h1 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>rustscan</code> ，选择第一个 <code>rustscan/rustscan</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102217484.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102217484.png"></p>
 <p>你也可以使用命令行，用 <code>SSH</code> 客户端登录到群晖后，依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像  </span></span><br><span class="line">docker pull rustscan/rustscan:latest|</span><br></pre></td></tr></table></figure>
 
@@ -522,7 +522,7 @@
 <p>如果拉不动，可以试试 <code>docker</code> 代理网站：<span class="exturl" data-url="aHR0cHM6Ly9kb2NrZXJwcm94eS5jb20v">https://dockerproxy.com/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>下载完成后，可以在 <code>映像</code> 中找到。一般来说，<code>Rust</code> 开发的应用，尺寸都比较小</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102223396.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102223396.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>为了方便起见，创建一个 <code>shell</code> 别名来隐藏 <code>Docker</code> 命令。通过使用 <code>alias</code> 命令，为长或复杂的命令创建简短且易记的别名，以便更快地执行常用操作或减少输入的工作量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建别名</span></span><br><span class="line"><span class="built_in">alias</span> rustscan=<span class="string">&#x27;docker run -it --rm --name rustscan rustscan/rustscan:latest&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -533,24 +533,24 @@
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询帮助菜单</span></span><br><span class="line">rustscan --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102055081.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102055081.png"></p>
 <p>开始尝试扫描单个设备</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 扫描玩客云</span></span><br><span class="line">rustscan -a 192.168.0.9 -t 500 -b 1500 -- -A</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102320751.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102320751.png"></p>
 <p>发现居然有 <code>10</code> 个端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102329640.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102329640.png"></p>
 <p>其中有三个是可以通过网页访问的 </p>
 <ul>
 <li><code>8202</code>：能查看 <code>DLNA</code> 状态</li>
 <li><code>8800</code>：用途不明；</li>
 <li><code>9999</code>：能看到版本信息等</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102323676.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102323676.png"></p>
 <p>也可以扫描整个网段，当然时间会比较长一点</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 扫描 192.168.0.1 ~ 192.168.0.255 网段</span></span><br><span class="line">rustscan -a 192.168.0.0/24 -t 500 -b 1500 -- -A</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401102302373.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401102302373.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>RustScan/RustScan: 🤖 The Modern Port Scanner 🤖<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1J1c3RTY2FuL1J1c3RTY2Fu">https://github.com/RustScan/RustScan<i class="fa fa-external-link-alt"></i></span></p>
 <p>Installation Guide · RustScan/RustScan Wiki<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1J1c3RTY2FuL1J1c3RTY2FuL3dpa2kvSW5zdGFsbGF0aW9uLUd1aWRl">https://github.com/RustScan/RustScan/wiki/Installation-Guide<i class="fa fa-external-link-alt"></i></span></p>

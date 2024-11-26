@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Serge 是一个完全在本地运行 LLaMa 模型 (Alpaca) 的自托管应用程序，不需要远程 API。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png">
 <meta property="article:published_time" content="2023-04-19T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.377Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.012Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/04/19/Serge%E8%AE%A9%E4%BD%A0%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CLLaMa%E6%A8%A1%E5%9E%8B%F0%9F%A6%99/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +515,7 @@
 <iframe src="//player.bilibili.com/player.html?aid=782687594&bvid=BV1s24y1c7fL&cid=1100280017&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>老苏试了下，<code>4GB</code> 内存有点够呛，尤其是你的群晖还跑了其他的服务，如果有 <code>8GB</code>可以试试，不需要 <code>GPU</code> 还是不错的，虽然运算速度慢点</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171058595.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171058595.png"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>目前 <code>Serge</code> 需要与 <code>AVX2</code> 指令兼容的 <code>CPU</code> ，老苏猜测应该是因为 <code>MongoDB</code> 的缘故。官方给的检测命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测 cpu 是否支持 AVX2</span></span><br><span class="line">lscpu | grep avx2</span><br></pre></td></tr></table></figure>
 
@@ -523,7 +523,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测 cpu 是否支持 AVX2</span></span><br><span class="line">cat /proc/cpuinfo | grep avx2</span><br></pre></td></tr></table></figure>
 
 <p>如果输出包含 <code>avx2</code>，则表示您的 <code>CPU</code> 支持 <code>AVX2</code>。如果未找到 <code>avx2</code>，则表示您的 <code>CPU</code> 不支持 <code>AVX2</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171106502.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171106502.png"></p>
 <h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>如果您的模型没有足够的可用内存，<code>llama</code> 就会崩溃，下面是官方提供的数据：</p>
 <ul>
 <li>  <code>7B</code> 需要大约 <code>4.5GB</code> 的空闲 <code>RAM</code></li>
@@ -552,23 +552,23 @@
 
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8018</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161922209.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161922209.png"></p>
 <p>首先要点 <code>Download model</code>下载模型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161924486.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161924486.png"></p>
 <p>老苏下了 <code>gpt4all</code> ，文件大小和 <code>7B</code> 、<code>7B-native</code> 是一样的，估摸着内存占用应该是一样的，但具体有什么区别老苏不清楚  🤦‍♂️</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161928363.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161928363.png"></p>
 <p>下载速度挺快的，日志中看不到具体的下载地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161932987.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161932987.png"></p>
 <p>点左侧的 <code>Home</code> 回到首页</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161935304.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161935304.png"></p>
 <p>聊天之前，可以设置模型的参数，但是说实话，老苏也不明白这些该如何设置，所以就保持了默认的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161934831.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161934831.png"></p>
 <p>点紫色的 <code>Start a new chat</code> 开始聊天</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161938514.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161938514.png"></p>
 <p>老苏问了第一个问题 <code>你支持中文吗？</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304170935742.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304170935742.png"></p>
 <p>感觉一下就把天给聊死了，这接下来怎么聊呢？老苏的英文水平也就能说个 <code>What&#39;s you name?</code> 、<code>How are you?</code>、<code>How old are you?</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171256831.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171256831.png"></p>
 <p>老苏的机器是 <code>4G</code> 内存的， <code>CPU</code> 也比较古老，所以每个问题都需要很长时间才会有应答，差不多每个问题也就一顿饭的功夫吧 😁</p>
 <p>昨晚装好之后，第一个问题是中文的，其实难道也不大，但还是直接把机器给整的没响应了，早上起来一看重启了，估计是资源耗尽了吧，有兴趣的话，你也可以试试</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>

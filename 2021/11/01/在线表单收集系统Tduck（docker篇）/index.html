@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Tduck 填鸭是一款基于 B&#x2F;S 架构的开源的表单在线收集系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110202129541.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110202129541.png">
 <meta property="article:published_time" content="2021-10-31T16:10:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="表格">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110202129541.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110202129541.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/01/%E5%9C%A8%E7%BA%BF%E8%A1%A8%E5%8D%95%E6%94%B6%E9%9B%86%E7%B3%BB%E7%BB%9FTduck%EF%BC%88docker%E7%AF%87%EF%BC%89/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110202129541.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110202129541.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,7 +504,7 @@
 </ul>
 </blockquote>
 <p>没有找到官方的镜像，不过你可以试试👇</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110202135401.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110202135401.png"></p>
 <p>这是一个多合一的镜像，用于体验还是可以的，安装说明可以在参考文档部分找到，但是似乎并不支持设置自己的邮箱、微信公众号等，所以也就没办法用自己的账号登录了。</p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><blockquote>
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
@@ -529,7 +529,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> tduck</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> tduck</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取后端代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/TDuckApp/tduck-platform.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取前端代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/TDuckApp/tduck-front.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 Dockerfile 、supervisord.conf、nginx.conf、docker-compose.yaml、.env 五个文件放进 tduck 目录中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t wbsu2003/tduck:v1 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> --user root -it tduck /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键删除</span></span><br><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
 
 <p>目录结构👇</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201537211.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201537211.png"></p>
 <h1 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h1><ul>
 <li>在群晖 <code>docker</code> 目录中新建子目录 <code>tduck</code></li>
 <li>下载 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAzL0RvY2tlcmZpbGUvcmF3L21haW4vdGR1Y2svdGR1Y2suemlw">https://github.com/wbsu2003/Dockerfile/raw/main/tduck/tduck.zip<i class="fa fa-external-link-alt"></i></span> 文件，如果 <code>github</code> 抽风了，可以从镜像站点下载 <span class="exturl" data-url="aHR0cHM6Ly9odWIuZmFzdGdpdC5vcmcvd2JzdTIwMDMvRG9ja2VyZmlsZS9yYXcvbWFpbi90ZHVjay90ZHVjay56aXA=">https://hub.fastgit.org/wbsu2003/Dockerfile/raw/main/tduck/tduck.zip<i class="fa fa-external-link-alt"></i></span></li>
@@ -538,9 +538,9 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110291014341.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110291014341.png"></p>
 <p><code>__MACOSX</code> 和 <code>tduck.zip</code> 可以删掉，不删也无所谓的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110211055017.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110211055017.png"></p>
 <ul>
 <li><p>根据需要修改 <code>docker-compose.yaml</code> 文件，主要应该就是端口，如果你要修改数据库可以编辑 <code>.env</code> 文件，理论上通过修改 <code>jdbc</code> 可以直接使用群晖自带的 <code>mariadb</code></p>
 </li>
@@ -555,17 +555,17 @@
 <blockquote>
 <p>第一次执行会有拉取镜像的动作</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110210933002.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110210933002.png"></p>
 <blockquote>
 <p>如果最终 <code>4</code> 个容器都是 <code>done</code> ，表示创建成功！</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110211101211.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110211101211.png"></p>
 <p>在 <code>docker</code> 容器中能看到👇下面 <code>4</code> 个容器正在运行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110211033466.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110211033466.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:23569</code>，就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201748398.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201748398.png"></p>
 <p>点右上角的 <code>登录</code>，因为没设置微信扫码，所以一直是转圈的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201751969.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201751969.png"></p>
 <p>系统有个默认的账号 <code>test@tduck.com</code>，密码：<code>12345678</code></p>
 <blockquote>
 <p>官网有点坑，写的默认账号是 <code>test@tduckapp.com</code></p>
@@ -574,7 +574,7 @@
 <ul>
 <li>需要去掉 <code>docker-compose.yaml</code> 中红框中 3 行前面的 <code>#</code> 号注释</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201755671.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201755671.png"></p>
 <ul>
 <li>在 <code>.env</code> 最后面增加下面 <code>3</code> 行</li>
 </ul>
@@ -591,25 +591,25 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键删除</span></span><br><span class="line">docker-compose down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键停止</span></span><br><span class="line">docker-compose stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键重启</span></span><br><span class="line">docker-compose restart</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110211059987.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110211059987.png"></p>
 <p>选择用邮箱注册</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110210903781.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110210903781.png"></p>
 <p>顺利的话很快就会收到注册验证码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201736293.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201736293.png"></p>
 <p>填入验证码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201736673.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201736673.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201759335.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201759335.png"></p>
 <p>进入模板中心，创建空白模板</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201759067.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201759067.png"></p>
 <p>可以拖拽进行设计</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201800130.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201800130.png"></p>
 <p>如果你拖不动，是因为组件在线的上方</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201802640.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201802640.png"></p>
 <p>拖到下方才行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201803344.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201803344.png"></p>
 <p>预览一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110201803742.png"> </p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110201803742.png"> </p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>tduck-platform: Tduck-填鸭收集器是一款开源的表单在线收集系统，后台基于SpringBoot+MybatisPlus+MySql+Redis，前端基于Vue ElementUI开发，功能强大，界面美观。keywords：问卷/表单/信息收集<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vVER1Y2tBcHAvdGR1Y2stcGxhdGZvcm0=">https://gitee.com/TDuckApp/tduck-platform<i class="fa fa-external-link-alt"></i></span></p>
 <p>Tduck填鸭<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2MudGR1Y2thcHAuY29tLw==">https://doc.tduckapp.com/<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Actual 是本地优先的个人理财工具。采用 NodeJS 编写，支持将数据同步到服务器，具有多设备同步、可选的端到端加密等等。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308021122108.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308021122108.png">
 <meta property="article:published_time" content="2023-08-14T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="记账">
 <meta property="article:tag" content="财务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308021122108.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308021122108.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/08/14/%E6%9E%84%E5%BB%BAActual%E7%BD%91%E9%A1%B5%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%95%9C%E5%83%8F/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308021122108.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308021122108.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +511,7 @@
 <li><p>其他客户端下载地址：<span class="exturl" data-url="aHR0cHM6Ly9hY3R1YWxidWRnZXQuY29tL2Rvd25sb2FkLXBsYXRmb3Jtcy8=">https://actualbudget.com/download-platforms/<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012337251.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012337251.png"></p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><blockquote>
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
 </blockquote>
@@ -527,46 +527,46 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/actualbudget/actual.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者加个代理</span></span><br><span class="line">git <span class="built_in">clone</span> https://ghproxy.com/github.com/actualbudget/actual.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录  </span></span><br><span class="line"><span class="built_in">cd</span> actual</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t wbsu2003/actual:v1 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行Web客户端容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name actual-web \</span><br><span class="line">   -p 15005:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/app:/app \</span><br><span class="line">   wbsu2003/actual:v1</span><br></pre></td></tr></table></figure>
 
 <p>按官方 <code>Dockerfile</code> 编译的镜像</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308020941793.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308020941793.png"></p>
 <p>按老苏的 <code>Dockerfile</code> 编译的镜像</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202308020942558.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202308020942558.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <p>服务端和客户端是可以分别安装、分别使用的，也就意味着服务端和客户端可以安装在不同的机器上，好处是数据多了一个存储点</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 actual 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/actual/&#123;app,data&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 actual 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/actual</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行服务端容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name actual-server \</span><br><span class="line">   -p 15006:5006 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   actualbudget/actual-server:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行Web客户端容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name actual-web \</span><br><span class="line">   -p 15005:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/app:/app \</span><br><span class="line">   wbsu2003/actual:latest</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>服务端建议使用 <code>https</code> 访问，尤其是你部署在公网环境时。如果你只是在局域网里，使用 <code>http</code> 也不是不行</p>
 <p>在浏览器中输入 <code>http://群晖IP:15006</code>，点 <code>Adcanced options</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012218449.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012218449.png"></p>
 <p>勾选后就可以激活 <code>Open Actual</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012219108.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012219108.png"></p>
 <p>第一次要设置密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012202107.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012202107.png"></p>
 <p>假如你之前使用过，可以点 <code>Import my budget</code> 导入数据，也可以点 <code>Start fresh</code> 重新开始</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012203663.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012203663.png"></p>
 <p>服务端的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012212342.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012212342.png"></p>
 <p>首先要新增一个本地账户</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012214079.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012214079.png"></p>
 <p>创建成功后，就可以开始记账了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012216890.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012216890.png"></p>
 <p>当使用 <code>https</code> 协议时，设置中可以启用 <code>端到端加密</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012320528.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012320528.png"></p>
 <p>启用 <code>Show advanced settings</code> 后，会有更多高级设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012321962.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012321962.png"></p>
 <h2 id="web-客户端"><a href="#web-客户端" class="headerlink" title="web 客户端"></a>web 客户端</h2><p>只是在局域网使用的话，用 <code>http</code> 协议也可以，在浏览器中输入 <code>http://群晖IP:15005</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012218449.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012218449.png"></p>
 <p>勾选后会激活 <code>Open Actual</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012219108.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012219108.png"></p>
 <p>填入服务器地址，当然你也可以选择 <code>Don&#39;t use a server</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012226640.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012226640.png"></p>
 <p>输入密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012227224.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012227224.png"></p>
 <p>选择账本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012227400.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012227400.png"></p>
 <p>开始记账，右上角会有 <code>Sync</code> 用于和服务端同步</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012243735.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012243735.png"></p>
 <p>如果你前面选择了 <code>Don&#39;t use a server</code>，右上角会显示 <code>No server</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202308012251933.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202308012251933.png"></p>
 <p>其他平台的桌面客户端，应该是差不多的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>actualbudget/actual: A local-first personal finance app<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FjdHVhbGJ1ZGdldC9hY3R1YWw=">https://github.com/actualbudget/actual<i class="fa fa-external-link-alt"></i></span></p>

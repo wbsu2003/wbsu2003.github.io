@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Next Terminal 是使用 Golang 和 React 开发的一款 HTML5 的远程桌面网关。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212328390.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212328390.png">
 <meta property="article:published_time" content="2024-02-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.421Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.056Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="SSH">
 <meta property="article:tag" content="RDP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212328390.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212328390.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/07/%E8%BD%BB%E9%87%8F%E7%BA%A7%E5%A0%A1%E5%9E%92%E6%9C%BA%E7%B3%BB%E7%BB%9FNext%20Terminal/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212328390.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212328390.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -538,12 +538,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 next-terminal 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/next-terminal/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 next-terminal 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/next-terminal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h2 id="MySQL-版"><a href="#MySQL-版" class="headerlink" title="MySQL 版"></a>MySQL 版</h2><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>next_terminal</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212032119.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212032119.png"></p>
 <p>所以根据上面的设置，最后得到的数据库相关的参数如下：</p>
 <ul>
 <li>数据库主机：<code>192.168.0.197</code>，与群晖主机 <code>IP</code> 一致；</li>
@@ -599,20 +599,20 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 next-terminal 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/next-terminal/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 next-terminal 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/next-terminal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212114239.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212114239.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:4823</code> 就能看到登录界面</p>
 <blockquote>
 <p>默认账户、密码：<code>admin/admin</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401211803128.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401211803128.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401211802481.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401211802481.png"></p>
 <p>新建资产</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401211810158.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401211810158.png"></p>
 <p>点 <code>接入</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401211813535.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401211813535.png"></p>
 <p>如果设置无误的话，很快会连上服务器</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401211817257.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401211817257.png"></p>
 <p>更多功能，请参考官方使用文档：<span class="exturl" data-url="aHR0cHM6Ly9uZXh0LXRlcm1pbmFsLnR5cGVzYWZlLmNuL2RvY3MvdXNhZ2UvcmVhZG1lLmh0bWw=">https://next-terminal.typesafe.cn/docs/usage/readme.html<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>dushixiang/next-terminal: Next Terminal是使用Golang和React开发的一款HTML5的远程桌面网关，具有小巧、易安装、易使用、资源占用小的特点，支持RDP、SSH、VNC和Telnet协议的连接和管理。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2R1c2hpeGlhbmcvbmV4dC10ZXJtaW5hbA==">https://github.com/dushixiang/next-terminal<i class="fa fa-external-link-alt"></i></span></p>

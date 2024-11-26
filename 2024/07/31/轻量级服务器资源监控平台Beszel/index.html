@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Beszel 是一个轻量级的服务器资源监控中心，具有历史数据、docker 统计信息和警报。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291640086.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291640086.png">
 <meta property="article:published_time" content="2024-07-31T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.421Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.056Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291640086.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291640086.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/31/%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0Beszel/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291640086.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291640086.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +499,7 @@
 <blockquote>
 <p><code>Beszel</code> 是一个轻量级平台，借助 <code>Beszel</code>，可以访问 <code>CPU</code> 和内存使用情况的历史数据，以及 <code>Docker</code> 容器指标（例如特定于容器的 <code>CPU</code> 和内存统计信息）。还能收到针对潜在问题的可自定义警报通知，以便采取主动措施来优化服务器性能。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291237983.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291237983.png"></p>
 <p><strong>软件特点：</strong></p>
 <ul>
 <li><strong>轻量级</strong>：比领先的解决方案小得多，要求也低得多。</li>
@@ -520,7 +520,7 @@
 <blockquote>
 <p>本文折腾时，<code>latest</code> 版本均为  <code>0.1.1</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291552152.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291552152.png"></p>
 <p>为了省事，老苏把 <code>Hub</code> 和 <code>Agent</code> 合并到了一个 <code>docker-compose.yml</code> 中，但是实际上执行是分开的</p>
 <p>需要先运行 <code>Hub</code> ，生成一个 <code>Public Key</code> 之后，再运行 <code>Agent</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  beszel:</span><br><span class="line">    image: <span class="string">&#x27;henrygd/beszel&#x27;</span></span><br><span class="line">    container_name: <span class="string">&#x27;beszel&#x27;</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&#x27;8092:8090&#x27;</span></span><br><span class="line">    volumes:</span><br><span class="line">      - ./beszel:/beszel_data</span><br><span class="line"></span><br><span class="line">  beszel-agent:</span><br><span class="line">    image: <span class="string">&#x27;henrygd/beszel-agent&#x27;</span></span><br><span class="line">    container_name: <span class="string">&#x27;beszel-agent&#x27;</span></span><br><span class="line">    restart: unless-stopped</span><br><span class="line">    network_mode: host</span><br><span class="line">    volumes:</span><br><span class="line">      - /var/run/docker.sock:/var/run/docker.sock:ro</span><br><span class="line">    environment:</span><br><span class="line">      PORT: 45876</span><br><span class="line">      KEY: &lt;YOUR_PUBLIC_KEY&gt;</span><br><span class="line">      FILESYSTEM: /dev/md2 <span class="comment"># set to the correct filesystem for disk I/O stats</span></span><br></pre></td></tr></table></figure>
@@ -532,9 +532,9 @@
 <li>运行 <code>lsblk</code> 并在 <code>NAME</code>下选择一个选项；</li>
 <li>运行<code>sudo fdisk -l</code> 并在 <code>Device</code> 下选择一个选项；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291246341.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291246341.png"></p>
 <p>任何一种都是可以的，关键就是找到你要监视的硬盘，对老苏而言，就是那个最大的硬盘 <code>/dev/md2</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291247841.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291247841.png"></p>
 <p>更多环境变量，请参考官方文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlbnJ5Z2QvYmVzemVsI2Vudmlyb25tZW50LXZhcmlhYmxlcw==">https://github.com/henrygd/beszel#environment-variables<i class="fa fa-external-link-alt"></i></span></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 beszel 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/beszel/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 beszel 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/beszel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动 hub</span></span><br><span class="line">docker-compose up -d beszel</span><br></pre></td></tr></table></figure>
@@ -544,9 +544,9 @@
 <blockquote>
 <p>密码不能少于 <code>10</code> 个字符；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291308428.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291308428.png"></p>
 <p>登录后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291441578.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291441578.png"></p>
 <p>点 <code>Add System</code> 添加 <code>agent</code>，第一个 <code>agent</code> 是本机</p>
 <ul>
 <li><code>Name</code> ：主机名称；</li>
@@ -554,24 +554,24 @@
 <li><code>Port</code>：主机端口，如果你要修改，对应的 <code>agent</code> 的环境变量 <code>PORT</code> 也要对应做修改；</li>
 <li><code>Public Key</code>：点后面的复制按钮，替换掉环境变量中的 <code>&lt;YOUR_PUBLIC_KEY&gt;</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291501564.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291501564.png"></p>
 <blockquote>
 <p>注意：如果没有使用 <code>https</code> 协议，复制是无用的，需要在弹出框里再复制</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291509874.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291509874.png"></p>
 <p>点 <code>Add system</code> 保存后，暂时什么都没有</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291506629.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291506629.png"></p>
 <p>将获取到的 <code>Public Key</code> 替换掉 <code>&lt;YOUR_PUBLIC_KEY&gt;</code> ，现在你的 <code>docker-compose.yml</code> 是这样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291508509.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291508509.png"></p>
 <p>接下来启动 <code>agent</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动 agent</span></span><br><span class="line">docker-compose up -d beszel-agent</span><br></pre></td></tr></table></figure>
 
 <p><code>agent</code> 启动成功后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291515995.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291515995.png"></p>
 <p>就会有数据了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291514375.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291514375.png"></p>
 <p>如果有多台机器需要监控，只要再运行一次。被监控的主机只要安装  <code>agent</code> 即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291519886.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291519886.png"></p>
 <p>下面👇是老苏在另一台机器上的 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">beszel-agent:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;henrygd/beszel-agent&#x27;</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">&#x27;beszel-agent&#x27;</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">PORT:</span> <span class="number">45876</span></span><br><span class="line">      <span class="attr">KEY:</span> <span class="string">ssh-ed25519</span> <span class="string">AAAAC3NzaC1lZDI1NTE5AAAAICFYiBMMsEUVgNA6K7JZysslYqXrX7JVvH9WETHks41+</span></span><br><span class="line">      <span class="attr">FILESYSTEM:</span> <span class="string">/dev/md3</span> <span class="comment"># set to the correct filesystem for disk I/O stats</span></span><br></pre></td></tr></table></figure>
 
@@ -579,11 +579,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>当 <code>agent</code> 启动成功后，就能看到数据了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291524716.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291524716.png"></p>
 <p>点铃铛图标，可以设置报警</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291527872.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291527872.png"></p>
 <p>因为时间短，所以数据不多。意思到了就行了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291531844.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291531844.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>henrygd/beszel: A lightweight server monitoring hub with historical data, docker stats, and alerts.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hlbnJ5Z2QvYmVzemVs">https://github.com/henrygd/beszel<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>

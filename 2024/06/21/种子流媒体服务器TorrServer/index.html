@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="TorrServer 是一款简单而强大的种子流工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131254177.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131254177.png">
 <meta property="article:published_time" content="2024-06-21T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.413Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.048Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131254177.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131254177.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/21/%E7%A7%8D%E5%AD%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8TorrServer/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131254177.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131254177.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +515,7 @@
 <blockquote>
 <p>本文写作时，<code>latest</code> 对应的版本为 <code>MatriX.132</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111447863.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111447863.png"></p>
 <p>用 <code>SSH</code> 客户端登录到群晖后，依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 torrserver 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/torrserver/&#123;cache,config&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 torrserver 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/torrserver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull ghcr.io/yourok/torrserver</span><br></pre></td></tr></table></figure>
 
@@ -523,7 +523,7 @@
 <p>如果没有科学上网，很可能会拉不动</p>
 </blockquote>
 <p>下载完成后，可以在 <code>映像</code> 中找到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131026003.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131026003.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>采用可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 torrserver 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/torrserver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name torrserver \</span><br><span class="line">   -p 5665:5665 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/cache:/opt/ts/torrents \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/opt/ts/config \</span><br><span class="line">   -e TS_PORT=5665 \</span><br><span class="line">   -e TS_DONTKILL=1 \</span><br><span class="line">   -e TS_HTTPAUTH=0 \</span><br><span class="line">   -e TS_CONF_PATH=/opt/ts/config \</span><br><span class="line">   -e TS_TORR_DIR=/opt/ts/torrents \</span><br><span class="line">   ghcr.io/yourok/torrserver</span><br></pre></td></tr></table></figure>
@@ -535,29 +535,29 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 torrserver 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/torrserver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5665</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111346720.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111346720.png"></p>
 <p>老苏在网上找了个磁力链接加进去了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111347056.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111347056.png"></p>
 <p>添加之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111348596.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111348596.png"></p>
 <p>进入 <code>设置</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111407800.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111407800.png"></p>
 <p>默认缓存是在内存的，老苏改为了磁盘，至于大小就看需要了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111408237.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111408237.png"></p>
 <p>回到之前添加的种子，可以查看 <code>详细信息</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111421503.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111421503.png"></p>
 <p><code>打开链接</code>，如果已经有缓存的情况下，是能看到连续的图像的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111432535.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111432535.png"></p>
 <p>但每次拖动都要缓存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111423733.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111423733.png"></p>
 <p>网速可以的话，等待的时间会比较短</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405111424726.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405111424726.png"></p>
 <p>如果需要第三方播放器，可以点 <code>播放列表</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131245543.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131245543.png"></p>
 <p>你会下载一个 <code>m3u</code> 文件，用播放器打开就可以了，整体播放播放还是很流畅的，除了会偶尔缓存</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131248129.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131248129.png"></p>
 <p>因为下载瞬时速度能到 <code>40 Mbps</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202405131253466.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202405131253466.png"></p>
 <p> <code>TorrServer</code> 作为种子服务器，理论上可以只用种子来搭建流媒体影库的，但实际效果即便是同一台机器， 不同时段的表现也会是不一样的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>YouROK/TorrServer: Torrent stream server<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lvdXJvay90b3Jyc2VydmVy">https://github.com/yourok/torrserver<i class="fa fa-external-link-alt"></i></span></p>

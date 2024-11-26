@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="VanBlog 是一款简洁实用优雅的高性能个人博客系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031344797.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031344797.png">
 <meta property="article:published_time" content="2023-03-13T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.421Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.060Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031344797.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031344797.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/03/13/%E9%AB%98%E6%80%A7%E8%83%BD%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9FVanBlog/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031344797.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031344797.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -518,35 +518,35 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">vanblog:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mereith/van-blog:v0.47.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">vanblog-web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># 图床文件的存放地址，按需修改。</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./static:/app/static</span></span><br><span class="line">      <span class="comment"># 日志文件</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./log:/var/log</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="comment"># 前面的是映射到宿主机的端口号，改端口的话改前面的。</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">7172</span><span class="string">:80</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">mongo:</span></span><br><span class="line">    <span class="comment"># 某些机器不支持 avx 会报错，所以默认用 v4 版本。没问题的话可以用最新的。</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:4.4.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">vanblog-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data/db</span></span><br></pre></td></tr></table></figure>
 
 <p>因为有中文注释，所以保存的时候，记得编码格式要用 <code>UTF-8</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202303012151856.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202303012151856.png"></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vanblog 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vanblog/&#123;data,<span class="built_in">log</span>,static&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vanblog 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vanblog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7172</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031122818.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031122818.png"></p>
 <p>点右上角的小人进行设置，也可以直接输入 <code>http://群晖IP:7172/admin</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031123092.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031123092.png"></p>
 <p>接下来是网站的信息设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031124902.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031124902.png"></p>
 <p>初始化完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031129382.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031129382.png"></p>
 <p>登录后台</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031130897.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031130897.png"></p>
 <p>登录成功后的后台主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031130639.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031130639.png"></p>
 <p>先注册评论的管理员</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031131615.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031131615.png"></p>
 <p>接下来要做分类管理，因为不管是新建还是导入文章都需要用到</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031138523.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031138523.png"></p>
 <p>随便导入了几篇</p>
 <blockquote>
 <p>只能一篇一篇导入，这个有点麻烦</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031140031.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031140031.png"></p>
 <p>回到首页</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031151006.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031151006.png"></p>
 <p>查看一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202303031152906.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202303031152906.png"></p>
 <p>试了下手机上的效果也挺不错，更多的功能使用，可以去看看官方的指南：<span class="exturl" data-url="aHR0cHM6Ly92YW5ibG9nLm1lcmVpdGguY29tL2d1aWRlLw==">https://vanblog.mereith.com/guide/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Mereithhh/vanblog: 一款简洁实用优雅的高性能个人博客系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01lcmVpdGhoaC92YW5ibG9n">https://github.com/Mereithhh/vanblog<i class="fa fa-external-link-alt"></i></span></p>

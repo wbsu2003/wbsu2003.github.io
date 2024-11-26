@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Auddly 是一款开源、简单的自托管音乐流媒体服务器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210212143710.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210212143710.png">
 <meta property="article:published_time" content="2022-11-25T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.373Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.008Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210212143710.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210212143710.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/11/25/Auddly%20Music%20Server%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210212143710.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210212143710.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,15 +506,15 @@
 <blockquote>
 <p><code>auddly-server</code> 是一款开源、简单的自托管音乐流媒体服务器，之前叫 <code>waveline-server</code>，主要提供 <code>API</code> 接口服务。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202081428542.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202081428542.png"></p>
 <p>关于 <code>API</code> 可以看官方的文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dlbGxlbmxpbmUvYXVkZGx5LXNlcnZlciNhcGk=">https://github.com/Wellenline/auddly-server#api<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><blockquote>
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
 </blockquote>
 <p><code>Auddly</code> 分为前、后端，<code>dockhub</code> 上虽然能搜到前端的镜像 <code>wellenline/auddly</code>，但是架构是 <code>arm64</code> 的，而且时间也有点久远了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211434076.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211434076.png"></p>
 <p>服务端只能找到两年前的 <code>wellenline/waveline-server</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211439738.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211439738.png"></p>
 <p>但这没什么关系，官方提供了 <code>Dockerfile</code>，只需要我们重新构建一下就可以了</p>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>构建服务端镜像的基本命令如下👇</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/Wellenline/auddly-server.git</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 或者加个代理  </span></span><br><span class="line">git <span class="built_in">clone</span> https://ghproxy.com/github.com/Wellenline/auddly-server.git</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 进入目录  </span></span><br><span class="line"><span class="built_in">cd</span> auddly-server</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 构建镜像</span></span><br><span class="line">docker build -t wbsu2003/auddly-server:v1 .</span><br></pre></td></tr></table></figure>
@@ -527,7 +527,7 @@
 <li>修改 <code>node</code> 的版本； 从 <code>node:15-alpine3.10</code> 更换为 <code>node:lts-alpine</code> </li>
 <li><code>Dockerfile</code> 中需要屏蔽 <code>COPY package-lock.json /app</code></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211453560.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211453560.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h2><p>服务端涉及到两个镜像，我们采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">app:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/auddly-server:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">auddly-server</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_URL=mongodb://auddly:YkdQ7iEBWTL7N2yk@mongodb/auddly?authSource=admin</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MUSIC_PATH=/music</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CACHE_PATH=/cache</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">JWT_SECRET=674666487456875</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PORT=5000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">HOST=http://192.168.0.197:5122</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ADMIN_EMAIL=wbsu2003@gmail.com</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ADMIN_PASSWORD=123456</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./music:/music</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./cache:/cache</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">5122</span><span class="string">:5000</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongodb</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongodb</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">mongodb:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">auddly-mongo</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_DATA_DIR=/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_LOG_DIR=/dev/null</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_INITDB_ROOT_USERNAME=auddly</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_INITDB_ROOT_PASSWORD=YkdQ7iEBWTL7N2yk</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">mongod</span> <span class="string">--auth</span> <span class="string">--logpath=/dev/null</span></span><br></pre></td></tr></table></figure>
 
@@ -636,38 +636,38 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name auddly-web \</span><br><span class="line">   -p 5121:80 \</span><br><span class="line">   wbsu2003/auddly:latest</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5122</code> 就能看到服务端的界面，只有 <code>JSON</code> 格式的数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211457011.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211457011.png"></p>
 <p>格式化之后</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span>  </span><br><span class="line">    <span class="attr">&quot;load&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span>  </span><br><span class="line">        <span class="attr">&quot;idle&quot;</span><span class="punctuation">:</span><span class="number">2951412165</span><span class="punctuation">,</span>  </span><br><span class="line">        <span class="attr">&quot;total&quot;</span><span class="punctuation">:</span><span class="number">3066084135</span>  </span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span><span class="string">&quot;5.0.1&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;arch&quot;</span><span class="punctuation">:</span><span class="string">&quot;x64&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;node_version&quot;</span><span class="punctuation">:</span><span class="string">&quot;v15.14.0&quot;</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;num_cpus&quot;</span><span class="punctuation">:</span><span class="number">4</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;uptime&quot;</span><span class="punctuation">:</span><span class="number">229.572266431</span><span class="punctuation">,</span>  </span><br><span class="line">    <span class="attr">&quot;free_mem&quot;</span><span class="punctuation">:</span><span class="number">366473216</span>  </span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>在浏览器中输入 <code>http://群晖IP:5121</code> 就能看到 <code>Web</code> 端的界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211529231.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211529231.png"></p>
 <p>这里需要输入服务端的地址，就是我们前面 <code>docker-compose.yml</code> 文件中设定的 <code>HOST=http://192.168.0.197:5122</code></p>
 <blockquote>
 <p>如果要从互联网访问，服务端和 <code>Web</code> 端都需要反代</p>
 </blockquote>
 <p>接下来需要用前面设定的 <code>ADMIN_EMAIL</code> 和 <code>ADMIN_PASSWORD</code> 登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211535250.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211535250.png"></p>
 <p>登录成功后的主界面还是空空的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211506310.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211506310.png"></p>
 <p>测试用的音频还是那几个</p>
 <blockquote>
 <p>主要是剪来剪去可以节省空间 &#128514;</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211540167.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211540167.png"></p>
 <p>应该是没设定 <code>Spotify</code> 和 <code>Lastfm</code> 的缘故，没有专辑封面</p>
 <blockquote>
 <p>其实专辑内有 <code>cover.jpg</code> 文件</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211731020.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211731020.png"></p>
 <p>音轨模式也是一样</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211733661.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211733661.png"></p>
 <p>直接可以播放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211736778.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211736778.png"></p>
 <p>进入右上角的 <code>Queue</code> 有播放列表和界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211737299.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211737299.png"></p>
 <p>再回到首页的 <code>Dashboard</code>，就会有统计信息了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202210211740405.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202210211740405.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>没有找到 <code>Auddly</code>支持的音频格式的说明，反正老苏能确定的是，<code>mp3</code> 没问题，整轨的 <code>wav</code> 肯定是不支持的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>GitHub - Wellenline/waveline-server: Simple self-hosted music streaming server<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dlbGxlbmxpbmUvd2F2ZWxpbmUtc2VydmVy">https://github.com/Wellenline/waveline-server<i class="fa fa-external-link-alt"></i></span></p>

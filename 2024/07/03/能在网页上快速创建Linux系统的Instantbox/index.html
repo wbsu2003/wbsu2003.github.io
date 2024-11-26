@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Instantbox 可以启动临时 Linux 系统，并能从任何浏览器进行即时 Webshel​​l 访问。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/02/202402182024912.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/02/202402182024912.png">
 <meta property="article:published_time" content="2024-07-03T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.417Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.052Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/02/202402182024912.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/02/202402182024912.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/03/%E8%83%BD%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BALinux%E7%B3%BB%E7%BB%9F%E7%9A%84Instantbox/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/02/202402182024912.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/02/202402182024912.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,7 +508,7 @@
 <li>尝试一个开源项目进行实验</li>
 <li>测试资源限制下的软件性能</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181640769.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181640769.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">instantbox/instantbox:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">instantbox_server</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SERVERURL=</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">instantbox/instantbox-frontend:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">instantbox_frontend</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8899</span><span class="string">:80</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">cron:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">instantbox/cron:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">instantbox_cron</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">frontend</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CRON_STRINGS=*</span> <span class="string">*</span> <span class="string">*</span> <span class="string">*</span> <span class="string">*</span> <span class="string">wget</span> <span class="string">-qO</span> <span class="string">/dev/null</span> <span class="string">http://frontend/api/v2/superinspire/prune</span></span><br></pre></td></tr></table></figure>
@@ -525,39 +525,39 @@
 <li><code>Fedora</code>  </li>
 <li><code>Alpine</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181325787.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181325787.png"></p>
 <p>选择需要的系统和版本</p>
 <blockquote>
 <p>老苏选择了 <code>Ubuntu</code> 的 <code>20.04</code> 版本，你也可以试试其他的系统或版本</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181332054.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181332054.png"></p>
 <p>配置部署的端口、CPU 核心、内存和持续时间，默认的就可以</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181333412.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181333412.png"></p>
 <p>当然，你也可以修改端口</p>
 <blockquote>
 <p>其实这只是容器端口，主机端口是自动生成的</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181411942.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181411942.png"></p>
 <p>需要再次确认</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181334343.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181334343.png"></p>
 <p>如果你改过端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181411114.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181411114.png"></p>
 <p>接下来是等待，取决于网络的情况，因为需要根据你的选择，去下载对应的镜像，比如按照老苏的选择，需要下载 <code>instantbox/ubuntu</code>，<code>tags</code> 就是我们选择的系统版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181340106.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181340106.png"></p>
 <p>如果镜像下载成功，并且容器已经启动</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181413329.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181413329.png"></p>
 <p>点 <code>Yes</code> 会打开新窗口，你会发现自己处于新部署的 <code>Linux</code> 发行版的 <code>bash</code> 提示符下</p>
 <blockquote>
 <p>从地址看，应该是 <code>http://群晖IP:8899/console/容器名称</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181414219.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181414219.png"></p>
 <p>下载完成后，会看到多了一个容器</p>
 <blockquote>
 <p>按照我们默认的设置，<code>24</code> 小时后，这个容器会被自动清除</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181417278.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181417278.png"></p>
 <p>回到主页 <code>http://群晖IP:8899</code>，会看到详细的说明</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402181419254.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402181419254.png"></p>
 <p>需要记住的一件事是，一次只能创建一个发行版。完成分发后，可以单击 <code>Instantbox</code> 主窗口上的 <code>Purge</code> 来删除部署并重新开始。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>instantbox/docker-compose.yml at master · instantbox/instantbox<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luc3RhbnRib3gvaW5zdGFudGJveC9ibG9iL21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw=">https://github.com/instantbox/instantbox/blob/master/docker-compose.yml<i class="fa fa-external-link-alt"></i></span></p>

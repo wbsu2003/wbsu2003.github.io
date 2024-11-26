@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="HomeGallery 是一个自托管的开源 Web 图片库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121418528.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121418528.png">
 <meta property="article:published_time" content="2023-01-27T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.381Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.016Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="相册">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121418528.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121418528.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/01/27/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E8%87%AA%E6%89%98%E7%AE%A1%E5%9B%BE%E7%89%87%E5%BA%93HomeGallery/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121418528.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121418528.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -527,42 +527,42 @@
 <li><p><code>/data/Picture</code> 卷：用于放照片和视频文件，可以指向一个已经存在的图库，也可以是新建的。老苏指向了之前 <code>PhotoPrism</code> 的照片库，省得占用空间 😄</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203302143191.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203302143191.png"></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 homegallery 和 子目录</span></span><br><span class="line"><span class="comment"># 如果用现有照片库，可以不建 pictures 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/homegallery/&#123;data,pictures&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 homegallery 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/homegallery</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3045</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121143106.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121143106.png"></p>
 <p>是不是觉得有点奇怪，为什么明明指定的照片目录已经有文件，但是却是一片空白，不要慌，因为还需要做个初始化操作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it home-gallery-server /bin/sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 app 目录</span></span><br><span class="line"><span class="built_in">cd</span> /app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化目录</span></span><br><span class="line">./gallery.js init --<span class="built_in">source</span> /data/Pictures</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121354831.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121354831.png"></p>
 <p>用上下键选择不同的选项，第一步选 <code>Update and process source files</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121235746.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121235746.png"></p>
 <p>然后回车，老苏第二步选择了 <code>Process all files (one run)</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121236048.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121236048.png"></p>
 <p>回车后开始执行，看起来似乎是做了索引和缩略图操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121237213.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121237213.png"></p>
 <p>再回到页面，刷新一下，这下所有的图片都出来了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121239056.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121239056.png"></p>
 <p><code>HomeGallery</code> 支持标记和搜索，也可以按年份查看图片。随便打开一张，识别的物体，当然这显然不是 <code>vase</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121241444.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121241444.png"></p>
 <p>识别出是人，而且是男性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121243911.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121243911.png"></p>
 <p>女性</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121244430.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121244430.png"></p>
 <p>在右上角的搜索框中输入 <code>person</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121247400.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121247400.png"></p>
 <p>回车之后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121248471.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121248471.png"></p>
 <p>移动端，比如 <code>Android</code> 手机上，用 <code>Edge</code> 浏览器打开网站</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121259229.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121259229.png"></p>
 <p>打开图片</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121300697.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121300697.png"></p>
 <p>点 <code>i</code> 进入详情页</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121301743.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121301743.png"></p>
 <p>从资源占用看，老苏觉得还好</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212121249378.png"></p>
+<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212121249378.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>xemle/home-gallery: Self-hosted open-source web gallery to view your photos and videos featuring mobile-friendly, tagging and AI powered image discovery<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3hlbWxlL2hvbWUtZ2FsbGVyeQ==">https://github.com/xemle/home-gallery<i class="fa fa-external-link-alt"></i></span></p>
 <p>HomeGallery - self-hosted web gallery<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ob21lLWdhbGxlcnkub3JnLw==">https://home-gallery.org/<i class="fa fa-external-link-alt"></i></span></p>

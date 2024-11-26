@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Teleport 是一个开源的访问管理系统，提供安全的 SSH 访问、Web UI 访问和细粒度访问控制，适用于服务器、容器和 Kubernetes 集群。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271545589.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271545589.png">
 <meta property="article:published_time" content="2024-08-12T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.397Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.032Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="SSH">
 <meta property="article:tag" content="堡垒机">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271545589.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271545589.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/12/%E5%BC%80%E6%BA%90%E7%9A%84%E8%AE%BF%E9%97%AE%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FTeleport/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271545589.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271545589.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -523,16 +523,16 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成配置文件</span></span><br><span class="line">docker run --<span class="built_in">rm</span> \</span><br><span class="line">  --hostname localhost \</span><br><span class="line">  --entrypoint=/usr/local/bin/teleport \</span><br><span class="line">  public.ecr.aws/gravitational/teleport:14.3.19 configure --roles=proxy,auth &gt; ./config/teleport.yaml</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406251639583.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406251639583.png"></p>
 <p>打开文件 <code>teleport.yaml</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406251640795.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406251640795.png"></p>
 <p>需要手动添加对 <code>web</code> 的侦听，否则访问网页会打不开</p>
 <blockquote>
 <p>老苏在局域网使用，所以用的局域网 <code>IP</code></p>
 </blockquote>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy_service:</span></span><br><span class="line">  <span class="attr">web_listen_addr:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:3080</span></span><br><span class="line">  <span class="attr">public_addr:</span> <span class="string">&lt;您的服务器公网IP&gt;:3080</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406270916625.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406270916625.png"></p>
 <h2 id="启动-Teleport"><a href="#启动-Teleport" class="headerlink" title="启动 Teleport"></a>启动 Teleport</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --hostname localhost \</span><br><span class="line">  --name teleport \</span><br><span class="line">  -p 3023:3023 \</span><br><span class="line">  -p 3024:3024 \</span><br><span class="line">  -p 3025:3025 \</span><br><span class="line">  -p 3080:3080 \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/config/teleport.yaml:/etc/teleport/teleport.yaml \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/data:/var/lib/teleport \</span><br><span class="line">  public.ecr.aws/gravitational/teleport:14.3.19</span><br></pre></td></tr></table></figure>
 
 <p>一般来说，<code>Teleport</code> 在 <code>Docker</code> 中主要使用以下端口：</p>
@@ -548,11 +548,11 @@
 <p>⚠️ 注意：是 <code>https</code> 而不是 <code>http</code></p>
 </blockquote>
 <p>点 <code>高级</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261347546.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261347546.png"></p>
 <p>选择 <code>继续前往</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261348085.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261348085.png"></p>
 <p>然后就会看到登录界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261159500.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261159500.png"></p>
 <p>但是现在我们还没有账号，所以还需要创建账号</p>
 <h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>执行下面的命令进入容器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it teleport /bin/sh</span><br></pre></td></tr></table></figure>
@@ -566,81 +566,81 @@
 <p>执行此命令后，<code>Teleport</code> 将生成一个注册链接。该链接将允许用户设置他们的密码和二次认证方式。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User &quot;laosu&quot; has been created but requires a password. Share this URL with the user to complete user setup, link is valid for 1h:</span><br><span class="line">https://&lt;proxy-address&gt;:3080/web/invite/&lt;token&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261352220.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261352220.png"></p>
 <p>将此链接发送给用户。用户需要在链接过期之前（默认为1小时）访问此链接来完成账户设置。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261307310.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261307310.png"></p>
 <p>点 <code>GET STARTED</code> 开始填写密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261307650.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261307650.png"></p>
 <p>需要用 <code>Authy</code> 作为 <code>opt</code> 设备扫描二维码</p>
 <blockquote>
 <p><code>Authy</code>  是一款跨平台的、支持多个设备同时使用的两步验证（<code>2FA</code>）管理工具，基于 <code>TOTP</code> 协议，旨在提高账户的安全性。主要功能是生成时间敏感的一次性密码（<code>OTP</code>），这些密码可以在每次登录时使用，作为双重验证的一部分，能够显著提升用户账户的安全性。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261308382.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261308382.png"></p>
 <p>扫描完成后，输入在 <code>Authy</code> 上生成的 <code>6</code> 位数字</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261309652.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261309652.png"></p>
 <p>验证通过后，就注册成功了。会自动进入首界面，可以点 <code>ADD MY FIRST RESOURCE</code> 添加资源了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261354294.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261354294.png"></p>
 <p>之后的登录，除了账号、密码外，还需要 <code>Authy</code> 上生成的身份验证码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406270956629.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406270956629.png"></p>
 <h2 id="添加资源"><a href="#添加资源" class="headerlink" title="添加资源"></a>添加资源</h2><p>可以从左上角切换到 <code>Management</code> 界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261312937.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261312937.png"></p>
 <p>现在你要新增的资源（<code>Resource</code>）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271053586.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271053586.png"></p>
 <p>以老苏的编译镜像的虚拟机 <code>CentOS 8</code> 为例，选择了 <code>RHEL/CentOS 7+</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271059175.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271059175.png"></p>
 <p>需要在 <code>CentOS</code> 上执行下面的命令</p>
 <blockquote>
 <p>脚本是有时限的，默认是 <code>4</code> 小时</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> bash -c <span class="string">&quot;<span class="subst">$(curl --insecure -fsSL https://192.168.0.197:3080/scripts/ada9610f30751d3f2be8f6059a78e836/install-node.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271101341.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271101341.png"></p>
 <blockquote>
 <p> 老苏新增了使用 <code>--insecure</code> 标志来信任 <code>Teleport</code> 的自签名证书。在生产中，您需要从受信任的 <code>CA</code>（例如 <code>Let&#39;s Encrypt</code>）向代理服务提供 <code>TLS</code> 凭据。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271504391.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271504391.png"></p>
 <blockquote>
 <p>这里我们假设你的网络访问相关资源是没问题，否则你会看到👇这样的内容</p>
 </blockquote>
 <p>安装完成后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271505169.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271505169.png"></p>
 <p>正常情况下应该会自动检测到 <code>Teleport</code> 实例，但实际上可能会一直处于等待中  <code>We&#39;re still looking for your server</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271525983.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271525983.png"></p>
 <blockquote>
 <p>因为我们的证书是自签的，而不是受信任的，所以需要禁用证书验证，这可能会带来安全风险。所以下面的步骤应该只作为临时的故障排除措施使用，不建议在生产环境中长期使用。</p>
 </blockquote>
 <p>找到 <code>/etc/systemd/system/multi-user.target.wants/teleport.service</code> 文件，在 <code>ExecStart</code> 中增加 <code>--insecure</code> 参数</p>
 <p>从 <code>ExecStart=/usr/local/bin/teleport start --config /etc/teleport.yaml --pid-file=/run/teleport.pid</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271517913.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271517913.png"></p>
 <p>改为 <code>ExecStart=/usr/local/bin/teleport start --insecure --config /etc/teleport.yaml --pid-file=/run/teleport.pid</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271518163.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271518163.png"></p>
 <p>保存之后，再需要执行下面👇的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新加载 systemd 配置</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启 Teleport 服务</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl restart teleport</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查 Teleport 服务状态</span></span><br><span class="line"><span class="built_in">sudo</span> systemctl status teleport</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测日志</span></span><br><span class="line"><span class="built_in">sudo</span> journalctl -fu teleport</span><br></pre></td></tr></table></figure>
 
 <p>如果没问题的话，应该很快就会看到新实例连接成功的信息</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271456048.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271456048.png"></p>
 <p>点 <code>Next</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271458271.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271458271.png"></p>
 <p>选择用户</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271459128.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271459128.png"></p>
 <p>可以测试连接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271459454.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271459454.png"></p>
 <p>完成后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271500990.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271500990.png"></p>
 <p>可以查看添加成功的资源</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271501359.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271501359.png"></p>
 <p>可以选择不同的身份连接</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271534550.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271534550.png"></p>
 <p>连接成功后</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406271534976.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406271534976.png"></p>
 <h2 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h2><p>在安装过程中遇到任何问题，都可以在官方文档：<span class="exturl" data-url="aHR0cHM6Ly9nb3RlbGVwb3J0LmNvbS9kb2NzLw==">https://goteleport.com/docs/<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406270853126.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406270853126.png"></p>
 <p>点 <code>Switvh to Ask AI</code> 切换到 <code>AI</code>模式提问</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406270854087.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406270854087.png"></p>
 <p>例如如何创建账号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261200336.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261200336.png"></p>
 <p>或者亚要不要暴露端口，<code>AI</code> 都能给你满意的答案</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406261144814.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406261144814.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>gravitational/teleport: Certificate authority and access plane for SSH, Kubernetes, web apps, databases and desktops<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dyYXZpdGF0aW9uYWwvdGVsZXBvcnQv">https://github.com/gravitational/teleport/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Teleport: Easiest, most secure way to access infrastructure | Teleport<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nb3RlbGVwb3J0LmNvbS8=">https://goteleport.com/<i class="fa fa-external-link-alt"></i></span></p>

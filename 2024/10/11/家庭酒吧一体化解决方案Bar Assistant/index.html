@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Bar Assistant 是一个管理您的家庭酒吧的一体化解决方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021649179.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021649179.png">
 <meta property="article:published_time" content="2024-10-11T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.393Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.028Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="酒吧管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021649179.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021649179.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/10/11/%E5%AE%B6%E5%BA%AD%E9%85%92%E5%90%A7%E4%B8%80%E4%BD%93%E5%8C%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88Bar%20Assistant/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021649179.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021649179.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -523,7 +523,7 @@
 <li>管理自定义 <code>API</code> 个人访问令牌，用户可设置自定义权限</li>
 <li>提供关于配方和用户口味的详细统计信息</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021457899.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021457899.png"></p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><p>官方提供了镜像，不过虽然支持多语言，但没有中文，所以老苏机翻之后，重新编译了一下镜像。</p>
 <p>有几点需要说明一下：</p>
 <ol>
@@ -537,7 +537,7 @@
 <blockquote>
 <p>为了省事，修改了 <code>de-DE.js</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021356970.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021356970.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>采用 <code>docker-compose</code> 安装，需要先准备好几个安装文件</p>
 <h2 id="env-tx"><a href="#env-tx" class="headerlink" title="env.tx"></a>env.tx</h2><p><code>env.txt</code> 是环境变量设置</p>
@@ -581,29 +581,29 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 barassistant 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/barassistant/&#123;bdata,mdata&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 barassistant 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/barassistant</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> a+w bdata</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose --env-file env.txt up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409301550873.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409301550873.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3652</code> 就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409302144741.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409302144741.png"></p>
 <p>第一次需要注册账号</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409302052871.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409302052871.png"></p>
 <p>登录后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409302146670.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409302146670.png"></p>
 <h2 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h2><p>右上角 <code>User</code> –&gt; <code>Profile</code> –&gt; <code>Language</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021136316.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021136316.png"></p>
 <p>默认没有中文选项</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021137703.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021137703.png"></p>
 <p>如果你安装时使用了老苏编译的镜像 <code>wbsu2003/salt-rim:v3</code>，可以选择 <code>German</code>，保存之后，就变成了中文界面了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021413903.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021413903.png"></p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>创建一个酒吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021628157.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021628157.png"></p>
 <p>起个名字</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021630103.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021630103.png"></p>
 <p>保存之后，你就有一个酒吧了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021632603.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021632603.png"></p>
 <p>进入酒吧</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021633876.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021633876.png"></p>
 <p>有兴趣的可以装一个研究研究</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202410021636272.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202410021636272.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>karlomikus/bar-assistant: Bar assistant is a self hosted application for managing your home bar.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thcmxvbWlrdXMvYmFyLWFzc2lzdGFudA==">https://github.com/karlomikus/bar-assistant<i class="fa fa-external-link-alt"></i></span></p>
 <p>karlomikus/vue-salt-rim: Salt Rim is a Vue based web client used for connecting to Bar Assistant server instance.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thcmxvbWlrdXMvdnVlLXNhbHQtcmlt">https://github.com/karlomikus/vue-salt-rim<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Calendso 是一款日程安排工具，也是 Calendly 的开源替代方案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241317956.png">
+<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241317956.png">
 <meta property="article:published_time" content="2021-11-15T04:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="日程安排">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241317956.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241317956.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/15/%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E5%B7%A5%E5%85%B7Calendso/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241317956.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241317956.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,12 +506,12 @@
 <p>老苏还是想用群晖传统的图形界面来安装，虽然繁琐，但对不熟悉命令行的人来说，这或许会降低一些安装难度。</p>
 <h2 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>calendso</code> ，选择第一个 <code>ctadeu/calendso</code>，版本选择最新的，目前是 <code>0.0.17-1</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231040251.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231040251.png"></p>
 <p><code>calendso</code> 依赖 <code>PostgreSQL</code> 而不是 <code>MariaDB</code> 做数据库。默认情况下，只要你安装了 <code>Moments</code>、<code>Audio station</code>、<code>Video Station</code> 等套件，都会使用群晖内置的一个 <code>PostgreSQL</code> 数据库，但并没有像 <code>MariaDB</code> 一样提供数据库管理工具，所以老苏建议数据库最好另外安装</p>
 <p>在注册表中搜索 <code>postgresql</code> ，选择第一个 <code>postgres</code>，版本选 <code>latest</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231045515.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231045515.png"></p>
 <h2 id="安装-PostgreSQL"><a href="#安装-PostgreSQL" class="headerlink" title="安装 PostgreSQL"></a>安装 PostgreSQL</h2><p>名称用的默认的，进 <code>高级设置</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231052762.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231052762.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>calendso</code>，再在 <code>calendso</code> 目录中建一个子目录 <code>data</code></p>
 <table>
 <thead>
@@ -525,11 +525,11 @@
 <td align="center"><code>/var/lib/postgresql/data/</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231128319.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231128319.png"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>默认的端口 <code>5432</code> 存在冲突，因为前面老苏说过群晖已经安装了 <code>PostgreSQL</code> ，所以要改本地端口</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231140315.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231140315.png"></p>
 <table>
 <thead>
 <tr>
@@ -545,7 +545,7 @@
 <blockquote>
 <p>不打算通过客户端访问数据库的话，设自动也可以</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231129829.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231129829.png"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -566,11 +566,11 @@
 <td align="center">数据库名称</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231103272.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231103272.png"></p>
 <h3 id="高级设置"><a href="#高级设置" class="headerlink" title="高级设置"></a>高级设置</h3><p>勾选了 <code>启用自动重新启动</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210805111932.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210805111932.png"></p>
 <p>如果运行正常并且不报错的话，就可以进行 <code>calendso</code> 的安装了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231132340.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231132340.png"></p>
 <h2 id="安装-Calendso"><a href="#安装-Calendso" class="headerlink" title="安装 Calendso"></a>安装 Calendso</h2><h3 id="端口-1"><a href="#端口-1" class="headerlink" title="端口"></a>端口</h3><p>端口不冲突即可</p>
 <table>
 <thead>
@@ -589,13 +589,13 @@
 </tr>
 </tbody></table>
 <p>默认只有容器端口 <code>3000</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231549849.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231549849.png"></p>
 <p>需按 <code>+</code> 号新增端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231340673.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231340673.png"></p>
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>点 <code>+</code> 号，<code>容器名称</code> 中找到上一步安装的 <code>postgres1</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231343422.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231343422.png"></p>
 <p>别名设置为 <code>db</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231344242.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231344242.png"></p>
 <h3 id="环境-1"><a href="#环境-1" class="headerlink" title="环境"></a>环境</h3><p>参数有点多，先跑起来，后面会简单介绍与 <code>Outlook.com Calendar</code> 集成，至于<code>Google Calendar</code>、<code>Zoom</code> 、发邮件、加密啥的，有需要的可以去官网查阅文档</p>
 <table>
 <thead>
@@ -626,45 +626,45 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://群晖IP:5554</span><br></pre></td></tr></table></figure>
 
 <p>如果要在公网使用，改成域名即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231553574.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231553574.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5554</code>，就能看到登录界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231357804.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231357804.png"></p>
 <p>不要点红框中的 <code>Create an account</code>，会报错的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231358214.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231358214.png"></p>
 <p>而是要进入『终端机』</p>
 <blockquote>
 <p>不知道怎么进终端机，可以去老苏的博客搜索一下</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231400390.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231400390.png"></p>
 <p>输入 <code>npx prisma studio</code></p>
 <blockquote>
 <p>下载取决于你的网速，反正老苏觉得有点慢</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231403405.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231403405.png"></p>
 <p>新开一个浏览器窗口输入 <code>http://群晖IP:5555</code>，下载完成前只有几个框和闪烁的 <code>Getting things ready</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231406488.png" alt="下载完成前"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231406488.png" alt="下载完成前"></p>
 <p>下载完成之后可以选择 <code>Model</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231452854.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231452854.png"></p>
 <p>选择 <code>User</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231456105.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231456105.png"></p>
 <p>点 <code>Add Record</code></p>
 <blockquote>
 <p>密码需要先到 <span class="exturl" data-url="aHR0cHM6Ly9iY3J5cHQtZ2VuZXJhdG9yLmNvbS8=">https://bcrypt-generator.com<i class="fa fa-external-link-alt"></i></span> 做加密处理</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231501420.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231501420.png"></p>
 <p>只要填 <code>id</code> 、<code>email</code> 、<code>password</code> 三项，完成后点 <code>Save 1 change</code></p>
 <blockquote>
 <p>其他的可以在登录后，在设置中修改</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231529295.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231529295.png"></p>
 <p>回到 <code>5554</code> 端口的登录界面，用刚刚创建的账号登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231532152.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231532152.png"></p>
 <p>登陆成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231540063.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231540063.png"></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>在做下一步集成时，需要先通过反代实现 <code>https</code> 协议访问，因为回调地址只支持 <code>https</code> 协议</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231718510.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231718510.png"></p>
 <p>完成之后需要修改容器环境变量的 <code>BASE_URL</code>，否则登录成功后跳转的地址会是局域网地址</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231729370.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231729370.png"></p>
 <p>能通过域名正常访问之后，再进行第三方的集成</p>
 <h2 id="集成-Outlook-日历"><a href="#集成-Outlook-日历" class="headerlink" title="集成 Outlook 日历"></a>集成 Outlook 日历</h2><p>需要获取 <code>Microsoft Graph</code> 客户端 <code>ID</code> 和密钥，这个在之前集成 <code>OneDrive</code> 时讲过</p>
 <ol>
@@ -673,23 +673,23 @@
 <li><p>新注册应用</p>
 </li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231707210.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231707210.png"></p>
 <ul>
 <li>应用的名称</li>
 <li>选择账户类型为 <code>任何组织目录(任何 Azure AD 目录 - 多租户)中的帐户和个人 Microsoft 帐户(例如，Skype、Xbox)</code></li>
 <li>重定向 URI：也就是回调地址必须以 “HTTPS” 或 “<span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdCIv">http://localhost&quot;<i class="fa fa-external-link-alt"></i></span> 开头，默认地址为 ： <code>&lt;Calendso 的公网地址&gt; /api/integrations/office365calendar/callback</code>，将<code>&lt;Calendso 的公网地址&gt;</code> 替换为 <code>https://cal.laosu.ml</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231722342.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231722342.png"></p>
 <ol start="3">
 <li>注册成功后，<code>应用程序（客户端）ID</code> 作为<code>MS_GRAPH_CLIENT_ID</code> 属性值</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231739277.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231739277.png"></p>
 <ol start="4">
 <li><code>添加证书或机密</code> –&gt; <code>新客户端密码</code></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231742111.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231742111.png"></p>
 <p>将 <code>值</code> 作为 <code>MS_GRAPH_CLIENT_SECRET</code> 属性值</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231745798.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231745798.png"></p>
 <table>
 <thead>
 <tr>
@@ -706,48 +706,48 @@
 <td align="center">客户端密码</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231749431.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231749431.png"></p>
 <p><code>App Store</code> –&gt; <code>+ Connect a new App</code>，比默认的多了 <code>Office 365 / Outlook.com Calendar</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231751582.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231751582.png"></p>
 <p>点 <code>add</code> 后需要授权</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231754721.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231754721.png"></p>
 <p>添加成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109231755727.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109231755727.png"></p>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ol>
 <li> 设置中完善信息</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241113490.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241113490.png"></p>
 <ol start="2">
 <li>设置可用时间，也就是别人可以跟你约的时间</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241058780.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241058780.png"></p>
 <ol start="3">
 <li>创建新的事件类型</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241121017.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241121017.png"></p>
 <p>可以选择会议的类型</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241124878.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241124878.png"></p>
 <p>点 <code>Show advanced settings</code> 则可以更详细的设置</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241126523.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241126523.png"></p>
 <p>添加完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241129498.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241129498.png"></p>
 <blockquote>
 <p>这里的 <code>preview</code> 和 <code>copy link</code> 都有问题，取不到用户名，可以在链接地址上手动改，也可以进到里面去再 <code>preview</code> 或者 <code>copy link</code> </p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241131785.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241131785.png"></p>
 <ol start="4">
 <li>分享链接</li>
 </ol>
 <blockquote>
 <p>这里的 <code>preview</code> 没问题，但是 <code>copy link</code> 是不带端口的，如果你没有备案，记得分享的时候要手动添加端口号</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241135890.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241135890.png"></p>
 <p>对方收到链接，就可以根据自己的时间和你设定的可用时间进行预约了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241146471.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241146471.png"></p>
 <p>预约完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241147054.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241147054.png"></p>
 <p>在你的 <code>Outlook</code> 日历会看到预约成功的事件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109241148893.png"></p>
+<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109241148893.png"></p>
 <p>这种预约方式，可以帮助我们减少来回沟通的时间。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>calendso/calendso: Scheduling infrastructure for absolutely everyone.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhbGVuZHNvL2NhbGVuZHNv">https://github.com/calendso/calendso<i class="fa fa-external-link-alt"></i></span></p>

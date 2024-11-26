@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="APITable 是 vika.cn 维格表社区版，地表至强的开源低代码、多维表格工具，Airtable的开源免费替代。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152115699.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152115699.png">
 <meta property="article:published_time" content="2023-02-17T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.389Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.024Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="表格">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152115699.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152115699.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/02/17/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E4%BD%93%E9%AA%8C%E7%BB%B4%E6%A0%BC%E8%A1%A8%E7%A4%BE%E5%8C%BA%E7%89%88APITable/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152115699.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152115699.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,17 +503,17 @@
 <p><code>APITable</code> 是 <code>vika</code> 维格表的社区版，是一个面向 <code>API</code> 且易于使用的可视化数据库，适合所有人，使其成为 <code>Airtable</code> 的最佳开源替代品。最重要的是，<code>APITable</code> 拥有更酷的 <code>UI</code> 和更多的功能，可以将您的工作和生活优化到一个神奇的水平。</p>
 </blockquote>
 <p>按官方的说法，<code>APITable</code> 目前正在 <code>积极开发中</code>，并将在 <code>2023</code> 年 <code>2</code> 月下旬公布第一份发行版本。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152116371.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152116371.png"></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一开始老苏是打算安装多容器版本的，但在运行中发现老苏的小机器根本抗不住，大约有 <code>12</code> 个容器，启动过程中服务器 <code>CPU</code>、内存都在满负荷运作，很容易失联、重启，所以日志中会看到超时、失败等，总之没成功。老苏也会把折腾过程写出来，放在文末供参考，但这不是本文的重点</p>
 <p>官方发布了一个 <code>All In One</code> 的版本，里面包含了所需要的 <code>mysql/redis/minio/rabbitmq</code>，安装过程、使用中也比较耗资源，但是比多容器的要好得多。这是给大家体验的，不要用在生产环境</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">We also provide an all-in-one image based on pm2 for demo or testing purpose (not recommended for enterprise or production usage)</span><br></pre></td></tr></table></figure>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>apitable</code> ，选择第一个 <code>apitable/all-in-one</code>，版本选择 <code>v0.18.0-alpha_888</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151919904.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151919904.png"></p>
 <blockquote>
 <p>目前在测试阶段，更新非常频繁，一天都能出几个版本，老苏周三下午安装还是 <code>887</code>，晚上就出了 <code>888</code>，本文发布时，已经是 <code>902</code>了</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302160923330.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302160923330.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>vika</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -529,7 +529,7 @@
 <td align="center">存放数据库等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151929604.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151929604.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -553,9 +553,9 @@
 <li><code>9000</code>：是 <code>MinIO</code> 服务；</li>
 <li><code>80</code>：是 <code>Nginx</code> 服务；</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151929806.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151929806.png"></p>
 <p>如果你不打算从外部直接访问这些服务的话，只要保留 <code>80</code> 就可以了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151935214.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151935214.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vika 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vika/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vika 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vika</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name apitable \</span><br><span class="line">   -p 7088:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/apitable \</span><br><span class="line">   apitable/all-in-one:v0.18.0-alpha_888</span><br></pre></td></tr></table></figure>
 
@@ -566,29 +566,29 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vika 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vika/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vika 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vika</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>内存占用还是比较高的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152212062.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152212062.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7088</code> 就能看到主界面</p>
 <blockquote>
 <p>根据机器的性能不同，您可能需要等待几分钟才能启动所有服务，老苏差不多等了有 <code>5</code> 分钟</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151849197.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151849197.png"></p>
 <p>缺省用户名为 <code>admin@apitable.com</code> ，密码为 <code>Apitable2022</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151954277.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151954277.png"></p>
 <p>接下来创建空间，创建表单</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152128027.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152128027.png"></p>
 <p>不能自动识别系统语言版本，需要自己设置，在左下角找到 <code>My Settings</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152225670.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152225670.png"></p>
 <p>在 <code>Preferences</code>  –&gt; <code>Language</code> 中选择 <code>简体中文</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152226551.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152226551.png"></p>
 <p>界面会自动刷新，刷新之后就是中文了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152228229.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152228229.png"></p>
 <p>随便点了点，总能看到这样的页面，毕竟还是阿尔法版</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152254569.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152254569.png"></p>
 <p>功能大家慢慢摸索吧，老苏没找到中文的使用手册，也许再等等就有了</p>
 <h1 id="多容器折腾记录"><a href="#多容器折腾记录" class="headerlink" title="多容器折腾记录"></a>多容器折腾记录</h1><h2 id="升级-docker-compose"><a href="#升级-docker-compose" class="headerlink" title="升级 docker-compose"></a>升级 docker-compose</h2><p>因为是多容器，所以全程使用命令行安装，但是在安装前，需要确认下你群晖上 <code>docker-compose</code> 的版本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检测 docker 版本</span></span><br><span class="line">docker -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测 docker-compose 版本</span></span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142309087.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142309087.png"></p>
 <p><code>docker-compose</code> 如果低于 <code>1.29.0</code>，启动后日志中会出现 <code>depends_on condition &quot;service_completed_successfully&quot; is invalid.</code> 错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Creating network &quot;vika_apitable&quot; with driver &quot;bridge&quot;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;docker-compose&quot;, line 3, in &lt;module&gt;</span><br><span class="line">  File &quot;compose/cli/main.py&quot;, line 80, in main</span><br><span class="line">  File &quot;compose/cli/main.py&quot;, line 192, in perform_command</span><br><span class="line">  File &quot;compose/metrics/decorator.py&quot;, line 18, in wrapper</span><br><span class="line">  File &quot;compose/cli/main.py&quot;, line 1165, in up</span><br><span class="line">  File &quot;compose/cli/main.py&quot;, line 1161, in up</span><br><span class="line">  File &quot;compose/project.py&quot;, line 702, in up</span><br><span class="line">  File &quot;compose/parallel.py&quot;, line 99, in parallel_execute</span><br><span class="line">  File &quot;compose/parallel.py&quot;, line 48, in parallel_execute_watch</span><br><span class="line">  File &quot;compose/parallel.py&quot;, line 173, in parallel_execute_iter</span><br><span class="line">  File &quot;compose/parallel.py&quot;, line 222, in feed_queue</span><br><span class="line">  File &quot;compose/project.py&quot;, line 694, in get_deps</span><br><span class="line">  File &quot;compose/service.py&quot;, line 761, in get_dependency_configs</span><br><span class="line">ValueError: depends_on condition &quot;service_completed_successfully&quot; is invalid.</span><br><span class="line">[31897] Failed to execute script docker-compose</span><br></pre></td></tr></table></figure>
 
@@ -603,17 +603,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 独立下载和安装 Compose</span></span><br><span class="line">curl -sSL https://github.com/docker/compose/releases/download/v2.7.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下不动价加个代理</span></span><br><span class="line">curl -sSL https://ghproxy.com/github.com/docker/compose/releases/download/v2.7.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
 
 <p>安装之后，再次检查 <code>docker-compose</code> 版本</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142319943.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142319943.png"></p>
 <h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>官方提供了所需要的文件，只需按部就班就可以了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vika 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vika/.data/&#123;minio/&#123;data,config&#125;,mysql,rabbitmq,redis&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vika 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vika</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载安装文件包</span></span><br><span class="line">curl -sSL https://github.com/apitable/apitable.github.io/releases/latest/download/docker-compose.tar.gz -o docker-compose.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下不动就加个代理试试</span></span><br><span class="line">curl -sSL https://ghproxy.com/github.com/apitable/apitable.github.io/releases/latest/download/docker-compose.tar.gz -o docker-compose.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line">tar -xvzf docker-compose.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>现在的目录结构</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142211000.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142211000.png"></p>
 <p>修改 <code>.env</code> 中的端口</p>
 <blockquote>
 <p>为了方便修改先重命名为 <code>txt</code>，改完后记得改回去</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142204390.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142204390.png"></p>
 <p>老苏改成下面的端口</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">NGINX_HTTP_PORT</span>=<span class="number">7088</span></span><br><span class="line"><span class="attr">NGINX_HTTPS_PORT</span>=<span class="number">7443</span></span><br></pre></td></tr></table></figure>
 
@@ -621,17 +621,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>第一次建议用 <code>docker-compose up</code> 启动，这样能看到详细的日志</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151157501.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151157501.png"></p>
 <p><code>CPU</code> 就没低过 <code>80%</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151201777.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151201777.png"></p>
 <p>基本上都是一直处于满负荷状态</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151328286.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151328286.png"></p>
 <p>有可能会遇到错误退出</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302142342416.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302142342416.png"></p>
 <p>更大的可能性就是直接失联，折腾了几天愣是连首页面都没跑出来</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302151637673.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302151637673.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这是老苏写文章专用的小机器，方便你对比一下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302152053164.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302152053164.png"></p>
 <p>老苏觉得在群晖上用用 <code>All In One</code> 的版本就行了，多容器版本就算了吧，用三体的话说，就是不要安装、不要安装！</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>apitable/apitable: 🚀🎉📚 APITable, an API-oriented low-code platform for building collaborative apps and better than all other Airtable open-source alternatives.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FwaXRhYmxlL2FwaXRhYmxl">https://github.com/apitable/apitable<i class="fa fa-external-link-alt"></i></span></p>

@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Activepieces 是一款无代码工具，旨在帮助您自动化营销、销售、客户服务和内部流程。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061428447.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061428447.png">
 <meta property="article:published_time" content="2023-11-13T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="自动化">
 <meta property="article:tag" content="工作流">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061428447.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061428447.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/11/13/%E6%97%A0%E4%BB%A3%E7%A0%81%E4%B8%9A%E5%8A%A1%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7Activepieces/">
@@ -393,7 +393,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061428447.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061428447.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +434,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,7 +502,7 @@
 <p><code>Activepieces</code>  是一款工作流程自动化软件，可以帮助您自动化所有重要流程，例如市场、销售、营销等。您可以集成其他有用的应用程序并更有效地管理您的业务。无需编码，是 <code>Zapier</code> 的绝佳替代品。</p>
 </blockquote>
 <p><code>Activepieces</code> 和之前老苏介绍的 <code>n8n</code>、<code>Automatisch</code> 是同一类软件。目前已经支持 <code>100</code> 多种应用，其中包括了 <code>OpenAI</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061404896.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061404896.png"></p>
 <iframe src="//player.bilibili.com/player.html?aid=533188846&bvid=BV1Du411P7Pf&cid=1258859166&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>因为触发器可能存在回调，所以需要让 <code>Activepieces</code> 有公网可访问的 <code>IP</code> 或者域名。 </p>
@@ -527,7 +527,7 @@
 <li><code>192.168.0.197</code> 为安装 <code>Activepieces</code> 服务的群晖主机 <code>IP</code></li>
 <li><code>4848</code> 为 <code>Activepieces</code> 服务对外暴露的端口</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061158999.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061158999.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><p>将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.0&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">activepieces:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">activepieces/activepieces</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">activepieces-web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="comment">## Enable the following line if you already use AP_EXECUTION_MODE with SANDBOXED or old activepieces, checking the breaking change documentation for more info.</span></span><br><span class="line">    <span class="comment">## privileged: true</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">4848</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">env_file:</span> <span class="string">env.txt</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:14</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">activepieces-postgres</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_DB=$&#123;AP_POSTGRES_DATABASE&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_PASSWORD=$&#123;AP_POSTGRES_PASSWORD&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_USER=$&#123;AP_POSTGRES_USERNAME&#125;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./pdata:/var/lib/postgresql/data</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">activepieces-redis</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./rdata:/data</span></span><br></pre></td></tr></table></figure>
 
@@ -551,17 +551,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 activepieces 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/activepieces/&#123;pdata,rdata&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 activepieces 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/activepieces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose --env-file env.txt up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>https://ap.laosu.cf</code> 就能看到注册界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309011634698.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309011634698.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309041347864.png" alt="带demo"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309041347864.png" alt="带demo"></p>
 <p>点 <code>+</code> 号新建，会看到有一些现成的 <code>template</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309041450917.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309041450917.png"></p>
 <p>如果没有合适的模板，也可以自己重新搭建</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309060928182.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309060928182.png"></p>
 <p>一个标准的流程（<code>flow</code>）包含了 <code>2</code> 个部分：触发器（<code>trigger</code>） 和动作（<code>actions</code>）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309041458245.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309041458245.png"></p>
 <p>触发器分为两类：<code>Core</code> 和 <code>App Events</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061050981.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061050981.png"></p>
 <p>其中：</p>
 <ul>
 <li><code>Core</code> 有一个定期自动执行的 <code>Schedule</code> 和一个在访问特定 <code>URL</code> 时自动执行的 <code>Webhook</code>；</li>
@@ -573,37 +573,37 @@
 <li><code>Trigger</code> ：选择 <code>New Item In Feed</code></li>
 <li><code>RSS Feed URL</code>：设置老苏的 <code>RSS</code> 订阅地址 <code>https://laosu.cf/atom.xml</code></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309041504609.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309041504609.png"></p>
 <p>完成之后要点右下角的 <code>Load data</code>，加载完成后能看到 <code>5</code> 条数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061046246.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061046246.png"></p>
 <p>第二步、选择 <code>mail</code> 应用，可供选择的有 <code>3</code> 个</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309041510084.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309041510084.png"></p>
 <p>老苏选择了 <code>Gmail</code>，当然你也可以选择 <code>SMTP</code> ，来使用其他的邮箱，不过老苏没试</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/09/202309060919227.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/09/202309060919227.png"></p>
 <p>创建 <code>New Connection</code> 时，<code>Gmail</code> 需要授权</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061749607.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061749607.png"></p>
 <p>保存之后，还需要设置主题等，完成之后，同样需要 <code>Test app</code>，如果没问题的话会返回 <code>Tested Successfully</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061111300.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061111300.png"></p>
 <p>加下来就可以重命名、并发布了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061114366.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061114366.png"></p>
 <p>最后 <code>body</code> 部分只使用了 <code>summary</code> 和 <code>link</code> </p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070925393.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070925393.png"></p>
 <p>收到了测试邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202309062339699.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202309062339699.png"></p>
 <p>返回主页就能看到我们创建的 <code>RSS2Email</code> 了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309061115859.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309061115859.png"></p>
 <h2 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h2><p><code>Gmail</code> 在国内还是限制的，所以 <code>SMTP</code> 显得更灵活一些，老苏还是用 <code>88</code> 邮箱做示例</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070945949.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070945949.png"></p>
 <p>其他是一样的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070943344.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070943344.png"></p>
 <p>现在的 <code>My Flows</code> 中多了一个</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070948118.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070948118.png"></p>
 <p>收到的测试邮件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070952918.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070952918.png"></p>
 <blockquote>
 <p>下面加载出来的图片等预览功能，是 <code>hotmail</code> 网页版的功能；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202309070951526.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202309070951526.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>activepieces/activepieces: Your friendliest open source automation tool ✨ Workflow automation tool / Enterprise automation tool / Business automation tool / Zapier Alternative<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FjdGl2ZXBpZWNlcy9hY3RpdmVwaWVjZXM=">https://github.com/activepieces/activepieces<i class="fa fa-external-link-alt"></i></span></p>
 <p>Activepieces - The open source business automation software - Zapier alternative<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYWN0aXZlcGllY2VzLmNvbS8=">https://www.activepieces.com/<i class="fa fa-external-link-alt"></i></span></p>

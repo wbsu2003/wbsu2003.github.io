@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Pingvin Share 是轻巧美观的自托管文件共享平台，完美实现了无缝高效的文件共享。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051518450.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051518450.png">
 <meta property="article:published_time" content="2023-07-08T02:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网盘">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051518450.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051518450.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/07/08/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E5%B9%B3%E5%8F%B0Pingvin%20Share/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051518450.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051518450.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -513,7 +513,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v0.9.0</code>；发文时，已是 <code>v0.15.0</code>，界面也有变化，懒得再重新截图了，凑合看吧</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051415508.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051415508.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>pingvin-share</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -529,7 +529,7 @@
 <td align="center">存放数据库和上传文件等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051423561.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051423561.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -545,7 +545,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051424389.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051424389.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pingvin-share 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pingvin-share/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pingvin-share 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pingvin-share</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name pingvin-share \</span><br><span class="line">   -p 3040:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/opt/app/backend/data \</span><br><span class="line">   stonith404/pingvin-share:latest</span><br></pre></td></tr></table></figure>
 
@@ -562,25 +562,25 @@
 <blockquote>
 <p>注意：密码不能少于 <code>8</code> 个字符</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051157319.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051157319.png"></p>
 <p>登录后还有一些需要设置的内容</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051203486.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051203486.png"></p>
 <p> <code>APP URL</code> 如果局域网使用，就用 <code>IP</code>，如果做了反向代理，就用域名，老苏将 <code>http://localhost:3000</code> 改为了 <code>http://192.168.0.197:3040</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051249629.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051249629.png"></p>
 <p>其他的可以根据需要设置，比如 <code>smtp</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051252572.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051252572.png"></p>
 <p>点 <code>Send test email</code> ，如果设置没问题的话，右下角会有成功的提示</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051303558.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051303558.png"></p>
 <p>主界面非常清爽</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051307658.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051307658.png"></p>
 <p>上传一个要分享的文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051311975.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051311975.png"></p>
 <p>点 <code>Share</code> 按钮</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051312623.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051312623.png"></p>
 <p>点 <code>Generate</code> 生成共享连接，还能设置分享时间、密码、描述等等</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051314523.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051314523.png"></p>
 <p>设置完成之后，就可以将链接发给别人了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202302051316305.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202302051316305.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>stonith404/pingvin-share: A self-hosted file sharing platform.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0b25pdGg0MDQvcGluZ3Zpbi1zaGFyZQ==">https://github.com/stonith404/pingvin-share<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>

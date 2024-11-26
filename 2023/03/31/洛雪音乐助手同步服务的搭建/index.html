@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="洛雪音乐数据同步服务端，目前用于收藏列表数据同步。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301655461.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301655461.png">
 <meta property="article:published_time" content="2023-03-31T00:45:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301655461.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301655461.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/03/31/%E6%B4%9B%E9%9B%AA%E9%9F%B3%E4%B9%90%E5%8A%A9%E6%89%8B%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%90%AD%E5%BB%BA/">
@@ -391,7 +391,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301655461.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301655461.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +432,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,7 +516,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>wbsu2003/lx-music-sync-server</code> ，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303300911617.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303300911617.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>lx-music-sync-server</code>，并在其中建两个子文件夹，分别是 <code>data</code> 和 <code>logs</code></p>
 <table>
 <thead>
@@ -537,7 +537,7 @@
 <td align="center">存放日志</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301139370.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301139370.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -553,7 +553,7 @@
 <td align="center"><code>9527</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301139372.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301139372.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -567,11 +567,11 @@
 </tr>
 </tbody></table>
 <p>官方提供的可用变量挺多，除了密码，基本上可以直接用默认的，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x5c3dodXQvbHgtbXVzaWMtc3luYy1zZXJ2ZXIjJUU1JThGJUFGJUU3JTk0JUE4JUU3JTlBJTg0JUU3JThFJUFGJUU1JUEyJTgzJUU1JThGJTk4JUU5JTg3JThG">https://github.com/lyswhut/lx-music-sync-server#可用的环境变量<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301140524.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301140524.png"></p>
 <blockquote>
 <p>软件支持多用户设置，但是密码不能一样；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301337726.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301337726.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 lx-music-sync-server 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/lx-music-sync-server/&#123;data,logs&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 lx-music-sync-server 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/lx-music-sync-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name lx-music-sync-server \</span><br><span class="line">   -p 9527:9527 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/server/data \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/logs://server/logs \</span><br><span class="line">   -e LX_USER_user1=mypassword123 \</span><br><span class="line">   wbsu2003/lx-music-sync-server</span><br></pre></td></tr></table></figure>
 
@@ -582,34 +582,34 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 lx-music-sync-server 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/lx-music-sync-server/&#123;data,logs&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 lx-music-sync-server 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/lx-music-sync-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>在浏览器中输入 <code>http://群晖IP:9527/hello</code>，如果在页面上你看到 <code>Hello~::^-^::~v3~</code>，说明服务已经 <code>OK</code> 了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303272151305.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303272151305.png"></p>
 <h2 id="Windows-客户端"><a href="#Windows-客户端" class="headerlink" title="Windows 客户端"></a>Windows 客户端</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x5c3dodXQvbHgtbXVzaWMtZGVza3RvcC9yZWxlYXNlcw==">https://github.com/lyswhut/lx-music-desktop/releases<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303272120433.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303272120433.png"></p>
 <p>老苏下载的 <code>windows</code> 的 <code>2.2.0</code> 绿色版 <code>lx-music-desktop-v2.2.0-win_x64-green.7z</code></p>
 <p>解压运行之后，搜了 <code>石进</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303272125371.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303272125371.png"></p>
 <p>进入设置–&gt; 数据同步，默认是 <code>服务端模式</code></p>
 <ul>
 <li>  服务端模式，用于在同一局域网下，为其他设备提供同步服务</li>
 <li>  客户端模式，与移动端一样，可用于连接另一个处于“服务端模式”的PC端或独立版数据同步服务</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303272135109.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303272135109.png"></p>
 <p>但是我们已经安装了独立版数据同步服务 <code>lx-music-sync-server</code> ，所以我们要改为 <code>客户端模式</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303302215483.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303302215483.png"></p>
 <p>输入服务器地址，勾选 <code>启用同步功能</code>，输入连接码就可以了</p>
 <blockquote>
 <p>连接码就是我们前面设置的密码，如果你用 <code>mypassword123</code>，连接信息就会记录在 <code>user1</code> 用户目录下，如果你用 <code>123456</code>，j就会记录在 <code>laosu</code> 目录下</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303302213477.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303302213477.png"></p>
 <p>查看 <code>File Station</code> 中的 ``</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202303302218982.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202303302218982.png"></p>
 <h2 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x5c3dodXQvbHgtbXVzaWMtbW9iaWxlL3JlbGVhc2Vz">https://github.com/lyswhut/lx-music-mobile/releases<i class="fa fa-external-link-alt"></i></span></p>
 <p>一般 <code>Android</code> 手机只要下载 <code>lx-music-mobile-v1.0.3-arm64-v8a.apk</code> 就行</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301153845.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301153845.png"></p>
 <p>填好 <code>服务器地址</code> 之后，勾选 <code>启用同步</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301205826.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301205826.png"></p>
 <p>填写连接码之后，因为桌面端已经同步过，所以要选择你的同步方式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202303301206480.png"></p>
+<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202303301206480.png"></p>
 <h2 id="反代"><a href="#反代" class="headerlink" title="反代"></a>反代</h2><p>用 <code>npm</code> 正常处理就可以，没有特殊设置</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>lyswhut/lx-music-sync-server: 运行在Node.js上的LX Music数据同步服务<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x5c3dodXQvbHgtbXVzaWMtc3luYy1zZXJ2ZXI=">https://github.com/lyswhut/lx-music-sync-server<i class="fa fa-external-link-alt"></i></span></p>

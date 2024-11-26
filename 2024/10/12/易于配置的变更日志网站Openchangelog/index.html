@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Openchangelog 能将您的变更日志 Markdown 文件转换为精美的产品更新。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012203395.png">
+<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012203395.png">
 <meta property="article:published_time" content="2024-10-12T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-26T02:38:10.405Z">
+<meta property="article:modified_time" content="2024-11-26T11:47:27.040Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="RSS">
 <meta property="article:tag" content="软件管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012203395.png">
+<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012203395.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/10/12/%E6%98%93%E4%BA%8E%E9%85%8D%E7%BD%AE%E7%9A%84%E5%8F%98%E6%9B%B4%E6%97%A5%E5%BF%97%E7%BD%91%E7%AB%99Openchangelog/">
@@ -392,7 +392,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012203395.png" itemprop="contentUrl">
+      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012203395.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +433,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-26 10:38:10" itemprop="dateModified" datetime="2024-11-26T10:38:10+08:00">2024-11-26</time>
+      <time title="修改时间：2024-11-26 19:47:27" itemprop="dateModified" datetime="2024-11-26T19:47:27+08:00">2024-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,12 +507,12 @@
 <li>各种集成，打开问题以请求新的集成</li>
 <li>自动 <code>RSS</code> 提要</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409011147627.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409011147627.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
 <p>老苏折腾时，最新版本为 <code>0.1.0</code>，<code>tags</code> 分为 <code>0.1.0</code>、<code>0.1.0-litefs</code> 和 <code>0.1.0-sqlite</code>，具体的差异未找到官方的说明；<br>本文发布时，最新版本为 <code>0.2.1</code>，注意修改对应的 <code>tags</code>；</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409011144849.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409011144849.png"></p>
 <h2 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 openchangelog 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/openchangelog/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 openchangelog 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/openchangelog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull ghcr.io/jonashiltl/openchangelog:0.1.0</span><br></pre></td></tr></table></figure>
 
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>创建一个<code>openchangelog.yml</code>配置文件</p>
@@ -546,7 +546,7 @@
 <p><code>v0.0.2.xxx.md</code> 的内容如下：</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: xxx软件</span><br><span class="line">description: 这是发布的第二个版本 </span><br><span class="line"><span class="section">publishedAt: 2024-09-01</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line">第二个版本</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012148809.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012148809.png"></p>
 <h2 id="docker-cli安装"><a href="#docker-cli安装" class="headerlink" title="docker cli安装"></a>docker cli安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name openchangelog \</span><br><span class="line">   -p 6001:6001 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/openchangelog.yml:/etc/openchangelog.yml:ro \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/data</span><br><span class="line">   ghcr.io/jonashiltl/openchangelog:0.1.0</span><br></pre></td></tr></table></figure>
 
@@ -556,9 +556,9 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 docker-compose.yml 和 openchangelog.yml 放入 openchangelog 根目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012024702.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012024702.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:6001</code> 就能看到主界面</p>
-<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409012023268.png"></p>
+<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409012023268.png"></p>
 <p>右上角可以通过 <code>feed</code> 订阅，来跟踪软件的版本变更</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>JonasHiltl/openchangelog: Easy to configure &amp; self hostable Changelog Website<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0pvbmFzSGlsdGwvb3BlbmNoYW5nZWxvZw==">https://github.com/JonasHiltl/openchangelog<i class="fa fa-external-link-alt"></i></span></p>
