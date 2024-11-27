@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="tu|du|di 是一个使用 Sinatra 构建的任务和项目管理 Web 应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251648743.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251648743.png">
 <meta property="article:published_time" content="2024-01-01T06:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="项目管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251648743.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251648743.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/01/01/%E4%B8%AA%E4%BA%BA%E4%BB%BB%E5%8A%A1%E5%92%8C%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6tududi%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251648743.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251648743.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,22 +535,22 @@
 <li><strong>任务管理</strong>：创建、更新和删除任务。将任务标记为已完成，并通过不同的过滤器（今天、即将到来、有一天）查看它们。按名称、截止日期、创建日期或优先级对它们进行排序。</li>
 <li><strong>快速注释</strong>：创建、更新、删除文本注释或将文本注释分配给项目。</li>
 <li><strong>标签</strong>：为任务和笔记创建标签。</li>
-<li><strong>项目跟踪</strong>：将任务组织到项目中。每个项目可以包含多个任务和/或多个注释。</li>
+<li><strong>项目跟踪</strong>：将任务组织到项目中。每个项目可以包含多个任务和&#x2F;或多个注释。</li>
 <li><strong>区域分类</strong>：将项目分组为多个区域，以便更好地组织和集中。</li>
 <li><strong>截止日期跟踪</strong>：设置任务的截止日期并根据截止日期类别查看它们。</li>
 <li><strong>响应式设计（正在进行中）</strong>：可从各种设备访问，确保在台式机、平板电脑和手机上获得一致的体验。</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251504787.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251504787.png"></p>
 <blockquote>
 <p>【注意】：在低内核版本上，会遇到 <code>failed to get urandom</code> 错误，容器会自动停止；</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>tududi</code> ，选择第一个 <code>chrisvel/tududi</code>，只有一个版本，双击直接下载</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191912004.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191912004.png"></p>
 <blockquote>
 <p>本文写作时， 还只有一个  <code>0.9</code> 版；发文时，已经更新到了 <code>0.17</code> 版</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191914603.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191914603.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>tududi</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -535,7 +566,7 @@
 <td align="center">存放数据库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251536667.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251536667.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -551,7 +582,7 @@
 <td align="center"><code>9292</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251537943.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251537943.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -572,7 +603,7 @@
 <td align="center">可以用 <code>openssl rand -hex 64</code> 来生成</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251539966.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251539966.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 tududi 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/tududi/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 tududi 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tududi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name tududi \</span><br><span class="line">   -p 9292:9292 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/usr/src/app/tududi_db \</span><br><span class="line">   -e TUDUDI_USER_EMAIL=wbsu2003@gmail.com \</span><br><span class="line">   -e TUDUDI_USER_PASSWORD=123456 \</span><br><span class="line">   -e TUDUDI_SESSION_SECRET=bddd8681f6b6c1f44ba2c1c9b31690d7d2128e2ef94cc2512ae46b8e320903ad88157781ea935576a325acaa633f77752998a327f799a39d1d2b92f138095d71 \</span><br><span class="line">   chrisvel/tududi:0.9</span><br></pre></td></tr></table></figure>
 
@@ -583,20 +614,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 tududi 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/tududi/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 tududi 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tududi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:9292</code> ，会显示错误</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211649206.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211649206.png"></p>
 <p>必须输入使用 <code>https</code>协议，也就是要输入 <code>https://群晖IP:9292</code> ，然后点 <code>高级</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311192232797.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311192232797.png"></p>
 <p>点 <code>[继续前往192.168.0.199（不安全）</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311192236435.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311192236435.png"></p>
 <p>就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311192239818.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311192239818.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311192245786.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311192245786.png"></p>
 <p>接下来就可以创建 <code>Project</code>、<code>Area</code>、<code>Task</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311251438991.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311251438991.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>chrisvel/tududi: tu|du|di is a task and project management web application built with Sinatra<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NocmlzdmVsL3R1ZHVkaQ==">https://github.com/chrisvel/tududi<i class="fa fa-external-link-alt"></i></span></p>
-<p>tu|du|di - A personal task and project management app : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTd1Y3pjNS90dWR1ZGlfYV9wZXJzb25hbF90YXNrX2FuZF9wcm9qZWN0X21hbmFnZW1lbnRfYXBwLw==">https://www.reddit.com/r/selfhosted/comments/17uczc5/tududi_a_personal_task_and_project_management_app/<i class="fa fa-external-link-alt"></i></span></p>
+<p>chrisvel&#x2F;tududi: tu|du|di is a task and project management web application built with Sinatra<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NocmlzdmVsL3R1ZHVkaQ==">https://github.com/chrisvel/tududi<i class="fa fa-external-link-alt"></i></span></p>
+<p>tu|du|di - A personal task and project management app : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTd1Y3pjNS90dWR1ZGlfYV9wZXJzb25hbF90YXNrX2FuZF9wcm9qZWN0X21hbmFnZW1lbnRfYXBwLw==">https://www.reddit.com/r/selfhosted/comments/17uczc5/tududi_a_personal_task_and_project_management_app&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -742,7 +773,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

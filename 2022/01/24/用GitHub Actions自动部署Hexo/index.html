@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="通过 GitHub Actions 实现自动化部署 Hexo 。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091537431.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091537431.png">
 <meta property="article:published_time" content="2022-01-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="自动化">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091537431.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091537431.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/01/24/%E7%94%A8GitHub%20Actions%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2Hexo/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091537431.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091537431.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,48 +534,48 @@
 <p><strong>第三阶段</strong> ：折腾了自动化的工具 <code>Github Action</code> ，用来完成 <code>hexo</code> 的自动化部署，已经稳定运行了一段时间，而且解决了 <code>Gitee</code> 必须手动发布的问题。</p>
 <p><strong>什么是 GitHub Actions ？</strong></p>
 <blockquote>
-<p><code>GitHub Actions</code> 是一个 <code>CI/CD</code>（持续集成/持续部署）工具，<code>GitHub</code> 于 <code>2018</code> 年 <code>10</code> 月推出，正式版于 <code>2019</code> 年 <code>11</code> 月正式推出。</p>
+<p><code>GitHub Actions</code> 是一个 <code>CI/CD</code>（持续集成&#x2F;持续部署）工具，<code>GitHub</code> 于 <code>2018</code> 年 <code>10</code> 月推出，正式版于 <code>2019</code> 年 <code>11</code> 月正式推出。</p>
 </blockquote>
 <p>本文假设你已经有了自己的 <code>hexo</code> 静态博客，因此只简单介绍了自动化部署需要的设置。</p>
 <h1 id="创建代码仓库"><a href="#创建代码仓库" class="headerlink" title="创建代码仓库"></a>创建代码仓库</h1><ol>
 <li>老苏已经有了 <code>wbsu2003.github.io</code> 仓库用来存放静态博客页面，仓库类型是 <code>public</code> </li>
 <li>新建一个 <code>myblog</code> 仓库用来存放 <code>Hexo</code> 项目的源码，这个仓库的类型是 <code>private</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041232989.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041232989.png"></p>
 <p>记得勾选 <code>Add a Readme file</code> 来完成 <code>repository</code> 的初始化</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041236046.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041236046.png"></p>
 <h1 id="生成部署密钥"><a href="#生成部署密钥" class="headerlink" title="生成部署密钥"></a>生成部署密钥</h1><p>在 <code>Git Bash Here</code> 中执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成秘钥</span></span><br><span class="line">ssh-keygen -f github-deploy-key</span><br></pre></td></tr></table></figure>
 
 <p>一路按回车直到生成成功</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201240850707.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201240850707.png"></p>
 <p>会在当前目录中生成两个文件，私钥文件 <code>github-deploy-key</code> 和公钥文件 <code>github-deploy-key.pub</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041144736.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041144736.png"></p>
 <h1 id="配置部署密钥"><a href="#配置部署密钥" class="headerlink" title="配置部署密钥"></a>配置部署密钥</h1><h2 id="私钥"><a href="#私钥" class="headerlink" title="私钥"></a>私钥</h2><p>复制 <code>github-deploy-key</code> 文件内容，在 <code>myblog</code> 仓库 <code>Settings</code> -&gt; <code>Secrets</code> -&gt; <code>New repository secret</code> 页面上添加。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041153978.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041153978.png"></p>
 <ol>
-<li> 在 <code>Name</code> 输入框填写 <code>HEXO_DEPLOY_PRI</code></li>
-<li> 在 <code>Value</code> 输入框填写 <code>github-deploy-key</code> 文件内容</li>
+<li>在 <code>Name</code> 输入框填写 <code>HEXO_DEPLOY_PRI</code></li>
+<li>在 <code>Value</code> 输入框填写 <code>github-deploy-key</code> 文件内容</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041155284.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041155284.png"></p>
 <p>添加完成</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041156807.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041156807.png"></p>
 <p>另外建一个用于同步到 <code>gitee</code> 的私钥，用于存储 <code>gitee</code> 的密码</p>
 <ol>
-<li> 在 <code>Name</code> 输入框填写 <code>GITEE_PASSWORD</code></li>
-<li> 在 <code>Value</code> 输入框填写 <code>gitee</code> 的密码</li>
+<li>在 <code>Name</code> 输入框填写 <code>GITEE_PASSWORD</code></li>
+<li>在 <code>Value</code> 输入框填写 <code>gitee</code> 的密码</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041849896.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041849896.png"></p>
 <h2 id="公钥"><a href="#公钥" class="headerlink" title="公钥"></a>公钥</h2><p>复制 <code>github-deploy-key.pub</code> 文件内容，在 <code>wbsu2003.github.io</code> 仓库 <code>Settings -&gt; Deploy keys -&gt; Add deploy key</code> 页面上添加。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041158431.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041158431.png"></p>
 <ol>
 <li>在 <code>Title</code> 输入框填写 <code>HEXO_DEPLOY_PUB</code></li>
 <li>在 <code>Key</code> 输入框填写 <code>github-deploy-key.pub</code> 文件内容</li>
 <li>勾选 <code>Allow write access</code> 选项</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112041201009.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112041201009.png"></p>
 <p>添加完成</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201240954913.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201240954913.png"></p>
 <h1 id="同步代码"><a href="#同步代码" class="headerlink" title="同步代码"></a>同步代码</h1><p>接下来老苏把群晖上的 <code>blog</code> 提交到了 <code>myblog</code> 仓库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 blog 目录变成 git 可以管理的仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把文件添加到版本库中</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把文件提交到仓库。引号内为提交注释</span></span><br><span class="line">git commit -m <span class="string">&#x27;第一次提交&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关联到远程库</span></span><br><span class="line">git remote add origin https://github.com/wbsu2003/myblog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">git remote add origin git@github.com:wbsu2003/myblog.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把本地库的内容推送到远程</span></span><br><span class="line"><span class="comment">## 第一次使用加上了-u参数，是推送内容并关联分支。</span></span><br><span class="line">git push -u origin main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下次直接提交</span></span><br><span class="line">git push origin main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制更新</span></span><br><span class="line">git push -f origin main</span><br></pre></td></tr></table></figure>
 
@@ -561,12 +592,12 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Action 的名字</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">Hexo</span> <span class="string">Auto</span> <span class="string">Deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="comment"># 触发条件1：main 分支收到 push 后执行任务。</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line">  <span class="comment"># 触发条件2：手动按钮</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里放环境变量,需要替换成你自己的</span></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="comment"># Hexo 编译后使用此 git 用户部署到 github 仓库</span></span><br><span class="line">  <span class="attr">GIT_USER:</span> <span class="string">wbsu2003</span></span><br><span class="line">  <span class="comment"># Hexo 编译后使用此 git 邮箱部署到 github 仓库</span></span><br><span class="line">  <span class="attr">GIT_EMAIL:</span> <span class="string">wbsu2003@gmail.com</span></span><br><span class="line">  <span class="comment"># Hexo 编译后要部署的 github 仓库</span></span><br><span class="line">  <span class="attr">GIT_DEPLOY_REPO:</span> <span class="string">wbsu2003/wbsu2003.github.io</span></span><br><span class="line">  <span class="comment"># Hexo 编译后要部署到的分支</span></span><br><span class="line">  <span class="attr">GIT_DEPLOY_BRANCH:</span> <span class="string">master</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># Hexo 编译后使用此 gitee 用户部署到gitee仓库</span></span><br><span class="line">  <span class="attr">GITEE_USER:</span> <span class="string">wbsu2003</span></span><br><span class="line">  <span class="comment"># Hexo 编译后要部署的 gitee 仓库</span></span><br><span class="line">  <span class="attr">GITEE_DEPLOY_REPO:</span> <span class="string">wbsu2003/wbsu2003</span></span><br><span class="line">  <span class="comment"># Hexo 编译后要部署到的分支</span></span><br><span class="line">  <span class="attr">GITEE_DEPLOY_BRANCH:</span> <span class="string">master</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 注意替换为你的 GitHub 源仓库地址</span></span><br><span class="line">  <span class="attr">GIT_SOURCE_REPO:</span> <span class="string">git@github.com:wbsu2003/wbsu2003.github.io.git</span></span><br><span class="line">  <span class="comment"># 注意替换为你的 Gitee 目标仓库地址</span></span><br><span class="line">  <span class="attr">GITEE_DESTINATION_REPO:</span> <span class="string">git@gitee.com:wbsu2003/wbsu2003.git</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">Build</span> <span class="string">on</span> <span class="string">node</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span> <span class="string">and</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.os</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">if:</span> <span class="string">github.event.repository.owner.id</span> <span class="string">==</span> <span class="string">github.event.sender.id</span></span><br><span class="line">    <span class="attr">strategy:</span></span><br><span class="line">      <span class="attr">matrix:</span></span><br><span class="line">        <span class="attr">os:</span> [<span class="string">ubuntu-18.04</span>]</span><br><span class="line">        <span class="attr">node_version:</span> [<span class="number">12.</span><span class="string">x</span>]</span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">deploy</span> <span class="string">repo</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">repository:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GIT_DEPLOY_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GIT_DEPLOY_BRANCH</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">.deploy_git</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configuration</span> <span class="string">environment</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">HEXO_DEPLOY_PRI:</span> <span class="string">$&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          sudo timedatectl set-timezone &quot;Asia/Shanghai&quot;</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$HEXO_DEPLOY_PRI&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan -t rsa github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          # coding 已取消同步</span></span><br><span class="line"><span class="string">          ssh-keyscan -t rsa e.coding.net &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          ssh-keyscan -t rsa gitee.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.name $GIT_USER</span></span><br><span class="line"><span class="string">          git config --global user.email $GIT_EMAIL</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string"></span>		  <span class="comment"># 根据你安装的组件进行安装</span></span><br><span class="line">          <span class="string">npm</span> <span class="string">uninstall</span> <span class="string">hexo-generator-index</span> <span class="string">--save</span></span><br><span class="line">          <span class="string">npm</span> <span class="string">install</span> <span class="string">hexo-baidu-url-submit</span> <span class="string">hexo-generator-index2</span> <span class="string">hexo-symbols-count-time</span> <span class="string">hexo-blog-encrypt</span> <span class="string">hexo-deployer-git</span> <span class="string">--save</span></span><br><span class="line">          <span class="comment"># 复制中文语言包，解决菜单英文的问题</span></span><br><span class="line">          <span class="string">cp</span> <span class="string">zh-CN.yml</span> <span class="string">node_modules/hexo-theme-next/languages/</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">hexo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm run deploy</span></span><br><span class="line"><span class="string"></span>		  </span><br><span class="line">      <span class="comment"># 以下为发布到gitee</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Sync</span> <span class="string">to</span> <span class="string">Gitee</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">wearerequired/git-mirror-action@master</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="comment"># 直接使用了 HEXO_DEPLOY_PRI</span></span><br><span class="line">          <span class="attr">SSH_PRIVATE_KEY:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.HEXO_DEPLOY_PRI</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="comment"># GitHub 源仓库地址</span></span><br><span class="line">          <span class="attr">source-repo:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GIT_SOURCE_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># Gitee 目标仓库地址</span></span><br><span class="line">          <span class="attr">destination-repo:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GITEE_DESTINATION_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Gitee</span> <span class="string">Pages</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">yanglbme/gitee-pages-action@main</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="comment"># 你的 Gitee 用户名</span></span><br><span class="line">          <span class="attr">gitee-username:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GITEE_USER</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># 注意在 Settings-&gt;Secrets 配置 GITEE_PASSWORD</span></span><br><span class="line">          <span class="attr">gitee-password:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.GITEE_PASSWORD</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># 你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错</span></span><br><span class="line">          <span class="attr">gitee-repo:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GITEE_DEPLOY_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="comment"># 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）</span></span><br><span class="line">          <span class="attr">branch:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.GITEE_DEPLOY_BRANCH</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="触发部署"><a href="#触发部署" class="headerlink" title="触发部署"></a>触发部署</h1><p>老苏在 <code>hexo</code> 的菜单中建了一个 <code>发文</code> 菜单，地址指向了 <code>myblog</code> 仓库中的 <code>_post</code> 目录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251332420.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251332420.png"></p>
 <p>只要将 <code>md</code> 文件通过 <code>Add file</code> –&gt; <code>Upload files</code> 上传到仓库，就会自动触发自动部署</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112061215178.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112061215178.png"></p>
 <p>第一篇自动部署的文章是『 <a href="https://laosu.tech/2021/12/06/%E5%BE%B7%E4%B8%9ADYD-T22A3%E9%99%A4%E6%B9%BF%E6%9C%BA%E6%8E%A5%E5%85%A5HomeAssistant%E8%AE%B0%E5%BD%95/">德业DYD-T22A3除湿机接入HomeAssistant记录</a> 』</p>
 <p>目前的发布时间都在 <code>3</code> 分钟以内</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251346548.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251346548.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本文是照着参考文档做的，如果您在实践中遇到什么问题，请多看看原文，不管怎么说，老苏都能成功，你也一样可以的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>利用 Github Actions 自动部署 Hexo 博客 | Sanonz<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zYW5vbnouZ2l0aHViLmlvLzIwMjAvZGVwbG95LWEtaGV4by1ibG9nLWZyb20tZ2l0aHViLWFjdGlvbnMv">https://sanonz.github.io/2020/deploy-a-hexo-blog-from-github-actions/<i class="fa fa-external-link-alt"></i></span></p>
@@ -716,7 +747,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="PaoPao 是一个清新文艺的微社区。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201351776.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201351776.png">
 <meta property="article:published_time" content="2024-02-26T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201351776.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201351776.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/26/%E6%B8%85%E6%96%B0%E6%96%87%E8%89%BA%E7%9A%84%E5%BE%AE%E7%A4%BE%E5%8C%BAPaoPao/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201351776.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201351776.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,12 +530,12 @@
 <blockquote>
 <p><code>PaoPao</code> 是一个 <code>Go</code> 写的轻量级社区。采用 <code>Gin+Vue</code> 实现的微社区，界面清爽拥有话题、发布短内容、评论等功能。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191737323.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191737323.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
 <p> 本文写作时，<code>bitbus/paopao-ce</code> 镜像， <code>latest</code> 对应的版本是 <code>0.5.2</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191206054.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191206054.png"></p>
 <p>接下来要准备 <code>3</code> 个文件，分别是：</p>
 <ul>
 <li><code>paopao-mysql.sql</code>：数据库初始化脚本；</li>
@@ -513,17 +544,17 @@
 </ul>
 <h2 id="paopao-mysql-sql"><a href="#paopao-mysql-sql" class="headerlink" title="paopao-mysql.sql"></a>paopao-mysql.sql</h2><p>文件比较长，直接去官网下载，不需要修改</p>
 <p>地址： <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNlL2Jsb2IvbWFpbi9zY3JpcHRzL3Bhb3Bhby1teXNxbC5zcWw=">https://github.com/rocboss/paopao-ce/blob/main/scripts/paopao-mysql.sql<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191345414.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191345414.png"></p>
 <h2 id="config-yaml-sample"><a href="#config-yaml-sample" class="headerlink" title="config.yaml.sample"></a>config.yaml.sample</h2><p>文件比较长，直接去官网下载</p>
 <p>地址：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNlL2Jsb2IvbWFpbi9jb25maWcueWFtbC5zYW1wbGU=">https://github.com/rocboss/paopao-ce/blob/main/config.yaml.sample<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191348189.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191348189.png"></p>
 <p>文件需要根据自己的设置进行修改，将 <code>LocalOSS</code> 中的 <code>Domain</code> 后面的值，由 <code>127.0.0.1:8008</code> 改为你群晖的主机 <code>IP</code> + <code>8038</code>端口或者域名</p>
 <blockquote>
 <p>之所以是 <code>8038</code> 而不是 <code>8008</code> 是因为主机端口在 <code>docker-compose.yml</code> 中设置为了 <code>8038</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201148582.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201148582.png"></p>
 <p>否则上传的图片会显示不出来</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201058766.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201058766.png"></p>
 <h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><p>将下面的内容保存为 <code>docker-compose.yml</code>，这是基于官方的 <code>docker-compose.yaml</code> 修改而成</p>
 <p>原文件地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNlL2Jsb2IvbWFpbi9kb2NrZXItY29tcG9zZS55YW1s">https://github.com/rocboss/paopao-ce/blob/main/docker-compose.yaml<i class="fa fa-external-link-alt"></i></span></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:8.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">paopao-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="comment">#ports:</span></span><br><span class="line">    <span class="comment">#  - 3306:3306</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./paopao-mysql.sql:/docker-entrypoint-initdb.d/paopao.sql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./mysql_data:/var/lib/mysql</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">paopao</span></span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">paopao</span></span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">paopao</span></span><br><span class="line">      <span class="attr">MYSQL_RANDOM_ROOT_PASSWORD:</span> <span class="string">&#x27;yes&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis/redis-stack:7.2.0-v2</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">paopao-redis</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="comment">#ports:</span></span><br><span class="line">    <span class="comment">#  - 6379:6379</span></span><br><span class="line">    <span class="comment">#  - 8001:8001</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">REDISEARCH_ARGS:</span> <span class="string">&quot;MAXSEARCHRESULTS 5&quot;</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">meili:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">getmeili/meilisearch:v1.4</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">paopao-meili</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="comment">#ports:</span></span><br><span class="line">    <span class="comment">#  - 7700:7700</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./meili_data:/meili_data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MEILI_MASTER_KEY=paopao-meilisearch</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">backend:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">bitbus/paopao-ce</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">paopao-web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8038</span><span class="string">:8008</span></span><br><span class="line">    <span class="comment"># modify below to reflect your custom configure</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config.yaml.sample:/app/paopao-ce/config.yaml</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/app/paopao-ce/custom</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">meili</span></span><br></pre></td></tr></table></figure>
@@ -558,41 +589,41 @@
 <blockquote>
 <p>前三个参数如果修改了默认值，需要同步修改 <code>config.yaml.sample</code> 文件中对应的 <code>MySQL</code> 数据库部分</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201341687.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201341687.png"></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 paopao 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/paopao/&#123;data,meili_data,mysql_data&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 paopao 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/paopao</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 paopao-mysql.sql、config.yaml.sample、docker-compose.yml 三个文件放入当前目录</span></span><br></pre></td></tr></table></figure>
 
 <p>现在的目录结构如下：</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191054671.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191054671.png"></p>
 <p>为了避免容器 <code>paopao-web</code> 因连接数据库失败而反复重启，我们需要需要先启动数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动数据库</span></span><br><span class="line">docker-compose up -d db</span><br></pre></td></tr></table></figure>
 
 <p>数据库初始化大概5分钟左右，当看到日志显示下面的信息，数据库应该就准备好了</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Server] /usr/sbin/mysqld: ready for connections. Version: &#x27;8.0.33&#x27; socket: &#x27;/var/run/mysqld/mysqld.sock&#x27; port: 3306 MySQL Community Server - GPL.</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191308464.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191308464.png"></p>
 <p>接下来就可以启动其他容器了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>如果没什么意外的话，现在应该能看到 <code>4</code> 个容器在运行</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191333324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191333324.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8038</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191243287.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191243287.png"></p>
 <p>先点<code>注册</code> 按钮注册新用户</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191631718.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191631718.png"></p>
 <p>注册成功之后的界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191632549.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191632549.png"></p>
 <p>发帖方式类似于微博和推特，先试试图片，看起来一切正常</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312201329699.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201329699.png"></p>
 <p><code>PaoPao</code> 和我们之前介绍的 <code>Misskey</code> 是同类应用，只是 <code>PaoPao</code> 并不是去中心化的</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2023/02/22/%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E5%BC%80%E6%BA%90%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0Misskey">去中心化开源社交平台Misskey</a></p>
 </blockquote>
 <p>但是，<code>PaoPao</code> 有桌面端，下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNlL3JlbGVhc2Vz">https://github.com/rocboss/paopao-ce/releases<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312191739628.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312191739628.png"></p>
 <p>有兴趣你可以搭一个试试</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>rocboss/paopao-ce: 🔥An artistic “twitter like” community built on gin+zinc+vue+ts 清新文艺微社区<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNl">https://github.com/rocboss/paopao-ce<i class="fa fa-external-link-alt"></i></span></p>
+<p>rocboss&#x2F;paopao-ce: 🔥An artistic “twitter like” community built on gin+zinc+vue+ts 清新文艺微社区<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2Jvc3MvcGFvcGFvLWNl">https://github.com/rocboss/paopao-ce<i class="fa fa-external-link-alt"></i></span></p>
 <p>广场 | 泡泡 - 一个清新文艺的微社区<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucGFvcGFvLmluZm8v">https://www.paopao.info<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -739,7 +770,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

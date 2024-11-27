@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Speedtest Tracker 是一款自托管互联网性能跟踪应用程序，可针对 Ookla 的 Speedtest 服务运行速度测试检查。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208091037242.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208091037242.png">
 <meta property="article:published_time" content="2024-07-13T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="测速">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208091037242.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208091037242.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/13/%E7%94%A8Speedtest-Tracker%E8%B7%9F%E8%B8%AA%E4%B8%8A%E7%BD%91%E9%80%9F%E5%BA%A6%EF%BC%88%E7%BB%AD%EF%BC%89/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208091037242.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208091037242.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.5k</span>
+      <span>4.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -505,15 +536,15 @@
 <p>文章传送门：<a href="https://laosu.tech/2022/10/19/%E7%94%A8Speedtest-Tracker%E8%B7%9F%E8%B8%AA%E4%B8%8A%E7%BD%91%E9%80%9F%E5%BA%A6">用Speedtest-Tracker跟踪上网速度</a></p>
 </blockquote>
 <p><code>Speedtest Tracker</code> 会保留历史记录，所以会用到数据库做存储，支持的数据库类型包括 <code>SQLite</code>、<code>MySQL</code>、<code>MariaDB</code> 和 <code>PostgreSQL</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131652264.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131652264.png"></p>
 <p>图形界面安装，老苏默认使用了 <code>SQLite</code> ，命令行安装，则使用了群晖套件中自带的 <code>MariaDB</code> 和容器部署的 <code>MariaDB</code></p>
 <h1 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h1><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>speedtest</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402031150574.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402031150574.png"></p>
 <p>所以根据上面的设置，最后得到的数据库相关的参数如下：</p>
 <ul>
 <li>数据库主机：<code>192.168.0.197</code>，与群晖主机 <code>IP</code> 一致；</li>
@@ -524,11 +555,11 @@
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>关于镜像，一开始是 <code>ajustesen/speedtest-tracker</code>，本文写作时， <code>latest</code> 版本对应为  <code>v0.14.5</code>，但这个版本到 <code>v0.19.0</code> 就不再更新了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402031137126.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402031137126.png"></p>
 <p>与这个版本对应的是 <code>ghcr.io/alexjustesen/speedtest-tracker</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131028366.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131028366.png"></p>
 <p>官方现在推荐的版本是 <code>lscr.io/linuxserver/speedtest-tracker</code>，在 <code>dockerhub</code> 上就是 <code>linuxserver/speedtest-tracker</code>，本文修订时的最新版本为  <code>0.20.6</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131032333.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131032333.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>speedtest</code>，并在其中建一个子文件夹 <code>config</code></p>
 <table>
 <thead>
@@ -544,7 +575,7 @@
 <td align="center">存放数据库和网页文件等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402031254868.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402031254868.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -565,9 +596,9 @@
 <li><code>80</code> 端口是 <code>http</code> 协议的</li>
 <li><code>443</code> 端口是 <code>http</code> 协议的</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131417809.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131417809.png"></p>
 <p>老苏只保留了 <code>80</code> 端口</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402031312298.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402031312298.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -607,12 +638,12 @@
 <ul>
 <li><code>APP_KEY</code>：可以在 <span class="exturl" data-url="aHR0cHM6Ly9zcGVlZHRlc3QtdHJhY2tlci5kZXYv">https://speedtest-tracker.dev<i class="fa fa-external-link-alt"></i></span> 生成</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406130929392.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406130929392.png"></p>
 <ul>
 <li><code>SPEEDTEST_SCHEDULE</code>：可以问 <code>AI</code>，老苏用了 <code>*/10 * * * *</code>，这是 <code>10</code> 分钟</li>
 </ul>
 <p>更多环境变量的说明，请参考官方文档：<br><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwZWVkdGVzdC10cmFja2VyLmRldi9nZXR0aW5nLXN0YXJ0ZWQvZW52aXJvbm1lbnQtdmFyaWFibGVz">https://docs.speedtest-tracker.dev/getting-started/environment-variables<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131434785.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131434785.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 speedtest 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/speedtest/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 speedtest 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/speedtest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name speedtest-tracker \</span><br><span class="line">   -p 8764:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">   -e PUID=1000 \</span><br><span class="line">   -e PGID=1000 \</span><br><span class="line">   -e APP_KEY=<span class="built_in">base64</span>:Bl8DLs4k220iy5Y5OkdRh51wuDzur0IFmOXS5Qi+L6M= \</span><br><span class="line">   -e DB_CONNECTION=sqlite \</span><br><span class="line">   -e APP_TIMEZONE=Asia/Shanghai \</span><br><span class="line">   -e SPEEDTEST_SCHEDULE=<span class="string">&quot;*/10 * * * *&quot;</span> \</span><br><span class="line">   -e PRUNE_RESULTS_OLDER_THAN=7 \</span><br><span class="line">   linuxserver/speedtest-tracker</span><br></pre></td></tr></table></figure>
 
@@ -630,25 +661,25 @@
 <blockquote>
 <p>缺省的账号： <code>admin@example.com</code>，密码：<code>password</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406130942098.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406130942098.png"></p>
 <p>登录成功后的界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131006664.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131006664.png"></p>
 <p>如果你不想等待，可以进行手动测试。点右上角黄色按钮 <code>Run Speedtest</code>，会有一行小字 <code>Ookla speedtest</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131126021.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131126021.png"></p>
 <p>继续点 <code>Ookla speedtest</code>，会看到 <code>Ookla speedtest started</code></p>
 <p>这时候，你会看到有数据显示了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131128829.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131128829.png"></p>
 <p>如果测试总是失败 </p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131443332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131443332.png"></p>
 <p>可以考虑通过 <code>SPEEDTEST_SERVERS</code> 参数，指定用于速度测试的服务器</p>
 <p>可以通过内置的命令，获取附近的服务器列表</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> speedtest-tracker php /app/www/artisan app:ookla-list-servers</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131100771.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131100771.png"></p>
 <p>或者在这里 <span class="exturl" data-url="aHR0cHM6Ly9saW51eHNwZWVkdGVzdC5jb20v">https://linuxspeedtest.com<i class="fa fa-external-link-alt"></i></span>查 <code>ID</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131109416.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131109416.png"></p>
 <p>可能这里国内的会更多一些，<span class="exturl" data-url="aHR0cHM6Ly93aWxsaWFteWFwcy5naXRodWIuaW8vd2xtamF2YXNjcmlwdC9zZXJ2ZXJjbGkuaHRtbA==">https://williamyaps.github.io/wlmjavascript/servercli.html<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131500161.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131500161.png"></p>
 <p>在 <code>docker-cli</code> 中，可以增加环境变量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-e SPEEDTEST_SERVERS=<span class="string">&quot;3633,45170,54312&quot;</span> \</span><br></pre></td></tr></table></figure>
 
@@ -656,13 +687,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- SPEEDTEST_SERVERS=<span class="string">&quot;3633,45170,54312&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <code>Docker</code> 管理器中，只要编辑原来的容器，新增一条即可</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131551438.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131551438.png"></p>
 <p>如果 <code>SPEEDTEST_SCHEDULE</code> 设置有问题，可能导致下面👇的错误</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406131328168.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406131328168.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>alexjustesen/speedtest-tracker: Speedtest Tracker is a self-hosted internet performance tracking application that runs speedtest checks against Ookla’s Speedtest service.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsZXhqdXN0ZXNlbi9zcGVlZHRlc3QtdHJhY2tlcg==">https://github.com/alexjustesen/speedtest-tracker<i class="fa fa-external-link-alt"></i></span></p>
+<p>alexjustesen&#x2F;speedtest-tracker: Speedtest Tracker is a self-hosted internet performance tracking application that runs speedtest checks against Ookla’s Speedtest service.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsZXhqdXN0ZXNlbi9zcGVlZHRlc3QtdHJhY2tlcg==">https://github.com/alexjustesen/speedtest-tracker<i class="fa fa-external-link-alt"></i></span></p>
 <p>Introduction - Speedtest Tracker<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwZWVkdGVzdC10cmFja2VyLmRldi8=">https://docs.speedtest-tracker.dev/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MySQL - connection refused - New install of both · Issue #1078 · alexjustesen/speedtest-tracker<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsZXhqdXN0ZXNlbi9zcGVlZHRlc3QtdHJhY2tlci9pc3N1ZXMvMTA3OA==">https://github.com/alexjustesen/speedtest-tracker/issues/1078<i class="fa fa-external-link-alt"></i></span></p>
+<p>MySQL - connection refused - New install of both · Issue #1078 · alexjustesen&#x2F;speedtest-tracker<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsZXhqdXN0ZXNlbi9zcGVlZHRlc3QtdHJhY2tlci9pc3N1ZXMvMTA3OA==">https://github.com/alexjustesen/speedtest-tracker/issues/1078<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -809,7 +840,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

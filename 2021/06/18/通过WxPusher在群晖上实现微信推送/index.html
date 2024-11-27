@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="利用免费的 WxPusher 消息推送服务，实现群晖事件消息的实时推送。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613153735.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613153735.png">
 <meta property="article:published_time" content="2021-06-18T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.990Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.196Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="消息推送">
 <meta property="article:tag" content="微信">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613153735.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613153735.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/06/18/%E9%80%9A%E8%BF%87WxPusher%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%BE%AE%E4%BF%A1%E6%8E%A8%E9%80%81/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613153735.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613153735.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,67 +536,67 @@
 </blockquote>
 <p>在开始折腾之前，你可以先试试 demo 演示程序，体验下功能：<span class="exturl" data-url="aHR0cDovL3d4cHVzaGVyLnpqaWVjb2RlLmNvbS9kZW1vLw==">http://wxpusher.zjiecode.com/demo/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="快速接入"><a href="#快速接入" class="headerlink" title="快速接入"></a>快速接入</h1><h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>在浏览器中打开 <span class="exturl" data-url="aHR0cDovL3d4cHVzaGVyLnpqaWVjb2RlLmNvbS9hZG1pbi8=">http://wxpusher.zjiecode.com/admin/<i class="fa fa-external-link-alt"></i></span> ，使用微信扫码登录，无需注册，新用户首次扫码自动注册。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613114558.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613114558.png"></p>
 <p>会提示您完善联系方式</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613114921.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613114921.png"></p>
 <h2 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h2><p>需要先创建一个应用</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613114009.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613114009.png"></p>
 <p>只需要填前三项带星号的部分</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613114325.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613114325.png"></p>
 <p>创建成功会显示 <code>APP_TOKEN</code>，把这长串内容记下来并保存好，因为就显示一次</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613121552.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613121552.png"></p>
 <p>不过您也不要担心，万一忘记了可以选择重置</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613123120.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613123120.png"></p>
 <p>扫描生成的应用的二维码，就可以开启微信消息推送了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613121443.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613121443.png"></p>
 <p>找到自己的 <code>UID</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613123643.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613123643.png"></p>
 <p>除了网页端，微信公众号里也能找到 <code>UID</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613123512.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613123512.jpg"></p>
 <h2 id="消息推送"><a href="#消息推送" class="headerlink" title="消息推送"></a>消息推送</h2><p>直接点 <code>发生消息</code> 来测试一下</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613125026.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613125026.png"></p>
 <p>填写 <code>消息内容</code>，其他可以留空</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613130059.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613130059.png"></p>
 <p>发送成功</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613130141.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613130141.png"></p>
 <p>手机上立刻就收到了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613133809.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613133809.png"></p>
 <h1 id="群晖设置"><a href="#群晖设置" class="headerlink" title="群晖设置"></a>群晖设置</h1><p>和 <code>Alertover</code> 在群晖上的设置方法大同小异。</p>
 <h2 id="短信通知"><a href="#短信通知" class="headerlink" title="短信通知"></a>短信通知</h2><p><code>控制面板</code> –&gt; <code>通知设置</code> –&gt; <code>短信</code>，勾选 <code>启用短信通知</code> 之后，<code>新增短信服务提供商</code> 会高亮</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/22/1613972658263-1613972658273.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/22/1613972658263-1613972658273.png" alt="title"></p>
 <p>点击 <code>新增短信服务提供商</code> ，在 <code>测试网址</code> 中输入下面的示例</p>
 <blockquote>
 <p>老苏用的是 6.1.7 的黑裙，6.2.3 上多一个 HTTP 方法的选择，用默认的 GET 就可以</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 记得替换成您自己的 appToken 和 uid 值</span><br><span class="line">http://wxpusher.zjiecode.com/api/send/message/?appToken=你的appToken&amp;uid=你的UID&amp;content=Hello+World&amp;number=null&amp;user=user&amp;pwd=pwd</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613134933.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613134933.png"></p>
 <p>点 <code>下一步</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613135022.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613135022.png"></p>
 <p>点 <code>寄送测试短信</code> 来验证设置是否正确</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613134459.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613134459.png"></p>
 <p>马上手机上就能收到</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210613135157.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210613135157.jpg"></p>
 <h2 id="事件通知"><a href="#事件通知" class="headerlink" title="事件通知"></a>事件通知</h2><p><code>控制面板</code> –&gt; <code>通知设置</code> –&gt; <code>高级设置</code>，直接勾选 <code>短信</code>，然后 <code>保存</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/22/1613984846784-1613984846793.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/22/1613984846784-1613984846793.png" alt="title"></p>
 <h1 id="其他应用示例"><a href="#其他应用示例" class="headerlink" title="其他应用示例"></a>其他应用示例</h1><h2 id="SSH登录通知"><a href="#SSH登录通知" class="headerlink" title="SSH登录通知"></a>SSH登录通知</h2><p>在 <code>/etc/ssh/</code> 目录下面创建一个 <code>sshrc</code> 的文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#获取登录者的用户名</span></span><br><span class="line">user=<span class="variable">$USER</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取登录者的IP地址</span></span><br><span class="line">ip=<span class="variable">$&#123;SSH_CLIENT%% *&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取登录的时间</span></span><br><span class="line">time=$(<span class="built_in">date</span> +%F%t%k:%M)</span><br><span class="line"></span><br><span class="line"><span class="comment">#服务器的IP地址</span></span><br><span class="line">server=`ifconfig eth0|sed -n <span class="string">&#x27;2p&#x27;</span>|awk -F <span class="string">&quot;:&quot;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment">#发微信提醒，并记录下日志</span></span><br><span class="line">curl -G <span class="string">&quot;http://wxpusher.zjiecode.com/api/send/message/?appToken=你的appToken&amp;uid=你的UID&quot;</span> --data-urlencode <span class="string">&quot;content=在<span class="variable">$time</span>，用户<span class="variable">$user</span>通过<span class="variable">$ip</span>登录了服务器<span class="variable">$server</span>&quot;</span> &gt; /etc/ssh/log 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
 
 <p>然后通过 <code>chmod 777 sshrc</code> 给它执行权限</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210616223855.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210616223855.png"></p>
 <p>在有人通过 <code>ssh</code> 远程登录这台服务器的时候，这段脚本就会被执行</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617114810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617114810.png"></p>
 <p>但是仅限于 <code>SSH</code> 协议，如果你用 <code>telnet</code> 协议登录是不会推消息的，需要另外实现。</p>
 <h2 id="HomeAssistant"><a href="#HomeAssistant" class="headerlink" title="HomeAssistant"></a>HomeAssistant</h2><p>看这篇文章就够了 <span class="exturl" data-url="aHR0cHM6Ly9iYnMuaGFzc2JpYW4uY29tL3RocmVhZC04MDgwLTEtMS5odG1s">https://bbs.hassbian.com/thread-8080-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>下载 7 楼的 <code>wxpusher.zip</code>，老苏已经顺利的搞定了。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210618190906.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210618190906.jpg"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>wxpusher<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3d4cHVzaGVy">https://github.com/wxpusher<i class="fa fa-external-link-alt"></i></span></p>
 <p>WxPusher微信推送服务<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93eHB1c2hlci56amllY29kZS5jb20vZG9jcy8jLw==">https://wxpusher.zjiecode.com/docs/#/<i class="fa fa-external-link-alt"></i></span></p>
-<p>wxpusher/wxpusher-docs: 微信消息实时推送服务[WxPusher]的服务说明文档，通过本文档，你可以了解如何使用WxPusher的服务。 文档预览地址：<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3d4cHVzaGVyL3d4cHVzaGVyLWRvY3M=">https://github.com/wxpusher/wxpusher-docs<i class="fa fa-external-link-alt"></i></span></p>
+<p>wxpusher&#x2F;wxpusher-docs: 微信消息实时推送服务[WxPusher]的服务说明文档，通过本文档，你可以了解如何使用WxPusher的服务。 文档预览地址：<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3d4cHVzaGVyL3d4cHVzaGVyLWRvY3M=">https://github.com/wxpusher/wxpusher-docs<i class="fa fa-external-link-alt"></i></span></p>
 <p>群晖系统开启微信推送服务 - GXNAS博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93cC5neG5hcy5jb20vMTA1MDguaHRtbA==">https://wp.gxnas.com/10508.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>linux ssh远程登陆报警提醒_qq362228416的专栏-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxMzYyMjI4NDE2L2FydGljbGUvZGV0YWlscy81MzUyNzkxNg==">https://blog.csdn.net/qq362228416/article/details/53527916<i class="fa fa-external-link-alt"></i></span></p>
-<p>Linux服务器用户登录邮件告警_深圳Java-Live的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMTY4NTc3L2FydGljbGUvZGV0YWlscy83OTU1MjU2Ng==">https://blog.csdn.net/qq_33168577/article/details/79552566<i class="fa fa-external-link-alt"></i></span></p>
+<p>Linux服务器用户登录邮件告警_深圳Java-Live的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMTY4NTc3L2FydGljbGUvZGV0YWlscy83OTU1MjU2Ng==">https://blog.csdn.net/qq_33168577&#x2F;article&#x2F;details&#x2F;79552566<i class="fa fa-external-link-alt"></i></span></p>
 <p>【新提醒】wxpusher微信推送插件 - 『HomeAssistant』综合讨论区 - 『瀚思彼岸』» 智能家居技术论坛 - Powered by Discuz!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMuaGFzc2JpYW4uY29tL3RocmVhZC04MDgwLTEtMS5odG1s">https://bbs.hassbian.com/thread-8080-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -712,7 +743,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

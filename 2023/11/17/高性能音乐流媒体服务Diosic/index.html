@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Diosic 是一个开源的基于网络的音乐收集服务器和流媒体。主要适合需要部署在硬件规格不高的服务器上的用户。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170948709.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170948709.png">
 <meta property="article:published_time" content="2023-11-17T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.990Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.196Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170948709.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170948709.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/11/17/%E9%AB%98%E6%80%A7%E8%83%BD%E9%9F%B3%E4%B9%90%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1Diosic/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170948709.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170948709.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,7 +532,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>diosic</code> ，选择第一个 <code>jinker25/diosic</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170846498.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170846498.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>diosic</code>，并在其中建两个子文件夹 <code>data</code> 和 <code>library</code></p>
 <table>
 <thead>
@@ -522,7 +553,7 @@
 <td align="center">存放音乐文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170853945.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170853945.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -539,9 +570,9 @@
 </tr>
 </tbody></table>
 <p>默认没有对外暴露端口</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170854077.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170854077.png"></p>
 <p>需要自己点 <code>+</code> 号添加</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170855797.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170855797.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -554,9 +585,9 @@
 <td align="center">音乐库的别名，默认值为 <code>MyLibrary</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170856731.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170856731.png"></p>
 <p>支持中文</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170857055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170857055.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 diosic 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/diosic/&#123;data,library&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 diosic 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/diosic</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name diosic \</span><br><span class="line">   -p 3177:3177 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/library:/library \</span><br><span class="line">   -e LIB_NAME_1=老苏的音乐库 \</span><br><span class="line">   jinker25/diosic:latest</span><br></pre></td></tr></table></figure>
 
@@ -566,29 +597,29 @@
 <blockquote>
 <p>如果 <code>docker-compose.yml</code> 中使用了中文，记得使用 <code>utf-8</code> 编码，否则会报错~~~</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170941718.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170941718.png"></p>
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 diosic 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/diosic/&#123;data,library&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 diosic 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/diosic</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3177</code> 就能看到注册界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170900638.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170900638.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170903994.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170903994.png"></p>
 <p>老苏随便找了几个 <code>mp3</code>  文件</p>
 <blockquote>
 <p>官方文档没有提到音乐格式，所以老苏也不知道</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170912963.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170912963.png"></p>
 <p>进入 <code>Control Panel</code>  –&gt; <code>Dashboard</code> –&gt; <code>Scan Libraries</code>，会扫描 <code>library</code> 目录中的文件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170907815.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170907815.png"></p>
 <p>回到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170914374.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170914374.png"></p>
 <p>点右上角的  <code>Play All</code> 就可以开始播放了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170917540.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170917540.png"></p>
 <p>看起来还是蛮简陋的，不过 <code>Rust</code> 开发的镜像确实小巧</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310170923928.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310170923928.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Reknij/diosic: Diosic is an open source web-based music collection server and streamer. Mainly suitable for users who need to deploy on servers with low hardware specifications.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Jla25pai9kaW9zaWM=">https://github.com/Reknij/diosic<i class="fa fa-external-link-alt"></i></span></p>
+<p>Reknij&#x2F;diosic: Diosic is an open source web-based music collection server and streamer. Mainly suitable for users who need to deploy on servers with low hardware specifications.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Jla25pai9kaW9zaWM=">https://github.com/Reknij/diosic<i class="fa fa-external-link-alt"></i></span></p>
 <p>Diosic documents<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWtuaWouZ2l0aHViLmlvL0Rpb3NpY0RvY0VOL2RvY3VtZW50cy9pbnN0YWxsRnJvbURvY2tlcg==">https://reknij.github.io/DiosicDocEN/documents/installFromDocker<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -735,7 +766,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

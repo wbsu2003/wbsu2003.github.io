@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="在群晖上像使用本地硬盘一样操作云盘，支持同步、备份等操作，并且能通过挂载实现硬盘扩容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210610115657.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210610115657.png">
 <meta property="article:published_time" content="2021-06-21T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="挂载">
 <meta property="article:tag" content="Rclone">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210610115657.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210610115657.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/06/21/%E7%BE%A4%E6%99%96%E4%B8%8A%E9%80%9A%E8%BF%87RcloneBrowser%E6%8C%82%E8%BD%BD%E4%BA%91%E7%9B%98/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210610115657.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210610115657.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,7 +533,7 @@
 </blockquote>
 <p><strong>什么是 Rclone Browser ？</strong></p>
 <blockquote>
-<p>用于 Rclone 命令行工具的简单跨平台 GUI。支持 Windows、macOS 、GNU/Linux 和  BSD 家族。</p>
+<p>用于 Rclone 命令行工具的简单跨平台 GUI。支持 Windows、macOS 、GNU&#x2F;Linux 和  BSD 家族。</p>
 </blockquote>
 <p><code>Rclone</code> 是一款的命令行工具，支持在不同对象存储、网盘间同步、上传、下载数据。所以如果你需要在不同的网盘之间迁移数据，<code>Rclone</code> 绝对是不二之选。</p>
 <p>之前老苏是在 <code>Windows</code> 上使用，但是命令总是比较难记的，所以写了很多批处理文件来实现不同的功能，后来用了 <code>Rclone Browser</code> 就把命令忘到了脑后，反正常用的几个功能  <code>Rclone Browser</code> 都已经具备了。</p>
@@ -520,9 +551,9 @@
 </blockquote>
 <h1 id="常规安装"><a href="#常规安装" class="headerlink" title="常规安装"></a>常规安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>rclonebrowser</code> ，选择第一个 <code>romancin/rclonebrowser </code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210603231328.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210603231328.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>rclone</code>，然后在 <code>rclone</code> 文件夹中再创建两个新的子文件夹，分别命名为 <code>config</code> 和 <code>media</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605190916.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605190916.png"></p>
 <table>
 <thead>
 <tr>
@@ -542,7 +573,7 @@
 <td align="center">数据存放目录</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605191334.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605191334.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>默认的端口被 <code>firefox</code> 占用了，所以要修改，其中前者为 Web 访问端口，后者为 VNC 端口（可选）。</p>
 <blockquote>
 <p>关于 firefox 可以看看老苏写的 『 <a href="https://laosu.tech/2020/11/01/%E7%BB%99%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85firefox%E6%B5%8F%E8%A7%88%E5%99%A8">给群晖安装firefox浏览器</a> 』</p>
@@ -563,7 +594,7 @@
 <td align="center">5900</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605193057.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605193057.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -584,11 +615,11 @@
 <td align="center">设置为1，支持支持中、日、韩文</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605192620.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605192620.png"></p>
 <blockquote>
 <p>如果不设置 <code>ENABLE_CJK_FONT = 1</code>，中文字会变成方框</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605210605.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605210605.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>根据网友反馈的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWFuY2luL3JjbG9uZWJyb3dzZXItZG9ja2VyL2lzc3Vlcy8z"># Synology cant Mount Drives #3 （https://github.com/romancin/rclonebrowser-docker/issues/3）<i class="fa fa-external-link-alt"></i></span> 整理的安装命令</p>
 <h2 id="第一步、建目录"><a href="#第一步、建目录" class="headerlink" title="第一步、建目录"></a>第一步、建目录</h2><p>参考常规方式的卷设置，同样也是建 <code>config</code> 和 <code>media</code> 目录</p>
 <h2 id="第二步、共享挂载"><a href="#第二步、共享挂载" class="headerlink" title="第二步、共享挂载"></a>第二步、共享挂载</h2><p>因为老苏映射的目录在 <code>volume1</code> 上，如果你的目录是其他的卷上，记得修改</p>
@@ -598,11 +629,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker: Error response from daemon: linux mounts: path /volume1/docker/rclone/media is mounted on /volume1 but it is not a shared mount.</span><br></pre></td></tr></table></figure>
 
 <p>这条命令在群晖重启后需要重新执行，所以我们可以把这句命令，通过 <code>任务计划</code> 加到开机脚本中</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233810.png"></p>
 <p>这是一个触发任务，事件是开机</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233845.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233845.png"></p>
 <p>邮件发不发看个人需要，主要是运行脚本</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617233951.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617233951.png"></p>
 <h2 id="第三步、启动容器"><a href="#第三步、启动容器" class="headerlink" title="第三步、启动容器"></a>第三步、启动容器</h2><p>在 <code>ssh</code> 客户端中执行下面👇的命令即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=rclonebrowser \</span><br><span class="line">--cap-add SYS_ADMIN \</span><br><span class="line">--device /dev/fuse \</span><br><span class="line">--security-opt apparmor=unconfined \</span><br><span class="line">-p 5801:5800 \</span><br><span class="line">-p 5901:5900 \</span><br><span class="line">-v /volume1/docker/rclone/config:/config \</span><br><span class="line">-v /volume1/docker/rclone/media:/media:shared \</span><br><span class="line">-e GROUP_ID=0 \</span><br><span class="line">-e USER_ID=0 \</span><br><span class="line">-e TZ=Asia/Shanghai \</span><br><span class="line">-e VNC_PASSWORD=123456 \</span><br><span class="line">-e ENABLE_CJK_FONT=1 \</span><br><span class="line">romancin/rclonebrowser:latest</span><br></pre></td></tr></table></figure>
 
@@ -610,12 +641,12 @@
 <p>如果你已经图形化安装过，请先删除再执行，否则会有冲突；</p>
 </blockquote>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>不管你用上面哪种安装方式，在浏览器中输入 <code>http://群晖IP:5801</code> 应该就可以看到主界面，不过如果设置了 <code>ENABLE_CJK_FONT = 1</code>，因为要安装字体</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210609135803.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210609135803.png"></p>
 <p>所以要等一会儿才行，这个取决于网速，有时候真的要很久很久，如果你发现容器并没有停止，但是又刷不出来主界面，十之八九就是卡在下载字体了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605193355.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605193355.png"></p>
 <p>填入我们前面设置的 <code>VNC_PASSWORD</code></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>不要直接点 <code>Config</code> 设置，因为后面需要在浏览器中验证并获取 <code>access_token</code>，这在容器里是实现不了的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210605194241.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210605194241.png"></p>
 <p>老苏用了个取巧的办法，直接将 <code>windows</code> 上的设置文件拷贝到了群晖里，然后直接刷新页面就可以了：</p>
 <ol>
 <li>下载 Rclone : <span class="exturl" data-url="aHR0cHM6Ly9yY2xvbmUub3JnL2Rvd25sb2Fkcy8=">https://rclone.org/downloads/<i class="fa fa-external-link-alt"></i></span>；</li>
@@ -629,35 +660,37 @@
 <h2 id="云盘挂载"><a href="#云盘挂载" class="headerlink" title="云盘挂载"></a>云盘挂载</h2><p>常规方式安装的不要去尝试 <code>mount</code>， 会返回下面👇这样的错误：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2021/06/09 14:19:18 NOTICE: One drive root <span class="string">&#x27;&#x27;</span>: --vfs-cache-mode writes or full is recommended <span class="keyword">for</span> this remote as it can<span class="string">&#x27;t stream</span></span><br><span class="line"><span class="string">2021/06/09 14:19:18 mount helper error: fusermount: fuse device not found, try &#x27;</span>modprobe fuse<span class="string">&#x27; first</span></span><br><span class="line"><span class="string">2021/06/09 14:19:18 Fatal error: failed to mount FUSE fs: fusermount: exit status 1</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210609141959.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210609141959.png"></p>
 <p>只有命令行安装的才能正常 <code>mount</code>，下图成功挂载了 5T 的 OD（One Drive）盘</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210610153125.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210610153125.png"></p>
 <p>在 <code>ssh</code> 中用 <code>df-h</code> 命令能看到挂载信息</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210617223705.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210617223705.png"></p>
 <p>在使用上跟本地盘是一样的，看起来似乎非常不错，但是也不是那么完美，因为每次开机之后，老苏要一个盘一个盘去 <code>mount</code>，另外也遇到过挂载成功后看不到内容的情况，没找到原因。老苏懒得折腾（主要是因为不懂），一般都是直接删容器，再用第三步的启动容器命令，一般都会OK的。</p>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>下图中分别是同步和拷贝操作</p>
 <ul>
 <li>云盘A –&gt; sync –&gt; 云盘B</li>
 <li>云盘A –&gt; copy –&gt; 云盘C</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210609194208.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210609194208.png"></p>
 <p>群晖主机的资源监控</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210609194242.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210609194242.png"></p>
 <p><code>docker</code> 本身资源消耗</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210610154220.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210610154220.png"></p>
 <p>看得出来资源占用还是很低的，接下来的玩法大家可以自由发挥了，但是不管怎么说，云盘还是有各种限制的，比如每天上传下载配额、单个文件大小、操作频次等等，要注意避免被禁止访问的风险。</p>
 <h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><ol>
-<li>如果下载显示 <code>permission denied</code> ，需要修改 <code>media</code> 目录的权限<br>比如使用 <code>chmod 777 media</code></li>
-<li>当你在做数据拷贝或者同步时，可能会在目录中留下残留文件，导致再次 <code>mount</code> 时，返回下面👇这样的错误</li>
+<li><p>如果下载显示 <code>permission denied</code> ，需要修改 <code>media</code> 目录的权限<br> 比如使用 <code>chmod 777 media</code></p>
+</li>
+<li><p>当你在做数据拷贝或者同步时，可能会在目录中留下残留文件，导致再次 <code>mount</code> 时，返回下面👇这样的错误</p>
+</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2021/06/18 14:13:54 Fatal error: Directory is not empty: /media/5tb If you want to mount it anyway use: --allow-non-empty option</span><br></pre></td></tr></table></figure>
 
 <p>可以修改参数，或者删除群晖目录中的残留文件(夹)</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210618142212.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210618142212.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>kapitainsky/RcloneBrowser: Simple cross platform GUI for rclone. Supports macOS, GNU/Linux, BSD family and Windows.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thcGl0YWluc2t5L1JjbG9uZUJyb3dzZXI=">https://github.com/kapitainsky/RcloneBrowser<i class="fa fa-external-link-alt"></i></span></p>
-<p>romancin/rclonebrowser-docker: A repository for creating a docker container including RClone Browser with GUI interface.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWFuY2luL3JjbG9uZWJyb3dzZXItZG9ja2Vy">https://github.com/romancin/rclonebrowser-docker<i class="fa fa-external-link-alt"></i></span></p>
-<p>romancin/rclonebrowser Dockerfile<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3JvbWFuY2luL3JjbG9uZWJyb3dzZXIvZG9ja2VyZmlsZQ==">https://hub.docker.com/r/romancin/rclonebrowser/dockerfile<i class="fa fa-external-link-alt"></i></span></p>
+<p>kapitainsky&#x2F;RcloneBrowser: Simple cross platform GUI for rclone. Supports macOS, GNU&#x2F;Linux, BSD family and Windows.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2thcGl0YWluc2t5L1JjbG9uZUJyb3dzZXI=">https://github.com/kapitainsky/RcloneBrowser<i class="fa fa-external-link-alt"></i></span></p>
+<p>romancin&#x2F;rclonebrowser-docker: A repository for creating a docker container including RClone Browser with GUI interface.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvbWFuY2luL3JjbG9uZWJyb3dzZXItZG9ja2Vy">https://github.com/romancin/rclonebrowser-docker<i class="fa fa-external-link-alt"></i></span></p>
+<p>romancin&#x2F;rclonebrowser Dockerfile<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL3JvbWFuY2luL3JjbG9uZWJyb3dzZXIvZG9ja2VyZmlsZQ==">https://hub.docker.com/r/romancin/rclonebrowser/dockerfile<i class="fa fa-external-link-alt"></i></span></p>
 <p>群晖 NAS 挂载 Google Drive 共享云端硬盘（团队盘） | 搁浅被注册了<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2hleWlsaW4uY29tLzIwMjAvMDQvZG9ja2VyLXJjbG9uZS1wcm94eQ==">https://www.sheyilin.com/2020/04/docker-rclone-proxy<i class="fa fa-external-link-alt"></i></span></p>
 <p>[Nas] 如何在 Synology Nas 中使用 docker 並建立 rclone 來掛載資料夾 ? | 從入門到放棄<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9leGZhc3QubWUvMjAyMC8wNy9uYXMtaG93LXRvLXVzZS1ydW5uaW5nLXRoZS1yY2xvbmUtb24tdGhlLWRvY2tlci1vbi10aGUtc3lub2xvZ3ktbmFzLXRvLW1vdW50LWZvbGRlci8=">https://exfast.me/2020/07/nas-how-to-use-running-the-rclone-on-the-docker-on-the-synology-nas-to-mount-folder/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Windows平台下使用 Rclone 挂载 OneDrive 为本地硬盘 - 热夏 - 博客园<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbXlzdW1tZXJkYXkvcC8xMjY2MTI2My5odG1s">https://www.cnblogs.com/mysummerday/p/12661263.html<i class="fa fa-external-link-alt"></i></span></p>
@@ -807,7 +840,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Shiori 是一款开源免费的书签管理软件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101536599.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101536599.png">
 <meta property="article:published_time" content="2022-09-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta property="article:tag" content="稍后阅读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101536599.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101536599.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/09/07/%E5%AE%89%E8%A3%85%E7%BD%91%E9%A1%B5%E4%B9%A6%E7%AD%BE%E6%94%B6%E8%97%8F%E5%A4%B9Shiori/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101536599.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101536599.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,14 +527,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202209062051480.png"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202209062051480.png"></p>
 <blockquote>
 <ul>
 <li>本文完成于 <code>7</code> 月初，最近工作比较忙，只能发发存稿；</li>
 <li>到本文发表为止，<code>Shiori</code> 的正式版依然还是 <code>v1.5.3</code>；</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202209051133482.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202209051133482.png"></p>
 <p><strong>什么是 Shiori ？</strong></p>
 <blockquote>
 <p><code>Shiori</code> 是一款用 <code>Go</code> 语言编写的简单书签管理器，旨在作为 <code>Pocket</code> 的简单克隆。您可以将其用作命令行应用程序或 <code>web</code> 应用程序，支持浏览器扩展，但没有手机客户端。</p>
@@ -511,40 +542,40 @@
 <p><code>Shiori</code> 是一款比较 <code>老</code> 的程序，但是一直还在更新中，其兼具了书签和稍后阅读的功能。</p>
 <p>之所以想起写 <code>Shiori</code> 是打算帮朋友看个问题，哪知道安装中遇到了一些坑，顺便就记录了一下，防止遗忘，使用的版本为 <code>v1.5.3</code></p>
 <h1 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h1><p><code>Shiori</code> 支持带 <code>SQLite3</code>、<code>MySQL</code>、<code>PostgreSQL</code> 数据库，既然是群晖所以就选择系统自带的 <code>MariaDB 10</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207071351460.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207071351460.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建了名为 <code>shiori</code> 的空数据库。</p>
 <blockquote>
 <p>这里假定数据库密码也设为了 <code>shiori</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207092219994.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207092219994.png"></p>
 <p>往常应该到这就结束了，容器在启动时应该会自己创建表和导入数据，进行数据的迁移，但是<code>Shiori</code> 并没有。直接安装后，在登录时会显示了下面的错误</p>
 <blockquote>
 <p>老苏尝试过使用 <code>SQLite</code> 也遇到同样的问题</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">failed to fetch accounts: Error 1146: Table &#x27;shiori.account&#x27; doesn&#x27;t exist (500)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207100945531.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207100945531.png"></p>
 <p>从报错看应该是没有创建相应的表，在 <code>phpMyAdmin</code> 看也确实没有表</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207100951955.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207100951955.png"></p>
 <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>手动导入 <code>SQL</code> 脚本，在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmkvdHJlZS9tYXN0ZXIvaW50ZXJuYWwvZGF0YWJhc2UvbWlncmF0aW9ucy9teXNxbA==">https://github.com/go-shiori/shiori/tree/master/internal/database/migrations/mysql<i class="fa fa-external-link-alt"></i></span> 可以找到 <code>MySQL</code> 对应的数据库脚本</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101055874.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101055874.png"></p>
 <p>你可以下载之后再在 <code>phpMyAdmin</code> 中导入，也可以直接复制</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101052017.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101052017.png"></p>
 <p>在 <code>phpMyAdmin</code> 中依次执行 <code>SQL</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101053697.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101053697.png"></p>
 <p><code>4</code> 个脚本全部完成后会有 <code>4</code> 张表</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101103674.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101103674.png"></p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>查阅后发现官方在 <code>v1.5.3</code> 的 <code>Breaking changes</code> 中做了说明</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208312300879.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208312300879.png"></p>
 <p>在容器启动之后，再执行下面的命令，即可完成数据库迁移</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it shiori shiori migrate</span><br></pre></td></tr></table></figure>
 
 <p>相比而言，方法二适用范围更广，是官方提供的方法；方法一就显得比较笨拙了，这是老苏在看到官方说明前使用的方法；</p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>但<code>dockerhub</code> 上的镜像已经超过了 <code>2</code> 年</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207091558114.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207091558114.png"></p>
 <p>并不是官方没有发布最新的镜像，而是发布到了 <code>ghcr.io</code>，从版本看，目前最新的版本是 <code>v1.5.3</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101154773.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101154773.png"></p>
 <p>用 <code>SSH</code> 客户端登录到群晖后，依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 shiori </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/shiori</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 shiori 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/shiori</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull ghcr.io/go-shiori/shiori</span><br></pre></td></tr></table></figure>
 
@@ -564,32 +595,32 @@
 <blockquote>
 <p>初始管理员用户名和密码为 <code>shiori</code> 和 <code>gopher</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207092308840.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207092308840.png"></p>
 <p>登录成功后</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101104862.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101104862.png"></p>
 <p>可以创建新的账号</p>
 <blockquote>
 <p>初始账号在数据库中是查不到的，插件登录只能用新建账号</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101107493.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101107493.png"></p>
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>目前支持 <code>Chrome</code> 和 <code>firefox</code> 插件， <code>Chrome</code> 插件可以在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmktd2ViLWV4dA==">https://github.com/go-shiori/shiori-web-ext<i class="fa fa-external-link-alt"></i></span> 下载，然后在 <code>Chrome</code>  的扩展程序页面打开「开发者模式」把下载的文件拖进去即可。</p>
 <p>设置服务器地址、账号、密码就可以开始使用了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101143546.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101143546.png"></p>
 <p>只要出现 <code>Active session</code> 就算登录成功了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101323332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101323332.png"></p>
 <p>收藏的时候有时候会报错</p>
 <blockquote>
 <p>没有去深究，可能还有隐藏的问题</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101357612.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101357612.png"></p>
 <p>实际上已经成功了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207101421521.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207101421521.png"></p>
 <p><code>Shiori</code> 的使用教程非常多，老苏就不打算再写使用篇了</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>go-shiori/shiori: Simple bookmark manager built with Go<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmk=">https://github.com/go-shiori/shiori<i class="fa fa-external-link-alt"></i></span></p>
+<p>go-shiori&#x2F;shiori: Simple bookmark manager built with Go<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmk=">https://github.com/go-shiori/shiori<i class="fa fa-external-link-alt"></i></span></p>
 <p>Package shiori<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmkvcGtncy9jb250YWluZXIvc2hpb3Jp">https://github.com/go-shiori/shiori/pkgs/container/shiori<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker Proxy 镜像加速<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NrZXJwcm94eS5jb20v">https://dockerproxy.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>shiori/Usage.md at master · go-shiori/shiori<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmkvYmxvYi9tYXN0ZXIvZG9jcy9Vc2FnZS5tZA==">https://github.com/go-shiori/shiori/blob/master/docs/Usage.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>shiori&#x2F;Usage.md at master · go-shiori&#x2F;shiori<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvLXNoaW9yaS9zaGlvcmkvYmxvYi9tYXN0ZXIvZG9jcy9Vc2FnZS5tZA==">https://github.com/go-shiori/shiori/blob/master/docs/Usage.md<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -736,7 +767,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

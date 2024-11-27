@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MinDoc 是一款针对IT团队开发的简单好用的文档管理系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271954923.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271954923.png">
 <meta property="article:published_time" content="2023-10-16T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271954923.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271954923.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/10/16/%E7%AE%80%E5%8D%95%E5%A5%BD%E7%94%A8%E7%9A%84%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FMinDoc/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271954923.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271954923.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,7 +540,7 @@
 
 <p>没有找到关于环境变量的说明，但是可以参考 <code>app.conf.example</code> 文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbmRvYy1vcmcvbWluZG9jL2Jsb2IvbWFzdGVyL2NvbmYvYXBwLmNvbmYuZXhhbXBsZQ==">https://github.com/mindoc-org/mindoc/blob/master/conf/app.conf.example<i class="fa fa-external-link-alt"></i></span></p>
 <p>安装完成后，可以在 <code>conf</code> 目录中找到 <code>app.conf</code> 和 <code>app.conf.example</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271751068.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271751068.png"></p>
 <blockquote>
 <p>如果你想使用 <code>MySQL</code> 做数据库，可以参考 <code>app.conf</code> 文件中的说明；</p>
 </blockquote>
@@ -523,17 +554,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 mindoc 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/mindoc/&#123;conf,database,runtime,static,uploads,views&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 mindoc 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/mindoc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8185</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271713888.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271713888.png"></p>
 <blockquote>
 <p>默认程序会自动初始化一个超级管理员用户：<code>admin</code>， 密码：<code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271714004.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271714004.png"></p>
 <p>进入演示项目，点 <code>编辑</code> 就可以开始编写文档了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271715223.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271715223.png"></p>
 <p>功能不复杂，如果不会就去看看官方的说明吧</p>
 <p>地址：<span class="exturl" data-url="aHR0cHM6Ly9taW5kb2MuY29tLmNuL2RvY3MvbWluZG9jaGVscA==">https://mindoc.com.cn/docs/mindochelp<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>mindoc-org/mindoc: Golang实现的基于beego框架的接口在线文档管理系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbmRvYy1vcmcvbWluZG9j">https://github.com/mindoc-org/mindoc<i class="fa fa-external-link-alt"></i></span></p>
+<p>mindoc-org&#x2F;mindoc: Golang实现的基于beego框架的接口在线文档管理系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbmRvYy1vcmcvbWluZG9j">https://github.com/mindoc-org/mindoc<i class="fa fa-external-link-alt"></i></span></p>
 <p>MinDoc文档管理系统 - Powered by MinDoc<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9taW5kb2MuY29tLmNuLw==">https://mindoc.com.cn/<i class="fa fa-external-link-alt"></i></span></p>
 <p>MinDoc 接口文档在线管理系统 - 官方网站<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaW1pbmhvLm1lLw==">https://www.iminho.me/<i class="fa fa-external-link-alt"></i></span></p>
 <p>MinDoc 简介 - Powered by MinDoc<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9taW5kb2MuY29tLmNuL2RvY3MvbWluZG9jaGVscA==">https://mindoc.com.cn/docs/mindochelp<i class="fa fa-external-link-alt"></i></span></p>
@@ -684,7 +715,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

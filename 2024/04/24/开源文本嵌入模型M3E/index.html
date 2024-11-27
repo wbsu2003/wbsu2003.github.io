@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="M3E 是一个开源的文本嵌入模型，适合使用场景主要是中文，少量英文的情况。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171452697.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171452697.png">
 <meta property="article:published_time" content="2024-04-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171452697.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171452697.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/04/24/%E5%BC%80%E6%BA%90%E6%96%87%E6%9C%AC%E5%B5%8C%E5%85%A5%E6%A8%A1%E5%9E%8BM3E/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171452697.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171452697.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.7k</span>
+      <span>3.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -501,16 +532,16 @@
 <p>具体是下面👇这样的</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@DS918:/volume2/docker/xiaoya# docker pull alpine:3.18.2</span><br><span class="line">3.18.2: Pulling from library/alpine</span><br><span class="line">31e352740f53: Already exists </span><br><span class="line">error pulling image configuration: Get <span class="string">&quot;https://production.cloudflare.docker.com/registry-v2/docker/registry/v2/blobs/sha256/c1/c1aabb73d2339c5ebaa3681de2e9d9c18d57485045a4e311d9f8004bec208d67/data?verify=1713883560-%2F3RhBOCWXsSAz9IO7i8g2LuGRCE%3D&quot;</span>: x509: certificate has expired or is not yet valid: current time 2024-04-23T21:56:03+08:00 is after 2021-09-30T14:01:15Z</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404232320895.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404232320895.png"></p>
 <p>通过 <code>dockerproxy</code> 下载则是正常的 </p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404232322982.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404232322982.png"></p>
 <p>下载 <code>ghcr.io</code> 的镜像也正常</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404232336046.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404232336046.png"></p>
 <p>①、网络没问题，另一台机器上下载镜像是正常的</p>
 <p>②、检查了证书也没到期，下图是重新生成的证书</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404232051658.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404232051658.png"></p>
 <p>③、系统时间也没问题</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404240859529.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404240859529.png"></p>
 <p>④、重装过 <code>docker</code> 套件（卸载–&gt;重启–&gt;安装），但问题一直没得到解决</p>
 <p>网上找了两天，也没有找到可行的解决方案，有点抓瞎 &#128514;</p>
 <p>有遇到过这种情况并解决的朋友，请不吝赐教，感谢！</p>
@@ -536,11 +567,11 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>m3e-large-api</code> ，选择第一个 <code>stawky/m3e-large-api</code>，只有一个 <code>latest</code> 版本，双击直接下载。</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404160912024.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404160912024.png"></p>
 <blockquote>
 <p>镜像比较大，如果下载不动，可以用命令行试试从国内阿里源下载</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171315302.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171315302.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -556,7 +587,7 @@
 <td align="center"><code>6008</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404160914241.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404160914241.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器（国外）</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name m3e-large-api \</span><br><span class="line">   -p 6008:6008 \</span><br><span class="line">   stawky/m3e-large-api:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器（国内）</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name m3e-large-api \</span><br><span class="line">   -p 6008:6008 \</span><br><span class="line">   registry.cn-hangzhou.aliyuncs.com/fastgpt_docker/m3e-large-api:latest</span><br></pre></td></tr></table></figure>
 
@@ -570,9 +601,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 m3e-large-api 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/m3e-large-api</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 m3e-large-api 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/m3e-large-api</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:6008</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404152141783.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404152141783.png"></p>
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><p>要验证 <code>API</code> 服务是否正常，除了查看日志</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171336648.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171336648.png"></p>
 <p>还可以用下面的示例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令行测试</span></span><br><span class="line">curl --location --request POST <span class="string">&#x27;http://&lt;服务地址:端口&gt;/v1/embeddings&#x27;</span> \</span><br><span class="line">--header <span class="string">&#x27;Authorization: Bearer &lt;秘钥&gt;&#x27;</span> \</span><br><span class="line">--header <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">--data-raw <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">  &quot;model&quot;: &quot;&lt;模型&gt;&quot;,</span></span><br><span class="line"><span class="string">  &quot;input&quot;: [&quot;&lt;问题&gt;&quot;]</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">curl --location --request POST <span class="string">&#x27;http://192.168.0.197:6008/v1/embeddings&#x27;</span> \</span><br><span class="line">--header <span class="string">&#x27;Authorization: Bearer sk-aaabbbcccdddeeefffggghhhiiijjjkkk&#x27;</span> \</span><br><span class="line">--header <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">--data-raw <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">  &quot;model&quot;: &quot;m3e&quot;,</span></span><br><span class="line"><span class="string">  &quot;input&quot;: [&quot;laf是什么&quot;]</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -584,7 +615,7 @@
 <li><code>&lt;问题&gt;</code>：填入你想问的问题</li>
 </ul>
 <p>如果看到下图这样的返回，就 <code>OK</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404152138706.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404152138706.png"></p>
 <h2 id="One-API"><a href="#One-API" class="headerlink" title="One API"></a>One API</h2><p>也可以用 <code>One API</code>进行管理和分发。老苏建议用这种方式</p>
 <p>在 <code>One API</code> 中添加新的渠道</p>
 <ul>
@@ -595,18 +626,18 @@
 <li>模型：输入自定义模型名称，<code>填入</code> 即可，例如：<code>m3e</code>，其他服务调用时，需匹配这个模型的名称</li>
 <li>秘钥：<code>sk-aaabbbcccdddeeefffggghhhiiijjjkkk</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404152144982.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404152144982.png"></p>
 <p>保存之后，一般会测试一下</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404152145901.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404152145901.png"></p>
 <p>返回 <code>404</code> 是正常的，<code>M3E</code>不是聊天模型，但测试调用的是 <code>chat</code>   接口，所以会失败</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171338047.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171338047.png"></p>
 <p>到这里，准备工作基本上就完成了，下一篇将正式进入知识库问答系统的搭建</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>moka-ai/m3e-large · Hugging Face<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9tb2thLWFpL20zZS1sYXJnZQ==">https://huggingface.co/moka-ai/m3e-large<i class="fa fa-external-link-alt"></i></span></p>
+<p>moka-ai&#x2F;m3e-large · Hugging Face<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9tb2thLWFpL20zZS1sYXJnZQ==">https://huggingface.co/moka-ai/m3e-large<i class="fa fa-external-link-alt"></i></span></p>
 <p>接入 M3E 向量模型 | FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2MuZmFzdGFpLnNpdGUvZG9jcy9kZXZlbG9wbWVudC9jdXN0b20tbW9kZWxzL20zZS8=">https://doc.fastai.site/docs/development/custom-models/m3e/<i class="fa fa-external-link-alt"></i></span></p>
 <p>docker部署m3e-large-api无法启动_开发工具-CSDN问答<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hc2suY3Nkbi5uZXQvcXVlc3Rpb25zLzgwNTYyNDk=">https://ask.csdn.net/questions/8056249<i class="fa fa-external-link-alt"></i></span></p>
-<p>docker stawky/m3e-large-api internal error · Issue #741 · labring/FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVC9pc3N1ZXMvNzQx">https://github.com/labring/FastGPT/issues/741<i class="fa fa-external-link-alt"></i></span></p>
-<p>本地部署的m3e-large-api不可用 · Issue #931 · labring/FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVC9pc3N1ZXMvOTMx">https://github.com/labring/FastGPT/issues/931<i class="fa fa-external-link-alt"></i></span></p>
+<p>docker stawky&#x2F;m3e-large-api internal error · Issue #741 · labring&#x2F;FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVC9pc3N1ZXMvNzQx">https://github.com/labring/FastGPT/issues/741<i class="fa fa-external-link-alt"></i></span></p>
+<p>本地部署的m3e-large-api不可用 · Issue #931 · labring&#x2F;FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVC9pc3N1ZXMvOTMx">https://github.com/labring/FastGPT/issues/931<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -753,7 +784,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

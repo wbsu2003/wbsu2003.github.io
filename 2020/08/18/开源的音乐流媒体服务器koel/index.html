@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2020/08/18/1597754181020-1597754181052.png">
 <meta property="article:published_time" content="2020-08-18T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="音乐">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +508,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -499,13 +530,13 @@
 <blockquote>
 <p>koel是一款网页版的开源个人音乐流媒体播放器，前端基于 vue , 后端基于 laravel PHP Framework 。采用了现代 Web 技术，例如 CSS 网格、音频和拖放 API 等等。遵守 MIT 开源协议。安装 PHP 环境后，可采用 MYSQL 数据库，搭建在服务器上，也可部署到 Docker 上。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596953637215-1596953637241.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596953637215-1596953637241.png" alt="title"></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前我们介绍并搭建过 <code>airsonic</code>， 一款基于 Java 开发的 Web 音乐应用，今天是另外一款​</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596975148546-1596975148548.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596975148546-1596975148548.png" alt="title"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>先建好数据库</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596972977127-1596972977128.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596972977127-1596972977128.png" alt="title"></p>
 <p>接下来用 Docker 安装 koel</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596958725025-1596958725026.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596958725025-1596958725026.png" alt="title"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
 <thead>
 <tr>
@@ -514,17 +545,17 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/koel/covers</td>
-<td align="center">/var/www/html/public/img/covers</td>
+<td align="center">&#x2F;docker&#x2F;koel&#x2F;covers</td>
+<td align="center">&#x2F;var&#x2F;www&#x2F;html&#x2F;public&#x2F;img&#x2F;covers</td>
 </tr>
 <tr>
-<td align="center">/docker/koel/music</td>
-<td align="center">/music</td>
+<td align="center">&#x2F;docker&#x2F;koel&#x2F;music</td>
+<td align="center">&#x2F;music</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596972065366-1596972065391.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596972065366-1596972065391.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>默认是80，别冲突就可以</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596972146683-1596972146685.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596972146683-1596972146685.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -553,7 +584,7 @@
 <td align="center">LALZTx6mxba7</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596974907068-1596974907070.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596974907068-1596974907070.png" alt="title"></p>
 <h1 id="第一次运行"><a href="#第一次运行" class="headerlink" title="第一次运行"></a>第一次运行</h1><p>SSH 连接到群晖，运行</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker exec -it &lt;container_name_for_koel&gt; bash</span></span><br><span class="line">docker <span class="built_in">exec</span> -it hyzual-koel1 bash</span><br></pre></td></tr></table></figure>
 
@@ -563,40 +594,40 @@
 <blockquote>
 <p>【已知问题】koel:init will fail at the stage where it checks front-end assets. This is known and is due to the absence of node.js and yarn. koel’s frontend assets are already built in this image so this step is not necessary.</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596977266710-1596977266712.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596977266710-1596977266712.png" alt="title"></p>
 <p>浏览器中打开 <code>http://群晖IP:2080</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596977079654-1596977079656.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596977079654-1596977079656.png" alt="title"></p>
 <p>登录成功后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/09/1596977010631-1596977010633.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/09/1596977010631-1596977010633.png" alt="title"></p>
 <h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>用 <code>https://域名</code> 访问，返回空白页面，查看网页源代码，发现均为 <code>http</code> 协议，怀疑是不支持 https 协议导致的，根据 <code>Laravel</code> 的特性，应该有单独的设置项。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker exec -it &lt;container_name_for_koel&gt; bash</span></span><br><span class="line">docker <span class="built_in">exec</span> -it hyzual-koel1 bash</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597153839744-1597153839749.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597153839744-1597153839749.png" alt="title"></p>
 <p>因为 <code>Docker</code> 中未安装 <code>vi</code>，所以需要先安装编辑器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597149967253-1597149967259.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597149967253-1597149967259.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vi</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597150104653-1597150104658.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597150104653-1597150104658.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597150138920-1597150138924.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597150138920-1597150138924.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597150204755-1597150204757.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597150204755-1597150204757.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 .env 文件</span></span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597153234326-1597153234328.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597153234326-1597153234328.png" alt="title"></p>
 <p>重启容器后，一切正常。</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>歌曲的上传</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597157118561-1597157118563.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597157118561-1597157118563.png" alt="title"></p>
 <p>临时用 XLD 转码一张孙露的专辑《一抹伤》做测试</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/12/1597218246423-1597218246426.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/12/1597218246423-1597218246426.png" alt="title"></p>
 <p>或者直接放到 <code>/music</code> 目录，再扫描</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597157235681-1597157235684.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597157235681-1597157235684.png" alt="title"></p>
 <p>播放列表</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/11/1597157280779-1597157280781.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/11/1597157280779-1597157280781.png" alt="title"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>颜值不错，很像 Spotify，可惜音乐格式只支持 <code>mp3</code>，这点肯定比不上 <code>airsonic</code>，但是系统占用小于 <code>airsonic</code>，如果你的收藏是 <code>mp3</code>，那这款应用值得一试。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/12/1597193888864-1597193888906.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/12/1597193888864-1597193888906.png" alt="title"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>koel 官方代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tvZWwva29lbA==">https://github.com/koel/koel<i class="fa fa-external-link-alt"></i></span>)</p>
 <p>Koel:一款超酷的私有音乐面板（基于larvel+vue）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzExOTguaHRtbA==">https://baiyue.one/archives/1198.html<i class="fa fa-external-link-alt"></i></span></p>
@@ -746,7 +777,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

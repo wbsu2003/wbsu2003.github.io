@@ -178,6 +178,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -410,7 +441,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/06/17/1592403673101-1592403673103.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/17/1592403673101-1592403673103.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -435,7 +466,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -485,7 +516,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/31/com.gianbresa.wake-1590924230496.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/31/com.gianbresa.wake-1590924230496.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -535,7 +566,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/06/01/1591002302270-1591002302272.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/06/01/1591002302270-1591002302272.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -560,7 +591,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/31/1590911657796-1590911657799.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/31/1590911657796-1590911657799.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -585,7 +616,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/29/1590763720285-1590763720314.png" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -610,7 +641,7 @@
       <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg" itemprop="contentUrl">
     </div>
     </div>
     </header>
@@ -676,7 +707,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

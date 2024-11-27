@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="免费开源还跨平台，支持下载 HTTP、FTP、BT、磁力链接等资源。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png">
 <meta property="article:published_time" content="2020-07-27T12:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="网盘">
 <meta property="article:tag" content="下载">
 <meta property="article:tag" content="Motrix">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/07/27/%E4%B8%80%E6%AC%BE%E5%85%A8%E8%83%BD%E7%9A%84%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7Motrix/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595864801341-1595864801345.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,41 +532,41 @@
 </blockquote>
 <h1 id="产品特性"><a href="#产品特性" class="headerlink" title="产品特性"></a>产品特性</h1><p>🕹 简洁明了的图形操作界面<br>🦄 支持BT和磁力链任务<br>☑️ 支持选择性下载BT部分文件<br>📡 每天自动更新 Tracker 服务器列表<br>🔌 UPnP &amp; NAT-PMP 端口映射<br>🎛 最高支持 10 个任务同时下载<br>🚀 单任务最高支持 64 线程下载<br>🕶 模拟用户代理UA<br>🔔 下载完成后通知<br>💻 支持触控栏快捷键(Mac 专享)<br>🤖 常驻系统托盘，操作更加便捷<br>🌑 深色模式<br>🗑 移除任务时可同时删除相关文件<br>🌍 国际化， 查看已可支持的语言<br>🛠 更多特性开发中</p>
 <p>软件主界面：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595860773837-1595860773868.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595860773837-1595860773868.png" alt="title"></p>
 <p>软件本身的使用非常简单，实在不会在这里能找到详细的使用说明，<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL21vYXBwL2hlbHA=">https://www.yuque.com/moapp/help<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="百度云的2种下载方式"><a href="#百度云的2种下载方式" class="headerlink" title="百度云的2种下载方式"></a>百度云的2种下载方式</h1><h2 id="Motrix-插件"><a href="#Motrix-插件" class="headerlink" title="Motrix 插件"></a>Motrix 插件</h2><p>Motrix 曾经提供过名为「百度网盘助手」的 Chrome 浏览器扩展，但是因为某种原因已经不提供了，但是我知道你总归还是有办法的。</p>
 <p>插件安装好之后，在您的百度网盘网页上会出现「MO.app」按钮。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595867567020-1595867567024.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595867567020-1595867567024.png" alt="title"></p>
 <p>先要设置，才能使用。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595867617615-1595867617617.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595867617615-1595867617617.png" alt="title"></p>
 <p>其实都已经配好了，只要测试成功就能用了。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595867665225-1595867665227.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595867665225-1595867665227.png" alt="title"></p>
 <p>另外别忘了插件要启用key</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595936377019-1595936377025.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595936377019-1595936377025.png" alt="title"></p>
 <p>这个key来自于 Motrix 的设置</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595899137317-1595899137319.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595899137317-1595899137319.png" alt="title"></p>
 <blockquote>
 <p>需要注意的是，在 windows 平台，用 ctrl +c 复制这个 key 实际上得到的是这样一串字符：<code>http://token:eJEPyMHltDcy@127.0.0.1:16800/jsonrpc</code>，而在 Mac 上 只有 <code>eJEPyMHltDcy</code>，需要自己补全，不然会有问题。</p>
 </blockquote>
 <p>下载前需要先启动 Motrix，选择要下载的文件，然后点「使用MO下载」即可。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595867770517-1595867770518.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595867770517-1595867770518.png" alt="title"></p>
 <h2 id="油猴（Tampermonkey）脚本"><a href="#油猴（Tampermonkey）脚本" class="headerlink" title="油猴（Tampermonkey）脚本"></a>油猴（Tampermonkey）脚本</h2><p>一个开源的脚本「百度网盘直链下载助手」，代码下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N5aHl6MTk5MC9iYWlkdXl1bg==">https://github.com/syhyz1990/baiduyun<i class="fa fa-external-link-alt"></i></span>。安装完成后，在您的百度网盘网页上会出现「下载助手」按钮。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595862832030-1595862832035.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595862832030-1595862832035.png" alt="title"></p>
 <p>要配合 Motrix 下载，我们要用 「PRC 下载」模式。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595900291772-1595900291779.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595900291772-1595900291779.png" alt="title"></p>
 <p>同样需要「配置 RPC 服务」</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595900332408-1595900332414.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595900332408-1595900332414.png" alt="title"></p>
 <blockquote>
 <p>1、这里的密钥只要填写前面 Motrix 生成的 <code>eJEPyMHltDcy</code> 即可；<br>2、端口改为16800；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/28/1595936119011-1595936119111.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/28/1595936119011-1595936119111.png" alt="title"></p>
 <p>详细的教程（<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmFpZHV5dW4ud2lraS96aC1jbi9ycGMuaHRtbCNtb3RyaXgtJUU0JUJEJUJGJUU3JTk0JUE4JUU2JThDJTg3JUU1JThEJTk3">https://www.baiduyun.wiki/zh-cn/rpc.html#motrix-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97<i class="fa fa-external-link-alt"></i></span>）在这里能找到。</p>
 <h2 id="两种下载方式的对比"><a href="#两种下载方式的对比" class="headerlink" title="两种下载方式的对比"></a>两种下载方式的对比</h2><p>2种下载方式的下载速度，显然油猴脚本的「下载助手」中的 RPC 下载速度更好，但不确定是否具备普遍性。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595861918637-1595861918639.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595861918637-1595861918639.png" alt="title"></p>
 <h1 id="其他网站的下载"><a href="#其他网站的下载" class="headerlink" title="其他网站的下载"></a>其他网站的下载</h1><p>建议下载「Motrix Chrome Extension」插件，用来拦截 chrome 的下载器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595863609686-1595863609687.png" alt="title"></p>
-<p>装了插件后默认会用 Motrix 下载，在「蜂鸟云盘」测试下载速度，网页直接下载大概在 7 MB/s左右，但是用 Motrix 可以达到 11 MB/s。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/07/27/1595863521050-1595863521053.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595863609686-1595863609687.png" alt="title"></p>
+<p>装了插件后默认会用 Motrix 下载，在「蜂鸟云盘」测试下载速度，网页直接下载大概在 7 MB&#x2F;s左右，但是用 Motrix 可以达到 11 MB&#x2F;s。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/07/27/1595863521050-1595863521053.png" alt="title"></p>
 <h1 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h1><p>工具用着虽然爽，但是各种云盘既然存在会员，既然存在限速，说明资源还是有限的，也许你占的就是VIP的带宽，别人可是交了钱才享受的服务，所以偶尔应应急就算了。羊毛可以撸，但是千万别撸太狠，把羊给撸没了。生存不易，网盘多的很，别总和百度较劲，且用且珍惜！</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>官网中文主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tb3RyaXguYXBwL3poLUNOLw==">https://motrix.app/zh-CN/<i class="fa fa-external-link-alt"></i></span></p>
@@ -684,7 +715,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

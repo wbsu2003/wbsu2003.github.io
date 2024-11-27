@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Scraperr 是一个自托管的 Web 应用程序，允许用户通过 XPath 指定元素从网页中抓取数据。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241119616.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241119616.png">
 <meta property="article:published_time" content="2024-07-29T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241119616.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241119616.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/07/29/Scraperr%E8%83%BD%E4%BB%8E%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8A%93%E5%8F%96%E6%95%B0%E6%8D%AE/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241119616.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241119616.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,14 +530,14 @@
 <blockquote>
 <p><code>Scraperr</code> 是一个自托管的 <code>Web</code> 应用程序，允许用户通过 <code>XPath</code> 指定元素从网页中抓取数据。用户可以提交要抓取的 <code>URL</code> 和相应元素，结果将显示在表格中。用户可以下载作业结果的 <code>Excel</code> 表，以及重新运行该作业的选项。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241026009.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241026009.png"></p>
 <h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>安装完成后，如果直接用 <code>IP</code> 访问，虽然能看到主界面，但是点什么都反应，所以我们需要通过反代实现域名的解析。</p>
 <p>官方用的是 <code>traefik</code>，这个老苏不熟悉，所以换成了 <code>nginx proxy manager</code></p>
 <p>因为无公网访问需求，本文采用了 <code>tailscale + npm</code> 方案</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2023/06/25/%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AEtailscale%E8%8A%82%E7%82%B9">用自定义域名访问tailscale节点</a></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221604330.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221604330.png"></p>
 <p>假设我们实际访问地址为： <code>https://pc.xxsu.cf</code></p>
 <table>
 <thead>
@@ -523,18 +554,18 @@
 </tr>
 </tbody></table>
 <p>在 <code>npm</code> 中的设置</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221747317.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221747317.png"></p>
 <p><code>SSL</code> 都勾选了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221747856.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221747856.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>scraperr</code> ，选择第一个 <code>jpyles0524/scraperr</code>，只有一个 <code>latest</code> 版本，双击直接下载</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241039293.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241039293.png"></p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">scraperr:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">jpyles0524/scraperr:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">webscrape-app</span></span><br><span class="line">    <span class="attr">init:</span> <span class="literal">True</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8124</span><span class="string">:8000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGODB_URI=mongodb://root:example@webscrape-mongo:27017</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">SECRET_KEY=your_secret_key</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ALGORITHM=HS256</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ACCESS_TOKEN_EXPIRE_MINUTES=600</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">HOSTNAME=pc.xxsu.cf</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">mongo:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:4.4.29</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">webscrape-mongo</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data/db</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="string">example</span></span><br></pre></td></tr></table></figure>
 
 <p>注意事项：</p>
 <ol>
-<li> 为避免在某些机器上出现指令不兼容的情况，<code>WARNING: MongoDB 5.0+ requires a CPU with AVX support, and your current system does not appear to have that!</code>，老苏用了 <code>mongo:4.4.29</code>，而不是 <code>mongo:latest</code>；</li>
+<li>为避免在某些机器上出现指令不兼容的情况，<code>WARNING: MongoDB 5.0+ requires a CPU with AVX support, and your current system does not appear to have that!</code>，老苏用了 <code>mongo:4.4.29</code>，而不是 <code>mongo:latest</code>；</li>
 <li>如果 <code>MONGO_INITDB_ROOT_USERNAME</code> 和 <code>MONGO_INITDB_ROOT_PASSWORD</code> 修改了， <code>MONGODB_URI</code> 要相应的变化；</li>
 <li><code>HOSTNAME</code> ：设置为域名；</li>
 </ol>
@@ -542,34 +573,34 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 scraperr 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/scraperr/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 scraperr 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/scraperr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>https://pc.xxsu.cf</code> 就能看到主界面，</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407241059797.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407241059797.png"></p>
 <p>第一次要注册账号，点 <code>Login</code> –&gt; <code>NO ACCOUNT? SIGN UP</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221740434.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221740434.png"></p>
 <p>注册成功会有提示</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221741481.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221741481.png"></p>
 <p>登录成功后</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407221742060.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407221742060.png"></p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>测试抓个标题看看，还是以老苏的博客为例</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231804531.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231804531.png"></p>
 <ul>
 <li><code>URL</code>：老苏的博客地址为 <code>https://laosu.tech</code></li>
 <li><code>Multi-Page Scrape</code>：看需要，这里没有勾选，所以只会抓取第一个（后来测试勾选了会失败）</li>
 <li><code>Name</code>：因为是抓标题，所以输入了 <code>title</code></li>
-<li><code>XPath</code>：可以在浏览器中获取到<code>/html/body/main/div[2]/div[1]/article/header/h2/a</code><br><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231758551.png"></li>
+<li><code>XPath</code>：可以在浏览器中获取到<code>/html/body/main/div[2]/div[1]/article/header/h2/a</code><br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231758551.png"></li>
 </ul>
 <p>点 <code>+</code> 号添加，可以设定多个条件</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231758774.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231758774.png"></p>
 <p>点 <code>submit</code> 提交到任务队列</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231759785.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231759785.png"></p>
 <p>很快就有结果</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231800395.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231800395.png"></p>
 <p>可以下载 <code>Excel</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231801117.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231801117.png"></p>
 <h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><code>Scraperr</code> 提供了 <code>API</code> ，打开 <code>https://pc.xxsu.cf/docs</code> 可以找到该 <code>API</code> 的文档页面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407231633343.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407231633343.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>jaypyles/Scraperr: Self-hosted webscraper.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pheXB5bGVzL1NjcmFwZXJy">https://github.com/jaypyles/Scraperr<i class="fa fa-external-link-alt"></i></span></p>
-<p>Update to Self-Hosted Webscraper “Scraperr” : r/selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMWU4cnl1YS91cGRhdGVfdG9fc2VsZmhvc3RlZF93ZWJzY3JhcGVyX3NjcmFwZXJyLw==">https://www.reddit.com/r/selfhosted/comments/1e8ryua/update_to_selfhosted_webscraper_scraperr/<i class="fa fa-external-link-alt"></i></span></p>
+<p>jaypyles&#x2F;Scraperr: Self-hosted webscraper.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pheXB5bGVzL1NjcmFwZXJy">https://github.com/jaypyles/Scraperr<i class="fa fa-external-link-alt"></i></span></p>
+<p>Update to Self-Hosted Webscraper “Scraperr” : r&#x2F;selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMWU4cnl1YS91cGRhdGVfdG9fc2VsZmhvc3RlZF93ZWJzY3JhcGVyX3NjcmFwZXJyLw==">https://www.reddit.com/r/selfhosted/comments/1e8ryua/update_to_selfhosted_webscraper_scraperr&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -715,7 +746,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

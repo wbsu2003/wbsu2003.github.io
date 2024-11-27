@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Superset 是由 Airbnb （知名在线短租赁公司）开源的数据分析与可视化平台（曾用名 Caravel 、 Panoramix ）。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png">
 <meta property="article:published_time" content="2021-08-23T10:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="BI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/23/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0Superset%EF%BC%88%E5%AE%89%E8%A3%85%E7%AF%87%EF%BC%89/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +508,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -501,14 +532,14 @@
 <hr>
 <p><strong>什么是 Superset ？</strong></p>
 <blockquote>
-<p><code>Superset</code> 是由  <code>Airbnb</code> （知名在线短租赁公司）开源的数据分析与可视化平台。支持丰富的数据源连接，多种可视化方式，并能够对用户实现细粒度的权限控制。该工具主要特点是可自助分析、自定义仪表盘、分析结果可视化（导出）、用户/角色权限控制，还集成了一个 <code>SQL</code> 编辑器，可以进行 <code>SQL</code> 编辑查询等。</p>
+<p><code>Superset</code> 是由  <code>Airbnb</code> （知名在线短租赁公司）开源的数据分析与可视化平台。支持丰富的数据源连接，多种可视化方式，并能够对用户实现细粒度的权限控制。该工具主要特点是可自助分析、自定义仪表盘、分析结果可视化（导出）、用户&#x2F;角色权限控制，还集成了一个 <code>SQL</code> 编辑器，可以进行 <code>SQL</code> 编辑查询等。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>superset</code> ，选择第一个 <code>amancevice/superset</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>本文完成于2021年3月，当时的 <code>latest</code> 和现在安装的可能会存在差异</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330153254.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330153254.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>superset</code>。然后在 <code>superset</code> 文件夹中再创建两个新的子文件夹，命名为 <code>config</code>  和 <code>data</code>。</p>
 <table>
 <thead>
@@ -524,7 +555,7 @@
 <td align="center">存放配置文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330192159.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330192159.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突</p>
 <table>
 <thead>
@@ -540,48 +571,48 @@
 <td align="center">TCP</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330154721.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330154721.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>开始资源会很高</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330155233.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330155233.png"></p>
 <p>甚至CPU占用回到100%</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330155304.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330155304.png"></p>
 <p>这个过程不会太长，这个时候你如果看日志，会发现日志在快速不停的刷新</p>
 <blockquote>
 <p>日志在 <code>Docker</code> –&gt; <code>容器</code> –&gt; <code>amancevice-superset1</code> –&gt; <code>详情</code> –&gt; <code>终端机</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330192610.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330192610.png"></p>
 <p>等到日志不再刷新的时候，你就可以在浏览器中输入 <code>http://群晖IP:8588</code> ，并看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330164341.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330164341.png"></p>
 <p>这个时候资源消耗会稳定下来</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330194335.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330194335.png"></p>
 <h2 id="配置用户名和密码"><a href="#配置用户名和密码" class="headerlink" title="配置用户名和密码"></a>配置用户名和密码</h2><p>启动 <code>Superset</code> 服务之后，使用 <code>superset-init</code> 脚本以 <code>admin</code> 用户和 <code>Superset</code> 表初始化数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset-init</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>其中 <code>amancevice-superset1</code> 是容器的名称</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330165501.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330165501.png"></p>
 <p>用刚才创建的 admin 用户登录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330171123.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330171123.png"></p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>命令查询</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330212707.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330212707.png"></p>
 <ol>
-<li> 设置您的本地管理员帐户</li>
+<li>设置您的本地管理员帐户</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset fab create-admin \</span><br><span class="line">              --username admin \</span><br><span class="line">              --firstname Superset \</span><br><span class="line">              --lastname Admin \</span><br><span class="line">              --email admin@superset.com \</span><br><span class="line">              --password admin</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
-<li> 将本地数据库迁移到最新版本</li>
+<li>将本地数据库迁移到最新版本</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset db upgrade</span><br></pre></td></tr></table></figure>
 <ol start="3">
-<li> 加载示例</li>
+<li>加载示例</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset load_examples</span><br></pre></td></tr></table></figure>
 <ol start="4">
-<li> 初始化 superset</li>
+<li>初始化 superset</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset init</span><br></pre></td></tr></table></figure>
 
@@ -596,31 +627,31 @@
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330222920.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330222920.png"></p>
 <ol start="3">
 <li>修改 <code>/usr/local/lib/python3.8/site-packages/superset/config.py</code></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/lib/python3.8/site-packages/superset/config.py</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330223215.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330223215.png"></p>
 <p>将 <code>en</code> 改为 <code>zh</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330223510.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330223510.png"></p>
 <ol start="4">
 <li>重新编译涉及到国际化的文件</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pybabel compile -d /usr/local/lib/python3.8/site-packages/superset/translations</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330224104.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330224104.png"></p>
 <ol start="5">
-<li> 重启服务</li>
+<li>重启服务</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止容器</span></span><br><span class="line">docker stop amancevice-superset1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker start amancevice-superset1</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330230650.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330230650.png"></p>
 <ol start="6">
 <li>打开主页 <code>http://群晖IP:8588</code>，已经是中文了</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210330224705.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210330224705.png"></p>
 <h2 id="更换数据库"><a href="#更换数据库" class="headerlink" title="更换数据库"></a>更换数据库</h2><p>从安装日志可以看出来，系统默认使用的数据源为 <code>SQLite</code>，为了提高性能，可以改成 <code>MySQL</code> 数据库</p>
 <ol>
 <li>群晖 MariaDB 中新建数据库 <code>superset</code></li>
@@ -628,7 +659,7 @@
 <blockquote>
 <p>只是为了演示方便，创建用户时勾选了 <code>创建与用户同名的数据库并授予所有权限。</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210331114454.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210331114454.png"></p>
 <ol start="2">
 <li>进入容器</li>
 </ol>
@@ -642,30 +673,30 @@
 <ol start="4">
 <li>修改系统数据源，格式为<code>SQLALCHEMY_DATABASE_URI =&quot;mysql://root:密码@xx.xx.xx.xx:3306/数据库名称?charset=utf8&quot;</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210331115856.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210331115856.png"></p>
 <ol start="5">
 <li>初始化数据库</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 退出容器</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化数据库</span></span><br><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset db upgrade</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210331120033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210331120033.png"></p>
 <ol start="6">
 <li>初始化 superset</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it amancevice-superset1 superset-init</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210331120439.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210331120439.png"></p>
 <blockquote>
 <p>上图中可以看出已经切换到了 MySQL 了</p>
 </blockquote>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Welcome | Superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zdXBlcnNldC5hcGFjaGUub3JnLw==">https://superset.apache.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>apache/superset: Apache Superset is a Data Visualization and Data Exploration Platform<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FwYWNoZS9zdXBlcnNldA==">https://github.com/apache/superset<i class="fa fa-external-link-alt"></i></span></p>
-<p>amancevice/docker-superset: Docker image for AirBnB’s Superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtYW5jZXZpY2UvZG9ja2VyLXN1cGVyc2V0">https://github.com/amancevice/docker-superset<i class="fa fa-external-link-alt"></i></span></p>
-<p>amancevice/superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2FtYW5jZXZpY2Uvc3VwZXJzZXQv">https://hub.docker.com/r/amancevice/superset/<i class="fa fa-external-link-alt"></i></span></p>
-<p>docker-superset/examples at main · amancevice/docker-superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtYW5jZXZpY2UvZG9ja2VyLXN1cGVyc2V0L3RyZWUvbWFpbi9leGFtcGxlcw==">https://github.com/amancevice/docker-superset/tree/main/examples<i class="fa fa-external-link-alt"></i></span></p>
+<p>apache&#x2F;superset: Apache Superset is a Data Visualization and Data Exploration Platform<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FwYWNoZS9zdXBlcnNldA==">https://github.com/apache/superset<i class="fa fa-external-link-alt"></i></span></p>
+<p>amancevice&#x2F;docker-superset: Docker image for AirBnB’s Superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtYW5jZXZpY2UvZG9ja2VyLXN1cGVyc2V0">https://github.com/amancevice/docker-superset<i class="fa fa-external-link-alt"></i></span></p>
+<p>amancevice&#x2F;superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2FtYW5jZXZpY2Uvc3VwZXJzZXQv">https://hub.docker.com/r/amancevice/superset/<i class="fa fa-external-link-alt"></i></span></p>
+<p>docker-superset&#x2F;examples at main · amancevice&#x2F;docker-superset<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtYW5jZXZpY2UvZG9ja2VyLXN1cGVyc2V0L3RyZWUvbWFpbi9leGFtcGxlcw==">https://github.com/amancevice/docker-superset/tree/main/examples<i class="fa fa-external-link-alt"></i></span></p>
 <p>superset的docker安装配置和汉化_小小北漂-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ1ODk4NTYvYXJ0aWNsZS9kZXRhaWxzLzEwMzU4MjgyNA==">https://blog.csdn.net/u014589856/article/details/103582824<i class="fa fa-external-link-alt"></i></span> </p>
-<p>Superset 基于Docker的安装&amp;入门解析_kamisamak的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODg3MDk2L2FydGljbGUvZGV0YWlscy8xMTQ1MzI5NDg=">https://blog.csdn.net/qq_33887096/article/details/114532948<i class="fa fa-external-link-alt"></i></span></p>
+<p>Superset 基于Docker的安装&amp;入门解析_kamisamak的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzODg3MDk2L2FydGljbGUvZGV0YWlscy8xMTQ1MzI5NDg=">https://blog.csdn.net/qq_33887096&#x2F;article&#x2F;details&#x2F;114532948<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -811,7 +842,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Easy countdown 是一个易于设置的倒计时页面。可以设置为倒计时或计时器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211190106696.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211190106696.png">
 <meta property="article:published_time" content="2023-01-18T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211190106696.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211190106696.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/01/18/%E6%98%93%E4%BA%8E%E8%AE%BE%E7%BD%AE%E7%9A%84%E5%80%92%E8%AE%A1%E6%97%B6%E9%A1%B5%E9%9D%A2Easy%20countdown/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211190106696.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211190106696.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,17 +527,17 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>今天开始放假了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202301180934514.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301180934514.png"></p>
 <hr>
 <p><strong>什么是 Easy countdown ？</strong></p>
 <blockquote>
 <p><code>Easy countdown</code> 是一个易于设置的倒计时页面。可以设置为倒计时或计时器。</p>
 </blockquote>
 <p>先看看官方提供的动图</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182218438.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182218438.gif"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>easy-countdown</code> ，选择第一个 <code>yooooomi/easy-countdown</code>，双击直接下载。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182257384.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182257384.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -523,9 +554,9 @@
 </tr>
 </tbody></table>
 <p>默认没有暴露端口</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182259848.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182259848.png"></p>
 <p>需要点 <code>+</code> 号自己添加</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182300920.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182300920.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -551,15 +582,15 @@
 <li><code>TIMER_BACKGROUND</code>：可以到 <span class="exturl" data-url="aHR0cHM6Ly9kaWd3YWxscGFwZXJzLmNvbS8=">https://digwallpapers.com/<i class="fa fa-external-link-alt"></i></span> 上去找喜欢的图片；</li>
 <li><code>TIMER_TARGET</code> ：时间的格式有固定的要求，但是不符合中国人的习惯，需要通过专门的网站来帮助我们进行转换</li>
 </ul>
-<p>第一步、打开网站：<span class="exturl" data-url="aHR0cHM6Ly9lc3Fzb2Z0LmNvbS9qYXZhc2NyaXB0X2V4YW1wbGVzL2RhdGUtdG8tZXBvY2guaHRt">https://esqsoft.com/javascript_examples/date-to-epoch.htm<i class="fa fa-external-link-alt"></i></span> </p>
+<p>第一步、打开网站：<span class="exturl" data-url="aHR0cHM6Ly9lc3Fzb2Z0LmNvbS9qYXZhc2NyaXB0X2V4YW1wbGVzL2RhdGUtdG8tZXBvY2guaHRt">https://esqsoft.com/javascript_examples&#x2F;date-to-epoch.htm<i class="fa fa-external-link-alt"></i></span> </p>
 <p>第二步、在①中输入选择你目标日期，点②中的 <code>To Epoch</code>，得到③的数值</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182314061.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182314061.png"></p>
 <p>第三步、复制③的值填入④，点⑤中的 <code>To Date</code>，得到⑥的时间 <code>Sat Nov 26 2022 06:00:00 GMT+0800</code>，这就是我们填入 <code>TIMER_TARGET</code>的值</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182317750.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182317750.png"></p>
 <ul>
 <li><code>TIMER_TITLE</code>：倒计时的标题，支持中文；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182329518.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182329518.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name countdown \   </span><br><span class="line">   -p 3434:3000 \</span><br><span class="line">   -e TIMER_BACKGROUND=<span class="string">&quot;https://digwallpapers.com/wallpapers/full/3/a/2/32039-3840x2160-sci-fi-images-background-desktop-4k.jpg&quot;</span> \</span><br><span class="line">   -e TIMER_TARGET=<span class="string">&quot;Sat Nov 26 2022 06:00:00 GMT+0800&quot;</span> \</span><br><span class="line">   -e TIMER_TITLE=<span class="string">&quot;Business trip in Suzhou&quot;</span> \</span><br><span class="line">   yooooomi/easy-countdown</span><br></pre></td></tr></table></figure>
 
@@ -570,16 +601,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 countdown 目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/countdown</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 countdown 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/countdown</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>如果 <code>TIMER_TITLE</code>中使用了中文。记得用 <code>UTF-8</code> 编码</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182332615.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182332615.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3030</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182240088.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182240088.png"></p>
 <p>中文标题</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182323160.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182323160.png"></p>
 <p>看着挺酷，但似乎又没什么用处，因为连通知都没有，唯一的优点可能就是能在任何设备上打开同一个计时器</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211182349812.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211182349812.jpg"></p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
-<p>Yooooomi/easy-countdown<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1lvb29vb21pL2Vhc3ktY291bnRkb3du">https://github.com/Yooooomi/easy-countdown<i class="fa fa-external-link-alt"></i></span></p>
-<p>Self-hosted countdown timer(? Is this a thing?) : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMveWJ1emQ2L3NlbGZob3N0ZWRfY291bnRkb3duX3RpbWVyX2lzX3RoaXNfYV90aGluZy8=">https://www.reddit.com/r/selfhosted/comments/ybuzd6/selfhosted_countdown_timer_is_this_a_thing/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Yooooomi&#x2F;easy-countdown<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1lvb29vb21pL2Vhc3ktY291bnRkb3du">https://github.com/Yooooomi/easy-countdown<i class="fa fa-external-link-alt"></i></span></p>
+<p>Self-hosted countdown timer(? Is this a thing?) : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMveWJ1emQ2L3NlbGZob3N0ZWRfY291bnRkb3duX3RpbWVyX2lzX3RoaXNfYV90aGluZy8=">https://www.reddit.com/r/selfhosted/comments/ybuzd6/selfhosted_countdown_timer_is_this_a_thing&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -725,7 +756,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

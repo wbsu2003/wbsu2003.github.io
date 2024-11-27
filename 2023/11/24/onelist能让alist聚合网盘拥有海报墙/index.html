@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="onelist 是一个类似 emby 的专注于刮削 alist 聚合网盘形成影视媒体库的程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211642932.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211642932.png">
 <meta property="article:published_time" content="2023-11-24T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211642932.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211642932.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/11/24/onelist%E8%83%BD%E8%AE%A9alist%E8%81%9A%E5%90%88%E7%BD%91%E7%9B%98%E6%8B%A5%E6%9C%89%E6%B5%B7%E6%8A%A5%E5%A2%99/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211642932.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211642932.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,15 +536,15 @@
 <li>使用 <code>webdav</code> 挂载本地后，用 <code>jellyfin</code> 或者 <code>emby</code> 刮削会下载视频截取封面导致封号；</li>
 <li>用 <code>jellyfin</code> 或者 <code>emby</code> 之类，没有大带宽公网 <code>ip</code>，在外难以访问；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201138711.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201138711.png"></p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="TMDB-API-申请"><a href="#TMDB-API-申请" class="headerlink" title="TMDB API 申请"></a>TMDB API 申请</h2><p>在浏览器中打开 <code>https://www.themoviedb.org</code>，右上角 <code>加入 TMDB</code> </p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201546328.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201546328.png"></p>
 <p>注册一个账号</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201547567.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201547567.png"></p>
 <p>登录成功后，进入 <code>账户设置</code>，</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201551403.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201551403.png"></p>
 <p>找到 <code>API</code> –&gt; <code>创建</code> –&gt; <code>Developer</code> ，第一次要填写一些应用信息，无非是应用名称、<code>URL</code>、简介一类的，成功之后就能看到<code>API 密钥</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201556732.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201556732.png"></p>
 <h2 id="hosts"><a href="#hosts" class="headerlink" title="hosts"></a>hosts</h2><p><code>TMDB</code> 的访问存在一些限制，如果刮削效果不好，可以尝试修改路由器的自定义 <code>HOST</code> 或者容器的 <code>hosts</code> 文件</p>
 <p>路由器不同，可能设置自定义 <code>HOST</code>  的方法也不一样，所以这里就只介绍修改容器内的 <code>hosts</code> 文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器内</span></span><br><span class="line">docker <span class="built_in">exec</span> -it onelist /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑 hosts 文件</span></span><br><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
@@ -536,7 +567,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v2.0.5</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201141811.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201141811.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>onelist</code>，并在其中建一个子文件夹 <code>config</code></p>
 <table>
 <thead>
@@ -552,7 +583,7 @@
 <td align="center">存放设置和数据库文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201333955.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201333955.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -568,7 +599,7 @@
 <td align="center"><code>5245</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201334902.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201334902.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -589,7 +620,7 @@
 <td align="center">时区，默认值为 <code>Asia/Shanghai</code>，不需要修改</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201339332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201339332.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 onelist 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/onelist/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 onelist 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/onelist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name onelist \</span><br><span class="line">   --add-host api.themoviedb.org:13.224.161.90 \</span><br><span class="line">   -p 5245:5245 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">   -e PUID=0 \</span><br><span class="line">   -e PGID=0 \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   msterzhang/onelist:latest</span><br></pre></td></tr></table></figure>
 
@@ -598,7 +629,7 @@
 <li><code>PUID</code> 和 <code>PGID</code> 均为 <code>0</code> 表示是 <code>root</code> 用户，也就是超级用户或系统管理员；</li>
 <li><code>--add-host api.themoviedb.org:13.224.161.90</code> 会向容器内的 <code>hosts</code> 文件中插入一条记录；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201633458.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201633458.png"></p>
 <h2 id="docker-compose-安装"><a href="#docker-compose-安装" class="headerlink" title="docker-compose 安装"></a>docker-compose 安装</h2><p>也可以用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">onelist:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">onelist</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">&#x27;msterzhang/onelist:latest&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;./config:/config&#x27;</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;5245:5245&#x27;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PUID=0</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PGID=0</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">UMASK=022</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">extra_hosts:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;api.themoviedb.org:13.224.161.90&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;api.themoviedb.org:13.35.67.86&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;api.themoviedb.org:13.249.175.212&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;api.themoviedb.org:13.35.161.120&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;image.themoviedb.org:104.16.61.155&#x27;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;www.themoviedb.org:54.192.151.79&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -610,41 +641,41 @@
 <p>默认用户：<code>xxxx.@qq.com</code>，默认密码：<code>xxxxx</code>。</p>
 <p><strong>【注意】</strong>：进入后台后，需要删除初始化的默认账号，防止被别人登录</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211453519.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211453519.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201240268.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201240268.png"></p>
 <p><code>管理</code> –&gt; <code>系统设置</code> –&gt; <code>TheMovieDb api密匙</code>，虽然系统带了一个，但不确定是否能用，最好还是用我们自己申请的 <code>key</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201424433.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201424433.png"></p>
 <p>也可以在 <code>config</code> 中</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201221390.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201221390.png"></p>
 <p>找到配置文件 <code>config.env</code> 文件修改</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201223555.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201223555.png"></p>
 <p><code>管理</code> –&gt; <code>媒体中心</code> –&gt; <code>新增</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201301956.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201301956.png"></p>
 <p>填写媒体库信息和 <code>Alist</code> 信息，封面可以先不填，类型支持电影和电视剧；域名、账号和密码就是你的 <code>Alist</code> 的域名、管理账号和密码。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211451475.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211451475.png"></p>
 <p>媒体库创建成功后，需要挂载目录</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201306852.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201306852.png"></p>
 <p><code>Alist</code> 中阿里云盘的设置</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201309763.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201309763.png"></p>
 <p>老苏收藏的电影的完整路径，<code>http://192.168.191.199:5244/阿里云盘181/视频/电影/全球华语影视</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201330752.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201330752.png"></p>
 <p>设置路径为 <code>/阿里云盘181/视频/电影/全球华语影视</code>，至于下面两个开关，老苏都打开了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201315464.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201315464.png"></p>
 <p>设置完成后就开始刮削了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201317968.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201317968.png"></p>
 <p>如果设置没问题，会看到处理进度</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201327872.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201327872.png"></p>
 <p>完成之后，主页能看到刮削成功的内容</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211535521.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211535521.png"></p>
 <p>进入查看详情</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211618351.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211618351.png"></p>
 <p>支持直接播放</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311211619013.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311211619013.png"></p>
 <p>看起来刮削的效果并不好，不知道是网络问题还是用了默认的 <code>tmdb api key</code>，回头再试试 <code>修复</code> </p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311201421235.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311201421235.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>msterzhang/onelist: 一个类似emby的专注于刮削alist聚合网盘形成影视媒体库的程序。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21zdGVyemhhbmcvb25lbGlzdA==">https://github.com/msterzhang/onelist<i class="fa fa-external-link-alt"></i></span></p>
+<p>msterzhang&#x2F;onelist: 一个类似emby的专注于刮削alist聚合网盘形成影视媒体库的程序。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21zdGVyemhhbmcvb25lbGlzdA==">https://github.com/msterzhang/onelist<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -790,7 +821,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

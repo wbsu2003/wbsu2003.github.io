@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="qBittorrent 是一款开源、免费、跨平台的种子和磁力链接下载工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
 <meta property="article:published_time" content="2021-02-12T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="BitTorrent">
 <meta property="article:tag" content="下载">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/02/12/%E5%AE%89%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7qBittorrent/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096041139-1613096041142.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -497,16 +528,16 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>给大家拜年了，新春快乐，牛年大吉，身体健康，阖家幸福</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/12/1613096839922-1613096839927.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/12/1613096839922-1613096839927.png" alt="title"></p>
 <p><strong>什么是 qBittorrent？</strong></p>
 <blockquote>
 <p><code>qBittorrent</code> 是一款开源免费的种子和磁力链接下载工具，支持 <code>Windows</code>、<code>Mac</code> 和 <code>Linux</code>，是一个跨平台的自由 <code>BitTorrent</code> 客户端，其图形用户接口由 <code>Qt</code> 写成。使用<code>libtorrent</code> 作为后端。由 Christophe Dumez 在贝尔福 - 蒙贝利亚尔理工大学时开始开发。</p>
 </blockquote>
 <p>我下载的需求不大，一直用的玩客云，这玩意儿现在淘宝上还不到50块，比买迅雷会员合算多了，插个移动硬盘就成了下载机，又经济又实惠。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210119202444.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210119202444.png"></p>
 <p>但为啥又要折腾下载软件呢？因为 <code>qBittorrent</code> 支持 RSS 订阅，可以实现自动化的更新，这会让我们以后的折腾变得更有趣。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>qbittorrent</code> ，选择第三个 <code>johngong/qbittorrent</code>，版本 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611716629429-1611716629469.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611716629429-1611716629469.png" alt="title"></p>
 <p>这个版本集成了 <code>Trackers</code> 自动更新，可以帮我们省一些事情。</p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><table>
 <thead>
@@ -517,17 +548,17 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/qbittorrent/config</td>
-<td align="center">/config</td>
+<td align="center">&#x2F;docker&#x2F;qbittorrent&#x2F;config</td>
+<td align="center">&#x2F;config</td>
 <td align="center">配置文件的目录</td>
 </tr>
 <tr>
-<td align="center">/docker/qbittorrent/downloads</td>
-<td align="center">/Downloads</td>
+<td align="center">&#x2F;docker&#x2F;qbittorrent&#x2F;downloads</td>
+<td align="center">&#x2F;Downloads</td>
 <td align="center">下载文件的目录</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611717860067-1611717860070.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611717860067-1611717860070.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突</p>
 <table>
 <thead>
@@ -557,7 +588,7 @@
 <td align="center">web访问端口</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611717904227-1611717904232.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611717904227-1611717904232.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -587,86 +618,86 @@
 </tr>
 <tr>
 <td align="center">TZ</td>
-<td align="center">系统时区设置，默认为Asia/Shanghai</td>
+<td align="center">系统时区设置，默认为Asia&#x2F;Shanghai</td>
 </tr>
 </tbody></table>
 <blockquote>
 <p>注意事项：</p>
 <ol>
 <li><code>WEBUIPORT</code> 要根据前面本地端口的设置而修改，如果不一致可能会导致无法访问。</li>
-<li> 默认的 <code>UID</code> 和 <code>GID</code> 均为 0，这是 <code>root</code> 用户，如果你要使用，请勿将对权限敏感的文件夹映射到此文件夹。<code>UID</code> 和 <code>GID</code> 要通过运行 <code>id user</code> 命令来获得。或者像我一样用 <code>1000</code>，这代表第一个用户。</li>
+<li>默认的 <code>UID</code> 和 <code>GID</code> 均为 0，这是 <code>root</code> 用户，如果你要使用，请勿将对权限敏感的文件夹映射到此文件夹。<code>UID</code> 和 <code>GID</code> 要通过运行 <code>id user</code> 命令来获得。或者像我一样用 <code>1000</code>，这代表第一个用户。</li>
 <li>其他值保持默认就可以。</li>
 </ol>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611718253432-1611718253441.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611718253432-1611718253441.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8989</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201103003951.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201103003951.png"></p>
 <blockquote>
 <p>默认的用户名：admin，密码：adminadmin</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201103003907.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201103003907.png"></p>
 <p>登录成功</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611719062262-1611719062272.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719062262-1611719062272.png" alt="title"></p>
 <h2 id="搜索和下载"><a href="#搜索和下载" class="headerlink" title="搜索和下载"></a>搜索和下载</h2><p>设置中，默认勾选了 <code>使用我的路由器的 UPnP / NAT-PMP 功能来转发端口</code>，</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/17/1610878034131-1610878034134.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/17/1610878034131-1610878034134.png" alt="title"></p>
 <p>但还需要在路由器开启 <code>UPnP / NAT-PMP</code> 功能。每个路由器不同，我用的电信送的磊科 MG1200AC ，在 <code>路由器设置</code> –&gt; <code>开发者模式</code> 中可以启用和关闭。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611761715522-1611761715552.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611761715522-1611761715552.png" alt="title"></p>
 <p>找到右上侧的 <code>搜索</code>，输入你要搜索的内容</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/17/1610874947128-1610874947130.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/17/1610874947128-1610874947130.png" alt="title"></p>
 <p>选中你想下载的资源，双击</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/17/1610875028214-1610875028215.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/17/1610875028214-1610875028215.png" alt="title"></p>
 <p>开始下载</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/17/1610875096483-1610875096484.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/17/1610875096483-1610875096484.png" alt="title"></p>
 <p>如果下载速度慢可能是种子问题也可能是网络环境问题</p>
 <h2 id="启用-Jackett-插件"><a href="#启用-Jackett-插件" class="headerlink" title="启用 Jackett 插件"></a>启用 Jackett 插件</h2><p>默认启用了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/29/1611901927050-1611901927058.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901927050-1611901927058.png" alt="title"></p>
 <p>但不做任何修改会提示 API 错误</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/29/1611901483359-1611901483367.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901483359-1611901483367.png" alt="title"></p>
 <p>按提示找到 <code>/docker/qbittorrent/config/qBittorrent/data/nova3/engines</code> 下的 <code>jackett.json</code>，右键 <code>用文本编辑器打开</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/29/1611901688264-1611901688272.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611901688264-1611901688272.png" alt="title"></p>
 <p><code>api_key</code> 可以在 <code>Jackett</code> 主界面的右上角找到</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/29/1611902029591-1611902029593.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611902029591-1611902029593.png" alt="title"></p>
 <p><code>url</code> 根据实际的地址填写，保存即可。再次搜索就会有结果返回了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/29/1611902252235-1611902252246.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/29/1611902252235-1611902252246.png" alt="title"></p>
 <h2 id="支持-https"><a href="#支持-https" class="headerlink" title="支持 https"></a>支持 https</h2><p>点 <code>注册以处理磁力链接</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611739192454-1611739192491.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739192454-1611739192491.png" alt="title"></p>
 <p>显示需要支持 https 才可以，其实我好像是能直接添加磁力链接下载的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611739230481-1611739230488.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739230481-1611739230488.png" alt="title"></p>
 <p>首先，在 <code>控制面板</code> –&gt; <code>Synology 应用程序门口</code> –&gt; <code>反向代理服务器</code> 中新增规则</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611739417129-1611739417133.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739417129-1611739417133.png" alt="title"></p>
 <p>停止容器，找到 <code>/docker/qbittorrent/config/qBittorrent/config</code> 目录中的 <code>qBittorrent.conf</code> 文件，习惯在修改前先备份一份。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611739831171-1611739831174.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611739831171-1611739831174.png" alt="title"></p>
 <p>找到 <code>WebUI\HostHeaderValidation=true</code> , 将 <code>true</code> 改为 <code>false</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611738123706-1611738123712.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611738123706-1611738123712.png" alt="title"></p>
 <p>改为重新启动容器就可以了。</p>
 <blockquote>
 <p>如果不改这一行，访问时会显示 <code>Unanthorized</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611738150322-1611738150329.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611738150322-1611738150329.png" alt="title"></p>
 <h2 id="RSS-订阅"><a href="#RSS-订阅" class="headerlink" title="RSS 订阅"></a>RSS 订阅</h2><p>直接点开右上角的 <code>RSS</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611719471781-1611719471788.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719471781-1611719471788.png" alt="title"></p>
 <p>回到设置中，勾选 <code>启用获取 RSS 订阅</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611719602070-1611719602077.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719602070-1611719602077.png" alt="title"></p>
 <p>如果你要想使用 RSS 下载，还需要勾选 <code>启用 RSS Torrent 自动下载</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/27/1611719854767-1611719854770.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/27/1611719854767-1611719854770.png" alt="title"></p>
 <ol>
 <li>转到 <code>qBittorrent</code> 的 <code>RSS</code> 选项卡。</li>
 <li>点击 <code>新 RSS订阅</code> </li>
-<li>在弹出界面中的 URL 地址中输入在上一篇文章《<a href="https://laosu.tech/2021/02/08/%E8%B5%84%E6%BA%90%E8%81%9A%E5%90%88%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8Jackett/">资源聚合搜索神器Jackett</a>》中生成的带查询结果的RSS， 然后单击“确定” 。 </li>
+<li>在弹出界面中的 URL 地址中输入在上一篇文章《<a href="https://laosu.tech/2021/02/08/%E8%B5%84%E6%BA%90%E8%81%9A%E5%90%88%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8Jackett/">资源聚合搜索神器Jackett</a>》中生成的带查询结果的RSS， 然后单击“确定” 。</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.0.199:9117/api/v2.0/indexers/zooqle/results/torznab/api?apikey=4dekwddu91wlil50ho1xrj17fz008aaa&amp;t=search&amp;cat=5000,103583&amp;q=西部世界</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/28/1611824577129-1611824577162.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/28/1611824577129-1611824577162.png" alt="title"></p>
 <p>添加完成后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210129112330.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210129112330.png"></p>
 <p>转到 <code>RSS 下载器</code> 并按照打开的屏幕截图中的示例设置一些规则，</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210129140822.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210129140822.png"></p>
 <p>qBittorrent 就会根据你的设置，把订阅的并符合下载规则的资源自动下载。但这个功能要慎用，如果设置不当，可能会下载一堆你不需要的东西回来。</p>
 <p>要实现更高效的自动化下载，且听下回分解​。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>折腾群晖笔记：使用群晖 Docker 安装qbittorrent QB下载器 PT离线下载神器_NAS存储_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E1azY0NTg3Lw==">https://post.smzdm.com/p/a5k64587/<i class="fa fa-external-link-alt"></i></span></p>
 <p>蜗牛星际NAS 篇三：qBittorrent下载器安装配置_办公软件_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2F6NWV6eDkwLw==">https://post.smzdm.com/p/az5ezx90/<i class="fa fa-external-link-alt"></i></span></p>
-<p>How to configure Jackett plugin · qbittorrent/search-plugins Wiki · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3FiaXR0b3JyZW50L3NlYXJjaC1wbHVnaW5zL3dpa2kvSG93LXRvLWNvbmZpZ3VyZS1KYWNrZXR0LXBsdWdpbg==">https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin<i class="fa fa-external-link-alt"></i></span></p>
+<p>How to configure Jackett plugin · qbittorrent&#x2F;search-plugins Wiki · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3FiaXR0b3JyZW50L3NlYXJjaC1wbHVnaW5zL3dpa2kvSG93LXRvLWNvbmZpZ3VyZS1KYWNrZXR0LXBsdWdpbg==">https://github.com/qbittorrent/search-plugins/wiki/How-to-configure-Jackett-plugin<i class="fa fa-external-link-alt"></i></span></p>
 <p>[筆記] 使用qBittorrent WebUI訂閱RSS自動下載教學 | NPCHK Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ucGNoay5pbmZvL3FiaXR0b3JyZW50LXdlYi1yc3MtYXV0by1kb3dubG9hZC8=">https://npchk.info/qbittorrent-web-rss-auto-download/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -814,7 +845,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

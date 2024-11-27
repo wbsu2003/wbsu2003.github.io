@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Easy-Gate 是通往您的自托管基础架构的大门。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031514888.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031514888.png">
 <meta property="article:published_time" content="2022-06-24T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031514888.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031514888.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/06/24/%E5%AE%B6%E5%BA%AD%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%97%A8%E6%88%B7Easy-Gate/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031514888.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031514888.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,7 +527,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>周一做的核酸一直没有结果，中途收到了一次短信</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206240912484.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206240912484.png"></p>
 <p>算上全员筛查，这周做了4次核酸，分别是周六上午、周一下午、周二下午、周四下午</p>
 <p>昨晚已经接到通知，本周末继续全员核酸筛查，想睡懒觉那是不可能滴😂</p>
 <hr>
@@ -520,7 +551,7 @@
 <p><code>icon</code> 可以到下面网站查找：</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9mb250YXdlc29tZS5jb20vc2VhcmNo">https://fontawesome.com/search<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudGhpbmtjbWYuY29tL2ZvbnQvZm9udF9hd2Vzb21lL2ljb25zLmh0bWw=">https://www.thinkcmf.com/font/font_awesome/icons.html<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudGhpbmtjbWYuY29tL2ZvbnQvZm9udF9hd2Vzb21lL2ljb25zLmh0bWw=">https://www.thinkcmf.com/font/font_awesome&#x2F;icons.html<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fa-brands fa-git-square&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Git&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://git.example.vpn&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;groups&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;vpn&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;icon&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fa-brands fa-docker&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Portainer&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://portainer.example.internal&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;groups&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -531,7 +562,7 @@
 <p>上例中，<code>Simple note</code> 只能 <code>vpn</code> 组看到，<code>Global note</code> 则 <code>internal</code> 组和 <code>vpn</code> 组都能看到。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>easy-gate</code> ，选择第一个 <code>r7wx/easy-gate</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031202149.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031202149.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><ol>
 <li>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>easy-gate</code></li>
 <li>将 <code>easy-gate.json</code> 文件放入到 <code>easy-gate</code> 目录</li>
@@ -550,7 +581,7 @@
 <td align="center">设置文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031410721.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031410721.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -567,9 +598,9 @@
 </tr>
 </tbody></table>
 <p>默认是暴露的 <code>80</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031411275.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031411275.png"></p>
 <p>容器端口需要修改为 <code>8080</code>，本地端口不冲突就可以</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031411833.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031411833.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 easy-gate </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/easy-gate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 easy-gate 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/easy-gate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 easy-gate.json 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name easy-gate \</span><br><span class="line">   -p 8082:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/easy-gate.json:/etc/easy-gate/easy-gate.json \</span><br><span class="line">   r7wx/easy-gate</span><br></pre></td></tr></table></figure>
 
@@ -580,14 +611,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 easy-gate </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/easy-gate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/easy-gate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8082</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031321796.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031321796.png"></p>
 <p>老苏试验了中文，支持良好</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031352467.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031352467.png"></p>
 <p>手机上的效果</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031414143.jpg"></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205031414743.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031414143.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031414743.jpg"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>r7wx/easy-gate: A gate to your self hosted infrastructure<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3I3d3gvZWFzeS1nYXRl">https://github.com/r7wx/easy-gate<i class="fa fa-external-link-alt"></i></span></p>
+<p>r7wx&#x2F;easy-gate: A gate to your self hosted infrastructure<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3I3d3gvZWFzeS1nYXRl">https://github.com/r7wx/easy-gate<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -733,7 +764,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

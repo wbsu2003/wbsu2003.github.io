@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="详细介绍frp的工作原理及基本设置。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg">
 <meta property="article:published_time" content="2020-05-28T11:35:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="frp">
 <meta property="article:tag" content="kcp协议">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/28/frp%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E7%A4%BA%E4%BE%8B%E8%AF%A6%E8%A7%A3/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/logo-1590667665166.jpg" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,9 +528,9 @@
     
     <div class="post-body" itemprop="articleBody"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>当初开始用 frp 走了一些弯路，主要原因还是对 frp 的工作原理理解不透彻，所以在设置时才会出现各种错误，导致不成功，所以下面我们以实例来做详细的说明。</p>
 <h1 id="frp-工作原理"><a href="#frp-工作原理" class="headerlink" title="frp 工作原理"></a>frp 工作原理</h1><p>官网的架构图比较抽象，不便于描述</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/1590643008214-1590643008248.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/1590643008214-1590643008248.png" alt="title"></p>
 <p>所以我重绘了一张，结合实例来进行说明</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/1590644061456-1590644061464.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/1590644061456-1590644061464.png" alt="title"></p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ol>
 <li>frps 需要有公网 IP，例如：IP 是 <code>10.146.0.3</code></li>
 <li>frps 要绑定域名，例如：绑定到 <code>laosu.ml</code></li>
@@ -514,8 +545,8 @@
 <h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>当我在浏览器中输入： <span class="exturl" data-url="aHR0cDovL21vdmllLmxhb3N1Lm1sLw==">http://movie.laosu.ml<i class="fa fa-external-link-alt"></i></span> 时，dns 服务会将其解析到 IP：<code>10.146.0.3</code> 上，也就是跳转到了我们安装了 frps 的主机上，frps 会根据用户输入的域名向 frpc 发起查询，如果存在该服务，则返回 jellyfin 的web 页面。</p>
 <p>而当我输入了错误的二级域名，或者该二级域名没有被解析、绑定，又或者是 frps 和 frpc 之间的网络出现了问题，也就是服务不存在时，则会返回下面的错误界面。</p>
 <p>例如在浏览器中输入了：<span class="exturl" data-url="aHR0cDovL21vdmllMS5sYW9zdS5tbC8=">http://movie1.laosu.ml<i class="fa fa-external-link-alt"></i></span> 之后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/1590644807478-1590644807482.png" alt="title"></p>
-<h1 id="frps-ini-说明"><a href="#frps-ini-说明" class="headerlink" title="frps.ini 说明"></a>frps.ini 说明</h1><p>frps 服务器有了一键安装包之后，变得简单多了，可以输入frps config 来查看 /usr/local/frps/frps.ini 的内容，下面的 frps.ini 是一路默认设置生成的内容：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/1590644807478-1590644807482.png" alt="title"></p>
+<h1 id="frps-ini-说明"><a href="#frps-ini-说明" class="headerlink" title="frps.ini 说明"></a>frps.ini 说明</h1><p>frps 服务器有了一键安装包之后，变得简单多了，可以输入frps config 来查看 &#x2F;usr&#x2F;local&#x2F;frps&#x2F;frps.ini 的内容，下面的 frps.ini 是一路默认设置生成的内容：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># [common] is integral section</span></span><br><span class="line"><span class="section">[common]</span></span><br><span class="line"><span class="comment"># A literal address or host name for IPv6 must be enclosed</span></span><br><span class="line"><span class="comment"># in square brackets, as in &quot;[::1]:80&quot;, &quot;[ipv6-host]:http&quot; or &quot;[ipv6-host%zone]:80&quot;</span></span><br><span class="line"><span class="attr">bind_addr</span> = <span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"><span class="attr">bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># udp port used for kcp protocol, it can be same with &#x27;bind_port&#x27;</span></span><br><span class="line"><span class="comment"># if not set, kcp is disabled in frps</span></span><br><span class="line"><span class="attr">kcp_bind_port</span> = <span class="number">5443</span></span><br><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br><span class="line"><span class="comment"># assets_dir = ./static</span></span><br><span class="line"><span class="attr">vhost_http_port</span> = <span class="number">80</span></span><br><span class="line"><span class="attr">vhost_https_port</span> = <span class="number">443</span></span><br><span class="line"><span class="comment"># console or real logFile path like ./frps.log</span></span><br><span class="line"><span class="attr">log_file</span> = ./frps.log</span><br><span class="line"><span class="comment"># debug, info, warn, error</span></span><br><span class="line"><span class="attr">log_level</span> = info</span><br><span class="line"><span class="attr">log_max_days</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># auth token</span></span><br><span class="line"><span class="attr">token</span> = yyyyyyyyyyyyyyyy</span><br><span class="line"><span class="comment"># It is convenient to use subdomain configure for http、https type when many people use one frps server together.</span></span><br><span class="line"><span class="attr">subdomain_host</span> = <span class="number">10.146</span>.<span class="number">0.3</span></span><br><span class="line"><span class="comment"># only allow frpc to bind ports you list, if you set nothing, there won&#x27;t be any limit</span></span><br><span class="line"><span class="comment">#allow_ports = 1-65535</span></span><br><span class="line"><span class="comment"># pool_count in each proxy will change to max_pool_count if they exceed the maximum value</span></span><br><span class="line"><span class="attr">max_pool_count</span> = <span class="number">50</span></span><br><span class="line"><span class="comment"># if tcp stream multiplexing is used, default is true</span></span><br><span class="line"><span class="attr">tcp_mux</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>这里比较关键的信息：</p>
@@ -529,7 +560,7 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if you want to configure or reload frps by dashboard, dashboard_port must be set</span></span><br><span class="line"><span class="attr">dashboard_port</span> = <span class="number">6443</span></span><br><span class="line"><span class="comment"># dashboard assets directory(only for debug mode)</span></span><br><span class="line"><span class="attr">dashboard_user</span> = admin</span><br><span class="line"><span class="attr">dashboard_pwd</span> = xxxxxxxx</span><br></pre></td></tr></table></figure>
 
 <p>你可以在浏览器中输入：<span class="exturl" data-url="aHR0cDovLzEwLjE0Ni4wLjM6NjQ0My8=">http://10.146.0.3:6443<i class="fa fa-external-link-alt"></i></span> ，输入用户名、密码后，可以查看实时的服务状态是否在线等信息。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/1590646590390-1590646590393.png" alt="title"></p>
 <ul>
 <li>token</li>
 </ul>
@@ -557,7 +588,7 @@
 <li>个人习惯将节的名称和二级域名的前缀保持一致，这样便于管理</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/28/1590649156365-1590649156373.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/28/1590649156365-1590649156373.png" alt="title"></p>
 <h2 id="加密与压缩"><a href="#加密与压缩" class="headerlink" title="加密与压缩"></a>加密与压缩</h2><p>这个是将 frpc 与 frps 之间的通信内容加密与压缩传输</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">use_encryption</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
@@ -727,7 +758,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="honey 是一个很酷的个人仪表盘。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221621218.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221621218.png">
 <meta property="article:published_time" content="2024-06-03T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221621218.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221621218.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/03/%E5%BE%88%E9%85%B7%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%BB%AA%E8%A1%A8%E7%9B%98honey/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221621218.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221621218.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,11 +530,11 @@
 <blockquote>
 <p><code>honey</code> 是一个很酷的个人仪表盘。采用纯 <code>HTML</code>、<code>CSS</code>、 <code>JS</code>编写的，因此不需要动态后端或特殊的 <code>Web</code> 服务器配置。它开箱即用，因为所有操作都是在客户端完成的。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221450248.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221450248.png"></p>
 <p>官方提供了在线示例：<span class="exturl" data-url="aHR0cHM6Ly9ob25leXkudmVyY2VsLmFwcC8=">https://honeyy.vercel.app/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <h2 id="ghcr-io-镜像下载"><a href="#ghcr-io-镜像下载" class="headerlink" title="ghcr.io 镜像下载"></a>ghcr.io 镜像下载</h2><p>官方的镜像没有发布在 <code>docker hub</code>，而是在 <code>ghcr.io</code>，所以直接用命令行来安装。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401212351465.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401212351465.png"></p>
 <p>在 <code>SSH</code> 客户端中依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull ghcr.io/dani3l0/honey:latest</span><br></pre></td></tr></table></figure>
 
@@ -609,30 +640,30 @@
 <li>因为使用了中文，所以需要用 <code>utf-8</code> 编码保存文件；</li>
 <li>最后一个 <code>services</code> 后面没有逗号；</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221458805.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221458805.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>采用 <code>docker cli</code> 安装更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 honey 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/honey/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 honey 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/honey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 config.json 和 manifest.json 放入 config 目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name honey \</span><br><span class="line">   -p 4173:4173 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/app/dist/config:ro \</span><br><span class="line">   ghcr.io/dani3l0/honey:latest</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221537850.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221537850.png"></p>
 <p>也可以用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">rediary:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/dani3l0/honey:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">honey</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">4173</span><span class="string">:4173</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/app/dist/config:ro</span></span><br></pre></td></tr></table></figure>
 
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 honey 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/honey/config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 honey 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/honey</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 config.json 和 manifest.json 放入 config 目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221540790.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221540790.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:4173</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221435065.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221435065.png"></p>
 <p>点 <code>Theme</code> 可以直接切换主题</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221449866.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221449866.png"></p>
 <p>点 <code>Service</code>  查看详情</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221447052.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221447052.png"></p>
 <p>点 <code>More</code> –&gt; <code>Settings</code> ，有一些简单的设置</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401221448841.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401221448841.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>dani3l0/honey: Nice and sweet place for all your self-hosted services.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhbmkzbDAvaG9uZXk=">https://github.com/dani3l0/honey<i class="fa fa-external-link-alt"></i></span></p>
+<p>dani3l0&#x2F;honey: Nice and sweet place for all your self-hosted services.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhbmkzbDAvaG9uZXk=">https://github.com/dani3l0/honey<i class="fa fa-external-link-alt"></i></span></p>
 <p>honey<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ob25leXkudmVyY2VsLmFwcC8=">https://honeyy.vercel.app/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Yet another dashboard for self-hosted services : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTdmOWhqci95ZXRfYW5vdGhlcl9kYXNoYm9hcmRfZm9yX3NlbGZob3N0ZWRfc2VydmljZXMv">https://www.reddit.com/r/selfhosted/comments/17f9hjr/yet_another_dashboard_for_selfhosted_services/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Yet another dashboard for self-hosted services : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTdmOWhqci95ZXRfYW5vdGhlcl9kYXNoYm9hcmRfZm9yX3NlbGZob3N0ZWRfc2VydmljZXMv">https://www.reddit.com/r/selfhosted/comments/17f9hjr/yet_another_dashboard_for_selfhosted_services&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -778,7 +809,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

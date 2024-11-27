@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="NodeBB 是一个更好的现代网络社区平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091359680.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091359680.png">
 <meta property="article:published_time" content="2022-11-14T00:45:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="论坛">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091359680.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091359680.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/11/14/%E5%9F%BA%E4%BA%8EDocker%E5%92%8CMongoDB%E9%83%A8%E7%BD%B2NodeBB%E8%AE%BA%E5%9D%9B%E7%B3%BB%E7%BB%9F/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091359680.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091359680.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,16 +541,16 @@
 </blockquote>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">db_1 | <span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;t&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;$date&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2022-11-08T02:38:55.786+00:00&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;s&quot;</span><span class="punctuation">:</span> <span class="string">&quot;I&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;c&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ACCESS&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="number">20249</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;ctx&quot;</span><span class="punctuation">:</span> <span class="string">&quot;conn3&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Authentication failed&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;attr&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;mechanism&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SCRAM-SHA-1&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;speculative&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;principalName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;root&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;authenticationDatabase&quot;</span><span class="punctuation">:</span> <span class="string">&quot;nodebb&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;remote&quot;</span><span class="punctuation">:</span> <span class="string">&quot;192.168.48.3:50616&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;extraInfo&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;error&quot;</span><span class="punctuation">:</span> <span class="string">&quot;UserNotFound: Could not find user \&quot;root\&quot; for db \&quot;nodebb\&quot;&quot;</span></span><br><span class="line">	<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081653312.png"></p>
-<p>老苏查了半天资料，一种方法是通过进入容器创建用户，但是感觉有点繁琐；另一种方法干脆就用了无用户/密码登录方式，可能会收到警告信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081653312.png"></p>
+<p>老苏查了半天资料，一种方法是通过进入容器创建用户，但是感觉有点繁琐；另一种方法干脆就用了无用户&#x2F;密码登录方式，可能会收到警告信息</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">warn: You have no mongo username/password setup!</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091100560.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091100560.png"></p>
 <p>不过反正也没有对外暴露数据库的端口，应该问题不大；</p>
 <h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题 2"></a>问题 2</h2><p>本来想把配置文件 <code>config.json</code> 映射到容器中，这样改起来方便</p>
 <p>但是访问页面时显示 <code>Cannot read properties of undefined (reading &#39;split&#39;)</code> </p>
 <p>日志中也有错误</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091151233.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091151233.png"></p>
 <p>所以只能放弃这种方式，好在也没啥需要改的地方，有兴趣了解可以看最后的部分</p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.5&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">node:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nodebb/docker</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nodebb_web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">4567</span><span class="string">:4567</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="comment"># - ./config.json:/usr/src/app/config.json </span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./uploads:/usr/src/app/public/uploads</span></span><br><span class="line">      </span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nodebb_db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./mongo:/data/db</span></span><br></pre></td></tr></table></figure>
@@ -529,63 +560,63 @@
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>容器启动的时间有点长，除了初始化数据库，似乎还有代码 <code>build</code> 的动作，</p>
 <p>当在容器 <code>nodebb_web</code> 的日志中看到 <code>Web installer listening on http://0.0.0.0:4567</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081023897.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081023897.png"></p>
 <p>就可以在浏览器中输入 <code>http://群晖IP:4567</code> 进行设置了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081025937.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081025937.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><ul>
 <li><p><code>web</code> 地址</p>
 <ul>
-<li> <code>Web Address (URL)</code>：局域网使用直接默认的就可以；老苏尝试过，即使用 <code>npm</code> 做了反代，这里也不需要修改为域名；</li>
+<li><code>Web Address (URL)</code>：局域网使用直接默认的就可以；老苏尝试过，即使用 <code>npm</code> 做了反代，这里也不需要修改为域名；</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081038923.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081038923.png"></p>
 <ul>
 <li><p>创建管理员账号</p>
 <ul>
-<li> <code>Username</code>：用于后台管理的管理员账号，比如：<code>laposu</code>；</li>
-<li> <code>Email Address</code>：管理员的电子邮件；</li>
-<li> <code>Password</code> 和 <code>Confirm Password</code>：是管理员的密码；</li>
+<li><code>Username</code>：用于后台管理的管理员账号，比如：<code>laposu</code>；</li>
+<li><code>Email Address</code>：管理员的电子邮件；</li>
+<li><code>Password</code> 和 <code>Confirm Password</code>：是管理员的密码；</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081029208.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081029208.png"></p>
 <ul>
 <li><p>设置数据库</p>
 <ul>
-<li> <code>Database Type</code>：数据库类型，默认的 <code>MongoDB</code> 就可以；</li>
-<li> <code>Host IP or address of your MongoDB instance</code> ：不能用默认的 <code>127.0.0.1</code>，改为 <code>docker-compose.yml</code> 文件中的 <code>service</code> 名称 <code>db</code>;</li>
-<li> <code>Host port of your MongoDB instance</code>：默认的端口 <code>27017</code> 就可以；</li>
-<li> <code>MongoDB username</code>：数据库用户，按照前面的设置留空就行；</li>
-<li> <code>Password of your MongoDB database</code>：数据库密码，按照前面的设置留空就行；</li>
-<li> <code>MongoDB database name</code>：直接用默认的 <code>nodebb</code> 就可以；</li>
+<li><code>Database Type</code>：数据库类型，默认的 <code>MongoDB</code> 就可以；</li>
+<li><code>Host IP or address of your MongoDB instance</code> ：不能用默认的 <code>127.0.0.1</code>，改为 <code>docker-compose.yml</code> 文件中的 <code>service</code> 名称 <code>db</code>;</li>
+<li><code>Host port of your MongoDB instance</code>：默认的端口 <code>27017</code> 就可以；</li>
+<li><code>MongoDB username</code>：数据库用户，按照前面的设置留空就行；</li>
+<li><code>Password of your MongoDB database</code>：数据库密码，按照前面的设置留空就行；</li>
+<li><code>MongoDB database name</code>：直接用默认的 <code>nodebb</code> 就可以；</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081431736.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081431736.png"></p>
 <p>设置的过程还是比较长的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081040494.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081040494.png"></p>
 <p>日志中有进度</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091159164.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091159164.png"></p>
 <p>不出意外的话你会看到</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081435114.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081435114.png"></p>
 <p>直接点绿色按钮 <code>Launch NodeBB</code>，就能看到登录界面</p>
 <blockquote>
 <p>虽然默认登录是中文界面，但后面不是，可能是自动识别错误了；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081438014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081438014.png"></p>
 <blockquote>
 <p>有可能会连不上，因为还有下载、编译的动作</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091203209.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091203209.png"></p>
 <p>登录成功后的 <code>Dashboard</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081554762.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081554762.png"></p>
 <h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p><code>Settings</code> –&gt; <code>Languages </code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081558840.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081558840.png"></p>
 <p><code>Default Language</code> 中下拉选择 <code>简体中文</code> 后，点右下角的按钮保存</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081600213.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081600213.png"></p>
 <p>刷新之后就是中文了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211081604175.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211081604175.png"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>这个没啥用的，属于问题2折腾的一部分，从设置完成的容器内导出了一份 <code>config.json</code>，本想做模板，用于映射的</p>
 <p>———–下面👇这段不需要—————</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置完成后才会有 config.json 文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝配置文件到群晖中</span></span><br><span class="line">docker <span class="built_in">cp</span> nodebb_web:/usr/src/app/config.json config.json</span><br></pre></td></tr></table></figure>
@@ -596,12 +627,12 @@
 <p>其中 ：</p>
 <ul>
 <li><code>url</code>：需要填主机 IP 和 服务端口，比如老苏的是 <code>http://192.168.0.197:4567</code>；</li>
-<li> <code>secret</code>：在服务启动时会自动生成；</li>
-<li> 其他的默认就可以了；</li>
+<li><code>secret</code>：在服务启动时会自动生成；</li>
+<li>其他的默认就可以了；</li>
 </ul>
 <p>———–上面👆这段不需要—————</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>NodeBB/NodeBB: Node.js based forum software built for the modern web<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05vZGVCQi9Ob2RlQkI=">https://github.com/NodeBB/NodeBB<i class="fa fa-external-link-alt"></i></span></p>
+<p>NodeBB&#x2F;NodeBB: Node.js based forum software built for the modern web<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05vZGVCQi9Ob2RlQkI=">https://github.com/NodeBB/NodeBB<i class="fa fa-external-link-alt"></i></span></p>
 <p>Home | NodeBB | Your Community Forum Platform<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ub2RlYmIub3JnLw==">https://nodebb.org/<i class="fa fa-external-link-alt"></i></span></p>
 <p>NodeBB 文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm5vZGViYi5vcmcv">https://docs.nodebb.org/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -749,7 +780,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

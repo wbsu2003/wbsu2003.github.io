@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="FreeAskInternet 是一款完全免费、私有且本地运行的搜索聚合器，它利用大型语言模型（LLM）来生成答案。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041329091.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041329091.png">
 <meta property="article:published_time" content="2024-06-10T01:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="搜索引擎">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041329091.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041329091.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/10/%E7%A7%81%E6%9C%89%E5%8C%96AI%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8EFreeAskInternet/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041329091.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041329091.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -544,61 +575,61 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 freeaskinternet 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/freeaskinternet/searxng</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 freeaskinternet 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/freeaskinternet</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041120237.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041120237.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3133</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031853209.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031853209.png"></p>
 <p>第一当然是选择模型了，因为我们没有安装 <code>freegpt35</code>、<code>kimi-free-api</code>、<code>glm-free-api</code>、<code>qwen-free-api</code>，所以上面的不用管，直接勾选 <code>使用自定义模型</code></p>
 <ul>
 <li><code>URL</code> 部分，因为老苏用的是 <code>One API</code> + <code>kimi-free-api</code>，所以这里填的是 <code>One API</code> 的地址</li>
 <li><code>model auth token</code>：填的是 <code>One API</code> 的访问令牌</li>
 <li><code>model name</code> ：填的是渠道中的模型名称</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406032256214.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406032256214.png"></p>
 <p>保存之后，模型就灰掉了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031853312.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031853312.png"></p>
 <p>开始第一个问题，但是你会发现，一直卡在这个界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041158044.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041158044.png"></p>
 <p>一开始，老苏也以为是网络问题，但实际上并不是，不信的话，你可以打开 <code>searxng</code> 的端口，访问 <code>http://群晖IP:3135</code> ，随便搜索一个试试</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406032249781.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406032249781.png"></p>
 <p>老苏仔细查看了 <code>backend</code> 的日志，发现了有这么一条</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">requests.exceptions.HTTPError: 403 Client Error: FORBIDDEN for url: http://searxng:8080/search?q=%3Aall+%21general+%E4%BB%80%E4%B9%88%E6%98%AF+FreeAskInternet&amp;format=json</span><br></pre></td></tr></table></figure>
 
 <p>在浏览器中直接输入 <code>http://群晖IP:3135/search?q=%3Aall+%21general+%E4%BB%80%E4%B9%88%E6%98%AF+FreeAskInternet&amp;format=json</code></p>
 <p>确实是没权限访问的，这才是导致界面卡住的根本原因</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031944804.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031944804.png"></p>
 <p>找到了问题，解决起来就容易多了，找到 <code>searxng</code> 目录下的 <code>settings.yml</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041212972.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041212972.png"></p>
 <p>首先需要修改文件的权限，否则保存不了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041223104.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041223104.png"></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"> <span class="attr">formats:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">html</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">json</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041221801.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041221801.png"></p>
 <p>修改完成后，建议再打开看看，确认是否修改成功了，如果修改成了，可以单独重启一次容器 <code>free_ask_internet_searxng</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041227724.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041227724.png"></p>
 <p>再次刷新页面，参考搜索结果有了，但是还是提示搜索失败</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041101044.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041101044.png"></p>
 <p>再看看日志，原来是超时了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041231566.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041231566.png"></p>
 <p>继续编辑 <code>settings.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">outgoing:</span></span><br><span class="line">  <span class="attr">request_timeout:</span> <span class="number">5.0</span></span><br><span class="line">  <span class="attr">max_request_timeout:</span> <span class="number">10.0</span></span><br><span class="line">  <span class="attr">enable_http2:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041237550.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041237550.png"></p>
 <p>保存后</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041238420.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041238420.png"></p>
 <p>再次重启容器 <code>free_ask_internet_searxng</code>，搜索就没问题了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406041243179.png"></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406032303188.png"></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406032258182.png"></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406032358370.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406041243179.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406032303188.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406032258182.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406032358370.png"></p>
 <p>如果没有返回参考搜索结果的，但是告诉你搜索失败的，一般来说，应该是网络出问题了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406040955297.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406040955297.png"></p>
 <p>像下面这样一声不吭的，说明模型设置可能也是不正确的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406040914142.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406040914142.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>nashsu/FreeAskInternet: FreeAskInternet is a completely free, private and locally running search aggregator &amp; answer generate using LLM, without GPU needed. The user can ask a question and the system will make a multi engine search and combine the search result to the ChatGPT3.5 LLM and generate the answer based on search results.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25hc2hzdS9GcmVlQXNrSW50ZXJuZXQ=">https://github.com/nashsu/FreeAskInternet<i class="fa fa-external-link-alt"></i></span></p>
+<p>nashsu&#x2F;FreeAskInternet: FreeAskInternet is a completely free, private and locally running search aggregator &amp; answer generate using LLM, without GPU needed. The user can ask a question and the system will make a multi engine search and combine the search result to the ChatGPT3.5 LLM and generate the answer based on search results.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25hc2hzdS9GcmVlQXNrSW50ZXJuZXQ=">https://github.com/nashsu/FreeAskInternet<i class="fa fa-external-link-alt"></i></span></p>
 <p>python 3.x - LangChain search_tools ValueError: (‘Searx API returned an error: ‘, ‘Too Many Requests’) - Stack Overflow<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNzcyNTM4NzAvbGFuZ2NoYWluLXNlYXJjaC10b29scy12YWx1ZWVycm9yLXNlYXJ4LWFwaS1yZXR1cm5lZC1hbi1lcnJvci10b28tbWFueS1y">https://stackoverflow.com/questions/77253870/langchain-search-tools-valueerror-searx-api-returned-an-error-too-many-r<i class="fa fa-external-link-alt"></i></span></p>
 <p>SearXNG | 中文 | Dify<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmRpZnkuYWkvdi96aC1oYW5zL2d1aWRlcy9nb25nLWp1L3Rvb2wtY29uZmlndXJhdGlvbi9zZWFyeG5n">https://docs.dify.ai/v/zh-hans/guides/gong-ju/tool-configuration/searxng<i class="fa fa-external-link-alt"></i></span></p>
-<p>Bug: all engine · Issue #334 · searxng/searxng<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy9pc3N1ZXMvMzM0">https://github.com/searxng/searxng/issues/334<i class="fa fa-external-link-alt"></i></span></p>
+<p>Bug: all engine · Issue #334 · searxng&#x2F;searxng<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy9pc3N1ZXMvMzM0">https://github.com/searxng/searxng/issues/334<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -746,7 +777,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

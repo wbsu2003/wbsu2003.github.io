@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Linkwarden 是一个完全可自托管的开源协作书签管理器，用于收集、组织和存档网页。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251435583.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251435583.png">
 <meta property="article:published_time" content="2023-11-08T00:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="书签">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251435583.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251435583.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/11/08/%E6%94%AF%E6%8C%81%E5%AD%98%E6%A1%A3%E7%9A%84%E4%B9%A6%E7%AD%BE%E6%9C%8D%E5%8A%A1LinkWarden/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251435583.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251435583.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +530,7 @@
 <blockquote>
 <p><code>Linkwarden</code> 是一个自托管、开源协作书签管理器，用于收集、组织和存档网页。目标是将您在网络上找到的有用网页和文章组织到一个地方，并且由于有用的网页可能会消失（参见链接失效的必然性），<code>Linkwarden</code> 还将每个网页的副本保存为屏幕截图和 <code>PDF</code>，确保可访问性即使原始内容不再可用。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311071017678.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311071017678.png"></p>
 <p>官方提供了试用站点：<span class="exturl" data-url="aHR0cHM6Ly9saW5rd2FyZGVuLmFwcC8=">https://linkwarden.app<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="重要说明"><a href="#重要说明" class="headerlink" title="重要说明"></a>重要说明</h1><p>本文完成于 <code>8</code> 月，当时官方提供了 <code>Dockerfile</code> ，但是没有现成的镜像，发文时老苏发现官方对 <code>Dockerfile</code> 文件做了比较大的调整 ，而且也在 <code>ghcr.io</code> 提供了镜像，连 <code>logo</code> 都做了变更。 &#128514;</p>
 <p>老苏建议大家用官方的镜像，请将下文中 <code>docker-compose.yml</code> 中的 <code>wbsu2003/linkwarden</code> 替换为 <code>ghcr.io/linkwarden/linkwarden:latest</code>，其他的都是一样的。</p>
@@ -517,9 +548,9 @@
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> wget https://nodejs.org/dist/v20.5.1/node-v20.5.1-linux-x64.tar.xz -O nodejs.tar.xz \  </span></span><br><span class="line">  &amp;&amp; mkdir /opt/nodejs \  </span><br><span class="line">  &amp;&amp; tar -xf nodejs.tar.xz --strip-components <span class="number">1</span> -C /opt/nodejs \  </span><br><span class="line">  &amp;&amp; rm nodejs.tar.xz  </span><br></pre></td></tr></table></figure>
 
 <p>编译出来的镜像有点大，就这样吧</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251152233.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251152233.png"></p>
 <p>官方镜像是一样的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311080828301.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311080828301.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.5&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:14</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">linkwarden-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./pgdata:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_USER=linkwarden</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_PASSWORD=qP4oMQGewTi</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_DB=linkwarden</span></span><br><span class="line">      </span><br><span class="line">  <span class="attr">linkwarden:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/linkwarden</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">linkwarden-web</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">platform:</span> <span class="string">linux/x86_64</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3035</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DATABASE_URL=postgresql://linkwarden:qP4oMQGewTi@postgres:5432/linkwarden</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NEXTAUTH_URL=http://192.168.0.197:3035</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NEXTAUTH_SECRET=23NhmBsT7TzC6996XwLX9PjPNnAciPZV</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br></pre></td></tr></table></figure>
 
@@ -578,32 +609,32 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 linkwarden 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/linkwarden/&#123;data,pgdata&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 linkwarden 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/linkwarden</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3035</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251139725.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251139725.png"></p>
 <p>第一次需要注册</p>
 <blockquote>
 <p>密码不能少于 <code>8</code> 个字符</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251142052.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251142052.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251141960.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251141960.png"></p>
 <p><code>Collections</code> 是分类，可以设置为共享或者协作</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251147873.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251147873.png"></p>
 <p>有了分类就可以添加 <code>Link</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251149698.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251149698.png"></p>
 <p><code>Link</code> 属性除了 <code>Collection</code> ，还支持 <code>Tags</code>，查询起来会比较快</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251149688.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251149688.png"></p>
 <p>新增一个 <code>link</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251408862.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251408862.png"></p>
 <p>可用固定在主页</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251409002.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251409002.png"></p>
 <p>可用截屏或者导出 <code>pdf</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251410297.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251410297.png"></p>
 <p>效果还行</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308251414496.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308251414496.png"></p>
 <p>最后来一张官方的效果图</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308242132346.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308242132346.png"></p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><blockquote>
-<p>Daniel31x13/link-warden: A self-hosted bookmark + archive manager to store your useful links.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RhbmllbDMxeDEzL2xpbmstd2FyZGVu">https://github.com/Daniel31x13/link-warden<i class="fa fa-external-link-alt"></i></span></p>
+<p>Daniel31x13&#x2F;link-warden: A self-hosted bookmark + archive manager to store your useful links.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RhbmllbDMxeDEzL2xpbmstd2FyZGVu">https://github.com/Daniel31x13/link-warden<i class="fa fa-external-link-alt"></i></span></p>
 <p>Linkwarden<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9saW5rd2FyZGVuLmFwcC8=">https://linkwarden.app/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -750,7 +781,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

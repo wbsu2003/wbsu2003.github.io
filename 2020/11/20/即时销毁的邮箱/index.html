@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Forsaken-Mail 搭建的即时销毁邮箱，可以让你告别邮件骚扰。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120212623.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120212623.png">
 <meta property="article:published_time" content="2020-11-20T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="邮箱">
 <meta property="article:tag" content="email">
 <meta property="article:tag" content="临时邮箱">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120212623.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120212623.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/11/20/%E5%8D%B3%E6%97%B6%E9%94%80%E6%AF%81%E7%9A%84%E9%82%AE%E7%AE%B1/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120212623.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120212623.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,39 +533,39 @@
 <p>很多时候我们需要注册一个用户才能使用论坛或者网站的完整功能，除了手机外，大多数还是需要一个电子邮箱才能注册，如果使用我们的个人或者工作邮箱，免不了会收到很多广告或者推销等垃圾邮件。</p>
 <p><code>Forsaken Mail</code> 是一个免费、开源的临时邮箱系统，可以供任何人接受邮件，即收即毁，支持自定义邮箱地址前缀，这样我们注册完之后这些临时邮箱就不再需要了，避免了收到收到垃圾短信。</p>
 <p>官网提供的 <code>Online Demo</code> 地址：<span class="exturl" data-url="aHR0cDovL2Rpc3Bvc2FibGUuZGhjLWFwcC5jb20v">http://disposable.dhc-app.com/<i class="fa fa-external-link-alt"></i></span>，感觉好像有了新的界面。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120211458.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120211458.png" alt="title"></p>
 <p>原来是长成下图这样的，而且我们即将安装出来的也是这样的。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601977552229-1601977552232.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601977552229-1601977552232.png" alt="title"></p>
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>假设你的域名为 <code>abc.ml</code> ，为了接收电子邮件，假设你想邮件地址格式都为 <code>*@abc.ml</code> 的形式，需要添加两条 <code>DNS</code> 记录：</p>
 <ul>
 <li>首先是MX记录：<code>abc.ml MX 10 mx.abc.ml</code> 。这意味着该地址的邮件服务器 <code>*@abc.ml</code> 将为 <code>mx.abc.ml</code> 。</li>
 <li>然后是A记录：<code>mx.abc.ml A 服务器IP</code>。这告诉可以在哪个 <code>IP</code> 地址找到邮件服务器。</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601993790636-1601993790637.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601993790636-1601993790637.png" alt="title"></p>
 <ul>
 <li>在 <code>frpc.ini</code> 中映射端口25</li>
 </ul>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[smtp:tcp_port]</span></span><br><span class="line"><span class="attr">type</span> = tcp</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">25</span></span><br><span class="line"><span class="attr">remote_port</span> = <span class="number">25</span></span><br><span class="line"><span class="attr">use_encryption</span> = <span class="literal">false</span></span><br><span class="line"><span class="attr">use_compression</span> = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>Forsaken</code> ，选择第二个 <code>denghongcai/forsaken-mail</code>，双击下载。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601984575614-1601984575616.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601984575614-1601984575616.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口要避免冲突</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601992691193-1601992691197.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601992691193-1601992691197.png" alt="title"></p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在浏览器中输入 <code>http://群晖IP:3280</code> ，即可看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601992886886-1601992886887.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601992886886-1601992886887.png" alt="title"></p>
 <p>接下来设置反向代理</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601993101911-1601993101912.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601993101911-1601993101912.png" alt="title"></p>
 <p>你可以用 <code>smtp服务器测试程序</code> 来验证设置是否正确，地址：<span class="exturl" data-url="aHR0cHM6Ly9teHRvb2xib3guY29tL2RpYWdub3N0aWMuYXNweA==">https://mxtoolbox.com/diagnostic.aspx<i class="fa fa-external-link-alt"></i></span></p>
 <p>你也可以跳过这一步，直接做收发邮件测试</p>
 <p>在邮件主页的右上角指定一个邮箱，比如 <code>test@mail.abc.ml</code>，只要输入 <code>test</code> 即可，后缀是主动生成的。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/06/1601993987235-1601993987237.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/06/1601993987235-1601993987237.png" alt="title"></p>
 <p>发个邮件试试，设置没问题的话，顶多一分钟就可以看到邮件了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/07/1602053456019-1602053456114.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/07/1602053456019-1602053456114.png" alt="title"></p>
 <p>实际上，收件人为 <code>test@mail.abc.ml</code> 和 <code>test@abc.ml</code> 都是可以的</p>
 <ul>
-<li><p>发给 <code>test@abc.ml</code><br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/07/1602055385860-1602055385863.png" alt="title"></p>
+<li><p>发给 <code>test@abc.ml</code><br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/07/1602055385860-1602055385863.png" alt="title"></p>
 </li>
-<li><p>发给 <code>test@mail.abc.ml</code><br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/07/1602055402602-1602055402604.png" alt="title"></p>
+<li><p>发给 <code>test@mail.abc.ml</code><br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/07/1602055402602-1602055402604.png" alt="title"></p>
 </li>
 </ul>
 <p>当然如果你不想这么混乱，可以不用反代，直接用 <code>frp</code> 把端口 <code>3280</code> 映射出来，这样就可以通过 <code>http(s)://abc.ml:3280</code> 来访问主页，邮箱也会变成 <code>test@abc.ml</code> 了</p>
@@ -542,9 +573,9 @@
 
 <p>如果你备案了，而且 <code>80</code> 端口没有被占用，改成 <code>remote_port = 80</code> 就可以通过 <code>http(s)://abc.ml</code> 来访问了这个网页了。</p>
 <p>我习惯了按需启动 docker ，也就是说平时是这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120212123.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120212123.png"></p>
 <p>虽然 <code>Forsaken Mail</code> 本身系统占用并不高，但是还是只有在需要用到时才会启动</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201120212218.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201120212218.png"></p>
 <h1 id="福利"><a href="#福利" class="headerlink" title="福利"></a>福利</h1><p>如果你懒得自己安装，推荐几个可以直接使用的临时邮箱：</p>
 <ol>
 <li><p>Tmail邮箱，可以自己指定邮箱前缀，支持多域名，支持多语言；<br>地址：<span class="exturl" data-url="aHR0cHM6Ly94a3gubWUv">https://xkx.me/<i class="fa fa-external-link-alt"></i></span></p>
@@ -561,7 +592,7 @@
 <p>排名不分先后，看各人的需求。</p>
 <p>祝周末愉快~</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>denghongcai/forsaken-mail 代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rlbmdob25nY2FpL2ZvcnNha2VuLW1haWw=">https://github.com/denghongcai/forsaken-mail<i class="fa fa-external-link-alt"></i></span></p>
+<p>denghongcai&#x2F;forsaken-mail 代码主页<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rlbmdob25nY2FpL2ZvcnNha2VuLW1haWw=">https://github.com/denghongcai/forsaken-mail<i class="fa fa-external-link-alt"></i></span></p>
 <p>Forsaken-Mail 搭建教程 - 临时邮箱系统（即收即毁） | 喵斯基部落<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9ld2FoLmNvbS9hcmNoaXZlcy8xMzI5Lmh0bWw=">https://www.moewah.com/archives/1329.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>IT男的VPS系列教程 篇五：如何自己搭建一个即时销毁的邮箱？_IT互联网_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wLzcxNzYzNy8=">https://post.smzdm.com/p/717637/<i class="fa fa-external-link-alt"></i></span></p>
 <p>使用Forsaken Mail搭建一个临时邮箱系统，即收即毁 - Rat’s Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9lcmF0cy5jb20vYXJjaGl2ZXMvNzIzLw==">https://www.moerats.com/archives/723/<i class="fa fa-external-link-alt"></i></span></p>
@@ -711,7 +742,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

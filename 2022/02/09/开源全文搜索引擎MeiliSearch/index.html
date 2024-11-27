@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MeiliSearch 是用 Rust 写的强大、快速、开源、易于使用和部署的搜索引擎。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271257946.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271257946.png">
 <meta property="article:published_time" content="2022-02-09T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="搜索">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271257946.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271257946.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/09/%E5%BC%80%E6%BA%90%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8EMeiliSearch/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271257946.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271257946.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +545,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>meilisearch</code> ，选择第一个 <code>getmeili/meilisearch</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251503273.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251503273.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>meilisearch</code></p>
 <table>
 <thead>
@@ -530,7 +561,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251535519.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251535519.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -546,7 +577,7 @@
 <td align="center"><code>7700</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251535288.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251535288.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>环境变量是可选的，默认是 <code>developer</code> 模式，可以不设置 <code>master key</code> ，只有在指定为 <code>product</code> 模式才必须设置的 </p>
 <table>
 <thead>
@@ -560,7 +591,7 @@
 <td align="center"><code>master key</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112292001130.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112292001130.png"></p>
 <p><code>MeiliSearch</code> 的每个实例都有三个键：<code>master</code>、<code>private</code> 和 <code>public</code>。每个密钥在 <code>API</code> 路由上都有一组给定的权限。每当您设置或更改 <code>master key</code> 时，都会自动生成 <code>private key</code> 和 <code>public key</code>。</p>
 <ul>
 <li><code>master key</code> 可以用来存取所有的路由</li>
@@ -568,46 +599,46 @@
 <li><code>public key</code> 只能用来进行搜索操作。</li>
 </ul>
 <p> 老苏生成 <code>master key</code> 的方式是在 <code>Bitwarden</code> 中用密码生成器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112291958358.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112291958358.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7700</code> 就能看到主界面</p>
 <blockquote>
 <p>由于生产环境需要 <code>API-key</code> 进行搜索，因此 <code>Web</code> 界面仅在开发模式下可用。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251537579.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251537579.png"></p>
 <p>日志中</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112251654041.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112251654041.png"></p>
 <h2 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取private key和public key</span></span><br><span class="line">curl \</span><br><span class="line">  -H <span class="string">&quot;X-Meili-API-Key: 27bb9198372f81f8b95fb75d0252912de061fb6fa90d0ad6eb347cc051f0abe3&quot;</span> \</span><br><span class="line">  -X GET <span class="string">&#x27;http://192.168.0.197:7700/keys&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112292053240.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112292053240.png"></p>
 <p>官方提供了一个电影数据库 <code>movie.json</code> ，文件下载地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1laWxpc2VhcmNoLmNvbS9tb3ZpZXMuanNvbg==">https://docs.meilisearch.com/movies.json<i class="fa fa-external-link-alt"></i></span></p>
 <p>将文件上传到群晖的 <code>meilisearch</code> 目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到 movie.json 所在的目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/meilisearch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用命令行下载文件，已经下了可以跳过</span></span><br><span class="line">curl -L <span class="string">&#x27;https://docs.meilisearch.com/movies.json&#x27;</span> -o movies.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加文档到 movies 索引</span></span><br><span class="line">curl -i -X POST <span class="string">&#x27;http://192.168.0.197:7700/indexes/movies/documents&#x27;</span> \</span><br><span class="line">  --header <span class="string">&#x27;content-type: application/json&#x27;</span> \</span><br><span class="line">  --data-binary @movies.json</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112261120977.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112261120977.png"></p>
 <p>回到 <code>web</code> 界面，刷新一下</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112272059030.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112272059030.png"></p>
 <p>官网的动图能清晰的显示如何使用</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112272057609.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112272057609.gif"></p>
 <h2 id="search-json"><a href="#search-json" class="headerlink" title="search.json"></a>search.json</h2><p>默认情况下 <code>hexo-generator-searchdb</code> 生成的搜索索引文件是 <code>search.xml</code>，但其本身支持 <code>XML</code> 和 <code>JSON</code> 格式输出，所以只要改一下配置即可，<code>search.json</code> 位于博客的根目录下，需将其上传到群晖的 <code>meilisearch</code> 目录，然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加文档到 movies 索引</span></span><br><span class="line">curl -i -X POST <span class="string">&#x27;http://192.168.0.197:7700/indexes/search/documents&#x27;</span> \</span><br><span class="line">  --header <span class="string">&#x27;content-type: application/json&#x27;</span> \</span><br><span class="line">  --data-binary @search.json</span><br></pre></td></tr></table></figure>
 
 <p>但是并没有像官方示例一样，老苏尝试过增加 <code>primaryKey</code>，但始终没有结果，可能是格式不对吧，一时半会儿也没研究明白，先这样吧，等有精力了再说</p>
 <p>本来还想着是不是在 <code>vercel</code> 上搭个搜索服务，这下都省了</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>目前情况下，博客上点 <code>搜索</code> 后弹出的搜索界面，如果是一直转圈，最好是等一会儿，或者重新再刷新一下页面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271223105.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271223105.png"></p>
 <p>如果直接显示 <code>放大镜</code>，也就是下面👇这样</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271151477.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271151477.png"></p>
 <p>那就可以直接输入关键词进行搜索，基本上是秒开</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201271218520.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201271218520.png"></p>
 <p>所以再一次证实了慢的原因是加载 <code>search.json</code> 慢，而不是搜索本身慢，因此 <code>MeiliSearch</code> 的研究也就不急在一时。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>meilisearch/MeiliSearch: Powerful, fast, and an easy to use search engine<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21laWxpc2VhcmNoL01laWxpU2VhcmNo">https://github.com/meilisearch/MeiliSearch<i class="fa fa-external-link-alt"></i></span></p>
+<p>meilisearch&#x2F;MeiliSearch: Powerful, fast, and an easy to use search engine<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21laWxpc2VhcmNoL01laWxpU2VhcmNo">https://github.com/meilisearch/MeiliSearch<i class="fa fa-external-link-alt"></i></span></p>
 <p>MeiliSearch<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubWVpbGlzZWFyY2guY29tLw==">https://www.meilisearch.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>MeiliSearch Documentation | MeiliSearch Documentation v0.24<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1laWxpc2VhcmNoLmNvbS8=">https://docs.meilisearch.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>MeiliSearch vs Elasticsearch<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1laWxpc2VhcmNoLmNvbS93aHktc2hvdWxkLXlvdS11c2UtbWVpbGlzZWFyY2gtb3Zlci1lbGFzdGljc2VhcmNoLw==">https://blog.meilisearch.com/why-should-you-use-meilisearch-over-elasticsearch/<i class="fa fa-external-link-alt"></i></span></p>
 <p>We Built A Search Engine With MeiliSearch and JavaScript: Here’s How You Can Too | Hacker Noon<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oYWNrZXJub29uLmNvbS93ZS1idWlsdC1hLXNlYXJjaC1lbmdpbmUtd2l0aC1tZWlsaXNlYXJjaC1hbmQtamF2YXNjcmlwdC1oZXJlcy1ob3cteW91LWNhbi10b28tenoyZDN6YWU=">https://hackernoon.com/we-built-a-search-engine-with-meilisearch-and-javascript-heres-how-you-can-too-zz2d3zae<i class="fa fa-external-link-alt"></i></span></p>
-<p>meilisearch/docs-searchbar.js: Front-end search bar for documentation with MeiliSearch<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21laWxpc2VhcmNoL2RvY3Mtc2VhcmNoYmFyLmpzLw==">https://github.com/meilisearch/docs-searchbar.js/<i class="fa fa-external-link-alt"></i></span></p>
-<p>90pixel/MeiliAdmin: Open Source MeiliSearch Management Tool<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLzkwcGl4ZWwvTWVpbGlBZG1pbg==">https://github.com/90pixel/MeiliAdmin<i class="fa fa-external-link-alt"></i></span></p>
+<p>meilisearch&#x2F;docs-searchbar.js: Front-end search bar for documentation with MeiliSearch<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21laWxpc2VhcmNoL2RvY3Mtc2VhcmNoYmFyLmpzLw==">https://github.com/meilisearch/docs-searchbar.js/<i class="fa fa-external-link-alt"></i></span></p>
+<p>90pixel&#x2F;MeiliAdmin: Open Source MeiliSearch Management Tool<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLzkwcGl4ZWwvTWVpbGlBZG1pbg==">https://github.com/90pixel/MeiliAdmin<i class="fa fa-external-link-alt"></i></span></p>
 <p>PHP使用MeiliSearch实现全文检索_织梦猫的博客-CSDN博客_meilisearch文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2phc29uMTk5MDUvYXJ0aWNsZS9kZXRhaWxzLzExNTA1NTY2Ng==">https://blog.csdn.net/jason19905/article/details/115055666<i class="fa fa-external-link-alt"></i></span></p>
 <p>使用MeiliSearch实现Hugo博客搜索 - Jefferywang的烂笔头<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndhbmdqdW5mZW5nLmNvbS9wb3N0L2h1Z28tbWVpbGlzZWFyY2gv">https://blog.wangjunfeng.com/post/hugo-meilisearch/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -755,7 +786,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="BookStack 是基于 PHP 和 Laravel 创建文档&#x2F;wiki 的内容平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301846656.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301846656.png">
 <meta property="article:published_time" content="2022-02-23T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="wiki">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301846656.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301846656.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/23/%E5%9F%BA%E4%BA%8EBookStack%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301846656.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301846656.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,10 +539,10 @@
 <blockquote>
 <p>老苏没试过 <code>MariaDB 5</code>，万一有数据库方面的错误，请切换到 <code>MariaDB 10</code>，后续一般不做特殊说明，默认都将使用 <code>MariaDB 10</code>，与时俱进嘛🙂</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301531236.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301531236.png"></p>
 <h2 id="安装-BookStack"><a href="#安装-BookStack" class="headerlink" title="安装 BookStack"></a>安装 BookStack</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>bookstack</code> ，选择第一个 <code>linuxserver/bookstack</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301536459.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301536459.png"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>bookstack</code></p>
 <table>
 <thead>
@@ -527,7 +558,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301543047.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301543047.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -550,7 +581,7 @@
 <blockquote>
 <p>没必要同时开两个端口，不用的端口可以删掉一个</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301545059.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301545059.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -590,37 +621,37 @@
 <blockquote>
 <p><strong>注意:</strong><br>1、<code>MariaDB 10</code> 数据库的端口是  <code>3307</code>；<br>2、<code>APP_URL</code> 中如果你用了局域网 <code>IP</code>，远程用 <code>tailscale</code> 的 <code>IP</code> 也是不能访问的，所以如果要远程访问，要么填入 <code>tailscale</code> 的 <code>IP</code>+端口 ，要么就直接填域名；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301553011.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301553011.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><blockquote>
 <p>第一次会对数据库数据进行了初始化，所以要稍等一会儿。</p>
 </blockquote>
 <p>在浏览器中输入 <code>http://群晖IP:6875</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301555005.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301555005.png"></p>
 <blockquote>
 <p>默认：<code>Email地址</code> 为 <code>admin@admin.com</code>，密码为 <code>password</code></p>
 </blockquote>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301602751.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301602751.png"></p>
 <p>可以点击右上角用户名，在下拉框里面点击编辑用户资料链接，进入编辑页面对用户信息进行修改，比如用户名、密码、头像、首选语言等</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301610789.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301610789.png"></p>
 <p>中文界面后设置就简单了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301611622.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301611622.png"></p>
 <p>默认的编辑器是 <code>WYSIWYG</code>，也就是我们常说的 <code>所见即所得</code> 的富文本编辑器，老苏还是习惯用 <code>Markdown</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301618199.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301618199.png"></p>
 <p>接下来就可以在 <code>书架</code> 页面创建新 <code>书架</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301652392.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301652392.png"></p>
 <p>在 <code>书架</code> 上 <code>创建图书</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301657977.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301657977.png"></p>
 <p>可以为新书 <code>创建页面</code>  和 <code>添加章节</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301743658.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301743658.png"></p>
 <p>点击 <code>创建章节</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301747235.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301747235.png"></p>
 <p>在章节中，点击 <code>新页面</code> 或者 <code>创建页面</code> 进入编辑状态</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301657052.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301657052.png"></p>
 <p>保存页面后</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301756049.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301756049.png"></p>
 <p>依次类推，可以添加其他的章节，并在每个章节中添加相应的页面，来完成一本书的编写</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202230856272.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202230856272.png"></p>
 <h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>基于 <code>Laravel</code> 框架的应用还挺多的，光老苏写过的就有好几个：</p>
 <ul>
 <li><a href="https://laosu.tech/2020/08/14/%E7%BB%99%E7%BE%A4%E6%99%96%E5%BC%84%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84%E5%AF%BC%E8%88%AA%E9%A1%B5%EF%BC%88%E4%B8%8A%EF%BC%89">给群晖弄个漂亮的导航页（上）</a></li>
@@ -633,7 +664,7 @@
 <p><code>Laravel</code> 是一套简洁、优雅的 <code>PHP Web</code> 开发框架（<code>PHP Web Framework</code>），它可以让你从面条一样杂乱的代码中解脱出来；可以帮你构建一个完美的网络 <code>APP</code>，而且每行代码都可以简洁、富于表达力。【百度百科】</p>
 </blockquote>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>BookStackApp/BookStack: A platform to create documentation/wiki content built with PHP &amp; Laravel<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Jvb2tTdGFja0FwcC9Cb29rU3RhY2s=">https://github.com/BookStackApp/BookStack<i class="fa fa-external-link-alt"></i></span></p>
+<p>BookStackApp&#x2F;BookStack: A platform to create documentation&#x2F;wiki content built with PHP &amp; Laravel<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Jvb2tTdGFja0FwcC9Cb29rU3RhY2s=">https://github.com/BookStackApp/BookStack<i class="fa fa-external-link-alt"></i></span></p>
 <p>BookStack<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYm9va3N0YWNrYXBwLmNvbS8=">https://www.bookstackapp.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>基于 Laravel 开源项目 BookStack 构建知识管理与服务平台 | 在线教育 | Laravel 完整开源项目大全<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sYXJhdmVsYWNhZGVteS5vcmcvcG9zdC8xOTk5Ng==">https://laravelacademy.org/post/19996<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -782,7 +813,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

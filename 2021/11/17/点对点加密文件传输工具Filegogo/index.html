@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Filegogo 是一款基于 WebRTC 开发的点对点加密文件传输工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110231629055.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110231629055.png">
 <meta property="article:published_time" content="2021-11-17T04:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="WebRTC">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110231629055.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110231629055.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/17/%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E5%B7%A5%E5%85%B7Filegogo/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110231629055.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110231629055.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,7 +547,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>filegogo</code> ，选择第一个 <code>wbsu2003/filegogo</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110222355776.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110222355776.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行</p>
 <table>
 <thead>
@@ -530,19 +561,19 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110222357606.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110222357606.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3478</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110222358509.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110222358509.png"></p>
 <p>先 <code>Selec File</code> ，老苏选了张图片</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110222359348.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110222359348.png"></p>
 <p>如果是手机端接收的话，直接用手机浏览器扫码，点 <code>getFile</code> 开始传输文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110230005964.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110230005964.jpg"></p>
 <p>传输完成</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110230006171.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110230006171.jpg"></p>
 <p>使用非常简单，所以好像没啥好介绍的，最后放一张官方的动图吧</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110231616536.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110231616536.gif"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>a-wing/filegogo: A file transfer tool that can be used in the browser webrtc p2p<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Etd2luZy9maWxlZ29nbw==">https://github.com/a-wing/filegogo<i class="fa fa-external-link-alt"></i></span></p>
+<p>a-wing&#x2F;filegogo: A file transfer tool that can be used in the browser webrtc p2p<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Etd2luZy9maWxlZ29nbw==">https://github.com/a-wing/filegogo<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -689,7 +720,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

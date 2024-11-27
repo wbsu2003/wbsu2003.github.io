@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="DB-GPT 是一个开源的 AI 原生数据应用开发框架，是蚂蚁开源的 Text-to-SQL 利器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031502252.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031502252.png">
 <meta property="article:published_time" content="2024-06-05T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031502252.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031502252.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/05/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E9%80%9A%E8%BF%87Docker%E9%83%A8%E7%BD%B2DB-GPT/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031502252.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031502252.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,19 +534,19 @@
 <blockquote>
 <p><code>DB-GPT</code>是一个开源的 <code>AI</code> 原生数据应用开发框架( <code>AI Native Data App Development framework with AWEL(Agentic Workflow Expression Language) and Agents</code>)。目的是构建大模型领域的基础设施，通过开发多模型管理( <code>SMMF</code>)、<code>Text2SQL</code> 效果优化、<code>RAG</code> 框架以及优化、<code>Multi-Agents</code> 框架协作、<code>AWEL</code> (智能体工作流编排)等多种技术能力，让围绕数据库构建大模型应用更简单，更方便。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031505160.png" alt="DB-GPT 整体架构设计图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031505160.png" alt="DB-GPT 整体架构设计图"></p>
 <p><code>DB-GPT</code> 支持原生对话</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021956137.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021956137.gif"></p>
 <p>也支持与数据对话</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021955403.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021955403.gif"></p>
 <p>还能与数据库、<code>Excel</code> 等对话，做数据分析，实现智能体、工作流等等</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021959025.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021959025.png"></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在开始之前，老苏觉得应该先讲讲可能会遇到的问题。如果你觉得这些问题中存在你无法解决的，建议你看看就行了。如果对你来说这都不算事，那就开始我们今天的折腾之旅吧</p>
 <ul>
 <li>第一个问题：是网络问题。</li>
 </ul>
 <p> 如果你没有一个稳定的，科学的上网环境，不建议你继续折腾，因为镜像下载之后有 <code>13G</code>，老苏差不多下载了一整天。有一次都快下载完成了，突然又显示 <code>EOF</code> 错误</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406011723118.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406011723118.png"></p>
 <p>如果你平时下载个几百兆的镜像都不顺畅的情况下，就不要浪费时间去尝试了，这种感觉真的很让人抓狂</p>
 <ul>
 <li>第二个问题：<code>git-lfs</code> 的支持问题。</li>
@@ -523,9 +554,9 @@
 <p>首先要了解下，什么是 <code>git-lfs</code> </p>
 <p><code>Git LFS (Large File Storage）</code> 是 <code>Git</code> 的扩展，是一个开源的 <code>Git</code> 大文件版本控制的解决方案和工具集。用于管理大文件和二进制文件，将它们存储在单独的 <code>LFS</code> 存储库中， 从而让 <code>Git</code> 存储库保持在一个可管理的规模。</p>
 <p>现在很多包含大模型的仓库都必须使用 <code>git-lfs</code> 才能把整个 <code>git</code> 仓库拉下来，老苏的机器是 <code>DSM6.17</code> 的，现在想安装 <code>Git</code> 套件都找不到了，之前下载的版本比较老了，肯定是不支持 <code>git-lfs</code> 的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022045666.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022045666.png"></p>
 <p>但 <code>6.2</code> 以上应该是没问题的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022037454.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022037454.png"></p>
 <p>在不支持 <code>git-lfs</code> 的情况下，下载的大文件只有很小的尺寸，打开文件内容是下面这样的</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">version https://git-lfs.github.com/spec/v1</span><br><span class="line">oid sha256:eaf5cb71c0eeab7db3c5171da504e5867b3f67a78e07bdba9b52d334ae35adb3</span><br><span class="line">size 1302138752</span><br></pre></td></tr></table></figure>
 
@@ -537,9 +568,9 @@
 <li>第三个问题：磁盘空间问题。</li>
 </ul>
 <p>前面讲了 <code>Docker</code> 镜像就 <code>13G</code>，加上 <code>Embedding</code> 模型差不多 <code>3G</code>，这还是因为老苏的群晖上没有 <code>GPU</code> 资源，使用了代理模型的情况下</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022055057.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022055057.png"></p>
 <p>老苏的磁盘一下就吃紧了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022057567.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022057567.png"></p>
 <ul>
 <li>第四个问题：<code>API</code> 服务问题。</li>
 </ul>
@@ -566,29 +597,29 @@
 <p>文章传送门：<a href="https://laosu.tech/2024/04/17/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%89%E8%A3%85GPT4Free">在群晖上安装GPT4Free</a></p>
 </blockquote>
 <p>最终测试发现，还是基于 <code>One API</code> + <code> kimi-free-api</code> 最理想，但需要在原来的渠道中，增加模型的名称为 <code>gpt-3.5-turbo</code>，原因后面再说</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022208686.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022208686.png"></p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2024/04/22/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86%E5%92%8C%E5%88%86%E5%8F%91%E7%B3%BB%E7%BB%9FOne%20API">大模型接口管理和分发系统One API</a></p>
 </blockquote>
 <p>聊天内容不会再出被错误覆盖了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022251720.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022251720.png"></p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>在开始安装之前，我们需要做一些准备工作，比如先下载好镜像，毕竟这是一个 <code>13G</code> 的大家伙，另外  <code>Embedding</code>  模型也需要提前下载</p>
 <blockquote>
 <p>以下全部采用命令行方式，需要用 <code>SSH</code> 客户端登录到群晖后执行</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 dbgpt 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/dbgpt/data/models</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 dbgpt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/dbgpt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 models 目录</span></span><br><span class="line"><span class="built_in">cd</span> data/models/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 Embedding 模型 (需要git lfs)</span></span><br><span class="line">git <span class="built_in">clone</span> https://huggingface.co/GanymedeNil/text2vec-large-chinese</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull eosphorosai/dbgpt:latest</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406011953732.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406011953732.png"></p>
 <p>如果不支持 <code>git-lfs</code> 的情况下，大文件只有  <code>135 bytes</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021838205.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021838205.png"></p>
 <p>实在没招的情况下，一个文件一个文件下载也不是不行 &#128514;</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406022234859.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406022234859.png"></p>
 <p>当然手动下载的话，记得要在 <code>models</code> 目录下，再建一个 <code>text2vec-large-chinese</code> 目录，用于上传我们下载的模型文件</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
 <p> 本文写作时， <code>latest</code> 版本对应为  <code>v0.5.7</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012023084.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012023084.png"></p>
 <h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 dbgpt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/dbgpt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器（采用 One API + kimi-free-api 方案）</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name dbgpt \</span><br><span class="line">   -p 5670:5670 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data/models/text2vec-large-chinese:/app/models/text2vec-large-chinese \</span><br><span class="line">   -e LOCAL_DB_TYPE=sqlite \</span><br><span class="line">   -e LOCAL_DB_PATH=data/default_sqlite.db \</span><br><span class="line">   -e LLM_MODEL=proxyllm \</span><br><span class="line">   -e PROXY_API_KEY=sk-bn6M52bOfdxYB3n2Ee717eA2C66b45318f1c95E4D9553d94 \</span><br><span class="line">   -e PROXY_SERVER_URL=http://192.168.0.197:3033/v1/chat/completions  \</span><br><span class="line">   -e EMBEDDING_MODEL=text2vec \</span><br><span class="line">   -e LANGUAGE=zh \</span><br><span class="line">   eosphorosai/dbgpt:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器（采用 GPT4Free 方案）</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name dbgpt \</span><br><span class="line">   -p 5670:5670 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data/models/text2vec-large-chinese:/app/models/text2vec-large-chinese \</span><br><span class="line">   -e LOCAL_DB_TYPE=sqlite \</span><br><span class="line">   -e LOCAL_DB_PATH=data/default_sqlite.db \</span><br><span class="line">   -e LLM_MODEL=proxyllm \</span><br><span class="line">   -e PROXY_API_KEY=sk-bn6M52bOfdxYB3n2Ee717eA2C66b45318f1c95E4D9553d94 \</span><br><span class="line">   -e PROXY_SERVER_URL=http://192.168.0.197:1337/v1/chat/completions  \</span><br><span class="line">   -e EMBEDDING_MODEL=text2vec \</span><br><span class="line">   -e LANGUAGE=zh \</span><br><span class="line">   eosphorosai/dbgpt:latest</span><br></pre></td></tr></table></figure>
 
@@ -642,7 +673,7 @@
 </blockquote>
 <p>更多的环境变量参数，请参考官方的 <code>.env.template</code> 文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvYmxvYi9tYWluLy5lbnYudGVtcGxhdGU=">https://github.com/eosphoros-ai/DB-GPT/blob/main/.env.template<i class="fa fa-external-link-alt"></i></span></p>
 <p><code>LLM_MODEL</code> 模型名称请参考：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvYmxvYi9tYWluL2RiZ3B0L2NvbmZpZ3MvbW9kZWxfY29uZmlnLnB5">https://github.com/eosphoros-ai/DB-GPT/blob/main/dbgpt/configs/model_config.py<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031258543.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031258543.png"></p>
 <p>从上图我们可以看出来，<code>proxyllm</code> 等同于 <code>chatgpt_proxyllm</code>，所以是按 <code>gpt-3.5-turbo</code> 来请求的。这就是为什么前面要求给 <code>kimi-free-api</code> 增加模型名称的原因</p>
 <p>顺便说一下，老苏尝试过 <code>moonshot_proxyllm</code>，但设置后总报 <code>LLM_MODEL_PATH</code> 错误，没有继续尝试。理论上，线上模型 <code>LLM_MODEL_PATH</code> 应该是和 <code>MOONSHOT_MODEL_VERSION</code>一样的</p>
 <h2 id="docker-compose-安装"><a href="#docker-compose-安装" class="headerlink" title="docker-compose 安装"></a>docker-compose 安装</h2><p>也可以用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
@@ -652,56 +683,56 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 dbgpt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/dbgpt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5670</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012226583.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012226583.png"></p>
 <p>如果界面是英文的，可以点左下角的地球图标进行切换</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021954255.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021954255.png"></p>
 <p>随便聊一下</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021413455.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021413455.png"></p>
 <p>如果有返回，说明 <code>proxyllm</code> 设置是正确的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021713863.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021713863.png"></p>
 <p>现在只有一个模型</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021412998.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021412998.png"></p>
 <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>进入数据库（ <code>Database</code>），显示了支持的类型</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012251170.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012251170.png"></p>
 <p>点 <code>MySQL</code> 创建一个数据库</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012252211.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012252211.png"></p>
 <p>选了 <code>nextcloud</code> 做测试</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021503982.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021503982.png"></p>
 <p>保存成功后</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021506591.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021506591.png"></p>
 <p>回到聊天界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012303063.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012303063.png"></p>
 <p>选择 <code>Chat DB</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406012304233.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406012304233.png"></p>
 <p>不太会用，随便问了个问题： <code>oc_accounts 表中有几个用户？</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021717654.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021717654.png"></p>
 <p>继续，对不对反正我是不懂的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021733360.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021733360.png"></p>
 <p>选择  <code>Chat Data</code>，还是不会用</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406031420709.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406031420709.png"></p>
 <h2 id="知识库"><a href="#知识库" class="headerlink" title="知识库"></a>知识库</h2><p>进入知识库（ <code>Knowledge</code>），点 <code>Create</code> 创建</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021802982.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021802982.png"></p>
 <p>选择 <code>Document</code> 类型</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021804175.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021804175.png"></p>
 <p>拖拽知识库文档</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021806617.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021806617.png"></p>
 <p>选择 <code>自动</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021810598.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021810598.png"></p>
 <p>会在后台自动处理</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021812970.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021812970.png"></p>
 <p>处理完成后，状态会从 <code>Running</code> 变成 <code>Finished</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021826156.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021826156.png"></p>
 <p>提个老问题</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021829062.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021829062.png"></p>
 <p>如果是 <code>GPT4Free</code>，正确答案会被 <code>&#39;Too Many Requests&#39;</code> 的日志覆盖。而用 <code>One API + kimi-free-api</code> 可以规避这个问题</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406021829921.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406021829921.png"></p>
 <p>像智能体、工作流，之前其他应用中介绍过，基本上是大同小异的，可以去看看官方的中文文档：<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL2Vvc3Bob3Jvcw==">https://www.yuque.com/eosphoros<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>GitHub - eosphoros-ai/DB-GPT: AI Native Data App Development framework with AWEL(Agentic Workflow Expression Language) and Agents<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQ=">https://github.com/eosphoros-ai/DB-GPT<i class="fa fa-external-link-alt"></i></span></p>
+<p>GitHub - eosphoros-ai&#x2F;DB-GPT: AI Native Data App Development framework with AWEL(Agentic Workflow Expression Language) and Agents<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQ=">https://github.com/eosphoros-ai/DB-GPT<i class="fa fa-external-link-alt"></i></span></p>
 <p>概览<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL2Vvc3Bob3Jvcy9kYmdwdC1kb2NzL2JleDMwbnN2NjBydTBmbXg=">https://www.yuque.com/eosphoros/dbgpt-docs/bex30nsv60ru0fmx<i class="fa fa-external-link-alt"></i></span></p>
-<p>shibing624/text2vec: text2vec, text to vector. 文本向量表征工具，把文本转化为向量矩阵，实现了Word2Vec、RankBM25、Sentence-BERT、CoSENT等文本表征、文本相似度计算模型，开箱即用。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoaWJpbmc2MjQvdGV4dDJ2ZWM=">https://github.com/shibing624/text2vec<i class="fa fa-external-link-alt"></i></span></p>
-<p>docker ValueError: Path /app/models/text2vec-large-chinese not found · Issue #981 · eosphoros-ai/DB-GPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvaXNzdWVzLzk4MQ==">https://github.com/eosphoros-ai/DB-GPT/issues/981<i class="fa fa-external-link-alt"></i></span></p>
-<p>[Bug] [text2vec-large-chinese LLM启动报错] safetensors_rust.SafetensorError: Error while deserializing header: HeaderTooLarge · Issue #932 · eosphoros-ai/DB-GPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvaXNzdWVzLzkzMg==">https://github.com/eosphoros-ai/DB-GPT/issues/932<i class="fa fa-external-link-alt"></i></span></p>
+<p>shibing624&#x2F;text2vec: text2vec, text to vector. 文本向量表征工具，把文本转化为向量矩阵，实现了Word2Vec、RankBM25、Sentence-BERT、CoSENT等文本表征、文本相似度计算模型，开箱即用。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NoaWJpbmc2MjQvdGV4dDJ2ZWM=">https://github.com/shibing624/text2vec<i class="fa fa-external-link-alt"></i></span></p>
+<p>docker ValueError: Path &#x2F;app&#x2F;models&#x2F;text2vec-large-chinese not found · Issue #981 · eosphoros-ai&#x2F;DB-GPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvaXNzdWVzLzk4MQ==">https://github.com/eosphoros-ai/DB-GPT/issues/981<i class="fa fa-external-link-alt"></i></span></p>
+<p>[Bug] [text2vec-large-chinese LLM启动报错] safetensors_rust.SafetensorError: Error while deserializing header: HeaderTooLarge · Issue #932 · eosphoros-ai&#x2F;DB-GPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Vvc3Bob3Jvcy1haS9EQi1HUFQvaXNzdWVzLzkzMg==">https://github.com/eosphoros-ai/DB-GPT/issues/932<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -849,7 +880,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

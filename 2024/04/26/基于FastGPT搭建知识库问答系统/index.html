@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="FastGPT 是基于 LLM 大模型的 AI 知识库构建平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171928369.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171928369.png">
 <meta property="article:published_time" content="2024-04-26T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171928369.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171928369.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/04/26/%E5%9F%BA%E4%BA%8EFastGPT%E6%90%AD%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E9%97%AE%E7%AD%94%E7%B3%BB%E7%BB%9F/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171928369.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171928369.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -535,67 +566,67 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 fastgpt 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/fastgpt/&#123;pg,mongo,tmp&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 fastgpt 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/fastgpt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果修改了 config.sys 文件，需要重启 FastGPT</span></span><br><span class="line">docker-compose down</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171654913.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171654913.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3155</code> 就能看到登录界面</p>
 <blockquote>
 <p>如果你没有更改默认配置，那么用户名便是 <code>root</code>，密码为 <code>1234</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132208472.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132208472.png"></p>
 <h2 id="新建知识库"><a href="#新建知识库" class="headerlink" title="新建知识库"></a>新建知识库</h2><p>首先需要新建一个知识库</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132232541.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132232541.png"></p>
 <p>取个名字</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132234703.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132234703.png"></p>
 <p>选择 <code>文本数据集</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132238364.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132238364.png"></p>
 <p>来源选择 <code>本地文件</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132240166.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132240166.png"></p>
 <p>将文件拖入</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132241644.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132241644.png"></p>
 <p>上传了一个 <code>pdf</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132242662.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132242662.png"></p>
 <p>直接用了默认设置</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132243763.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132243763.png"></p>
 <p>开始上传</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132244491.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132244491.png"></p>
 <p>多了一个数据集</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132247022.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132247022.png"></p>
 <p>等状态变成 <code>已就绪</code> 就可以开始建应用了</p>
 <blockquote>
 <p>当然这个过程也很消耗资源，小机器死机了一次，好在最后还是索引成功了</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171633708.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171633708.png"></p>
 <p>可以测试下搜索</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171346050.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171346050.png"></p>
 <h2 id="新建应用"><a href="#新建应用" class="headerlink" title="新建应用"></a>新建应用</h2><p>新建一个应用</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132213112.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132213112.png"></p>
 <p>模板选择了 <code>知识库+对话引导</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171637821.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171637821.png"></p>
 <p>进入 <code>简易配置</code>，关联知识库</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171639421.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171639421.png"></p>
 <p>也可以进入 <code>高级编排</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171640693.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171640693.png"></p>
 <p>这里已经可以开始调试了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171406990.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171406990.png"></p>
 <p>再来一条</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171419825.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171419825.png"></p>
 <p>没问题的话就可以保存、发布了</p>
 <h2 id="开始聊天"><a href="#开始聊天" class="headerlink" title="开始聊天"></a>开始聊天</h2><p>进入 <code>聊天</code>  </p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404132226720.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404132226720.png"></p>
 <p>相关接口的开发问题随便问，这给客服工作省了多大的事啊</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171647549.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171647549.png"></p>
 <p>看看 <code>Moonshot AI</code> 赠送的 <code>15块</code> 还剩下多少?</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404171457258.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404171457258.png"></p>
 <p>所有的请求，在 <code>One API</code> 的日志中都有记录</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404182044543.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404182044543.png"></p>
 <p><code>FastGPT</code> 是支持纯本地私有化部署的，但老苏考虑了自己小机器的性能，采用了混合部署的方式，其中向量模型采用了本地私有化部署，而 <code>LLM</code> 模型则使用了云服务</p>
 <p>流程跑通了，接下来就是优化了，比如 <code>标记预期答案</code> 等</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404181027322.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404181027322.png"></p>
 <p>当然，你还可以将 <code>FastGPT</code> 通过 <code>OpenAPI</code> 接口，被第三方应用调用，可以是全局 <code>API key</code>（可操作 <code>FastGPT</code> 上的相关服务和资源，无法直接调用应用对话）</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404231130546.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404231130546.png"></p>
 <p>也可以是应用  <code>API key</code>（可直接调用应用对话）</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404231133192.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404231133192.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>labring/FastGPT: FastGPT is a knowledge-based platform built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVA==">https://github.com/labring/FastGPT<i class="fa fa-external-link-alt"></i></span></p>
+<p>labring&#x2F;FastGPT: FastGPT is a knowledge-based platform built on the LLM, offers out-of-the-box data processing and model invocation capabilities, allows for workflow orchestration through Flow visualization!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYnJpbmcvRmFzdEdQVA==">https://github.com/labring/FastGPT<i class="fa fa-external-link-alt"></i></span></p>
 <p>FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9mYXN0Z3B0LmluLw==">https://fastgpt.in/<i class="fa fa-external-link-alt"></i></span></p>
 <p>快速了解 FastGPT | FastGPT<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2MuZmFzdGFpLnNpdGUvZG9jcy9pbnRyby8=">https://doc.fastai.site/docs/intro/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -744,7 +775,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

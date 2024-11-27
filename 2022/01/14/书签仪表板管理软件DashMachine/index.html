@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="DashMachine 是另一个具有有趣功能的 Web 书签仪表板应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041540787.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041540787.png">
 <meta property="article:published_time" content="2022-01-14T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041540787.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041540787.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/01/14/%E4%B9%A6%E7%AD%BE%E4%BB%AA%E8%A1%A8%E6%9D%BF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6DashMachine/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041540787.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041540787.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,10 +531,10 @@
 <p><code>DashMachine</code> 是一个具有有趣功能的 <code>Web</code> 书签仪表板应用程序，让你能够从一个仪表板管理所有自托管应用程序。</p>
 </blockquote>
 <p> <code>DashMachine</code> 使用单个 <code>.ini</code> 文件进行配置，管理起来比较方便；支持数据源，因此可以实现的不仅仅是书签功能，而且支持高大上的 <code>Dashboard</code>，实现数据可视化。不过需要说明的是，代码已经有 1 年多没更新了，当然这并不影响我们的研究、试用。</p>
-<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051211295.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051211295.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>dashmachine</code> ，选择第一个 <code>rmountjoy/dashmachine</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051214704.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051214704.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>dashmachine</code></p>
 <table>
 <thead>
@@ -519,7 +550,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051245195.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051245195.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -535,30 +566,30 @@
 <td align="center"><code>5000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051300689.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051300689.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5233</code> 就能看到一段说明，往下拉会看到两个按钮</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051253833.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051253833.png"></p>
 <p>接下来需要登录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051254897.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051254897.png"></p>
 <p>点 <code>GO TO LOGIN</code> 登录</p>
 <blockquote>
 <p>默认的账号：<code>admin</code>，密码：<code>admin</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051255100.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051255100.png"></p>
 <p>第一次进入后台，什么都没有</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051302529.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051302529.png"></p>
 <p>点 <code>Setting</code> 开始编辑，左侧是 <code>Config.ini</code> 的内容，右侧是说明</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051305479.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051305479.png"></p>
 <h2 id="卡片"><a href="#卡片" class="headerlink" title="卡片"></a>卡片</h2><p>搜索支持联想功能，比如输入 <code>Ho</code> 会自动过滤</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051645317.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051645317.png"></p>
 <p>再试试 <code>Ja</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051536390.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051536390.png"></p>
 <p>自动生成的示例，直接复制到左侧</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051537881.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051537881.png"></p>
 <p>一般只要修改 <code>prefix</code> 和 <code>url</code> 后即可</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051541055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051541055.png"></p>
 <p>保存之后回到首页</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112051545103.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112051545103.png"></p>
 <h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p>这是 <code>DashMachine</code> 最有趣的地方，可以通过不同的数据源，在 <code>DashMachine</code> 上显示数据，类似于仪表板（<code>DashBoard</code>）的功能</p>
 <h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>以官方提供的 <code>MyIP</code> 为例，如果您在浏览器中输入 <code>https://api.myip.com</code> 会返回👇这样的数据</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;ip&quot;</span><span class="punctuation">:</span><span class="string">&quot;114.93.213.71&quot;</span><span class="punctuation">,</span><span class="attr">&quot;country&quot;</span><span class="punctuation">:</span><span class="string">&quot;China&quot;</span><span class="punctuation">,</span><span class="attr">&quot;cc&quot;</span><span class="punctuation">:</span><span class="string">&quot;CN&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -572,24 +603,24 @@
 <p>第二段则用于 <code>展示数据</code></p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[MyIp.com]</span></span><br><span class="line"><span class="attr">prefix</span> = https://</span><br><span class="line"><span class="attr">url</span> = myip.com</span><br><span class="line"><span class="attr">icon</span> = static/images/apps/default.png</span><br><span class="line"><span class="attr">description</span> = Link to myip.com</span><br><span class="line"><span class="attr">open_in</span> = new_tab</span><br><span class="line"><span class="attr">data_sources</span> = test</span><br></pre></td></tr></table></figure>
 <p>呈现的效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112301015212.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112301015212.png"></p>
 <p>再以老苏常用的天气为例子（ <code>DashMachine</code> 也有专门的 <code>Weather</code> 数据源）</p>
 <blockquote>
 <p>关于天气数据，可以参考『 <a href="https://laosu.tech/2021/09/03/%E7%94%A8Changedetection%E7%9B%91%E6%8E%A7%E7%BD%91%E9%A1%B5%E7%9A%84%E5%8F%98%E5%8C%96#JSON-API-%E7%9B%91%E6%8E%A7">用Changedetection监控网页的变化</a> 』一文中的 <code>JSON-API-监控</code> 部分</p>
 </blockquote>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[shtq]</span></span><br><span class="line"><span class="attr">platform</span> = curl</span><br><span class="line"><span class="attr">resource</span> = http://t.weather.itboy.net/api/weather/city/<span class="number">101020100</span></span><br><span class="line"><span class="attr">value_template</span> = 今天&#123;&#123;value.data.forecast[<span class="number">0</span>].type&#125;&#125;，&#123;&#123;value.data.forecast[<span class="number">0</span>].high&#125;&#125;，&#123;&#123;value.data.forecast[<span class="number">0</span>].low&#125;&#125;，&#123;&#123;value.data.forecast[<span class="number">0</span>].notice&#125;&#125;</span><br><span class="line"><span class="attr">response_type</span> = json</span><br><span class="line"></span><br><span class="line"><span class="section">[上海天气预报]</span></span><br><span class="line"><span class="attr">prefix</span> = https://</span><br><span class="line"><span class="attr">url</span> = www.sojson.com</span><br><span class="line"><span class="attr">icon</span> = static/images/apps/default.png</span><br><span class="line"><span class="attr">description</span> = 免费天气API</span><br><span class="line"><span class="attr">open_in</span> = new_tab</span><br><span class="line"><span class="attr">data_sources</span> = shtq</span><br></pre></td></tr></table></figure>
 <p>展示效果</p>
-<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112301113839.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112301113839.png"></p>
 <h3 id="http-status"><a href="#http-status" class="headerlink" title="http_status"></a>http_status</h3><p>通过对给定 <code>URL</code> 进行 <code>http</code> 调用，并显示服务是否联机。</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[http_status_test]</span></span><br><span class="line"><span class="attr">platform</span> = http_status</span><br><span class="line"><span class="attr">resource</span> = https://baidu.com</span><br><span class="line"><span class="attr">return_codes</span> = <span class="number">2</span>xx,<span class="number">3</span>xx</span><br><span class="line"></span><br><span class="line"><span class="section">[Baidu]</span></span><br><span class="line"><span class="attr">prefix</span> = https://</span><br><span class="line"><span class="attr">url</span> = baidu.com</span><br><span class="line"><span class="attr">icon</span> = static/images/apps/default.png</span><br><span class="line"><span class="attr">open_in</span> = this_tab</span><br><span class="line"><span class="attr">data_sources</span> = http_status_test</span><br></pre></td></tr></table></figure>
 <p>展示效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041345143.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041345143.png"></p>
 <h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>通过 <code>ping</code> 检查服务是否在线</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[ping_laosu_ml]</span></span><br><span class="line"><span class="attr">platform</span> = ping</span><br><span class="line"><span class="attr">resource</span> = laosu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[laosu_ml]</span></span><br><span class="line"><span class="attr">prefix</span> = https://</span><br><span class="line"><span class="attr">url</span> = laosu.ml</span><br><span class="line"><span class="attr">icon</span> = static/images/apps/default.png</span><br><span class="line"><span class="attr">open_in</span> = this_tab</span><br><span class="line"><span class="attr">data_sources</span> = ping_laosu_ml</span><br></pre></td></tr></table></figure>
 <p>展示效果和 <code>http_status</code>，卡片右侧有个颜色按钮</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041354119.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041354119.png"></p>
 <p>将 <code>[ping_laosu_ml]</code> 中 <code>resource</code> 改为错误的地址，比如 <code>laosu.mll</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202201041356338.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202201041356338.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>老苏测试了几个通用的数据源，但数据源 <code>Docker</code> 老苏尝试失败了，原因没找到，配置用的是官方提供的，老苏只改了 <code>IP</code> 和端口，还是把设置贴出来吧，也许有人知道原因呢</p>
 <blockquote>
 <p><code>http://192.168.0.197:9000</code> 是 <code>Portainer</code> 的本地访问地址，可正常使用</p>
@@ -597,7 +628,7 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[docker-endpoint-1]</span></span><br><span class="line"><span class="attr">platform</span> = docker</span><br><span class="line"><span class="attr">prefix</span> = http://</span><br><span class="line"><span class="attr">host</span> = <span class="number">192.168</span>.<span class="number">0.197</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">9000</span></span><br><span class="line"><span class="attr">value_template</span> = &#123;&#123;error&#125;&#125;&lt;p style=<span class="string">&quot;text-align:right;text-transform:uppercase;font-size:14px;font-family: monospace;&quot;</span>&gt;&#123;&#123;name&#125;&#125;&lt;br /&gt;&lt;i style=<span class="string">&quot;position: relative; top: .2rem&quot;</span> class=<span class="string">&quot;material-icons md-18 theme-success-text&quot;</span> title=<span class="string">&quot;Running&quot;</span>&gt;fiber_manual_record&lt;/i&gt;&#123;&#123;containers_running&#125;&#125;&lt;i style=<span class="string">&quot;position: relative; top: .2rem&quot;</span> class=<span class="string">&quot;material-icons md-18 theme-warning-text&quot;</span> title=<span class="string">&quot;Paused&quot;</span>&gt;fiber_manual_record&lt;/i&gt;&#123;&#123;containers_paused&#125;&#125;&lt;i style=<span class="string">&quot;position: relative; top: .2rem&quot;</span> class=<span class="string">&quot;material-icons md-18 theme-failure-text&quot;</span> title=<span class="string">&quot;Stopped&quot;</span>&gt;fiber_manual_record&lt;/i&gt;&#123;&#123;containers_stopped&#125;&#125;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line"><span class="section">[Portainer]</span></span><br><span class="line"><span class="attr">prefix</span> = http://</span><br><span class="line"><span class="attr">url</span> = <span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">9000</span></span><br><span class="line"><span class="attr">icon</span> = static/images/apps/portainer.png</span><br><span class="line"><span class="attr">sidebar_icon</span> = static/images/apps/portainer.png</span><br><span class="line"><span class="attr">description</span> = Making Docker management easy</span><br><span class="line"><span class="attr">open_in</span> = this_tab</span><br><span class="line"><span class="attr">data_sources</span> = docker-endpoint-<span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p> 除此之外还有一些跟应用相关的数据源，比如 <code>PiHole</code>、<code>Sonarr</code>、<code>Radarr</code> 之类的，有兴趣可以研究看看。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>rmountjoy92/DashMachine: Another web application bookmark dashboard, with fun features.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jtb3VudGpveTkyL0Rhc2hNYWNoaW5l">https://github.com/rmountjoy92/DashMachine<i class="fa fa-external-link-alt"></i></span></p>
+<p>rmountjoy92&#x2F;DashMachine: Another web application bookmark dashboard, with fun features.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jtb3VudGpveTkyL0Rhc2hNYWNoaW5l">https://github.com/rmountjoy92/DashMachine<i class="fa fa-external-link-alt"></i></span></p>
 <p>Manage your Self Hosted Applications using DashMachine – NAS Hosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nZWVrZWQuaG9zdC9tYW5hZ2UteW91ci1zZWxmLWhvc3RlZC1hcHBsaWNhdGlvbnMtdXNpbmctZGFzaG1hY2hpbmUv">https://geeked.host/manage-your-self-hosted-applications-using-dashmachine/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -744,7 +775,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

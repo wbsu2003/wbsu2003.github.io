@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="一个类似 Dropbox 的文件管理器，让您可以在任何位置管理  WebDAV、FTP、S3、Dropbox、Google Drive 等数据。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201111105462.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201111105462.png">
 <meta property="article:published_time" content="2022-02-14T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网盘">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201111105462.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201111105462.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/14/%E5%A4%9A%E5%8A%9F%E8%83%BDWeb%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8Filestash/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201111105462.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201111105462.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,10 +534,10 @@
 <p><code>Filestash</code> 是一个类似 <code>Dropbox</code> 的文件管理器，旨在通过抽象存储来解决 <code>Dropbox</code> 问题，通过实现一个简单的接口来引入自己的后端或创建自己的后端。可以通过浏览器管理您的文件，包括上传文件和文件夹，编辑文件，音频播放器，视频播放器，图像查看器、图像转码，还支持全文检索。目前支持 <code>FTP</code>、<code>FTPS</code>、<code>SFTP</code>、<code>WebDAV</code>、<code>Git</code>、<code>S3</code>、<code>LDAP</code>、<code>Mysql</code>、<code>CardDAV</code>、<code>CalDAV</code>、<code>Backblaze B2</code>、 <code>Minio</code>、<code>Dropbox</code>、<code>Google Drive</code>。</p>
 </blockquote>
 <p>简单概括一下就是 <code>Filestash</code> 支持大量开放和专有协议，可以从任何地方访问您在云中的数据。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/02/202202141023906.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/02/202202141023906.gif"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>filestash</code> ，选择第一个 <code>machines/filestash</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091308210.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091308210.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>filestash</code>，在 <code>filestash</code> 中再建一个子文件夹 <code>config</code></p>
 <ul>
 <li>在 <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL21pY2thZWwta2VyamVhbi9maWxlc3Rhc2gvbWFzdGVyL2NvbmZpZy9jb25maWcuanNvbg==">https://raw.githubusercontent.com/mickael-kerjean/filestash/master/config/config.json<i class="fa fa-external-link-alt"></i></span> 下载 <code>config.json</code> 文件</li>
@@ -516,7 +547,7 @@
 <blockquote>
 <p>如果没有正确设置权限的话，第一次登录修改密码时会报错</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091454713.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091454713.png"></p>
 <table>
 <thead>
 <tr>
@@ -531,7 +562,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091345893.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091345893.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -547,7 +578,7 @@
 <td align="center"><code>8334</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091332810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091332810.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -579,7 +610,7 @@
 <blockquote>
 <p>老苏没有 <code>GDrive</code> 和  <code>Dropbox</code>，也没打算预览 <code>docx</code>、<code>xlsx</code> 等文件，所以这里没有设置环境变量</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091350692.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091350692.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8334</code> 就能看到主界面，第一次需要创建密码，所以会跳转到后台管理界面</p>
 <ul>
 <li><p>后端地址： <code>http://群晖IP:8334/admin</code></p>
@@ -587,55 +618,55 @@
 <li><p>前台地址 <code>http://群晖IP:8334</code></p>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091447033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091447033.png"></p>
 <p>接下来就会进入管理控制台</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091456913.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091456913.png"></p>
 <p>进入 <code>Backend</code> 会显示所有支持的存储类型</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091514045.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091514045.png"></p>
 <h2 id="WebDAV"><a href="#WebDAV" class="headerlink" title="WebDAV"></a>WebDAV</h2><p><code>WebDAV</code> 的参数比较简单，只要 <code>url</code>、<code>username</code> 和 <code>password</code></p>
 <blockquote>
 <p>老苏填的是 <code>webdav-aliyundriver</code> 的地址</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091945581.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091945581.png"></p>
 <p>在浏览器中打开  <code>http://群晖IP:8334</code> 前台页面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201091959516.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201091959516.png"></p>
 <p>点 <code>连接</code>，如果设置没有错误的话，会看到文件列表</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092000956.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092000956.png"></p>
 <h2 id="SAMBA"><a href="#SAMBA" class="headerlink" title="SAMBA"></a>SAMBA</h2><p>用 <code>samba</code> 协议挂载了 <code>Airdisk Q1</code>，这是老苏玩群晖之前买的，直接挂个 <code>U盘</code> 就能远程访问</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092107502.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092107502.png"></p>
 <p>在浏览器中打开  <code>http://群晖IP:8334</code> 前台页面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092112525.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092112525.png"></p>
 <p>选择 <code>SAMBA</code> 点 <code>连接</code>，如果设置没有错误的话，会看到文件列表</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092113142.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092113142.png"></p>
 <h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><p>用 <code>mysql</code> 挂载了 <code>MariaDB 5</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092127232.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092127232.png"></p>
 <p>在浏览器中打开  <code>http://群晖IP:8334</code> 前台页面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092126563.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092126563.png"></p>
 <p>选择 <code>MYSQL</code> 点 <code>连接</code>，会看到库</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092124669.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092124669.png"></p>
 <p>进入表单</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201092134033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201092134033.png"></p>
 <h2 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h2><p>用 <code>GIT</code> 挂载了个 <code>repo</code> 测试了一下</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201102153026.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201102153026.png"></p>
 <p>不过 <code>github</code> 总是抽风，容器内能看到在下载，但总下不完全</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201102140524.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201102140524.png"></p>
 <p>每次报错也不一样</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201102117689.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201102117689.png"></p>
 <p>也会出现</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201102150573.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201102150573.png"></p>
 <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>功能方面有点类似 <code>PanIndex</code>，同样只能在不同的存储间切换，而不是能同时使用。</p>
 <p>但也有自己的特色：</p>
 <ol>
-<li> 对图像的支持：<code>Filestash</code> 非常擅长浏览大量图像库，如果您有数码单反相机，它还可以很好地支持 <code>RAW</code> 图像。</li>
-<li> 支持视频：<code>Filestash</code> 可以对一系列视频格式进行即时转码。</li>
-<li> 搜索：<code>Filestash</code>  可以进行全文搜索，也可以根据您的选择搜索文件名</li>
-<li> 共享链接：允许您使用内置机制的链接与他人共享文件和文件夹</li>
+<li>对图像的支持：<code>Filestash</code> 非常擅长浏览大量图像库，如果您有数码单反相机，它还可以很好地支持 <code>RAW</code> 图像。</li>
+<li>支持视频：<code>Filestash</code> 可以对一系列视频格式进行即时转码。</li>
+<li>搜索：<code>Filestash</code>  可以进行全文搜索，也可以根据您的选择搜索文件名</li>
+<li>共享链接：允许您使用内置机制的链接与他人共享文件和文件夹</li>
 <li>强大的文本编辑器：具有完整 <code>org 模式</code> 客户端支持的文本编辑器</li>
 <li>与 <code>Onlyoffice</code> 集成：有一个易于部署的 <code>OnlyOffice</code> 解决方案</li>
 </ol>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>FileStash</code> 是一个简单易用，功能强大的文件管理器，具有许多附加组件和扩展，虽然老苏并没有都去试用，但是可玩性还是很高的，如果你愿意花时间去尝试的话。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>mickael-kerjean/filestash: 🦄 A modern web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze, …<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY2thZWwta2VyamVhbi9maWxlc3Rhc2g=">https://github.com/mickael-kerjean/filestash<i class="fa fa-external-link-alt"></i></span></p>
+<p>mickael-kerjean&#x2F;filestash: 🦄 A modern web client for SFTP, S3, FTP, WebDAV, Git, Minio, LDAP, CalDAV, CardDAV, Mysql, Backblaze, …<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY2thZWwta2VyamVhbi9maWxlc3Rhc2g=">https://github.com/mickael-kerjean/filestash<i class="fa fa-external-link-alt"></i></span></p>
 <p>Filestash — Self-hosted client for your data<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZmlsZXN0YXNoLmFwcC8=">https://www.filestash.app/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Getting started<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZmlsZXN0YXNoLmFwcC9kb2NzLw==">https://www.filestash.app/docs/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -783,7 +814,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

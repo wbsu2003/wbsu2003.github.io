@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="RStudio 是为 R 语言设计的一种跨平台集成开发环境。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401082254813.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401082254813.png">
 <meta property="article:published_time" content="2024-01-17T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="开发">
 <meta property="article:tag" content="编辑器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401082254813.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401082254813.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/01/17/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%89%E8%A3%85RStudio%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%89%88/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202401082254813.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202401082254813.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -513,7 +544,7 @@
 
 <p>而当你使用 <code>sudo</code>后，容器还是会进入了 <code>rootless</code> 模式，所以老苏姑且认为，在群晖上安装的 <code>RStudio</code> 服务器版，可能只能使用 <code>root</code> 用户登录，而不能使用默认用户 <code>rstudio</code>，或者自己设定的其他用户</p>
 <p>当然，最好的办法还是，当遇到登录失败时，进日志看看容器工作在什么模式下</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401091119113.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401091119113.png"></p>
 <ul>
 <li><code>rootless</code> 模式：默认用户名为 <code>root</code>；</li>
 <li>非 <code>rootless</code> 模式：默认用户名为 <code>rstudio</code>；</li>
@@ -523,7 +554,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>4.3.2</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312221043053.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312221043053.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>rstudio</code>，并在其中建两个子文件夹 <code>config</code> 和 <code>workspace</code></p>
 <table>
 <thead>
@@ -544,7 +575,7 @@
 <td align="center">存放代码</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401091148584.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401091148584.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -560,7 +591,7 @@
 <td align="center"><code>8787</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401091146777.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401091146777.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -578,7 +609,7 @@
 </tr>
 </tbody></table>
 <p>更多环境变量请参考官方的文档：<span class="exturl" data-url="aHR0cHM6Ly9yb2NrZXItcHJvamVjdC5vcmcvaW1hZ2VzL3ZlcnNpb25lZC9yc3R1ZGlvLmh0bWwjZW52aXJvbm1lbnQtdmFyaWFibGVz">https://rocker-project.org/images/versioned/rstudio.html#environment-variables<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401091147341.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401091147341.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 rstudio 及子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/rstudio/&#123;config,workspace&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 rstudio 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/rstudio</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name rstudio \</span><br><span class="line">   -p 8788:8787 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/home/rstudio/.config/rstudio \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/workspace:/home/rstudio/workspace \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e PASSWORD=123456 \</span><br><span class="line">   rocker/rstudio</span><br></pre></td></tr></table></figure>
 
@@ -589,19 +620,19 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 rstudio 及子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/rstudio/&#123;config,workspace&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 rstudio 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/rstudio</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8788</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312221055324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312221055324.png"></p>
 <p>用默认用户：<code>rstudio</code>，大概率会遇到登录失败，显示 <code>Error: Incorrect or invalid username/password</code></p>
 <blockquote>
 <p>密码就是我们环境变量 <code>PASSWORD</code> 中设定的值</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401081639053.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401081639053.png"></p>
 <p>如果日志中显示容器工作在 <code>rootless</code>，用户需改为 <code>root</code>，密码依然是我们环境变量 <code>PASSWORD</code> 中设定的值</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202401081638075.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202401081638075.png"></p>
 <p>现在可以开始使用了</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>rocker-org/rocker-versioned2: Run current &amp; prior versions of R using docker. rocker/r-ver, rocker/rstudio, rocker/shiny, rocker/tidyverse, and so on.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2tlci1vcmcvcm9ja2VyLXZlcnNpb25lZDI=">https://github.com/rocker-org/rocker-versioned2<i class="fa fa-external-link-alt"></i></span></p>
+<p>rocker-org&#x2F;rocker-versioned2: Run current &amp; prior versions of R using docker. rocker&#x2F;r-ver, rocker&#x2F;rstudio, rocker&#x2F;shiny, rocker&#x2F;tidyverse, and so on.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JvY2tlci1vcmcvcm9ja2VyLXZlcnNpb25lZDI=">https://github.com/rocker-org/rocker-versioned2<i class="fa fa-external-link-alt"></i></span></p>
 <p>Rocker Project - The Rocker Project<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yb2NrZXItcHJvamVjdC5vcmcv">https://rocker-project.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Administration Guide - PAM Authentication<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnBvc2l0LmNvL2lkZS9zZXJ2ZXItcHJvL2F1dGhlbnRpY2F0aW5nX3VzZXJzL3BhbV9hdXRoZW50aWNhdGlvbi5odG1s">https://docs.posit.co/ide/server-pro/authenticating_users/pam_authentication.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>Administration Guide - PAM Authentication<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnBvc2l0LmNvL2lkZS9zZXJ2ZXItcHJvL2F1dGhlbnRpY2F0aW5nX3VzZXJzL3BhbV9hdXRoZW50aWNhdGlvbi5odG1s">https://docs.posit.co/ide/server-pro/authenticating_users&#x2F;pam_authentication.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>Running RStudio Server with Docker - Dave Tang’s blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kYXZldGFuZy5vcmcvbXVzZS8yMDIxLzA0LzI0L3J1bm5pbmctcnN0dWRpby1zZXJ2ZXItd2l0aC1kb2NrZXIv">https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -749,7 +780,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

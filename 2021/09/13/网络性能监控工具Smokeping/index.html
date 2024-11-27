@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Smokeping 是开源免费的网络性能监控工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819105508.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819105508.png">
 <meta property="article:published_time" content="2021-09-13T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819105508.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819105508.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/09/13/%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7Smokeping/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819105508.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819105508.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,9 +533,9 @@
 <p>可以用于监控群晖主机的网络状态，也可以用于监控多台 <code>vps</code> 的运行状态，支持通过邮件报警。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>smokeping</code> ，选择第一个 <code>linuxserver/smokeping</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729092746.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729092746.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>smokeping</code>，并在 <code>smokeping</code> 中建两个子目录，分别命名为 <code>config</code> 和 <code>data</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729092931.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729092931.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +555,7 @@
 <td align="center">配置文件目录</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729093333.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729093333.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突</p>
 <table>
 <thead>
@@ -540,7 +571,7 @@
 <td align="center">TCP</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729093402.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729093402.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -561,9 +592,9 @@
 <td align="center"><code>&lt;uid&gt;</code> 设为 <code>1000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729093606.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729093606.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8580</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729093916.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729093916.png"></p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>配置文件在 <code>/docker/smokeping/config</code> 目录中，知道了用途可以方便后面的修改</p>
 <table>
 <thead>
@@ -613,29 +644,29 @@
 <td align="center">监控目标设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729175324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729175324.png"></p>
 <h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><p>打开 <code>smokeping/config/Database</code> 文件，全部采用了默认值，也就是 300 秒（5 分钟）ping 20 次</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210812092225.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210812092225.png"></p>
 <h2 id="Probes"><a href="#Probes" class="headerlink" title="Probes"></a>Probes</h2><p>编辑 <code>smokeping/config/Probes</code> 文件，将 dns 中的 <code>google.com</code> 改为了 <code>baidu.com</code>，其他都是默认的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210812105415.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210812105415.png"></p>
 <h2 id="邮件报警"><a href="#邮件报警" class="headerlink" title="邮件报警"></a>邮件报警</h2><p>第一步、编辑 <code>ssmtp.conf</code></p>
 <blockquote>
 <p>配置生效需要重启容器</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819092450.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819092450.png"></p>
 <p>除了密码都在下面👇</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Debug</span>=<span class="literal">YES</span></span><br><span class="line"><span class="comment"># Config file for sSMTP sendmail</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The person who gets all mail for userids &lt; 1000</span></span><br><span class="line"><span class="comment"># Make this empty to disable rewriting.</span></span><br><span class="line"></span><br><span class="line"><span class="attr">root</span>=wbsu2003@<span class="number">88</span>.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># The place where the mail goes. The actual machine name is required no</span></span><br><span class="line"><span class="comment"># MX records are consulted. Commonly mailhosts are named mail.domain.com</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mailhub</span>=smtp.<span class="number">88</span>.com:<span class="number">465</span></span><br><span class="line"><span class="attr">AuthUser</span>=wbsu2003@<span class="number">88</span>.com</span><br><span class="line"><span class="attr">AuthPass</span>=<span class="number">88</span>邮箱设置的专用密码</span><br><span class="line"><span class="attr">UseSTARTTLS</span>=<span class="literal">NO</span></span><br><span class="line"></span><br><span class="line"><span class="attr">UseTLS</span>=<span class="literal">YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Where will the mail seem to come from?</span></span><br><span class="line"><span class="attr">rewriteDomain</span>=<span class="number">88</span>.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># The full hostname</span></span><br><span class="line"><span class="attr">hostname</span>=linuxserver-smokeping1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Are users allowed to set their own From: address?</span></span><br><span class="line"><span class="comment"># YES - Allow the user to specify their own From: address</span></span><br><span class="line"><span class="comment"># NO - Use the system generated From: address</span></span><br><span class="line"><span class="attr">FromLineOverride</span>=<span class="literal">YES</span></span><br></pre></td></tr></table></figure>
 
 <p>老苏用的是 <code>88</code> 邮箱，相关参数可以在 <code>设置</code> 中找到</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819092918.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819092918.png"></p>
 <p>设置完成后，可以通过 『终端机』 进入容器内进行 <code>Email</code> 发送调试，命令行下输入 <code>ssmtp -v wbsu2003@hotmail.com</code> ，再依次输入：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">To: wbsu2003@hotmail.com</span><br><span class="line">From: wbsu2003@88.com</span><br><span class="line">Subject: alert &lt;回车2次&gt;</span><br><span class="line"></span><br><span class="line">test123 &lt;ctrl+D&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819094313.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819094313.png"></p>
 <p>去收件箱查看邮件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819092303.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819092303.png"></p>
 <p>第二步、编辑 <code>Alerts</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210819094514.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210819094514.png"></p>
 <p>修改红框部分</p>
 <ul>
 <li><code>to</code>：接收报警的邮箱，也可以是自定义脚本；</li>
@@ -647,16 +678,16 @@
 </blockquote>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">*** Alerts ***</span><br><span class="line"><span class="attr">to</span> = wbsu2003@hotmail.com</span><br><span class="line"><span class="attr">from</span> = wbsu2003@<span class="number">88</span>.com</span><br><span class="line"> </span><br><span class="line">+rttdetect</span><br><span class="line"><span class="attr">type</span> = rtt</span><br><span class="line"><span class="attr">pattern</span> = &lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&lt;<span class="number">20</span>,&gt;<span class="number">20</span>,&gt;<span class="number">20</span>,&gt;<span class="number">20</span></span><br><span class="line"><span class="attr">comment</span> = 连续<span class="number">3</span>次延时<span class="number">20</span>以上</span><br><span class="line"></span><br><span class="line">+lossdetect</span><br><span class="line"><span class="attr">type</span> = loss</span><br><span class="line"><span class="attr">pattern</span> = ==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,==<span class="number">0</span>%,&gt;<span class="number">0</span>%,&gt;<span class="number">0</span>%,&gt;<span class="number">0</span>%</span><br><span class="line"><span class="attr">comment</span> = 突然有丢包</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210812105620.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210812105620.png"></p>
 <h2 id="Targets"><a href="#Targets" class="headerlink" title="Targets"></a>Targets</h2><p><code>Internet Sites</code> 基本上是我们正常无法访问的站点，所以需要进行修改，不然会没有数据</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729103108.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729103108.png"></p>
 <p>编辑 <code>smokeping/config/Targets</code> 文件</p>
 <blockquote>
 <p>编辑之前请先做好备份</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729103945.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729103945.png"></p>
 <p>格式一目了然，采用了是分层结构，用+表示，例如第一层“+”，第二层“++”一次类推可以增加也可以修改</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729104143.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729104143.png"></p>
 <p>下面👇这段来自 <span class="exturl" data-url="aHR0cHM6Ly93emZvdS5jb20vc21va2VwaW5nLw==">https://wzfou.com/smokeping/<i class="fa fa-external-link-alt"></i></span>，但根据我们前面设置的 <code>Probes</code> 和 <code>Alerts</code>进行了微调</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">+ Other</span><br><span class="line"><span class="attr">menu</span> = 三大网络监控</span><br><span class="line"><span class="attr">title</span> = 监控统计</span><br><span class="line"><span class="attr">probe</span> = FPing</span><br><span class="line"></span><br><span class="line">++ dianxin</span><br><span class="line"><span class="attr">menu</span> = 电信网络监控</span><br><span class="line"><span class="attr">title</span> = 电信网络监控列表</span><br><span class="line"><span class="attr">host</span> = /Other/dianxin/dianxin-bj /Other/dianxin/dianxin-hlj /Other/dianxin/dianxin-tj /Other/dianxin/dianxin-sc /Other/dianxin/dianxin-sh /Other/dianxin/dianxin-gz</span><br><span class="line"></span><br><span class="line">+++ dianxin-bj</span><br><span class="line"><span class="attr">menu</span> = 北京电信</span><br><span class="line"><span class="attr">title</span> = 北京电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">202.96</span>.<span class="number">199.133</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ dianxin-hlj</span><br><span class="line"><span class="attr">menu</span> = 黑龙江电信</span><br><span class="line"><span class="attr">title</span> = 黑龙江电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">219.147</span>.<span class="number">198.242</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ dianxin-tj</span><br><span class="line"><span class="attr">menu</span> = 天津电信</span><br><span class="line"><span class="attr">title</span> = 天津电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">219.150</span>.<span class="number">32.132</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ dianxin-sc</span><br><span class="line"><span class="attr">menu</span> = 四川电信</span><br><span class="line"><span class="attr">title</span> = 四川电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">61.139</span>.<span class="number">2.69</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ dianxin-sh</span><br><span class="line"><span class="attr">menu</span> = 上海电信</span><br><span class="line"><span class="attr">title</span> = 上海电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">116.228</span>.<span class="number">111.118</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ dianxin-gz</span><br><span class="line"><span class="attr">menu</span> = 广东电信</span><br><span class="line"><span class="attr">title</span> = 广东电信</span><br><span class="line"><span class="attr">host</span> = <span class="number">113.111</span>.<span class="number">211.22</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">++ liantong</span><br><span class="line"><span class="attr">menu</span> = 联通网络监控</span><br><span class="line"><span class="attr">title</span> = 联通网络监控列表</span><br><span class="line"><span class="attr">host</span> = /Other/liantong/liantong-bj /Other/liantong/liantong-hlj /Other/liantong/liantong-tj /Other/liantong/liantong-sc /Other/liantong/liantong-sh /Other/liantong/liantong-gz</span><br><span class="line"> </span><br><span class="line">+++ liantong-bj</span><br><span class="line"><span class="attr">menu</span> = 北京联通</span><br><span class="line"><span class="attr">title</span> = 北京联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">61.135</span>.<span class="number">169.121</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ liantong-hlj</span><br><span class="line"><span class="attr">menu</span> = 黑龙江联通</span><br><span class="line"><span class="attr">title</span> = 黑龙江联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">202.97</span>.<span class="number">224.69</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ liantong-tj</span><br><span class="line"><span class="attr">menu</span> = 天津联通</span><br><span class="line"><span class="attr">title</span> = 天津联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">202.99</span>.<span class="number">96.68</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ liantong-sc</span><br><span class="line"><span class="attr">menu</span> = 四川联通</span><br><span class="line"><span class="attr">title</span> = 四川联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">119.6</span>.<span class="number">6.6</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ liantong-sh</span><br><span class="line"><span class="attr">menu</span> = 上海联通</span><br><span class="line"><span class="attr">title</span> = 上海联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">210.22</span>.<span class="number">84.3</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ liantong-gz</span><br><span class="line"><span class="attr">menu</span> = 广东联通</span><br><span class="line"><span class="attr">title</span> = 广东联通</span><br><span class="line"><span class="attr">host</span> = <span class="number">221.5</span>.<span class="number">88.88</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">++ yidong</span><br><span class="line"><span class="attr">menu</span> = 移动网络监控</span><br><span class="line"><span class="attr">title</span> = 移动网络监控列表</span><br><span class="line"><span class="attr">host</span> = /Other/yidong/yidong-bj /Other/yidong/yidong-hlj /Other/yidong/yidong-tj /Other/yidong/yidong-sc /Other/yidong/yidong-sh /Other/yidong/yidong-gz </span><br><span class="line"> </span><br><span class="line">+++ yidong-bj</span><br><span class="line"><span class="attr">menu</span> = 北京移动</span><br><span class="line"><span class="attr">title</span> = 北京移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">221.130</span>.<span class="number">33.52</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ yidong-hlj</span><br><span class="line"><span class="attr">menu</span> = 黑龙江移动</span><br><span class="line"><span class="attr">title</span> = 黑龙江移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">211.137</span>.<span class="number">241.35</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ yidong-tj</span><br><span class="line"><span class="attr">menu</span> = 天津移动</span><br><span class="line"><span class="attr">title</span> = 天津移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">211.137</span>.<span class="number">160.5</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ yidong-sc</span><br><span class="line"><span class="attr">menu</span> = 四川移动</span><br><span class="line"><span class="attr">title</span> = 四川移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">218.201</span>.<span class="number">4.3</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ yidong-sh</span><br><span class="line"><span class="attr">menu</span> = 上海移动</span><br><span class="line"><span class="attr">title</span> = 上海移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">117.131</span>.<span class="number">19.23</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br><span class="line"> </span><br><span class="line">+++ yidong-gz</span><br><span class="line"><span class="attr">menu</span> = 广东移动</span><br><span class="line"><span class="attr">title</span> = 广东移动</span><br><span class="line"><span class="attr">host</span> = <span class="number">211.136</span>.<span class="number">192.6</span></span><br><span class="line"><span class="attr">alerts</span> = rttdetect,lossdetect</span><br></pre></td></tr></table></figure>
 
@@ -664,24 +695,24 @@
 <blockquote>
 <p>配置生效需要重启容器</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210812110811.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210812110811.png"></p>
 <p>如果是用默认的 <code>GB18030</code> 编码保存，中文会乱码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729105235.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729105235.png"></p>
 <p>而正常显示应该是这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729110617.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729110617.png"></p>
 <p>随着时间的推移，逐步会产生数据</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210729141433.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210729141433.png"></p>
 <p>当触发了设定的延迟（ <code>rttdetect</code> ）或者丢包（ <code>lossdetect</code> ）条件时，会收到邮件提醒</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820084030.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820084030.png"></p>
 <p>而如果邮件设置有问题，会在 <code>config</code> 目录中生成 <code>dead.letter</code> 文件，用于记录触发过的报警</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210818164308.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210818164308.png"></p>
 <p>下载之后打开文件内容是下面👇这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210818164507.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210818164507.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>oetiker/SmokePing: The Active Monitoring System<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29ldGlrZXIvU21va2VQaW5n">https://github.com/oetiker/SmokePing<i class="fa fa-external-link-alt"></i></span></p>
+<p>oetiker&#x2F;SmokePing: The Active Monitoring System<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29ldGlrZXIvU21va2VQaW5n">https://github.com/oetiker/SmokePing<i class="fa fa-external-link-alt"></i></span></p>
 <p>SmokePing - About SmokePing<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vc3Mub2V0aWtlci5jaC9zbW9rZXBpbmcv">https://oss.oetiker.ch/smokeping/<i class="fa fa-external-link-alt"></i></span></p>
 <p>How to install SmokePing – sleeplessbeastie’s notes<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zbGVlcGxlc3NiZWFzdGllLmV1LzIwMjAvMDYvMTkvaG93LXRvLWluc3RhbGwtc21va2VwaW5nLw==">https://sleeplessbeastie.eu/2020/06/19/how-to-install-smokeping/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Smokeping安装与配置-免费开源网络性能监控工具可视化主/从部署 - 挖站否-挖掘建站的乐趣<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93emZvdS5jb20vc21va2VwaW5nLw==">https://wzfou.com/smokeping/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Smokeping安装与配置-免费开源网络性能监控工具可视化主&#x2F;从部署 - 挖站否-挖掘建站的乐趣<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93emZvdS5jb20vc21va2VwaW5nLw==">https://wzfou.com/smokeping/<i class="fa fa-external-link-alt"></i></span></p>
 <p>ssmtp-命令行发送邮件 | Hom<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nb2hvbS53aW4vMjAxNi8xMC8wNy9zc210cC8=">https://gohom.win/2016/10/07/ssmtp/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -828,7 +859,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

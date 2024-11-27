@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Excalidraw 是一款完全免费的手绘风格绘图白板应用，能快速画出漂亮的流程图、示意图甚至是图表。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011430831.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011430831.png">
 <meta property="article:published_time" content="2021-11-12T04:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="白板">
 <meta property="article:tag" content="流程图">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011430831.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011430831.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/12/%E6%89%8B%E7%BB%98%E9%A3%8E%E6%A0%BC%E7%9A%84%E7%99%BD%E6%9D%BFExcalidraw/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011430831.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011430831.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -509,7 +540,7 @@
 <p>官方试用地址：<span class="exturl" data-url="aHR0cHM6Ly9leGNhbGlkcmF3LmNvbS8=">https://excalidraw.com<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>excalidraw</code> ，选择第一个 <code>excalidraw/excalidraw</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011127853.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011127853.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>直接用了默认的端口 <code>2480</code> </p>
 <table>
 <thead>
@@ -523,51 +554,51 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011242511.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011242511.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:2480</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011247932.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011247932.png"></p>
 <h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><p>界面简洁，上手简单，操作习惯和大部分制图软件相似，具备白板所需要的基本功能，提供了方形、圆形、自由画笔和箭头直线等常用图形工具</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011303989.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011303989.png"></p>
 <p>支持导出 <code>png</code>、<code>svg</code> 两种图像格式</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011307356.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011307356.png"></p>
 <p>支持保存到本地，需要时可以导入继续编辑</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011321996.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011321996.png"></p>
 <h2 id="公共图库"><a href="#公共图库" class="headerlink" title="公共图库"></a>公共图库</h2><p>除了基本的绘图功能外，<code>Excalidraw</code> 还提供了库功能</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011327250.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011327250.png"></p>
 <p>点 <code>浏览库</code>，会新开一个页面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011329281.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011329281.png"></p>
 <p>可以 <code>➡️ Add to Excalidraw</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011330639.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011330639.png"></p>
 <p>直接拖拽到编辑区</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011335665.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011335665.png"></p>
 <p>可以根据需要添加，都是手绘风格的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011336152.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011336152.png"></p>
 <p>如果经常做分析，可以试试 <code>Data Viz</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011341973.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011341973.png"></p>
 <p>支持从 <code>Excel</code> 中 <code>ctrl+c</code> 复制表格</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011632363.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011632363.png"></p>
 <p>然后在 <code>Excalidraw</code> 中 <code>ctrl+v</code> 粘贴，选择好图表类型</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011633299.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011633299.png"></p>
 <p>自动生成图表</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011633401.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011633401.png"></p>
 <h2 id="协作功能"><a href="#协作功能" class="headerlink" title="协作功能"></a>协作功能</h2><p>这个 <code>docker</code> 实际上只是 <code>Excalidraw</code> 客户端，所以你创建的实例不支持共享或协作功能</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011253950.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011253950.png"></p>
 <p>我们自己搭建的是启动不了会议的，而官网的则可以</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011255162.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011255162.png"></p>
 <h1 id="Obsidian-插件"><a href="#Obsidian-插件" class="headerlink" title="Obsidian 插件"></a>Obsidian 插件</h1><blockquote>
 <p>这个和 <code>docker</code> 本身已经没有关系，是 <code>Excalidraw</code> 的另一种应用场景</p>
 </blockquote>
 <p>在 <code>Obsidian</code> 的 <code>设置</code> –&gt; <code>第三方插件</code> –&gt; <code>社区插件</code> –&gt; <code>浏览</code> 中，找到 <code>Excalidraw</code>，点 <code>安装</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011547988.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011547988.png"></p>
 <p>安装完成后，默认并没有启用</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011553341.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011553341.png"></p>
 <p>启用后，左侧的图标会多出像回形针（领带？笔尖？）的 <code>Excalidraw</code> 图标</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011556181.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011556181.png"></p>
 <p>使用方法是完全一样的，除了库的加载方式不能再使用 <code>➡️ Add to Excalidraw</code> ，而是要先 <code>⬇️ Download</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110011603244.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110011603244.png"></p>
 <p>画的图默认在库根目录下的 <code>Excalidraw</code> 目录中</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>excalidraw/excalidraw: Virtual whiteboard for sketching hand-drawn like diagrams<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdw==">https://github.com/excalidraw/excalidraw<i class="fa fa-external-link-alt"></i></span></p>
+<p>excalidraw&#x2F;excalidraw: Virtual whiteboard for sketching hand-drawn like diagrams<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V4Y2FsaWRyYXcvZXhjYWxpZHJhdw==">https://github.com/excalidraw/excalidraw<i class="fa fa-external-link-alt"></i></span></p>
 <p>Excalidraw<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9leGNhbGlkcmF3LmNvbS8=">https://excalidraw.com<i class="fa fa-external-link-alt"></i></span></p>
 <p>Excalidraw在线手绘图表工具，帮你摆脱一成不变 - 超级PDF<br>地址：<span class="exturl" data-url="aHR0cHM6Ly94cGRmLm5ldC93aWtpL2tub3dsZWRnZS8xMzg5OTcwMzQwNDEwNTYwNTEyLmh0bWw=">https://xpdf.net/wiki/knowledge/1389970340410560512.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -716,7 +747,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

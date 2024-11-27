@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="TagSpaces 是一款离线、开源的文档管理器，支持标记。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png">
 <meta property="article:published_time" content="2023-10-14T00:10:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="S3">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/10/14/%E5%85%B7%E6%9C%89%E6%A0%87%E8%AE%B0%E5%92%8C%E7%AC%94%E8%AE%B0%E5%8A%9F%E8%83%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8TagSpaces/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -501,11 +532,11 @@
 <p><code>TagSpaces</code> 是一款免费、无供应商锁定的开源应用程序，用于借助标签组织、注释和管理本地文件。它具有高级笔记功能和待办事项应用程序的一些功能。该应用程序适用于 <code>Windows</code>、<code>Linux</code>、<code>Mac OS</code> 和 <code>Android</code>。并已经为 <code>Firefox</code>、<code>Edge</code> 和 <code>Chrome</code> 提供了 <code>Web Clipper</code> 扩展，可以轻松收集本地文件形式的在线内容。</p>
 </blockquote>
 <p><code>TagSpaces</code> 遵循无后端、无登录的理念，它不是 <code>SaaS</code>，而是前端应用程序，其中文件系统或对象存储扮演后端的角色。适用于多种图像、视频、音频和文档文件格式的集成查看器。说白了有点像是 <code>S3</code> 存储的客户端应用。</p>
-<p><code>TagSpaces</code> 分为社区开发版和 <code>Pro</code> 版等，各版本的差异可以去看：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGFnc3BhY2VzLm9yZy9wcm9kdWN0cy8/dXRtX3NvdXJjZT1hcHA=">https://www.tagspaces.org/products/?utm_source=app<i class="fa fa-external-link-alt"></i></span></p>
+<p><code>TagSpaces</code> 分为社区开发版和 <code>Pro</code> 版等，各版本的差异可以去看：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGFnc3BhY2VzLm9yZy9wcm9kdWN0cy8/dXRtX3NvdXJjZT1hcHA=">https://www.tagspaces.org/products/?utm_source&#x3D;app<i class="fa fa-external-link-alt"></i></span></p>
 <iframe src="//player.bilibili.com/player.html?aid=658941393&bvid=BV1Rh4y1y7wC&cid=1212265387&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271518516.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271518516.png"></p>
 <h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 tagspaces 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/tagspaces/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 tagspaces 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 MinIO 容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name tagspaces-minio \</span><br><span class="line">   --entrypoint sh \</span><br><span class="line">   -p 9010:9000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e MINIO_ROOT_USER=laosu \</span><br><span class="line">   -e MINIO_ROOT_PASSWORD=oMYiHrjyK72SeMHYFkEZ \</span><br><span class="line">   minio/minio \</span><br><span class="line">   -c <span class="string">&#x27;mkdir -p /data/tagspaces &amp;&amp; minio server /data&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -535,30 +566,30 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 tagspaces 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/tagspaces/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 tagspaces 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:9012</code> 就能看到向导界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271338768.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271338768.png"></p>
 <p>同意协议之后的界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271339783.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271339783.png"></p>
 <p>应用程序的用户界面由以下主要区域组成</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271056438.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271056438.png"></p>
 <ul>
 <li>(1)<strong>左侧抽屉</strong>：在这里您可以打开位置管理器或标签库并访问应用程序的其他重要功能，例如设置。</li>
 <li>(2)<strong>导航和搜索</strong>：在这里您可以打开搜索、切换当前位置或导航到父文件夹。</li>
 <li>(3)<strong>浏览区域</strong>：该区域被所谓的透视图占据，用于浏览文件和文件夹。</li>
 <li>(4)<strong>常用操作区域</strong>：在这里您可以访问当前打开的文件或文件夹的常用操作。</li>
-<li>(5)<strong>文件/文件夹属性</strong>：在这里您将找到当前打开的文件或文件夹的属性。</li>
-<li>(6)<strong>文件预览</strong>：在此区域中您可以预览和/或编辑当前文件。</li>
+<li>(5)<strong>文件&#x2F;文件夹属性</strong>：在这里您将找到当前打开的文件或文件夹的属性。</li>
+<li>(6)<strong>文件预览</strong>：在此区域中您可以预览和&#x2F;或编辑当前文件。</li>
 </ul>
 <h2 id="设置中文"><a href="#设置中文" class="headerlink" title="设置中文"></a>设置中文</h2><p>进入 <code>Settings</code> –&gt; <code>GENERAL</code> –&gt; <code>Interface Language</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271341824.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271341824.png"></p>
 <p>选择 <code>中国的（Chinese）</code> 即可</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271349031.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271349031.png"></p>
 <p>但是还有部分是英文</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271351151.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271351151.png"></p>
 <p>需要刷新页面才行</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271352436.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271352436.png"></p>
 <p>不过是繁体，有点奇怪</p>
 <h2 id="添加笔记"><a href="#添加笔记" class="headerlink" title="添加笔记"></a>添加笔记</h2><p>进入 <code>关联新的位置</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271354884.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271354884.png"></p>
 <ul>
 <li><strong>位置名称</strong>：位置的名称，将在位置管理器中可见，例如：<code>老苏的笔记</code>；</li>
 <li><strong>位置路径</strong> ：该位置指向的存储桶中的路径，按前面安装 <code>MinIO</code>的设置，为 <code>/</code>；</li>
@@ -568,24 +599,24 @@
 <li><strong>云存储区域名称</strong> ：该位置指向的存储桶的名称，例如：<code>tagspaces</code>；</li>
 <li><strong>端点 URL</strong> ：<code>S3</code> 服务的 <code>url</code>，例如：<code>http://192.168.0.197:9010</code>，其中 <code>192.168.0.197</code> 是群晖主机的 <code>IP</code>；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271513822.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271513822.png"></p>
 <p>设置完成后</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271103032.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271103032.png"></p>
 <p>现在可以通过拖拽等方式，创建笔记了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271414803.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271414803.png"></p>
 <h2 id="浏览器插件"><a href="#浏览器插件" class="headerlink" title="浏览器插件"></a>浏览器插件</h2><p><code>TagSpaces Web Clipper</code> 扩展提供了一种简单的方法来从 <code>Internet</code> 收集网页、文章、<code>PDF</code> 文档、书签、位置和屏幕截图作为简单文件，以便于存储和调用。</p>
 <p>从这里 ：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGFnc3BhY2VzLm9yZy9wcm9kdWN0cy93ZWJjbGlwcGVyLw==">https://www.tagspaces.org/products/webclipper/<i class="fa fa-external-link-alt"></i></span> 可以进入不同的市场</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271453276.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271453276.png"></p>
 <p>使用很简单，有个短片可以看看</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271505812.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271505812.png"></p>
 <p>保存的页面是直接下载到本机的 <code>html</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271508881.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271508881.png"></p>
 <p>直接拖拽导入是最简单的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271509020.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271509020.png"></p>
 <p>三个笔记在 <code>File Station</code> 中的位置</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271516517.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271516517.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>tagspaces/tagspaces: TagSpaces is an offline, open source, document manager with tagging support<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhZ3NwYWNlcy90YWdzcGFjZXM=">https://github.com/tagspaces/tagspaces<i class="fa fa-external-link-alt"></i></span></p>
+<p>tagspaces&#x2F;tagspaces: TagSpaces is an offline, open source, document manager with tagging support<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RhZ3NwYWNlcy90YWdzcGFjZXM=">https://github.com/tagspaces/tagspaces<i class="fa fa-external-link-alt"></i></span></p>
 <p>Organize your files and folders with tags | TagSpaces<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGFnc3BhY2VzLm9yZy8=">https://www.tagspaces.org/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Install on Web Server | TagSpaces Docs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnRhZ3NwYWNlcy5vcmcvdHV0b3JpYWxzL3RhZ3NwYWNlcy13ZWItZG9ja2Vy">https://docs.tagspaces.org/tutorials/tagspaces-web-docker<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -734,7 +765,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

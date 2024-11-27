@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="RedisInsight 是一个 Redis 数据库的可视化工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291359262.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291359262.png">
 <meta property="article:published_time" content="2022-05-09T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291359262.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291359262.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/05/09/Redis%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7RedisInsight/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291359262.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291359262.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,12 +539,12 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>redisinsight</code> ，选择第一个 <code>redislabs/redisinsight</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203282148779.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203282148779.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>redisinsight</code></p>
 <blockquote>
 <p>需要给 <code>redisinsight</code> 读写权限，不然容器会停止</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291121613.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291121613.png"></p>
 <table>
 <thead>
 <tr>
@@ -528,7 +559,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291404439.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291404439.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -544,21 +575,21 @@
 <td align="center"><code>8001</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291406123.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291406123.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/redisinsight</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chown</span> -R 1001 /volume2/docker/redisinsight</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 redisinsight 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/redisinsight</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键安装</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name redisinsight \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>):/db \</span><br><span class="line">   -p 8001:8001 \</span><br><span class="line">   redislabs/redisinsight:latest</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8001</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291124976.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291124976.png"></p>
 <p>勾选 <code>I have read and understood the RedisInsight License Terms</code>，r然后点 <code>CONFIRM</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291126064.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291126064.png"></p>
 <p>老苏已经有了 <code>redis</code> 数据库，所以选了 <code>I already have a database</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291128014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291128014.png"></p>
 <p>老苏选的是 <code>outline</code> 的数据库，当时 <code>docker-compose.yml</code> 中 <code>redis</code> 的相关部分是下面👇这样的</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">redis:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">  <span class="attr">container_name:</span> <span class="string">$&#123;REDIS_HOST&#125;</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&quot;6479:6379&quot;</span></span><br><span class="line">  <span class="attr">healthcheck:</span></span><br><span class="line">    <span class="attr">test:</span> [<span class="string">&quot;CMD&quot;</span>, <span class="string">&quot;redis-cli&quot;</span>, <span class="string">&quot;ping&quot;</span>]</span><br><span class="line">    <span class="attr">interval:</span> <span class="string">10s</span></span><br><span class="line">    <span class="attr">timeout:</span> <span class="string">30s</span></span><br><span class="line">    <span class="attr">retries:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <p>所以我们选使用主机和端口连接的方式</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291133398.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291133398.png"></p>
 <p>按设置文件的内容</p>
 <ul>
 <li>主机（<code>Host</code>）：是群晖的 <code>IP</code> ，也就是 <code>192.168.0.197</code></li>
@@ -566,15 +597,15 @@
 <li>名称（<code>Name</code>）：并没有设置过，但是这里又是必填的，所以随便设了个 <code>redis</code></li>
 <li>用户名（<code>Usename</code>）和密码（<code>Password</code>）都没设置过，所以直接留空</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291136090.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291136090.png"></p>
 <p>完成后直接点 <code>ADD REDIS DATEBASE</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291142272.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291142272.png"></p>
 <p>直接点数据库进入数据库主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291144534.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291144534.png"></p>
 <p>进入 <code>Browser</code> 就可以查看、编辑、修改、删除了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203291151555.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203291151555.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>RedisInsight/RedisInsight: RedisInsight<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlzSW5zaWdodC9SZWRpc0luc2lnaHQ=">https://github.com/RedisInsight/RedisInsight<i class="fa fa-external-link-alt"></i></span></p>
+<p>RedisInsight&#x2F;RedisInsight: RedisInsight<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlzSW5zaWdodC9SZWRpc0luc2lnaHQ=">https://github.com/RedisInsight/RedisInsight<i class="fa fa-external-link-alt"></i></span></p>
 <p>Installing RedisInsight on Docker | Redis Documentation Center<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJlZGlzLmNvbS9sYXRlc3QvcmkvaW5zdGFsbGluZy9pbnN0YWxsLWRvY2tlci8=">https://docs.redis.com/latest/ri/installing/install-docker/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -721,7 +752,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

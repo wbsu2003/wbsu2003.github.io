@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Kodi（以前叫XBMC）是一款强大的开源媒体播放器软件，支持 MacOS、Windows、Linux、Android等多系统平台。Kodi 的局域网视频播放功能异常强大；默认情况下 Kodi 的资料库是独立的，这就带来一个很大的问题，当家里有多个Kodi终端的话，资料的同步是个很大的问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg">
 <meta property="article:published_time" content="2020-05-02T05:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Kodi">
 <meta property="article:tag" content="NAS">
 <meta property="article:tag" content="KodiWebPortal">
 <meta property="article:tag" content="MariaDB">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/02/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%885%EF%BC%89%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%AF%87/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/kodi-1588477652292.jpg" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.3k</span>
+      <span>4.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -510,8 +541,8 @@
 <h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>首先我们想到的就是能不能用数据库来统一管理？结果还真是可行的，只需要我们在群晖上安装数据库和共享刮削资料的文件夹即可。具体的步骤略过，只要仔细阅读参考文档即可。这里只提示关键的步骤。</p>
 <blockquote>
 <ul>
-<li>从【套件中心】安装MariaDB数据库；<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/f8a3e8aa9c7485c1714e77cc02f2bdf-1588402683571.png" alt="title"></li>
-<li>从【套件中心】安装PHPMyAdmin，用于管理MariaDB数据库；<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/99fdd953b382d4ed4dae5b41b9ae658-1588402708642.png" alt="title"></li>
+<li>从【套件中心】安装MariaDB数据库；<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/f8a3e8aa9c7485c1714e77cc02f2bdf-1588402683571.png" alt="title"></li>
+<li>从【套件中心】安装PHPMyAdmin，用于管理MariaDB数据库；<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/99fdd953b382d4ed4dae5b41b9ae658-1588402708642.png" alt="title"></li>
 <li>为Kodi注册一个数据库用户，当然你也可以用root，但从安全性考虑，强烈不建议这么做。</li>
 <li>如果你已经用了Kodi，选择具有最新库的机器，打开Kodi并进入设置&gt;媒体设置&gt;导出库。</li>
 <li>创建advancedsettings.xml文件</li>
@@ -535,23 +566,23 @@
 </thead>
 <tbody><tr>
 <td align="center">Android</td>
-<td align="center">Android/data/org.xbmc.kodi/files/.kodi/userdata/</td>
+<td align="center">Android&#x2F;data&#x2F;org.xbmc.kodi&#x2F;files&#x2F;.kodi&#x2F;userdata&#x2F;</td>
 </tr>
 <tr>
 <td align="center">iOS</td>
-<td align="center">/private/var/mobile/Library/Preferences/Kodi/userdata/</td>
+<td align="center">&#x2F;private&#x2F;var&#x2F;mobile&#x2F;Library&#x2F;Preferences&#x2F;Kodi&#x2F;userdata&#x2F;</td>
 </tr>
 <tr>
 <td align="center">Linux</td>
-<td align="center">~/.kodi/userdata/</td>
+<td align="center">~&#x2F;.kodi&#x2F;userdata&#x2F;</td>
 </tr>
 <tr>
 <td align="center">Mac</td>
-<td align="center">/Users/<your_user_name>/Library/Application Support/Kodi/userdata/</td>
+<td align="center">&#x2F;Users&#x2F;<your_user_name>&#x2F;Library&#x2F;Application Support&#x2F;Kodi&#x2F;userdata&#x2F;</td>
 </tr>
 <tr>
-<td align="center">LibreELEC/OpenELEC</td>
-<td align="center">/storage/.kodi/userdata/</td>
+<td align="center">LibreELEC&#x2F;OpenELEC</td>
+<td align="center">&#x2F;storage&#x2F;.kodi&#x2F;userdata&#x2F;</td>
 </tr>
 <tr>
 <td align="center">Windows</td>
@@ -561,29 +592,29 @@
 <p>至此我们已经实现了全屋Kodi终端的同步，不仅仅是刮削的图片及信息，还包括了播放状态。</p>
 <h1 id="进阶应用"><a href="#进阶应用" class="headerlink" title="进阶应用"></a>进阶应用</h1><p>我们现在已经可以在任何一台Kodi终端上进行查询，但是Kodi的查询不太好用，而且也不可能为了查询而打开Kodi，再说有时候我们会需要远程查询，所以能基于Web是最理想的。</p>
 <h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>MariaDB数据库、和PHPMyAdmin前面已经安装了，接下来需要从【套件中心】安装PHP和Web Station。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/816c05d5313a68e99234695ebf78a6f-1588402805299.png" alt="title"><br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/fe636d2f5f8971058ed3f8bfade9a87-1588402810188.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/816c05d5313a68e99234695ebf78a6f-1588402805299.png" alt="title"><br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/fe636d2f5f8971058ed3f8bfade9a87-1588402810188.png" alt="title"></p>
 <h2 id="网站设置"><a href="#网站设置" class="headerlink" title="网站设置"></a>网站设置</h2><p>只勾选了几个和数据库相关的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/6a842f85a55830b598617b20cb5a80f-1588403067065.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/6a842f85a55830b598617b20cb5a80f-1588403067065.png" alt="title"></p>
 <h2 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h2><p>在github上找到一个叫KodiWebPortal的项目，据介绍可以用于浏览，显示，搜索并最终下载已编入索引的Kodi多媒体内容。此Web应用程序非常轻巧，没有框架（JQuery除外）和依赖项。</p>
 <p>非常符合我的需求，源代码地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lhbm5jYW0vS29kaVdlYlBvcnRhbCVFMyU4MCU4Mg==">https://github.com/yanncam/KodiWebPortal。<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/853e05544ae0e66946ed7e91543d5c9-1588403790202.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/853e05544ae0e66946ed7e91543d5c9-1588403790202.png" alt="title"></p>
 <h2 id="代码部署"><a href="#代码部署" class="headerlink" title="代码部署"></a>代码部署</h2><p>把下载的 KodiWebPortal-master.zip，解压后拷贝到群晖的 web 目录，并修改目录中的config.php中数据库相关部分</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/f1d7de9ded895589c0449da92bbbe58-1588404859631.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/f1d7de9ded895589c0449da92bbbe58-1588404859631.png" alt="title"></p>
 <h3 id="取消强制https"><a href="#取消强制https" class="headerlink" title="取消强制https"></a>取消强制https</h3><p>打开index.php，找到</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>将其注释掉</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot; / --&gt;</span></span><br></pre></td></tr></table></figure>
 <p>直接删掉也可以</p>
 <h3 id="界面汉化"><a href="#界面汉化" class="headerlink" title="界面汉化"></a>界面汉化</h3><p>在 \i18n 目录中的lang_en.php 复制一份并重新命名为 lang_cn.php，用百度翻译一下。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/1c9c34307d96ba6228c040a34bf3d67-1588405228352.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/1c9c34307d96ba6228c040a34bf3d67-1588405228352.png" alt="title"></p>
 <p>在config.php中，将121行的 lang_en.php ，改成 lang_cn.php 即可。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/3f214214eef410972765867bac25a43-1588407528986.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/3f214214eef410972765867bac25a43-1588407528986.png" alt="title"></p>
 <h3 id="适应手机"><a href="#适应手机" class="headerlink" title="适应手机"></a>适应手机</h3><p>偶尔我们会在手机上打开查询页面，但原始的界面在手机上没法看，所以需要做个简单的适配，在前面注释掉的代码后面加一行。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=0.95&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>最后上个效果图</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/02/0-1588409261368.jpg" alt="title"></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/02/0-1588409261368.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
 <p>如何利用MySQL数据库让多个XBMC客户端显示一样的媒体库资料<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5oZHBmYW5zLmNvbS90aHJlYWQtNjAwMTM5LTEtMS5odG1s">http://www.hdpfans.com/thread-600139-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>如何使用MySQL在多个设备上同步Kodi库<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5ob3d0b2lwLmNvbS9ob3ctdG8tc3luYy15b3VyLW1lZGlhLWFjcm9zcy15b3VyLWVudGlyZS1ob3VzZS13aXRoLXhibWMv">http://www.howtoip.com/how-to-sync-your-media-across-your-entire-house-with-xbmc/<i class="fa fa-external-link-alt"></i></span></p>
@@ -735,7 +766,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

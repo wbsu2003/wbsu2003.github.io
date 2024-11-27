@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="这是一个系列，为了避免篇幅过长，准备分五个部分，以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png">
 <meta property="article:published_time" content="2020-05-01T01:04:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Emby">
 <meta property="article:tag" content="jellyfin">
@@ -43,7 +43,7 @@
 <meta property="article:tag" content="极影派">
 <meta property="article:tag" content="Kodi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%881%EF%BC%89%EF%BC%9A%E7%BB%BC%E5%90%88%E7%AF%87/">
@@ -189,6 +189,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -396,7 +427,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -437,7 +468,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,14 +546,14 @@
 </ol>
 </blockquote>
 <p>以群晖为核心，从下载到播放，整个流程基本上实现了一个完整的闭环。</p>
-<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
+<h1 id="离线查询："><a href="#离线查询：" class="headerlink" title="离线查询："></a><strong>离线查询</strong>：</h1><p>首先要有个管理系统，能查到某一部电影有没有下载过，如果是下载过的片源，能查到它的格式、分辨率等信息。<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/Jietu20200427-135747-1587967110918.jpg" alt="title"></p>
 <h1 id="下载片源："><a href="#下载片源：" class="headerlink" title="下载片源："></a><strong>下载片源</strong>：</h1><p>如果是没有下载过的片源，可以用迅雷、BT、PT等各类下载软件去下；</p>
 <h1 id="影片管理："><a href="#影片管理：" class="headerlink" title="影片管理："></a><strong>影片管理</strong>：</h1><ul>
 <li>少量的电影无所谓管理，但是当数量多了就需要管理，不仅仅是方便查找；</li>
 <li>如果电影都只在本机上，Windows平台上可以用极影派、zogvm2来管理，Mac上没研究过；</li>
 <li>如果你和我一样可能要用到Kodi、Jellyfin、Emby、Plex等，建议用MediaElch、tinyMediaManager来做刮削器，可以生成漂亮的海报墙。下图是jellyfin上的显示效果。</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/27/0-1587966853645.png" alt="title"></p>
 <h1 id="影片播放："><a href="#影片播放：" class="headerlink" title="影片播放："></a><strong>影片播放</strong>：</h1><ul>
 <li>局域网中，虽然Kodi是个神器，而且支持各种平台，但是我还是更喜欢用各平台最常用的播放器，比如Windows下用PotPlayer，Mac下用IINA，Android手机上用MX Player，ios上用nPlayer。</li>
 <li>如果有远程播放的需求，可以试试Emby、jellyfin、Plex等，其实对我来说这是个伪需求。</li>
@@ -534,7 +565,7 @@
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a><strong>参考文档</strong></h1><blockquote>
 <p>Add-on:Universal Movie Scraper<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb2RpLndpa2kvdmlldy9BZGQtb246VW5pdmVyc2FsX01vdmllX1NjcmFwZXI=">https://kodi.wiki/view/Add-on:Universal_Movie_Scraper<i class="fa fa-external-link-alt"></i></span></p>
 <p>极影派 – 帮你管理本地电影视频库[Windows]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9qZWVucGkv">https://www.appinn.com/jeenpi/<i class="fa fa-external-link-alt"></i></span></p>
-<p>ZogVM – 支持多硬盘、NAS 的本地音/视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ZogVM – 支持多硬盘、NAS 的本地音&#x2F;视频库管理工具[Win]<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS96b2d2bS8=">https://www.appinn.com/zogvm/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Linux下电影管理软件的简单比较<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmJnbWUubWUvcG9zdHMvdGhlLWxpbnV4LW1vdmllLWNvbGxlY3Rpb24tbWFuYWdlcnMtY29tcGFyZWQvI21lZGlhZWxjaA==">https://blog.bgme.me/posts/the-linux-movie-collection-managers-compared/#mediaelch<i class="fa fa-external-link-alt"></i></span></p>
 <p>手把手教您用tMM刮削影片信息，让KODI、Jellyfin、PLEX、使用本地媒体电影墙！<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E0d2txdzM3Lw==">https://post.smzdm.com/p/a4wkqw37/<i class="fa fa-external-link-alt"></i></span></p>
 <p>KODI使用心得（界面改中文、插件安装、设置媒体库）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC9kZjQ3NTc1NGFjYzE=">https://www.jianshu.com/p/df475754acc1<i class="fa fa-external-link-alt"></i></span></p>
@@ -688,7 +719,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

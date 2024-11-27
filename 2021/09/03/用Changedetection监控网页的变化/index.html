@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Changedetection 能让你知道网页何时发生变化！随时掌握新信息 。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809172746.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809172746.png">
 <meta property="article:published_time" content="2021-09-03T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网页监控">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809172746.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809172746.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/09/03/%E7%94%A8Changedetection%E7%9B%91%E6%8E%A7%E7%BD%91%E9%A1%B5%E7%9A%84%E5%8F%98%E5%8C%96/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809172746.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809172746.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,7 +534,7 @@
 <p>个人感觉两者各有特点，在网页监控方面 <code>ChangeDetect</code> 的设置更简单，但是通知方面 <code>WebMonitor</code> 符合国人的习惯，至于安装哪个看您的需求</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>changedetection</code> ，选择第一个 <code>dgtlmoon/changedetection.io</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808124413.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808124413.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>changedetection</code></p>
 <table>
 <thead>
@@ -519,7 +550,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808125445.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808125445.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>需要新增端口， 容器端口为 <code>5000</code>，需要映射一个不冲突的本地端口</p>
 <table>
 <thead>
@@ -533,7 +564,7 @@
 <td align="center">5000</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808125742.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808125742.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -552,7 +583,7 @@
 </tbody></table>
 <p>老苏没设置代理，更多的环境变量示例可以看官方的 <code>docker-compose.yml</code> 文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RndGxtb29uL2NoYW5nZWRldGVjdGlvbi5pby9ibG9iL21hc3Rlci9kb2NrZXItY29tcG9zZS55bWw=">https://github.com/dgtlmoon/changedetection.io/blob/master/docker-compose.yml<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5321</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808131205.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808131205.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>点右上角的 <code>SETTINGS</code> 是 <code>default global settings</code>，只需要在 <code>Notification URL List</code> 中设置通知方式</p>
 <p><code>Changedetection</code> 采用了 <code>apprise</code> 项目来实现 <code>通知</code> 功能，可惜除了 <code>邮件</code> ，老苏没找到手机上已经安装的应用</p>
 <blockquote>
@@ -576,66 +607,66 @@
 </blockquote>
 <p>只是其内置支持的邮箱服务都是国外的，如果要使用国内的邮件，需要自定义功能</p>
 <h3 id="自定义邮箱"><a href="#自定义邮箱" class="headerlink" title="自定义邮箱"></a>自定义邮箱</h3><p>老苏用 <code>88</code> 邮箱做测试，<code>88</code> 邮箱相关参数可以在 <code>设置</code> 中找到</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210806105358.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210806105358.png"></p>
 <p>自用不需要设置回复邮箱，所以省略了 <code>from</code> 参数，但 88 邮箱不能省略 <code>smtp</code> 参数，否则会发送不成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mailto://wbsu2003:password@88.com?smtp=smtp.88.com&amp;to=wbsu2003@gmail.com</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>gmail 有可能屏蔽了 88 邮箱，收件邮箱换成 hotmail 的就没问题了</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808152257.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808152257.png"></p>
 <p>点 <code>Save</code> 保存，因为勾选了 <code>Send test notification on save</code>，所以会收到测试邮件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808212239.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808212239.png"></p>
 <h2 id="网页监控"><a href="#网页监控" class="headerlink" title="网页监控"></a>网页监控</h2><p>还是以之前的电影网站为例，分别填入下面的内容，点 <code>Watch</code></p>
 <ul>
 <li>网址：<code>https://www.bd2020.com/movies/index.htm</code></li>
 <li>tag：<code>电影</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808132603.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808132603.png"></p>
 <p>添加成功</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808132645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808132645.png"></p>
 <p>点 <code>Edit</code>，进行进一步的设置</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210808143217.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210808143217.png"></p>
 <p>老苏什么都没改，所以默认使用了缺省的全局设置 <code>default global settings</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810112846.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810112846.png"></p>
 <p>等网页有变化之后就会有通知邮件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809140244.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809140244.png"></p>
 <p>有变化之后，最后的 <code>Preview</code> 会变成 <code>Diff</code>，点击就可以看到页面的具体变化和差异</p>
 <blockquote>
 <p>绿色为 <code>Inserted Text</code>也就是新增内容，红色为 <code>Removed text</code>也就是消失的内容</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/20210903141323.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/20210903141323.png"></p>
 <h2 id="JSON-API-监控"><a href="#JSON-API-监控" class="headerlink" title="JSON API 监控"></a>JSON API 监控</h2><p>老苏找了个天气预报的 <code>JSON API</code>，请求是<code>restfull</code> 风格，city_code 为 <code>9</code> 位数字。只要拼接在地址 “<code>http://t.weather.itboy.net/api/weather/city/+</code>city_code” 后面即可。</p>
 <p><code>city_code</code> 可以在这里查询： <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JhaWNoZW5nemhvdS93ZWF0aGVyLmFwaS9ibG9iL21hc3Rlci9zcmMvbWFpbi9yZXNvdXJjZXMvY2l0eWNvZGUtMjAxOS0wOC0yMy5qc29u">https://github.com/baichengzhou/weather.api/blob/master/src/main/resources/citycode-2019-08-23.json<i class="fa fa-external-link-alt"></i></span></p>
 <p>比如上海的 <code>city_code</code> 为 <code>101020100</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810115835.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810115835.png"></p>
 <p>所以在浏览器中输入 <code>http://t.weather.itboy.net/api/weather/city/101020100</code> 就能看到上海的天气信息</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810120118.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810120118.png"></p>
 <p>将网页上的文本全部复制（<code>Ctrl+A</code> 然后 <code>Ctrl+C</code>）,接着打开网页：<span class="exturl" data-url="aHR0cHM6Ly9qc29ucGF0aC5jb20v">https://jsonpath.com<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p>这个网址可用于 <code>JSON</code> 的语法测试</p>
 </blockquote>
 <p>将前面复制的内容粘贴到左侧的 <code>Inputs</code>，因为老苏希望返回所有的数据，所以在 <code>JSONPath Syntax</code> 中输入了 <code>$</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810133259.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810133259.png"></p>
 <p>右侧的 <code>Evaluation Results</code> 不仅返回了所有的数据，并且对 <code>JSON</code> 数据进行了格式化处理，更易于阅读</p>
 <p>如果只是需要获取温度，可以在 <code>JSONPath Syntax</code> 中输入 <code>$.data.wendu</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810134401.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810134401.png"></p>
 <p>准备工作到这里就差不多了，返回到 <code>Changedetection</code> 新增一个监控，分别填入下面的内容后，点 <code>Watch</code></p>
 <ul>
 <li>网址：<code>http://t.weather.itboy.net/api/weather/city/101020100</code></li>
 <li>tag：<code>天气</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810134937.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810134937.png"></p>
 <p>添加成功后点 <code>Edit</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810135108.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810135108.png"></p>
 <p>在 <code>CSS/JSON Filter</code> 中输入 <code>json:$.data.wendu</code>，其中前缀 <code>json:</code> 是必须要的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810135357.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810135357.png"></p>
 <p>保存，180分钟后如果温度有变化，就会发送邮件了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810191740.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810191740.png"></p>
 <p>查看 <code>Diff</code>，温度从 <code>37C°</code> 降为了 <code>33C°</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810191420.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810191420.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>dgtlmoon/changedetection.io: changedetection.io - The best and simplest self-hosted website change detection monitoring and notification service. An alternative to Visualping, Watchtower etc. Designed for simplicity - the main goal is to simply monitor which websites had a text change. Open source web page change detection - Now also includes JSON API change detection and monitoring support!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RndGxtb29uL2NoYW5nZWRldGVjdGlvbi5pbw==">https://github.com/dgtlmoon/changedetection.io<i class="fa fa-external-link-alt"></i></span></p>
+<p>dgtlmoon&#x2F;changedetection.io: changedetection.io - The best and simplest self-hosted website change detection monitoring and notification service. An alternative to Visualping, Watchtower etc. Designed for simplicity - the main goal is to simply monitor which websites had a text change. Open source web page change detection - Now also includes JSON API change detection and monitoring support!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RndGxtb29uL2NoYW5nZWRldGVjdGlvbi5pbw==">https://github.com/dgtlmoon/changedetection.io<i class="fa fa-external-link-alt"></i></span></p>
 <p>免费天气API，天气JSON API，不限次数获取十五天的天气预报 —技术博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29qc29uLmNvbS9ibG9nLzMwNS5odG1s">https://www.sojson.com/blog/305.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -782,7 +813,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="AzuraCast 是一个简单的自托管网络广播管理套件。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204232117731.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204232117731.png">
 <meta property="article:published_time" content="2022-08-26T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta property="article:tag" content="有声读物">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204232117731.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204232117731.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/26/%E7%BD%91%E7%BB%9C%E7%94%B5%E5%8F%B0%E7%AE%A1%E7%90%86%E5%A5%97%E4%BB%B6AzuraCast/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204232117731.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204232117731.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,9 +528,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>昨天杨浦又出现了疫情</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208251731455.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208251731455.png"></p>
 <p>所以本周筛查调整为了三次</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208251638129.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208251638129.png"></p>
 <hr>
 <blockquote>
 <p>本文完成于 <code>4</code> 月，等 <code>8</code> 月份想起准备发布时才发现，由于版本的变更，原来的截图基本上都已不可用，相当于又重写了一遍，&#128514;，至于为什么这么拖拉？老苏在文末会有交代。</p>
@@ -511,8 +542,8 @@
 <p>老苏个人觉得，<code>AzuraCast</code> 作为音频直播，可以搭一个，用来给家里的小朋友讲讲故事，或者播放背景音乐都是很不错的，当然这点功能用 <code>Audiobookshelf</code> 做点播也是可以的。</p>
 <p>官网提供了演示：<span class="exturl" data-url="aHR0cHM6Ly9kZW1vLmF6dXJhY2FzdC5jb20v">https://demo.azuracast.com/<i class="fa fa-external-link-alt"></i></span></p>
 <ul>
-<li>  Username: <code>demo@azuracast.com</code></li>
-<li>  Password: <code>demo</code></li>
+<li>Username: <code>demo@azuracast.com</code></li>
+<li>Password: <code>demo</code></li>
 </ul>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
@@ -522,9 +553,9 @@
 <blockquote>
 <p>老苏用过多合一的镜像 <code>ghcr.io/azuracast/azuracast:stable</code>，也用过单独的版本</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205011045728.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205011045728.png"></p>
 <p>需要注意的是，老苏下载的是稳定版（<code>stable</code>），这个多合一容器中包含整个应用程序、数据库、缓存以及广播控件；</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208171453713.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208171453713.png"></p>
 <p>用 <code>SSH</code> 登录带群晖，通过命令行方式下载</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载镜像</span></span><br><span class="line">docker pull ghcr.io/azuracast/azuracast:stable</span><br></pre></td></tr></table></figure>
 
@@ -538,25 +569,25 @@
 <blockquote>
 <p>如果不修改 <code>stations</code> 目录权限，在创建电台时，有可能会显示没有创建目录的权限</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208162113128.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208162113128.png"></p>
 <h2 id="配置端口"><a href="#配置端口" class="headerlink" title="配置端口"></a>配置端口</h2><p>接下来开始配置端口，我们打算用 <code>2080(http)</code> 、 <code>2443(https)</code> 、<code>2022(sftp)</code>端口，如果你的这几个端口已使用，可以试试其他的端口</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置相关的环境变量</span></span><br><span class="line"><span class="built_in">sudo</span> ./docker.sh setup-ports</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204232216581.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204232216581.png"></p>
 <p>这一步会在当前目录生成 <code>.env</code> 文件，现在查看到的文件内容</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241019043.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241019043.png"></p>
 <h2 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h2><p>新建 <code>docker-compose.override.yml</code> 文件，内容如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/volume2/docker/azuracast/stations:/var/azuracast/stations</span></span><br></pre></td></tr></table></figure>
 
 <p>将其上传到 <code>azuracast</code> 目录</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208172320810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208172320810.png"></p>
 <h2 id="服务配置"><a href="#服务配置" class="headerlink" title="服务配置"></a>服务配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置镜像的版本</span></span><br><span class="line"><span class="built_in">sudo</span> ./docker.sh install</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>需要选择版本，<code>Roling Release</code> 或者 <code>Stable</code>，老苏输入了小写 <code>y</code>，选择了 <code>Stable</code> 版本；</li>
 <li>选择了不更新脚本，输入了小写的 <code>n</code>；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208161606869.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208161606869.png"></p>
 <p>如果直接退出说明下载脚本遇到了问题，一般都是 <code>curl</code> 错误，例如：</p>
 <blockquote>
 <ul>
@@ -572,17 +603,17 @@
 <p>但是需要注意版本的选择，这次 <code>y</code> 是选择 <code>Stable</code> 版本，下一次则是 <code>N</code> 才是  <code>Stable</code> 版本，一定要看仔细</p>
 </blockquote>
 <p>中间也会有 <code>.FileNotFoundError</code> 报错，但是程序如果可以继续执行的话，就可以不用管</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205011218100.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205011218100.png"></p>
 <p>选择语言 <code>zh_CN</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205010033483.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205010033483.png"></p>
 <p><code>AzuraCast</code> 安装都选择 <code>no</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205010035357.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205010035357.png"></p>
 <p>有可能会遇到 <code>AzuraCast.ERROR</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205011522209.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205011522209.png"></p>
 <p>但只要看到 <code>Creating azuracast ... done</code> 就成功了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205011304273.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205011304273.png"></p>
 <p>除了下载了所需的镜像外，还生成了一些设置文件</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241414962.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241414962.png"></p>
 <blockquote>
 <p>如果环境稳定，也会帮你完成镜像的安装，如果一切正常，你可以跳到 <code>运行</code> 章节，否则的话，请继续往下看</p>
 </blockquote>
@@ -592,64 +623,64 @@
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AZURACAST_PUID=1000</span><br><span class="line">AZURACAST_PGID=1000</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208161629949.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208161629949.png"></p>
 <p>如果你不习惯 <code>vi</code> 编辑器，可以在 <code>File Station</code> 中，将 <code>.env</code> 重命名为 <code>.env.txt</code> 然后再编辑，记得完成后重命名为 <code>.env</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208161637319.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208161637319.png"></p>
 <h2 id="一键启动"><a href="#一键启动" class="headerlink" title="一键启动"></a>一键启动</h2><p>需要先停止然后再启动，以便后面修改的内容生效</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键停止</span></span><br><span class="line"><span class="built_in">sudo</span> docker-compose down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果要删除所有卷，包括数据库，末尾加 -v 标志</span></span><br><span class="line"><span class="built_in">sudo</span> docker-compose down -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line"><span class="built_in">sudo</span> docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>如果反复启动都存在问题，建议用 <code>sudo docker-compose down -v</code> 清除干净再启动</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241244648.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241244648.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:2080</code> 就能看到注册管理员用户界面</p>
 <blockquote>
 <p>软件会自动显示中文，不需要另外设置</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241245642.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241245642.png"></p>
 <p>只有都符合要求时，才会出现 <code>创建账号</code> 按钮</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241253424.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241253424.png"></p>
 <p>登录后进入设置向导，带星号的是必填的，【个人资料】中，老苏就改了下面两项，其他的都是用的默认值，请根据自己的需要设置</p>
 <ul>
 <li>名称：例如 <code>laosu radio</code>；</li>
 <li>时区：选 <code>Asia/Shanghai(UTC+8)</code>；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241312357.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241312357.png"></p>
 <p>【自动DJ】中，老苏勾选了 <code>允许歌曲请求</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208161718398.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208161718398.png"></p>
 <p>最后是一些系统设置</p>
 <ul>
 <li>网站基础网址：例如： <code>http://群晖IP:2080</code></li>
 <li>保留的播放历史记录天数：选了 <code>最近 14 天</code></li>
 <li>如果你使用了反代，一定要勾选 <code>使用网络代理进行广播</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241344431.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241344431.png"></p>
 <p>设置完成</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204241347131.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204241347131.png"></p>
 <p>上传 <code>音乐文件</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204242151995.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204242151995.png"></p>
 <p>勾选所有上传的文件</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204282212598.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204282212598.png"></p>
 <p>保存为播放列表</p>
 <blockquote>
 <p>只有将音乐添加到播放列表中才能流式传输</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202204282213299.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202204282213299.png"></p>
 <p>开始电台，来启动广播服务和 <code>AutoDJ</code> 服务</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208180010891.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208180010891.png"></p>
 <p>点 <code>开始电台</code> 按钮</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208180011877.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208180011877.png"></p>
 <p>在 <code>公开页面</code> 中就能看到了并进行收听了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/04/202205011631589.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/04/202205011631589.png"></p>
 <p>当然，<code>AzuraCast</code> 的功能远不止这些，有兴趣可以深入研究。</p>
 <h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>老苏在 <code>PC</code> 浏览器中没有声音（试过 <code>chrome</code>、<code>safari</code>、<code>Edge</code>），浏览器中显示有声音，但是听不到，也尝试过启用 <code>Enable HTTP Live Streaming (HLS)</code>，结果时一样的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208180920337.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208180920337.png"></p>
 <p>但是在手机浏览器中则正常（试过小米浏览器和 <code>Edge</code>，不过音量偏小），实在有些不解，这也是为什么从 <code>4</code> 月份拖到现在的主要原因。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208172351992.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208172351992.jpg"></p>
 <p>次要原因了么是 <code>AzuraCast</code> 的安装过程中对网络有较高的要求，如果没有稳定的科学上网环境，会让原本简单的安装变得繁琐且易出错。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>AzuraCast/AzuraCast: A self-hosted web radio management suite, including turnkey installer tools for the full radio software stack and a modern, easy-to-use web app to manage your stations.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3Q=">https://github.com/AzuraCast/AzuraCast<i class="fa fa-external-link-alt"></i></span></p>
+<p>AzuraCast&#x2F;AzuraCast: A self-hosted web radio management suite, including turnkey installer tools for the full radio software stack and a modern, easy-to-use web app to manage your stations.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3Q=">https://github.com/AzuraCast/AzuraCast<i class="fa fa-external-link-alt"></i></span></p>
 <p>Installing AzuraCast on a Synology NAS | AzuraCast Docs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF6dXJhY2FzdC5jb20vZW4vZ2V0dGluZy1zdGFydGVkL2luc3RhbGxhdGlvbi9zeW5vbG9neQ==">https://docs.azuracast.com/en/getting-started/installation/synology<i class="fa fa-external-link-alt"></i></span></p>
-<p>Help with installing Azuracast on Synology Docker · Issue #3407 · AzuraCast/AzuraCast<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3QvaXNzdWVzLzM0MDc=">https://github.com/AzuraCast/AzuraCast/issues/3407<i class="fa fa-external-link-alt"></i></span></p>
-<p>配置 HTTPS 的公共站点上没有声音 · 问题 #1786 · AzuraCast/AzuraCast<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3QvaXNzdWVzLzE3ODY=">https://github.com/AzuraCast/AzuraCast/issues/1786<i class="fa fa-external-link-alt"></i></span></p>
+<p>Help with installing Azuracast on Synology Docker · Issue #3407 · AzuraCast&#x2F;AzuraCast<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3QvaXNzdWVzLzM0MDc=">https://github.com/AzuraCast/AzuraCast/issues/3407<i class="fa fa-external-link-alt"></i></span></p>
+<p>配置 HTTPS 的公共站点上没有声音 · 问题 #1786 · AzuraCast&#x2F;AzuraCast<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0F6dXJhQ2FzdC9BenVyYUNhc3QvaXNzdWVzLzE3ODY=">https://github.com/AzuraCast/AzuraCast/issues/1786<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -796,7 +827,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

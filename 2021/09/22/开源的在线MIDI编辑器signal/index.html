@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="signal 是使用 React 构建的完全开源的在线 MIDI 编辑器和播放器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221317072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221317072.png">
 <meta property="article:published_time" content="2021-09-22T10:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="音乐">
 <meta property="article:tag" content="MIDI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221317072.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221317072.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/09/22/%E5%BC%80%E6%BA%90%E7%9A%84%E5%9C%A8%E7%BA%BFMIDI%E7%BC%96%E8%BE%91%E5%99%A8signal/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221317072.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221317072.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +542,7 @@
 <p>镜像构建成功后，能够登录阿里云和百度云，并且也能列出文件目录，但是在迁移时显示文件下载错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Err: 下载文件块失败：Can&#x27;t instantiate abstract class RangeRequestIO with abstract methods __enter__, __exit__, closed, fileno, flush, isatty, mode, name, readable, readline, readlines, truncate, write, writelines</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109201716005.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109201716005.png"></p>
 <h2 id="PyBoy"><a href="#PyBoy" class="headerlink" title="PyBoy"></a>PyBoy</h2><p><code>PyBoy</code> 是一个基于 <code>Python</code> 的 <code>Game Boy</code> 模拟器，官方提供了很多版本的 <code>Dockerfile</code> 文件，但是老苏依次编译后没有一个能成功启动容器，即便改成了源代码编译也是一样，而且没有任何报错信息</p>
 <p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0JhZWthbGZlbi9QeUJveQ==">https://github.com/Baekalfen/PyBoy<i class="fa fa-external-link-alt"></i></span></p>
 <p>这几个项目本身没问题，有问题的是容器这种运行环境可能不适合项目，需要做代码或者其他的调整，但是老苏水平有限，只能暂时搁置。</p>
@@ -536,7 +567,7 @@
 <p>老苏是从 <code>nginx:1.12-alpine</code> 中把默认的 <code>/etc/nginx/conf.d/default.conf</code> 拷贝出来，在 <code>location</code> 中新增下面的内容，达到了访问时没有 <code>html</code> 后缀的目的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (!-e $request_filename)&#123;</span><br><span class="line">   rewrite ^(.*)$ /$1.html last;</span><br><span class="line">   break;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109212153425.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109212153425.png"></p>
 <p>完整的 <code>default.conf</code> 如下👇</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line">    #access_log  /var/log/nginx/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">        if (!-e $request_filename)&#123;</span><br><span class="line">           rewrite ^(.*)$ /$1.html last;</span><br><span class="line">           break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    #error_page  404              /404.html;</span><br><span class="line"></span><br><span class="line">    # redirect server error pages to the static page /50x.html</span><br><span class="line">    #</span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # proxy the PHP scripts to Apache listening on 127.0.0.1:80</span><br><span class="line">    #                                           </span><br><span class="line">    #location ~ \.php$ &#123;                         </span><br><span class="line">    #    proxy_pass   http://127.0.0.1;         </span><br><span class="line">    #&#125;                                                         </span><br><span class="line">                                               </span><br><span class="line">    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">    #                                                       </span><br><span class="line">    #location ~ \.php$ &#123;                         </span><br><span class="line">    #    root           html;                   </span><br><span class="line">    #    fastcgi_pass   127.0.0.1:9000;         </span><br><span class="line">    #    fastcgi_index  index.php;               </span><br><span class="line">    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;  </span><br><span class="line">    #    include        fastcgi_params;         </span><br><span class="line">    #&#125;                                                                             </span><br><span class="line">    # deny access to .htaccess files, if Apache&#x27;s document root         </span><br><span class="line">    # concurs with nginx&#x27;s one                   </span><br><span class="line">    #                                           </span><br><span class="line">    #location ~ /\.ht &#123;                         </span><br><span class="line">    #    deny  all;                             </span><br><span class="line">    #&#125;                                           </span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
 
@@ -545,7 +576,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>wbsu2003</code> ，找到 <code>wbsu2003/signal</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221010698.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221010698.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p> 找了个不冲突的本地端口 <code>7800</code> </p>
 <table>
 <thead>
@@ -559,44 +590,44 @@
 <td align="center">80</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221023533.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221023533.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7800</code>，就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221026033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221026033.png"></p>
 <p>点 <code>Launch</code> 进入到编辑界面，左侧是钢琴的琴键🎹，可以直接弹奏</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221028761.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221028761.png"></p>
 <p>右侧随便点点就可以形成一首曲子播放了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221046252.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221046252.png"></p>
 <p>可以保存为 <code>mid</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221047061.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221047061.png"></p>
 <p>软件的界面很友好，如果你懂乐理，上手应该很容易的，就算和老苏一样完全不懂，也可以当 <code>MIDI</code> 播放器用</p>
 <h1 id="答疑"><a href="#答疑" class="headerlink" title="答疑"></a>答疑</h1><ol>
 <li><code>WebGL can&#39;t be initialized. may be browser doesn&#39;t support</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221059317.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221059317.png"></p>
 <p>【建议】：换个浏览器试试，一般来说现代浏览器都是没问题的，老苏试过  <code>Chrome</code> 、<code>Edge</code>、<code>Safari</code>，上图只出现在『 <a href="https://laosu.tech/2020/11/01/%E7%BB%99%E7%BE%A4%E6%99%96%E5%AE%89%E8%A3%85firefox%E6%B5%8F%E8%A7%88%E5%99%A8">给群晖安装firefox浏览器</a>  』一文安装的 <code>firefox</code> 上，可能是版本老了，也可能是其他原因</p>
 <ol start="2">
 <li><code>Web MIDI API is not Supported by your browser</code></li>
 </ol>
 <p>在 <code>Setting</code> 中，你会看到提示</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221051705.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221051705.png"></p>
 <p>并不是说你的浏览器真的不支持 <code>Web MIDI API</code> ，而是因为局域网中使用了 <code>http</code> 而不是 <code>https</code> 协议</p>
 <p>老苏用的 <code>frp</code>，需做反代设置</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221056746.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221056746.png"></p>
 <p>通过 <code>https://域名</code> 再进入编辑界面时，会弹出权限申请，要点 <code>允许</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221107081.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221107081.png"></p>
 <p>再进到 <code>Setting</code>，发现⚠️警告⚠️已经没有了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221108140.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221108140.png"></p>
 <p>点网址前面的锁🔐标志可以修改权限</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221355823.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221355823.png"></p>
 <p>地址栏也可以修改权限</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221110261.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221110261.png"></p>
 <ol start="3">
-<li> 导入 <code>mid</code> 文件报错</li>
+<li>导入 <code>mid</code> 文件报错</li>
 </ol>
 <p><code>Windows + Chrome</code> 出现这样的错误： <code>TypeError: Cannot read property &#39;value&#39; of null</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221229901.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221229901.png"></p>
 <p><code>MacOS + Chrome</code> 则显示 <code>TypeError: Cannot read property of null (reading &#39;value&#39;)</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221348413.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221348413.png"></p>
 <p>可能：</p>
 <ul>
 <li>存在 <code>MIDI</code> 格式兼容问题</li>
@@ -605,23 +636,23 @@
 <p>老苏尝试过几个 <code>mid</code>，这几个文件用 <code>Windows Media Player</code> 测试都是能正常播放的，也在下面两个网站上做过测试都是 <code>OK</code> 的</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9vbmxpbmVzZXF1ZW5jZXIubmV0Lw==">https://onlinesequencer.net<i class="fa fa-external-link-alt"></i></span>  </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub25saW5lbWlkaS5jb20vRWRpdG9yLnBocA==">https://www.onlinemidi.com/Editor.php<i class="fa fa-external-link-alt"></i></span>  </li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub25saW5lbWlkaS5jb20vRWRpdG9yLnBocA==">https://www.onlinemidi.com/Editor.php<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>但在 <code>signal</code> 上有的可以导入，并能正常播放⏯，比如下面这首百听不厌的钢琴曲：</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTEzMTYyNC5taWQ=">石进-夜的钢琴曲(ONE).mid<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202109221136791.png"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTEzMTYyNC5taWQ=">石进-夜的钢琴曲(ONE).mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202109221136791.png"></p>
 <p>而像下面👇这两首导入时会出现上面👆的报错</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTIyNjMwNy5taWQ=">After The ThrillIs Gone.mid<i class="fa fa-external-link-alt"></i></span></p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTIyNzU2Mi5taWQ=">稻香-周杰伦.mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTIyNjMwNy5taWQ=">After The ThrillIs Gone.mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTIyNzU2Mi5taWQ=">稻香-周杰伦.mid<i class="fa fa-external-link-alt"></i></span></p>
 <p>还有的导入时并不报错，但是导入后编辑器是空的</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzOTcxMS5taWQ=">茉莉花.mid<i class="fa fa-external-link-alt"></i></span></p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzNDgyNC5taWQ=">在水一方.mid<i class="fa fa-external-link-alt"></i></span></p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzNjcyNi5taWQ=">只盼着深山出太阳.mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzOTcxMS5taWQ=">茉莉花.mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzNDgyNC5taWQ=">在水一方.mid<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxLzA5LzIwMjEwOTIyMTQzNjcyNi5taWQ=">只盼着深山出太阳.mid<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p>以上 <code>mid</code> 文件均来自网上，仅用于做软件测试、验证，请不要用于商业用途。</p>
 </blockquote>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>ryohey/signal: A friendly music sequencer built with web technology<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5b2hleS9zaWduYWwv">https://github.com/ryohey/signal/<i class="fa fa-external-link-alt"></i></span></p>
+<p>ryohey&#x2F;signal: A friendly music sequencer built with web technology<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J5b2hleS9zaWduYWwv">https://github.com/ryohey/signal/<i class="fa fa-external-link-alt"></i></span></p>
 <p>signal - Online MIDI Editor<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zaWduYWwudmVyY2VsLmFwcC8=">https://signal.vercel.app/<i class="fa fa-external-link-alt"></i></span></p>
 <p>让nginx上的静态网页在访问的时候没有html后缀-云社区-华为云<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYnMuaHVhd2VpY2xvdWQuY29tL2Jsb2dzL2RldGFpbC8xMjYyMTE=">https://bbs.huaweicloud.com/blogs/detail/126211<i class="fa fa-external-link-alt"></i></span></p>
 <p>11 Best Free Online MIDI Editors &amp; MIDI Players<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oaXBob3BtYWtlcnMuY29tL2ZyZWUtb25saW5lLW1pZGktZWRpdG9ycy1taWRpLXBsYXllcnM=">https://hiphopmakers.com/free-online-midi-editors-midi-players<i class="fa fa-external-link-alt"></i></span></p>
@@ -771,7 +802,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

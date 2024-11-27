@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="将 Hexo 生成的静态 blog 托管在 4everland.org 上。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282102184.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282102184.png">
 <meta property="article:published_time" content="2021-12-01T04:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.938Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.144Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="GitHub">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282102184.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282102184.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/12/01/4EVERLAND%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282102184.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282102184.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,65 +539,65 @@
 <p><code>DNSPod</code> 是国内提供智能 <code>DNS</code> 产品的网站，致力于为各类网站提供高质量的电信、网通、教育网双线或者三线智能 <code>DNS</code> 免费解析。</p>
 </blockquote>
 <h1 id="账号"><a href="#账号" class="headerlink" title="账号"></a>账号</h1><p>浏览器中打开 <span class="exturl" data-url="aHR0cHM6Ly9ob3N0aW5nLjRldmVybGFuZC5vcmcv">https://hosting.4everland.org<i class="fa fa-external-link-alt"></i></span> ，不需要注册，直接用 <code>github</code> 的账号</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281929480.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281929480.png"></p>
 <p>输入 <code>github</code> 账号密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281930650.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281930650.png"></p>
 <p>第一次可能会需要 <code>Device verification code</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281931846.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281931846.png"></p>
 <p>验证成功</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281933413.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281933413.png"></p>
 <h1 id="导入-git-仓库"><a href="#导入-git-仓库" class="headerlink" title="导入 git 仓库"></a>导入 git 仓库</h1><p>点 <code>New Project</code> 新建项目</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281937871.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281937871.png"></p>
 <p>选择 <code>hexo</code> 的存储库 <code>wbsu2003.github.io</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281938353.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281938353.png"></p>
 <p>选择目录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281940382.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281940382.png"></p>
 <p>老苏不是源码发布，而是发布的静态文件，所以框架是 <code>Other</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281941007.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281941007.png"></p>
 <p>实际上 <code>4EVERLAND</code> 支持的前端框架很多</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112011242014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112011242014.png"></p>
 <p>修改 <code>Project Name</code>，并启用 <code>Deploy hook</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281947753.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281947753.png"></p>
 <p>点 <code>Deploy</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281949784.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281949784.png"></p>
 <p>发布成功后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281949266.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281949266.png"></p>
 <p>直接点击 <code>Visit</code> 即可进行浏览。默认的域名是 <span class="exturl" data-url="aHR0cHM6Ly93YnN1MjAwMy40ZXZlcmxhbmQuYXBwLw==">https://wbsu2003.4everland.app<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281951989.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281951989.png"></p>
 <h1 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h1><p>第一步、准备好域名 <code>laosu.gq</code>，这个域名是老苏在 <code>Freenom</code> 申请的，所以要在 <code>Freenom</code> 中设置好 <code>Nameservers</code>，将其指向 <code>DNSPod</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281958646.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281958646.png"></p>
 <p>第二步、在 <code>DNSPod</code> 中增加两条解析</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282002964.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282002964.png"></p>
 <p>第三步、回到 <code>4EVERLAND</code>，进入 <code>Setting</code> –&gt; <code>Domains</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281953199.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281953199.png"></p>
 <p>选择刚建的项目 <code>wbsu2003</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281954292.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281954292.png"></p>
 <p>输入准备好的域名 <code>laosu.gq</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111281956188.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111281956188.png"></p>
 <p>点 <code>Add</code> 即可</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282005587.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282005587.png"></p>
 <p>现在可以用 <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncS8=">https://laosu.gq<i class="fa fa-external-link-alt"></i></span> 直接访问了，是不是很简单？</p>
 <h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>在站长之家（ <span class="exturl" data-url="aHR0cDovL3Rvb2wuY2hpbmF6LmNvbS9zaXRlc3BlZWQ=">http://tool.chinaz.com/sitespeed<i class="fa fa-external-link-alt"></i></span> ）–&gt;【国内网速测试】，分别输入域名进行测试。</p>
 <ul>
 <li><code>Vercel</code> 域名：<code>laosu.ml</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282011365.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282011365.png"></p>
 <ul>
 <li><code>Gitee</code> 域名：<code>wbsu2003.gitee.io</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282012529.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282012529.png"></p>
 <ul>
 <li><code>4EVERLAND</code> 域名：<code>laosu.gq</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282014224.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282014224.png"></p>
 <ul>
 <li><code>github</code> 域名：<code>laosu.ga</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282018806.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282018806.png"></p>
 <ul>
 <li><code>Netlify</code> 域名：<code>laosu.tk</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282034975.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282034975.png"></p>
 <p>似乎也就比 <code>vercel</code> 略微低一点，做个备站是没问题的</p>
 <h1 id="站点规划"><a href="#站点规划" class="headerlink" title="站点规划"></a>站点规划</h1><table>
 <thead>
@@ -608,19 +639,19 @@
 </tr>
 </tbody></table>
 <p>目前网站上已完成调整，应该能找到您访问最快的站点。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282021548.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282021548.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ol>
 <li>只要 <code>Hexo</code> 提交到 <code>Github</code> ，就会自动部署，还是很方便的；</li>
 <li>目前 <code>4EVERLAND</code> 给所有账户提供 <code>40GB</code> 免费存储空间以及无限的流量；</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111291037764.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111291037764.png"></p>
 <ol start="3">
 <li><code>Settings</code> –&gt; <code>statistics</code> 中可以看到访问记录；</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282026461.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282026461.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>免费的静态托管平台4EVERLAND - 知乎<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MDEzODE3MTY=">https://zhuanlan.zhihu.com/p/401381716<i class="fa fa-external-link-alt"></i></span></p>
-<p>4EVERLAND 使用指北_m0_60963693的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzYwOTYzNjkzL2FydGljbGUvZGV0YWlscy8xMTk4MjIwNTI=">https://blog.csdn.net/m0_60963693/article/details/119822052<i class="fa fa-external-link-alt"></i></span></p>
+<p>4EVERLAND 使用指北_m0_60963693的博客-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzYwOTYzNjkzL2FydGljbGUvZGV0YWlscy8xMTk4MjIwNTI=">https://blog.csdn.net/m0_60963693&#x2F;article&#x2F;details&#x2F;119822052<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -766,7 +797,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

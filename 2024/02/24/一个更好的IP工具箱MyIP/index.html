@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MyIP 是一个完全开源的 IP 信息查看器，可以查询本机 IP、查询任意 IP、查询国内外网站可用性等。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221751002.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221751002.png">
 <meta property="article:published_time" content="2024-02-24T01:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221751002.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221751002.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/02/24/%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A5%BD%E7%9A%84IP%E5%B7%A5%E5%85%B7%E7%AE%B1MyIP/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221751002.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221751002.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,11 +536,11 @@
 <li>🕵️ <strong>看 IP 信息</strong>：显示所有 <code>IP</code> 的相关信息，包括国家、地区、<code>ASN</code>、地理位置等</li>
 <li>🚦 <strong>可用性检测</strong>：检测一些网站的可用性：<code>Google</code>, <code>Github</code>, <code>Youtube</code>, 网易, 百度等</li>
 <li>🚥 <strong>WebRTC 检测</strong>：查看使用 <code>WebRTC</code> 连接时使用的 <code>IP</code></li>
-<li>🛑 <strong>DNS 泄露检测</strong>：查看 <code>DNS</code> 出口信息，以便查看在 <code>VPN</code>/代理的情况下，是否存在 <code>DNS</code> 泄露隐私的风险</li>
+<li>🛑 <strong>DNS 泄露检测</strong>：查看 <code>DNS</code> 出口信息，以便查看在 <code>VPN</code>&#x2F;代理的情况下，是否存在 <code>DNS</code> 泄露隐私的风险</li>
 <li>🚀 <strong>网速测试</strong>：利用边缘网络进行网速测试</li>
 <li>🌐 <strong>全球延迟测试</strong>：从分布在全球的多个服务器进行延迟测试，了解你与全球网络的连接速度</li>
 <li>📡 <strong>MTR 测试</strong>：从分布在全球的多个服务器进行 <code>MTR</code> 测试，了解你与全球的连接路径</li>
-<li>🌗 <strong>暗黑模式</strong>：根据系统设置自动切换暗黑/白天模式，也可以手动切换</li>
+<li>🌗 <strong>暗黑模式</strong>：根据系统设置自动切换暗黑&#x2F;白天模式，也可以手动切换</li>
 <li>📱 <strong>简约模式</strong>：为移动版提供的专门模式，缩短页面长度，快速查看最重要的信息</li>
 <li>🔍 <strong>查任意 IP 信息</strong>：可以通过小工具查询任意 <code>IP</code> 的信息</li>
 <li>📲 <strong>支持 PWA</strong>：可以添加为手机桌面应用以及电脑里的 <code>Chrome</code> 应用</li>
@@ -523,9 +554,9 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>myip</code> ，选择第一个 <code>jason5ng32/myip</code>，双击直接下载</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221549370.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221549370.png"></p>
 <p>因为只有一个 <code>latest</code> 版本</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221550024.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221550024.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -542,9 +573,9 @@
 </tr>
 </tbody></table>
 <p>默认没有对外暴露端口</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221732553.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221732553.png"></p>
 <p>需要点 <code>+</code> 号自行添加</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221733637.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221733637.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>你可以不添加环境变量直接使用，但是如果你想使用一些高级功能，可以添加下面的环境变量</p>
 <table>
 <thead>
@@ -621,21 +652,21 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 myip </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/myip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 myip 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/myip</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:18966</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221704086.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221704086.png"></p>
 <p>对比官方网站 <code>https://ipcheck.ing</code> 的 <code>IP</code> 信息</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221719032.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221719032.png"></p>
 <blockquote>
 <p>显然自己搭的还是不如官方的准确，因此设置环境变量 <code>IPChecking_API</code> 还是非常有必要的，不过目前暂时还没有办法获取到 <code>IPCheck.ing</code> 的 <code>API Key</code>，要等作者完善服务之后才行</p>
 </blockquote>
-<p>如果设置了环境变量 <code>BING_MAP_API_KEY</code> ，可以点这个图标，来打开/关闭地图显示</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221735360.png"></p>
+<p>如果设置了环境变量 <code>BING_MAP_API_KEY</code> ，可以点这个图标，来打开&#x2F;关闭地图显示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221735360.png"></p>
 <p>测个速试试</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221711910.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221711910.png"></p>
 <p>想做个 <code>全球延迟测试</code>，不过看起来公司的 <code>IP</code> 是禁 <code>ping</code> 的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402221713180.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402221713180.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>jason5ng32/MyIP: The best IP Toolbox. Easy to check what’s your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability and more! || 🇨🇳 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性等等。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phc29uNW5nMzIvTXlJUA==">https://github.com/jason5ng32/MyIP<i class="fa fa-external-link-alt"></i></span></p>
-<p>IPCheck.ing的API Key · Issue #117 · jason5ng32/MyIP<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phc29uNW5nMzIvTXlJUC9pc3N1ZXMvMTE3">https://github.com/jason5ng32/MyIP/issues/117<i class="fa fa-external-link-alt"></i></span></p>
+<p>jason5ng32&#x2F;MyIP: The best IP Toolbox. Easy to check what’s your IPs, IP geolocation, check for DNS leaks, examine WebRTC connections, speed test, ping test, MTR test, check website availability and more! || 🇨🇳 可能是最好用的IP工具箱。轻松检查你的 IP，IP 地理位置，检查DNS泄漏，检查 WebRTC 连接，速度测试，ping 测试，MTR测试，检查网站可用性等等。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phc29uNW5nMzIvTXlJUA==">https://github.com/jason5ng32/MyIP<i class="fa fa-external-link-alt"></i></span></p>
+<p>IPCheck.ing的API Key · Issue #117 · jason5ng32&#x2F;MyIP<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2phc29uNW5nMzIvTXlJUC9pc3N1ZXMvMTE3">https://github.com/jason5ng32/MyIP/issues/117<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -781,7 +812,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

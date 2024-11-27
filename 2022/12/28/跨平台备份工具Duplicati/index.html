@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Duplicati 是一个免费的开源备份客户端。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211101143532.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211101143532.png">
 <meta property="article:published_time" content="2022-12-28T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.986Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.192Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="备份">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211101143532.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211101143532.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/12/28/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%A4%87%E4%BB%BD%E5%B7%A5%E5%85%B7Duplicati/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211101143532.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211101143532.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -574,52 +605,52 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 duplicati 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/duplicati/&#123;backups,config&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 duplicati 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/duplicati</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8220</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091430485.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091430485.png"></p>
 <p>如果你是自己一个人用，选 <code>No</code> ，否则就选 <code>Yes</code>，然后设置一个密码</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091437155.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091437155.png"></p>
 <p>新建一个备份项目</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091445763.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091445763.png"></p>
 <p>如果备份位置选择 <code>本地文件夹或磁盘</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091449577.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091449577.png"></p>
 <p>当然也可以选择保存到远端，支持的协议很多</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091450324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091450324.png"></p>
 <p>老苏选了 <code>WebDAV</code>，备份位置指向了 <code>Alist</code> 中设置的阿里云盘</p>
 <blockquote>
 <p>已经在阿里云盘中建好了 <code>测试</code> 目录</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091501252.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091501252.png"></p>
 <p><code>测试连接</code> 正常的话，可以进行下一步</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091453985.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091453985.png"></p>
 <p>找到我们之前映射的 <code>source</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091454672.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091454672.png"></p>
 <p>假设我们要备份 <code>bitwarden</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211101037051.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211101037051.png"></p>
 <p>映射后的目录应该是 <code>source/docker/bitwarden</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091456723.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091456723.png"></p>
 <p>设置备份计划</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091457201.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091457201.png"></p>
 <p>一些常规选项，如果默认的话，文件将按 <code>50M</code> 分割</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091457891.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091457891.png"></p>
 <p>从安全性考虑，建议采用加密</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091458234.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091458234.png"></p>
 <p>到这里任务就建好了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091458470.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091458470.png"></p>
 <p>展开详情</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091459409.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091459409.png"></p>
 <p>为了测试，老苏选择了 <code>立即运行</code> 来验证效果</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091502496.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091502496.png"></p>
 <p>开始备份</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091503588.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091503588.png"></p>
 <p>到阿里云盘中刷新，可以看到文件都未超过 <code>50M</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091505997.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091505997.png"></p>
 <p>备份完成</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091534837.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091534837.png"></p>
 <p>如果同时进行多个任务，可以分别限流</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/10/202211091535923.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/10/202211091535923.png"></p>
 <p>友情提示：虽然有备份，但是记得定期检查，避免关键时刻掉链子</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Duplicati<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZHVwbGljYXRpLmNvbS8=">https://www.duplicati.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>duplicati/duplicati: Store securely encrypted backups in the cloud!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2R1cGxpY2F0aS9kdXBsaWNhdGk=">https://github.com/duplicati/duplicati<i class="fa fa-external-link-alt"></i></span></p>
+<p>duplicati&#x2F;duplicati: Store securely encrypted backups in the cloud!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2R1cGxpY2F0aS9kdXBsaWNhdGk=">https://github.com/duplicati/duplicati<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -765,7 +796,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

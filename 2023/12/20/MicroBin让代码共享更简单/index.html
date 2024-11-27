@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MicroBin 是用 Rust 编写的安全、可配置的文件共享和 URL 缩短 Web 应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161702992.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161702992.png">
 <meta property="article:published_time" content="2023-12-20T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="pastebin">
 <meta property="article:tag" content="短链接">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161702992.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161702992.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/12/20/MicroBin%E8%AE%A9%E4%BB%A3%E7%A0%81%E5%85%B1%E4%BA%AB%E6%9B%B4%E7%AE%80%E5%8D%95/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161702992.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161702992.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,13 +540,13 @@
 </ul>
 </blockquote>
 <p>如果不想自己搭建，可以试试官方的公共测试服务器：<span class="exturl" data-url="aHR0cHM6Ly9wdWIubWljcm9iaW4uZXUv">https://pub.microbin.eu/<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161606200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161606200.png"></p>
 <p>您可以使用 <code>MicroBin</code>：</p>
 <ul>
 <li>要向其他人发送长短信；</li>
 <li>要将大文件发送给其他人；</li>
 <li>为了安全地共享秘密或敏感文档；</li>
-<li>作为 <code>URL</code> 缩短/重定向服务；</li>
+<li>作为 <code>URL</code> 缩短&#x2F;重定向服务；</li>
 <li>在网络上提供内容，例如。用于测试的配置文件、图像或使用原始功能的任何其他文件内容；</li>
 <li>要在桌面和从控制台访问的服务器之间移动文件；</li>
 <li>作为“邮箱”服务，人们可以上传文件或文本，但无法查看或删除其他人发送给您的内容；</li>
@@ -526,7 +557,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>2.0.4</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161544087.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161544087.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>microbin</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -542,7 +573,7 @@
 <td align="center">存放数据库等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161556194.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161556194.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -558,7 +589,7 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161556659.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161556659.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -579,7 +610,7 @@
 <td align="center">是否启用阅后即焚，默认是 <code>false</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161558479.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161558479.png"></p>
 <p>更多的环境变量，请参考官方文档： <span class="exturl" data-url="aHR0cHM6Ly9taWNyb2Jpbi5ldS9kb2NzL2luc3RhbGxhdGlvbi1hbmQtY29uZmlndXJhdGlvbi9jb25maWd1cmF0aW9uLw==">https://microbin.eu/docs/installation-and-configuration/configuration/<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 microbin 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/microbin/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 microbin 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/microbin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name microbin \</span><br><span class="line">   -p 8022:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/microbin_data \</span><br><span class="line">   -e MICROBIN_ADMIN_USERNAME=laosu \</span><br><span class="line">   -e MICROBIN_ADMIN_PASSWORD=5YH5FUy6vX2c \</span><br><span class="line">   -e MICROBIN_ENABLE_BURN_AFTER=<span class="literal">true</span> \</span><br><span class="line">   danielszabo99/microbin:latest</span><br></pre></td></tr></table></figure>
@@ -591,25 +622,25 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 microbin 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/microbin/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 microbin 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/microbin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8022</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161600888.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161600888.png"></p>
 <h2 id="管理后台"><a href="#管理后台" class="headerlink" title="管理后台"></a>管理后台</h2><p>在浏览器中输入 <code>http://群晖IP:8022/admin</code> 就能看到登录界面</p>
 <blockquote>
 <p>账号密码就是我们之前安装时设定的 <code>MICROBIN_ADMIN_USERNAME</code> 和 <code>MICROBIN_ADMIN_PASSWORD</code> 的值</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307162014314.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307162014314.png"></p>
 <p>登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307162019573.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307162019573.png"></p>
 <p>下拉可以看到对应的环境变量，可以根据需要进行添加和修改</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161602363.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161602363.png"></p>
 <p>例如增加： <code>MICROBIN_HIGHLIGHTSYNTAX</code>、<code>MICROBIN_PRIVAT</code> 等，你就能得到一个和官网差多的界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161635064.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161635064.png"></p>
 <p>贴了 <code>docker-compose.yml</code> 的代码，感觉配色不太好看</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/091/202310161644947.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/091/202310161644947.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>MicroBin | MicroBin<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9taWNyb2Jpbi5ldS8=">https://microbin.eu/<i class="fa fa-external-link-alt"></i></span></p>
-<p>szabodanika/microbin: A tiny, self-contained, configurable paste bin and URL shortener written in Rust.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N6YWJvZGFuaWthL21pY3JvYmlu">https://github.com/szabodanika/microbin<i class="fa fa-external-link-alt"></i></span></p>
+<p>szabodanika&#x2F;microbin: A tiny, self-contained, configurable paste bin and URL shortener written in Rust.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N6YWJvZGFuaWthL21pY3JvYmlu">https://github.com/szabodanika/microbin<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker | MicroBin<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9taWNyb2Jpbi5ldS9kb2NzL2luc3RhbGxhdGlvbi1hbmQtY29uZmlndXJhdGlvbi9kb2NrZXIv">https://microbin.eu/docs/installation-and-configuration/docker/<i class="fa fa-external-link-alt"></i></span></p>
-<p>MicroBin v2 released : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTR4MzZ2cy9taWNyb2Jpbl92Ml9yZWxlYXNlZC8=">https://www.reddit.com/r/selfhosted/comments/14x36vs/microbin_v2_released/<i class="fa fa-external-link-alt"></i></span></p>
+<p>MicroBin v2 released : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTR4MzZ2cy9taWNyb2Jpbl92Ml9yZWxlYXNlZC8=">https://www.reddit.com/r/selfhosted/comments/14x36vs/microbin_v2_released&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -756,7 +787,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

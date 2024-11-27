@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="DocuSeal 是一款免费开源软件工具，用于创建、填写和签署数字文档。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041647143.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041647143.png">
 <meta property="article:published_time" content="2024-01-08T00:45:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="pdf">
 <meta property="article:tag" content="签名">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041647143.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041647143.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/01/08/%E5%9C%A8%E7%BA%BF%E6%95%B0%E5%AD%97%E6%96%87%E6%A1%A3%E7%AD%BE%E5%90%8D%E5%B9%B3%E5%8F%B0DocuSeal/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041647143.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041647143.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,16 +534,16 @@
 </blockquote>
 <p><strong>软件特点：</strong></p>
 <ul>
-<li> <code>PDF</code> 表单字段生成器 (<code>WYSIWYG</code>)</li>
-<li> <code>11</code> 种可用字段类型（签名、日期、文件、复选框等）</li>
+<li><code>PDF</code> 表单字段生成器 (<code>WYSIWYG</code>)</li>
+<li><code>11</code> 种可用字段类型（签名、日期、文件、复选框等）</li>
 <li>每个文档有多个提交者</li>
-<li> 通过 <code>SMTP</code> 自动发送电子邮件</li>
-<li> 文件存储在磁盘或 <code>AWS S3</code>、<code>Google Storage</code>、<code>Azure Cloud</code> 上</li>
-<li> 自动 <code>PDF</code> 电子签名</li>
-<li> <code>PDF</code> 签名验证</li>
-<li> 用户管理</li>
-<li> 移动端优化</li>
-<li> 用于集成的 <code>API</code> 和 <code>Webhooks</code></li>
+<li>通过 <code>SMTP</code> 自动发送电子邮件</li>
+<li>文件存储在磁盘或 <code>AWS S3</code>、<code>Google Storage</code>、<code>Azure Cloud</code> 上</li>
+<li>自动 <code>PDF</code> 电子签名</li>
+<li><code>PDF</code> 签名验证</li>
+<li>用户管理</li>
+<li>移动端优化</li>
+<li>用于集成的 <code>API</code> 和 <code>Webhooks</code></li>
 <li>几分钟内即可轻松部署</li>
 </ul>
 <iframe src="//player.bilibili.com/player.html?aid=834119297&bvid=BV1a34y1c7xb&cid=1350152964&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
@@ -528,7 +559,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>1.3.0</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011425456.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011425456.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>docuseal</code>，并在其中建两个子文件夹 <code>data</code> 和 <code>web</code></p>
 <table>
 <thead>
@@ -544,7 +575,7 @@
 <td align="center">存放数据库和配置等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011458487.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011458487.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -560,7 +591,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011459240.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011459240.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 docuseal 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/docuseal/web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 docuseal 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/docuseal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name docuseal \</span><br><span class="line">   -p 3883:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/web:/data \</span><br><span class="line">   docuseal/docuseal</span><br></pre></td></tr></table></figure>
 
@@ -571,19 +602,19 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 docuseal 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/docuseal/web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 docuseal 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/docuseal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3883</code> 就能看到设置界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011615373.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011615373.png"></p>
 <p>开始创建模板或者进入设置</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011617387.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011617387.png"></p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>先设个签名（<code>Signature</code>），用鼠标现场画了一个</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011621148.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011621148.png"></p>
 <p>保存即可</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011623788.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011623788.png"></p>
 <p>接下来设个 <code>SMTP</code>，这样签完的文件可以直接发送给别人</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011716578.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011716578.png"></p>
 <h2 id="流程演示"><a href="#流程演示" class="headerlink" title="流程演示"></a>流程演示</h2><ol>
 <li>上传合同文件</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011632887.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011632887.png"></p>
 <blockquote>
 <p>演示用的合同来自：<span class="exturl" data-url="aHR0cHM6Ly9tYi5wZGYzNjUuY24vZmVubGVpLTctMC0wLTE=">https://mb.pdf365.cn/fenlei-7-0-0-1<i class="fa fa-external-link-alt"></i></span>  提供的免费模板</p>
 </blockquote>
@@ -592,36 +623,36 @@
 <li>从右侧栏拖拽了 <code>2</code> 个 “签名” 到合同指定的位置</li>
 </ol>
 <p>因为涉及到双方签名，所以需要分成 <code>2</code>  个 <code>Party</code>，其中甲方的前面放在 <code>First Party</code>，乙方前面放在了 <code>Second Party</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041456090.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041456090.png"></p>
 <p>3、保存后，邮件发送</p>
 <p>填写甲乙双方的邮件地址，不要搞反咯</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041545926.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041545926.png"></p>
 <p>完成之后</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041506595.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041506595.png"></p>
 <ol start="4">
 <li>收到邮件</li>
 </ol>
 <p>如果  <code>SMTP</code> 设置没问题的话，会很快收到邮件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312011717883.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312011717883.png"></p>
 <ol start="5">
 <li>点 <code>Submit Form</code>，在线打开合文本，假如甲方先签名</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041509486.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041509486.png"></p>
 <p>完成后可以直接 <code>SUBMIT FORM</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041509580.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041509580.png"></p>
 <p>乙方收到邮件后，也是一样的流程</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041510867.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041510867.png"></p>
 <p>签名</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041510598.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041510598.png"></p>
 <p>提交</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041511589.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041511589.png"></p>
 <p>5、下载合同</p>
 <p>一份完整的合同就生成了。点 <code>DOWNLOAD</code> 下载后，用 <code>pdf</code> 阅读器打开</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041533418.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041533418.png"></p>
 <p>邮件也会收到</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312041554645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312041554645.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>docusealco/docuseal: Open source DocuSign alternative. Create, fill, and sign digital documents ✍️<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvY3VzZWFsY28vZG9jdXNlYWw=">https://github.com/docusealco/docuseal<i class="fa fa-external-link-alt"></i></span></p>
+<p>docusealco&#x2F;docuseal: Open source DocuSign alternative. Create, fill, and sign digital documents ✍️<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvY3VzZWFsY28vZG9jdXNlYWw=">https://github.com/docusealco/docuseal<i class="fa fa-external-link-alt"></i></span></p>
 <p>DocuSeal | Open Source Document Signing<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jdXNlYWwuY28v">https://www.docuseal.co/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -770,7 +801,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

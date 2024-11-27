@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="JPress 是一个使用 Java 开发的、开源免费的建站神器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281828914.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281828914.png">
 <meta property="article:published_time" content="2023-05-15T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="博客">
 <meta property="article:tag" content="CMS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281828914.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281828914.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/05/15/%E7%94%A8Java%E5%BC%80%E5%8F%91%E7%9A%84%E5%BB%BA%E7%AB%99%E7%A5%9E%E5%99%A8JPress/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281828914.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281828914.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,7 +534,7 @@
 </blockquote>
 <p>目前已经有 <code>10w+</code> 网站使用 <code>JPress</code> 进行驱动，其中包括多个政府机构，<code>200+</code> 上市公司，中科院、红+字会等。</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>老苏原本想用群晖自带的 <code>MariaDB</code>，但是 <code>JPress</code> 只支持 <code>mysql 5.6</code> 或 <code>5.7</code> 版本，而系统自带的 <code>MariaDB 5</code> 版本不够</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281640605.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281640605.png"></p>
 <p>老苏没试行不行，另外用容器安装了 <code>mysql</code></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 jpress 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/jpress/&#123;addons,attachment,data,templates/dockers,WEB-INF/addons,wp-content&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 jpress 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/jpress</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 mysql 容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart always \</span><br><span class="line">   --name jpress-db \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/lib/mysql \</span><br><span class="line">   -e MYSQL_ROOT_PASSWORD=jpress \</span><br><span class="line">   -e MYSQL_DATABASE=jpress \</span><br><span class="line">   -e MYSQL_USER=jpress \</span><br><span class="line">   -e MYSQL_PASSWORD=jpress \</span><br><span class="line">   mysql:5.7 \</span><br><span class="line">   --default-authentication-plugin=mysql_native_password</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 jpress 容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart always \</span><br><span class="line">   --name jpress-web \</span><br><span class="line">   --<span class="built_in">link</span> jpress-db:db \</span><br><span class="line">   -p 8882:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/attachment:/opt/jpress/webapp/attachment \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/addons:/opt/jpress/webapp/addons \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/WEB-INF/addons:/opt/jpress/webapp/WEB-INF/addons \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/wp-content:/opt/jpress/webapp/wp-content \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/templates/dockers:/opt/jpress/webapp/templates/dockers \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e JPRESS_DB_HOST=db \</span><br><span class="line">   -e JPRESS_DB_PORT=3306 \</span><br><span class="line">   -e JPRESS_DB_NAME=jpress \</span><br><span class="line">   -e JPRESS_DB_USER=jpress \</span><br><span class="line">   -e JPRESS_DB_PASSWORD=jpress \</span><br><span class="line">   fuhai/jpress:v5.0.8</span><br></pre></td></tr></table></figure>
@@ -516,27 +547,27 @@
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8882</code></p>
 <h2 id="设置向导"><a href="#设置向导" class="headerlink" title="设置向导"></a>设置向导</h2><p>第一次需要进行设置，会自动调整到设置界面，直接点 <code>下一步</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281636261.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281636261.png"></p>
 <p>因为我们在环境变量中做了设置，所以这里只要点 <code>下一步</code> 即可</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281651623.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281651623.png"></p>
 <p>接下来设置 <code>网站信息</code> 和 <code>超级管理员</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281653370.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281653370.png"></p>
 <p>点 <code>完成</code> 之后开始安装</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281654677.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281654677.png"></p>
 <p>完成之后有弹窗提示</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281654320.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281654320.png"></p>
 <p>点 <code>确定</code> 之后就会看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281655827.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281655827.png"></p>
 <p>登录之后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281656709.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281656709.png"></p>
 <p>接下来就可以用 <code>JPress</code> 搭建自己的网站了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/01/202301281809442.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301281809442.png"></p>
 <ul>
 <li>网站地址：<code>http://群晖IP:8882</code></li>
 <li>后台管理地址：<code>http://群晖IP:8882/admin</code></li>
 </ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>JPressProjects/jpress: JPress，一个使用 Java 开发的建站神器，目前已经有 10w+ 网站使用 JPress 进行驱动，其中包括多个政府机构，200+上市公司，中科院、红+字会等。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0pQcmVzc1Byb2plY3RzL2pwcmVzcw==">https://github.com/JPressProjects/jpress<i class="fa fa-external-link-alt"></i></span></p>
+<p>JPressProjects&#x2F;jpress: JPress，一个使用 Java 开发的建站神器，目前已经有 10w+ 网站使用 JPress 进行驱动，其中包括多个政府机构，200+上市公司，中科院、红+字会等。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0pQcmVzc1Byb2plY3RzL2pwcmVzcw==">https://github.com/JPressProjects/jpress<i class="fa fa-external-link-alt"></i></span></p>
 <p>JPress 简介 | JPress 官方文档<br>地址：<span class="exturl" data-url="aHR0cDovL2RvYy5qcHJlc3MuY24vbWFudWFsLw==">http://doc.jpress.cn/manual/<i class="fa fa-external-link-alt"></i></span></p>
 <p>JPress官网-一个使用 Java 开发的 CMS 系统。<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5qcHJlc3MuY24v">http://www.jpress.cn/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -686,7 +717,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

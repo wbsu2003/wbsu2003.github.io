@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="能将任何带有 Web 浏览器的设备转换为电脑的辅助屏幕。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320155915.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320155915.png">
 <meta property="article:published_time" content="2021-03-22T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.938Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.144Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="WebRTC">
 <meta property="article:tag" content="虚拟显示器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320155915.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320155915.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/03/22/Deskreen%E8%83%BD%E8%AE%A9%E6%89%8B%E6%9C%BA%E5%8F%98%E6%88%90%E7%94%B5%E8%84%91%E7%9A%84%E8%BE%85%E5%8A%A9%E5%B1%8F/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320155915.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320155915.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -495,15 +526,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320155638.png"><br><em>（题图来自官网）</em></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320155638.png"><br><em>（题图来自官网）</em></p>
 <p><strong>什么是 Deskreen ？</strong></p>
 <blockquote>
 <ul>
-<li> Deskreen 是一个 <code>electron.js</code> 应用程序，通过 <code>WebRTC</code> 将您的桌面实时流传输到任何设备上的 Web 浏览器。</li>
-<li> Deskreen 是一款桌面应用程序，可以通过 WiFi 将任何带有网络浏览器的设备变成电脑的辅助屏幕。</li>
-<li> Deskreen 可用于将整个计算机显示镜像到任何具有 Web 浏览器的设备屏幕上。您还可以限制 Deskreen 只选择一个要共享的应用程序窗口视图，这对于演示非常有用。</li>
-<li> Deskreen 的最大特点是可以使用任何设备作为辅助屏幕。</li>
-<li> Deskreen 是开源的，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhdmxvYnUvZGVza3JlZW4=">源代码地址（https://github.com/pavlobu/deskreen）<i class="fa fa-external-link-alt"></i></span></li>
+<li>Deskreen 是一个 <code>electron.js</code> 应用程序，通过 <code>WebRTC</code> 将您的桌面实时流传输到任何设备上的 Web 浏览器。</li>
+<li>Deskreen 是一款桌面应用程序，可以通过 WiFi 将任何带有网络浏览器的设备变成电脑的辅助屏幕。</li>
+<li>Deskreen 可用于将整个计算机显示镜像到任何具有 Web 浏览器的设备屏幕上。您还可以限制 Deskreen 只选择一个要共享的应用程序窗口视图，这对于演示非常有用。</li>
+<li>Deskreen 的最大特点是可以使用任何设备作为辅助屏幕。</li>
+<li>Deskreen 是开源的，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhdmxvYnUvZGVza3JlZW4=">源代码地址（https://github.com/pavlobu/deskreen）<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 </blockquote>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Deskreen 作为一款桌面应用程序，支持  Windows, Linux, MacOS 系统，对存储、内存和 CPU 的要求都不高</p>
@@ -517,45 +548,45 @@
 </ul>
 <h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>为了研究 Deskreen 的用法，准备拿 Windows 10 台式机和 Android 手机做测试。虽然台式机已经比较老旧了，但性能肯定能满足要求。</p>
 <h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>根据平台在<span class="exturl" data-url="aHR0cHM6Ly9kZXNrcmVlbi5jb20vbGFuZy16aF9DTg==">官方（https://deskreen.com/）<i class="fa fa-external-link-alt"></i></span>下载  Deskreen 客户端，并安装</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320163431.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320163431.png"></p>
 <blockquote>
 <p>我下了 windows 版，现在的版本是 <code>1.0.11</code></p>
 </blockquote>
 <p>接下来要运行 Deskreen ，选择 <code>简体中文</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320163741.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320163741.png"></p>
 <p>然后用平板电脑或手机扫描二维码 (QR)，或手动在网页浏览器地址栏中键入二维码 (QR) 下面的蓝色地址。这将在您的平板电脑上打开一个带有连接状态的页面。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320164242.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320164242.png"></p>
 <p>如果您的相机无法识别小的二维码 (QR)，请单击二维码 (QR) 将其放大</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320172734.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320172734.png"></p>
 <p>如果你没有相机扫描二维码 (QR)，点击二维码 (QR) 下面的蓝色按钮将地址复制到剪贴板上。然后，您可以共享复制的地址并将其粘贴到 Web 浏览器地址栏以打开 Deskreen 查看器。您也可以在任何设备的浏览器地址栏中手动键入蓝色按钮的地址，以打开 Deskreen 查看器。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320172854.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320172854.png"></p>
 <p>但是返回的结果是 <code>网页无法访问</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320172500.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320172500.jpg"></p>
 <p>换了 Microsoft Edge 浏览器，结果是一样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320174200.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320174200.jpg"></p>
 <p>怀疑是 windows 防火墙导致的，为了验证先关闭了防火墙</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320183940.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320183940.png"></p>
 <p>当然要想彻底解决，还是要在 <code>允许其他应用</code> 中把 Deskreen 添加到 <code>允许的应用</code> 列表中，同时勾选 <code>专用</code> 和 <code>公用</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320183816.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320183816.png"></p>
 <p>再次刷新 Microsoft Edge 浏览器，可以看到界面了</p>
 <blockquote>
 <p>小米手机自带的浏览器还是不行，我的 MIUI 版本是 11 的</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320184750.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320184750.jpg"></p>
 <p>需要电脑端点 <code>允许</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320184848.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320184848.png"></p>
 <h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>接下来需要电脑端选择共享 <code>整个屏幕</code> 还是 <code>应用程序窗口</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320184922.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320184922.png"></p>
 <p>如果选择共享 <code>应用程序窗口</code>，您可以在下图中选择要共享的应用程序窗口。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320190218.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320190218.png"></p>
 <p>如果选择共享 <code>整个屏幕</code>，您可以选择共享整个屏幕。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320190302.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320190302.png"></p>
 <p>我共享了 <code>PotPlayer</code> 正在播放的视频，</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320190415.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320190415.png"></p>
 <h2 id="确认"><a href="#确认" class="headerlink" title="确认"></a>确认</h2><p>还需要 <code>确认</code>，桌面端的设置就完成了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320190441.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320190441.png"></p>
 <p>毕竟是局域网，图像非常流畅，手机端几乎看不出延迟</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320185526.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320185526.jpg"></p>
 <p>结合软件的 <code>全屏</code> 功能和手机自带的 <code>旋转</code> 功能，视频可以在手机上横屏观看。</p>
 <h1 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h1><p>如果只是我们前面介绍的用法，最多也就是<code>复制屏</code>的用法，而如果要变成<code>扩展屏</code>，按官方的说法需要用到 <code>虚拟显示适配器</code> 。</p>
 <p>所谓 <code>虚拟显示适配器</code> 实际上就是欺骗主机，让主机以为存在第二个显示器，这玩意儿可以是硬件，也可以是软件。</p>
@@ -569,17 +600,17 @@
 <li>假负载</li>
 </ul>
 <p>接口支持 VGA 、HDMI 、DP 、DVI 、Type-C 等，分辨率一般是 1080P 和 4K，价格从几块到几十块，可以根据自己的需要选择。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320195243.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320195243.png"></p>
 <h2 id="软件方案"><a href="#软件方案" class="headerlink" title="软件方案"></a>软件方案</h2><p>这个方案简单而免费，可以在您的系统上创建一个<code>软件</code>监视器，但是这个解决方案仅适用于 Windows 10。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
-<li>  下载虚拟显示驱动程序 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYW15dW5pLmNvbS9kb3dubG9hZHMvdXNibW1pZGQuemlw">https://www.amyuni.com/downloads/usbmmidd.zip<i class="fa fa-external-link-alt"></i></span>  或者 <span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxMDMyMDIwNDIwNS56aXA=">usbmmidd.zip<i class="fa fa-external-link-alt"></i></span></li>
-<li>  将zip文件解压缩到一个空文件夹，例如 <code>C:\temp\usbmmidd</code></li>
-<li>  以管理员身份打开命令提示符窗口（除非您以 <code>以管理员身份运行</code>，否则无法将设备添加到系统中）</li>
+<li>下载虚拟显示驱动程序 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYW15dW5pLmNvbS9kb3dubG9hZHMvdXNibW1pZGQuemlw">https://www.amyuni.com/downloads/usbmmidd.zip<i class="fa fa-external-link-alt"></i></span>  或者 <span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9waWNnby8yMDIxMDMyMDIwNDIwNS56aXA=">usbmmidd.zip<i class="fa fa-external-link-alt"></i></span></li>
+<li>将zip文件解压缩到一个空文件夹，例如 <code>C:\temp\usbmmidd</code></li>
+<li>以管理员身份打开命令提示符窗口（除非您以 <code>以管理员身份运行</code>，否则无法将设备添加到系统中）</li>
 <li>运行下面的命令<ul>
-<li>   <code>cd C:\temp\usbmmidd</code>（或您选择的任何目标文件夹）</li>
-<li>   <code>deviceinstaller64 install usbmmidd.inf usbmmidd</code></li>
-<li>   如果显示 <code>Drivers installed successfully.</code>，就执行下一条命令</li>
-<li>  <code>deviceinstaller64 enableidd 1</code></li>
+<li><code>cd C:\temp\usbmmidd</code>（或您选择的任何目标文件夹）</li>
+<li><code>deviceinstaller64 install usbmmidd.inf usbmmidd</code></li>
+<li>如果显示 <code>Drivers installed successfully.</code>，就执行下一条命令</li>
+<li><code>deviceinstaller64 enableidd 1</code></li>
 </ul>
 </li>
 </ul>
@@ -589,17 +620,17 @@
 <li>更简单的办法，请右键单击 <code>usbmmidd.bat</code> 并 <code>以管理员身份运行</code>。</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320205918.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320205918.png"></p>
 <p>系统中原本 2 个显示器现在变成了 3 个，该高清监视器固定为 1920x1080 像素</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320210251.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320210251.png"></p>
 <p>选择共享 <code>整个屏幕</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320210506.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320210506.png"></p>
 <p>选择 <code>Screen 3</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320210600.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320210600.png"></p>
 <p>确认</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320211022.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320211022.jpg"></p>
 <p>当点 <code>标识</code> 时，手机被识别为 3 号屏</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210320211213.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210320211213.jpg"></p>
 <p>这可是真正的扩展屏哦</p>
 <h3 id="停用"><a href="#停用" class="headerlink" title="停用"></a>停用</h3><p>要停用虚拟监视器，请运行以下命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deviceinstaller64 enableidd 0</span><br></pre></td></tr></table></figure>
@@ -618,7 +649,7 @@
 </ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Deskreen 官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kZXNrcmVlbi5jb20vbGFuZy16aF9DTg==">https://deskreen.com<i class="fa fa-external-link-alt"></i></span></p>
-<p>pavlobu/deskreen: 源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhdmxvYnUvZGVza3JlZW4=">https://github.com/pavlobu/deskreen<i class="fa fa-external-link-alt"></i></span></p>
+<p>pavlobu&#x2F;deskreen: 源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhdmxvYnUvZGVza3JlZW4=">https://github.com/pavlobu/deskreen<i class="fa fa-external-link-alt"></i></span></p>
 <p>Activating a Secondary Display on Windows 10 when no Monitor is Connected - Amyuni Technologies<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW15dW5pLmNvbS9mb3J1bS92aWV3dG9waWMucGhwP3Q9MzAzMA==">https://www.amyuni.com/forum/viewtopic.php?t=3030<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -765,7 +796,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

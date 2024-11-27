@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="LimeSurvey 是一款开源免费的在线问卷管理系统，具有问卷的设计、修改、发布、回收和统计等多项功能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110011009813.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110011009813.png">
 <meta property="article:published_time" content="2021-10-01T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="问卷">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110011009813.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110011009813.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/10/01/%E5%9C%A8%E7%BA%BF%E9%97%AE%E5%8D%B7%E5%B7%A5%E5%85%B7LimeSurvey/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202110011009813.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202110011009813.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,14 +528,14 @@
     
     <div class="post-body" itemprop="articleBody"><p><strong>什么是 LimeSurvey ？</strong></p>
 <blockquote>
-<p><code>LimeSurvey</code> 是一款开源的在线问卷管理系统，具有问卷的设计、修改、发布、回收和统计等多项功能。它集成了调查程序开发、调查问卷的发布以及数据收集等功能，网上收集的调查数据可以导出多种文件格式以便分析，例如 <code>spss</code> 数据格式 <code>*.dat</code> 文件。支持 <code>49</code> 种语言/方言版本；</p>
+<p><code>LimeSurvey</code> 是一款开源的在线问卷管理系统，具有问卷的设计、修改、发布、回收和统计等多项功能。它集成了调查程序开发、调查问卷的发布以及数据收集等功能，网上收集的调查数据可以导出多种文件格式以便分析，例如 <code>spss</code> 数据格式 <code>*.dat</code> 文件。支持 <code>49</code> 种语言&#x2F;方言版本；</p>
 </blockquote>
 <p>官方体验地址👇，凭据已预先填写好了，只需单击 <code>Log in</code>：<br><span class="exturl" data-url="aHR0cDovL2RlbW8ubGltZXN1cnZleS5vcmcvaW5kZXgucGhwP3I9YWRtaW4vYXV0aGVudGljYXRpb24vc2EvbG9naW4=">http://demo.limesurvey.org/index.php?r=admin/authentication/sa/login<i class="fa fa-external-link-alt"></i></span>,</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>limesurvey</code> ，选择第一个 <code>crramirez/limesurvey</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409134924.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409134924.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>limesurvey</code>，然后在 <code>limesurvey</code> 文件夹中再创建两个新的子文件夹，分别命名为 <code>upload</code> 和 <code>mysql</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409173654.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409173654.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +555,7 @@
 <td align="center">数据库文件夹</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409173841.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409173841.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>默认的端口 <code>80</code> 不能用，所以换成了 <code>8111</code>，不冲突就行<br><code>3306</code> 是 <code>MySQL</code> 的端口，这个和群晖的 <code>MariaDB</code> 冲突，所以也要修改</p>
 <table>
 <thead>
@@ -545,7 +576,7 @@
 <blockquote>
 <p> 【注意】：如果同时安装了 <code>MariaDB 5</code> 和 <code>MariaDB 10</code>，<code>3307</code> 是 <code>MariaDB 10</code> 默认的端口，所以也是不能使用的</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409140352.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409140352.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -561,22 +592,22 @@
 <p>按现在的设置，访问 <code>limesurvey</code> 的地址是 <code>http://群晖IP:8111</code>;</p>
 <p>当你设置 <code>HTTP_LOCATION=&quot;surveys&quot;</code> 后，访问 <code>limesurvey</code> 的地址就变成了 <code>http://群晖IP:8111/surveys</code>;</p>
 <p>环境直接用的默认</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409140952.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409140952.png"></p>
 <h1 id="初始化设置"><a href="#初始化设置" class="headerlink" title="初始化设置"></a>初始化设置</h1><p>在浏览器中输入 <code>http://群晖IP:8111</code>，就能看到主界面了，第一次需要设置</p>
 <ul>
 <li>语言选择：系统支持多种语言</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409141232.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409141232.png"></p>
 <p>选择 <code>简体中文</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409174025.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409174025.png"></p>
 <ul>
 <li>许可：直接接受就可以了</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409141352.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409141352.png"></p>
 <ul>
 <li>环境检测：如果都是绿勾就没问题，下一步</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409141446.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409141446.png"></p>
 <ul>
 <li>配置数据库：按下表的值填写</li>
 </ul>
@@ -615,58 +646,58 @@
 <blockquote>
 <p>记得 <code>localhost</code> 后面要加上前面修改过的端口号</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409142235.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409142235.png"></p>
 <ul>
 <li>创建数据库</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409142324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409142324.png"></p>
 <ul>
 <li>创建成功</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409143001.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409143001.png"></p>
 <ul>
 <li>设置管理员：<strong>记得修改管理员密码，默认语言改简体中文</strong></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409143146.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409143146.png"></p>
 <ul>
 <li>安装完成</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409174300.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409174300.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>点 <code>管理</code> 会跳转到登录界面</p>
 <blockquote>
 <p>管理员登录地址 <code>http://群晖IP:8111/index.php/admin/</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409174341.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409174341.png"></p>
 <blockquote>
 <p>用 <code>admin</code> 和前面设置的密码登录</p>
 </blockquote>
 <p>登录成功后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409143454.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409143454.png"></p>
 <p>跳过教程</p>
 <blockquote>
 <p>第一次使用还是建议看看教程，对熟悉系统很有帮助！</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409143537.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409143537.png"></p>
 <p>让我们创建一个问卷调查，<code>文字元素</code> 页必填的有 <code>调查标题</code></p>
 <blockquote>
 <p>详细的操作，可以参考 <span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1pbmRzZWVkLmNuL0xpbWVTdXJ2ZXkvNDk5Lmh0bWw=">LimeSurvey基础教程（三）—— 创建新问卷调查（https://tech.mindseed.cn/LimeSurvey/499.html）<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409152149.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409152149.png"></p>
 <p>添加新问题默认创建的问题类型是 <code>长自由文本</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409151227.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409151227.png"></p>
 <p>可以更改为其他类型</p>
 <blockquote>
 <p>关于各种问题类型的说明，可以参考 <span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1pbmRzZWVkLmNuL0xpbWVTdXJ2ZXkvNDUyLmh0bWw=">LimeSurvey基础教程（二）——问题类型（https://tech.mindseed.cn/LimeSurvey/452.html）<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409151105.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409151105.png"></p>
 <p>生成预览</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409172920.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409172920.png"></p>
 <p>下一页才是题目</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210409170531.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210409170531.png"></p>
 <p>软件的安装很简单，功能也很强大，但是说实话刚开始不太容易上手，需要花时间去实践和熟悉。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>LimeSurvey/LimeSurvey: The most popular FOSS online survey tool on the web.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbWVTdXJ2ZXkvTGltZVN1cnZleQ==">https://github.com/LimeSurvey/LimeSurvey<i class="fa fa-external-link-alt"></i></span></p>
-<p>用户手册 - LimeSurvey Manual<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwubGltZXN1cnZleS5vcmcvTGltZVN1cnZleV9NYW51YWwvemgtY24=">https://manual.limesurvey.org/LimeSurvey_Manual/zh-cn<i class="fa fa-external-link-alt"></i></span></p>
+<p>LimeSurvey&#x2F;LimeSurvey: The most popular FOSS online survey tool on the web.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpbWVTdXJ2ZXkvTGltZVN1cnZleQ==">https://github.com/LimeSurvey/LimeSurvey<i class="fa fa-external-link-alt"></i></span></p>
+<p>用户手册 - LimeSurvey Manual<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYW51YWwubGltZXN1cnZleS5vcmcvTGltZVN1cnZleV9NYW51YWwvemgtY24=">https://manual.limesurvey.org/LimeSurvey_Manual&#x2F;zh-cn<i class="fa fa-external-link-alt"></i></span></p>
 <p>LimeSurvey教程 - 心站日志—MindSeed技术站<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1pbmRzZWVkLmNuL0xpbWVTdXJ2ZXkuaHRtbA==">https://tech.mindseed.cn/LimeSurvey.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -813,7 +844,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

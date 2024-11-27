@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="SearXNG 是一个免费的互联网元搜索引擎，它来自各种搜索服务和数据库的结果。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081922489.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081922489.png">
 <meta property="article:published_time" content="2024-04-15T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="搜索引擎">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081922489.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081922489.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/04/15/%E4%BA%92%E8%81%94%E7%BD%91%E5%85%83%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8ESearXNG/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081922489.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081922489.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,14 +508,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -519,9 +550,9 @@
 <blockquote>
 <p>开始折腾时， <code>latest</code> 版本对应为  <code>2024.3.29-f5bb64cca</code>，本文写作时， <code>latest</code> 版本对应为  <code>2024.4.8-4acb52f68</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081413602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081413602.png"></p>
 <h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>勾选 <code>使用高权限执行容器</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081444827.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081444827.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>searxng</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -537,7 +568,7 @@
 <td align="center">存放设置文件等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081446186.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081446186.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -553,7 +584,7 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081447300.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081447300.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 searxng 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/searxng/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 searxng 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/searxng</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --name searxng \</span><br><span class="line">  --cap-drop ALL \</span><br><span class="line">  --cap-add CHOWN \</span><br><span class="line">  --cap-add SETGID \</span><br><span class="line">  --cap-add SETUID \</span><br><span class="line">  --log-driver json-file \</span><br><span class="line">  --log-opt max-size=1m \</span><br><span class="line">  --log-opt max-file=1 \</span><br><span class="line">  -p 8061:8080 \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/data:/etc/searxng:rw \</span><br><span class="line">  searxng/searxng:latest</span><br></pre></td></tr></table></figure>
 
@@ -564,28 +595,28 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 searxng 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/searxng/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 searxng 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/searxng</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8061</code> 就能看到搜索界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081104349.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081104349.png"></p>
 <p>先进 <code>首选项</code> 进行设置，任何更改都需要 <code>保存</code> 才能生效</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081106842.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081106842.png"></p>
 <p>调整了一下搜索引擎，挑选了几个主流的搜索引擎</p>
 <blockquote>
 <p>【注意】：群晖必须要能访问到才行，否则是不会出搜索结果的</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081108332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081108332.png"></p>
 <p>第一次搜 <code>小猫照片</code>，返回的结果第一页是 <code>bing</code> 的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081335607.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081335607.png"></p>
 <p>刷新后，第一页都是 <code>google</code> 的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404081336614.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404081336614.png"></p>
 <p>有时候，会需要多次刷新才会有搜索结果，看来老苏的网络也不太稳定</p>
 <p>想让 <code>Chatgpt 3.5</code> 具备联网搜索的方法很多，譬如给 <code>Chrome</code> 装个 <code>WebChatGPT</code> 插件</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404131244151.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404131244151.png"></p>
 <p>所以 <code>FreeAskInternet</code> 就不再尝试了</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>searxng/searxng: SearXNG is a free internet metasearch engine which aggregates results from various search services and databases. Users are neither tracked nor profiled.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZw==">https://github.com/searxng/searxng<i class="fa fa-external-link-alt"></i></span></p>
-<p>searxng/searxng-docker: The docker-compose files for setting up a SearXNG instance with docker.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy1kb2NrZXI=">https://github.com/searxng/searxng-docker<i class="fa fa-external-link-alt"></i></span></p>
+<p>searxng&#x2F;searxng: SearXNG is a free internet metasearch engine which aggregates results from various search services and databases. Users are neither tracked nor profiled.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZw==">https://github.com/searxng/searxng<i class="fa fa-external-link-alt"></i></span></p>
+<p>searxng&#x2F;searxng-docker: The docker-compose files for setting up a SearXNG instance with docker.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy1kb2NrZXI=">https://github.com/searxng/searxng-docker<i class="fa fa-external-link-alt"></i></span></p>
 <p>Welcome to SearXNG — SearXNG Documentation (2022.05.29-38403ee5)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNlYXJ4bmcub3JnLw==">https://docs.searxng.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>[问题]searx和searxng有什么区别？ · searchxng/searxng · 讨论 #972<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy9kaXNjdXNzaW9ucy85NzI=">https://github.com/searxng/searxng/discussions/972<i class="fa fa-external-link-alt"></i></span></p>
-<p>nashsu/FreeAskInternet: FreeAskInternet is a completely free, PRIVATE and LOCALLY running search aggregator &amp; answer generate using MULTI LLMs, without GPU needed. The user can ask a question and the system will make a multi engine search and combine the search result to LLM and generate the answer based on search results. It’s all FREE to use.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25hc2hzdS9GcmVlQXNrSW50ZXJuZXQ=">https://github.com/nashsu/FreeAskInternet<i class="fa fa-external-link-alt"></i></span></p>
+<p>[问题]searx和searxng有什么区别？ · searchxng&#x2F;searxng · 讨论 #972<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NlYXJ4bmcvc2VhcnhuZy9kaXNjdXNzaW9ucy85NzI=">https://github.com/searxng/searxng/discussions/972<i class="fa fa-external-link-alt"></i></span></p>
+<p>nashsu&#x2F;FreeAskInternet: FreeAskInternet is a completely free, PRIVATE and LOCALLY running search aggregator &amp; answer generate using MULTI LLMs, without GPU needed. The user can ask a question and the system will make a multi engine search and combine the search result to LLM and generate the answer based on search results. It’s all FREE to use.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25hc2hzdS9GcmVlQXNrSW50ZXJuZXQ=">https://github.com/nashsu/FreeAskInternet<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -731,7 +762,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

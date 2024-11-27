@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Dashdot 是一个简单、现代的服务器仪表板，主要由较小的私人服务器使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211211899.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211211899.png">
 <meta property="article:published_time" content="2022-07-01T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
 <meta property="article:tag" content="可视化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211211899.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211211899.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/07/01/%E7%AE%80%E5%8D%95%E4%BD%86%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%AA%E8%A1%A8%E6%9D%BFDashdot/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211211899.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211211899.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,14 +538,14 @@
 <ul>
 <li>升级前</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206091357378.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206091357378.png"></p>
 <ul>
 <li>升级后</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206300853488.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206300853488.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>dashdot</code> ，选择第一个 <code>mauricenino/dashdot</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211034332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211034332.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><blockquote>
 <p>如果不是群晖，请用官方的脚本安装，需要挂载 4 个卷来获得更详细的系统信息，而在图像界面上无法挂载，直接跳过就好了，最终显示的是容器的系统信息</p>
 </blockquote>
@@ -541,7 +572,7 @@
 <td align="center"><code>3001</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211148928.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211148928.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>环境变量是非必要的可选项，老苏就测试了温度</p>
 <table>
 <thead>
@@ -559,10 +590,10 @@
 <td align="center">用于显示自定义的操作系统</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211149187.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211149187.png"></p>
 <p>官方提供了参数说明，想了解的可以去看文档：<span class="exturl" data-url="aHR0cHM6Ly9nZXRkYXNoZG90LmNvbS9kb2NzL2NvbmZpZw==">https://getdashdot.com/docs/config<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="常规设置"><a href="#常规设置" class="headerlink" title="常规设置"></a>常规设置</h2><p>记得勾选 <code>使用高权限执行容器</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211150583.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211150583.png"></p>
 <h1 id="命令行运行"><a href="#命令行运行" class="headerlink" title="命令行运行"></a>命令行运行</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 会更快捷</p>
 <blockquote>
 <p>需要 <code>--privileged</code> 标志来正确确定内存和存储信息</p>
@@ -576,15 +607,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 dashdot </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/dashdot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 dashdot 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/dashdot</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8002</code> 就能看到主界面，第一眼是不是有点惊艳？</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211128727.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211128727.png"></p>
 <p>这是加了温度显示的，但实际上 <code>v 1.x</code> 并没有获取到值，最新版没问题</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211143222.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211143222.png"></p>
 <p>退出 <code>Dark Mode</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211130270.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211130270.png"></p>
 <p>硬件信息在日志里都有</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205211154075.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205211154075.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>MauriceNino/dashdot: A simple, modern server dashboard, primarily used by smaller private servers<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01hdXJpY2VOaW5vL2Rhc2hkb3Q=">https://github.com/MauriceNino/dashdot<i class="fa fa-external-link-alt"></i></span></p>
+<p>MauriceNino&#x2F;dashdot: A simple, modern server dashboard, primarily used by smaller private servers<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01hdXJpY2VOaW5vL2Rhc2hkb3Q=">https://github.com/MauriceNino/dashdot<i class="fa fa-external-link-alt"></i></span></p>
 <p>Home | dash.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nZXRkYXNoZG90LmNvbS8=">https://getdashdot.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Installation | dash.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nZXRkYXNoZG90LmNvbS9kb2NzL2luc3RhbGw=">https://getdashdot.com/docs/install<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -733,7 +764,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

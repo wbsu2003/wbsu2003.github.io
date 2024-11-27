@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Cherry 是一个开源的自托管书签服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091452465.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091452465.png">
 <meta property="article:published_time" content="2022-10-10T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta property="article:tag" content="书签">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091452465.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091452465.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/10/10/%E5%BC%80%E6%BA%90%E7%9A%84%E4%B9%A6%E7%AD%BE%E6%9C%8D%E5%8A%A1Cherry/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091452465.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091452465.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -513,16 +544,16 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>haishanh</code> ，目前还搜不到</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210081143427.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210081143427.png"></p>
 <p>但实际上是存在的</p>
 <blockquote>
 <p>估计是 <code>docker</code> 服务器同步的问题，老苏发现新发布的镜像经常会遇到这种情况</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210081143673.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210081143673.png"></p>
 <p><code>映像</code> –&gt; <code>新增</code> –&gt; <code>从 URL 添加</code>，地址输入：<code>haishanh/cherry</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091344606.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091344606.png"></p>
 <p>版本选 <code>latest</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091345839.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091345839.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>cherry</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -538,7 +569,7 @@
 <td align="center">存放 <code>SQLite</code> 数据库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091351387.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091351387.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -554,7 +585,7 @@
 <td align="center"><code>8000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091352641.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091352641.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -583,11 +614,11 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091025673.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091025673.png"></p>
 <ul>
 <li><p><code>ENABLE_PUBLIC_REGISTRATION</code> ：此值确定是否从外部（您的 <code>Cherry Docker</code> 容器实例）启用注册。将其设置 <code>1</code> 为启用注册。默认情况下，或使用其他值，注册被禁用。您很可能希望在全新部署后启用注册，并在创建用户后立即禁用它。</p>
 <ul>
-<li> 老苏不建议启用，如果要建用户，可以用 <code>API</code> 接口直接创建；</li>
+<li>老苏不建议启用，如果要建用户，可以用 <code>API</code> 接口直接创建；</li>
 </ul>
 </li>
 <li><p><code>USE_INSECURE_COOKIE</code>：默认情况下，<code>Cherry</code> 使用仅适用于 <code>HTTPS</code> 的 <code>Secure cookie</code> 。但是，如果您想尝试在本地主机上运行 <code>Cherry</code>，您可以将此环境变量设置 <code>1</code> 为暂时禁用  <code>Secure cookie</code>，否则您可能无法登录。</p>
@@ -596,7 +627,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091403179.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091403179.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 cherry 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/cherry/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 cherry 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/cherry</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name cherry \</span><br><span class="line">   -p 5150:8000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e JWT_SECRET=some-secret-string \</span><br><span class="line">   haishanh/cherry</span><br></pre></td></tr></table></figure>
 
@@ -612,48 +643,48 @@
 <p>老苏给自己建了一个账号</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 邮件：wbsu2003@hotmail.com</span></span><br><span class="line"><span class="comment"># 密码：123456</span></span><br><span class="line">docker <span class="built_in">exec</span> cherry cherry create-user wbsu2003@hotmail.com 123456</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210081512250.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210081512250.png"></p>
 <p>如果你是在『终端机』里操作，只要输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 邮件：wbsu2003@gmail.com</span></span><br><span class="line"><span class="comment"># 密码：123456</span></span><br><span class="line">cherry create-user wbsu2003@gmail.com 123456</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210092015455.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210092015455.png"></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>老苏在环境变量里设置了 <code>USE_INSECURE_COOKIE</code> 为 <code>1</code>，但是在使用 <code>http://群晖IP:5150</code> 访问时，浏览器调试工具中会看到返回下面信息，表现症状为一直卡在登录界面</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">__sveltekit_data</span> = &#123;<span class="attr">type</span>:<span class="string">&quot;redirect&quot;</span>,<span class="attr">location</span>:<span class="string">&quot;\u002Fsignin&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <p>所以只能通过反代实现 <code>https</code> 协议访问</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091201717.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091201717.png"></p>
 <p>没问题的话，<code>SSL</code> 就全勾了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091202723.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091202723.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>https://cherry.laosu.ml:444</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210081253550.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210081253550.png"></p>
 <blockquote>
 <p>如果没有在环境变量中启用外部注册，即便 <code>https://cherry.laosu.ml:444/signup</code> 看到注册页面，也是不能注册的</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210081414941.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210081414941.png"></p>
 <p>登录成功</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091314232.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091314232.png"></p>
 <p><code>Setting</code> –&gt; <code>Import</code> 可以导入浏览器导出的书签</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091315946.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091315946.png"></p>
 <p>将 <code>Chrome</code> 中导出的书签文件 <code>bookmarks_2022_10_9.html</code> 拖进来，点下面的 <code>Import</code> 按钮开始导入</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091320947.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091320947.png"></p>
 <p>等导入完成即可</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210100850694.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210100850694.png"></p>
 <h1 id="浏览器插件"><a href="#浏览器插件" class="headerlink" title="浏览器插件"></a>浏览器插件</h1><p>支持 <code>Chrome</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091424759.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091424759.png"></p>
 <p>和 <code>Firefox</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091424032.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091424032.png"></p>
 <p>以 <code>Chrome</code> 为例，首先需要 <code>Add Server</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091425297.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091425297.png"></p>
 <p>填入服务器地址，有端口也要带上</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091434109.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091434109.png"></p>
 <p>回到 <code>Cherry</code> 主界面，右上角 <code>Settings</code> –&gt; <code>Account</code> –&gt; <code>Personal Access Token</code>，直接点后面的复制按钮</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091428899.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091428899.png"></p>
 <p>在你需要添加书签的页面上点 <code>Cherry</code> 插件按钮</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091433702.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091433702.png"></p>
 <p>点 <code>Edit</code> 可以添加 <code>Tags</code> 和 选择 <code>Group</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/09/202210091432865.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/09/202210091432865.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>haishanh/cherry: Cherry is a self-hostable bookmark service<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhaXNoYW5oL2NoZXJyeQ==">https://github.com/haishanh/cherry<i class="fa fa-external-link-alt"></i></span></p>
+<p>haishanh&#x2F;cherry: Cherry is a self-hostable bookmark service<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2hhaXNoYW5oL2NoZXJyeQ==">https://github.com/haishanh/cherry<i class="fa fa-external-link-alt"></i></span></p>
 <p>Cherry<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGVycnkuaGFpc2hhbi5tZS8=">https://cherry.haishan.me/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Intro | Cherry<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGVycnkuaGFpc2hhbi5tZS9kb2NzL2ludHJv">https://cherry.haishan.me/docs/intro<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -802,7 +833,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

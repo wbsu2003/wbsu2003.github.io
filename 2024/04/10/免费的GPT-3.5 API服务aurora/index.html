@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="aurora 是自带 Web UI 的免费 GPT-3.5-Turbo API 服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092202015.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092202015.png">
 <meta property="article:published_time" content="2024-04-10T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092202015.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092202015.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/04/10/%E5%85%8D%E8%B4%B9%E7%9A%84GPT-3.5%20API%E6%9C%8D%E5%8A%A1aurora/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092202015.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092202015.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,13 +538,13 @@
 <p>文章传送门：<a href="https://laosu.tech/2024/04/05/%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E4%B8%8E%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6LobeChat">聊天应用与开发框架LobeChat</a></p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><code>aurora</code> 支持在多种云服务上部署</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092036475.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092036475.png"></p>
 <p>不过老苏要写的，还是在群晖上以 Docker 方式安装。</p>
 <h2 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h2><p>官方没有在 <code>docker hub</code> 上发布镜像，而是采用了自动构建 <code>docker</code> 镜像的方式，地址在 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F1cm9yYS1kZXZlbG9wL2F1cm9yYS9wa2dzL2NvbnRhaW5lci9hdXJvcmE=">https://github.com/aurora-develop/aurora/pkgs/container/aurora<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p>本文写作时，<code>latest</code> 对应版本 <code>6baafd306e7e7ef423e08f16079f228f335f795e</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091751455.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091751455.png"></p>
 <p>用 <code>SSH</code> 客户端登录到群晖后，执行下面的命令拉取镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull ghcr.io/aurora-develop/aurora:latest</span><br></pre></td></tr></table></figure>
 
@@ -521,7 +552,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果拉不动的话加个代理</span></span><br><span class="line">docker pull ghcr.dockerproxy.com/aurora-develop/aurora:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名镜像（如果是通过代理下载的）</span></span><br><span class="line">docker tag ghcr.dockerproxy.com/aurora-develop/aurora:latest ghcr.io/aurora-develop/aurora:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除代理镜像（如果是通过代理下载的）</span></span><br><span class="line">docker rmi ghcr.dockerproxy.com/aurora-develop/aurora:latest</span><br></pre></td></tr></table></figure>
 
 <p>下载完成后，可以在 <code>映像</code> 中找到</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092047120.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092047120.png"></p>
 <h2 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name aurora \</span><br><span class="line">   -p 8328:8080 \</span><br><span class="line">   ghcr.io/aurora-develop/aurora:latest</span><br></pre></td></tr></table></figure>
 
@@ -582,16 +613,16 @@
 </tr>
 </tbody></table>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="Web-UI"><a href="#Web-UI" class="headerlink" title="Web UI"></a>Web UI</h2><p>访问 <code>http://群晖IP:8328/web</code> 就能看到聊天界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091802499.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091802499.png"></p>
 <p>随便问个问题，如果 <code>IP</code> 没问题的话，很快就会看到结果了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091945933.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091945933.png"></p>
 <h2 id="API-服务"><a href="#API-服务" class="headerlink" title="API 服务"></a>API 服务</h2><p>在浏览器中输入 <code>http://群晖IP:8328</code> ，会看到一条信息 <code>&#123;&quot;message&quot;:&quot;Hello, world!&quot;&#125;</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091800719.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091800719.png"></p>
 <h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>要验证是 <code>API</code>  否正常，可以用下面的示例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl --location <span class="string">&#x27;http://192.168.0.197:8328/v1/chat/completions&#x27;</span> \</span><br><span class="line">--header <span class="string">&#x27;Content-Type: application/json&#x27;</span> \</span><br><span class="line">--data <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">     &quot;model&quot;: &quot;gpt-3.5-turbo&quot;,</span></span><br><span class="line"><span class="string">     &quot;messages&quot;: [&#123;&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Say this is a test!&quot;&#125;],</span></span><br><span class="line"><span class="string">     &quot;stream&quot;: true</span></span><br><span class="line"><span class="string">   &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>返回下面的信息 <code>This is a test!</code> 表示 <code>IP</code> 没问题，<code>API</code> 工作正常</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092220655.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092220655.png"></p>
 <h3 id="ChatGPT-Next-Web"><a href="#ChatGPT-Next-Web" class="headerlink" title="ChatGPT-Next-Web"></a>ChatGPT-Next-Web</h3><p>以第三方客户端 <code>ChatGPT-Next-Web</code> 为例。如果你还没安装，可以去看看老苏之前写的文章</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2024/04/08/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%A7%81%E4%BA%BAChatGPT%E5%BA%94%E7%94%A8ChatGPT-Next-Web">跨平台私人ChatGPT应用ChatGPT-Next-Web</a></p>
@@ -599,9 +630,9 @@
 <ol>
 <li>停止 <code>ChatGPT-Next-Web</code> 容器</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092108787.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092108787.png"></p>
 <ol start="2">
-<li> 编辑 <code>ChatGPT-Next-Web</code> 容器的参数，将环境变量 <code>BASE_URL</code> 从 <code>FreeGPT35</code> 改为 <code>aurora</code> 的</li>
+<li>编辑 <code>ChatGPT-Next-Web</code> 容器的参数，将环境变量 <code>BASE_URL</code> 从 <code>FreeGPT35</code> 改为 <code>aurora</code> 的</li>
 </ol>
 <table>
 <thead>
@@ -619,18 +650,18 @@
 <td align="center"><code>http://192.168.0.197:8328</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091950055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091950055.png"></p>
 <ol start="3">
 <li><p><code>应用</code> 之后，重新启动  <code>ChatGPT-Next-Web</code> 容器</p>
 </li>
 <li><p>在浏览器中输入 <code>http://群晖IP:3059</code> 就能看到   <code>ChatGPT-Next-Web</code>  的聊天界面</p>
 </li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404092229449.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404092229449.png"></p>
 <p>接下来就可以开始提问了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/04/202404091956126.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/04/202404091956126.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>aurora-develop/aurora<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F1cm9yYS1kZXZlbG9wL2F1cm9yYQ==">https://github.com/aurora-develop/aurora<i class="fa fa-external-link-alt"></i></span></p>
+<p>aurora-develop&#x2F;aurora<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F1cm9yYS1kZXZlbG9wL2F1cm9yYQ==">https://github.com/aurora-develop/aurora<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -777,7 +808,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

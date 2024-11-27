@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="FileFlows 是一个文件处理应用程序，可以对树流结构中的文件执行转码、转换、压缩等操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081112503.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081112503.png">
 <meta property="article:published_time" content="2024-01-06T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="自动化">
 <meta property="article:tag" content="工作流">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081112503.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081112503.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/01/06/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E8%BD%AF%E4%BB%B6FileFlows/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081112503.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081112503.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,8 +531,8 @@
 <blockquote>
 <p><code>FileFlows</code> 是一款文件处理软件，可以转码、转换、压缩和管理任何文件类型，包括视频、音频、图像和漫画书。它支持多个平台、硬件编码器以及强大的流程和报告功能。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181353757.png"></p>
-<p><code>FileFlows</code> 通过监视“库”（文件夹/路径）中的文件，会自动或根据时间表处理这些文件。例如，您可以将所有视频文件转码为适合您需求的格式。一个非常典型的用例是让 <code>FFmpeg</code> 将所有视频文件转换为特定的编解码器、音频编解码器、从视频中删除黑条、删除不需要的音频、字幕、重新复用为 <code>mkv/mp4</code> 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181353757.png"></p>
+<p><code>FileFlows</code> 通过监视“库”（文件夹&#x2F;路径）中的文件，会自动或根据时间表处理这些文件。例如，您可以将所有视频文件转码为适合您需求的格式。一个非常典型的用例是让 <code>FFmpeg</code> 将所有视频文件转换为特定的编解码器、音频编解码器、从视频中删除黑条、删除不需要的音频、字幕、重新复用为 <code>mkv/mp4</code> 。</p>
 <p><code>FileFlows</code>  提供了插件和脚本扩展，可以将多个操作合成一个流程，以便在单个步骤中执行多个操作，实现了类似 <code>n8n</code> 的自动化处理。</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2021/12/29/%E5%BC%80%E6%BA%90%E5%B7%A5%E4%BD%9C%E6%B5%81%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7n8n">开源工作流自动化工具n8n</a></p>
@@ -512,7 +543,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>23.10</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181134264.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181134264.png"></p>
 <h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 fileflows 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/fileflows/&#123;data,logs,media/&#123;pictures,output&#125;,temp&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 fileflows 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/fileflows</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name fileflows \</span><br><span class="line">   -p 5040:5000 \</span><br><span class="line">   -v /var/run/docker.sock:/var/run/docker.sock:ro \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/app/Data \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/logs:/app/Logs \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/temp:/temp \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/media:/media \</span><br><span class="line">   -e TempPathHost:$(<span class="built_in">pwd</span>)/temp \</span><br><span class="line">   revenz/fileflows</span><br></pre></td></tr></table></figure>
 
@@ -593,13 +624,13 @@
 </ul>
 </blockquote>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5040</code> ，第一次会有设置向导</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181151801.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181151801.png"></p>
 <p>设置完成后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310181344812.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310181344812.png"></p>
 <h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p><code>Plugins</code> 中勾选全部，然后右键选择 <code>download</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310191508992.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310191508992.png"></p>
 <p>下载完成后，全部都启用 <code>enabled</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310191517349.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310191517349.png"></p>
 <h2 id="设置-SMTP"><a href="#设置-SMTP" class="headerlink" title="设置 SMTP"></a>设置 SMTP</h2><p><code>FileFlows</code> 支持 <code>Apprise</code>、<code>Discord</code> 和 <code>Email</code> 等通知方式，老苏选择了 <code>Email</code>，还是以 <code>88</code> 邮箱为例</p>
 <ul>
 <li><code>SMTP Server</code>：为 <code>smtp</code> 服务的地址；</li>
@@ -608,74 +639,74 @@
 <li><code>SMTP Password</code>：密码；</li>
 <li><code>Sender</code>：显示发送电子邮件的电子邮件地址；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312051649215.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312051649215.png"></p>
 <p>如果你要使用 <code>Apprise</code>，可以看老苏之前写的文章</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2021/09/06/%E5%87%A0%E4%B9%8E%E6%AF%8F%E4%B8%AA%E5%B9%B3%E5%8F%B0%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5apprise">几乎每个平台都可以使用的推送通知apprise</a></p>
 </blockquote>
 <h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><p>假设我们的需求是：将其他的图片格式转为 <code>png</code> 格式</p>
 <h3 id="建流程"><a href="#建流程" class="headerlink" title="建流程"></a>建流程</h3><p>第一步、首先要在 <code>Flows</code> 中 <code>ADD</code> 一个新的流程</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310191518706.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310191518706.png"></p>
 <p>如果<code>template</code> 显示空白，你会在日志中找到下面的错误，因此要确保你的群晖能连上 <code>raw.githubusercontent.com</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error -&gt; ExceptionMiddleware: Resource temporarily unavailable (raw.githubusercontent.com:443)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071402370.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071402370.png"></p>
 <p>选择 <code>Image File</code>，然后点 <code>NEXT</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071420364.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071420364.png"></p>
 <p>现在我们有了第一个节点，其他的节点要在右侧选取</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071422189.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071422189.png"></p>
 <p>第二个节点用的是 <code>Image Format</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071504247.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071504247.png"></p>
 <ul>
 <li><code>Format</code> 选择了 <code>PNG</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071506027.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071506027.png"></p>
 <p>第三个节点用的是 <code>Move File</code></p>
 <ul>
 <li><code>Destination Folder</code>：目标输出路径选择了 <code>/media/output</code>；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312080939704.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312080939704.png"></p>
 <p>第四个节点用的是 <code>Send Email</code></p>
 <ul>
 <li><code>Recipients</code>：收件人的地址；</li>
 <li><code>Subject</code>：邮件主题；</li>
 <li><code>Body</code>：邮件的内容；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312080946602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312080946602.png"></p>
 <p>现在一个基本的流程就完成了，取名为 <code>Image2png</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312080946628.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312080946628.png"></p>
 <h3 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h3><p>第二步、在 <code>Libraries</code>中 <code>ADD</code> 一个库</p>
 <ul>
 <li><code>Template</code>：下拉选择了 <code>Image Library</code>；</li>
 <li><code>Flow</code>：选择我们前面创建的 <code>Image2png</code> 流程；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071556208.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071556208.png"></p>
 <ul>
 <li><code>Scan</code>：启用，并将 <code>Scan Interval</code> 设置为 <code>3600</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312080950810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312080950810.png"></p>
 <p>保存</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312071557178.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312071557178.png"></p>
 <h3 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h3><p>往 <code>/fileflows/media/pictures</code> 目录中丢一张图片</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312080955744.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312080955744.png"></p>
 <p>转换完成后，如果邮件设置没问题的话，会收到提醒邮件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081002549.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081002549.png"></p>
 <p>在 <code>/fileflows/media/output</code> 中能看到转换后的 <code>png</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081004226.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081004226.png"></p>
 <h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><ol>
 <li>本来想在邮件中设置使用图片文件名的，但是看了半天文档也没搞明白；</li>
 <li>虽然转换成功了，但是原始的 <code>jpg</code>文件分辨率是 <code>1920*1301</code>，但是转换完成的 <code>png</code>分辨率是 <code>1301*1301</code>的；</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081010681.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081010681.png"></p>
 <ol start="3">
-<li> 多了一个文件，看起来像是群晖特有的；</li>
+<li>多了一个文件，看起来像是群晖特有的；</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202312081011573.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312081011573.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>revenz/FileFlows: FileFlows is a file processing application that can execute actions against a file in a tree flow structure.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JldmVuei9GaWxlRmxvd3M=">https://github.com/revenz/FileFlows<i class="fa fa-external-link-alt"></i></span></p>
+<p>revenz&#x2F;FileFlows: FileFlows is a file processing application that can execute actions against a file in a tree flow structure.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JldmVuei9GaWxlRmxvd3M=">https://github.com/revenz/FileFlows<i class="fa fa-external-link-alt"></i></span></p>
 <p>FileFlows<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9maWxlZmxvd3MuY29tLw==">https://fileflows.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker | FileFlows<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9maWxlZmxvd3MuY29tL2RvY3MvaW5zdGFsbGF0aW9uL2RvY2tlcg==">https://fileflows.com/docs/installation/docker<i class="fa fa-external-link-alt"></i></span></p>
-<p>FileFlows: Self hosted file processing, videos, audio, images, anything : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTVqbGVkby9maWxlZmxvd3Nfc2VsZl9ob3N0ZWRfZmlsZV9wcm9jZXNzaW5nX3ZpZGVvcy8=">https://www.reddit.com/r/selfhosted/comments/15jledo/fileflows_self_hosted_file_processing_videos/<i class="fa fa-external-link-alt"></i></span></p>
+<p>FileFlows: Self hosted file processing, videos, audio, images, anything : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvMTVqbGVkby9maWxlZmxvd3Nfc2VsZl9ob3N0ZWRfZmlsZV9wcm9jZXNzaW5nX3ZpZGVvcy8=">https://www.reddit.com/r/selfhosted/comments/15jledo/fileflows_self_hosted_file_processing_videos&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -822,7 +853,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

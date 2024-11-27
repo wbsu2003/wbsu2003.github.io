@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Rocket.Chat是多功能团队聊天室。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png">
 <meta property="article:published_time" content="2020-08-22T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="IM">
 <meta property="article:tag" content="即时通讯">
 <meta property="article:tag" content="Rocket.Chat">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/08/22/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88Rocket.Chat%E4%B8%8A%E7%AF%87%EF%BC%89/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/13/1597331608771-1597331608774.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -478,14 +509,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.6k</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -498,11 +529,11 @@
     
     <div class="post-body" itemprop="articleBody"><p>什么是 Rocket.Chat？</p>
 <blockquote>
-<p>Rocket.Chat 是特性最丰富的 Slack 开源替代品之一。主要功能：群组聊天，直接通信，私聊群，桌面通知，媒体嵌入，链接预览，文件上传，语音/视频 聊天，截图等等。</p>
+<p>Rocket.Chat 是特性最丰富的 Slack 开源替代品之一。主要功能：群组聊天，直接通信，私聊群，桌面通知，媒体嵌入，链接预览，文件上传，语音&#x2F;视频 聊天，截图等等。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>因为 Rocket.Chat 用了 Meteor 框架，所以需要安装 MongoDB。这次我们还是采用 Docker 方式安装，想要把 Rocket.Chat 跑起来，需要下载2个镜像，分别是 MongoDB 镜像和 Rocket.Chat 镜像。</p>
 <h2 id="安装-MongoDB"><a href="#安装-MongoDB" class="headerlink" title="安装 MongoDB"></a>安装 MongoDB</h2><p>在 Docker 的注册表中搜索 <code>mongodb</code>，选第一个 <code>mongo</code>，版本选 <code>latest</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597479748364-1597479748397.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597479748364-1597479748397.png" alt="title"></p>
 <h3 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h3><table>
 <thead>
 <tr>
@@ -511,20 +542,20 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">your/path/to/mongodb/mongo.conf</td>
-<td align="center">/etc/mongod.conf</td>
+<td align="center">your&#x2F;path&#x2F;to&#x2F;mongodb&#x2F;mongo.conf</td>
+<td align="center">&#x2F;etc&#x2F;mongod.conf</td>
 </tr>
 <tr>
-<td align="center">your/path/to/mongodb/db</td>
-<td align="center">/data/db</td>
+<td align="center">your&#x2F;path&#x2F;to&#x2F;mongodb&#x2F;db</td>
+<td align="center">&#x2F;data&#x2F;db</td>
 </tr>
 </tbody></table>
 <blockquote>
 <p>以上2个均为文件夹，而不是文件</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597480704031-1597480704034.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597480704031-1597480704034.png" alt="title"></p>
 <h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>直接用的默认端口 27017</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597480332031-1597480332033.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597480332031-1597480332033.png" alt="title"></p>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -551,27 +582,27 @@
 <blockquote>
 <p>一旦容器创建成功，就不能再添加命令行，所以切记一定要在创建之前添加。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597498900708-1597498900710.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597498900708-1597498900710.png" alt="title"></p>
 <p>完成上述设置后，就可以启动了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597481566725-1597481566726.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597481566725-1597481566726.png" alt="title"></p>
 <p>直接启动容器，右键进入「详情」</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597496795183-1597496795185.png" alt="title"></p>
-<p>「终端机」 =&gt; 「新增」 =&gt; 「通过命令启动」=&gt; 「请输入一个命令」=&gt; 「sh」</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597496861985-1597496861986.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597496795183-1597496795185.png" alt="title"></p>
+<p>「终端机」 &#x3D;&gt; 「新增」 &#x3D;&gt; 「通过命令启动」&#x3D;&gt; 「请输入一个命令」&#x3D;&gt; 「sh」</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597496861985-1597496861986.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mongo -u root -p &lt;pass&gt; --authenticationDatabase admin</span></span><br><span class="line">mongo -u root -p test123 --authenticationDatabase admin</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597498591125-1597498591126.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597498591125-1597498591126.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rs.initiate(&#123; _id: <span class="string">&#x27;rs01&#x27;</span>, members: [ &#123; _id: 0, host: <span class="string">&#x27;localhost:27017&#x27;</span> &#125; ]&#125;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597498680666-1597498680668.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597498680666-1597498680668.png" alt="title"></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换用户</span></span><br><span class="line">use admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增用户</span></span><br><span class="line">db.createUser(&#123;user: <span class="string">&quot;admin&quot;</span>, <span class="built_in">pwd</span>: passwordPrompt(), roles: [&#123;role: <span class="string">&quot;readWrite&quot;</span>, db: <span class="string">&quot;db&quot;</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597500116669-1597500116671.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597500116669-1597500116671.png" alt="title"></p>
 <h2 id="安装-Rocket-Chat"><a href="#安装-Rocket-Chat" class="headerlink" title="安装 Rocket.Chat"></a>安装 Rocket.Chat</h2><p>在 Docker 的注册表中搜索 <code>rocket</code>，选第二个 <code>rocketchat/rocket.chat</code>，版本选 <code>latest</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597500528568-1597500528570.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597500528568-1597500528570.png" alt="title"></p>
 <h3 id="端口-1"><a href="#端口-1" class="headerlink" title="端口"></a>端口</h3><p>直接用的默认端口 3000</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597501192888-1597501192890.png" alt="title"></p>
-<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597501373724-1597501373725.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597501192888-1597501192890.png" alt="title"></p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597501373724-1597501373725.png" alt="title"></p>
 <h3 id="环境-1"><a href="#环境-1" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -581,68 +612,68 @@
 </thead>
 <tbody><tr>
 <td align="center">MONGO_URL</td>
-<td align="center">mongodb://root:yourRootPass@db:27017/db?authSource=admin​</td>
+<td align="center">mongodb:&#x2F;&#x2F;root:yourRootPass@db:27017&#x2F;db?authSource&#x3D;admin​</td>
 </tr>
 <tr>
 <td align="center">MONGO_OPLOG_URL</td>
-<td align="center">mongodb://root:yourRootPass@db:27017/local?authSource=admin​</td>
+<td align="center">mongodb:&#x2F;&#x2F;root:yourRootPass@db:27017&#x2F;local?authSource&#x3D;admin​</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597504535631-1597504535633.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597504535631-1597504535633.png" alt="title"></p>
 <p>启动容器，查看日志，已经正常启动了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597503732726-1597503732728.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597503732726-1597503732728.png" alt="title"></p>
 <p>资源占用有点高，不过还能接受</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597504637174-1597504637177.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597504637174-1597504637177.png" alt="title"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在浏览器中访问 <code>http://群晖IP:3000</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597503929896-1597503929897.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597503929896-1597503929897.png" alt="title"></p>
 <p>后面跟随设置向导完成一些常规设定即可，没有什么难度。设置完后就能看到聊天室界面了：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597504330671-1597504330673.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597504330671-1597504330673.png" alt="title"></p>
 <p>在管理员工作区，可以添加用户、查看系统日志等操作</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597504893751-1597504893753.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597504893751-1597504893753.png" alt="title"></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>除网页版之外，在 <code>https://rocket.chat/install/</code> 可以下载桌面和移动端应用</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597546415237-1597546415273.png" alt="title"></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597505843326-1597505843328.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597546415237-1597546415273.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597505843326-1597505843328.png" alt="title"></p>
 <h2 id="Windows-客户端"><a href="#Windows-客户端" class="headerlink" title="Windows 客户端"></a>Windows 客户端</h2><p>输入服务器地址</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597506559117-1597506559120.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597506559117-1597506559120.png" alt="title"></p>
 <p>连接成功后需要输入账号和密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597506597299-1597506597301.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597506597299-1597506597301.png" alt="title"></p>
 <p>登录成功</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/15/1597506661250-1597506661251.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/15/1597506661250-1597506661251.png" alt="title"></p>
 <h2 id="Android-客户端"><a href="#Android-客户端" class="headerlink" title="Android 客户端"></a>Android 客户端</h2><p>因为国内市场需要软著，所以不管应用宝还是小米市场，肯定是没有的，但是 <code>google play</code> 又访问不到，所以只能去github下载。</p>
 <p>移动客户端的发布地址：<br> <code>https://github.com/RocketChat/Rocket.Chat.ReactNative/releases</code></p>
 <p>我们会看到有带 <code>rc</code> 和不带 <code>rc</code> 的版本</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597547894567-1597547894571.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597547894567-1597547894571.png" alt="title"></p>
 <blockquote>
-<p>RC版本含义 RC=Release Candidate,含义是”发布候选版”，它不是最终的版本，而是最终版(RTM=Release To Manufacture)之前的最后一个版本。</p>
+<p>RC版本含义 RC&#x3D;Release Candidate,含义是”发布候选版”，它不是最终的版本，而是最终版(RTM&#x3D;Release To Manufacture)之前的最后一个版本。</p>
 </blockquote>
 <p>所以一般我们要找不带 <code>rc</code> 的版本，例如这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597548138501-1597548138507.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597548138501-1597548138507.png" alt="title"></p>
 <p>下拉到下面的 Assets，展开前面的小三角</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597548181530-1597548181533.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597548181530-1597548181533.png" alt="title"></p>
 <p>其中 <code>apk</code>结尾的是 Android 版本，<code>ipa</code>结尾的是 iOS 版本，把链接复制到手机浏览器里下载安装</p>
 <p>开始运行</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597557062335-1597557062338.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597557062335-1597557062338.png" alt="title"></p>
 <p>输入服务器地址</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597557115165-1597557115167.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597557115165-1597557115167.png" alt="title"></p>
 <p>输入账号、密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597557143591-1597557143593.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597557143591-1597557143593.png" alt="title"></p>
 <p>登录成功后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597558665257-1597558665261.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597558665257-1597558665261.png" alt="title"></p>
 <p>第一件事就是设置成中文界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597557424599-1597557424601.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597557424599-1597557424601.png" alt="title"></p>
 <p>可以切换服务器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597557450600-1597557450601.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597557450600-1597557450601.png" alt="title"></p>
 <p>接下来可以创建频道等操作，开始进行各种花式聊天了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597558117486-1597558117488.png" alt="title"></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597559329658-1597559329662.png" alt="title"></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/16/1597559298020-1597559298022.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597558117486-1597558117488.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597559329658-1597559329662.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/16/1597559298020-1597559298022.png" alt="title"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>官方文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnJvY2tldC5jaGF0Lw==">https://docs.rocket.chat/<i class="fa fa-external-link-alt"></i></span></p>
 <p>CentOS7使用RocketChat自建即时聊天服务器<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cueGllYnJ1Y2UudG9wLzExMjMuaHRtbA==">https://www.xiebruce.top/1123.html<i class="fa fa-external-link-alt"></i></span>)</p>
 <p>使用宝塔面板安装Rocket.Chat多功能团队聊天室<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9lcmF0cy5jb20vYXJjaGl2ZXMvOTYwLw==">https://www.moerats.com/archives/960/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Rocket.Chat 开源 IM 系统部署<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vZW50cnkvNjg0NDkwMzUyMDEzOTczOTE0OQ==">https://juejin.im/entry/6844903520139739149<i class="fa fa-external-link-alt"></i></span></p>
 <p>Rocket.Chat 开源免费企业级聊天工具<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucnVsdHIuY29tL3R1dG9yaWFscy9wcm94eS80MDgzLmh0bWw=">https://www.rultr.com/tutorials/proxy/4083.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>rocket-chat使用教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTI3MjI2OS9hcnRpY2xlL2RldGFpbHMvMTA0ODI2Mzk2">https://blog.csdn.net/weixin_41272269/article/details/104826396<i class="fa fa-external-link-alt"></i></span></p>
+<p>rocket-chat使用教程<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTI3MjI2OS9hcnRpY2xlL2RldGFpbHMvMTA0ODI2Mzk2">https://blog.csdn.net/weixin_41272269&#x2F;article&#x2F;details&#x2F;104826396<i class="fa fa-external-link-alt"></i></span></p>
 <p>Install Rocket.Chat with Docker as a Slack alternative<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnNzZG5vZGVzLmNvbS9ibG9nL3R1dG9yaWFsLXJvY2tldC1jaGF0LWRvY2tlci8=">https://blog.ssdnodes.com/blog/tutorial-rocket-chat-docker/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker Rocket.Chat - SLACK alternative (with MongoDB as backend)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3lub2ZvcnVtLmNvbS9yZXNvdXJjZXMvcm9ja2V0LWNoYXQtc2xhY2stYWx0ZXJuYXRpdmUtd2l0aC1tb25nb2RiLWFzLWJhY2tlbmQuMTkv">https://www.synoforum.com/resources/rocket-chat-slack-alternative-with-mongodb-as-backend.19/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Rocket.Chat Installation on Synology DS415+<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZHVhbmVub2xhbmQuY29tL2hvbWUtbGFiL3JvY2tldGNoYXQtc3lub2xvZ3kv">https://www.duanenoland.com/home-lab/rocketchat-synology/<i class="fa fa-external-link-alt"></i></span></p>
@@ -792,7 +823,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

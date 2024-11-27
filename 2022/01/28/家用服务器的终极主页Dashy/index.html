@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Dashy 是一个开源、高度可定制、易于使用、尊重隐私的仪表板应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061512306.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061512306.png">
 <meta property="article:published_time" content="2022-01-28T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061512306.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061512306.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/01/28/%E5%AE%B6%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%BB%88%E6%9E%81%E4%B8%BB%E9%A1%B5Dashy/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061512306.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061512306.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,7 +533,7 @@
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpc3N5OTMvZGFzaHkvYmxvYi9tYXN0ZXIvZG9jcy9zaG93Y2FzZS5tZA==">https://github.com/Lissy93/dashy/blob/master/docs/showcase.md<i class="fa fa-external-link-alt"></i></span>  有一些样例，可以找你喜欢的风格</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>dashy</code> ，选择第一个 <code>lissy93/dashy</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201060958194.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201060958194.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -518,48 +549,48 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061003947.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061003947.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>第一次时间比较长，似乎有个 <code>build</code> 的过程</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061015645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061015645.png"></p>
 <p>当你在日志中看到 <code>DONE  Build complete. Watching for changes...</code>，就可以在浏览器中输入 <code>http://群晖IP:4000</code> 并看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061024400.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061024400.png"></p>
 <h2 id="切换中文"><a href="#切换中文" class="headerlink" title="切换中文"></a>切换中文</h2><p><code>Update Configuration</code> –&gt; <code>Change App Language</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061027086.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061027086.png"></p>
 <p>选择 <code>简体中文</code>，保存即可</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061028212.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061028212.png"></p>
 <h2 id="代码编辑器"><a href="#代码编辑器" class="headerlink" title="代码编辑器"></a>代码编辑器</h2><p>从 <code>主菜单</code> –&gt; <code>编辑设置</code> 可以进入</p>
 <blockquote>
 <p>配置文件以 <code>YAML</code> 格式编写，保存在容器的 <code>/app/public/conf.yml</code> 中，界面上可以直接启动编辑器，对 <code>conf.yml</code> 进行源代码编辑</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061037672.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061037672.png"></p>
 <p>配置文件的格式非常简单。存在三个根属性：</p>
 <ul>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#appconfig-optional"><code>appConfig</code></a> - 仪表板设置，如主题、身份验证、语言和自定义</li>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#pageinfo"><code>pageInfo</code></a> - 仪表盘元数据，如标题、描述、导航栏链接和页脚文本</li>
-<li>  <a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#section"><code>sections</code></a> - 组部分，每个部分包括一组项目</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#appconfig-optional"><code>appConfig</code></a> - 仪表板设置，如主题、身份验证、语言和自定义</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#pageinfo"><code>pageInfo</code></a> - 仪表盘元数据，如标题、描述、导航栏链接和页脚文本</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Lissy93/dashy/blob/master/docs/configuring.md#section"><code>sections</code></a> - 组部分，每个部分包括一组项目</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061041461.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061041461.png"></p>
 <p>支持常用的编辑功能，可以拖动来更改顺序</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061046003.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061046003.png"></p>
 <p>上一张官网的动图</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061055937.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061055937.gif"></p>
 <p>详细的说明可以看看 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpc3N5OTMvZGFzaHkvYmxvYi9tYXN0ZXIvZG9jcy9jb25maWd1cmluZy5tZA==">https://github.com/Lissy93/dashy/blob/master/docs/configuring.md<i class="fa fa-external-link-alt"></i></span>，不过这种方式比较容易出错，并不适合大多数人，包括老苏自己也是一样</p>
 <h2 id="UI-编辑器"><a href="#UI-编辑器" class="headerlink" title="UI 编辑器"></a>UI 编辑器</h2><p>这是交互式的所见即所得的编辑器</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061059955.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061059955.png"></p>
 <p>点红框中的按钮进入编辑模式</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061100703.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061100703.png"></p>
 <p><code>Add New Section</code> 保存</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061140650.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061140650.png"></p>
 <p>按道理应该有 <code>Add New Item</code>，但是老苏的没有</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061142829.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061142829.png"></p>
 <p><code>Section</code> 上右键菜单也没有</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061144799.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061144799.png"></p>
 <p>不过官网的动图上是有滴，也许哪里操作的不正确？</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061104402.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061104402.gif"></p>
 <p>在保存时有 <code>Save Locally</code> 和 <code>Save to Disk</code></p>
 <ul>
-<li>  <code>Save Locally</code> 本地保存的更改只会通过浏览器应用于当前用户，不会应用于其他实例。您需要使用云同步功能，或者手动更新 <code>conf.yml</code> 文件。</li>
-<li>  <code>Save to Disk</code> 写入磁盘，那么您的主 <code>conf.yml</code> 文件将被更新，并且更改将应用于所有用户，并在所有设备上可见。</li>
+<li><code>Save Locally</code> 本地保存的更改只会通过浏览器应用于当前用户，不会应用于其他实例。您需要使用云同步功能，或者手动更新 <code>conf.yml</code> 文件。</li>
+<li><code>Save to Disk</code> 写入磁盘，那么您的主 <code>conf.yml</code> 文件将被更新，并且更改将应用于所有用户，并在所有设备上可见。</li>
 </ul>
 <h2 id="widgets"><a href="#widgets" class="headerlink" title="widgets"></a>widgets</h2><p><code>Dashy</code> 支持以小部件的形式显示动态内容。有几个开箱即用的内置小部件，并且支持自定义小部件以显示来自几乎所有具有 <code>API</code> 的服务的统计信息。</p>
 <p>具体说明在👇这里：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpc3N5OTMvZGFzaHkvYmxvYi9tYXN0ZXIvZG9jcy93aWRnZXRzLm1k">https://github.com/Lissy93/dashy/blob/master/docs/widgets.md<i class="fa fa-external-link-alt"></i></span></p>
@@ -576,7 +607,7 @@
 <li>将 <code>conf.yml</code> 放入 <code>dashy</code> 目录</li>
 <li>停止容器，并进入 <code>编辑</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061416753.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061416753.png"></p>
 <p>在 <code>存储空间</code> –&gt; <code>添加文件</code></p>
 <table>
 <thead>
@@ -590,12 +621,12 @@
 <td align="center"><code>/app/public/conf.yml</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061423599.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061423599.png"></p>
 <p>完成之后重新启动容器，稍等一下再刷新页面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201061427652.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201061427652.png"></p>
 <p>功能确实强大，敢说自己是 <code>The Ultimate Homepage</code> 也不是没道理的👍，但自己要做得这么漂亮也不容易</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Lissy93/dashy: 🚀 A self-hosted startpage for your server. Easy to use visual editor, status checking, themes and tons more!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpc3N5OTMvZGFzaHk=">https://github.com/Lissy93/dashy<i class="fa fa-external-link-alt"></i></span></p>
+<p>Lissy93&#x2F;dashy: 🚀 A self-hosted startpage for your server. Easy to use visual editor, status checking, themes and tons more!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0xpc3N5OTMvZGFzaHk=">https://github.com/Lissy93/dashy<i class="fa fa-external-link-alt"></i></span></p>
 <p>Dashy | Dashy<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kYXNoeS50by8=">https://dashy.to/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Example Config Files for Dashy<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vTGlzc3k5My8wMDBmNzEyYTVjZTk4ZjIxMjgxN2QyMGJjMTZiYWIxMA==">https://gist.github.com/Lissy93/000f712a5ce98f212817d20bc16bab10<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -743,7 +774,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

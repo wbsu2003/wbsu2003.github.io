@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Trilium Notes 是一个分层笔记应用程序，专注于构建大型个人知识库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302239303.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302239303.png">
 <meta property="article:published_time" content="2021-11-22T11:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302239303.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302239303.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/22/%E4%BD%BF%E7%94%A8Trilium%20Notes%E5%BB%BA%E7%AB%8B%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302239303.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302239303.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,15 +532,15 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <h2 id="英文版"><a href="#英文版" class="headerlink" title="英文版"></a>英文版</h2><p>在注册表中搜索 <code>trilium</code> ，选择第一个 <code>zadam/trilium</code>，版本选择 <code>latest</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301559708.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301559708.png"></p>
 <p>版本信息</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301802518.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301802518.png"></p>
 <h2 id="中文版"><a href="#中文版" class="headerlink" title="中文版"></a>中文版</h2><p>在注册表中搜索 <code>trilium</code> ，选择第四个 <code>nriver/trilium-cn</code>，双击直接下载</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301804839.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301804839.png"></p>
 <p>版本要低一些</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301823537.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301823537.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>trilium</code>，再新建一个子文件夹 <code>data</code>，要修改文件夹 <code>data</code> 的权限，给 <code>Everyone</code> 用户 <code>读取</code> 和 <code>写入</code> 权限</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301701367.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301701367.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +555,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301620621.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301620621.png"></p>
 <blockquote>
 <p>因为同时装了中文版和英文版，所以将中文版指向了 <code>data_cn</code> 目录，如果你只是安装一个版本的话，直接指向 <code>data</code> 就可以了</p>
 </blockquote>
@@ -542,7 +573,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301834118.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301834118.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行</p>
 <table>
 <thead>
@@ -556,7 +587,7 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301604475.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301604475.png"></p>
 <p>中文版换了一个端口</p>
 <table>
 <thead>
@@ -570,54 +601,54 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301819569.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301819569.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3738</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301626513.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301626513.png"></p>
 <p>老苏因为是第一次安装，所以勾选了第一项 <code>I&#39;m a new user and I want to create new Trilium document for my notes</code></p>
 <p>首先要创建账号</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301628456.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301628456.png"></p>
 <p>完成之后会跳转到登录界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301629310.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301629310.png"></p>
 <p>登录成功之后的主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301644422.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301644422.png"></p>
 <p>中文版确实看着更习惯一些</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301822538.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301822538.png"></p>
 <h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><p>同样也有英文版和中文版</p>
 <h2 id="英文版-1"><a href="#英文版-1" class="headerlink" title="英文版"></a>英文版</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3phZGFtL3RyaWxpdW0vcmVsZWFzZXM=">https://github.com/zadam/trilium/releases<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301855994.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301855994.png"></p>
 <p>这次选择了 <code>I have server instance already and I want to setup sync with it</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302043082.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302043082.png"></p>
 <p>填写服务器地址和账号、密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302120400.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302120400.png"></p>
 <p>登录成功之后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302122265.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302122265.png"></p>
 <h2 id="中文版-1"><a href="#中文版-1" class="headerlink" title="中文版"></a>中文版</h2><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05yaXZlci90cmlsaXVtLXRyYW5zbGF0aW9uL3JlbGVhc2Vz">https://github.com/Nriver/trilium-translation/releases<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110301853309.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110301853309.png"></p>
 <ul>
 <li>中文版和英文版的 <code>Sync version</code> 不同，英文版是 <code>21</code> ，而中文版是 <code>20</code>，所以是不能混用的</li>
 <li>中文版客户端在老苏的机器上没跑起来，怀疑是先运行了高版本的英文版的缘故</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302137626.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302137626.png"></p>
 <h2 id="Trilium-Web-Clipper"><a href="#Trilium-Web-Clipper" class="headerlink" title="Trilium Web Clipper"></a>Trilium Web Clipper</h2><p><code>Trilium Web Clipper</code> 允许您直接从浏览器中剪辑文本、整个页面、屏幕截图和简短笔记，并将它们保存到 <code>Trilium Notes</code>，在完成设置之前，所有菜单都是灰的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302203649.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302203649.png"></p>
 <p>点 <code>Option</code> 进入设置界面，和客户端是一样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302206678.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302206678.png"></p>
 <p>点 <code>Login to the server instance</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302208151.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302208151.png"></p>
 <p>再回到插件，所有的菜单都已经点亮了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302209814.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302209814.png"></p>
 <p>抓了一篇文章</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302212626.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302212626.png"></p>
 <h1 id="公网访问"><a href="#公网访问" class="headerlink" title="公网访问"></a>公网访问</h1><p>需要做反代处理</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302111251.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302111251.png"></p>
 <p>在 <code>Option</code> –&gt; <code>Sync</code> 中修改服务器地址</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302142933.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302142933.png"></p>
 <p>先点 <code>Save</code> 保存，然后再点 <code>Test Sync</code> 测试，如果测试结果显示 <code>sucessful</code> 就可以正常使用了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/10/202110302146639.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/10/202110302146639.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>似乎中文版的更新并不积极，所以老苏还是建议用英文版的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>zadam/trilium: Build your personal knowledge base with Trilium Notes<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3phZGFtL3RyaWxpdW0=">https://github.com/zadam/trilium<i class="fa fa-external-link-alt"></i></span></p>
-<p>Nriver/trilium-translation: Translation for Trilium Notes. Trilium Notes 中文版.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05yaXZlci90cmlsaXVtLXRyYW5zbGF0aW9u">https://github.com/Nriver/trilium-translation<i class="fa fa-external-link-alt"></i></span></p>
+<p>zadam&#x2F;trilium: Build your personal knowledge base with Trilium Notes<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3phZGFtL3RyaWxpdW0=">https://github.com/zadam/trilium<i class="fa fa-external-link-alt"></i></span></p>
+<p>Nriver&#x2F;trilium-translation: Translation for Trilium Notes. Trilium Notes 中文版.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05yaXZlci90cmlsaXVtLXRyYW5zbGF0aW9u">https://github.com/Nriver/trilium-translation<i class="fa fa-external-link-alt"></i></span></p>
 <p>用群晖 Docker 部署 Trilium Notes – 学习杂记<br>地址：<span class="exturl" data-url="aHR0cDovL3N0dWR5bm90ZXMuY24vP3A9ODc=">http://studynotes.cn/?p=87<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -764,7 +795,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

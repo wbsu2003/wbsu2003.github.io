@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="OCRmyPDF 为扫描的 PDF 文件添加 OCR 文本层，以便搜索或复制粘贴它们。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191546656.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191546656.png">
 <meta property="article:published_time" content="2023-12-09T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="pdf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191546656.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191546656.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/12/09/OCRmyPDF%E8%AE%A9%E4%BD%A0%E8%83%BD%E6%90%9C%E7%B4%A2%E6%89%AB%E6%8F%8F%E7%89%88PDF%E6%96%87%E6%A1%A3/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191546656.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191546656.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -500,13 +531,13 @@
 <blockquote>
 <p><code>PDF</code> 是存储和交换扫描文档的最佳格式。不幸的是，<code>PDF</code> 可能很难修改。<code>OCRmyPDF</code> 是一个 <code>Python</code> 应用程序和库，可以轻松地将图像处理和 <code>OCR</code>（可识别、可搜索的文本）应用于现有 <code>PDF</code>，通过向扫描的 <code>PDF</code> 文件添加 <code>OCR</code> 文本层，使你可以搜索或复制粘贴它们。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182239396.svg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182239396.svg"></p>
 <h1 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>ocrmypdf</code> ，选择第一个 <code>jbarlow83/ocrmypdf</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v15.4.2</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311122244200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311122244200.png"></p>
 <p>你也可以使用命令行，用 <code>SSH</code> 客户端登录到群晖后，依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull jbarlow83/ocrmypdf:latest</span><br></pre></td></tr></table></figure>
 
@@ -514,21 +545,21 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果拉不动的话加个代理</span></span><br><span class="line">docker pull dockerproxy.com/jbarlow83/ocrmypdf:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名镜像（如果是通过代理下载的）</span></span><br><span class="line">docker tag dockerproxy.com/jbarlow83/ocrmypdf:latest jbarlow83/ocrmypdf:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除代理镜像（如果是通过代理下载的）</span></span><br><span class="line">docker rmi dockerproxy.com/jbarlow83/ocrmypdf:latest</span><br></pre></td></tr></table></figure>
 
 <p>下载完成后，可以在 <code>映像</code> 中找到</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311191335603.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311191335603.png"></p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>【说明】：</p>
 <blockquote>
 <ol>
-<li> 与典型的 <code>Docker</code> 容器不同，<code>OCRmyPDF Docker</code> 容器是短暂的，它为一个 <code>OCR</code> 作业运行并终止，就像命令行程序一样。因此，我们通常使用 <code>--rm</code> 参数在容器退出时将其删除。</li>
-<li> 默认情况下，<code>Docker</code> 镜像包括英语、德语、简体中文、法语、葡萄牙语和西班牙语，所以中文用户不需要添加语言包。</li>
+<li>与典型的 <code>Docker</code> 容器不同，<code>OCRmyPDF Docker</code> 容器是短暂的，它为一个 <code>OCR</code> 作业运行并终止，就像命令行程序一样。因此，我们通常使用 <code>--rm</code> 参数在容器退出时将其删除。</li>
+<li>默认情况下，<code>Docker</code> 镜像包括英语、德语、简体中文、法语、葡萄牙语和西班牙语，所以中文用户不需要添加语言包。</li>
 </ol>
 </blockquote>
 <p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>ocrmypdf</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 ocrmypdf </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/ocrmypdf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 ocrmypdf 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/ocrmypdf</span><br></pre></td></tr></table></figure>
 
 <p>准备一个文档用于测试，这是网页上打印生成的 <code>pdf</code> 文件，直接搜索 <code>sam</code> 是没有 <code>没有匹配项</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182208679.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182208679.png"></p>
 <p>将这个文档放入 <code>ocrmypdf</code>，命名为 <code>input.pdf</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182203509.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182203509.png"></p>
 <h1 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h1><p>为了方便起见，创建一个 <code>shell</code> 别名来隐藏 <code>Docker</code> 命令。通过使用 <code>alias</code> 命令，为长或复杂的命令创建简短且易记的别名，以便更快地执行常用操作或减少输入的工作量</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建别名</span></span><br><span class="line"><span class="built_in">alias</span> docker_ocrmypdf=<span class="string">&#x27;docker run --rm  -i --user &quot;$(id -u):$(id -g)&quot; --workdir /data -v &quot;$PWD:/data&quot; jbarlow83/ocrmypdf:latest&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 OCR</span></span><br><span class="line">docker_ocrmypdf /data/input.pdf /data/output.pdf</span><br></pre></td></tr></table></figure>
 
@@ -539,18 +570,18 @@
 <li><code>--workdir /data</code>：指定容器内的工作目录；</li>
 <li><code>-v &quot;$PWD:/data&quot;</code>：将 <code>/volume1/docker/ocrmypdf</code> 映射到了容器内的 <code>/data</code> ；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182205022.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182205022.png"></p>
 <p> 运行完成后，会在 <code>ocrmypdf</code> 中看到多出了一个文件  <code>output.pdf</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182205344.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182205344.png"></p>
 <p>下载到本地后，用 <code>pdf</code> 阅读器打开后，继续搜索 <code>sam</code> 显示有 <code>2</code> 处匹配</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182212013.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182212013.png"></p>
 <p>第二处</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202311182210971.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202311182210971.png"></p>
 <p><code>OCRmyPDF</code> 不仅提供了基本的 <code>OCR</code> 功能，还包括一些高级功能，如自动旋转、自动裁剪、去除文本阴影、增强图像质量等。它使用了一些优秀的开源工具和库，如 <code>Tesseract OCR</code> 引擎、<code>Ghostscript</code> 和 <code>ImageMagick</code>，以提供强大的 <code>OCR</code>和 <code>PDF</code>处理功能，当然，<code>OCRmyPDF</code> 无法打开使用数字证书加密的文档。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>ocrmypdf/OCRmyPDF: OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29jcm15cGRmL09DUm15UERG">https://github.com/ocrmypdf/OCRmyPDF<i class="fa fa-external-link-alt"></i></span></p>
+<p>ocrmypdf&#x2F;OCRmyPDF: OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29jcm15cGRmL09DUm15UERG">https://github.com/ocrmypdf/OCRmyPDF<i class="fa fa-external-link-alt"></i></span></p>
 <p>OCRmyPDF documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vY3JteXBkZi5yZWFkdGhlZG9jcy5pby8=">https://ocrmypdf.readthedocs.io<i class="fa fa-external-link-alt"></i></span></p>
-<p>jbarlow83/ocrmypdf - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2piYXJsb3c4My9vY3JteXBkZg==">https://hub.docker.com/r/jbarlow83/ocrmypdf<i class="fa fa-external-link-alt"></i></span></p>
+<p>jbarlow83&#x2F;ocrmypdf - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2piYXJsb3c4My9vY3JteXBkZg==">https://hub.docker.com/r/jbarlow83/ocrmypdf<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -697,7 +728,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

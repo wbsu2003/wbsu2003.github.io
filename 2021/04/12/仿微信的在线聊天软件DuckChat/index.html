@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="DuckChat 是一款开源、可私有化部署、仿微信界面的即时通讯系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png">
 <meta property="article:published_time" content="2021-04-12T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="IM">
 <meta property="article:tag" content="即时通讯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/04/12/%E4%BB%BF%E5%BE%AE%E4%BF%A1%E7%9A%84%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E8%BD%AF%E4%BB%B6DuckChat/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210412112409.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210412112409.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,39 +529,39 @@
     
     <div class="post-body" itemprop="articleBody"><p><strong>什么是 DuckChat ？</strong></p>
 <blockquote>
-<p>DuckChat 是一款安全的私有聊天软件，基于 PHP 环境，可运行在 Docker 、linux 、Windows 、MacOS 等各种平台上，它帮助我们简化企业办公、客服系统、互联网创业，提供了完善的 IM 相关功能，并提供 Android/iOS/Web 多客户端。</p>
+<p>DuckChat 是一款安全的私有聊天软件，基于 PHP 环境，可运行在 Docker 、linux 、Windows 、MacOS 等各种平台上，它帮助我们简化企业办公、客服系统、互联网创业，提供了完善的 IM 相关功能，并提供 Android&#x2F;iOS&#x2F;Web 多客户端。</p>
 </blockquote>
 <p>DuckChat 的前身是 Akaxin ，作者由于某些原因，从 Java 切到了 PHP （+Golang ），推出了升级换代的 DuckChat 。但又不知道什么原因， DuckChat 这个项目2年前就已经停止了更新，不确定是闭源了还是停止开发了，但是从官网已关闭来看，应该是停止开发的概率更大一些。</p>
 <blockquote>
 <p>这篇文档是应朋友要求而折腾的，他在找一款开源的即时聊天的工具，要求各端齐全，符合中国人的使用习惯。如果你有合适的，请给我留言</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ol>
-<li><p>  在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>duckchat</code>。</p>
+<li><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>duckchat</code>。</p>
 </li>
-<li><p> 在 <span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vYWxvbmU4OC9kdWNrY2hhdA==">https://gitee.com/alone88/duckchat<i class="fa fa-external-link-alt"></i></span> 下载源代码。</p>
+<li><p>在 <span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vYWxvbmU4OC9kdWNrY2hhdA==">https://gitee.com/alone88/duckchat<i class="fa fa-external-link-alt"></i></span> 下载源代码。</p>
 </li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324104302.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324104302.png"></p>
 <blockquote>
 <p>注意：gitee 需要登录才能下载。</p>
 </blockquote>
 <ol start="3">
-<li> 将下载的 zip 解压到 <code>duckchat</code> 目录</li>
+<li>将下载的 zip 解压到 <code>duckchat</code> 目录</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324105141.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324105141.png"></p>
 <h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>用 SSH 客户端连到群晖。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 duckchat 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/duckchat</span><br></pre></td></tr></table></figure>
 
 <p>因为默认的 <code>http</code> 端口使用了 80 ，所以要指定端口来启动服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sh duckchat.sh -http=11180</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324105935.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324105935.png"></p>
 <p>启动成功后，可以在 Docker 中看到状态</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110212.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110212.png"></p>
 <p>安装设置完成后，<code>duckchat</code> 目录中多了一个 <code>duckchat_private</code> 目录，存储了数据库和日志文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324111357.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324111357.png"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在浏览器中输入 <code>http://群晖IP:11180</code>，就可以看到登录界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121041.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121041.png"></p>
 <p>填写 <code>邀请码</code>，默认是用的 <code>SQLite</code> 做数据库</p>
 <blockquote>
 <p>注意：邀请码一定要填，后面用户注册需要用到，不填是注册不了的。</p>
@@ -564,41 +595,41 @@
 <td align="center"><code>duckchat@akaxin</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121210.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121210.png"></p>
 <blockquote>
 <p>注意：此 MySQL 无法从宿主机直接访问，必须在 Docker 内部访问。</p>
 </blockquote>
 <p>然后 <code>初始化数据</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110551.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110551.png"></p>
 <p>注册一个用户</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324110916.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324110916.png"></p>
 <p><code>下一步</code>，输入前面设置的<code>邀请码</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121630.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121630.png"></p>
 <p><code>注册并登陆</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324121755.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324121755.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="Web-端"><a href="#Web-端" class="headerlink" title="Web 端"></a>Web 端</h2><p><code>DuckChat</code> 天然支持 <code>Web</code> 网页，这种方式免去了安装客户端的烦恼，做到了即开即用，在浏览器中输入 <code>http://群晖IP:11180</code> 即可。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324125655.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324125655.png"></p>
 <h2 id="Android-端"><a href="#Android-端" class="headerlink" title="Android 端"></a>Android 端</h2><p>因为官网已经关闭，所以原来的下载地址已经失效了，不过用度娘还是能找到的，我下的版本是 <code>v1.1.0</code></p>
 <p>从启动界面看，<code>DuckChat</code>  给自己定位是社交浏览器，而不仅仅是个聊天工具</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135055.png"></p>
 <p>在 <code>Web</code> 端没有找到生成二维码的地方，所以需要我们手动输入服务器的地址</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135256.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135256.png"></p>
 <blockquote>
 <p>注意：官网已关闭，所以 <code>试用站点</code> 是连不上的；</p>
 </blockquote>
 <p>连接服务器成功后，需要登录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135530.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135530.png"></p>
 <p>登录成功后，主页会显示错误，原因还是官网已经关闭导致的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135638.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135638.png"></p>
 <p><code>通讯录</code> 界面，能看到好友和群组</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135724.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135724.png"></p>
 <p><code>我</code> 界面，能看到版本信息</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210324135823.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210324135823.png"></p>
 <h2 id="iOS-端"><a href="#iOS-端" class="headerlink" title="iOS 端"></a>iOS 端</h2><p>没有 iOS 设备，所以没试，按官方的说法可以在 <span class="exturl" data-url="aHR0cHM6Ly9pdHVuZXMuYXBwbGUuY29tL2NuL2FwcC9kdWNrY2hhdC9pZDE0MzQxNTM1MTI/bD1lbiZtdD04">AppStore官方下载<i class="fa fa-external-link-alt"></i></span>，只是这么久没人维护，不知道是否已经被下架了？</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>没有找到手机客户端 APP 的源代码，所以最多只能当个网页聊天系统来用。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>duckchat: 一个安全的私有IM聊天软件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vYWxvbmU4OC9kdWNrY2hhdA==">https://gitee.com/alone88/duckchat<i class="fa fa-external-link-alt"></i></span></p>
-<p>duckchat/gaga<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2R1Y2tjaGF0L2dhZ2E=">https://github.com/duckchat/gaga<i class="fa fa-external-link-alt"></i></span></p>
+<p>duckchat&#x2F;gaga<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2R1Y2tjaGF0L2dhZ2E=">https://github.com/duckchat/gaga<i class="fa fa-external-link-alt"></i></span></p>
 <p>DuckChat使用指引 - DuckChat Using Guide<br>地址：<span class="exturl" data-url="aHR0cHM6Ly95ZXNoYW84ODguZ2l0ZWUuaW8vZHVja2NoYXRndWlkZS8=">https://yeshao888.gitee.io/duckchatguide/<i class="fa fa-external-link-alt"></i></span></p>
 <p>免费分享：一款DuckChat聊天系统 PHP仿微信在线聊天源码-老6源码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubDYwNS5jb20vNDY1Ny5odG1s">https://www.l605.com/4657.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>开源项目：采用 PHP 编写的聊天软件，简直就是一个完整的迷你版微信 | Laravel China 社区<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9sZWFybmt1LmNvbS9hcnRpY2xlcy8xNzcxNA==">https://learnku.com/articles/17714<i class="fa fa-external-link-alt"></i></span></p>
@@ -749,7 +780,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

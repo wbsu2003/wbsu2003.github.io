@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Prowlarr 是索引器管理器，可与您的各种 PVR 应用程序集成。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292130949.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292130949.png">
 <meta property="article:published_time" content="2022-02-18T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="搜索">
 <meta property="article:tag" content="BitTorrent">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292130949.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292130949.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/18/Prowlarr%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%B4%A2%E5%BC%95%E8%81%9A%E5%90%88%E5%99%A8/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292130949.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292130949.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +530,7 @@
     
     <div class="post-body" itemprop="articleBody"><p><strong>什么是 Prowlarr ？</strong></p>
 <blockquote>
-<p><code>Prowlarr</code> 是建立在流行的 <code>arr .net/reactjs</code> 基础堆栈上的索引器管理器/代理，可与您的各种 <code>PVR</code> 应用程序集成。<code>Prowlarr</code> 支持对 <code>Torrent Trackers</code> 和 <code>Usenet Indexers</code> 管理。它与 <code>Lidarr</code>、<code>Mylar3</code>、<code>Radarr</code>、<code>Readarr</code> 和 <code>Sonar</code> 无缝集成，为您的索引器提供完整的管理，无需为每个应用程序设置索引器。【百度翻译】</p>
+<p><code>Prowlarr</code> 是建立在流行的 <code>arr .net/reactjs</code> 基础堆栈上的索引器管理器&#x2F;代理，可与您的各种 <code>PVR</code> 应用程序集成。<code>Prowlarr</code> 支持对 <code>Torrent Trackers</code> 和 <code>Usenet Indexers</code> 管理。它与 <code>Lidarr</code>、<code>Mylar3</code>、<code>Radarr</code>、<code>Readarr</code> 和 <code>Sonar</code> 无缝集成，为您的索引器提供完整的管理，无需为每个应用程序设置索引器。【百度翻译】</p>
 </blockquote>
 <p>功能上来说和之前介绍的 <code>Jackett</code> 是一样的，而界面风格则继承了 <code>arr</code> 系列的一贯风格，所以上手还是很简单的</p>
 <blockquote>
@@ -510,7 +541,7 @@
 <blockquote>
 <p>这个镜像有三个 <code>tags</code>，分别是 <code>develop</code>、<code>nightly</code>、<code>nightly-alpine</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201231943955.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201231943955.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>prowlarr</code></p>
 <table>
 <thead>
@@ -526,7 +557,7 @@
 <td align="center">存放设置</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201231949103.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201231949103.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -542,7 +573,7 @@
 <td align="center"><code>9696</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201231949366.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201231949366.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -563,62 +594,62 @@
 <td align="center">设为 <code>Asia/Shanghai</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232007641.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232007641.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:9696</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232008255.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232008255.png"></p>
 <h2 id="添加索引器"><a href="#添加索引器" class="headerlink" title="添加索引器"></a>添加索引器</h2><p>点 <code>Add New Indexer</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232058586.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232058586.png"></p>
 <p>搜素支持过滤，例如支持 <code>中文</code> 的 <code>public</code> 类型的搜索网站</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232101858.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232101858.png"></p>
 <p>不过似乎都是搜动漫的，老苏想添加 <code>Zooqle</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232118042.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232118042.png"></p>
 <p>结果发现 <code>Base Url</code> 只有选 <code>https://zooqle.unblockninja.com/</code>  时 <code>Test</code> 才能通过</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232124350.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232124350.png"></p>
 <p>其他地址都会报错</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232123840.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232123840.png"></p>
 <p>添加完成后</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232127767.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232127767.png"></p>
 <p>在顶部的搜索栏中输入 <code>狙击手</code>，回车后会返回结果</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201232128037.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201232128037.png"></p>
 <h2 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h2><p>以 <code>aira</code> 为例，<code>Settings</code> –&gt; <code>Download Clients</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291452541.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291452541.png"></p>
 <p>点 <code>+</code> 号添加下载客户端</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291500994.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291500994.png"></p>
 <p><code>Secret token</code> 需要从 <code>Aira</code> 的环境变量中获取</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291529239.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291529239.png"></p>
 <p>设置很简单，只要 <code>Test</code> 通过就可以点 <code>Save</code> 保存</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291507163.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291507163.png"></p>
 <p>现在可以直接下载</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291513510.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291513510.png"></p>
 <p>打开下载器界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291517594.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291517594.png"></p>
 <h2 id="整合应用端"><a href="#整合应用端" class="headerlink" title="整合应用端"></a>整合应用端</h2><p>以 <code>Sonarr</code> 为例，<code>Settings</code> –&gt; <code>Apps</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291525414.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291525414.png"></p>
 <p>点 <code>+</code> 号添加应用</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291526956.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291526956.png"></p>
 <p>进入 <code>Sonarr</code></p>
 <blockquote>
 <p> 需要说明的是 <code>Sync Level</code> </p>
 <ul>
-<li>  <code>Add and Remove Only</code>：在 <code>Prowlarr</code> 添加或删除索引器时，将其同步到应用程序。如果索引器在同步时关闭 - 它将被删除；</li>
-<li>  <code>Full Sync</code>- 完全同步将使您的应用程序和 <code>Prowlarr</code> 完全同步。然后，在 Prowlarr 中所做的任何更改都会同步到其他程序。远程进行的任何更改都将在下次同步时被 <code>Prowlarr</code> 覆盖；</li>
-<li>  <code>Disabled</code>- 将阻止索引器与程序完全同步；</li>
+<li><code>Add and Remove Only</code>：在 <code>Prowlarr</code> 添加或删除索引器时，将其同步到应用程序。如果索引器在同步时关闭 - 它将被删除；</li>
+<li><code>Full Sync</code>- 完全同步将使您的应用程序和 <code>Prowlarr</code> 完全同步。然后，在 Prowlarr 中所做的任何更改都会同步到其他程序。远程进行的任何更改都将在下次同步时被 <code>Prowlarr</code> 覆盖；</li>
+<li><code>Disabled</code>- 将阻止索引器与程序完全同步；</li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291538494.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291538494.png"></p>
 <p>打开  <code>Sonarr</code>，<code>ApiKey</code> 需要从 <code>Sonarr</code> 的 <code>Settings</code> –&gt; <code>General</code> 获取</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291847253.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291847253.png"></p>
 <p>设置比较简单，只要 <code>Test</code> 通过就可以点 <code>Save</code> 保存</p>
 <blockquote>
 <p>老苏偶然发现，如果你的 <code>Sonarr</code> 不是 <code>v3</code> 而是 <code>v2</code>，测试是通不过的😳</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291849926.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291849926.png"></p>
 <p>回到 <code>Sonarr</code> ，在 <code>Settings</code> –&gt; <code>Indexers</code> 中会自动增加 <code>Zooqle (Prowlarr)</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201291911176.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201291911176.png"></p>
 <p>当然你直接在 <code>Sonarr</code> 中增加 <code>Indexers</code> 也是一样的</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Prowlarr/Prowlarr<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Byb3dsYXJyL1Byb3dsYXJy">https://github.com/Prowlarr/Prowlarr<i class="fa fa-external-link-alt"></i></span></p>
-<p>linuxserver/prowlarr - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2xpbnV4c2VydmVyL3Byb3dsYXJyLw==">https://registry.hub.docker.com/r/linuxserver/prowlarr/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Prowlarr&#x2F;Prowlarr<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Byb3dsYXJyL1Byb3dsYXJy">https://github.com/Prowlarr/Prowlarr<i class="fa fa-external-link-alt"></i></span></p>
+<p>linuxserver&#x2F;prowlarr - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2xpbnV4c2VydmVyL3Byb3dsYXJyLw==">https://registry.hub.docker.com/r/linuxserver/prowlarr/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Prowlarr API Docs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wcm93bGFyci5jb20vZG9jcy9hcGkv">https://prowlarr.com/docs/api/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Prowlarr Quick Start Guide | WikiArr<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93aWtpLnNlcnZhcnIuY29tL3Byb3dsYXJyL3F1aWNrLXN0YXJ0LWd1aWRl">https://wiki.servarr.com/prowlarr/quick-start-guide<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -768,7 +799,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

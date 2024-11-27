@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="✍️Memos 是一个开源的、自托管的知识库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231654812.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231654812.png">
 <meta property="article:published_time" content="2022-07-04T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231654812.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231654812.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/07/04/%E7%A2%8E%E7%89%87%E5%8C%96%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Memos/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231654812.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231654812.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,13 +542,13 @@
 <li>产生奇思妙想</li>
 </ul>
 <p>从官网提供的界面看，<code>Memos</code> 很可能是国人开发的，我们可以将 <code>Memos</code> 作为 <code>flomo · 浮墨笔记</code> 的开源替代品。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231346334.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231346334.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>memos</code> ，选择第一个 <code>neosmemo/memos</code>，版本选择 <code>0.1.1</code>。</p>
 <blockquote>
 <p>发稿时，最新的版本已经是 <code>0.1.3</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205252134253.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205252134253.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>memos</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -533,7 +564,7 @@
 <td align="center">存放数据库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231418698.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231418698.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -550,9 +581,9 @@
 </tr>
 </tbody></table>
 <p>默认并没有端口</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231419516.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231419516.png"></p>
 <p>需要我们自己点 “+” 号添加</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231420590.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231420590.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -565,7 +596,7 @@
 <td align="center">默认设为 <code>prod</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231423182.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231423182.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 memos 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/memos/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 memos 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/memos</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name memos \</span><br><span class="line">   -p 5230:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/var/opt/memos \</span><br><span class="line">   -e mode=prod \</span><br><span class="line">   neosmemo/memos:0.1.1</span><br></pre></td></tr></table></figure>
 
@@ -576,28 +607,28 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 memos 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/memos/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/memos</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5230</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231335353.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231335353.png"></p>
 <p>输入你的邮箱和想用的密码，点 <code>Sign up as Owner</code>，这个账号将成为管理员</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231319570.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231319570.png"></p>
 <p>用 <code>Hello World!</code> 打个招呼</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231436645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231436645.png"></p>
 <p>功能比较简单</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231443867.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231443867.png"></p>
 <p><code>Setting</code> 中可以添加成员</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231441644.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231441644.png"></p>
 <p>似乎图片命名上还存在问题，<code>avataaars.png</code> 没问题，但是 <code>avataaars (2).png</code> 就有问题</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231716236.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231716236.png"></p>
 <p>从页面代码看，似乎命名变成了 <code>(2).png</code></p>
 <blockquote>
 <p>看起来应该是空格导致的问题，这个应该算是低级错误吧</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231720087.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231720087.png"></p>
 <p>正常的是👇这样的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231722338.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231722338.png"></p>
 <p>记录下当前的版本</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206231442026.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206231442026.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>usememos/memos: An open source, self-hosted knowledge base that works with a SQLite db file.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VzZW1lbW9zL21lbW9z">https://github.com/usememos/memos<i class="fa fa-external-link-alt"></i></span></p>
+<p>usememos&#x2F;memos: An open source, self-hosted knowledge base that works with a SQLite db file.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3VzZW1lbW9zL21lbW9z">https://github.com/usememos/memos<i class="fa fa-external-link-alt"></i></span></p>
 <p>Memos<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tZW1vcy5vbnJlbmRlci5jb20v">https://memos.onrender.com<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -744,7 +775,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

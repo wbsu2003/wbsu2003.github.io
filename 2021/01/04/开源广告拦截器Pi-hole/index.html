@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Pi-Hole 是 Linux 网络级的广告和 Internet 跟踪器阻止应用程序，能够阻止传统的网站广告以及非常规位置的广告。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229152548.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229152548.png">
 <meta property="article:published_time" content="2021-01-04T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229152548.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229152548.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/01/04/%E5%BC%80%E6%BA%90%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%99%A8Pi-hole/">
@@ -183,6 +183,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -390,7 +421,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229152548.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229152548.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -431,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -476,7 +507,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -498,31 +529,31 @@
 <p>今天是2021年的第一个工作日，新年新气象，让我们一起加油！</p>
 </blockquote>
 <p>Pi-hole 是一款开源且免费的 DNS 沉洞服务器（DNS sinkhole），能够在不安装任何客户端侧软件的前提下为设备提供网络内容屏蔽服务，非常轻量易用。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229154116.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229154116.png"></p>
 <p>不用安装客户端，这对机顶盒、智能电视、手机、PAD等设备是非常方便的。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>pihole</code> ，选择第一个 <code>pihole/pihole</code>，版本 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229144344.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229144344.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>pihole</code>，然后在 <code>pihole</code> 文件夹中创建两个新的子文件夹：分别命名为 <code>pihole</code>，和 <code>dnsmasq.d</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229152312.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229152312.png"></p>
 <table>
 <thead>
 <tr>
-<th align="center">文件/文件夹</th>
+<th align="center">文件&#x2F;文件夹</th>
 <th align="center">装载路径</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/pihole/pihole</td>
-<td align="center">/etc/pihole/</td>
+<td align="center">&#x2F;docker&#x2F;pihole&#x2F;pihole</td>
+<td align="center">&#x2F;etc&#x2F;pihole&#x2F;</td>
 </tr>
 <tr>
-<td align="center">/docker/pihole/dnsmasq.d</td>
-<td align="center">/etc/dnsmasq.d/</td>
+<td align="center">&#x2F;docker&#x2F;pihole&#x2F;dnsmasq.d</td>
+<td align="center">&#x2F;etc&#x2F;dnsmasq.d&#x2F;</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210101165510.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210101165510.png"></p>
 <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>勾选 <code>使用与 Docker Host 相同的网络</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210101164630.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210101164630.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -548,14 +579,14 @@
 </tr>
 </tbody></table>
 <p>其中前三项是需要新加的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229161930.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229161930.png"></p>
 <p>最后一项是需要修改的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201229161458.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201229161458.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>有几种<span class="exturl" data-url="aHR0cHM6Ly9kaXNjb3Vyc2UucGktaG9sZS5uZXQvdC9ob3ctZG8taS1hY2Nlc3MtcGktaG9sZXMtZGFzaGJvYXJkLWFkbWluLWludGVyZmFjZS8zMTY4">访问仪表板的方法<i class="fa fa-external-link-alt"></i></span>：</p>
 <ol>
 <li><code>http://&lt;IP_ADDPRESS_OF_YOUR_PI_HOLE&gt;/admin/</code></li>
-<li> <code>http://pi.hole/admin/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
-<li> <code>http://pi.hole/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
+<li><code>http://pi.hole/admin/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
+<li><code>http://pi.hole/</code> （当使用 Pi-hole 作为 DNS 服务器时）</li>
 </ol>
 <p>所以我们在浏览器中输入 <code>http://群晖IP:4880/admin</code>就能看到主界面，如果看不到，再等一会！！！！！</p>
 <blockquote>
@@ -564,30 +595,30 @@
 <blockquote>
 <p>但是等到什么时候刷新才行呢，我发现只要 <code>pihole</code> 或者 <code>dnsmasq.d</code> 里有文件的时候就可以了。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210101174321.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210101174321.png"></p>
 <p>点击左侧菜单栏的 <code>Login</code>，输入密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210101174454.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210101174454.png"></p>
 <p>然后就可以根据需要进行设置了。</p>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="添加规则"><a href="#添加规则" class="headerlink" title="添加规则"></a>添加规则</h2><p>有个开源项目 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">anti-AD<i class="fa fa-external-link-alt"></i></span>：<br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">https://github.com/privacy-protection-tools/anti-AD<i class="fa fa-external-link-alt"></i></span>，在这里能找到适用于 <code>Pi-hole</code> 的规则</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210103134652.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210103134652.png"></p>
 <p>复制规则的链接，在 <code>Group Management</code> -&gt; <code>Adlists</code> 里面添加到 <code>Pi-hole</code> 中</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210103134917.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210103134917.png"></p>
 <blockquote>
 <p>除了这个项目，你还能找到其他的 <code>Pi-hole</code> 过滤规则</p>
 </blockquote>
 <h2 id="更新规则"><a href="#更新规则" class="headerlink" title="更新规则"></a>更新规则</h2><p>在 <code>Tools</code> -&gt; <code>Update Gravity</code> 里面点一下“Update”，开始更新屏蔽域名表</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/01/03/1609653221769-1609653221795.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/01/03/1609653221769-1609653221795.png" alt="title"></p>
 <p>一共导入了 <code>43177</code> 条规则。</p>
 <h2 id="添加-DNS"><a href="#添加-DNS" class="headerlink" title="添加 DNS"></a>添加 DNS</h2><p><code>Pi-hole</code> 采用的是使用本地 <code>DNS</code> 服务器的方式在局域网中进行过滤，所以我们需要设置 <code>Pi-hole</code> 为当前网络的<code>DNS</code>。</p>
 <h3 id="单个设备设置-DNS"><a href="#单个设备设置-DNS" class="headerlink" title="单个设备设置 DNS"></a>单个设备设置 DNS</h3><p>您可以在网络上的所有设备上将 <code>群晖 IP</code> 添加为 <code>DNS</code>。</p>
 <h3 id="路由器上设置-DNS"><a href="#路由器上设置-DNS" class="headerlink" title="路由器上设置 DNS"></a>路由器上设置 DNS</h3><p>登录路由器，并通过更改 <code>DNS</code> 来在路由器级别阻止广告。这样，您就不必在每个设备上都单独进行操作了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Pi-hole – Network-wide protection<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9waS1ob2xlLm5ldC8=">https://pi-hole.net/<i class="fa fa-external-link-alt"></i></span></p>
-<p>pi-hole/pi-hole: A black hole for Internet advertisements<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvcGktaG9sZQ==">https://github.com/pi-hole/pi-hole<i class="fa fa-external-link-alt"></i></span></p>
-<p>pi-hole/docker-pi-hole: Pi-hole in a docker container<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvZG9ja2VyLXBpLWhvbGUvI3J1bm5pbmctcGktaG9sZS1kb2NrZXI=">https://github.com/pi-hole/docker-pi-hole/#running-pi-hole-docker<i class="fa fa-external-link-alt"></i></span></p>
+<p>pi-hole&#x2F;pi-hole: A black hole for Internet advertisements<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvcGktaG9sZQ==">https://github.com/pi-hole/pi-hole<i class="fa fa-external-link-alt"></i></span></p>
+<p>pi-hole&#x2F;docker-pi-hole: Pi-hole in a docker container<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BpLWhvbGUvZG9ja2VyLXBpLWhvbGUvI3J1bm5pbmctcGktaG9sZS1kb2NrZXI=">https://github.com/pi-hole/docker-pi-hole/#running-pi-hole-docker<i class="fa fa-external-link-alt"></i></span></p>
 <p>Block Ads on your Network with Pi-Hole Hosted on Synology – NAS Hosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9nZWVrZWQuaG9zdC9ibG9jay1hZHMtb24teW91ci1uZXR3b3JrLXdpdGgtcGktaG9sZS1ob3N0ZWQtb24tc3lub2xvZ3kv">https://geeked.host/block-ads-on-your-network-with-pi-hole-hosted-on-synology/<i class="fa fa-external-link-alt"></i></span></p>
 <p>How to Install Pi-Hole on Your Synology NAS – Marius Hosting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJpdXNob3N0aW5nLmNvbS9ob3ctdG8taW5zdGFsbC1waS1ob2xlLW9uLXlvdXItc3lub2xvZ3ktbmFzLw==">https://mariushosting.com/how-to-install-pi-hole-on-your-synology-nas/<i class="fa fa-external-link-alt"></i></span> </p>
-<p>privacy-protection-tools/anti-AD: 致力于成为中文区命中率最高的广告过滤列表，实现精确的广告屏蔽和隐私保护。anti-AD现已支持AdGuardHome，dnsmasq， Surge，Pi-Hole，smartdns等网络组件。完全兼容常见的广告过滤工具所支持的各种广告过滤列表格式<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">https://github.com/privacy-protection-tools/anti-AD<i class="fa fa-external-link-alt"></i></span></p>
+<p>privacy-protection-tools&#x2F;anti-AD: 致力于成为中文区命中率最高的广告过滤列表，实现精确的广告屏蔽和隐私保护。anti-AD现已支持AdGuardHome，dnsmasq， Surge，Pi-Hole，smartdns等网络组件。完全兼容常见的广告过滤工具所支持的各种广告过滤列表格式<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaXZhY3ktcHJvdGVjdGlvbi10b29scy9hbnRpLUFE">https://github.com/privacy-protection-tools/anti-AD<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -732,7 +763,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Clapper 能将您的演示文稿变成一种互动、引人入胜且令人兴奋的体验。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311420843.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311420843.png">
 <meta property="article:published_time" content="2022-08-01T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="文稿演示">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311420843.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311420843.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/01/%E8%83%BD%E4%B8%8E%E8%A7%82%E4%BC%97%E5%AE%9E%E6%97%B6%E4%BA%92%E5%8A%A8%E7%9A%84Claper/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311420843.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311420843.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,9 +527,9 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>周六总算休息了一天</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207301239662.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207301239662.png"></p>
 <p>杨浦看来还是没清零，<code>2</code> ~ <code>4</code> 号实行 <code>3天2检</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311836899.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311836899.png"></p>
 <hr>
 <p><strong>什么是 Claper ？</strong></p>
 <blockquote>
@@ -508,7 +539,7 @@
 <li>帮助每个参与者成为演讲和会议中的演员，并感到自己很重要和有用。</li>
 </ul>
 </blockquote>
-<p><code>Claper</code> 是 <code>Slido</code> 、 <code>AhaSlides</code> 、 <code>Mentimeter</code> 的开源替代品，能帮助公众演讲者和那些必须通过实时消息/问答和民意调查使他们的演讲具有互动性的人。</p>
+<p><code>Claper</code> 是 <code>Slido</code> 、 <code>AhaSlides</code> 、 <code>Mentimeter</code> 的开源替代品，能帮助公众演讲者和那些必须通过实时消息&#x2F;问答和民意调查使他们的演讲具有互动性的人。</p>
 <ul>
 <li><code>Slido - Easy-to-Use Q&amp;A and Polling App</code></li>
 <li><code>AhaSlides: The Best Free Presentation Software Online</code></li>
@@ -526,7 +557,7 @@
 <p>从应用场景看主要还是现场演讲，但结合远程视频会议，远程互动也是没问题的。</p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>官方的镜像没有发布在 <code>docker hub</code>，而是在 <code>ghcr.io</code>，所以直接用命令行来安装</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207301746037.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207301746037.png"></p>
 <p>在 <code>SSH</code> 客户端中依次执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载 mysql 版镜像</span></span><br><span class="line">docker pull ghcr.io/claperco/claper:latest</span><br></pre></td></tr></table></figure>
 
@@ -626,37 +657,37 @@
 <blockquote>
 <p>如果你是 <code>参与者</code>，在收到了邀请后，直接将 <code>code</code> 填入 <code>#</code> 号之后，点 <code>Join</code> 就可以加入；<br>如果你是 <code>演讲者</code> 或者 <code>主持人</code>，需要点右上角的 <code>Login</code> 先登录；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207302336542.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207302336542.png"></p>
 <p>登录只要输入你的邮箱地址，在输入你的邮箱后，点 <code>Send link by email</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207302338523.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207302338523.png"></p>
 <p>如果发送邮箱的设置没问题的话，你应该会很快就收到邮件</p>
 <blockquote>
 <p>关于邮件的设置，老苏也没啥好的办法，日志中看不到任何调试信息，反正一堆参数慢慢试吧，<code>88</code> 邮箱用到了 <code>5</code> 个 <code>SMTP</code> 开头的参数</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207302329645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207302329645.png"></p>
 <p>点 <code>ACCESS TO MY ACCOUNT</code> 会打开新的网页</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207302330558.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207302330558.png"></p>
 <p>点 <code>Create</code> 开始创建</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207310008365.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207310008365.png"></p>
 <p>支持 <code>PDF, PPT, PPTX</code> 格式的文档，但是文件不能超过 <code>15M</code> ，点 <code>Add facilitator</code> 添加 <code>主持人</code> 的邮件</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207310012695.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207310012695.png"></p>
 <p>点 <code>My presentations</code> 进入我的演讲稿，可以看到预览、聊天和设置三个分区</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207310016132.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207310016132.png"></p>
 <p>点右上角的 <code>Start</code> 后会弹出新的浏览器窗口，按 <code>F11</code> 可以全屏。如果你有双屏，可以将控制窗口留在一号屏，把全屏窗口放到二号屏，可以实现和 <code>PPT</code> 一样的演讲模式。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207310019114.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207310019114.png"></p>
 <p><code>参与者</code> 可以直接输入 <code>code</code> 进入</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311135642.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311135642.jpg"></p>
 <p>随时可以提问</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311136002.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311136002.jpg"></p>
 <p><code>演讲者</code> 可以实时收到，并在现场直接回答</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311133834.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311133834.png"></p>
 <p><code>演讲者</code>（或者 <code>主持人</code> ）还可以在文档中加入投票，来实现更多的互动</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311139310.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311139310.png"></p>
 <p>活动结束后，会自动生成报告</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207311441747.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207311441747.png"></p>
 <p><code>Clapper</code> 目前刚开源，后续值得期待~</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>ClaperCo/Claper: The ultimate tool to interact with your audience<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NsYXBlckNvL0NsYXBlcg==">https://github.com/ClaperCo/Claper<i class="fa fa-external-link-alt"></i></span></p>
+<p>ClaperCo&#x2F;Claper: The ultimate tool to interact with your audience<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NsYXBlckNvL0NsYXBlcg==">https://github.com/ClaperCo/Claper<i class="fa fa-external-link-alt"></i></span></p>
 <p>Claper - The ultimate tool to interact with your audience<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jbGFwZXIuY28v">https://claper.co/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Overview — Claper v1.0.0<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmNsYXBlci5jby9vdmVydmlldy5odG1s">https://docs.claper.co/overview.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -804,7 +835,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

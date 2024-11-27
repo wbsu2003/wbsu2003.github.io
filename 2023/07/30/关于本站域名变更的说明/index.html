@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="因为 freenom 免费域名被回收，本站目前的主域名改为 https:&#x2F;&#x2F;laosu.tech">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402191118505.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402191118505.png">
 <meta property="article:published_time" content="2023-07-30T09:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="域名">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402191118505.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402191118505.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/07/30/%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99%E5%9F%9F%E5%90%8D%E5%8F%98%E6%9B%B4%E7%9A%84%E8%AF%B4%E6%98%8E/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402191118505.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402191118505.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,7 +540,7 @@
     <div class="post-body" itemprop="articleBody"><ul>
 <li>2024.02.20、经过申诉，目前博客的几个域名都恢复了，时间也延长到了 <code>2033</code> 年，后面还会不会出问题，老苏也不知道</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/01/202402201313967.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/01/202402201313967.png"></p>
 <ul>
 <li>2024.02.09、新增主域名：<a href="https://laosu.tech/">https://laosu.tech</a></li>
 <li>2023.12.26、新增二级域名：<span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5jbG91ZG5zLm9yZy8=">https://laosu.cloudns.org<i class="fa fa-external-link-alt"></i></span></li>
@@ -570,15 +601,15 @@
 </tr>
 </tbody></table>
 <p>这些东西其实一直都在的，只是大家平时没注意</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307201943205.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307201943205.png"></p>
 <p>万一哪天突然又遇到这种情况，你还可以去访问老苏的 <code>CSDN</code> ，地址：<br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dic3UyMDA0">https://blog.csdn.net/wbsu2004<i class="fa fa-external-link-alt"></i></span></p>
 <p>或者微信公众号：</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307201752732.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307201752732.jpg"></p>
 <p>如果不想迷路，关注公众号才是最好的办法</p>
 <p>虽然经历了 <code>20</code> 号的访问量暴跌</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307210915010.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307210915010.png"></p>
 <p>但这几天开始有点回头了，不过和正常时还是存在一定的差距，但这有什么关系呢？</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307301607537.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307301607537.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Free Website Counter Showing Visitor Location on Map<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9jbHVzdHJtYXBzLmNvbS8=">https://clustrmaps.com/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -726,7 +757,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

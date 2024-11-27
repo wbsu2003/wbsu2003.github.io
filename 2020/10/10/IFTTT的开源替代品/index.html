@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="IFTTT 的作用就是，如果「这个」网络服务满足条件，那么就自动触发「那个」网络服务去执行一个动作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png">
 <meta property="article:published_time" content="2020-10-10T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="自动化">
 <meta property="article:tag" content="IFTTT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/10/10/IFTTT%E7%9A%84%E5%BC%80%E6%BA%90%E6%9B%BF%E4%BB%A3%E5%93%81/">
@@ -183,6 +183,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -390,7 +421,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602334732849-1602334732880.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -431,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,51 +529,51 @@
 <blockquote>
 <p>IFTTT，是一個新生的網絡服務平台，通過其他不同平台的條件來決定是否執行下一條命令。即對網絡服務通過其他網絡服務作出反應。IFTTT得名為其口號「if this then that」。 IFTTT的官方念法類似英語單詞「gift」的「ift」，即不要發「g」的音。 [維基百科]</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602301546869-1602301546877.png" alt="title"><br>【图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8yMjU4ODA4NTVfMTE1Nzg1">https://www.sohu.com/a/225880855_115785<i class="fa fa-external-link-alt"></i></span>】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602301546869-1602301546877.png" alt="title"><br>【图片来自：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8yMjU4ODA4NTVfMTE1Nzg1">https://www.sohu.com/a/225880855_115785<i class="fa fa-external-link-alt"></i></span>】</p>
 <p>IFTTT要收费了，即在意料之外又在情理之中，毕竟一个网站的运营不可能长期靠爱来发电。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602300227661-1602300227713.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602300227661-1602300227713.png" alt="title"></p>
 <p>不过定价方式比较奇特，10月31日前由用户自己填写，当然能设置的最低价格是 $1.99，从11月1号开始固定为 $3.99。</p>
 <p>如果你不想付费也还是可以继续使用的，只是免费版的 IFTTT 只能创建 3 个应用，这对于不是重度用户来说也是够的。</p>
 <p>我之前主要用在收藏资料，比如最早是从 Google Reader 到 Evernote， Pocket 到 Evernote，feedly 到 Evernote，后来笔记改为 Wiznote 后，又从 feedly 到 Wiznote 等等，当然 IFTTT 能做的事情远不仅仅是我的这点应用，可以结合家里的智能家居，比如智能温控器，来更有效的控制空调设备，或者结合智能空气检测仪，来控制新风系统等等。</p>
 <p>其实 IFTTT 的替代品挺多的，我指的是开源的，能够自建的那种。</p>
 <h1 id="n8n"><a href="#n8n" class="headerlink" title="n8n"></a>n8n</h1><p>n8n 是免费的基于节点的工作流自动化工具，可以轻松实现跨不同服务的任务自动化。</p>
 <p>类似 IFTTT、Zapier，可以互联互通包括 GitHub、Dropbox、Google、NextCLoud、RSS、Slack、Telegram 在内的几十款在线服务。实现当 A 条件发生，触发 B 服务这样的自动工作流程。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602309461118-1602309461125.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602309461118-1602309461125.png" alt="title"></p>
 <p>官网：<span class="exturl" data-url="aHR0cHM6Ly9uOG4uaW8v">https://n8n.io/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL244bi1pby9uOG4v">https://github.com/n8n-io/n8n/<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602308666661-1602308666702.png" alt="title"><br>【图片来自：官网】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602308666661-1602308666702.png" alt="title"><br>【图片来自：官网】</p>
 <h1 id="Node-RED"><a href="#Node-RED" class="headerlink" title="Node-RED"></a>Node-RED</h1><p>Node-RED 是一种编程工具，用于以新颖有趣的方式将硬件设备、API 和在线服务连接在一起。 它提供了一个基于浏览器的编辑器，使您可以轻松地使用设计器中的各种节点将流连接在一起，只需单击即可将其部署到其运行，简洁高效的完成一个服务的部署。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602316253657-1602316253664.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602316253657-1602316253664.png" alt="title"></p>
 <p>官网：<span class="exturl" data-url="aHR0cHM6Ly9ub2RlcmVkLm9yZy8=">https://nodered.org/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25vZGUtcmVkL25vZGUtcmVk">https://github.com/node-red/node-red<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602315954066-1602315954075.png" alt="title"><br>【图片来自：官网】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602315954066-1602315954075.png" alt="title"><br>【图片来自：官网】</p>
 <h1 id="StackStorm"><a href="#StackStorm" class="headerlink" title="StackStorm"></a>StackStorm</h1><p>StackStorm 是一个强大的自动化平台，结合 DevOps 和 ChatOps ，提供可扩展、灵活和健壮的工具链用于应用、服务和工作流的自动化能力。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602309409523-1602309409523.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602309409523-1602309409523.png" alt="title"></p>
 <p>官网：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja3N0b3JtLmNvbS8=">https://stackstorm.com/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N0YWNrU3Rvcm0vc3Qy">https://github.com/StackStorm/st2<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602309301405-1602309301415.png" alt="title"><br>【图片来自：官网】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602309301405-1602309301415.png" alt="title"><br>【图片来自：官网】</p>
 <h1 id="Huginn"><a href="#Huginn" class="headerlink" title="Huginn"></a>Huginn</h1><p>Huginn 是一个强大的自动化工具，它就像 IFTTT，if 1 then 2，当事件 1 出现，自动完成事件 2。 它可以帮助你设置感应器，收集信息并完成从信息的搜集—过滤—通知这样一连串的任务。 比起 IFTTT，它更加强大，更加自动化，也更加难以搞定。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602309926948-1602309926955.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602309926948-1602309926955.png" alt="title"></p>
 <p>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2h1Z2lubi9odWdpbm4=">https://github.com/huginn/huginn<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602310311110-1602310311119.png" alt="title"><br>【图片来自：官网】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602310311110-1602310311119.png" alt="title"><br>【图片来自：官网】</p>
 <h1 id="Flogo"><a href="#Flogo" class="headerlink" title="Flogo"></a>Flogo</h1><p>Flogo项目是一个资源高效的，基于 Go 的开源生态系统，用于构建事件驱动的应用程序。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602317155625-1602317155628.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602317155625-1602317155628.png" alt="title"></p>
 <p>主页：<span class="exturl" data-url="aHR0cDovL3d3dy5mbG9nby5pby8=">http://www.flogo.io/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RpYmNvc29mdHdhcmUvZmxvZ28=">https://github.com/tibcosoftware/flogo<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602317169844-1602317169851.png" alt="title"><br>【图片来自：官网】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602317169844-1602317169851.png" alt="title"><br>【图片来自：官网】</p>
 <h1 id="Beehive"><a href="#Beehive" class="headerlink" title="Beehive"></a>Beehive</h1><p>Beehive 是由 Go 模板引擎驱动的开源 IFTTT，一个灵活的事件和代理系统。它允许你创建自己的代理，执行由事件和过滤器触发的自动化任务。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602317668267-1602317668274.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602317668267-1602317668274.png" alt="title"></p>
 <p>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211ZXNsaS9iZWVoaXZlLw==">https://github.com/muesli/beehive/<i class="fa fa-external-link-alt"></i></span></p>
 <p><img src="https://cdn.jsdelivr.net/gh/muesli/beehive-docs@master/screencaps/new_bees.gif" alt="title"><br>【图片来自：官网】</p>
 <h1 id="DataFire"><a href="#DataFire" class="headerlink" title="DataFire"></a>DataFire</h1><p>DataFire 是一个用于构建和集成 API 的开源框架，可以快速开发连接到 1000 多种不同服务的任务和 API。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602317855774-1602317855780.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602317855774-1602317855780.png" alt="title"></p>
 <p>主页：<span class="exturl" data-url="aHR0cHM6Ly9hcHAuZGF0YWZpcmUuaW8v">https://app.datafire.io/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0RhdGFGaXJlL0RhdGFGaXJl">https://github.com/DataFire/DataFire<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602317962457-1602317962464.png" alt="title"></p>
-<h1 id="Actionsflow"><a href="#Actionsflow" class="headerlink" title="Actionsflow"></a>Actionsflow</h1><p>Actionsflow 基于 GitHub Actions 实现，因此可通过配置 YAML 文件来构建工作流，亦可用作 IFTTT/Zapier 的开源替代品。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602317962457-1602317962464.png" alt="title"></p>
+<h1 id="Actionsflow"><a href="#Actionsflow" class="headerlink" title="Actionsflow"></a>Actionsflow</h1><p>Actionsflow 基于 GitHub Actions 实现，因此可通过配置 YAML 文件来构建工作流，亦可用作 IFTTT&#x2F;Zapier 的开源替代品。</p>
 <p>可用于构建各类 App、数据、API 之间的工作流程，帮你更好的处理文件同步、信息收集、任务管理等事项。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602312266089-1602312266092.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602312266089-1602312266092.png" alt="title"></p>
 <p>官网：<span class="exturl" data-url="aHR0cHM6Ly9hY3Rpb25zZmxvdy5naXRodWIuaW8v">https://actionsflow.github.io/<i class="fa fa-external-link-alt"></i></span><br>代码：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FjdGlvbnNmbG93L2FjdGlvbnNmbG93">https://github.com/actionsflow/actionsflow<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/10/10/1602312796307-1602312796316.png" alt="title"><br>【图片来自：<span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNTcyMjk2NDM4OS9Kb2RGRGRqMmw=">https://weibo.com/5722964389/JodFDdj2l<i class="fa fa-external-link-alt"></i></span>】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/10/10/1602312796307-1602312796316.png" alt="title"><br>【图片来自：<span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vNTcyMjk2NDM4OS9Kb2RGRGRqMmw=">https://weibo.com/5722964389/JodFDdj2l<i class="fa fa-external-link-alt"></i></span>】</p>
 <p>当然还有一些已经不活跃的项目，比如 Trigger Happy、Fr8，有新的后续再增补吧。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>玩转 IFTTT，互联网自动化也可以很简单<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8yMjU4ODA4NTVfMTE1Nzg1">https://www.sohu.com/a/225880855_115785<i class="fa fa-external-link-alt"></i></span></p>
-<p>n8n - 开源自动工作流工具，类 IFTTT/Zapier，互联互通 50+ 款在线服务 - 小众软件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9uOG4taW8v">https://www.appinn.com/n8n-io/<i class="fa fa-external-link-alt"></i></span></p>
+<p>n8n - 开源自动工作流工具，类 IFTTT&#x2F;Zapier，互联互通 50+ 款在线服务 - 小众软件<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXBwaW5uLmNvbS9uOG4taW8v">https://www.appinn.com/n8n-io/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Stackstorm的介绍与入门_夜深人静后的码农-CSDN博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N4YjA4NDE5MDExMTYvYXJ0aWNsZS9kZXRhaWxzLzc5ODI2OTY5">https://blog.csdn.net/sxb0841901116/article/details/79826969<i class="fa fa-external-link-alt"></i></span></p>
 <p>Huginn中文指南：搭建自己的iFTTT — Corkine’s BlOG<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm1hemhhbmdqaW5nLmNvbS8yMDE3LzAxLzE0L2h1Z2lubiVFNiU4QyU4NyVFNSU4RCU5Ny8=">https://blog.mazhangjing.com/2017/01/14/huginn%E6%8C%87%E5%8D%97/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Beehive-go-Go 模板引擎驱动的 IFTTT<br>地址：<span class="exturl" data-url="aHR0cDovL2NvZGluZ2RpY3QuY29tL29zL3NvZnR3YXJlLzkzNzMz">http://codingdict.com/os/software/93733<i class="fa fa-external-link-alt"></i></span></p>
@@ -691,7 +722,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

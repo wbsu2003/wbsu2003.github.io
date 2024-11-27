@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Notea 是存储在 S3 上的自托管笔记应用程序，不需要数据库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306141146932.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306141146932.png">
 <meta property="article:published_time" content="2023-07-31T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="S3">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306141146932.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306141146932.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/07/31/%E5%9F%BA%E4%BA%8ES3%E5%AD%98%E5%82%A8%E7%9A%84%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Notea/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306141146932.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306141146932.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +546,7 @@
 <p> 老苏选择的是<code>main</code> 而不是 <code>latest</code>，因为 <code>latest</code> 对应的版本为 <code>0.3.6</code>，已经有两年没有更新了；</p>
 <p>撰写本文时，<code>main</code>对应的版本是 <code>0.4.0-alpha</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306141058225.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306141058225.png"></p>
 <h2 id="docker-cli-安装"><a href="#docker-cli-安装" class="headerlink" title="docker cli 安装"></a>docker cli 安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 notea 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/notea/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 notea 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/notea</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 MinIO 容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name notea-minio \</span><br><span class="line">   --entrypoint sh \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e MINIO_ACCESS_KEY=Q3AM3UQ867SPQQA43P2F \</span><br><span class="line">   -e MINIO_SECRET_KEY=zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG \</span><br><span class="line">   minio/minio \</span><br><span class="line">   -c <span class="string">&#x27;mkdir -p /data/notea &amp;&amp; mkdir -p /data/notea-test &amp;&amp; minio server /data&#x27;</span></span><br></pre></td></tr></table></figure>
 
@@ -583,32 +614,32 @@
 <blockquote>
 <p>按前面的设置，<code>PASSWORD</code>设为了 <code>notea</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131712691.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131712691.png"></p>
 <p>主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131714760.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131714760.png"></p>
 <h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p>点左下角的齿轮，进入 <code>Settings</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131716602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131716602.png"></p>
 <p><code>Settings</code> –&gt; <code>Basic</code> –&gt; <code>Language</code>，选择 <code>简体中文</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131716761.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131716761.png"></p>
 <p>即时生效，不需要保持或者刷新页面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131716705.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131716705.png"></p>
 <h2 id="新建页面"><a href="#新建页面" class="headerlink" title="新建页面"></a>新建页面</h2><p>点 <code>+</code> 号新建页面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131718572.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131718572.png"></p>
 <p>文档支持 <code>markdown</code> 格式</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131719769.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131719769.png"></p>
 <p>支持分享</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131722089.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131722089.png"></p>
 <h2 id="每日笔记"><a href="#每日笔记" class="headerlink" title="每日笔记"></a>每日笔记</h2><p>可以新建 <code>每日笔记</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131718956.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131718956.png"></p>
 <p>和页面的区别在于默认以日期为文件名</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131723228.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131723228.png"></p>
 <p>笔记文件在 <code>FileStation</code> 中的存储</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131729618.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131729618.png"></p>
 <p>最后来张官方效果图，看起来在移动端上，显示效果也还不错</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131759892.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131759892.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>QingWei-Li/notea: 📒 Self hosted note taking app stored on S3<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1FpbmdXZWktTGkvbm90ZWE=">https://github.com/QingWei-Li/notea<i class="fa fa-external-link-alt"></i></span></p>
-<p>Notea - Self-hosted note-taking app stored on S3 | AKA a self-hosted Notion alternative : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvbjBqYWNmL2NvbW1lbnQvZ3c4OWl5by8/dXRtX3NvdXJjZT1zaGFyZSZ1dG1fbWVkaXVtPXdlYjJ4JmNvbnRleHQ9Mw==">https://www.reddit.com/r/selfhosted/comments/n0jacf/comment/gw89iyo/?utm_source=share&amp;utm_medium=web2x&amp;context=3<i class="fa fa-external-link-alt"></i></span></p>
+<p>QingWei-Li&#x2F;notea: 📒 Self hosted note taking app stored on S3<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1FpbmdXZWktTGkvbm90ZWE=">https://github.com/QingWei-Li/notea<i class="fa fa-external-link-alt"></i></span></p>
+<p>Notea - Self-hosted note-taking app stored on S3 | AKA a self-hosted Notion alternative : selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMvbjBqYWNmL2NvbW1lbnQvZ3c4OWl5by8/dXRtX3NvdXJjZT1zaGFyZSZ1dG1fbWVkaXVtPXdlYjJ4JmNvbnRleHQ9Mw==">https://www.reddit.com/r/selfhosted/comments/n0jacf/comment/gw89iyo/?utm_source&#x3D;share&amp;utm_medium&#x3D;web2x&amp;context&#x3D;3<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -755,7 +786,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

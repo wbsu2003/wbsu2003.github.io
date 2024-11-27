@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="如果需要远程播放，上一篇提到的Samba协议也是可以的，但只能用Zerotier组网方式了，如果我们还想通过Web上观看电影的话就只能在群晖上搭建流媒体服务了。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png">
 <meta property="article:published_time" content="2020-05-01T09:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Emby">
 <meta property="article:tag" content="Plex">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="Jellyfin">
 <meta property="article:tag" content="威动影音">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/01/%E5%AE%B6%E5%BA%AD%E5%A4%9A%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/unnamed-1588479602490.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -522,18 +553,18 @@
 </ul>
 </blockquote>
 <h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="DS-Video"><a href="#DS-Video" class="headerlink" title="DS Video"></a>DS Video</h2><p>DS Video可以在群晖的【套件中心】中找到并安装，安装设置都比较简单，界面效果图：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/2020-02-21_221218-1588338398920.jpg" alt="title"></p>
 <p>至于格式少的问题，可以通过安装第三方插件来解决，如果你在【套件中心】添加了第三方源【 <span class="exturl" data-url="aHR0cDovL3BhY2thZ2VzLnN5bm9jb21tdW5pdHkuY29tLw==">http://packages.synocommunity.com<i class="fa fa-external-link-alt"></i></span> 】，就可以直接搜索ffmpeg，安装完成后，Video Station将可以支持更多格式。</p>
 <h2 id="Plex"><a href="#Plex" class="headerlink" title="Plex"></a>Plex</h2><p>在群晖上Plex可以通过【套件中心】安装，官方支持的版本相对较低，如果想要高版本的也可以通过Docker来安装，界面效果图：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/plex-full-library-500x500-1588340022437.jpg" alt="title"></p>
 <h2 id="Emby"><a href="#Emby" class="headerlink" title="Emby"></a>Emby</h2><p>在群晖上Emby需要通过Docker来安装，当然也可以通过给【套件中心】增加第三方源的方式</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/5c124c17ba3232683.png_e680-1588340165884.png" alt="title"></p>
 <p>界面效果图：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/unnamed-1588340581645.jpg" alt="title"></p>
 <h2 id="Jellyfin"><a href="#Jellyfin" class="headerlink" title="Jellyfin"></a>Jellyfin</h2><p>个人推荐使用Jellyfin，主要是因为它是开源软件，所有功能都是免费的，界面效果图：</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/38650d9efcdc7b0bf3cfccd2de83ef6-1588340701890.png" alt="title"></p>
 <h1 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h1><p>以Jellyfin为例，来看看Docker的设置，端口默认是8096。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/01/fa7f1efca6ff367f2c42ea5814a8530-1588341241086.png" alt="title"></p>
 <ul>
 <li>如果你是有公网IP的幸运儿，只要在路由器中将8096映射出去即可；</li>
 <li>如果你和我一样用frp，需要在frpc.ini中增加一段设置：</li>
@@ -695,7 +726,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="TiddlyWiki 是非线性个人网络笔记本。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301147297.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301147297.png">
 <meta property="article:published_time" content="2022-02-21T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="wiki">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301147297.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301147297.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/02/21/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0%E6%9C%ACTiddlyWiki/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301147297.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301147297.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,9 +540,9 @@
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>tiddlywiki</code> ，选择第二个 <code>nicolaw/tiddlywiki</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292058599.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292058599.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>tiddlywiki</code>，记得给目录添加 <code>everyone</code> 的读写权限</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292232967.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292232967.png"></p>
 <p>不然会报错</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Error creating directory &#x27;/var/lib/tiddlywiki/mywiki&#x27;</span><br></pre></td></tr></table></figure>
 
@@ -529,7 +560,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292202820.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292202820.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -545,9 +576,9 @@
 <td align="center"><code>8080</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292207145.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292207145.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>默认情况下，用户名设置为 <code>anonymous</code> 而且无密码，你可以按照需要进行修改</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292213410.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292213410.png"></p>
 <p>如果您在群晖内存比较小，可以设置 <code>NODE_MEM</code> 指定 <code>NodeJS</code> 可以使用的最大内存（以 <code>MB</code> 为单位）</p>
 <table>
 <thead>
@@ -561,20 +592,20 @@
 <td align="center">例如设为 <code>400</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292226351.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292226351.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8080</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201292234674.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201292234674.png"></p>
 <h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>按照前面的版本划分， <code>node.js</code> 版不能直接使用 <code>TiddlyWiki</code> 官方插件库，只能通过配置文件 <code>tiddlywiki.info</code> 来添加</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301021620.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301021620.png"></p>
 <h3 id="简体中文"><a href="#简体中文" class="headerlink" title="简体中文"></a>简体中文</h3><p>在官方的插件库的 <code>Languages</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301037534.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301037534.png"></p>
 <p>找到简体中文</p>
 <blockquote>
 <p><code>$:/languages/zh-Hans</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301036250.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301036250.png"></p>
 <p>将 <code>tiddlywiki.info</code> 修改扩展名为 <code>txt</code> ，或者下载到本地进行编辑</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301044747.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301044747.png"></p>
 <p>在 <code>tiddlywiki.info</code> 中添加下面这段</p>
 <blockquote>
 <p>对应前面的 <code>$:/languages/zh-Hans</code></p>
@@ -582,35 +613,35 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;languages&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;zh-Hans&quot;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
 
 <p>本质上 <code>tiddlywiki.info</code> 是个 <code>json</code> 文件，所以语法上遵从的规范是 <code>json</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301043630.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301043630.png"></p>
 <p>恢复名称或者上传修改文件后，需要重启容器</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301101130.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301101130.png"></p>
 <p>才能生效</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301047980.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301047980.png"></p>
 <h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><p>在官方的插件库的 <code>Plugins</code> </p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301052677.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301052677.png"></p>
 <p>找到 <code>markdown</code> 插件</p>
 <blockquote>
 <p><code>$:/plugins/tiddlywiki/markdown</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301051568.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301051568.png"></p>
 <p>在 <code>tiddlywiki.info</code> 中的 <code>plugins</code> 中添加下面这段</p>
 <blockquote>
 <p>对应前面的  <code>$:/plugins/tiddlywiki/markdown</code></p>
 </blockquote>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;tiddlywiki/markdown&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301058190.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301058190.png"></p>
 <p>修改完成后需要重启容器才能生效</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/01/202201301103898.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/01/202201301103898.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>接下来您可以根据自己的需要安装插件，将 <code>TiddlyWiki</code> 打造成自己的专属应用。当然插件不是越多越好，一方面要考虑程序会不会变得臃肿，另一方面也要考虑未来的兼容性。</p>
 <p>老苏个人觉得入门并不难，但是要用好还是有点小门槛的。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Jermolene/TiddlyWiki5: A self-contained JavaScript wiki for the browser, Node.js, AWS Lambda etc.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0plcm1vbGVuZS9UaWRkbHlXaWtpNQ==">https://github.com/Jermolene/TiddlyWiki5<i class="fa fa-external-link-alt"></i></span></p>
+<p>Jermolene&#x2F;TiddlyWiki5: A self-contained JavaScript wiki for the browser, Node.js, AWS Lambda etc.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0plcm1vbGVuZS9UaWRkbHlXaWtpNQ==">https://github.com/Jermolene/TiddlyWiki5<i class="fa fa-external-link-alt"></i></span></p>
 <p>Installing custom plugins on Node.js: TiddlyWiki — a non-linear personal web notebook<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90aWRkbHl3aWtpLmNvbS9zdGF0aWMvSW5zdGFsbGluZyUyNTIwY3VzdG9tJTI1MjBwbHVnaW5zJTI1MjBvbiUyNTIwTm9kZS5qcy5odG1s">https://tiddlywiki.com/static/Installing%2520custom%2520plugins%2520on%2520Node.js.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>TiddlyWiki 舞 — 基礎文件正體中文版<br>地址：<span class="exturl" data-url="aHR0cDovL3R3NS16aC50aWRkbHlzcG90LmNvbS8=">http://tw5-zh.tiddlyspot.com/<i class="fa fa-external-link-alt"></i></span></p>
-<p>Jermolene/TiddlyDesktop: A custom desktop browser for TiddlyWiki 5 and TiddlyWiki Classic, based on nw.js<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0plcm1vbGVuZS9UaWRkbHlEZXNrdG9w">https://github.com/Jermolene/TiddlyDesktop<i class="fa fa-external-link-alt"></i></span></p>
-<p>tiddly-gittly/TidGi-Desktop: TidGi is an auto-git-backup, privatcy-in-mind, freely-deployed Tiddlywiki knowledgement Desktop app, with local REST API. 「 太记 」是一个基于「 太微 TiddlyWiki 」的知识管理桌面应用，能自动用Git备份、保护隐私内容、部署为博客，且可通过RESTAPI与Anki等应用连接。（迭代开发中欢迎试用，开发进度见下方链接，点 Watch 里面选 Release 可以在更新修复的时候收到通知！）(Under active development, see website below for details, click Watch and select “release” to get update!!)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RpZGRseS1naXR0bHkvVGlkR2ktRGVza3RvcA==">https://github.com/tiddly-gittly/TidGi-Desktop<i class="fa fa-external-link-alt"></i></span></p>
+<p>Jermolene&#x2F;TiddlyDesktop: A custom desktop browser for TiddlyWiki 5 and TiddlyWiki Classic, based on nw.js<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0plcm1vbGVuZS9UaWRkbHlEZXNrdG9w">https://github.com/Jermolene/TiddlyDesktop<i class="fa fa-external-link-alt"></i></span></p>
+<p>tiddly-gittly&#x2F;TidGi-Desktop: TidGi is an auto-git-backup, privatcy-in-mind, freely-deployed Tiddlywiki knowledgement Desktop app, with local REST API. 「 太记 」是一个基于「 太微 TiddlyWiki 」的知识管理桌面应用，能自动用Git备份、保护隐私内容、部署为博客，且可通过RESTAPI与Anki等应用连接。（迭代开发中欢迎试用，开发进度见下方链接，点 Watch 里面选 Release 可以在更新修复的时候收到通知！）(Under active development, see website below for details, click Watch and select “release” to get update!!)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RpZGRseS1naXR0bHkvVGlkR2ktRGVza3RvcA==">https://github.com/tiddly-gittly/TidGi-Desktop<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -756,7 +787,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

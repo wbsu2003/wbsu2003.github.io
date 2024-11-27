@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="WeekToDo 是一款免费的极简每周计划应用程序，专注于隐私。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282341601.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282341601.png">
 <meta property="article:published_time" content="2023-07-29T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="日程安排">
 <meta property="article:tag" content="时间管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282341601.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282341601.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/07/29/%E6%9E%81%E7%AE%80%E6%AF%8F%E5%91%A8%E8%AE%A1%E5%88%92%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8FWeekToDo/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282341601.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282341601.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,7 +535,7 @@
 <p><code>WeekToDo</code> 将日历和任务列表的概念混合在一个界面中。您可以以直观、简单的方式设置警报、颜色、重复任务、子任务等等。我们还关心您的隐私，因此您的所有数据都存储在您的设备中。</p>
 <p><code>WeekToDo</code> 是一个免费的开源项目，可供所有人使用。您可以像 <code>Windows</code>、<code>macOS</code> 和 <code>Linux</code> 上的本机应用程序一样使用它，也可以直接从网络浏览器中使用它。它还提供多种语言版本。官方提供了免费使用的站点：<span class="exturl" data-url="aHR0cHM6Ly93ZWVrdG9kby5tZS8=">https://weektodo.me/<i class="fa fa-external-link-alt"></i></span></p>
 <p>但官方未提供 <code>docker</code> 镜像，需要我们自己构建</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282352125.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282352125.png"></p>
 <h1 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h1><blockquote>
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
 </blockquote>
@@ -516,7 +547,7 @@
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>weektodo</code> ，选择第一个 <code>wbsu2003/weektodo</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307282226938.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307282226938.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -532,7 +563,7 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307282227193.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307282227193.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name weektodo \</span><br><span class="line">   -p 3808:80 \</span><br><span class="line">   wbsu2003/weektodo</span><br></pre></td></tr></table></figure>
 
@@ -543,26 +574,26 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 weektodo</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/weektodo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 weektodo 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/weektodo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3808</code> 就能看到首界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307282229952.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307282229952.png"></p>
 <p>程序自动进入向导，支持中文</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282240279.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282240279.png"></p>
 <p>接下来设置主题、隐私等，设置完成之后的主界面，开始有一些测试数据，实际上也是用来完成简单的教学的，看起来使用还是很简单的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282242466.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282242466.png"></p>
 <p>数据全部保存在本地，<strong>优点</strong>是可以确保数据的安全性和隐私性，<strong>缺点</strong>就是不能实现多客户端的同步，毕竟这个软件没有服务端，所以在线版也只是个 <code>Web client</code></p>
 <blockquote>
 <p>从官方的 <code>Roadmap</code> 看， 有支持 <code>Sync across devices</code> 的计划，这一点值得我们期待</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282247529.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282247529.png"></p>
 <p>不过 <code>WeekToDo</code> 提供了数据导入、导出的功能</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282252048.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282252048.png"></p>
 <p>还支持子任务</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282256609.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282256609.png"></p>
 <p>任务注释支持 <code>markdown</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282259196.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282259196.png"></p>
 <p>其他功能等大家来解锁吧，在老苏看来，<code>WeekToDo</code> 是个非常好的应用程序。简单、快速、专注。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/07/202307282350771.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/07/202307282350771.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>manuelernestog/weektodo: WeekToDo is a Free and Open Source Minimalist Weekly Planner and To Do list App focused on privacy. Available for Windows, Mac, Linux or online.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hbnVlbGVybmVzdG9nL3dlZWt0b2Rv">https://github.com/manuelernestog/weektodo<i class="fa fa-external-link-alt"></i></span></p>
+<p>manuelernestog&#x2F;weektodo: WeekToDo is a Free and Open Source Minimalist Weekly Planner and To Do list App focused on privacy. Available for Windows, Mac, Linux or online.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hbnVlbGVybmVzdG9nL3dlZWt0b2Rv">https://github.com/manuelernestog/weektodo<i class="fa fa-external-link-alt"></i></span></p>
 <p>WeekToDo Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93ZWVrdG9kby5tZS9ibG9nLzEv">https://weektodo.me/blog/1/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -710,7 +741,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

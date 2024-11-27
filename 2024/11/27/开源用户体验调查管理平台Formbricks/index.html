@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Formbricks 是一个多功能的开源用户体验调查平台，旨在优化产品体验和业务决策。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131244762.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131244762.png">
 <meta property="article:published_time" content="2024-11-27T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.966Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.172Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="问卷">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131244762.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131244762.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/11/27/%E5%BC%80%E6%BA%90%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E8%B0%83%E6%9F%A5%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0Formbricks/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131244762.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131244762.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -426,7 +457,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-11-27 09:00:00 / 修改时间：09:34:00" itemprop="dateCreated datePublished" datetime="2024-11-27T09:00:00+08:00">2024-11-27</time>
+      <time title="创建时间：2024-11-27 09:00:00 / 修改时间：10:45:28" itemprop="dateCreated datePublished" datetime="2024-11-27T09:00:00+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,12 +537,12 @@
 <li>用户旅程各阶段反馈收集</li>
 <li>应用内、网站、链接和电子邮件调查</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131041143.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131041143.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
 <p>本文写作时， <code>Formbricks</code> 镜像的 <code>latest</code> 版本对应为  <code>v2.5.3</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131047834.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131047834.png"></p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:15-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">formbricks-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">formbricks</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">formbricks</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">formbricks</span></span><br><span class="line">    </span><br><span class="line">  <span class="attr">formbricks:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/formbricks/formbricks:latest</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">formbricks-web</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3374</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./uploads:/home/nextjs/apps/web/uploads/</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">WEBAPP_URL:</span> <span class="string">http://192.168.0.197:3374</span></span><br><span class="line">      <span class="attr">DATABASE_URL:</span> <span class="string">&quot;postgresql://formbricks:formbricks@postgres:5432/formbricks?schema=public&quot;</span></span><br><span class="line">      <span class="attr">NEXTAUTH_SECRET:</span> <span class="string">9tjukHzjQSa8moZpFkCFQhX8cXq8Mzc8</span></span><br><span class="line">      <span class="attr">CRON_SECRET:</span> <span class="string">rX3vQ4xay7nuSrN5bGXlgbmBbFBZy96W</span></span><br><span class="line">      <span class="attr">MAIL_FROM:</span> <span class="string">wbsu2003@88.com</span></span><br><span class="line">      <span class="attr">SMTP_HOST:</span> <span class="string">smtp.88.com</span></span><br><span class="line">      <span class="attr">SMTP_PORT:</span> <span class="number">465</span></span><br><span class="line">      <span class="attr">SMTP_SECURE_ENABLED:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">SMTP_USER:</span> <span class="string">wbsu2003@88.com</span></span><br><span class="line">      <span class="attr">SMTP_PASSWORD:</span> <span class="string">&lt;第三方邮件客户端密码&gt;</span></span><br><span class="line">      <span class="attr">SMTP_REJECT_UNAUTHORIZED_TLS:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">ENCRYPTION_KEY:</span> <span class="string">bairajGTe3KJM6PkmCKpnWx3gNDUK5qk</span></span><br><span class="line">      <span class="attr">EMAIL_VERIFICATION_DISABLED:</span> <span class="number">1</span> </span><br><span class="line">      <span class="attr">PASSWORD_RESET_DISABLED:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">SIGNUP_DISABLED:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">INVITE_DISABLED:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
 
@@ -626,40 +657,40 @@
 <p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 formbricks 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/formbricks/&#123;data,uploads&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 formbricks 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/formbricks</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131125097.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131125097.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3374</code> 就能看到欢迎界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131003882.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131003882.png"></p>
 <p>创建管理员账号</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131005685.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131005685.png"></p>
 <p>输入用户名、邮件和密码</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131006365.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131006365.png"></p>
 <p>创建成功后，点 <code>login</code> 登录</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131007766.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131007766.png"></p>
 <p>跳转到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131009151.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131009151.png"></p>
 <p>点 <code>Login with Email</code>，输入邮箱和密码</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131010786.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131010786.png"></p>
 <p>再次点 <code>Login with Email</code> 登录，成功后需要输入组织，例如公司名称</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131012602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131012602.png"></p>
 <p>可以通过输入邮件邀请成员，当然也可以先跳过</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131013475.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131013475.png"></p>
 <p>根据需要选择选择想要调查的人群</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131014904.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131014904.png"></p>
 <p>选择你的行业</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131018145.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131018145.png"></p>
 <p>背景颜色和你的产品名称</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131019719.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131019719.png"></p>
 <p>根据您的选择，显示的界面会有差异，可能会看到一段代码，也可能会看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131021077.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131021077.png"></p>
 <p>点右上角的 <code>+</code> 号，开始创建你的调查表</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131031927.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131031927.png"></p>
 <p>可以更换左侧的模版</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131032611.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131032611.png"></p>
 <p><code>Formbricks</code> 本身支持多语言，但似乎只能启用了 <code>Enterprise </code>许可证才行</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/10/202410131227135.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/10/202410131227135.png"></p>
 <p>软件具体的使用，可以看官方的文档：<span class="exturl" data-url="aHR0cHM6Ly9mb3JtYnJpY2tzLmNvbS9kb2NzL2FwcC1zdXJ2ZXlzL3F1aWNrc3RhcnQ=">https://formbricks.com/docs/app-surveys/quickstart<i class="fa fa-external-link-alt"></i></span>，可惜不支持中文，只能借助翻译软件</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>formbricks/formbricks: Open Source Survey Platform<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Zvcm1icmlja3MvZm9ybWJyaWNrcw==">https://github.com/formbricks/formbricks<i class="fa fa-external-link-alt"></i></span>  </p>
+<p>formbricks&#x2F;formbricks: Open Source Survey Platform<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Zvcm1icmlja3MvZm9ybWJyaWNrcw==">https://github.com/formbricks/formbricks<i class="fa fa-external-link-alt"></i></span>  </p>
 <p>Formbricks | Privacy-first Experience Management<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9mb3JtYnJpY2tzLmNvbS8=">https://formbricks.com/<i class="fa fa-external-link-alt"></i></span>  </p>
 <p>Comprehensive Guide to Self-Hosting Formbricks - Formbricks Docs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9mb3JtYnJpY2tzLmNvbS9kb2NzL3NlbGYtaG9zdGluZy9vdmVydmlldw==">https://formbricks.com/docs/self-hosting/overview<i class="fa fa-external-link-alt"></i></span>  </p>
 </blockquote>
@@ -804,7 +835,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

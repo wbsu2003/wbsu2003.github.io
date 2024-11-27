@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="CloudDrive 是一款网盘挂载工具，主要支持挂载国产网盘。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820164501.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820164501.png">
 <meta property="article:published_time" content="2021-08-20T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.986Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.196Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网盘">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820164501.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820164501.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/20/%E9%80%82%E5%90%88%E5%9B%BD%E5%86%85%E7%BD%91%E7%9B%98%E7%9A%84%E5%85%8D%E8%B4%B9%E6%8C%82%E8%BD%BD%E5%B7%A5%E5%85%B7CloudDrive/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820164501.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820164501.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,12 +534,12 @@
 <p>这个项目并没有开源，目前已经支持 <code>windows</code> 和 <code>docker</code> 平台，建议先用小号尝鲜</p>
 <h1 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h1><p>和 <code>Rclone</code> 一样使用了 <code>fuse</code> 挂载云存储，所以我们会采用命令行方式来进行安装</p>
 <h2 id="第一步、建目录"><a href="#第一步、建目录" class="headerlink" title="第一步、建目录"></a>第一步、建目录</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>clouddrive</code>，然后在 <code>clouddrive</code> 文件夹中再创建两个新的子文件夹，分别命名为 <code>config</code> 和 <code>media</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820110911.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820110911.png"></p>
 <h2 id="第二步、共享挂载"><a href="#第二步、共享挂载" class="headerlink" title="第二步、共享挂载"></a>第二步、共享挂载</h2><p>按官方教程，有2种方法</p>
 <p>方法1、在 <code>docker</code> 服务中启用 <code>MountFlags</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /etc/systemd/system/docker.service.d/</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF &gt; /etc/systemd/system/docker.service.d/clear_mount_propagation_flags.conf</span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">MountFlags=shared</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820174553.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820174553.png"></p>
 <p>方法2、为主机中的映射卷启用共享挂载选项</p>
 <blockquote>
 <p>老苏用的方法2，因为这个之前老苏在『 <a href="https://laosu.tech/2021/06/21/%E7%BE%A4%E6%99%96%E4%B8%8A%E9%80%9A%E8%BF%87RcloneBrowser%E6%8C%82%E8%BD%BD%E4%BA%91%E7%9B%98">群晖上通过RcloneBrowser挂载云盘</a> 』 一文中用过</p>
@@ -523,54 +554,54 @@
 <h2 id="第三步、启动容器"><a href="#第三步、启动容器" class="headerlink" title="第三步、启动容器"></a>第三步、启动容器</h2><p>在 <code>ssh</code> 客户端中执行下面👇的命令即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--privileged \</span><br><span class="line">--name clouddrive \</span><br><span class="line">--device /dev/fuse:/dev/fuse \</span><br><span class="line">--restart unless-stopped \</span><br><span class="line">-v /volume2/docker/clouddrive:/CloudNAS:shared \</span><br><span class="line">-v /volume2/docker/clouddrive/config:/Config \</span><br><span class="line">-v /volume2/docker/clouddrive/media:/media:shared \</span><br><span class="line">-p 9798:9798 \</span><br><span class="line">cloudnas/clouddrive</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820144542.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820144542.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>当你在容器中看到 <code>clouddrive</code> ，就说明已经安装成功了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820172610.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820172610.png"></p>
 <p>在浏览器中输入 <code>http://群晖IP:9798</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820113645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820113645.png"></p>
 <p>先要注册账号，登录成功后是空白的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820170805.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820170805.png"></p>
 <p>点图示之处，会显示支持的云盘</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820114146.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820114146.png"></p>
 <h2 id="115"><a href="#115" class="headerlink" title="115"></a>115</h2><p>直接用手机 <code>APP</code> 扫描二维码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820114513.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820114513.png"></p>
 <p>扫描成功后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820114701.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820114701.png"></p>
 <p>进入目录</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820170858.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820170858.png"></p>
 <p>点开一部电影</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820115910.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820115910.png"></p>
 <p>不过老苏因为不是 <code>115</code> 会员，所以速度不怎么样，基本上一直都在转圈。</p>
 <p>在 <code>file station</code> 能看到 <code>mount</code> 到本地的目录文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820115222.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820115222.png"></p>
 <p>在 <code>ssh</code> 客户端中执行 <code>df -h</code> 能看到挂载成功的盘符</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820174229.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820174229.png"></p>
 <p>但是新建目录、拷贝文件，都会报错，不过删除文件夹却可以</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820131015.png" alt="创建目录报错"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820131015.png" alt="创建目录报错"></p>
 <p>怀疑是权限问题，所以重新改了一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name clouddrive \</span><br><span class="line">--cap-add SYS_ADMIN \</span><br><span class="line">--device /dev/fuse \</span><br><span class="line">--security-opt apparmor=unconfined \</span><br><span class="line">--restart unless-stopped \</span><br><span class="line">-v /volume2/docker/clouddrive:/CloudNAS:shared \</span><br><span class="line">-v /volume2/docker/clouddrive/config:/Config \</span><br><span class="line">-v /volume2/docker/clouddrive/media:/media:shared \</span><br><span class="line">-p 9798:9798 \</span><br><span class="line">cloudnas/clouddrive</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820155849.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820155849.png"></p>
 <p>但是情况还是一样的，只能后续再研究了</p>
 <h2 id="阿里云盘"><a href="#阿里云盘" class="headerlink" title="阿里云盘"></a>阿里云盘</h2><p>也是扫描二维码，这比需要自己抓取 <code>refresh_token</code> 简单多了，必须要给作者点个大大的赞👍</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820120339.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820120339.png"></p>
 <p>扫描成功后的用法是一样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820130002.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820130002.png"></p>
 <p>看电影和原生的一样快，直接直接拖拽快进，所以不限速的阿里云盘还是很香的，如果你要注册，可以点👇下面的链接：</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9wYWdlcy5hbGl5dW5kcml2ZS5jb20vbW9iaWxlLXBhZ2Uvd2ViL2JlaW52aXRlZC5odG1sP2NvZGU9NTg3M2FkYg==">https://pages.aliyundrive.com/mobile-page/web/beinvited.html?code=5873adb<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="Windows-安装"><a href="#Windows-安装" class="headerlink" title="Windows  安装"></a>Windows  安装</h1><p>因为没有找到官方网站，所以老苏把安装程序放 <code>阿里云盘</code>做了分享，下载链接：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYWxpeXVuZHJpdmUuY29tL3MvQnRLOHFackU1QW0=">https://www.aliyundrive.com/s/BtK8qZrE5Am<i class="fa fa-external-link-alt"></i></span></p>
 <p>安装很简单，完成后会用默认浏览器打开 <code>http://localhost:9798/</code>，因为开始已经注册过账号，这里只要登录即可，比 <code>docker</code> 安装的多了选择挂载的 <code>盘符</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820170034.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820170034.png"></p>
 <p>但是 <code>docker</code> 那边已经挂载成功的 <code>115</code> 和 <code>阿里云</code> 并没有出现，说明并没有做数据同步，可能是因为老苏没有启用 <code>账号信息同步到云端</code> 吧</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820170331.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820170331.png"></p>
 <p>还是需要扫码授权才能使用</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820170706.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820170706.png"></p>
 <p>资源管理器中各种文件操作都正常</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210820171157.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210820171157.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>虽然 <code>CloudDrive</code> 可能还存在一些 <code>bug</code> ，但是老苏还是很看好它，毕竟直接挂载才是网盘最终极的玩法。和 <code>RaiDrive</code>、<code>Mountain Duck</code> 等搭配使用，可以实现中外合璧的资源共享。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>cloudnas/clouddrive - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2Nsb3VkbmFzL2Nsb3VkZHJpdmU=">https://hub.docker.com/r/cloudnas/clouddrive<i class="fa fa-external-link-alt"></i></span></p>
-<p>CloudDrive - 将阿里云网盘变成电脑本地硬盘的免费挂载工具 (支持115/天翼/WebDAV) - 异次元软件下载<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS9jbG91ZGRyaXZlLmh0bWw=">https://www.iplaysoft.com/clouddrive.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>cloudnas&#x2F;clouddrive - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2Nsb3VkbmFzL2Nsb3VkZHJpdmU=">https://hub.docker.com/r/cloudnas/clouddrive<i class="fa fa-external-link-alt"></i></span></p>
+<p>CloudDrive - 将阿里云网盘变成电脑本地硬盘的免费挂载工具 (支持115&#x2F;天翼&#x2F;WebDAV) - 异次元软件下载<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBsYXlzb2Z0LmNvbS9jbG91ZGRyaXZlLmh0bWw=">https://www.iplaysoft.com/clouddrive.html<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -716,7 +747,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

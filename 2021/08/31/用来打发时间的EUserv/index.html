@@ -30,14 +30,14 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="EUserv 是只有 IPv6 地址的免费 VPS 。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901162113.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901162113.png">
 <meta property="article:published_time" content="2021-08-31T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="vps">
 <meta property="article:tag" content="EUserv">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901162113.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901162113.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/31/%E7%94%A8%E6%9D%A5%E6%89%93%E5%8F%91%E6%97%B6%E9%97%B4%E7%9A%84EUserv/">
@@ -183,6 +183,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -390,7 +421,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901162113.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901162113.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -431,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,12 +535,12 @@
 <p><code>VPS</code> 服务器（虚拟专用服务器）（<code>Virtual Private Server</code>，或简称 <code>VPS</code>）是利用虚拟服务器软件（如微软的 <code>Virtual Server</code>、<code>VMware</code> 的<code>ESX server</code>、<code>SWsoft</code> 的 <code>Virtuozzo</code> ）在一台物理服务器上创建多个相互隔离的小服务器。【百度百科】</p>
 </blockquote>
 <h1 id="申请"><a href="#申请" class="headerlink" title="申请"></a>申请</h1><p>怎么申请 <code>EUserv</code> 的网上教程太多了，这里就略过了，老苏从申请到开通足足用了 8 天，在自己都快不记得的时候，终于收到了邮件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901095316.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901095316.png"></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>登录后台，首先要找到 <code>IP</code> 和密码，这个在 <code>Serverdata</code> 中，一定要<strong>做好记录</strong></p>
 <blockquote>
 <p><code>IPv6</code> 地址不要带后面的 <code>/128</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901095831.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901095831.png"></p>
 <p>对于这种纯 <code>IPv6</code> 的 <code>VPS</code> ，怎么连上去设置是个大问题，老苏研究了很多网上的教程，大致做个总结：</p>
 <ul>
 <li><p>第一种是在 <code>Windows 10</code> 下，通过设置 <code>Teredo</code> 服务器来开启 <code>IPv6</code> 访问，这种方法一旦搞定可以一劳永逸，可惜不知道是老苏太笨，还是教程过期，总之没搞成功，虽然 <code>ipconfig /all</code> 中已经看到分配的  <code>IPv6</code> 地址</p>
@@ -520,52 +551,52 @@
 <blockquote>
 <p>测试地址：<span class="exturl" data-url="aHR0cHM6Ly90ZXN0LWlwdjYuY29tL2luZGV4Lmh0bWwuemhfQ04=">https://test-ipv6.com/index.html.zh_CN<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901100824.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901100824.png"></p>
 <ul>
 <li>第三种方式是通过中转网站，比如 <code>嘿哟终端</code> ：（<span class="exturl" data-url="aHR0cHM6Ly9oZXl0ZXJtLmNvbS8=">https://heyterm.com<i class="fa fa-external-link-alt"></i></span>）来访问，但是老苏试过所以的节点，不是超时就是无法连接，估摸着用的人太多了吧</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901101921.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901101921.png"></p>
 <ul>
 <li>第四种方式和第三种有点类似，但需要你自己有一台同时支持 <code>IPv4</code> 和 <code>IPv6</code> 的 <code>VPS</code> 来做 <code>SSH</code> 中转</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901102953.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901102953.png"></p>
 <ul>
 <li>第五种用手机做热点，一般来说手机拨号默认采用的 <code>APN</code> 协议同时支持 <code>IPv4/IPv6</code>，如果不是自己改一下就行</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901102333.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901102333.png"></p>
 <p>所以对老苏来说，可行的方案只有第五种了，但是不是每次都需要这么麻烦而且不经济呢？显然不是，因为老苏想到了 <code>Tailscale</code></p>
 <blockquote>
 <p>相关文章：『 <a href="https://laosu.tech/2020/11/04/%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE%E7%BE%A4%E6%99%96%E7%9A%84%E6%96%B0%E6%96%B9%E6%A1%88Tailscale">外网访问群晖的新方案Tailscale</a> 』</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/202109011249654.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/202109011249654.png"></p>
 <p><code>Tailscale</code> 本身是完全支持 <code>IPv6</code> 的，即使您的 <code>ISP</code> 不支持 <code>IPv6</code>，<code>Tailscale</code> 也可以将 <code>IPv6</code> 数据包加密后通过 <code>WireGuard</code> 隧道在 <code>Tailscale</code> 节点之间传输，更多关于 <code>Tailscale IPv6</code> 的相关内容请参考：<span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2tiLzExMjEvaXB2Ng==">https://tailscale.com/kb/1121/ipv6<i class="fa fa-external-link-alt"></i></span></p>
 <p>所以 <code>EUserv</code> 到手之后的第一件事情就是 <code>SSH</code> 登录并安装 <code>Tailscale</code>，之后除非重装系统，否则你都可以用 <code>Tailscale</code> 的 <code>IPv4</code> 地址来登录了</p>
 <p>安装教程可以在 <span class="exturl" data-url="aHR0cHM6Ly90YWlsc2NhbGUuY29tL2Rvd25sb2FkL2xpbnV4L2NlbnRvcy03">https://tailscale.com/download/linux/centos-7<i class="fa fa-external-link-alt"></i></span> 找到，应该基本覆盖上了 <code>EUserv</code> 支持的系统</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901111201.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901111201.png"></p>
 <p>接下来就和一般的 <code>IPv4</code> 的 <code>VPS</code> 一样使用了，你可以安装宝塔，或者直接搭建 <code>LNMP</code>，<strong>只要性能允许</strong>。</p>
 <p>当然如果你搭的网站想要给别人用，还需要再套一个 <code>Cloudflare</code>，不然别人还是访问不了，这方面的教程也很多，有兴趣可以自己研究。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901143853.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901143853.png"></p>
 <h1 id="续期"><a href="#续期" class="headerlink" title="续期"></a>续期</h1><p>可能是因为用的人太多，<code>EUserv</code> 已经改成了需要每个月手动续期，当然这种小事情肯定难不倒聪明的网友，有利用 <code>github action</code> 自动续期的，也有利用 <code>腾讯云函数</code> 自动续期的，不过老苏注意到，有人因此被封了 <code>github</code> 账号。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p><code>EUserv</code> 有很多优点，比如不光免费还不要用信用卡认证，所以用来学习 <code>linux</code>、搭建网站是不错的选择</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901133610.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901133610.png"></p>
 <p>但是说实话，性子急的人不适合玩 <code>EUserv</code> ，不光光是因为申请时间长，而是 <code>EUserv</code> 中途经常会玩失联，而且一旦失联时间还不好说，快则几个小时，慢则几天，期间能证明它还存在的唯一证据只有在 <code>Tailscale</code> 的管理页面上还显示着 <code>Connected</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901115053.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901115053.png"></p>
 <p>上一次的 <code>Reinstallation</code> 和 <code>Webreboot</code> 过去了四天还没处理</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901115417.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901115417.png"></p>
 <p>但是它居然活过来了，现在宝塔里的状态</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901115705.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901115705.png"></p>
 <p>不过更多的时候是这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901120842.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901120842.png"></p>
 <p>执行下面👇的命令可以获取一些主机信息，供大家参考</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- bench.sh | bash</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210901133230.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210901133230.png"></p>
 <p>如果你和老苏一样不用考虑时间成本，可以撸一个来玩玩，不然还是算了吧，免得你生气砸坏键盘，那就得不偿失了😜</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>EUserv 德国永久免费VPS申请 支持IPv6/IPv4 安装宝塔以及自动续期 | 站长资源网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYm95aG9zdC5jbi9mcmVlcGhwaG9zdGluZy9ldXNlcnYuaHRtbA==">https://www.boyhost.cn/freephphosting/euserv.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>EUserv 德国永久免费VPS申请 支持IPv6&#x2F;IPv4 安装宝塔以及自动续期 | 站长资源网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYm95aG9zdC5jbi9mcmVlcGhwaG9zdGluZy9ldXNlcnYuaHRtbA==">https://www.boyhost.cn/freephphosting/euserv.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>如何用腾讯云函数给EUserv德国免费VPS自动续期-把握度<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9iYXdvZHUuY29tL2V1c2Vydi1yZW5ldy8=">https://bawodu.com/euserv-renew/<i class="fa fa-external-link-alt"></i></span></p>
-<p>cokemine/EUserv_extend: A simple Python Script help you renew free EUserv IPv6 VPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Nva2VNaW5lL0VVc2Vydl9leHRlbmQ=">https://github.com/CokeMine/EUserv_extend<i class="fa fa-external-link-alt"></i></span></p>
-<p>p3terx/euserv-extend - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL3AzdGVyeC9ldXNlcnYtZXh0ZW5k">https://registry.hub.docker.com/r/p3terx/euserv-extend<i class="fa fa-external-link-alt"></i></span></p>
+<p>cokemine&#x2F;EUserv_extend: A simple Python Script help you renew free EUserv IPv6 VPS<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Nva2VNaW5lL0VVc2Vydl9leHRlbmQ=">https://github.com/CokeMine/EUserv_extend<i class="fa fa-external-link-alt"></i></span></p>
+<p>p3terx&#x2F;euserv-extend - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL3AzdGVyeC9ldXNlcnYtZXh0ZW5k">https://registry.hub.docker.com/r/p3terx/euserv-extend<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -710,7 +741,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

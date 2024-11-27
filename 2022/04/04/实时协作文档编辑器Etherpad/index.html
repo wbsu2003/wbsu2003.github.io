@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Etherpad 是一个现代的实时协作文档编辑器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203062155805.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203062155805.png">
 <meta property="article:published_time" content="2022-04-03T23:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="编辑器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203062155805.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203062155805.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/04/04/%E5%AE%9E%E6%97%B6%E5%8D%8F%E4%BD%9C%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91%E5%99%A8Etherpad/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203062155805.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203062155805.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,12 +535,12 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>etherpad</code> ，选择第二个 <code>etherpad/etherpad</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051458739.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051458739.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>etherpad</code></p>
 <blockquote>
 <p>需要给目录增加读、写权限，否则容器启动的时候会因为文件创建失败而停止</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051631339.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051631339.png"></p>
 <table>
 <thead>
 <tr>
@@ -524,7 +555,7 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051614492.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051614492.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -540,26 +571,26 @@
 <td align="center"><code>9001</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051615341.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051615341.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>环境变量很多，涉及到几个方面，包括数据库、快捷键、皮肤、日志等设置、老苏没有做任何设置，采用了默认值</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051622995.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051622995.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:9011</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051648033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051648033.png"></p>
 <p>输入名称后点 <code>OK</code>后有个初始化的过程</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051656732.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051656732.png"></p>
 <p>完成后就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051658640.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051658640.png"></p>
 <p>虽然界面上都是英文，其实是支持中文的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051712536.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051712536.png"></p>
 <p>右上角可以设置名称，右下角是聊天窗口</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203051734493.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203051734493.png"></p>
 <p>软件本身的功能比较简单，但是如果你要多人使用，可能首先需要更改数据库，<code>Etherpad</code> 默认使用的数据库是 <code>DirtyDB</code> ，老苏尝试了下 <code>postgres</code></p>
 <h1 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h1><h2 id="安装-PostgreSQL"><a href="#安装-PostgreSQL" class="headerlink" title="安装 PostgreSQL"></a>安装 PostgreSQL</h2><p>在注册表中搜索 <code>postgres</code> ，选择第一个 <code>postgres</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061124955.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061124955.png"></p>
 <p>改个名字 <code>ep-postgres</code>，修改只是为了容易识别</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061138555.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061138555.png"></p>
 <h3 id="卷-1"><a href="#卷-1" class="headerlink" title="卷"></a>卷</h3><p>在  <code>etherpad</code> 中建一个子目录 <code>postgres</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111081526349.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111081526349.png"></p>
 <table>
 <thead>
 <tr>
@@ -572,7 +603,7 @@
 <td align="center"><code>/var/lib/postgresql/data</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061149462.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061149462.png"></p>
 <h3 id="端口-1"><a href="#端口-1" class="headerlink" title="端口"></a>端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
 <p>默认端口被占用，所以改了个没被占用的</p>
@@ -588,7 +619,7 @@
 <td align="center"><code>5432</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061154748.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061154748.png"></p>
 <h3 id="环境-1"><a href="#环境-1" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -608,12 +639,12 @@
 <blockquote>
 <p>数据库账号、密码后面还会用到</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061659437.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061659437.png"></p>
 <p>如果运行正常并且不报错的话，就可以进行 <code>etherpad</code> 的改造了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061201646.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061201646.png"></p>
 <h2 id="修改-Etherpad-容器"><a href="#修改-Etherpad-容器" class="headerlink" title="修改 Etherpad 容器"></a>修改 Etherpad 容器</h2><p>先停掉 <code>Etherpad</code> 容器，然后进入编辑模式</p>
 <h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>找到前面安装的 <code>ep-postgres</code>，别名简单点就好</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061543304.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061543304.png"></p>
 <h3 id="环境-2"><a href="#环境-2" class="headerlink" title="环境"></a>环境</h3><table>
 <thead>
 <tr>
@@ -646,26 +677,26 @@
 <td align="center">数据库密码，设为 <code>NaB3mbeY2JYFAdnFUjEKC4GVgApLN9Lb</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061644160.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061644160.png"></p>
 <p>启动之后新建的的提示已经没有 <code>DirtyDB</code> 警告信息了</p>
 <blockquote>
 <p><code>Warning: DirtyDB is used. This is not recommended for production. -- To suppress these warning messages change suppressErrorsInPadText to true in your settings.json</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061719618.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061719618.png"></p>
 <p>测试了下手机和 <code>PC</code> 之间的协同编辑，不同的用户可以设置不同的颜色</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061730124.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061730124.jpg"></p>
 <p>更厉害的是可以记录整个协同写作的过程</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061909817.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061909817.gif"></p>
 <p>至于导入、导出功能，因为没有安装 <code>Abiword</code> 和 <code>Libreoffice</code>，所以就没测试</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203061928952.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203061928952.png"></p>
 <p>其他的功能还有很多，例如更改外观、安装插件等等，可以去看看官方的说明文档：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGUvd2lraQ==">https://github.com/ether/etherpad-lite/wiki<i class="fa fa-external-link-alt"></i></span></p>
 <p>最后还是上一张官网的动图</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/03/202203112057337.gif"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/03/202203112057337.gif"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>ether/etherpad-lite: Etherpad: A modern really-real-time collaborative document editor.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGU=">https://github.com/ether/etherpad-lite<i class="fa fa-external-link-alt"></i></span></p>
+<p>ether&#x2F;etherpad-lite: Etherpad: A modern really-real-time collaborative document editor.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGU=">https://github.com/ether/etherpad-lite<i class="fa fa-external-link-alt"></i></span></p>
 <p>Etherpad<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9ldGhlcnBhZC5vcmcv">https://etherpad.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>etherpad-lite/docker.md at develop · ether/etherpad-lite<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGUvYmxvYi9kZXZlbG9wL2RvYy9kb2NrZXIubWQ=">https://github.com/ether/etherpad-lite/blob/develop/doc/docker.md<i class="fa fa-external-link-alt"></i></span></p>
-<p>Available Plugins · ether/etherpad-lite Wiki<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGUvd2lraS9BdmFpbGFibGUtUGx1Z2lucw==">https://github.com/ether/etherpad-lite/wiki/Available-Plugins<i class="fa fa-external-link-alt"></i></span></p>
+<p>etherpad-lite&#x2F;docker.md at develop · ether&#x2F;etherpad-lite<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGUvYmxvYi9kZXZlbG9wL2RvYy9kb2NrZXIubWQ=">https://github.com/ether/etherpad-lite/blob/develop/doc/docker.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>Available Plugins · ether&#x2F;etherpad-lite Wiki<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aGVyL2V0aGVycGFkLWxpdGUvd2lraS9BdmFpbGFibGUtUGx1Z2lucw==">https://github.com/ether/etherpad-lite/wiki/Available-Plugins<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -811,7 +842,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Pi.Alert 可以监控您的 WIFI&#x2F;LAN 网络，并对新的（入侵者或黑客）设备发出警报。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091449833.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091449833.png">
 <meta property="article:published_time" content="2023-08-02T00:25:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091449833.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091449833.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/08/02/%E7%BD%91%E7%BB%9C%E5%85%A5%E4%BE%B5%E6%8E%A2%E6%B5%8B%E5%99%A8Pi.Alert/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091449833.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091449833.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +508,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
+      <span>3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -510,7 +541,7 @@
 <blockquote>
 <p>细分的版本号是 <code>23.5.7</code>，但实际上 <code>23.5.7</code>、<code>23.5</code>、<code>23</code>、<code>latest</code> 是同一个版本；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091106095.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091106095.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>pialert</code>，并在其中建两个子文件夹，分别是 <code>config</code> 和 <code>db</code></p>
 <table>
 <thead>
@@ -531,9 +562,9 @@
 <td align="center">存放数据库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091134910.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091134910.png"></p>
 <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>勾选 <code>使用与 Docker Host 相同的网络</code> </p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091135431.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091135431.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -559,12 +590,12 @@
 </tr>
 </tbody></table>
 <p>一般只要修改 <code>TZ</code> 为 <code>Asia/Shanghai</code> 就可以了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091142250.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091142250.png"></p>
 <h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>要避免出现权限问题，可以勾选 <code>使用高权限执行容器</code></p>
 <blockquote>
 <p>老苏没有勾选，似乎也能正常工作；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091147971.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091147971.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pialert 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pialert/&#123;config,db&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pialert 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pialert</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name pialert \</span><br><span class="line">   --network=host \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/home/pi/pialert/config \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/db:/home/pi/pialert/db \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e PORT=20211 \</span><br><span class="line">   -e HOST_USER_ID=1000 \</span><br><span class="line">   -e HOST_USER_GID=1000 \</span><br><span class="line">   jokobsk/pi.alert:latest</span><br></pre></td></tr></table></figure>
 
@@ -575,38 +606,38 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 pialert 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/pialert/&#123;config,db&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 pialert 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/pialert</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:20211</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091142504.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091142504.png"></p>
 <p>只有两个设备显然是不正确的，我们可以选择手动编辑 <code>config</code> 目录下的 <code>pialert.conf</code> 文件</p>
 <blockquote>
 <p>修改前，记得备份文件，当然，万一改出问题了也不用太担心，大不了重来呗</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091000332.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091000332.png"></p>
 <p>但是更简单的方式是在 <code>settings</code> 中进行修改</p>
 <blockquote>
 <p>在<code>settings</code> 中修改，会自动生成备份文件；</p>
 </blockquote>
 <p>显然，系统默认启用了方式1扫描，也就是启用了 <code>Enable ARP scan</code>，但是 <code>SCAN_SUBNETS</code> 显然不正确</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091200473.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091200473.png"></p>
 <p>老苏的 <code>IP</code> 应该是 <code>192.168.0.0/24</code> 而不是 <code>192.168.1.0/24</code>，至于网络接口是 <code>eth0</code>，<code>eth1</code> ，也是一头雾水，这需要通过 <code>iwconfig</code> 在容器内查询</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line">docker <span class="built_in">exec</span> -it --user root pialert /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># (国内用户)改阿里源</span></span><br><span class="line">sed -i <span class="string">&quot;s@http://deb.debian.org@http://mirrors.aliyun.com@g&quot;</span> /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 wireless-tools 包</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install -y wireless-tools</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找接口名称</span></span><br><span class="line">iwconfig</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091030441.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091030441.png"></p>
 <p>看起来应该是 <code>eth0</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091354706.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091354706.png"></p>
 <p>前面输入 <code>192.168.0.0/24</code>，后面输入 <code>eth0</code>，然后点 <code>Add</code> 按钮，下拉到底部点 <code>Save</code> 按钮</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091356106.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091356106.png"></p>
 <p>会提示生成了备份文件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091358374.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091358374.png"></p>
 <p>然后点 <code>Enable ARP scan</code> 后面的 ▶️ 按钮开始扫描</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091402523.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091402523.png"></p>
 <p>回到 <code>Devices</code>，局域网的设备就都显示出来了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202305091035522.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202305091035522.png"></p>
 <p>更多的功能就留给大家自己探索了</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>pucherot/Pi.Alert: WIFI / LAN intruder detector. Check the devices connected and alert you with unknown devices. It also warns of the disconnection of “always connected” devices<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B1Y2hlcm90L1BpLkFsZXJ0">https://github.com/pucherot/Pi.Alert<i class="fa fa-external-link-alt"></i></span></p>
-<p>jokob-sk/Pi.Alert: 💻🔍 WIFI / LAN intruder detector. Scans for devices connected to your network and alerts you if new and unknown devices are found.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva29iLXNrL1BpLkFsZXJ0">https://github.com/jokob-sk/Pi.Alert<i class="fa fa-external-link-alt"></i></span></p>
-<p>jokobsk/pi.alert - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2pva29ic2svcGkuYWxlcnQ=">https://registry.hub.docker.com/r/jokobsk/pi.alert<i class="fa fa-external-link-alt"></i></span></p>
-<p>Pi.Alert/README.md at main · jokob-sk/Pi.Alert · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva29iLXNrL1BpLkFsZXJ0L2Jsb2IvbWFpbi9kb2NrZXJmaWxlcy9SRUFETUUubWQ=">https://github.com/jokob-sk/Pi.Alert/blob/main/dockerfiles/README.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>pucherot&#x2F;Pi.Alert: WIFI &#x2F; LAN intruder detector. Check the devices connected and alert you with unknown devices. It also warns of the disconnection of “always connected” devices<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3B1Y2hlcm90L1BpLkFsZXJ0">https://github.com/pucherot/Pi.Alert<i class="fa fa-external-link-alt"></i></span></p>
+<p>jokob-sk&#x2F;Pi.Alert: 💻🔍 WIFI &#x2F; LAN intruder detector. Scans for devices connected to your network and alerts you if new and unknown devices are found.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva29iLXNrL1BpLkFsZXJ0">https://github.com/jokob-sk/Pi.Alert<i class="fa fa-external-link-alt"></i></span></p>
+<p>jokobsk&#x2F;pi.alert - Docker Image | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2pva29ic2svcGkuYWxlcnQ=">https://registry.hub.docker.com/r/jokobsk/pi.alert<i class="fa fa-external-link-alt"></i></span></p>
+<p>Pi.Alert&#x2F;README.md at main · jokob-sk&#x2F;Pi.Alert · GitHub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pva29iLXNrL1BpLkFsZXJ0L2Jsb2IvbWFpbi9kb2NrZXJmaWxlcy9SRUFETUUubWQ=">https://github.com/jokob-sk/Pi.Alert/blob/main/dockerfiles/README.md<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -752,7 +783,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

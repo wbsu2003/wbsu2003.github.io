@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Hugo 是一个用 Go 编写的静态 HTML 和 CSS 网站生成器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205302302495.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205302302495.png">
 <meta property="article:published_time" content="2022-07-13T00:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205302302495.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205302302495.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/07/13/%E5%9F%BA%E4%BA%8Edocker%E6%90%AD%E5%BB%BAHugo/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205302302495.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205302302495.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,7 +529,7 @@
     
     <div class="post-body" itemprop="articleBody"><p>本周和上周一样，除了周六早上，还增加了周二和周三晚上的全区全员核酸筛查，在老苏印象中，上周只有周日没做核酸，这周估计也差不多。</p>
 <p>昨晚的结果到现在还没出来呢，辛亏礼拜一去做了一个，要不然今天上班又得在众目睽睽下捅鼻子做抗原  &#128514;</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202207130906788.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202207130906788.png"></p>
 <hr>
 <p><strong>什么是 Hugo ？</strong></p>
 <blockquote>
@@ -522,74 +553,74 @@
 <blockquote>
 <p>【注意】：截图不是基于 <code>-ext</code> 的版本，但是效果是一样的，从侧面也反映了老苏确实踩了坑   &#128514;</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311049543.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311049543.png"></p>
 <p>这个时候，<code>src</code> 目录中会出现文件</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205162324838.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205162324838.png"></p>
 <h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><p>开始建第一篇文章</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建第一个帖子</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -it \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/src:/src \</span><br><span class="line">   klakegg/hugo:latest-ext \</span><br><span class="line">   <span class="string">&quot;new posts/first_post.md&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311050517.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311050517.png"></p>
 <p>对比之前，又多了一些</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205162330914.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205162330914.png"></p>
 <p>新建的第一个帖子在 <code>/hugo/src/content/posts</code> 目录中</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205162331919.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205162331919.png"></p>
 <p>打开 <code>first_post.md</code> 除了文件头，内容还是空的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205162336703.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205162336703.png"></p>
 <p>为了避免打开是个空白页，我们要填点内容，同时要将 <code>draft: true</code> 改为 <code>draft: false</code></p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你好，hugo</span><br><span class="line"></span><br><span class="line">![](<span class="link">https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205162339779.png</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">你好，hugo</span><br><span class="line"></span><br><span class="line">![](<span class="link">https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205162339779.png</span>)</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205292233032.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205292233032.png"></p>
 <h2 id="关于页面"><a href="#关于页面" class="headerlink" title="关于页面"></a>关于页面</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建 about</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -it \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/src:/src \</span><br><span class="line">   klakegg/hugo:latest-ext \</span><br><span class="line">   <span class="string">&quot;new about/_index.md&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311057444.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311057444.png"></p>
 <p>同样需要将 <code>draft: true</code> 改为 <code>draft: false</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205292224694.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205292224694.png"></p>
 <h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><ul>
-<li>  <code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
+<li><code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131200.png"></p>
 <blockquote>
 <p>名称：随意，位置：<code>http://packages.synocommunity.com/</code></p>
 </blockquote>
 <ul>
-<li>  <code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
+<li><code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131711.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131711.png"></p>
 <h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载主题</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/reuixiy/hugo-theme-meme.git src/themes/meme</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不行就加个代理</span></span><br><span class="line">git <span class="built_in">clone</span> https://ghproxy.com/github.com/reuixiy/hugo-theme-meme.git src/themes/meme</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311059883.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311059883.png"></p>
 <p>下载完成后主题在 <code>src/themes/meme</code> 目录中</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311101953.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311101953.png"></p>
 <h2 id="修改设置"><a href="#修改设置" class="headerlink" title="修改设置"></a>修改设置</h2><p>需要用 <code>src/themes/meme/config-examples/zh-cn/config.toml</code> 替换掉 <code>src/config.toml</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将配置文件替换为主题的配置文件</span></span><br><span class="line"><span class="built_in">rm</span> config.toml &amp;&amp; <span class="built_in">cp</span> src/themes/meme/config-examples/zh-cn/config.toml src/config.toml</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311112937.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311112937.png"></p>
 <h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -it \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/src:/src \</span><br><span class="line">  -p 1313:1313 \</span><br><span class="line">  klakegg/hugo:latest-ext \</span><br><span class="line">  server</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>需要注意的是，这只是调试模式</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205301735253.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205301735253.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:1313</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205292327661.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205292327661.png"></p>
 <p>进入帖子</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205292327184.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205292327184.png"></p>
 <p>从 <code>hexo</code> 中复制了几个 <code>md</code> 文件，除了没有封面外，直接可用</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205301302599.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205301302599.png"></p>
 <p>打开文章，效果也挺好的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205301304221.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205301304221.png"></p>
 <h2 id="反代测试"><a href="#反代测试" class="headerlink" title="反代测试"></a>反代测试</h2><p>如果你针对 <code>1313</code>端口在 <code>Nginx Proxy Manager</code> 中做反向代理，在浏览器的 <code>开发者工具</code> 中能看到有下面这样的错误</p>
 <blockquote>
 <p>老苏的域名没有备案，所以不能使用 <code>80</code> 和 <code>443</code> 端口，因此域名是带端口的，类似 <code>https://hugo.laosu.ml:444</code> ，但是 <code>wss</code> 还是会去连 <code>1313</code> 端口</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebSocket connection to &#x27;wss://hugo.laosu.ml:1313/livereload&#x27; failed: </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205301326171.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205301326171.png"></p>
 <p>看起来似乎并没有影响使用，和使用 <code>http://群晖IP:1313</code> 访问并没有什么区别。不过这种方式只是用来预览的调试模式，并不是正确的使用方式。</p>
 <p>老苏觉得正确的方式应该是生成静态 <code>HTML</code> 文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -it \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/src:/src \</span><br><span class="line">  klakegg/hugo:latest-ext </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205301734193.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205301734193.png"></p>
 <p>然后将 <code>src/public</code> 目录中生成好的站点静态文件，发布、托管到 <code>Web 服务器</code>，可以选择的方式有很多：</p>
 <ul>
 <li><code>Web Station</code></li>
@@ -600,14 +631,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动 shell</span></span><br><span class="line">docker run --<span class="built_in">rm</span> -it \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/src:/src \</span><br><span class="line">  klakegg/hugo:latest-ext \</span><br><span class="line">  shell</span><br></pre></td></tr></table></figure>
 
 <p>要生成静态文件，只要输入 <code>hugo</code> 就可以了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311204852.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311204852.png"></p>
 <p>要预览只要输入 <code>hugo server</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205311213354.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205311213354.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>gohugoio/hugo: The world’s fastest framework for building websites.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvaHVnb2lvL2h1Z28=">https://github.com/gohugoio/hugo<i class="fa fa-external-link-alt"></i></span></p>
-<p>klakegg/docker-hugo: Truly minimal Docker images for Hugo open-source static site generator.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tsYWtlZ2cvZG9ja2VyLWh1Z28=">https://github.com/klakegg/docker-hugo<i class="fa fa-external-link-alt"></i></span></p>
+<p>gohugoio&#x2F;hugo: The world’s fastest framework for building websites.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvaHVnb2lvL2h1Z28=">https://github.com/gohugoio/hugo<i class="fa fa-external-link-alt"></i></span></p>
+<p>klakegg&#x2F;docker-hugo: Truly minimal Docker images for Hugo open-source static site generator.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tsYWtlZ2cvZG9ja2VyLWh1Z28=">https://github.com/klakegg/docker-hugo<i class="fa fa-external-link-alt"></i></span></p>
 <p>Hugo中文文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29odWdvLm9yZy8=">https://www.gohugo.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>reuixiy/hugo-theme-meme: You can’t spell aWEsoME without MEME! 😝<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JldWl4aXkvaHVnby10aGVtZS1tZW1l">https://github.com/reuixiy/hugo-theme-meme<i class="fa fa-external-link-alt"></i></span></p>
+<p>reuixiy&#x2F;hugo-theme-meme: You can’t spell aWEsoME without MEME! 😝<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JldWl4aXkvaHVnby10aGVtZS1tZW1l">https://github.com/reuixiy/hugo-theme-meme<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -754,7 +785,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

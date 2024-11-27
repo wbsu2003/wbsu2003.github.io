@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="HertzBeat 是易用友好的开源实时监控告警系统，无需 Agent，具有强大自定义监控能力。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121747195.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121747195.png">
 <meta property="article:published_time" content="2023-08-21T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121747195.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121747195.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/08/21/%E5%8F%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9FHertzBeat/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121747195.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121747195.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -505,7 +536,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v1.3.1</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121322647.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121322647.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>hertzbeat</code>，并在其中建两个子文件夹 <code>data</code> 和 <code>logs</code></p>
 <table>
 <thead>
@@ -526,7 +557,7 @@
 <td align="center">日志目录</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121327005.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121327005.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -542,7 +573,7 @@
 <td align="center"><code>1157</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121327501.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121327501.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -559,11 +590,11 @@
 <td align="center">设为 <code>Asia/Shanghai</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121331463.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121331463.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 hertzbeat 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/hertzbeat/&#123;data,logs&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 hertzbeat 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/hertzbeat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name hertzbeat \</span><br><span class="line">   -p 1157:1157 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/opt/hertzbeat/data \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/logs:/opt/hertzbeat/logs \</span><br><span class="line">   -e LANG=zh_CN.UTF-8 \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   tancloud/hertzbeat</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121253063.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121253063.png"></p>
 <p>也可以用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">hertzbeat:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">tancloud/hertzbeat</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">hertzbeat</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">1157</span><span class="string">:1157</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/opt/hertzbeat/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./logs:/opt/hertzbeat/logs</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">LANG=zh_CN.UTF-8</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br></pre></td></tr></table></figure>
 
@@ -571,51 +602,51 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 hertzbeat 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/hertzbeat/&#123;data,logs&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 hertzbeat 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/hertzbeat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:1157</code> 就能看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121254067.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121254067.png"></p>
 <blockquote>
 <p>默认账号密码 <code>admin/hertzbeat</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121255786.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121255786.png"></p>
 <h2 id="PING连通性"><a href="#PING连通性" class="headerlink" title="PING连通性"></a>PING连通性</h2><p><code>监控</code> –&gt; <code>应用服务监控</code> –&gt; <code>PING连通性</code> –&gt; <code>新增PING连通性</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121340910.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121340910.png"></p>
 <p>填入要监控的主机 <code>IP</code>和 <code>监控名称</code>，然后测试一下</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121343253.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121343253.png"></p>
 <p>没问题的话，直接 <code>确定</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121344149.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121344149.png"></p>
 <h2 id="MariaDB数据库"><a href="#MariaDB数据库" class="headerlink" title="MariaDB数据库"></a>MariaDB数据库</h2><p><code>监控</code> –&gt; <code>数据库监控</code> –&gt; <code>MariaDB数据库</code> –&gt; <code>新增MariaDB数据库</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121346968.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121346968.png"></p>
 <p>老苏准备测试群晖自带的 <code>MariaDB 10</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121352845.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121352845.png"></p>
 <p>填入要监控的主机 <code>IP</code>、<code>监控名称</code>、端口，然后测试一下</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121350207.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121350207.png"></p>
 <p>没问题的话，直接 <code>确定</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121353730.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121353730.png"></p>
 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>打开 <code>/var/packages/Docker/etc/dockerd.json</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121419777.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121419777.png"></p>
 <p>增加一行</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;hosts&quot;</span> <span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;tcp://192.168.0.197:2375&quot;</span><span class="punctuation">,</span> <span class="string">&quot;unix:///var/run/docker.sock&quot;</span> <span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
 
 <p>其中：<code>192.168.0.197</code> 为群晖的主机 <code>IP</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306130907821.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306130907821.png"></p>
 <p>保存后，执行一次，当然你也可以在 <code>套件中心</code> 重启 <code>Docker</code> 套件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重启docker</span></span><br><span class="line">synoservice --restart pkgctl-Docker</span><br></pre></td></tr></table></figure>
 
 <p><code>监控</code> –&gt; <code>云原生监控</code> –&gt; <code>Docker</code> –&gt; <code>新增 Docker</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306121355990.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306121355990.png"></p>
 <p>填入要监控的主机 <code>IP</code>、<code>监控名称</code>、端口，然后测试一下</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131004188.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131004188.png"></p>
 <p>没问题的话，直接 <code>确定</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131005755.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131005755.png"></p>
 <p>过一段时间在 <code>Dashboard</code> 可能会有一些事件</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131006678.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131006678.png"></p>
 <h2 id="消息通知"><a href="#消息通知" class="headerlink" title="消息通知"></a>消息通知</h2><p><code>HertzBeat</code> 的消息通知支持很多种</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131011350.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131011350.png"></p>
 <p>官方提供了详细的说明，而且是中文的，大家仔细研究吧</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9oZXJ0emJlYXQuY29tL3poLWNuL2RvY3MvaGVscC9hbGVydF9lbWFpbA==">https://hertzbeat.com/zh-cn/docs/help/alert_email<i class="fa fa-external-link-alt"></i></span></p>
 <p>无论在哪个页面上遇到问题，都可以直接点右上角的 <code>帮助</code> 按钮，默认是英文的，但是可以切换为中文</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202306131014396.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202306131014396.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>dromara/hertzbeat: A real-time monitoring system with custom-monitor and agentless. Support web service, database, os, middleware and more. 一个拥有强大自定义监控能力，无需Agent的实时监控系统。网站监测，PING连通性，端口可用性，数据库，操作系统，中间件，API监控，阈值告警，告警通知(邮件微信钉钉飞书)。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Ryb21hcmEvaGVydHpiZWF0">https://github.com/dromara/hertzbeat<i class="fa fa-external-link-alt"></i></span></p>
+<p>dromara&#x2F;hertzbeat: A real-time monitoring system with custom-monitor and agentless. Support web service, database, os, middleware and more. 一个拥有强大自定义监控能力，无需Agent的实时监控系统。网站监测，PING连通性，端口可用性，数据库，操作系统，中间件，API监控，阈值告警，告警通知(邮件微信钉钉飞书)。<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Ryb21hcmEvaGVydHpiZWF0">https://github.com/dromara/hertzbeat<i class="fa fa-external-link-alt"></i></span></p>
 <p>HertzBeat · An open source, real-time monitoring tool with custom-monitor and agentLess. | HertzBeat<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXJ0emJlYXQuY29tLw==">https://hertzbeat.com/<i class="fa fa-external-link-alt"></i></span></p>
 <p>TANCLOUD探云 · 易用友好的高性能监控云 | TANCLOUD探云<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90YW5jbG91ZC5jbi8=">https://tancloud.cn/<i class="fa fa-external-link-alt"></i></span></p>
 <p>通过 Docker 方式安装 HertzBeat | HertzBeat<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9oZXJ0emJlYXQuY29tL3poLWNuL2RvY3Mvc3RhcnQvZG9ja2VyLWRlcGxveS8=">https://hertzbeat.com/zh-cn/docs/start/docker-deploy/<i class="fa fa-external-link-alt"></i></span></p>
@@ -764,7 +795,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

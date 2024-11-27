@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Kiwix Serve 是一个 Zim 文件兼容的网络服务器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211359573.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211359573.png">
 <meta property="article:published_time" content="2023-02-24T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="词典">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211359573.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211359573.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/02/24/%E7%A6%BB%E7%BA%BF%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E9%98%85%E8%AF%BB%E5%99%A8Kiwix%20Serve/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211359573.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211359573.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,16 +547,16 @@
 </blockquote>
 <p>需要先准备好 <code>zim</code> 文件，如果容器在启动时找不到文件，会导致容器启动失败</p>
 <p>为了演示，老苏在这里 <span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5raXdpeC5vcmcvemltL3dpa2lwZWRpYS8/Qz1TO089RA==">https://download.kiwix.org/zim/wikipedia/?C=S;O=D<i class="fa fa-external-link-alt"></i></span> 下载了一个最小的 <code>wikipedia_zh_chemistry_mini_2022-12.zim</code>，大约 <code>18M</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211136559.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211136559.png"></p>
 <p>看名字是中文的化学，具体内容只有安装完成才知道</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>kiwix-serve</code> ，选择第一个 <code>kiwix/kiwix-serve</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>3.4.0</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211139268.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211139268.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>kiwixserve</code>，并在其中建一个个子文件夹 <code>data</code>，并将下载好的 <code>.zim</code> 文件放入 <code>data</code> 目录</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211142150.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211142150.png"></p>
 <table>
 <thead>
 <tr>
@@ -540,7 +571,7 @@
 <td align="center">存放 <code>zim</code> 文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211143317.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211143317.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -557,9 +588,9 @@
 </tr>
 </tbody></table>
 <p>默认是这样的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211144379.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211144379.png"></p>
 <p>老苏删掉了 <code>80</code> 端口</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211145841.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211145841.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -573,12 +604,12 @@
 </tr>
 </tbody></table>
 <p>例如：<code>-e DOWNLOAD=https://download.kiwix.org/zim/wikipedia/wikipedia_zh_chemistry_mini_2022-11.zim</code>，设置了的话，会自己下载</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211328177.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211328177.png"></p>
 <p>老苏没有用到环境变量，但是命令行需要输入 <code>*.zim</code>，这很重要，是告诉容器搜索数据目录中的所有 <code>ZIM</code> 文件</p>
 <blockquote>
 <p>命令行只有第一次生效，如果忘了只能删了重新来过；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211147260.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211147260.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kiwixserve 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/kiwixserve/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 data 中拷入 zim 文件</span></span><br><span class="line"><span class="comment"># 【注意】：如果没有 zim 文件会导致容器无法启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 kiwixserve 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/kiwixserve</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name kiwixserve \</span><br><span class="line">   -p 5058:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   kiwix/kiwix-serve \</span><br><span class="line">   *.zim</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器（带自动下载的示例）</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name kiwixserve \</span><br><span class="line">   -p 5058:8080 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e DOWNLOAD=https://download.kiwix.org/zim/wikipedia/wikipedia_zh_chemistry_mini_2022-11.zim</span><br><span class="line">   kiwix/kiwix-serve \</span><br><span class="line">   *.zim</span><br></pre></td></tr></table></figure>
 
@@ -589,21 +620,21 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kiwixserve 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/kiwixserve/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 data 中拷入 zim 文件</span></span><br><span class="line"><span class="comment"># 【注意】：如果没有 zim 文件会导致容器无法启动</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 kiwixserve 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/kiwixserve</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5058</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211148695.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211148695.png"></p>
 <p>点开 <code>化学维基百科</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211151546.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211151546.png"></p>
 <p>随便打开一个</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211152000.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211152000.png"></p>
 <p>也可以搜索，比如搜 <code>二氧化碳</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212211202548.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212211202548.png"></p>
 <p>是不是发现和我们之前搭建的 <code>Flask-MDict</code> 异曲同工？</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2022/07/27/Flask-MDict%E6%90%AD%E5%BB%BA%E5%9C%A8%E7%BA%BFMdict%E8%AF%8D%E5%85%B8%E6%9C%8D%E5%8A%A1">Flask-MDict搭建在线Mdict词典服务</a></p>
 </blockquote>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Index of /zim/wikipedia<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5raXdpeC5vcmcvemltL3dpa2lwZWRpYS8/Qz1TO089RA==">https://download.kiwix.org/zim/wikipedia/?C=S;O=D<i class="fa fa-external-link-alt"></i></span></p>
-<p>Index of /zim<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5raXdpeC5vcmcvemltLw==">https://download.kiwix.org/zim/<i class="fa fa-external-link-alt"></i></span></p>
-<p>kiwix/kiwix-tools: Command line Kiwix tools: kiwix-serve, kiwix-manage, …<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpd2l4L2tpd2l4LXRvb2xz">https://github.com/kiwix/kiwix-tools<i class="fa fa-external-link-alt"></i></span></p>
+<p>Index of &#x2F;zim&#x2F;wikipedia<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5raXdpeC5vcmcvemltL3dpa2lwZWRpYS8/Qz1TO089RA==">https://download.kiwix.org/zim/wikipedia/?C=S;O=D<i class="fa fa-external-link-alt"></i></span></p>
+<p>Index of &#x2F;zim<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZC5raXdpeC5vcmcvemltLw==">https://download.kiwix.org/zim/<i class="fa fa-external-link-alt"></i></span></p>
+<p>kiwix&#x2F;kiwix-tools: Command line Kiwix tools: kiwix-serve, kiwix-manage, …<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tpd2l4L2tpd2l4LXRvb2xz">https://github.com/kiwix/kiwix-tools<i class="fa fa-external-link-alt"></i></span></p>
 <p>Kiwix-serve - Kiwix<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93aWtpLmtpd2l4Lm9yZy93aWtpL0tpd2l4LXNlcnZl">https://wiki.kiwix.org/wiki/Kiwix-serve<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -750,7 +781,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

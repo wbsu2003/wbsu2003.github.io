@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Wakapi 是用于编码统计的极简主义、自托管的 WakaTime 兼容后端。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308210019688.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308210019688.png">
 <meta property="article:published_time" content="2023-08-30T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="时间管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308210019688.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308210019688.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/08/30/%E7%94%A8%E4%BA%8E%E7%BB%9F%E8%AE%A1%E7%BC%96%E7%A0%81%E6%97%B6%E9%95%BF%E7%9A%84Wakapi/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308210019688.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308210019688.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,15 +537,15 @@
 <blockquote>
 <p><code>Wakapi</code> 是一个极简主义、自托管的 <code>WakaTime</code> 兼容后端，可帮助您跟踪使用不同编程语言等在不同项目上编码所花费的时间，用于编码统计。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202342725.webp"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202342725.webp"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <h2 id="建数据库"><a href="#建数据库" class="headerlink" title="建数据库"></a>建数据库</h2><p>老苏用了群晖自带的  <code>MariaDB 10</code> 数据库。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205281853851.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205281853851.png"></p>
 <p>在 <code>phpMyAdmin</code> 中创建名为 <code>wakapi</code> 的空数据库。</p>
 <blockquote>
 <p>为便于说明，假设数据库密码为 <code>123456</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308201833798.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308201833798.png"></p>
 <p>所以根据上面的设置，最后得到的数据库相关的参数如下：</p>
 <ul>
 <li>数据库主机：<code>192.168.0.197</code>，与群晖主机 <code>IP</code> 一致；</li>
@@ -527,7 +558,7 @@
 <blockquote>
 <p>老苏折腾时，<code>latest</code> 对应的版本为 <code>2.8.1</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308201823884.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308201823884.png"></p>
 <p>用 <code>SSH</code> 客户端登录到群晖后，执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull ghcr.io/muety/wakapi:latest</span><br></pre></td></tr></table></figure>
 
@@ -535,7 +566,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果拉不动的话加个代理</span></span><br><span class="line">docker pull ghcr.dockerproxy.com/muety/wakapi:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名镜像（如果是通过代理下载的）</span></span><br><span class="line">docker tag ghcr.dockerproxy.com/muety/wakapi:latest ghcr.io/muety/wakapi:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除代理镜像（如果是通过代理下载的）</span></span><br><span class="line">docker rmi ghcr.dockerproxy.com/muety/wakapi:latest</span><br></pre></td></tr></table></figure>
 
 <p>下载完成后，可以在 <code>映像</code> 中找到</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308201858357.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308201858357.png"></p>
 <h2 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h2><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 wakapi </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/wakapi/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 wakapi 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/wakapi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name wakapi \</span><br><span class="line">   -p 3047:3000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e WAKAPI_PASSWORD_SALT=6EbmsMZ2keIZR0F0Syg7Y4TMxflr5Dmd \</span><br><span class="line">   -e WAKAPI_DB_TYPE=mysql \</span><br><span class="line">   -e WAKAPI_DB_HOST=192.168.0.197 \</span><br><span class="line">   -e WAKAPI_DB_PORT=3307 \</span><br><span class="line">   -e WAKAPI_DB_NAME=wakapi \</span><br><span class="line">   -e WAKAPI_DB_USER=wakapi \</span><br><span class="line">   -e WAKAPI_DB_PASSWORD=123456 \</span><br><span class="line">   -e ENVIRONMENT=prod \</span><br><span class="line">   ghcr.io/muety/wakapi:latest</span><br></pre></td></tr></table></figure>
 
@@ -557,13 +588,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 wakapi </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/wakapi/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 wakapi 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/wakapi</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3047</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202014599.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202014599.png"></p>
 <p>点右上角的 <code>login</code>，第一次需要注册账号</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202022230.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202022230.png"></p>
 <p>注册成功后</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202023119.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202023119.png"></p>
 <p>再次 <code>login</code>，登录成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202024112.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202024112.png"></p>
 <p>可以看到设置说明，尤其是下面这段代码后面可能会用到 </p>
 <blockquote>
 <p>跟客户端数据采集的方式有关，老苏后来用的是通过 <code>Wakatime</code> 后台采集的，所以并没用上； </p>
@@ -573,28 +604,28 @@
 <p>其中：</p>
 <p><code>api_url</code> ：是指 <code>API</code> 服务的地址；<br><code>api_key</code> ：是指访问 <code>Wakapi</code> 服务的 <code>API Key</code>，之所以要强调是因为我们还会用到 <code>Wakatime</code> 服务的 <code>API Key</code>；</p>
 <h2 id="注册-Wakatime"><a href="#注册-Wakatime" class="headerlink" title="注册 Wakatime"></a>注册 Wakatime</h2><p>打开 <span class="exturl" data-url="aHR0cHM6Ly93YWthdGltZS5jb20vc2lnbnVw">https://wakatime.com/signup<i class="fa fa-external-link-alt"></i></span> 注册账号</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202112755.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202112755.png"></p>
 <p>登录成功后，可以在 <code>Setting</code> –&gt; <code>Account</code> –&gt; <code>API key</code> 中找到 <code>Wakatime API Key</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202119085.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202119085.png"></p>
 <p>如果你找不到，也可以在浏览器中直接访问 <span class="exturl" data-url="aHR0cHM6Ly93YWthdGltZS5jb20vYXBpLWtleQ==">https://wakatime.com/api-key<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202128969.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202128969.png"></p>
 <h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>为自己的 <code>IDE</code> 安装插件，插件的下载地址：<span class="exturl" data-url="aHR0cHM6Ly93YWthdGltZS5jb20vcGx1Z2lucw==">https://wakatime.com/plugins<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202032438.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202032438.png"></p>
 <p>虽然老苏不写代码，但是这些客户端中，也会用到 <code>Chrome</code>、<code>Obsidian</code>、<code>VS Code</code> 和 <code>Word</code>。</p>
 <p>考虑到老苏用的最多的是 <code>Obsidian</code>，所以就试试 <code>OB</code> 的插件，点击 <code>OB</code> 的图标后，会有详解的教程</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202037485.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202037485.png"></p>
 <p>在 <code>OB</code> 插件市场中搜索 <code>wakatime</code> 并安装</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202039481.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202039481.png"></p>
 <p>还需要启用</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202043577.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202043577.png"></p>
 <p>输入 <code>API key</code>，这里是 <code>Wakatime API Key</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202132415.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202132415.png"></p>
 <p>因为 <code>OB</code> 插件没有设置 <code>URL</code> 的地方，所以数据默认是传到 <code>Wakatime</code> 网站的</p>
 <p>所有 <code>WakaTime</code> 文本编辑器插件，都会使用 <code>WakaTime cli</code> ,<code>360</code> 可能会阻止，添加信任就可以</p>
 <p>当插件正常工作时，<code>Wakatime</code> 网页上会有插件的工作状态</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202321653.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202321653.png"></p>
 <p>能监测到插件的平台和版本</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202324750.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202324750.png"></p>
 <p>接下来我们还要通过 <code>Wakapi</code> 的整合功能，读取 <code>Wakatime</code> 的数据</p>
 <h2 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h2><p>有两种方法拿到前端插件采集的数据：</p>
 <p>1、第一种：可以通过在客户端侧安装代理来转发数据到 <code>Wakapi</code>，官方提供了安装设置的说明：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211ZXR5L3dha2FwaS93aWtpL0FkdmFuY2VkLVNldHVwOi1DbGllbnQtc2lkZS1wcm94eQ==">https://github.com/muety/wakapi/wiki/Advanced-Setup:-Client-side-proxy<i class="fa fa-external-link-alt"></i></span></p>
@@ -603,24 +634,24 @@
 <p>老苏测试了第二种方法；</p>
 </blockquote>
 <p>回到 <code>Wakapi</code> 的后台，<code>Settings</code> –&gt; <code>Integrations</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202144374.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202144374.png"></p>
 <p>点 <code>Connect</code>，如果设置没问题的话，就可以 <code>Import Data</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202146201.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202146201.png"></p>
 <p>导入数据不可撤销的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202147041.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202147041.png"></p>
 <p>一开始是没有数据的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308202150001.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308202150001.png"></p>
 <p>需要时间的积累，第二天<code>WakaTime</code> 的面板</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308210917418.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308210917418.png"></p>
 <p>在 <code>Wakapi</code> 的面板</p>
 <blockquote>
 <p>感觉和 <code>WakaTime</code> 并不同步，但我也说不上来，或者只是统计口径不一样？</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211314809.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211314809.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>如果仅限于显示 <code>WakaTime</code> 的数据，显然意义不大，<code>Wakapi</code>  具备和第三方应用，比如 <code>Prometheus</code>、<code>Grafana</code> 的整合能力，这可能才是这个项目的意义所在吧</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/08/202308211320974.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/08/202308211320974.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>muety/wakapi: 📊 A minimalist, self-hosted WakaTime-compatible backend for coding statistics<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211ZXR5L3dha2FwaQ==">https://github.com/muety/wakapi<i class="fa fa-external-link-alt"></i></span></p>
+<p>muety&#x2F;wakapi: 📊 A minimalist, self-hosted WakaTime-compatible backend for coding statistics<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL211ZXR5L3dha2FwaQ==">https://github.com/muety/wakapi<i class="fa fa-external-link-alt"></i></span></p>
 <p>Wakapi – Coding Statistics<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93YWthcGkuZGV2Lw==">https://wakapi.dev/<i class="fa fa-external-link-alt"></i></span></p>
 <p>WakaTime<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dha2F0aW1l">https://github.com/wakatime<i class="fa fa-external-link-alt"></i></span></p>
 <p>WakaTime - Dashboards for developers<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93YWthdGltZS5jb20v">https://wakatime.com/<i class="fa fa-external-link-alt"></i></span></p>
@@ -769,7 +800,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

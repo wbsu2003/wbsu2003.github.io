@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Langflow 是一款适用于 RAG 和多智能体 AI 应用程序的低代码应用构建器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409152039358.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409152039358.png">
 <meta property="article:published_time" content="2024-10-21T03:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.938Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.144Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="低代码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409152039358.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409152039358.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/10/21/AI%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%8E%E4%BB%A3%E7%A0%81%E6%9E%84%E5%BB%BA%E5%B9%B3%E5%8F%B0Langflow/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409152039358.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409152039358.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,7 +545,7 @@
 <li>可以使用 <code>Python</code> 自定义工作流或完全创建流程。</li>
 <li>生态系统集成，作为可重用组件适用于任何模型、<code>API</code> 或数据库。</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409152015145.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409152015145.png"></p>
 <p>详细的功能演示，可以参考官方的视频：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMVhiNFNlbkU1Uw==">https://www.bilibili.com/video/BV1Xb4SenE5S<i class="fa fa-external-link-alt"></i></span></p>
 <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113141618842547&bvid=BV1Xb4SenE5S&cid=25880233218&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
@@ -523,7 +554,7 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v1.0.18</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151751874.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151751874.png"></p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">langflow:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">langflowai/langflow:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">langflow-web</span></span><br><span class="line">    <span class="attr">pull_policy:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;7860:7860&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/app/langflow</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@postgres:5432/langflow</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">postgres:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:16</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">langflow-db</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   - &quot;5432:5432&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./postgres:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_USER:</span> <span class="string">langflow</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">langflow</span></span><br><span class="line">      <span class="attr">POSTGRES_DB:</span> <span class="string">langflow</span></span><br></pre></td></tr></table></figure>
 
@@ -559,27 +590,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 langflow 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/langflow/&#123;data,postgres&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 langflow 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/langflow</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:7860</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151237154.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151237154.png"></p>
 <p>点 <code>Start Here</code> 创建项目，会弹出模版供你选择</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151414824.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151414824.png"></p>
 <p>例如老苏选择了 <code>Blog Writter</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151416930.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151416930.png"></p>
 <p>流程中默认使用的是 <code>OpenAI</code>，但老苏没有 <code>Key</code> </p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151422915.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151422915.png"></p>
 <p>所以改成了 <code>Ollama</code></p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2024/02/28/%E6%9C%AC%E5%9C%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E6%A1%86%E6%9E%B6Ollama">本地大模型运行框架Ollama</a></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151501996.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151501996.png"></p>
 <p>测试了一下</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151531655.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151531655.png"></p>
 <p>忘了改中文了，再来一次</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请参考以上内容的风格，撰写一篇关于 Langflow 和人工智能的新博客/教程。建议一些未涵盖的主题。并使用中文输出。</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409151614075.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409151614075.png"></p>
 <p>虽然时间有点长，但是效果似乎还不错</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>langflow-ai/langflow: ⛓️ Langflow is a dynamic graph where each node is an executable unit. Its modular and interactive design fosters rapid experimentation and prototyping, pushing hard on the limits of creativity.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhbmdmbG93LWFpL2xhbmdmbG93">https://github.com/langflow-ai/langflow<i class="fa fa-external-link-alt"></i></span></p>
+<p>langflow-ai&#x2F;langflow: ⛓️ Langflow is a dynamic graph where each node is an executable unit. Its modular and interactive design fosters rapid experimentation and prototyping, pushing hard on the limits of creativity.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhbmdmbG93LWFpL2xhbmdmbG93">https://github.com/langflow-ai/langflow<i class="fa fa-external-link-alt"></i></span></p>
 <p>Langflow - Create your chatbot!<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubGFuZ2Zsb3cub3JnLw==">https://www.langflow.org/<i class="fa fa-external-link-alt"></i></span></p>
 <p>12 Expert Tips and Features for Building AI Apps VISUALLY with Langflow - YouTube<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1raW5uZ1doYVVLTQ==">https://www.youtube.com/watch?v=kinngWhaUKM<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -729,7 +760,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

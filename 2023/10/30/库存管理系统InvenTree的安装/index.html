@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="InvenTree 是一款开源的库存管理系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261602684.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261602684.png">
 <meta property="article:published_time" content="2023-10-30T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.962Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.168Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="仓库管理">
 <meta property="article:tag" content="库存管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261602684.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261602684.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/10/30/%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9FInvenTree%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261602684.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261602684.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -570,7 +601,7 @@
 <blockquote>
 <p>【强烈建议】：不管你后续是否要使用<code>Redis</code>，<strong>在数据库初始化之前，一定不要取消注释，否则会报错的，切记！切记！</strong></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261409727.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261409727.png"></p>
 <ul>
 <li>其他<ul>
 <li><code>INVENTREE_GUNICORN_TIMEOUT</code>：服务器超时设置；</li>
@@ -589,7 +620,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 inventree 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/inventree/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 inventree 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/inventree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 、.env 、 nginx.prod.conf 放入当前目录</span></span><br></pre></td></tr></table></figure>
 
 <p>现在的目录</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261414923.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261414923.png"></p>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库</span></span><br><span class="line">docker-compose run inventree-server invoke update</span><br></pre></td></tr></table></figure>
 
 <p>这行初始化命令执行了以下步骤：</p>
@@ -600,13 +631,13 @@
 <li>更新翻译文件</li>
 <li>将所有必需的静态文件收集到可由 <code>nginx</code> 提供服务的目录中</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310241112576.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310241112576.png"></p>
 <p>一定不要先注释 <code>.env</code> 中的 <code>redis</code> 设置，否则最后 <code>Running InvenTree database migrations...</code>  时会有错误</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis.exceptions.ConnectionError: Error -2 connecting to inventree-cache:6379. Name or service not known.</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310241113695.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310241113695.png"></p>
 <p>正常应该是下面这样的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310251724717.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310251724717.png"></p>
 <h2 id="创建管理员"><a href="#创建管理员" class="headerlink" title="创建管理员"></a>创建管理员</h2><ol>
 <li>已在 <code>.env</code> 中指定管理员帐户详细信息，可以跳过这一步； </li>
 <li>为了安全起见，请确保在首次运行后从 <code>.env</code> 文件中删除管理员帐户凭据；</li>
@@ -620,12 +651,12 @@
 <blockquote>
 <p>如果你取消了 <code>redis</code> 注释，但是执行的又是不带 <code>redis</code> 的一键启动，也是会存在错误的，或导致容器不断重启；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310261453704.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310261453704.png"></p>
 <p>然后再执行下面的启动命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动（带 redis）</span></span><br><span class="line">docker-compose --profile redis up -d</span><br></pre></td></tr></table></figure>
 
 <p>不出意外的话，我们在 <code>Docker</code> 管理器中应该看到下面这样</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310251733782.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310251733782.png"></p>
 <blockquote>
 <p><code>inventree-production_inventree-server_run_2a703d49eef5</code>  是初始化数据库的时候生成的，看着不爽的话，可以删掉</p>
 </blockquote>
@@ -633,16 +664,16 @@
 <blockquote>
 <p>用我们前面设置的管理员账号、密码登录</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310251735316.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310251735316.png"></p>
 <p>主界面默认有部分中文显示，显然翻译程度还不高</p>
 <blockquote>
 <p>不知道初始化时最一行显示的 <code>InvenTree translation coverage: 27%</code> 是不是指的中文翻译；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310251736353.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310251736353.png"></p>
 <p>如果看到下面的提示，只要重启 <code>inventree-server</code> 容器即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Server Restart Required</span><br><span class="line">A configuration option has been changed which requires a server restart. Contact your system administrator for further information</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/10/202310251737645.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/10/202310251737645.png"></p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>一些其他可能会用到的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键删除</span></span><br><span class="line">docker-compose down</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将数据库导出为 JSON</span></span><br><span class="line">docker-compose run inventree-server invoke export-records -f /volume1/docker/inventree/data/data.json</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除卷</span></span><br><span class="line">docker volume <span class="built_in">rm</span> -f inventree_data</span><br></pre></td></tr></table></figure>
 
@@ -650,7 +681,7 @@
 <p>InvenTree<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ludmVudHJlZQ==">https://github.com/inventree<i class="fa fa-external-link-alt"></i></span></p>
 <p>InvenTree<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pbnZlbnRyZWUub3JnLw==">https://inventree.org<i class="fa fa-external-link-alt"></i></span></p>
 <p>InvenTree - InvenTree Documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmludmVudHJlZS5vcmcv">https://docs.inventree.org<i class="fa fa-external-link-alt"></i></span></p>
-<p>Docker Production Server - InvenTree Documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmludmVudHJlZS5vcmcvZW4vc3RhYmxlL3N0YXJ0L2RvY2tlcl9wcm9kLw==">https://docs.inventree.org/en/stable/start/docker_prod/<i class="fa fa-external-link-alt"></i></span></p>
+<p>Docker Production Server - InvenTree Documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmludmVudHJlZS5vcmcvZW4vc3RhYmxlL3N0YXJ0L2RvY2tlcl9wcm9kLw==">https://docs.inventree.org/en/stable/start/docker_prod&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -797,7 +828,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

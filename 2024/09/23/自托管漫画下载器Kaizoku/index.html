@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Kaizoku 则是一个自托管的漫画下载器，具有与多个平台或工具的集成能力。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409082018797.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409082018797.png">
 <meta property="article:published_time" content="2024-09-23T01:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.192Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="小人书">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409082018797.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409082018797.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/09/23/%E8%87%AA%E6%89%98%E7%AE%A1%E6%BC%AB%E7%94%BB%E4%B8%8B%E8%BD%BD%E5%99%A8Kaizoku/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409082018797.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409082018797.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,12 +530,12 @@
 <blockquote>
 <p><code>Kaizoku</code> 是一款出色的自托管应用程序，它在后端运行 <code>mangal</code>，以便从多个来源下载漫画。它可以设置定期任务来检查正在运行的漫画，并自动下载新剧集。<code>Kaizoku</code>  运行速度非常快并且可与网上最常见的漫画源兼容。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081527723.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081527723.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>v1.6.1</code>，有很长时间未更新了；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081529995.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081529995.png"></p>
 <p>采用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">app:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/oae/kaizoku:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kaizoku-app</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&#x27;3430:3000&#x27;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/config</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./logs:/logs</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">DATABASE_URL=postgresql://kaizoku:kaizoku@db:5432/kaizoku</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">KAIZOKU_PORT=3000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_HOST=redis</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">REDIS_PORT=6379</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PUID=1000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PGID=1000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="attr">db:</span></span><br><span class="line">        <span class="attr">condition:</span> <span class="string">service_healthy</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis:6.2-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kaizoku-redis</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis:/data</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres:14-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kaizoku-db</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./db:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_USER=kaizoku</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_DB=kaizoku</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_PASSWORD=kaizoku</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> [<span class="string">&#x27;CMD-SHELL&#x27;</span>, <span class="string">&#x27;pg_isready -U kaizoku&#x27;</span>]</span><br><span class="line">      <span class="attr">interval:</span> <span class="string">5s</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="string">5s</span></span><br><span class="line">      <span class="attr">retries:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 
@@ -513,20 +544,20 @@
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3430</code> 就能看到主界面</p>
 <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>一开始 <code>library</code> 是空的，需要点 <code>Create a library</code> 新建</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071729803.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071729803.png"></p>
 <p>输入 <code>/data</code> 作为库的路径</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071936183.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071936183.png"></p>
 <p>创建成功后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071936482.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071936482.png"></p>
 <p>点 <code>+</code> 号添加漫画</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071938571.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071938571.png"></p>
 <p>点 <code>Available sources</code> 下拉框选择漫画的源</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071939502.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071939502.png"></p>
 <p>老苏不了解漫画，之前在介绍 <code>Tachidesk</code> 时，看到过几篇中文的，所以尝试性搜了一下，发现时支持中文搜索的，虽然结果是英文的</p>
 <blockquote>
 <p>文章传送门：<a href="https://laosu.tech/2022/05/20/%E6%BC%AB%E7%94%BB%E8%81%9A%E5%90%88%E9%98%85%E8%AF%BB%E5%99%A8Tachidesk">漫画聚合阅读器Tachidesk</a></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071945823.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071945823.png"></p>
 <p>设置 <code>Download Interval</code></p>
 <ul>
 <li><code>At 00:00</code>：在每天的午夜 <code>12</code>点（<code>00:00</code>）执行一次；</li>
@@ -534,24 +565,24 @@
 <li><code>At 00:00，only on Sunday</code>：只在每周日的午夜 <code>12</code>点（<code>00:00</code>）执行一次；</li>
 <li><code>never</code>：不会自动执行，需要用户手动触发；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409071957164.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409071957164.png"></p>
 <p><code>Location</code> 不用设置，会自动生成在 <code>/data</code> 目录中</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072002426.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072002426.png"></p>
 <p>会显示详细信息</p>
 <blockquote>
 <p>似乎只有 <code>0 chapters</code> </p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072006674.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072006674.png"></p>
 <p>点 <code>Add</code> 添加到 <code>Library</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072007514.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072007514.png"></p>
 <p>又增加了另一部</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072011073.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072011073.png"></p>
 <p>这次很快就看到左侧的下载记录了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072013830.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072013830.png"></p>
 <p>查看详细的信息</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072014563.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072014563.png"></p>
 <p>进 <code>File Station</code> 查看</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072016756.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072016756.png"></p>
 <h2 id="阅读"><a href="#阅读" class="headerlink" title="阅读"></a>阅读</h2><p>右上角进入设置，看起来可以和 <code>Komga</code> 和 <code>Kavita</code> 集成</p>
 <blockquote>
 <p>文章传送门：</p>
@@ -560,7 +591,7 @@
 <li><a href="https://laosu.tech/2022/04/15/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%BC%AB%E7%94%BB%E9%98%85%E8%AF%BB%E6%9C%8D%E5%8A%A1%E5%99%A8Kavita">跨平台漫画阅读服务器Kavita</a></li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072023857.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072023857.png"></p>
 <p>以 <code>Kavita</code> 为例</p>
 <ul>
 <li><code>Enable</code>：启用 <code>Kavita</code> 集成以触发库扫描和元数据刷新任务；</li>
@@ -568,33 +599,33 @@
 <li><code>Username</code>：<code>Kavita</code> 的用户名；</li>
 <li><code>Password</code>：<code>Kavita</code> 的用户的密码；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072049393.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072049393.png"></p>
 <p>但是发现并没有任何作用，不知道是设置问题还是其他原因，也没有找到官方的说明文档 😂，所以老苏用了一种比较 <code>low</code> 的方法，就是将 <code>Kaizoku</code> 的下载目录 <code>/data</code> 挂载成 <code>kavita</code> 的目录，用来创建一个新的库</p>
 <p>⚠️ 需要注意的是</p>
 <ol>
 <li>镜像不再是 <code>kizaing/kavita</code>，而是 <code>jvmilazz0/kavita</code></li>
-<li> 原来的容器路径 <code>/kavita/data</code> 更改为 <code>/kavita/config</code></li>
+<li>原来的容器路径 <code>/kavita/data</code> 更改为 <code>/kavita/config</code></li>
 </ol>
 <p>否则会弹出提示框</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409072128663.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409072128663.png"></p>
 <p>所以 <code>kavita</code> 原来的安装命令已经不适用了，需要使用下面的命令来安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 kavita 和 子目录  </span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/kavita/&#123;manga,data&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 进入 kavita 目录  </span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/kavita  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name kavita \</span><br><span class="line">   -p 5050:5000 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/manga:/manga \</span><br><span class="line">   -v /volume1/docker/kaizoku/data:/kaizoku \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/kavita/config \</span><br><span class="line">   jvmilazz0/kavita:latest</span><br></pre></td></tr></table></figure>
 
 <p>新建一个资料库</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081938014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081938014.png"></p>
 <p>找到 <code>/kaizoku</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081938373.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081938373.png"></p>
 <p>保存之后</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081940426.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081940426.png"></p>
 <p>进入新建的 <code>Kaizoku</code> 库</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081940071.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081940071.png"></p>
 <p>进入漫画</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081941670.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081941670.png"></p>
 <p>就可以开始阅读了</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/08/202409081941499.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/08/202409081941499.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>GitHub - oae/kaizoku: Self-hosted manga downloader<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29hZS9rYWl6b2t1">https://github.com/oae/kaizoku<i class="fa fa-external-link-alt"></i></span></p>
-<p>Kaizoku: Manga Downloader : r/selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMveWF6c2p3L2thaXpva3VfbWFuZ2FfZG93bmxvYWRlci8=">https://www.reddit.com/r/selfhosted/comments/yazsjw/kaizoku_manga_downloader/<i class="fa fa-external-link-alt"></i></span></p>
+<p>GitHub - oae&#x2F;kaizoku: Self-hosted manga downloader<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29hZS9rYWl6b2t1">https://github.com/oae/kaizoku<i class="fa fa-external-link-alt"></i></span></p>
+<p>Kaizoku: Manga Downloader : r&#x2F;selfhosted<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL3NlbGZob3N0ZWQvY29tbWVudHMveWF6c2p3L2thaXpva3VfbWFuZ2FfZG93bmxvYWRlci8=">https://www.reddit.com/r/selfhosted/comments/yazsjw/kaizoku_manga_downloader&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 <p>Kavita<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cua2F2aXRhcmVhZGVyLmNvbS8jZG93bmxvYWRzLXYxLWRvY2tlcg==">https://www.kavitareader.com/#downloads-v1-docker<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -741,7 +772,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

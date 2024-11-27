@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="MagicMirror² 是一个开源、模块化智能魔镜平台。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210319185302.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210319185302.png">
 <meta property="article:published_time" content="2021-03-19T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="智能家居">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210319185302.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210319185302.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/03/19/MagicMirror%C2%B2%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E8%AE%BE%E7%BD%AE/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210319185302.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210319185302.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +508,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -502,9 +533,9 @@
 <p>从网上的教程看，用树莓派作为载体的比较多，有兴趣的可以自己装一台玩玩，我们这里只是体验下 <code>MagicMirror²</code> 的安装和基本设置。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>docker-magicmirror</code> ，选择第一个 <code>bastilimbach/docker-magicmirror </code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614416403992-1614416403994.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614416403992-1614416403994.png" alt="title"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>magicmirror</code>，然后在 <code>magicmirror</code> 文件夹中再创建三个新的子文件夹，分别命名为 <code>config</code> 、<code>modules</code> 和 <code>css</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614412545640-1614412545642.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614412545640-1614412545642.png" alt="title"></p>
 <table>
 <thead>
 <tr>
@@ -529,7 +560,7 @@
 <td align="center">挂载此文件以将您自己的自定义css添加到docker容器中。需要在运行容器之前，先创建文件。否则，Docker将创建一个custom.css文件夹</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614414523670-1614414523680.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614414523670-1614414523680.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>默认的端口要修改</p>
 <table>
 <thead>
@@ -543,7 +574,7 @@
 <td align="center">8080</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614414720177-1614414720178.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614414720177-1614414720178.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -556,74 +587,74 @@
 <td align="center">设置为 <code>Asia/Shanghai</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614418095501-1614418095503.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614418095501-1614418095503.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8085</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614418416693-1614418416696.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614418416693-1614418416696.png" alt="title"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><p>在 <code>docker/magicmirror/config</code> 目录你可以找到 <code>config.js</code>，通过修改这个文件，你可以设置日历假期、RSS源、以及天气等等；</p>
 <h2 id="设置为中文"><a href="#设置为中文" class="headerlink" title="设置为中文"></a>设置为中文</h2><p>打开 <code>config.js</code> 文件，将 <code>language</code> 属性从 <code>en</code> 改为 <code>zh-cn</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614421387316-1614421387320.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614421387316-1614421387320.png" alt="title"></p>
 <p>重新刷新主界面，即可将显示语言改为中文。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614420834850-1614420834852.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614420834850-1614420834852.png" alt="title"></p>
 <p>看起来并没有完全显示中文，因为跟日历、RSS源也有关系，可能需要单独设置</p>
 <h2 id="中国法定节假日"><a href="#中国法定节假日" class="headerlink" title="中国法定节假日"></a>中国法定节假日</h2><p>首先找到 <code>calendar</code> 模块</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614423352359-1614423352363.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614423352359-1614423352363.png" alt="title"></p>
 <p>我在网上找到两个订阅源</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webcal://p22-calendars.icloud.com/published/2/RL1JwQQtKFudYOiicAG_adz9DdrozFeZzv5Uyrs4s3gyWobdzL1NZFH-ZHAsTfuAevtnzdqVdYmcRO_Y_dWtxeIdmzUA1TNkAt5RuotJmsg</span><br></pre></td></tr></table></figure>
 
 <p>显示效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614423745627-1614423745631.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614423745627-1614423745631.png" alt="title"></p>
 <p>另一个订阅地址</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webcal://p10-calendars.icloud.com/published/2/MTI3Njk0MTQxNzEyNzY5NFRvxM53AOH-Px17vHeUETlZdUggoyEt2KnFiIqHg40FkRXfcQJjYoa2dULRarI9z4UlbHxK-kLOohfiRVSSP7Q</span><br></pre></td></tr></table></figure>
 
 <p>显示效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614423866317-1614423866319.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614423866317-1614423866319.png" alt="title"></p>
 <p>两个没有本质区别，看个人喜好了，我选了后面一个</p>
 <blockquote>
 <p>注意：因为 <code>header</code> 后面改成了中文，所以修改后的 <code>config.js</code> 文件编码格式必须是 <code>UTF-8</code>，否则页面上会乱码</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614424044005-1614424044007.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614424044005-1614424044007.png" alt="title"></p>
 <h2 id="天气预报"><a href="#天气预报" class="headerlink" title="天气预报"></a>天气预报</h2><ol>
 <li>在 <code>https://home.openweathermap.org/</code> 注册账号</li>
 <li>获取 <code>API key</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614428389336-1614428389338.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614428389336-1614428389338.png" alt="title"></p>
 <ol start="3">
 <li>校验邮箱</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/28/1614478862139-1614478862169.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/28/1614478862139-1614478862169.png" alt="title"></p>
 <ol start="4">
 <li>校验成功后会收到一封邮件，里面带了 <code>API Key</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/28/1614479009793-1614479009796.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/28/1614479009793-1614479009796.png" alt="title"></p>
 <ol start="5">
 <li>下载 <code>http://bulk.openweathermap.org/sample/city.list.json.gz</code> 文件，在解压出来的 <code>city.list.json</code> 中搜索你的城市，比如 <code>shanghai</code></li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614426730656-1614426730661.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614426730656-1614426730661.png" alt="title"></p>
 <p>显示效果</p>
 <p><img src="https://raw.githubusercontent.com/wbsu2003/gitnote-images/master/mynote/2021/02/27/1614428861601-1614428861607.png" alt="title"></p>
 <p>试了下 <code>yangpu</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614427096625-1614427096628.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614427096625-1614427096628.png" alt="title"></p>
 <p>显示效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614428693233-1614428693236.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614428693233-1614428693236.png" alt="title"></p>
 <p>修改 <code>location</code> 改不改无所谓，<code>locationID</code> 要用到上面的 <code>id</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614429007273-1614429007274.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614429007273-1614429007274.png" alt="title"></p>
 <h2 id="RSS-源"><a href="#RSS-源" class="headerlink" title="RSS 源"></a>RSS 源</h2><p>默认内置的新闻源是 <code>New York Times</code>，虽然也有中文版，但是需要科学上网才能访问，随便找了个中新网的即时新闻</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.chinanews.com/rss/scroll-news.xml</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/27/1614431652807-1614431652808.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/27/1614431652807-1614431652808.png" alt="title"></p>
 <h2 id="Compliments"><a href="#Compliments" class="headerlink" title="Compliments"></a>Compliments</h2><p>修改 <code>compliments.js</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210227223936.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210227223936.png"></p>
 <p>找了些鸡汤文来测试效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210227230016.png"></p>
-<h1 id="整体效果"><a href="#整体效果" class="headerlink" title="整体效果"></a>整体效果</h1><p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210227225802.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210227230016.png"></p>
+<h1 id="整体效果"><a href="#整体效果" class="headerlink" title="整体效果"></a>整体效果</h1><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210227225802.png"></p>
 <p>手机上的效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210227232334.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210227232334.jpg"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>MichMich/MagicMirror: 源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pY2hNaWNoL01hZ2ljTWlycm9y">https://github.com/MichMich/MagicMirror<i class="fa fa-external-link-alt"></i></span></p>
+<p>MichMich&#x2F;MagicMirror: 源代码<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pY2hNaWNoL01hZ2ljTWlycm9y">https://github.com/MichMich/MagicMirror<i class="fa fa-external-link-alt"></i></span></p>
 <p>MagicMirror² 官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYWdpY21pcnJvci5idWlsZGVycy8=">https://magicmirror.builders/<i class="fa fa-external-link-alt"></i></span></p>
 <p>Introduction | MagicMirror² Documentation<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1hZ2ljbWlycm9yLmJ1aWxkZXJzL21vZHVsZXMvaW50cm9kdWN0aW9uLmh0bWw=">https://docs.magicmirror.builders/modules/introduction.html<i class="fa fa-external-link-alt"></i></span></p>
-<p>docker / magicmirror · GitLab<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRsYWIuY29tL2toYXNzZWwvbWFnaWNtaXJyb3I=">https://gitlab.com/khassel/magicmirror<i class="fa fa-external-link-alt"></i></span></p>
-<p>bastilimbach/docker-magicmirror<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2Jhc3RpbGltYmFjaC9kb2NrZXItbWFnaWNtaXJyb3Iv">https://registry.hub.docker.com/r/bastilimbach/docker-magicmirror/<i class="fa fa-external-link-alt"></i></span></p>
+<p>docker &#x2F; magicmirror · GitLab<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRsYWIuY29tL2toYXNzZWwvbWFnaWNtaXJyb3I=">https://gitlab.com/khassel/magicmirror<i class="fa fa-external-link-alt"></i></span></p>
+<p>bastilimbach&#x2F;docker-magicmirror<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9yZWdpc3RyeS5odWIuZG9ja2VyLmNvbS9yL2Jhc3RpbGltYmFjaC9kb2NrZXItbWFnaWNtaXJyb3Iv">https://registry.hub.docker.com/r/bastilimbach/docker-magicmirror/<i class="fa fa-external-link-alt"></i></span></p>
 <p>我也來做 MagicMirror (二) 基本用法 | Mister Ngan<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cubWlzdGVybmdhbi5jb20vNTcwNS9qdXN0LWFub3RoZXItbWFnaWNtaXJyb3ItMi8=">https://www.misterngan.com/5705/just-another-magicmirror-2/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -770,7 +801,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

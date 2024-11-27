@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="TagSpaces 是一款离线、开源的文档管理器，支持标记。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png">
 <meta property="article:published_time" content="2023-12-02T04:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="S3">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/12/02/%E5%85%B7%E6%9C%89%E6%A0%87%E8%AE%B0%E5%92%8C%E7%AC%94%E8%AE%B0%E5%8A%9F%E8%83%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8TagSpaces%EF%BC%88%E7%BB%AD%EF%BC%89/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/06/202307271443011.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/06/202307271443011.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,7 +534,7 @@
 </blockquote>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="提出问题"><a href="#提出问题" class="headerlink" title="提出问题"></a>提出问题</h2><p>朋友最近在用 <code>TagSpaces</code>，但是发现添加 <code>管理新的位置</code> 后，虽然能创建笔记，可是刷新页面之后，新建的位置和笔记就都没了 😳</p>
 <h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>想了各种可能，包括换浏览器等等，但都无济于事，直到老苏看了官方文档</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311281039600.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311281039600.png"></p>
 <p>没理解这是什么脑回路，居然默认是不保存的。只能按官方的说明，通过 <code>extconfig.js</code> 进行自定义设置了</p>
 <p>因为不清楚 <code>extconfig.js</code> 的内容，所以老苏先从容器中拷贝了一个模板搬出来</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 tagspaces 目录  </span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器中拷贝模板文件到群晖</span></span><br><span class="line">docker <span class="built_in">cp</span> tagspaces-web:/usr/share/nginx/html/extconfig.tmpl.js ./extconfig.js</span><br></pre></td></tr></table></figure>
@@ -515,24 +546,24 @@
 <p>在 <code>tagspaces</code> 目录中新建一个 <code>extconfig.js</code> 文件，内容如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">ExtSaveLocationsInBrowser</span> = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311281437944.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311281437944.png"></p>
 <p>然后执行下面的命令，将 <code>extconfig.js</code> 文件拷贝进容器内</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确保自己在 tagspaces 目录  </span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 extconfig.js 文件拷贝回容器内</span></span><br><span class="line">docker <span class="built_in">cp</span> ./extconfig.js tagspaces-web:/usr/share/nginx/html/</span><br></pre></td></tr></table></figure>
 
 <p>现在问题就解决了，但是因为设置是保存在浏览器的本地存储（<code>Local Storage</code>）中，所以如果你换了机器或者浏览器，还是需要再设置一次的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311281353127.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311281353127.png"></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="添加认证"><a href="#添加认证" class="headerlink" title="添加认证"></a>添加认证</h2><p>默认情况下， <code>TagSpaces</code> 是没有登录认证的，在不添加反代的情况下，我们也可以给内置的 <code>nginx</code> 服务添加简单的基本身份验证</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 tagspaces 目录  </span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从容器中拷贝模板文件到群晖</span></span><br><span class="line">docker <span class="built_in">cp</span> tagspaces-web:/etc/nginx/conf.d/default.conf ./default.conf</span><br></pre></td></tr></table></figure>
 
 <p>这一步也不是必须的，主要是为看看原始的 <code>default.conf</code> 文件的内容，方便我们修改</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建密码文件和第一个用户，账号为 laosu，密码为 123456</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;laosu:<span class="subst">$(openssl passwd -crypt 123456)</span>\n&quot;</span> &gt;&gt; ./htpasswd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看文件内容 </span></span><br><span class="line"><span class="built_in">cat</span> htpasswd</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311281513853.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311281513853.png"></p>
 <p>在当前目录下，新建一个 <code>default.conf</code> 文件，内容如下</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">listen</span>  [::]:<span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        <span class="attribute">auth_basic</span> <span class="string">&quot;Please enter your username and password&quot;</span>;</span><br><span class="line">        <span class="attribute">auth_basic_user_file</span> /home/htpasswd; </span><br><span class="line">        <span class="attribute">autoindex</span> <span class="literal">on</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span>   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">        <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>现在的目录结构是这样的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311281531002.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311281531002.png"></p>
 <p>接下来要将 <code>default.conf</code> 和 <code>htpasswd</code> 拷贝到容器内</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确保自己在 tagspaces 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tagspaces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除容器内的 default.conf 文件</span></span><br><span class="line">docker <span class="built_in">exec</span> -it --user root tagspaces-web <span class="built_in">rm</span> -rf /etc/nginx/conf.d/default.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 default.conf 文件拷贝到容器内 /etc/nginx/conf.d 目录</span></span><br><span class="line">docker <span class="built_in">cp</span> ./default.conf tagspaces-web:/etc/nginx/conf.d/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 htpasswd 文件拷贝到容器内 /home 目录</span></span><br><span class="line">docker <span class="built_in">cp</span> ./htpasswd tagspaces-web:/home/</span><br></pre></td></tr></table></figure>
 
@@ -540,7 +571,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重启容器</span></span><br><span class="line">docker-compose restart</span><br></pre></td></tr></table></figure>
 
 <p>再次在浏览器中输入 <code>http://群晖IP:9012</code> ，就会看到弹出的登录界面了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/11/202311282108701.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202311282108701.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>具有标记和笔记功能的文件管理器TagSpaces | 老苏的blog<br>地址：<a href="https://laosu.tech/2023/10/14/%E5%85%B7%E6%9C%89%E6%A0%87%E8%AE%B0%E5%92%8C%E7%AC%94%E8%AE%B0%E5%8A%9F%E8%83%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8TagSpaces/">https://laosu.tech/2023/10/14/具有标记和笔记功能的文件管理器TagSpaces/</a></p>
 <p>Install with Docker | TagSpaces Docs<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnRhZ3NwYWNlcy5vcmcvdHV0b3JpYWxzL3RhZ3NwYWNlcy13ZWItZG9ja2VyLw==">https://docs.tagspaces.org/tutorials/tagspaces-web-docker/<i class="fa fa-external-link-alt"></i></span></p>
@@ -691,7 +722,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

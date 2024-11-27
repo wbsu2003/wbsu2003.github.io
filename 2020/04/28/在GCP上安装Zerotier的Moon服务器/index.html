@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="介绍如何在GCP上安装Zerotier的Moon服务器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png">
 <meta property="article:published_time" content="2020-04-28T03:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="GCP">
 <meta property="article:tag" content="Zerotier">
 <meta property="article:tag" content="Moon">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/04/28/%E5%9C%A8GCP%E4%B8%8A%E5%AE%89%E8%A3%85Zerotier%E7%9A%84Moon%E6%9C%8D%E5%8A%A1%E5%99%A8/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -390,7 +421,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/5-1588482334919.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -431,7 +462,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -495,28 +526,28 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>原本速度虽然不快，但是好歹也有1M左右的传输速度，但是架不住时常抽风，今天开始又完全不通了。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/Jietu20200422-125540-1587531353984.jpg" alt="title"></p>
 <p>而之前是这样的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/Jietu20200422-130750-1587532105407.jpg" alt="title"></p>
 <p>查阅文档后发现，moon的搭建是为了补充根节点在国外，速度慢，且不稳定的一个补充方案，以便使zerotier能在各种情况都能稳定运行的一种保障. </p>
 <p>GCP有公网地址，直接就它了。</p>
 <p><strong>1. 在GCP上安装Zerotier</strong></p>
 <p>用官网上提供的命令行：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | <span class="built_in">sudo</span> bash </span><br></pre></td></tr></table></figure>
 
-<p>开始安装：<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/38901587517414_.pic_hd-1587534791827.jpg" alt="title"></p>
-<p>安装完成：<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3891-1587534849922.png" alt="title"></p>
+<p>开始安装：<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/38901587517414_.pic_hd-1587534791827.jpg" alt="title"></p>
+<p>安装完成：<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3891-1587534849922.png" alt="title"></p>
 <p><strong>2. 加入网络</strong></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3897-1587536175663.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3897-1587536175663.png" alt="title"></p>
 <p><strong>3. 获取网络情况</strong></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3899-1587536235890.png" alt="title"></p>
-<p><strong>4. 生成moon.json</strong><br>进入 /var/lib/zerotier-one 文件夹<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3893-1587534932410.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3899-1587536235890.png" alt="title"></p>
+<p><strong>4. 生成moon.json</strong><br>进入 &#x2F;var&#x2F;lib&#x2F;zerotier-one 文件夹<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3893-1587534932410.png" alt="title"></p>
 <p>运行下面的语句</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-idtool initmoon identity.public &gt;&gt;moon.json</span><br></pre></td></tr></table></figure>
 
-<p>会在当前目录下产生一个新文件 <span class="exturl" data-url="aHR0cHM6Ly9jZG4ubGFvc3UuZnVuL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9teW5vdGUvMjAyMC8wNC8yMi9tb29uLTE1ODc1MzU3MDYyMDMuanNvbg==">moon.js<i class="fa fa-external-link-alt"></i></span></p>
+<p>会在当前目录下产生一个新文件 <span class="exturl" data-url="aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3dic3UyMDAzL2dpdG5vdGUtaW1hZ2VzQG1hc3Rlci9teW5vdGUvMjAyMC8wNC8yMi9tb29uLTE1ODc1MzU3MDYyMDMuanNvbg==">moon.js<i class="fa fa-external-link-alt"></i></span></p>
 <p>直接运行<code>vi moon.js</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3895-1587535338523.png" alt="title"></p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"> <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3648b35427&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;objtype&quot;</span><span class="punctuation">:</span> <span class="string">&quot;world&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;roots&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;identity&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3648b35427:0:49fbcc3fb665ac07dbbf5825a63d771d38dcc37f94393de88766d3a39a488156e02f6d816e3a3a3684af5d2385b7401944ce54651fd8de6b2a13f4d8d0ec9a5c&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;stableEndpoints&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;signingKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;signingKey_SECRET&quot;</span><span class="punctuation">:</span> <span class="string">&quot;294e4d31e71847eeea842aa60c2aba603f95666263970bb39e21eb4c349ee77c265bf903fce3b1870f9825346b87de7861b1538f24006d93e20b90f1a9bd9913&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;updatesMustBeSignedBy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;3475482010c71caf78bf00573552ebcd53cd83b2e09572374eaeae2383c9773d9d0c697e4ee0b3ae4a74e20abd04651c9fe6a339a1077f47bbeedce2a10d44f1&quot;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;worldType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;moon&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>5. 需要修改stableEndpoints</strong></p>
@@ -527,7 +558,7 @@
 <p><strong>6. 建立私有网络的zerotier标志性文件</strong></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-idtool genmoon moon.json</span><br></pre></td></tr></table></figure>
 
-<p>运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 /var/lib/zerotier-one/moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</p>
+<p>运行上面的命令以后，就会在该文件夹下生成类似这样的一个新文件：0000003648b35427.moon。然后把他们拷贝到做 moon 机器的 &#x2F;var&#x2F;lib&#x2F;zerotier-one&#x2F;moons.d 目录里去（这个目录是拷贝之前手工建立的），然后重启 zerotier-one。</p>
 <p><strong>7. 重启服务</strong></p>
 <p>网上的命令是这样的</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall -9 zerotier-one</span><br><span class="line">zerotier-one -d</span><br></pre></td></tr></table></figure>
@@ -536,19 +567,20 @@
 <ul>
 <li>在没有加入moon时，运行<code>zerotier-cli listpeers</code>查看客户端的连接情况</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3906-1587536897732.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3906-1587536897732.png" alt="title"></p>
 <p>可以看到都是planet和leaf，没有moon；</p>
 <ul>
-<li><p>不管Windows还是Mac OS，都需要以管理员身份运行：<br><code>zerotier-cli orbit 3648b35427 3648b35427</code></p>
-</li>
-<li><p>再次用 <code>zerotier-cli listpeers</code> 查看客户端的连接情况</p>
-</li>
+<li>不管Windows还是Mac OS，都需要以管理员身份运行：</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
+<p><code>zerotier-cli orbit 3648b35427 3648b35427</code></p>
+<ul>
+<li>再次用 <code>zerotier-cli listpeers</code> 查看客户端的连接情况</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3908-1587537050446.png" alt="title"></p>
 <ul>
 <li>注意红色的部分，看到了moon有木有？</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/22/WechatIMG3905-1587537114326.png" alt="title"></p>
 <p>参考文档：</p>
 <blockquote>
 <p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NvbGRib3kyNTgvYXJ0aWNsZS9kZXRhaWxzLzkzMTMzODYw">ZeroTier-One配置moon心得<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5MDUwNTk5L2FydGljbGUvZGV0YWlscy85NTc1NzExNQ==">ZeroTier-One搭建moon完整过程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2F0dXJsL2F3ZXNvbWUtYW50aS1nZncvYmxvYi9tYXN0ZXIvWmVyb1RpZXIvWmVyb1RpZXJfTW9vbnMubWQ=">建立自定义 ZeroTier Moons 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnpjemMuY3ovMjAxOC8wMy8xNC9aZXJvVGllci1tb29uLSVFOCVBRSVCRSVFNyVCRCVBRSVFNiU5NSU5OSVFNyVBOCU4Qi8=">ZeroTier moon 设置教程<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2NC5odG1s">初探：建立 zerotier 的 moon 服务器<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cDovL3d3dy5sdWNrdHUuY29tL2FyY2hpdmVzLzc2Ni5odG1s">再探：创建 zerotier moon 其实很简单<i class="fa fa-external-link-alt"></i></span></p>
@@ -697,7 +729,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

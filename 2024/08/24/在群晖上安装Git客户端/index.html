@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="docker-git-alpine 是一个在 Alpine Linux 中运行的有用的简单 git 容器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222356229.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222356229.png">
 <meta property="article:published_time" content="2024-08-24T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="工具">
 <meta property="article:tag" content="开发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222356229.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222356229.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/24/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%89%E8%A3%85Git%E5%AE%A2%E6%88%B7%E7%AB%AF/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222356229.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222356229.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,9 +533,9 @@
 </blockquote>
 <p>有时候，我们会需要用到 <code>git</code> 拉取源码。之前是比较容易的一件事情，只要安装 <code>Git</code> 套件就可以了</p>
 <h1 id="DSM-6-2-25556-及以上版本"><a href="#DSM-6-2-25556-及以上版本" class="headerlink" title="DSM 6.2-25556 及以上版本"></a>DSM 6.2-25556 及以上版本</h1><ul>
-<li> <code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
+<li><code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131200.png"></p>
 <blockquote>
 <ul>
 <li>名称：随意；</li>
@@ -512,17 +543,17 @@
 </ul>
 </blockquote>
 <ul>
-<li> <code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
+<li><code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131711.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131711.png"></p>
 <p>老苏机器上的是早些年安装的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222212337.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222212337.png"></p>
 <p>但是不知道从何时起，这个套件消失了，无论怎么搜都只能找到 <code>Git Server</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222143740.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222143740.png"></p>
 <p>但实际上，如果你访问 <span class="exturl" data-url="aHR0cHM6Ly9zeW5vY29tbXVuaXR5LmNvbS9wYWNrYWdlL2dpdA==">https://synocommunity.com/package/git<i class="fa fa-external-link-alt"></i></span>，会发现 <code>Git</code> 套件是存在的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406211635281.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406211635281.png"></p>
 <p>手动下载对应平台的 <code>spk</code> 文件，然后上传安装，结果发现需要 <code>6.2-25556</code> 或更新版本的 <code>DSM</code> 才行</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406211637561.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406211637561.png"></p>
 <p>难怪一直搜不到呢，总不能为了一个软件就把系统升了吧？那 <code>DSM 6.2-25556</code> 以下的版本怎么办呢？</p>
 <h1 id="DSM-6-2-25556-以下版本"><a href="#DSM-6-2-25556-以下版本" class="headerlink" title="DSM 6.2-25556 以下版本"></a>DSM 6.2-25556 以下版本</h1><p>当然还是用 <code>Docker</code> 啦，老苏找到一个在 <code>Alpine Linux</code> 中运行的简单 <code>git</code> 容器，特别适用于没有包管理器的小型 <code>Linux</code> 发行版，例如 <code>RancherOS</code>。</p>
 <h2 id="镜像下载"><a href="#镜像下载" class="headerlink" title="镜像下载"></a>镜像下载</h2><p>在群晖上以 Docker 方式安装。</p>
@@ -530,12 +561,12 @@
 <blockquote>
 <p>本文写作时， <code>latest</code> 版本对应为  <code>2.45.2 v2.45.2</code>；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406211759089.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406211759089.png"></p>
 <p>你也可以使用命令行，用 <code>SSH</code> 客户端登录到群晖后，执行下面的命令拉取镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull alpine/git:latest</span><br></pre></td></tr></table></figure>
 
 <p>下载完成后，可以在 <code>映像</code> 中找到。一般来说，以 <code>alpine</code> 为基础镜像的应用，尺寸都比较小</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222205829.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222205829.png"></p>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>作为命令行工具，需要用在 <code>SSH</code> 客户端的命令行运行、</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用法</span></span><br><span class="line">docker run -ti --<span class="built_in">rm</span> -v <span class="variable">$&#123;HOME&#125;</span>:/root -v $(<span class="built_in">pwd</span>):/git alpine/git &lt;git_command&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例</span></span><br><span class="line">docker run -ti --<span class="built_in">rm</span> -v <span class="variable">$&#123;HOME&#125;</span>:/root -v $(<span class="built_in">pwd</span>):/git alpine/git <span class="built_in">clone</span> https://github.com/alpine-docker/git.git</span><br></pre></td></tr></table></figure>
 
@@ -551,7 +582,7 @@
 <p>一个简单的示例</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单示例</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker</span><br><span class="line"><span class="built_in">alias</span> git=<span class="string">&quot;docker run -ti --rm -v <span class="subst">$(pwd)</span>:/git -v <span class="variable">$&#123;HOME&#125;</span>:/root alpine/git&quot;</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/fynnfluegge/rocketnotes.git</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222328522.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222328522.png"></p>
 <p>但是 </p>
 <ul>
 <li>在不同的存储库之间切换时，您需要重新定义（重新运行）别名</li>
@@ -567,20 +598,20 @@
 <h3 id="脚本模式"><a href="#脚本模式" class="headerlink" title="脚本模式"></a>脚本模式</h3><p>第二种方法是将命令添加到 <code>~/.bashrc</code>或<code>~/.profile</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 .profile</span></span><br><span class="line">vi ~/.profile</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222302509.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222302509.png"></p>
 <p>在文件的最后加入下面的函数</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">git</span></span> () &#123;</span><br><span class="line">    (docker run -ti --<span class="built_in">rm</span> -v <span class="variable">$&#123;HOME&#125;</span>:/root -v $(<span class="built_in">pwd</span>):/git alpine/git <span class="string">&quot;<span class="variable">$@</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222304338.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222304338.png"></p>
 <p>保存之后，执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 应用生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.profile</span><br></pre></td></tr></table></figure>
 
 <p>可以用方法一中的简单示例进行测试，效果是一样的</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406222332967.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406222332967.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>SynoCommunity<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zeW5vY29tbXVuaXR5LmNvbS9wYWNrYWdlL2dpdA==">https://synocommunity.com/package/git<i class="fa fa-external-link-alt"></i></span></p>
-<p>alpine-docker/git: A useful simple git container running in alpine linux, especially for tiny linux distro, such as RancherOS, which don’t have package manager.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FscGluZS1kb2NrZXIvZ2l0">https://github.com/alpine-docker/git<i class="fa fa-external-link-alt"></i></span></p>
-<p>alpine/git - Docker 镜像 | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2FscGluZS9naXQ=">https://hub.docker.com/r/alpine/git<i class="fa fa-external-link-alt"></i></span></p>
+<p>alpine-docker&#x2F;git: A useful simple git container running in alpine linux, especially for tiny linux distro, such as RancherOS, which don’t have package manager.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FscGluZS1kb2NrZXIvZ2l0">https://github.com/alpine-docker/git<i class="fa fa-external-link-alt"></i></span></p>
+<p>alpine&#x2F;git - Docker 镜像 | Docker Hub<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS9yL2FscGluZS9naXQ=">https://hub.docker.com/r/alpine/git<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -727,7 +758,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

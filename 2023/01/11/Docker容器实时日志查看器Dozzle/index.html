@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Dozzle 是 Docker 容器的实时日志查看器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171730821.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171730821.png">
 <meta property="article:published_time" content="2023-01-11T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.938Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171730821.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171730821.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/01/11/Docker%E5%AE%B9%E5%99%A8%E5%AE%9E%E6%97%B6%E6%97%A5%E5%BF%97%E6%9F%A5%E7%9C%8B%E5%99%A8Dozzle/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171730821.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171730821.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,20 +538,20 @@
 
 <p>软件特点</p>
 <ul>
-<li>  容器名称智能模糊搜索🤖</li>
-<li>  使用正则表达式搜索日志🔦</li>
-<li>  内存占用小🏎</li>
-<li>  用于查看多个日志的分屏</li>
-<li>  轻松下载日志</li>
-<li>  内存和 CPU 使用情况的实时统计信息</li>
-<li>  使用用户名和密码进行身份验证🚨</li>
+<li>容器名称智能模糊搜索🤖</li>
+<li>使用正则表达式搜索日志🔦</li>
+<li>内存占用小🏎</li>
+<li>用于查看多个日志的分屏</li>
+<li>轻松下载日志</li>
+<li>内存和 CPU 使用情况的实时统计信息</li>
+<li>使用用户名和密码进行身份验证🚨</li>
 </ul>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>与容器相关的应用，都需要绑定挂载 <code>/var/run/docker.sock</code> ，包括我们之前安装的 <code>portainer</code>、<code>watchtower</code>，<code>Glances</code>，<code>Netdata</code> 、<code>lazydocker</code> 等。</p>
 <p><strong>什么是 <code>/var/run/docker.sock</code> ?</strong></p>
 <blockquote>
 <p><code>/var/run/docker.sock</code> 是 <code>Docker API</code> 的主要入口，简单地说，它是 <code>Docker</code> 守护进程（<code>Docker daemon</code>）默认监听的 <code>Unix</code> 域套接字（<code>Unix domain socket</code>），容器中的进程可以通过它与 <code>Docker</code> 守护进程进行通信。</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/09/16/1600233408261-1600233408269.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/09/16/1600233408261-1600233408269.png" alt="title"></p>
 <blockquote>
 <p>图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iZXR0ZXJwcm9ncmFtbWluZy5wdWIvYWJvdXQtdmFyLXJ1bi1kb2NrZXItc29jay0zYmZkMjc2ZTEyZmQ=">https://betterprogramming.pub/about-var-run-docker-sock-3bfd276e12fd<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -536,20 +567,20 @@
 
 <p>更多的设置可以参考官方的说明：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtaXIyMC9kb3p6bGUjZW52aXJvbm1lbnQtdmFyaWFibGVzLWFuZC1jb25maWd1cmF0aW9u">https://github.com/amir20/dozzle#environment-variables-and-configuration<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8183</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171614437.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171614437.png"></p>
 <p>左侧可以选择查看的容器</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171616778.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171616778.png"></p>
 <p>默认列出的都是在运行的容器，可以在系统中设置把停止的容器也显示出来</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171619759.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171619759.png"></p>
 <p>停止的容器是是灰色的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171621930.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171621930.png"></p>
 <p>也同样可以获取到日志信息</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171622721.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171622721.png"></p>
 <p>日志支持下载</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202211171631771.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202211171631771.png"></p>
 <p><code>Dozzle</code> 定位很清晰，功能不多，但简单好用，是款不错的小工具。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>amir20/dozzle: Realtime log viewer for docker containers.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtaXIyMC9kb3p6bGU=">https://github.com/amir20/dozzle<i class="fa fa-external-link-alt"></i></span></p>
+<p>amir20&#x2F;dozzle: Realtime log viewer for docker containers.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtaXIyMC9kb3p6bGU=">https://github.com/amir20/dozzle<i class="fa fa-external-link-alt"></i></span></p>
 <p>Dozzle - Log viewer for Docker<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3p6bGUuZGV2Lw==">https://dozzle.dev/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -696,7 +727,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

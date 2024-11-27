@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="YuIndex 是一个极客范儿的浏览器主页。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262254155.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262254155.png">
 <meta property="article:published_time" content="2022-08-12T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.974Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.180Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262254155.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262254155.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/08/12/%E6%9E%81%E5%AE%A2%E8%8C%83%E5%84%BF%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E9%A1%B5YuIndex/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262254155.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262254155.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,7 +527,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>今晚继续，周日还有</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/08/202208111707048.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/08/202208111707048.png"></p>
 <hr>
 <blockquote>
 <p>本文是应网友 <code>哈哈</code> 的要求折腾的；</p>
@@ -513,7 +544,7 @@
 <p>如果你不想自己构建，可以跳过，直接阅读下一章节</p>
 </blockquote>
 <p>老苏开始都是基于官方的 <code>Dockerfile</code> 构建的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207261639798.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207261639798.png"></p>
 <p>后端就算了，前端实在有点看不下去，老苏的强迫症又犯了，于是在官方的基础上，用多阶段构建调整了一下</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-buster-slim as build-deps</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /src</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> nginx:<span class="number">1.12</span>-alpine</span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> maintainer=laosu&lt;wbsu2003@gmail.com&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=build-deps /src/dist /usr/share/nginx/html</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> ./replace_api_url.sh ./replace_api_url.sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x replace_api_url.sh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;./replace_api_url.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
 
@@ -527,14 +558,14 @@
 <li>产品模式：<code>&quot;https://yuindex-server-974538-1256524210.ap-shanghai.run.tcloudbase.com/api&quot;</code></li>
 <li>开发模式：<code>&quot;http://localhost:7345/api&quot;</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207261539278.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207261539278.png"></p>
 <p>将产品模式的地址替换为我们设定的 <code>BACKEND_URL</code> 地址；</p>
 </blockquote>
 <p>构建镜像和容器运行的基本命令如下👇</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接下载代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/liyupi/yuindex.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过代理下载原代码</span></span><br><span class="line">git <span class="built_in">clone</span> https://ghproxy.com/https://github.com/liyupi/yuindex.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入服务端目录</span></span><br><span class="line"><span class="built_in">cd</span> yuindex/server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建服务端镜像</span></span><br><span class="line">docker build -t wbsu2003/yuindex-server:v1 .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入前端目录</span></span><br><span class="line"><span class="built_in">cd</span> yuindex</span><br><span class="line"></span><br><span class="line"><span class="comment"># 前端要用老苏的 Dockerfile 文件替换官方的；</span></span><br><span class="line"><span class="comment"># 将 replace_api_url.sh 放入当前目录；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建前端镜像</span></span><br><span class="line">docker build -t wbsu2003/yuindex-client:v1 .</span><br></pre></td></tr></table></figure>
 
 <p>现在的前端还不到 <code>20M</code> 了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207270826075.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207270826075.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><p>应用涉及到多个容器，在群晖上用 <code>docker-compose</code> 安装，请将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span>    </span><br><span class="line">    </span><br><span class="line"><span class="attr">services:</span>    </span><br><span class="line">  <span class="attr">backend:</span>    </span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/yuindex-server</span>    </span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">yi_server</span>    </span><br><span class="line">    <span class="attr">volumes:</span>     </span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/usr/src/app/src/config</span>   </span><br><span class="line">    <span class="attr">depends_on:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span>  </span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span>  </span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span>    </span><br><span class="line">      </span><br><span class="line">  <span class="attr">frontend:</span>    </span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/yuindex-client</span> </span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">yi_client</span>   </span><br><span class="line">    <span class="attr">environment:</span>  </span><br><span class="line">      <span class="attr">BACKEND_URL:</span> <span class="string">http://192.168.0.197:3443</span>  </span><br><span class="line">    <span class="attr">depends_on:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span>  </span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="attr">db:</span>  </span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql:5.7</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">yi_mysql</span>  </span><br><span class="line">    <span class="comment"># restart: always</span></span><br><span class="line">    <span class="attr">environment:</span>  </span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">&#x27;Eig7r3DDmfvP&#x27;</span>  </span><br><span class="line">      <span class="attr">MYSQL_DATABASE:</span> <span class="string">&#x27;yuindex&#x27;</span>  </span><br><span class="line">      <span class="attr">MYSQL_USER:</span> <span class="string">&#x27;yuindex&#x27;</span>  </span><br><span class="line">      <span class="attr">MYSQL_PASSWORD:</span> <span class="string">&#x27;123456&#x27;</span>  </span><br><span class="line">    <span class="attr">volumes:</span>  </span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/lib/mysql</span>  </span><br><span class="line">      <span class="bullet">-</span> <span class="string">./init:/docker-entrypoint-initdb.d/</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">--character-set-server=utf8</span> <span class="string">--collation-server=utf8_unicode_ci</span></span><br><span class="line">  </span><br><span class="line">  <span class="attr">redis:</span>  </span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">yi_redis</span>  </span><br><span class="line">    <span class="attr">command:</span> <span class="string">redis-server</span> <span class="string">--requirepass</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">depends_on:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span>  </span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span> </span><br><span class="line">      </span><br><span class="line">  <span class="attr">proxy:</span>    </span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span>    </span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">yi_nginx</span>    </span><br><span class="line">    <span class="attr">ports:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="number">3443</span><span class="string">:80</span>  </span><br><span class="line">    <span class="attr">volumes:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nginx.conf:/etc/nginx/conf.d/default.conf:ro</span>    </span><br><span class="line">    <span class="attr">depends_on:</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span>    </span><br><span class="line">      <span class="bullet">-</span> <span class="string">frontend</span>  </span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br></pre></td></tr></table></figure>
 
@@ -561,15 +592,15 @@
 <p>然后执行下面的命令安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 yuindex 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/yuindex/&#123;config,data,init&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/yuindex</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml、nginx.conf放入当前目录；</span></span><br><span class="line"><span class="comment"># 将 config.prod.js、getConfig.js 放入 /config 目录；</span></span><br><span class="line"><span class="comment"># 将 ddl.sql 放入 /init 目录；</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262031231.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262031231.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3443</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262037686.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262037686.png"></p>
 <p>首先要创建一个用户</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user register -u laosu -p 123456 -e wbsu2003@gmail.com</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262038602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262038602.png"></p>
 <p>如果配置没问题，应该会注册成功的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/061/202207262040708.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/061/202207262040708.png"></p>
 <p>接下来怎么用，建议看看官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpeXVwaS95dWluZGV4L2Jsb2IvbWFzdGVyL2RvYy9jb21tYW5kcy5tZA==">YuIndex 命令大全（https://github.com/liyupi/yuindex/blob/master/doc/commands.md）<i class="fa fa-external-link-alt"></i></span>，老苏就不越俎代庖了。</p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>本文中用到的文件，老苏都放在了 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAzL0RvY2tlcmZpbGUvdHJlZS9tYWluL1l1SW5kZXg=">https://github.com/wbsu2003/Dockerfile/tree/main/YuIndex<i class="fa fa-external-link-alt"></i></span>，其中：</p>
 <ul>
@@ -577,8 +608,8 @@
 <li><code>install</code> 目录：容器安装用到的文件；</li>
 </ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>liyupi/yuindex: ✨ 新项目 - 极客范儿的浏览器主页 💻 Vue 3 + Node.js 全栈项目，自实现 web 终端 + 命令系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpeXVwaS95dWluZGV4">https://github.com/liyupi/yuindex<i class="fa fa-external-link-alt"></i></span></p>
-<p>yuindex/commands.md at master · liyupi/yuindex<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpeXVwaS95dWluZGV4L2Jsb2IvbWFzdGVyL2RvYy9jb21tYW5kcy5tZA==">https://github.com/liyupi/yuindex/blob/master/doc/commands.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>liyupi&#x2F;yuindex: ✨ 新项目 - 极客范儿的浏览器主页 💻 Vue 3 + Node.js 全栈项目，自实现 web 终端 + 命令系统<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpeXVwaS95dWluZGV4">https://github.com/liyupi/yuindex<i class="fa fa-external-link-alt"></i></span></p>
+<p>yuindex&#x2F;commands.md at master · liyupi&#x2F;yuindex<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xpeXVwaS95dWluZGV4L2Jsb2IvbWFzdGVyL2RvYy9jb21tYW5kcy5tZA==">https://github.com/liyupi/yuindex/blob/master/doc/commands.md<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -724,7 +755,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

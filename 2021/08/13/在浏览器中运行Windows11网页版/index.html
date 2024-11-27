@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="开源项目 Windows 11 in React 旨在使用 React、CSS (SCSS) 和 JS 等标准 Web 技术在 Web 上复刻 Windows 11 桌面体验。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810000707.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810000707.png">
 <meta property="article:published_time" content="2021-08-13T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810000707.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810000707.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/13/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E8%BF%90%E8%A1%8CWindows11%E7%BD%91%E9%A1%B5%E7%89%88/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810000707.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810000707.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,25 +535,25 @@
 <ol start="2">
 <li>安装并运行</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210625225143.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210625225143.png"></p>
 <ol start="3">
 <li>开始检查</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210625225441.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210625225441.png"></p>
 <ol start="4">
 <li>详情</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210810001256.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210810001256.png"></p>
 <ol start="5">
 <li>最低要求</li>
 </ol>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/06/20210625225745.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/06/20210625225745.png"></p>
 <p>让老苏失望的是，老苏的台式机也不满足 <code>Windows 11</code> 的安装要求，大部分机器不能升级的原因是不支持 <code>TPM 2.0</code>，但老苏的机器显然不是，检测工具几乎没有提供关于如何修复任何问题的信息和指导，所以老苏又下载了第三方的检测工具。</p>
 <h1 id="第三方检测工具"><a href="#第三方检测工具" class="headerlink" title="第三方检测工具"></a>第三方检测工具</h1><p><code>WhyNotWin11</code> 是个开源项目：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JjbWFlaGwvV2h5Tm90V2luMTE=">https://github.com/rcmaehl/WhyNotWin11<i class="fa fa-external-link-alt"></i></span>，可以在这里下到最新的版本：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JjbWFlaGwvV2h5Tm90V2luMTEvcmVsZWFzZXM=">https://github.com/rcmaehl/WhyNotWin11/releases<i class="fa fa-external-link-alt"></i></span></p>
 <p>老苏直接下了最新的 v2.3.2，文件很小</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809202952.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809202952.png"></p>
 <p>直接运行，如果报有毒信任一下即可</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809202851.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809202851.png"></p>
 <p>从测试结果看应该是 <code>CPU</code> 不能满足要求，查了下最低需要 <code>英特尔 8 代 CPU</code>，看来注定是与 <code>Windows 11</code> 无缘了。</p>
 <h1 id="Web-版-Windows-11"><a href="#Web-版-Windows-11" class="headerlink" title="Web 版 Windows 11"></a>Web 版 Windows 11</h1><p>虽然 <code>Windows 11</code> 用不了，但是国外有个大牛在 Web 上复刻了 <code>Windows 11</code> 的界面及部分功能，可用于体验  <code>Windows 11</code> 的一些功能。</p>
 <p><strong>什么是 Windows 11 in React ？</strong></p>
@@ -533,28 +564,28 @@
 <p>不过可能受网络影响，并不是特别顺畅，所以老苏打算在本地安装</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在群晖上以 Docker 方式安装。</p>
 <p>因为这个镜像在 <code>ghcr.io</code>，而不是之前我们常用的 <code>registry.hub.docker.com</code>，本想在注册表中 <code>新增</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809210214.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809210214.png"></p>
 <p>选中后点 <code>使用</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809210440.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809210440.png"></p>
 <p>但会显示报错</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809210348.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809210348.png"></p>
 <p>所以老苏只能用命令行来安装，先用 <code>SSH</code> 客户端登录到群晖，然后执行下面👇的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d  --name windows11 \</span><br><span class="line">--restart always \</span><br><span class="line">-p 3018:3000 \</span><br><span class="line">ghcr.io/blueedgetechno/windows11:master</span><br></pre></td></tr></table></figure>
 
 <p>速度有点慢，如果中断了可以多执行几次，直到成功为止</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809233254.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809233254.png"></p>
 <h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>在浏览器（建议用 <code>Chrome</code> ）中输入 <code>http://群晖IP:3018</code>，就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809233538.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809233538.png"></p>
 <p>可以体验 <code>Edge</code> 浏览器、应用商店等功能，还有很多功能还在实现中</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210809235048.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210809235048.png"></p>
 <p>不过就是在局域网，感觉也不是特别流畅，刚启动时容器的 <code>CPU</code> 占用一度可以达到 <code>30%</code> 多</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210811150745.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210811150745.png"></p>
 <p>稳定之后还是比较低的，不到 <code>1%</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210811150249.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210811150249.png"></p>
 <p>用于体验体验应该还行吧</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>rcmaehl/WhyNotWin11: Detection Script to help identify why your PC is not Windows 11 Release Ready<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JjbWFlaGwvV2h5Tm90V2luMTE=">https://github.com/rcmaehl/WhyNotWin11<i class="fa fa-external-link-alt"></i></span></p>
-<p>blueedgetechno/windows11: windows 11 in react 💻🌈⚡<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JsdWVlZGdldGVjaG5vL3dpbmRvd3MxMQ==">https://github.com/blueedgetechno/windows11<i class="fa fa-external-link-alt"></i></span></p>
+<p>rcmaehl&#x2F;WhyNotWin11: Detection Script to help identify why your PC is not Windows 11 Release Ready<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JjbWFlaGwvV2h5Tm90V2luMTE=">https://github.com/rcmaehl/WhyNotWin11<i class="fa fa-external-link-alt"></i></span></p>
+<p>blueedgetechno&#x2F;windows11: windows 11 in react 💻🌈⚡<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JsdWVlZGdldGVjaG5vL3dpbmRvd3MxMQ==">https://github.com/blueedgetechno/windows11<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -700,7 +731,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

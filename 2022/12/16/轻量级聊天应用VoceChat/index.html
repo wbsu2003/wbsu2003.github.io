@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="VoceChat 是一款支持独立部署的个人云社交媒体聊天服务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081712937.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081712937.png">
 <meta property="article:published_time" content="2022-12-16T00:45:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.986Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.196Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="IM">
 <meta property="article:tag" content="即时通讯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081712937.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081712937.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/12/16/%E8%BD%BB%E9%87%8F%E7%BA%A7%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8VoceChat/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081712937.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081712937.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -511,7 +542,7 @@
 <p>官方提供了 <code>Demo</code> 站点： <span class="exturl" data-url="aHR0cHM6Ly9wcml2b2NlLnZvY2UuY2hhdC8=">https://privoce.voce.chat<i class="fa fa-external-link-alt"></i></span>，不想自己搭可以去体验一下。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>vocechat-server</code> ，选择第一个 <code>privoce/vocechat-server</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081024102.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081024102.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>vocechat</code>，并在其中建一个子文件夹 <code>data</code></p>
 <table>
 <thead>
@@ -527,7 +558,7 @@
 <td align="center">存放设置等</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081027276.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081027276.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -543,13 +574,13 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081027510.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081027510.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>没有变量，但是需要设置命令，<code>VoceChat</code> 是通过命令来传递参数；</p>
 <p>在命令后面输入 <code>--network.frontend_url &quot;http://192.168.0.197:3009&quot;</code>，域名如果有端口也要带上</p>
 <blockquote>
 <p>这个地址只是邀请链接中显示的地址；</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081742468.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081742468.png"></p>
 <blockquote>
 <p>如果你要更换地址，需要删了重建容器，因为命令只有第一次生效，不能更改；</p>
 </blockquote>
@@ -563,55 +594,55 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 vocechat 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/vocechat/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 vocechat 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/vocechat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3009</code> 就能看到设置界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081111749.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081111749.png"></p>
 <h2 id="设置向导"><a href="#设置向导" class="headerlink" title="设置向导"></a>设置向导</h2><p>点 <code>开始</code> 进行设置，比较简单</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081112483.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081112483.png"></p>
 <p>设置一个管理员</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081113473.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081113473.png"></p>
 <p>邀请方式默认就可以，否则就只有收到邀请的人才能注册</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081114089.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081114089.png"></p>
 <p>邀请链接，如果前面设置的是域名，这里会显示域名</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081348324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081348324.png"></p>
 <p>到这里就可以了，后面可以进设置再调整</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081116875.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081116875.png"></p>
 <p>进入主界面，先邀请用户，然后创建一个频道就可以开始愉快的聊天了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081116633.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081116633.png"></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>官方关于反代和 <code>nginx</code> 的配置写的有点复杂，但是如果你和老苏一样在群晖上用 <code>npm</code>，其实都挺简单的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081122300.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081122300.png"></p>
 <p>没问题的话老苏习惯全部勾选</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081123068.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081123068.png"></p>
 <p>完成之后就可以用 <code>https://chat.laosu.ml:444</code> 访问了</p>
 <p>但是我们前面已经讲过，<code>--network.frontend_url</code> 设置的是邀请链接地址，所以虽然你是用域名访问的，但是设置中显示的依然还是局域网地址</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081355771.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081355771.png"></p>
 <blockquote>
 <p>其实应该跟老苏一样用环境变量，再加上占位替换法，这样会灵活一些；</p>
 </blockquote>
 <p>如果你还需要使用移动端，则还需要在 <code>Advanced</code> 中加入下面的代码</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://192.168.0.197:3009; <span class="comment"># 此处端口号取决于docker运行的对外端口号</span></span><br><span class="line">    <span class="attribute">proxy_redirect</span> <span class="literal">off</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span>        Host    <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span>        X-Real-IP       <span class="variable">$remote_addr</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span>        X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    <span class="attribute">proxy_next_upstream</span> <span class="literal">error</span> timeout invalid_header http_500 http_502 http_503 http_504;</span><br><span class="line">    <span class="attribute">proxy_max_temp_file_size</span> <span class="number">0</span>; <span class="comment"># 关掉硬盘缓存，增加写速度</span></span><br><span class="line">    <span class="comment"># SSE 相关配置</span></span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081447200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081447200.png"></p>
 <p>否则会卡在注册或者登陆界面，或者直接报错</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/11/202212081923802.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/11/202212081923802.png"></p>
 <h2 id="Android-端"><a href="#Android-端" class="headerlink" title="Android 端"></a>Android 端</h2><p>主界面上有客户端下载的按钮</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081402463.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081402463.png"></p>
 <p>点击会打开一个网站，建议下中间的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081403441.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081403441.png"></p>
 <p>下载速度还可以</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081406842.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081406842.png"></p>
 <p>运行之后，首先要输入服务器地址，也可以用邀请链接</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081452630.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081452630.png"></p>
 <p>注册用户，设置用户名</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081453938.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081453938.png"></p>
 <p>登陆成功后就可以聊天啦，老苏发了张图片</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081455938.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081455938.png"></p>
 <p>网页端能看到手机端发送的内容，不光能发 <code>Markdown</code>，还支持预览</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081459350.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081459350.png"></p>
 <p>手机上的效果</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081501855.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081501855.png"></p>
 <h1 id="关于-License"><a href="#关于-License" class="headerlink" title="关于 License"></a>关于 License</h1><p>默认安装出来有 <code>20</code> 用户的限制，一般用用应该是够的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081506352.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081506352.png"></p>
 <p>不够的话可以购买授权，有 <code>100</code> 用户的 <code>VoceChat Pro</code> 版和 <code>不限</code> 用户数的<code>VoceChat Supreme</code> 版</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/12/202212081507060.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202212081507060.png"></p>
 <p>据说还有机会获得免费版的机会</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>Privoce<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1ByaXZvY2U=">https://github.com/Privoce<i class="fa fa-external-link-alt"></i></span></p>
@@ -762,7 +793,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Serge 是一个完全在本地运行 LLaMa 模型 (Alpaca) 的自托管应用程序，不需要远程 API。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png">
 <meta property="article:published_time" content="2023-04-19T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/04/19/Serge%E8%AE%A9%E4%BD%A0%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CLLaMa%E6%A8%A1%E5%9E%8B%F0%9F%A6%99/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171255153.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171255153.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -515,7 +546,7 @@
 <iframe src="//player.bilibili.com/player.html?aid=782687594&bvid=BV1s24y1c7fL&cid=1100280017&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>老苏试了下，<code>4GB</code> 内存有点够呛，尤其是你的群晖还跑了其他的服务，如果有 <code>8GB</code>可以试试，不需要 <code>GPU</code> 还是不错的，虽然运算速度慢点</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171058595.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171058595.png"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><h2 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h2><p>目前 <code>Serge</code> 需要与 <code>AVX2</code> 指令兼容的 <code>CPU</code> ，老苏猜测应该是因为 <code>MongoDB</code> 的缘故。官方给的检测命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测 cpu 是否支持 AVX2</span></span><br><span class="line">lscpu | grep avx2</span><br></pre></td></tr></table></figure>
 
@@ -523,12 +554,12 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测 cpu 是否支持 AVX2</span></span><br><span class="line">cat /proc/cpuinfo | grep avx2</span><br></pre></td></tr></table></figure>
 
 <p>如果输出包含 <code>avx2</code>，则表示您的 <code>CPU</code> 支持 <code>AVX2</code>。如果未找到 <code>avx2</code>，则表示您的 <code>CPU</code> 不支持 <code>AVX2</code>。</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171106502.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171106502.png"></p>
 <h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><p>如果您的模型没有足够的可用内存，<code>llama</code> 就会崩溃，下面是官方提供的数据：</p>
 <ul>
-<li>  <code>7B</code> 需要大约 <code>4.5GB</code> 的空闲 <code>RAM</code></li>
-<li>  <code>13B</code> 需要大约 <code>12GB</code> 的空闲<code>RAM</code></li>
-<li> <code>30B</code> 需要大约 <code>20GB</code> 的空闲<code>RAM</code></li>
+<li><code>7B</code> 需要大约 <code>4.5GB</code> 的空闲 <code>RAM</code></li>
+<li><code>13B</code> 需要大约 <code>12GB</code> 的空闲<code>RAM</code></li>
+<li><code>30B</code> 需要大约 <code>20GB</code> 的空闲<code>RAM</code></li>
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="ghcr-io-镜像下载"><a href="#ghcr-io-镜像下载" class="headerlink" title="ghcr.io 镜像下载"></a>ghcr.io 镜像下载</h2><p>官方的镜像没有发布在 <code>docker hub</code>，而是在 <code>ghcr.io</code>，所以直接用命令行来安装。</p>
 <p>在 <code>SSH</code> 客户端中依次执行下面的命令</p>
@@ -552,29 +583,29 @@
 
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:8018</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161922209.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161922209.png"></p>
 <p>首先要点 <code>Download model</code>下载模型</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161924486.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161924486.png"></p>
 <p>老苏下了 <code>gpt4all</code> ，文件大小和 <code>7B</code> 、<code>7B-native</code> 是一样的，估摸着内存占用应该是一样的，但具体有什么区别老苏不清楚  🤦‍♂️</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161928363.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161928363.png"></p>
 <p>下载速度挺快的，日志中看不到具体的下载地址</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161932987.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161932987.png"></p>
 <p>点左侧的 <code>Home</code> 回到首页</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161935304.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161935304.png"></p>
 <p>聊天之前，可以设置模型的参数，但是说实话，老苏也不明白这些该如何设置，所以就保持了默认的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161934831.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161934831.png"></p>
 <p>点紫色的 <code>Start a new chat</code> 开始聊天</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/03/202304161938514.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/03/202304161938514.png"></p>
 <p>老苏问了第一个问题 <code>你支持中文吗？</code></p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304170935742.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304170935742.png"></p>
 <p>感觉一下就把天给聊死了，这接下来怎么聊呢？老苏的英文水平也就能说个 <code>What&#39;s you name?</code> 、<code>How are you?</code>、<code>How old are you?</code> </p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/031/202304171256831.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/031/202304171256831.png"></p>
 <p>老苏的机器是 <code>4G</code> 内存的， <code>CPU</code> 也比较古老，所以每个问题都需要很长时间才会有应答，差不多每个问题也就一顿饭的功夫吧 😁</p>
 <p>昨晚装好之后，第一个问题是中文的，其实难道也不大，但还是直接把机器给整的没响应了，早上起来一看重启了，估计是资源耗尽了吧，有兴趣的话，你也可以试试</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>nsarrazin/serge: A web interface for chatting with Alpaca through llama.cpp. Fully dockerized, with an easy to use API.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25zYXJyYXppbi9zZXJnZQ==">https://github.com/nsarrazin/serge<i class="fa fa-external-link-alt"></i></span></p>
+<p>nsarrazin&#x2F;serge: A web interface for chatting with Alpaca through llama.cpp. Fully dockerized, with an easy to use API.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25zYXJyYXppbi9zZXJnZQ==">https://github.com/nsarrazin/serge<i class="fa fa-external-link-alt"></i></span></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9zZXJnZS5jaGF0Lw==">https://serge.chat<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9zZXJnZS5jaGF0Lw==">https://serge.chat/<i class="fa fa-external-link-alt"></i></span></p>
-<p>[P] Serge, a self-hosted app for running LLaMa models (Alpaca) entirely locally, no remote API needed. : MachineLearning<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL01hY2hpbmVMZWFybmluZy9jb21tZW50cy8xMXl2YnpjL3Bfc2VyZ2VfYV9zZWxmaG9zdGVkX2FwcF9mb3JfcnVubmluZ19sbGFtYV9tb2RlbHMv">https://www.reddit.com/r/MachineLearning/comments/11yvbzc/p_serge_a_selfhosted_app_for_running_llama_models/<i class="fa fa-external-link-alt"></i></span></p>
+<p>[P] Serge, a self-hosted app for running LLaMa models (Alpaca) entirely locally, no remote API needed. : MachineLearning<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cucmVkZGl0LmNvbS9yL01hY2hpbmVMZWFybmluZy9jb21tZW50cy8xMXl2YnpjL3Bfc2VyZ2VfYV9zZWxmaG9zdGVkX2FwcF9mb3JfcnVubmluZ19sbGFtYV9tb2RlbHMv">https://www.reddit.com/r/MachineLearning/comments/11yvbzc/p_serge_a_selfhosted_app_for_running_llama_models&#x2F;<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -721,7 +752,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

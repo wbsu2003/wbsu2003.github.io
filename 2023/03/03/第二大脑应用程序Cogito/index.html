@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Cogito 是又一个第二大脑应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281354494.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281354494.png">
 <meta property="article:published_time" content="2023-03-03T00:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281354494.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281354494.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2023/03/03/%E7%AC%AC%E4%BA%8C%E5%A4%A7%E8%84%91%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8FCogito/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281354494.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281354494.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,13 +534,13 @@
 <p>官方号称是 <code>又一个第二大脑应用程序</code>，其实就是一个普通的笔记软件，但既不支持块操作、也不支持双链，更不具备现在流行的白板交互。</p>
 </blockquote>
 <p>先来张官方图片感受一下</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281200193.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281200193.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>tukks</code> ，选择第一个 <code>tukks/cogito</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p>老苏安装时，<code>latest</code> 对应的版本是 <code>v1.3-alpha</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302280850617.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302280850617.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>cogito</code>，并在其中建两个子文件夹，分别是 <code>db</code> 和 <code>image</code></p>
 <table>
 <thead>
@@ -530,7 +561,7 @@
 <td align="center">存放图片</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302280947946.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302280947946.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -546,7 +577,7 @@
 <td align="center"><code>9191</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302280948224.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302280948224.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -575,12 +606,12 @@
 <li><code>APP_JWT_SECRET</code>：可以用 <code>Bitwarden</code>密码生成器开生成，可以用 <code>256</code> 位（<code>128</code> 个字符长）的字符串；</li>
 <li><code>HTTPS_ONLY</code>：如果只是用局域网 <code>IP</code> 访问或者反代后使用 <code>http</code>协议，设为 <code>false</code>，如果反代后使用 <code>https</code> 协议，就设为 <code>true</code></li>
 <li><code>API_TWITTER_KEY</code> 和 <code>API_TWITTER_KEY_SECRET</code> ：这个可选参数，所以老苏没弄，主要原因是：<ul>
-<li> <code>twitter</code> 在国内访问需要特殊手段；</li>
+<li><code>twitter</code> 在国内访问需要特殊手段；</li>
 <li>注册 <code>twitter</code> 开发者账号还需要绑手机；</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281004008.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281004008.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 cogito 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/cogito/&#123;db,image&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 cogito 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/cogito</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name cogito \</span><br><span class="line">   -p 9191:9191 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/db:/app/db \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/image:/app/image \</span><br><span class="line">   -e APP_JWT_SECRET=w9xGdEZj9utU7gfEkJ8SHHK5ievpDXdxAmxXLrbAA7nRtwRm8tuxDEcLnnNs3wzqM7vvWs7j3Fc2a6ZgwVPiBUdcgx7F5Y54XT9z78yYftEppcDzCEvHaiD9E48R4PFd \</span><br><span class="line">   -e HTTPS_ONLY=<span class="literal">false</span> \</span><br><span class="line">   tukks/cogito:v1.3-alpha</span><br></pre></td></tr></table></figure>
 
@@ -591,38 +622,38 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 cogito 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/cogito/&#123;db,image&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 cogito 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/cogito</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <p>毕竟是 <code>java</code> 开发的，一开始的资源消耗还是比较高的</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281110367.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281110367.png"></p>
 <p>日志里能看到框架的版本</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281111140.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281111140.png"></p>
 <p>稳定之后，<code>CPU</code> 会降下来</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281113820.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281113820.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>启动时间比较长，在浏览器中输入 <code>http://群晖IP:9191</code> 会看到登录界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271336091.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271336091.png"></p>
 <p>第一次需要建新一个用户</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271337735.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271337735.png"></p>
 <p>登录成功之后的主界面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271338635.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271338635.png"></p>
 <p>首页的绿点是 <code>Webscoket status</code> 正常，变成红色的话应该就是服务失联了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281039882.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281039882.png"></p>
 <p>可以放一个链接作为笔记</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271341658.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271341658.png"></p>
 <p>会显示封面</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271344070.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271344070.png"></p>
 <p>点开详情，还可以设置 <code>tags</code> 和 <code>comment</code>，但本质是还只是个链接</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271417227.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271417227.png"></p>
 <p>也可以直接粘贴 <code>markdown</code>创建笔记</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271427946.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271427946.png"></p>
 <p>默认会在 <code>markdown</code> 文档前后自动加上   ```  标识</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271420210.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271420210.png"></p>
 <p>删掉就可以正常预览了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302271424792.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302271424792.png"></p>
 <p>回到首页，卡片也能预览了</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281041047.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281041047.png"></p>
 <p>卡片上可以点右键，不同的卡片上右键菜单存在小差异</p>
-<p><img src="https://cdn.laosu.fun/images2023@main/picgo/2023/02/202302281042408.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/02/202302281042408.png"></p>
 <p>你还可以访问 <code>http://群晖IP:9191/api/thoughts</code> ，看到 <code>json</code> 格式的笔记内容</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>Tukks/cogito: An another second brain app<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1R1a2tzL2NvZ2l0bw==">https://github.com/Tukks/cogito<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tukks&#x2F;cogito: An another second brain app<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1R1a2tzL2NvZ2l0bw==">https://github.com/Tukks/cogito<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -768,7 +799,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

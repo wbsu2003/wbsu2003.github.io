@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png">
 <meta property="article:published_time" content="2020-04-28T03:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="GitHub">
 <meta property="article:tag" content="NexT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/04/28/Hexo-theme-next%E4%B8%BB%E9%A2%98/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/03/1-1588480730519.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,10 +530,10 @@
 <blockquote>
 <p>«NexT» is a high quality elegant Hexo theme. It is crafted from scratch with love.</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
-<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/63487983-da41b080-c4df-11e9-951c-64883a8a5e9b-1588135737833.png" alt="title"></p>
+<h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Hexo安装完成后，默认的主题是landscape，个人不是很喜欢，所以我们要更换。<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/Jietu20200429-130211-1588137107672.jpg" alt="title"></p>
 <p>随便搜搜你就会发现，Next是排名最靠前的主题了，也是目前教程最多的主题，所以我们决定换成Next试试看，先上个效果。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4023-1588130305246.png" alt="title"></p>
 <p>粗看差别也不是特别大对不对？仔细看还是有一些区别的：</p>
 <blockquote>
 <ul>
@@ -521,23 +552,23 @@
 </blockquote>
 <p>进入<code>blog\themes</code>目录，你会发现，除了<code>landscape</code>目录外，还多了一个<code>next</code>目录。</p>
 <h2 id="2-3-切换主题"><a href="#2-3-切换主题" class="headerlink" title="2.3 切换主题"></a>2.3 切换主题</h2><p>回到<code>blog</code>目录，编辑<code>_config.yml</code>文件，将<code>theme：</code>后面的<code>landscape</code>改成<code>next</code>，保存并退出。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4028-1588138154211.png" alt="title"></p>
 <p>回到<code>blog</code>目录，cmd模式下运行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
 
 <h1 id="3-修改"><a href="#3-修改" class="headerlink" title="3. 修改"></a>3. 修改</h1><h2 id="3-1-修改Scheme"><a href="#3-1-修改Scheme" class="headerlink" title="3.1 修改Scheme"></a>3.1 修改Scheme</h2><p>进入<code>blog\themes\next</code>目录，打开<code>_config.yml</code>文件。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
-<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
-<p>再打开3个，去掉前面的#号就行<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4029-1588138855093.png" alt="title"></p>
+<h2 id="3-1-修改菜单"><a href="#3-1-修改菜单" class="headerlink" title="3.1 修改菜单"></a>3.1 修改菜单</h2><p>默认只有2个菜单<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/Jietu20200429-134353-1588139151630.jpg" alt="title"></p>
+<p>再打开3个，去掉前面的#号就行<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4030-1588139208209.png" alt="title"></p>
 <p>在编译发布一次</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
-<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/Jietu20200429-134520-1588139278556.jpg" alt="title"></p>
+<p>已经变成了5个菜单了，但是新增的菜单如果你什么都不做，点击后就会显示404错误。<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4031-1588139439421.png" alt="title"></p>
 <p>需要创建相应的文件夹，比如标签：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br></pre></td></tr></table></figure>
 
-<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
+<p>至于我们要改成什么样，给你看看官方的demo，让我们一起努力吧！<br><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/04/29/WechatIMG4033-1588140211540.png" alt="title"></p>
 <p><strong>参考文档</strong></p>
 <blockquote>
 <p>官网<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">https://github.com/theme-next/hexo-theme-next<i class="fa fa-external-link-alt"></i></span></p>
@@ -687,7 +718,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

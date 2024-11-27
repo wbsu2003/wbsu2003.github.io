@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="FileZilla 是一个免费开源的 FTP 软件，分为客户端版本和服务器版本，并具备所有的 FTP 软件功能。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416174554.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416174554.png">
 <meta property="article:published_time" content="2021-07-16T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.938Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="ftp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416174554.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416174554.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/07/16/FTP%E5%AE%A2%E6%88%B7%E7%AB%AFFileZilla%E7%9A%84%E5%AE%89%E8%A3%85/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210416174554.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210416174554.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +530,7 @@
 <p>这篇文章是年初写的，当时是因为一则新闻，但因为种种原因一直没发，确切的说主要是因为老苏都不记得上一次使用 FTP 是什么时候的事儿了，要知道当年资源网站大多都是采用 FTP 协议的，而现在基本上可以说已经绝迹了。</p>
 <p><strong>什么是 FTP 协议 ？</strong></p>
 <blockquote>
-<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。FTP 协议包括两个组成部分，其一为 FTP 服务器，其二为 FTP 客户端。其中 FTP 服务器用来存储文件，用户可以使用 FTP 客户端通过 FTP 协议访问位于 FTP 服务器上的资源。在开发网站的时候，通常利用 FTP 协议把网页或程序传到 Web 服务器上。此外，由于 FTP 传输效率非常高，在网络上传输大的文件时，一般也采用该协议。【百度百科】</p>
+<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP&#x2F;IP 协议组中的协议之一。FTP 协议包括两个组成部分，其一为 FTP 服务器，其二为 FTP 客户端。其中 FTP 服务器用来存储文件，用户可以使用 FTP 客户端通过 FTP 协议访问位于 FTP 服务器上的资源。在开发网站的时候，通常利用 FTP 协议把网页或程序传到 Web 服务器上。此外，由于 FTP 传输效率非常高，在网络上传输大的文件时，一般也采用该协议。【百度百科】</p>
 </blockquote>
 <p>FTP 是个 <code>古老</code> 的协议，年初谷歌在 Chrome 88 版本中正式禁用了文件传输协议（FTP），紧接着 Mozilla 也宣布，Firefox 浏览器将彻底移除对 FTP 文件传输协议的支持，主要原因是<strong>使用率低且不支持加密（FTPS）</strong>，这增加了通过 FTP 下载资源的安全风险。</p>
 <p><strong>什么是 FileZilla ?</strong></p>
@@ -507,7 +538,7 @@
 <p><code>FileZilla</code> 是免费开源的 <code>FTP</code> 解决方案，分为客户端版本和服务器版本，其客户端是一个快速可靠的、跨平台的 <code>FTP</code> ，<code>FTPS</code> 和 <code>SFTP</code> 客户端。具有图形用户界面（GUI）和很多有用的特性。</p>
 </blockquote>
 <p>这次要安装的 <code>FileZilla</code> 是 FTP 客户端版，这个镜像的原理和之前介绍的 <code>firefox</code> 、<code>baidunetdisk</code> 、<code>RcloneBrowser</code> 一样，都使用了 VNC 方式，不过还好，资源消耗不大。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613549994900-1613549994902.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613549994900-1613549994902.png" alt="title"></p>
 <p>相关文章:</p>
 <blockquote>
 <ul>
@@ -518,7 +549,7 @@
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>filezilla</code> ，选择第一个 <code>jlesage/filezilla</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613539204669-1613539204671.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613539204669-1613539204671.png" alt="title"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，并将其命名为 <code>filezilla</code>。</p>
 <table>
 <thead>
@@ -529,17 +560,17 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/filezilla</td>
-<td align="center">/config</td>
+<td align="center">&#x2F;docker&#x2F;filezilla</td>
+<td align="center">&#x2F;config</td>
 <td align="center">应用程序在此处存储其配置，日志和任何需要持久性的文件</td>
 </tr>
 <tr>
-<td align="center">&lt;path/to/file&gt;</td>
-<td align="center">/storage</td>
+<td align="center">&lt;path&#x2F;to&#x2F;file&gt;</td>
+<td align="center">&#x2F;storage</td>
 <td align="center">该位置包含主机中需要应用程序访问的文件</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613544736418-1613544736420.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613544736418-1613544736420.png" alt="title"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不能冲突</p>
 <table>
 <thead>
@@ -560,7 +591,7 @@
 <td align="center">TCP</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613545329937-1613545329938.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613545329937-1613545329938.png" alt="title"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -586,27 +617,27 @@
 </tr>
 <tr>
 <td align="center">ENABLE_CJK_FONT</td>
-<td align="center">可选项，设置为 <code>1</code> 时，将安装开源字体 <code>WenQuanYi Zen Hei</code> 。该字体包含各种中文/日文/韩文字符</td>
+<td align="center">可选项，设置为 <code>1</code> 时，将安装开源字体 <code>WenQuanYi Zen Hei</code> 。该字体包含各种中文&#x2F;日文&#x2F;韩文字符</td>
 </tr>
 </tbody></table>
 <blockquote>
 <p>更多环境变量的说明，请参考:<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2psZXNhZ2UvZG9ja2VyLWZpbGV6aWxsYSNlbnZpcm9ubWVudC12YXJpYWJsZXM=">https://github.com/jlesage/docker-filezilla#environment-variables<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613545940768-1613545940770.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613545940768-1613545940770.png" alt="title"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5802</code>，并不能马上看到主界面，从日志看在下载字库</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613546556656-1613546556658.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613546556656-1613546556658.png" alt="title"></p>
 <p>主界面，如果没有设置 <code>ENABLE_CJK_FONT = 1</code>， 中文的文件名和目录都是乱码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613547734664-1613547734666.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613547734664-1613547734666.png" alt="title"></p>
 <p>设置之后，原来乱码的部分已经能正常显示了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613549070748-1613549070751.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613549070748-1613549070751.png" alt="title"></p>
 <p>查看版本信息</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2021/02/17/1613550491814-1613550491815.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2021/02/17/1613550491814-1613550491815.png" alt="title"></p>
 <p>使用上感觉比我用过的其他 <code>FTP</code> 软件要简单一些，你还可以在 <code>FileZilla</code> 中文网站上找到其他平台的客户端，比如 <code>Windows 平台</code>、<code>MacOS 平台</code> 等等</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZmlsZXppbGxhLmNuL2Rvd25sb2FkL2NsaWVudA==">【FileZilla 客户端下载地址】：https://www.filezilla.cn/download/client<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210505232433.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210505232433.png"></p>
 <p>只是现在会用到 FTP 的场合越来越少了。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>jlesage/docker-filezilla: Docker container for FileZilla<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2psZXNhZ2UvZG9ja2VyLWZpbGV6aWxsYQ==">https://github.com/jlesage/docker-filezilla<i class="fa fa-external-link-alt"></i></span></p>
+<p>jlesage&#x2F;docker-filezilla: Docker container for FileZilla<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2psZXNhZ2UvZG9ja2VyLWZpbGV6aWxsYQ==">https://github.com/jlesage/docker-filezilla<i class="fa fa-external-link-alt"></i></span></p>
 <p>How to Install FileZilla on Your Synology NAS – Marius Hosting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJpdXNob3N0aW5nLmNvbS9ob3ctdG8taW5zdGFsbC1maWxlemlsbGEtb24teW91ci1zeW5vbG9neS1uYXMv">https://mariushosting.com/how-to-install-filezilla-on-your-synology-nas/<i class="fa fa-external-link-alt"></i></span></p>
 <p>FileZilla - The free FTP solution<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9maWxlemlsbGEtcHJvamVjdC5vcmcv">https://filezilla-project.org/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -754,7 +785,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

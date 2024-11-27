@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="superset 是由 Airbnb （知名在线短租赁公司）开源的数据分析与可视化平台（曾用名 Caravel 、 Panoramix ）。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png">
 <meta property="article:published_time" content="2021-08-25T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.970Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.176Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="BI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/08/25/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0Superset%EF%BC%88%E8%B8%A9%E5%9D%91%E7%AF%87%EF%BC%89/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210815224527.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210815224527.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,16 +527,16 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>从主菜单可以看出来，第一层是数据（Data)，第二层是图表（Charts），第三层是看板（Dashboards）</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210331163946.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210331163946.png"></p>
 <p>数据形成了图表，而图表又构成了看板</p>
 <h1 id="理解数据"><a href="#理解数据" class="headerlink" title="理解数据"></a>理解数据</h1><p>为了能展示数据，我找到了一篇文章 <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NTg3NzQ4OA==">Excel数据分析实例—牛油果销售分析（https://zhuanlan.zhihu.com/p/45877488）<i class="fa fa-external-link-alt"></i></span>，看能否用 <code>Superset</code> 来练习数据展示。</p>
 <blockquote>
 <p>数据来源： <span class="exturl" data-url="aHR0cHM6Ly93d3cua2FnZ2xlLmNvbS9uZXVyb211c2ljL2F2b2NhZG8tcHJpY2Vz">Avocado Prices（https://www.kaggle.com/neuromusic/avocado-prices）<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>首先用 <code>Excel</code> 打开 <code>avocado.csv</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401111929.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401111929.png"></p>
 <p>对数据的标题稍作调整</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401111637.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401111637.png"></p>
 <table>
 <thead>
 <tr>
@@ -586,103 +617,103 @@
 </tr>
 </tbody></table>
 <h1 id="新建数据库"><a href="#新建数据库" class="headerlink" title="新建数据库"></a>新建数据库</h1><p>通过 <code>phpMyAdmin</code> 新建一个库 <code>demo</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401130949.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401130949.png"></p>
 <h1 id="上传数据"><a href="#上传数据" class="headerlink" title="上传数据"></a>上传数据</h1><h2 id="连接到新数据库"><a href="#连接到新数据库" class="headerlink" title="连接到新数据库"></a>连接到新数据库</h2><p>在主界面 <code>数据库（Data）</code> –&gt; <code>数据库（Databases）</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401114957.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401114957.png"></p>
 <p>点右上侧的 <code>+ 数据库（DATABASE）</code>，在弹出界面填写 <code>数据库名称（DATAASE NAME）</code> 和<code>SQLAlchemy URI</code></p>
 <blockquote>
 <p><code>SQLAlchemy URI</code> 和之前 <code>config.py</code> 中的 <code>SQLALCHEMY_DATABASE_URI</code> 格式是一致的，也是 <code>mysql://用户:密码@xx.xx.xx.xx:3306/数据库名称?charset=utf8</code> </p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401131510.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401131510.png"></p>
 <p>点 <code>测试连接（TEST CONNECTION）</code>，如果测试不通过，下方会有提示</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401115902.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401115902.png"></p>
 <p>通过之后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401115803.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401115803.png"></p>
 <p><code>SQL LAB SETTINGS</code> 页中勾选 <code>允许 CREATE TABLE AS</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401133019.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401133019.png"></p>
 <p><code>扩展</code> 页中勾选 <code>Allow Data Upload</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401131723.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401131723.png"></p>
 <p>点 <code>ADD</code> 保存</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401132014.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401132014.png"></p>
 <h2 id="注册新表-失败"><a href="#注册新表-失败" class="headerlink" title="注册新表(失败)"></a>注册新表(失败)</h2><p>在主界面 <code>数据库（Data）</code> –&gt; <code>数据库（Datasets）</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401120502.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401120502.png"></p>
 <p>点右上侧的 <code>+ 数据库（DATASET）</code>，在弹出界面，模式选 <code>demo</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401132147.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401132147.png"></p>
 <p>因为 <code>demo</code> 是空库，所以 <code>表</code>也是空的，需要自己填 <code>avocado</code>，然后点 <code>Create avocado</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401132449.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401132449.png"></p>
 <p>点 <code>ADD</code>，居然出错了，没权限？</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401132706.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401132706.png"></p>
 <h2 id="上传-CSV（失败）"><a href="#上传-CSV（失败）" class="headerlink" title="上传 CSV（失败）"></a>上传 CSV（失败）</h2><p>在主界面 <code>数据库</code> –&gt; <code>上传CSV文件</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401113152.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401113152.png"></p>
 <p>填写表名</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401134838.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401134838.png"></p>
 <p>点 <code>保存</code> ，居然又出错了，显示 <code>No such file or directory</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401135106.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401135106.png"></p>
 <p>显示不存在目录，进入容器后发现确实 <code>/usr/local/lib/python3.8/site-packages/superset/</code> 确实不存在 <code>app</code>，依次创建 <code>/app/static/uploads/</code> 三级目录，再上传</p>
 <p>这次显示的是 <code>Permission denied</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401142602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401142602.png"></p>
 <h2 id="新思路1：直接将csv作为数据源（失败）"><a href="#新思路1：直接将csv作为数据源（失败）" class="headerlink" title="新思路1：直接将csv作为数据源（失败）"></a>新思路1：直接将csv作为数据源（失败）</h2><p>将 <code>avocado.csv</code> 丢到 <code>/docker/superset</code>目录，右键 –&gt; <code>属性</code> 获取 <code>所在位置</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401153110.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401153110.png"></p>
 <p>SSH 登录到群晖</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从 avocado.csv 群晖拷贝到容器 amancevice-superset1 内</span></span><br><span class="line">docker <span class="built_in">cp</span> /volume1/docker/superset/avocado.csv amancevice-superset1:/usr/local/lib/python3.8/site-packages/superset/</span><br></pre></td></tr></table></figure>
 
 <p>尝试将 SQLite 作为数据源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite:////usr/local/lib/python3.8/site-packages/superset/avocado.csv</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401155057.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401155057.png"></p>
 <p><code>测试连接</code> 失败</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401155143.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401155143.png"></p>
 <h2 id="新思路2：将csv导入MySQL"><a href="#新思路2：将csv导入MySQL" class="headerlink" title="新思路2：将csv导入MySQL"></a>新思路2：将csv导入MySQL</h2><p><code>phpMyAdmin</code> 存在文件大小的限制，所以用了 <code>Navicat</code> 导数据</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401160035.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401160035.png"></p>
 <p>选中<code>表</code>，右键选择 <code>导入向导</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401160543.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401160543.png"></p>
 <p>格式选择 <code>csv</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401160708.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401160708.png"></p>
 <p>添加文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210825134035.png" alt="已模糊"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210825134035.png" alt="已模糊"></p>
 <p>这里不动，继续</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401160849.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401160849.png"></p>
 <p>时间的格式默认是 <code>DMY</code>，改为 <code>YMD</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401161050.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401161050.png"></p>
 <p>表名不变，默认的就可以</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401161136.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401161136.png"></p>
 <p>字段也不用改，因为前面已经处理过了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401161216.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401161216.png"></p>
 <p>第一次导入，默认还没有数据，所以选什么都一样</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401161302.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401161302.png"></p>
 <p>开始导入</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210825134349.png" alt="已模糊"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210825134349.png" alt="已模糊"></p>
 <p>导入成功后有提示</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/08/20210825134510.png" alt="已模糊"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/08/20210825134510.png" alt="已模糊"></p>
 <p>看一下</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401161534.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401161534.png"></p>
 <h1 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h1><p>在开始分析之前，重新整理下思路：</p>
 <ol>
-<li> <code>csv</code> 因为安全原因，不能直接作为数据源；</li>
-<li> 数据不能直接导入 <code>Superset</code>;</li>
-<li> 需要一个 <code>MySQL</code> 或者其他类型的数据库作为存储；</li>
+<li><code>csv</code> 因为安全原因，不能直接作为数据源；</li>
+<li>数据不能直接导入 <code>Superset</code>;</li>
+<li>需要一个 <code>MySQL</code> 或者其他类型的数据库作为存储；</li>
 </ol>
 <h2 id="设置数据库（Databases）"><a href="#设置数据库（Databases）" class="headerlink" title="设置数据库（Databases）"></a>设置数据库（Databases）</h2><p>这一步，已经在 <a href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93">连接到新数据库</a> 中完成了，所以可以跳过；</p>
 <h2 id="设置表（Datasets）"><a href="#设置表（Datasets）" class="headerlink" title="设置表（Datasets）"></a>设置表（Datasets）</h2><p>在主界面 <code>数据库（Data）</code> –&gt; <code>数据库（Datasets）</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401120502.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401120502.png"></p>
 <p>点右上侧的 <code>+ 数据库（DATASET）</code>，在弹出界面，模式选 <code>demo</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401162735.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401162735.png"></p>
 <p>直接点 <code>ADD</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401162808.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401162808.png"></p>
 <h2 id="设置图表（Charts）"><a href="#设置图表（Charts）" class="headerlink" title="设置图表（Charts）"></a>设置图表（Charts）</h2><p>在主界面 <code>Chart</code> –&gt; <code>+ 图表</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401163159.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401163159.png"></p>
 <p>下拉框中选表</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401163449.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401163449.png"></p>
 <p><code>创建新图表</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401163550.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401163550.png"></p>
 <p>终于看到图表了，但接下来就不知道怎么玩了，这个得先学 <code>数据分析</code> 了吧？</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210401165833.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210401165833.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>AWS 教您手把手玩转 Apache Superset 可视化 Amazon S3 里的数据 | 亚马逊AWS官方博客<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS9jbi9ibG9ncy9jaGluYS9hd3MtdGVhY2hlcy15b3UtdG8tcGxheS13aXRoLWFwYWNoZS1zdXBlcnNldC10by12aXN1YWxpemUtdGhlLWRhdGEtaW4tYW1hem9uLXMzLw==">https://aws.amazon.com/cn/blogs/china/aws-teaches-you-to-play-with-apache-superset-to-visualize-the-data-in-amazon-s3/<i class="fa fa-external-link-alt"></i></span></p>
 <p>#mac# 篇三：自建Superset数据可视化平台并创建疫情地图网站（上）_服务器_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E2bHI2ejZlLw==">https://post.smzdm.com/p/a6lr6z6e/<i class="fa fa-external-link-alt"></i></span></p>
 <p>#mac# 篇四：自建Superset数据可视化平台并创建疫情地图网站（下）_服务器_什么值得买<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2EyNTkycG9xLw==">https://post.smzdm.com/p/a2592poq/<i class="fa fa-external-link-alt"></i></span></p>
-<p>canghailan/Wuhan-2019-nCoV: 2019-nCoV 新冠状病毒 2019-12-01至今国家、省、市三级每日统计数据（支持接口读取）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhbmdoYWlsYW4vV3VoYW4tMjAxOS1uQ29W">https://github.com/canghailan/Wuhan-2019-nCoV<i class="fa fa-external-link-alt"></i></span></p>
-<p>如何让Superset的地图显示中文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdHRhcnRpY2xlL3Avc2hvdz9pZD0yMzEzNTAxMDAwMDE0MTc5NzQwODM4Nzg1NDI5JnN1ZGFyZWY9d3d3Lmdvb2dsZS5jb20=">https://weibo.com/ttarticle/p/show?id=2313501000014179740838785429&amp;sudaref=www.google.com<i class="fa fa-external-link-alt"></i></span></p>
+<p>canghailan&#x2F;Wuhan-2019-nCoV: 2019-nCoV 新冠状病毒 2019-12-01至今国家、省、市三级每日统计数据（支持接口读取）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhbmdoYWlsYW4vV3VoYW4tMjAxOS1uQ29W">https://github.com/canghailan/Wuhan-2019-nCoV<i class="fa fa-external-link-alt"></i></span></p>
+<p>如何让Superset的地图显示中文<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vdHRhcnRpY2xlL3Avc2hvdz9pZD0yMzEzNTAxMDAwMDE0MTc5NzQwODM4Nzg1NDI5JnN1ZGFyZWY9d3d3Lmdvb2dsZS5jb20=">https://weibo.com/ttarticle/p/show?id=2313501000014179740838785429&sudaref=www.google.com<i class="fa fa-external-link-alt"></i></span></p>
 <p>superset导出csv中文乱码问题_Python - UCloud云社区<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cudWNsb3VkLmNuL3l1bi80Mzg2OS5odG1s">https://www.ucloud.cn/yun/43869.html<i class="fa fa-external-link-alt"></i></span></p>
 <p>Excel数据分析实例—牛油果销售分析 - 知乎<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NTg3NzQ4OA==">https://zhuanlan.zhihu.com/p/45877488<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
@@ -830,7 +861,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

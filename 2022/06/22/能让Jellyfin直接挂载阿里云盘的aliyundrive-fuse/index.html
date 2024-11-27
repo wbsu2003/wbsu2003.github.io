@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="aliyundrive-fuse 是阿里云盘 FUSE 磁盘挂载，能让 Emby&#x2F;Jellyfin 观看阿里云盘的内容。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206220838136.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206220838136.png">
 <meta property="article:published_time" content="2022-06-22T00:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.982Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.188Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="多媒体">
 <meta property="article:tag" content="WebDAV">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206220838136.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206220838136.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/06/22/%E8%83%BD%E8%AE%A9Jellyfin%E7%9B%B4%E6%8E%A5%E6%8C%82%E8%BD%BD%E9%98%BF%E9%87%8C%E4%BA%91%E7%9B%98%E7%9A%84aliyundrive-fuse/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206220838136.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206220838136.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -499,7 +530,7 @@
     <div class="post-body" itemprop="articleBody"><p>周六一大早做了普查，为了保鲜，周一下午二点多去公司边上的常规点做了一次核酸，估摸着周二上班怎么也应该出来了，但是没想到我的核酸过期了</p>
 <p>同事在同一个点比我晚两个小时做的核酸报告都出来了，可是我的居然还是 <code>检测中</code>，为了上班只能在众目睽睽下做了一次抗原检测</p>
 <p>为了保险起见，昨天下午一点多又去做了一次，结果后做的都出来了，但周一做的依然还没出来，我不禁怀疑，是管子遗失了吗？这运气也是没谁了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206212306938.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206212306938.png"></p>
 <hr>
 <p>自从阿里云盘可以挂载为 <code>WebDAV</code> 之后，老苏一直在琢磨怎么 <a href="https://laosu.tech/2021/11/10/%E5%B0%86webdav%E6%8C%82%E8%BD%BD%E6%88%90%E4%B8%BA%E7%BE%A4%E6%99%96%E7%9A%84%E6%9C%AC%E5%9C%B0%E7%9B%98">将webdav挂载成为群晖的本地盘</a>，目的就是让 <code>Jellyfin</code> 、<code>AirSonic</code> 等多媒体软件可以直接使用阿里云盘中的多媒体资源，因为这些软件都不支持直接访问 <code>WebDAV</code> 资源。</p>
 <p>之前的方案比较折腾，需要挂载两次：阿里云盘 –&gt; <code>WebDAV</code>  –&gt; 本地盘，现在 <code>aliyundrive-webdav</code> 的作者又推出了 <code>aliyundrive-fuse</code>，可以让你越过中间的 <code>WebDAV</code>，直接将阿里云盘挂载成服务器的本地盘，虽然是只读，不支持写入，但用来做媒体播放是没问题的。</p>
@@ -512,7 +543,7 @@
 <p>老苏不确定这两种方法是否依然有效，如果都失效了，您就百度一下吧</p>
 </blockquote>
 <p>老苏之前安装过 <code>aliyundrive-webdav</code>，所以在安装目录中会保存最新的 <code>refresh token</code> 文件，打开文件复制就可以了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206191912107.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206191912107.png"></p>
 <h2 id="共享挂载"><a href="#共享挂载" class="headerlink" title="共享挂载"></a>共享挂载</h2><p>这是为主机中的映射卷启用共享挂载选项，老苏映射的目录在 <code>volume2</code> 上，如果你的目录是其他的卷上，记得修改</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 共享挂载  </span></span><br><span class="line">mount --make-shared /volume2  </span><br></pre></td></tr></table></figure>
 
@@ -524,7 +555,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 aliyunfuse 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/aliyunfuse/media</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/aliyunfuse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name aliyundrive-fuse \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --privileged \</span><br><span class="line">   --device /dev/fuse:/dev/fuse \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/media:/mnt/aliyundrive:shared \</span><br><span class="line">   -e TZ=Asia/Shanghai \</span><br><span class="line">   -e REFRESH_TOKEN=&lt;你的 refresh token&gt; \</span><br><span class="line">   messense/aliyundrive-fuse</span><br></pre></td></tr></table></figure>
 
 <p>如果不出意外，现在你可以在  <code>File Station</code> 中看到阿里云盘的内容了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206191954564.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206191954564.png"></p>
 <h1 id="设置-Jellyfin"><a href="#设置-Jellyfin" class="headerlink" title="设置 Jellyfin"></a>设置 Jellyfin</h1><p>如果你已经安装 <code>jellyfin</code>，只要停止容器，进入编辑状态，在 <code>存储空间</code> 中 <code>添加文件夹</code> ，将 <code>/volume2/docker/aliyunfuse/media</code> 添加为新的媒体库即可</p>
 <p>如果你还没装 <code>jellyfin</code> ，可以直接在当前目录用命令行执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">再新建两个子目录</span><br><span class="line"><span class="built_in">mkdir</span> -p &#123;cache,config&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 硬件支持硬解的一键启动</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --name jellyfin \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/config \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/cache:/cache \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/media:/media \</span><br><span class="line">   -p 8096:8096 \</span><br><span class="line">   --device=/dev/dri/renderD128 \</span><br><span class="line">   --device /dev/dri/card0:/dev/dri/card0 \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   jellyfin/jellyfin</span><br></pre></td></tr></table></figure>
@@ -540,11 +571,11 @@
 
 <p>如果你希望 <code>Jellyfin</code> 支持 <code>DLNA</code>，可以参考『  <a href="https://laosu.tech/2022/03/23/%E7%94%A8Portainer%E5%AE%89%E8%A3%85Jellyfin%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%AE%89%E8%A3%85%E7%AF%87%EF%BC%89">用Portainer安装Jellyfin媒体服务器（安装篇）</a>』一文中的安装脚本</p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>虽然 <code>aliyundrive-fuse</code> 并不能指定挂载的目录，但 <code>jellyfin</code> 是可以设置位置的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206192041602.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206192041602.png"></p>
 <p>刚挂载还没开始刮削，所以只能看到目录</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206191734161.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206191734161.png"></p>
 <p>过一会儿就好了</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/06/202206191956092.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206191956092.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><ul>
 <li><p>如果你还没有「阿里云盘」，点此链接领取福利：<br><span class="exturl" data-url="aHR0cHM6Ly9wYWdlcy5hbGl5dW5kcml2ZS5jb20vbW9iaWxlLXBhZ2Uvd2ViL2JlaW52aXRlZC5odG1sP2NvZGU9NmQwODRiMw==">https://pages.aliyundrive.com/mobile-page/web/beinvited.html?code=6d084b3<i class="fa fa-external-link-alt"></i></span></p>
 </li>
@@ -552,7 +583,7 @@
 </li>
 </ul>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>messense/aliyundrive-fuse: 阿里云盘 FUSE 磁盘挂载<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21lc3NlbnNlL2FsaXl1bmRyaXZlLWZ1c2U=">https://github.com/messense/aliyundrive-fuse<i class="fa fa-external-link-alt"></i></span></p>
+<p>messense&#x2F;aliyundrive-fuse: 阿里云盘 FUSE 磁盘挂载<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21lc3NlbnNlL2FsaXl1bmRyaXZlLWZ1c2U=">https://github.com/messense/aliyundrive-fuse<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -699,7 +730,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

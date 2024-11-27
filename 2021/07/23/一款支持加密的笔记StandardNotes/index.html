@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Standard Notes 是一款免费、开源且完全加密的笔记应用程序。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716154617.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716154617.png">
 <meta property="article:published_time" content="2021-07-23T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.152Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716154617.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716154617.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/07/23/%E4%B8%80%E6%AC%BE%E6%94%AF%E6%8C%81%E5%8A%A0%E5%AF%86%E7%9A%84%E7%AC%94%E8%AE%B0StandardNotes/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716154617.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716154617.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -531,9 +562,9 @@
 <blockquote>
 <p>官方教程：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnN0YW5kYXJkbm90ZXMub3JnL3NlbGYtaG9zdGluZy9kb2NrZXIv">https://docs.standardnotes.org/self-hosting/docker/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716105650.png" alt="7个容器"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716105650.png" alt="7个容器"></p>
 <p>如果您跟老苏一样，采用了自定义数据库的话，安装完成后会有 6 个容器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716111546.png" alt="自定义数据库6个容器"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716111546.png" alt="自定义数据库6个容器"></p>
 <p>对比两张图，您应该会发现少的那个是 <code>MySQL</code> 容器</p>
 <h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><blockquote>
 <p>这一步是可选的，按官方的教程 <code>MySQL</code> 数据库是部署在容器里的，但老苏不建议这么干，原因有兴趣的可以自己度娘。</p>
@@ -543,27 +574,27 @@
 
 <p>查阅了很多文档发现是 <code>MariaDB 5.5</code> 的问题，所以老苏不得不又安装了 <code>MariaDB 10</code> </p>
 <p>通过 <code>phpMyAdmin</code> 在 <code>MariaDB 10</code> 中新建用户 <code>standardnote</code>，创建同名的库 <code>standardnote</code> 并授予所有权限。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715103324.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715103324.png"></p>
 <h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><ul>
-<li> <code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
+<li><code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131200.png"></p>
 <blockquote>
 <p>名称：随意，位置：<code>http://packages.synocommunity.com/</code></p>
 </blockquote>
 <ul>
-<li> <code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
+<li><code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131711.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131711.png"></p>
 <h2 id="下载代码"><a href="#下载代码" class="headerlink" title="下载代码"></a>下载代码</h2><p>用 SSH 客户端连到群晖，在 <code>docker</code> 目录中执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载代码</span></span><br><span class="line">git <span class="built_in">clone</span> --single-branch --branch main https://github.com/standardnotes/standalone.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> standalone</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715101512.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715101512.png"></p>
 <h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 初始化设置</span><br><span class="line">./server.sh setup</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715101836.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715101836.png"></p>
 <p>编辑 <code>.env</code> 文件</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715102423.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715102423.png"></p>
 <p>这里可以修改 <code>EXPOSED_PORT</code>，默认端口为 <code>3000</code>，找一个不冲突的端口就可以，老苏随便改了个 <code>3050</code></p>
 <blockquote>
 <p>如果你准备和老苏一样使用自定义数据库，那跟数据库想关的部分也需要进行修改</p>
@@ -576,10 +607,10 @@
 <li><code>DB_DATABASE</code>：默认为 <code>standard_notes_db</code>，改为我们第一步创建的 <code>standardnote</code></li>
 </ul>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716161952.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716161952.png"></p>
 <h2 id="生成秘钥"><a href="#生成秘钥" class="headerlink" title="生成秘钥"></a>生成秘钥</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 生成秘钥，每次运行会产生不同的32位十六进制的值</span><br><span class="line">openssl rand -hex 32</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715104018.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715104018.png"></p>
 <p> 有 2 个文件 4 个环境变量值需要用到随机秘钥，这是出于安全性的考虑</p>
 <ul>
 <li>根目录下的 <code>.env</code> 文件中 <code>AUTH_JWT_SECRET</code>，默认值为 <code>auth_jwt_secret</code></li>
@@ -598,34 +629,34 @@
 <p>动手修改前记得备份、备份、备份</p>
 </blockquote>
 <p>一、删除每个微服务 <code>depends_on:</code> 后面的 <code>- db</code>，大概有4处</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715143238.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715143238.png"></p>
 <p>二、将 <code>entrypoint:[]</code> 中的 <code>db</code> 改为群晖 IP，大概也是4处</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715153022.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715153022.png"></p>
 <p>改完之后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715153347.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715153347.png"></p>
 <p>三、删除 db 节</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">db:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">mysql:5.6</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">    <span class="attr">MYSQL_DATABASE:</span> <span class="string">&#x27;$&#123;DB_DATABASE&#125;&#x27;</span></span><br><span class="line">    <span class="attr">MYSQL_USER:</span> <span class="string">&#x27;$&#123;DB_USERNAME&#125;&#x27;</span></span><br><span class="line">    <span class="attr">MYSQL_PASSWORD:</span> <span class="string">&#x27;$&#123;DB_PASSWORD&#125;&#x27;</span></span><br><span class="line">    <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="string">&#x27;$&#123;DB_PASSWORD&#125;&#x27;</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="number">3306</span></span><br><span class="line">  <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">  <span class="attr">command:</span> <span class="string">--default-authentication-plugin=mysql_native_password</span> <span class="string">--character-set-server=utf8</span> <span class="string">--collation-server=utf8_general_ci</span></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">./data/mysql:/var/lib/mysql</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">./data/import:/docker-entrypoint-initdb.d</span></span><br><span class="line">  <span class="attr">networks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">standardnotes_standalone</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715143036.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715143036.png"></p>
 <h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p> 在 <code>data</code> 目录新建两个子目录，<code>mysql</code> 和 <code>redis</code></p>
 <blockquote>
 <p>如果是自定义数据库，只要建一个 <code>redis</code> 就可以</p>
 </blockquote>
-<p> <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715112025.png"></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715112025.png"></p>
 <h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 首次运行可能需要一段时间</span><br><span class="line">./server.sh start</span><br></pre></td></tr></table></figure>
 <p>从脚本看，实际上就是执行了 <code>docker-compose up -d</code></p>
 <p>而从 <code>docker-compose.yml</code> 看，除了 <code>MySQL</code> 和 <code>Redis</code> 外，由于<code>Standard Notes</code> 采用了微服务架构，分为了 <code>auth</code>、<code>api-gateway</code>、<code>syncing-server-js</code> 多个服务</p>
 <p>如果中途报类似这样的错误</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715111220.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715111220.png"></p>
 <p>一般都是网络问题，只要再次执行就可以了，反正老苏前前后后执行了 4 次才把镜像都下载成功，看到👇下图这样的就是已经成功了</p>
 <blockquote>
 <p>按官方指导启动</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715112202.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715112202.png"></p>
 <blockquote>
 <p>使用自定义数据库启动</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715150457.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715150457.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查看日志</span><br><span class="line">./server.sh logs</span><br></pre></td></tr></table></figure>
 
 <p>只有看到 <code>api-gateway_1 | &#123;&quot;message&quot;:&quot;Server started on port 3000&quot;,&quot;level&quot;:&quot;info&quot;&#125;</code></p>
@@ -633,19 +664,19 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查询状态</span><br><span class="line">./server.sh status</span><br></pre></td></tr></table></figure>
 
 <p>如果所有的服务状态都是 <code>up</code>就可以了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715113141.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715113141.png"></p>
 <p>还有更简单的办法，访问 <code>http://群晖IP:3050/healthcheck</code>，如果你看到 <code>OK</code>，也表示服务都启动了</p>
 <p>不用浏览器也是可以的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 查询页面状态</span><br><span class="line">curl http://localhost:3050/healthcheck</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715114935.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715114935.png"></p>
 <p>如果你修改了配置文件，可以用下面的命令重启服务</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 先停止再启动</span><br><span class="line">./server.sh stop &amp;&amp; ./server.sh start</span><br></pre></td></tr></table></figure>
 
-<h2 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h2><p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716165416.png"></p>
+<h2 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716165416.png"></p>
 <p>到这里，服务端就安装完成了。</p>
 <h1 id="客户端安装"><a href="#客户端安装" class="headerlink" title="客户端安装"></a>客户端安装</h1><p>先设置反向代理，因为后面环境文件 <code>.env</code> 中会用到</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716104410.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716104410.png"></p>
 <h2 id="web-客户端"><a href="#web-客户端" class="headerlink" title="web 客户端"></a>web 客户端</h2><p>在 <code>standalone</code> 新建子目录 <code>web</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> web</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建 .env 文件</span></span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
 
@@ -663,14 +694,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker run -d -p 3001:3001 --name standardnotes_web --env-file=.<span class="built_in">env</span> standardnotes/web:stable</span><br></pre></td></tr></table></figure>
 
 <p>在浏览器中打开 <code>http://群晖IP:3001</code> 就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715170431.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715170431.png"></p>
 <p>首先要注册用户</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210715171443.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210715171443.png"></p>
 <blockquote>
 <p>如果注册有问题，打开 <code>Advanced Option</code>，确认一下服务器地址是否正确，如果不正确可以重新输入正确的地址<br>密码千万不能忘记了，因为 <code>Standard Notes</code> 用密码来加密笔记</p>
 </blockquote>
 <p>接下来就可以开始使用了，虽然是英文，但是挺简单的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/07/20210716171655.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/07/20210716171655.png"></p>
 <h2 id="PC客户端"><a href="#PC客户端" class="headerlink" title="PC客户端"></a>PC客户端</h2><p>PC 客户端是基于 <code>Electron</code> 开发的，所以和 <code>WEB客户端</code> 有着相同的界面，只要在 <code>Advanced Option</code> 中输入服务器地址即可使用。</p>
 <p>移动端没试，大家有兴趣可以自己试试。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>至于扩展程序之类的，暂时没精力去搞，不过老苏找到了一篇文章 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYmxhY2t2b2lkLmNsdWIvc3RhbmRhcmQtbm90ZXMtZG9ja2VyLXNlbGYtaG9zdGVkLWFsdGVybmF0aXZlLw==">Standard Notes - Docker self-hosted alternative for all your note needs<i class="fa fa-external-link-alt"></i></span>，地址已经放在参考文档中，写的非常详细，有兴趣的可以自己研究一下。</p>
@@ -825,7 +856,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Flame 可以作为自托管服务器的起始页，非常易于设置和使用。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251026952.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251026952.png">
 <meta property="article:published_time" content="2021-12-24T02:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="导航">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251026952.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251026952.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/12/24/%E4%B8%AA%E4%BA%BA%E4%BB%AA%E8%A1%A8%E6%9D%BF%E8%BD%AF%E4%BB%B6Flame/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251026952.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251026952.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,16 +529,16 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>本文是在网友后台推荐之前就完成的😁</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202112211137890.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202112211137890.png"></p>
 <p><strong>什么是 Flame ？</strong></p>
 <blockquote>
 <p><code>Flame</code> 可以作为自托管服务器的起始页，非常易于设置和使用。借助内置编辑器可以轻松管理您的应用程序和书签。</p>
 </blockquote>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>flame</code> ，选择第一个 <code>pawelmalak/flame</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241041681.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241041681.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹，将其命名为 <code>flame</code>，并建一个子目录 <code>data</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241048784.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241048784.png"></p>
 <table>
 <thead>
 <tr>
@@ -522,15 +553,15 @@
 <td align="center">存放数据</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241049121.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241049121.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241057649.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241057649.png"></p>
 <blockquote>
 <p>因为老苏启用了群晖的 <code>WebDAV Server</code>，默认的端口就是 <code>5005</code> </p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241054124.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241054124.png"></p>
 <table>
 <thead>
 <tr>
@@ -543,7 +574,7 @@
 <td align="center"><code>5005</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241057576.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241057576.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -559,80 +590,80 @@
 <blockquote>
 <p>密码修改为你想要的即可</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241059545.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241059545.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:5007</code> 就能看到主界面，不过刚开始什么都没有</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241116033.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241116033.png"></p>
 <p>只有最上方的搜索可以使用，默认使用的是 <code>duckduckgo</code> 引擎</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250953610.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250953610.png"></p>
 <p>点左下角的设置图标 </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241137598.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241137598.png"></p>
 <p>这个按钮不大显眼，移上去才会高亮显示</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241138250.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241138250.png"></p>
 <p>可以选择主题的颜色</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241139309.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241139309.png"></p>
 <p>进入 <code>App</code> 要登录验证，需填入我们在前面 <code>环境变量</code> 中设置的密码</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241140453.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241140453.png"></p>
 <p>登录成功之后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241142168.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241142168.png"></p>
 <h2 id="Weather"><a href="#Weather" class="headerlink" title="Weather"></a>Weather</h2><p><code>Flame</code> 用的是 <span class="exturl" data-url="aHR0cHM6Ly93d3cud2VhdGhlcmFwaS5jb20v">https://www.weatherapi.com/<i class="fa fa-external-link-alt"></i></span> 的数据，免费账户可以显示3天的实时数据，7天的历史数据，每个月 <code>100w</code> 次查询请求，在线率 <code>95.5%</code>，自己用足够了。</p>
 <blockquote>
 <p>今天 <code>review</code> 文章的时候发现网站的证书似乎有问题，证书在有效期内，上个月写文章的时候还是好的</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112240946479.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112240946479.png"></p>
 <p>首先要注册一个账号，只要设置邮箱和密码即可</p>
 <blockquote>
 <p>人机身份验证可能需要科学上网，毕竟是谷歌出品的😳</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241155159.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241155159.png"></p>
 <p>登录邮箱，会有两封邮件，其中一封有验证地址，点击后验证账号</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241159044.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241159044.png"></p>
 <p>登录后即能看到 <code>API Key</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241202655.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241202655.png"></p>
 <p>在 <span class="exturl" data-url="aHR0cHM6Ly9hcGkubWFwLmJhaWR1LmNvbS9sYnNhcGkvZ2V0cG9pbnQvaW5kZXguaHRtbA==">https://api.map.baidu.com/lbsapi/getpoint/index.html<i class="fa fa-external-link-alt"></i></span> 查询要显示的城市的纬度 <code>Latitude</code> 和经度 <code>Longitude</code>，比如 <code>上海 杨浦</code>，点选位置后可以获得坐标</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241340031.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241340031.png"></p>
 <p>将获取到的 <code>API Key</code> 和 经纬度填入</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/12/202112241013472.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/12/202112241013472.png"></p>
 <p>返回首页就能看到天气的图标了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111241347954.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111241347954.png"></p>
 <h2 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h2><p>点红框中的链接，进入 <code>Applications</code> 设置界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111241418401.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111241418401.png"></p>
 <p>如果你没登录什么都没有</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111241421393.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111241421393.png"></p>
 <p>登录之后才有 <code>Add</code> 和 <code>Edit</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111241420731.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111241420731.png"></p>
 <p>新建一个试试</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250855141.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250855141.png"></p>
 <p>关于 <code>App Icon</code> 可以直接去 <span class="exturl" data-url="aHR0cHM6Ly9tYXRlcmlhbGRlc2lnbmljb25zLmNvbS8=">https://materialdesignicons.com<i class="fa fa-external-link-alt"></i></span> 搜索，老苏用的都是 <code>MDI(Material Design Icons)</code> 上的</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250946710.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250946710.png"></p>
 <p>也可以自己上传</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250943051.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250943051.png"></p>
 <p>随便加了几个</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250913516.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250913516.png"></p>
 <h2 id="Bookmarks"><a href="#Bookmarks" class="headerlink" title="Bookmarks"></a>Bookmarks</h2><p>点红框中的链接，进入 <code>Bookmarks</code> 设置界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250920601.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250920601.png"></p>
 <p>相比 <code>Applications</code> 多了分类 <code>Category</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250925441.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250925441.png"></p>
 <p>新建一个分类</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250935419.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250935419.png"></p>
 <p>新增书签</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250930658.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250930658.png"></p>
 <p>随便加了两个</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250934354.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250934354.png"></p>
 <p>整体效果</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111250937030.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111250937030.png"></p>
 <h2 id="换背景"><a href="#换背景" class="headerlink" title="换背景"></a>换背景</h2><p>在网上搜了张图片，尺寸是 <code>1280x1024</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251005005.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251005005.jpg"></p>
 <p>进后台找到 <code>CSS</code> 在 <code>Custom CSS</code> 中输入</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">background</span>: <span class="built_in">url</span>(<span class="string">&#x27;图片URL&#x27;</span>) no-repeat; <span class="attribute">background-size</span>: <span class="number">1920px</span>; &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251009707.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251009707.png"></p>
 <p>保存后刷新界面</p>
 <blockquote>
 <p>自动裁掉了下面的一部分，虽然没有了对称的效果，但是总体还看得过去；估计要按显示器分辨率用 <code>16：9</code> 的图片应该就不会被裁减</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111251013653.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111251013653.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>pawelmalak/flame: Flame is self-hosted startpage for your server. Easily manage your apps and bookmarks with built-in editors.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bhd2VsbWFsYWsvZmxhbWU=">https://github.com/pawelmalak/flame<i class="fa fa-external-link-alt"></i></span></p>
+<p>pawelmalak&#x2F;flame: Flame is self-hosted startpage for your server. Easily manage your apps and bookmarks with built-in editors.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bhd2VsbWFsYWsvZmxhbWU=">https://github.com/pawelmalak/flame<i class="fa fa-external-link-alt"></i></span></p>
 <p>Synology: How To Change Flame Dashboard Background – Marius Hosting<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9tYXJpdXNob3N0aW5nLmNvbS9zeW5vbG9neS1ob3ctdG8tY2hhbmdlLWZsYW1lLWRhc2hib2FyZC1iYWNrZ3JvdW5kLw==">https://mariushosting.com/synology-how-to-change-flame-dashboard-background/<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
@@ -779,7 +810,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

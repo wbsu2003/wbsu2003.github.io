@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="设置反向代理后遇到的问题的处理方法。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png">
 <meta property="article:published_time" content="2020-08-09T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.942Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.148Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="HomeAssistant">
 <meta property="article:tag" content="SSL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/08/09/HomeAssistant%E8%AE%BE%E7%BD%AEhttps%E8%AE%BF%E9%97%AE%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596358610302-1596358610304.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,18 +532,18 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[http]</span></span><br><span class="line"><span class="attr">type</span> = http</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">81</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.xxsu.ml</span><br><span class="line"></span><br><span class="line"><span class="section">[https]</span></span><br><span class="line"><span class="attr">type</span> = https</span><br><span class="line"><span class="attr">local_ip</span> = <span class="number">192.168</span>.<span class="number">0.199</span></span><br><span class="line"><span class="attr">local_port</span> = <span class="number">444</span></span><br><span class="line"><span class="attr">custom_domains</span> = *.xxsu.ml</span><br></pre></td></tr></table></figure>
 
 <h1 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h1><p>直接用的群晖的反向代理，这里「来源」中的端口要和 <code>frpc.ini</code> 中 <code>local_port</code> 一致</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596350538307-1596350538309.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596350538307-1596350538309.png" alt="title"></p>
 <h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><p>设置反代完成后，在浏览器中输入 <code>https://ha.xxx.ml</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596351283877-1596351283881.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596351283877-1596351283881.png" alt="title"></p>
 <p>但是登陆完成后，却一直连接不上</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596346985529-1596346985576.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596346985529-1596346985576.png" alt="title"></p>
 <p>开始以为是 https 的问题，所以重新反代了一次 http 协议</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596351438718-1596351438720.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596351438718-1596351438720.png" alt="title"></p>
 <p>但是结果是一样的，所以基本上可以确定是因为反代导致的，而不是因为 https</p>
 <h1 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h1><p>查阅了一圈资料，发现主要原因是因为群晖自带的 nginx 不支持 websocket，这个问题直到 DSM6.2.1 才解决，而我的版本还是  DSM6.1.7。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596357813026-1596357813028.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596357813026-1596357813028.png" alt="title"></p>
 <p>好在网上已经有了解决方案。Synology DSM 6 反向代理的配置修复程序项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29yb2JhcmRldC9kc20tcmV2ZXJzZS1wcm94eS13ZWJzb2NrZXQ=">https://github.com/orobardet/dsm-reverse-proxy-websocket<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596357088477-1596357088478.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596357088477-1596357088478.png" alt="title"></p>
 <p>SSH连接后打开 <code>/usr/syno/share/nginx/Portal.mustache</code></p>
 <blockquote>
 <p>切记，修改前先备份，先备份，先备份，重要的事情总是要说三遍，备份是一种好习惯</p>
@@ -520,7 +551,7 @@
 <p>在 <code>location</code> 部分中添加以下内容:</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_headerUpgrade   $http_upgrade<span class="comment">;</span></span><br><span class="line">proxy_set_headerConnection   &quot;upgrade&quot;<span class="comment">;</span></span><br><span class="line">proxy_read_timeout  86400<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/08/02/1596357482146-1596357482150.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/08/02/1596357482146-1596357482150.png" alt="title"></p>
 <p>重启 httpd</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> synoservicecfg --restart nginx</span><br></pre></td></tr></table></figure>
 
@@ -675,7 +706,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

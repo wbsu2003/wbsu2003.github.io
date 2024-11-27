@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="beancount-gs 是基于 beancount 提供个人财务管理的 RESTful API 服务（包含前端页面）。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201354847.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201354847.png">
 <meta property="article:published_time" content="2022-05-23T00:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="记账">
 <meta property="article:tag" content="财务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201354847.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201354847.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2022/05/23/%E4%B8%AA%E4%BA%BA%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fbeancount-gs/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201354847.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201354847.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,15 +529,15 @@
     
     <div class="post-body" itemprop="articleBody"><p>今天是老苏居家隔离的第 53 天。</p>
 <p>最近抗原还是每天做，差别是每天做 1 次还是 2 次，周六只做一次抗原，但不明白为什么总是要求在 8 点以前</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205220059932.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205220059932.png"></p>
 <p>平时也就罢了，好不容易周末想睡个懒觉，结果还是要早起，大家的反应是👇这样的</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205220052827.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205220052827.png"></p>
 <p>周日上午一次抗原 + 一次核酸</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205220049720.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205220049720.png"></p>
 <p>周日晚上先接到通知，周一只要做抗原</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205222131533.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205222131533.png"></p>
 <p>谁知道后面晚上 11 点多又来了新的通知，周一上午继续一次抗原 + 一次核酸</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205222317986.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205222317986.png"></p>
 <p>因为主任特别强调 <code>“本次核酸相当重要”</code>，禁不住让大家浮想联翩，难道我们终于迎来可以出小区了？</p>
 <hr>
 <p>老苏之前写过『 <a href="https://laosu.tech/2022/01/19/Firefly%20III%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%B4%A2%E5%8A%A1%E8%AE%B0%E8%B4%A6%E5%B9%B3%E5%8F%B0">Firefly III 搭建个人财务记账平台</a> 』 ，但坦率的说，<code>Firefly III</code> 在很多习惯上并不符合日常的记账习惯，所以老苏找到了 <code>beancount-gs</code>。</p>
@@ -525,9 +556,9 @@
 <p>官方提供了 <code>Demo</code> 网站：<span class="exturl" data-url="aHR0cHM6Ly9iZWFuY291bnQueGRiaW4uY29tLw==">https://beancount.xdbin.com<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>beancount-gs</code> ，选择第一个 <code>xdbin/beancount-gs</code>，双击直接下载</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205200030009.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205200030009.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>beancount</code>，并在其中建四个子文件夹，分别是 <code>bak</code>、<code>config</code> 、<code>data</code> 和 <code>icons</code></p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201151483.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201151483.png"></p>
 <table>
 <thead>
 <tr>
@@ -557,7 +588,7 @@
 <td align="center">存放图标</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201159148.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201159148.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -573,11 +604,11 @@
 <td align="center"><code>80</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201159103.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201159103.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>命令行中输入下面这行内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">&quot;cp -rn /app/public/default_icons/* /app/public/icons &amp;&amp; ./beancount-gs -p 80&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201201790.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201201790.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷，老苏更喜欢命令行，搭建环境比较快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 beancount 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume2/docker/beancount/&#123;bak,config,data,icons&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 beancount 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/beancount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name beancount-gs \</span><br><span class="line">   -p 10000:80 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/bak:/app/bak \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/config:/app/config \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data/beancount \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/icons:/app/public/icons \</span><br><span class="line">   xdbin/beancount-gs:latest \</span><br><span class="line">   sh -c <span class="string">&quot;cp -rn /app/public/default_icons/* /app/public/icons &amp;&amp; ./beancount-gs -p 80&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -591,9 +622,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume2/docker/beancount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:10000</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205200045161.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205200045161.png"></p>
 <p>第一次需要初始化</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201014383.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201014383.png"></p>
 <ul>
 <li><code>账本存储位置</code>：账本数据和配置的磁盘存储路径；例如：<code>laosu</code>，用年份会不会更好呢？</li>
 <li><code>账本开始日期</code>：账户的默认开始时间。（默认设置为 1970-01-01 即可）；</li>
@@ -602,28 +633,28 @@
 <li><code>是否备份数据</code>：开启后，当源文件被修改时，之前的版本会备份到 <code>/bak</code>文件夹；</li>
 <li><code>密钥</code>：只有服务的密钥匹配才允许完成配置项的设置。密钥可以在服务的启动日志中查看，每次服务启动，密钥都会被刷新。</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201013351.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201013351.png"></p>
 <p>接下来设置 <code>账本名称</code> 和 <code>账本密码</code></p>
 <blockquote>
 <p>需要注意的是：<strong>密码如果忘记，不支持找回。</strong></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201033012.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201033012.png"></p>
 <p>进入账本后，默认是没有任何数据。</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201036490.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201036490.png"></p>
 <p>点 <code>记账</code> 可以开始记录第一笔交易了</p>
 <blockquote>
 <p>“有借必有贷，借贷必相等”，所以必须要记录两个账户</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201114346.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201114346.png"></p>
 <p>账目记录完成后，支出明细一栏就出现了上一步记录的消费信息</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205201115541.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205201115541.png"></p>
 <p>在手机上的效果还是不错的，但没有 <code>app</code> 还是比较可惜</p>
-<p><img src="https://cdn.laosu.fun/images2022@main/picgo/2022/05/202205202353564.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205202353564.jpg"></p>
 <p><code>beancount-gs</code> 在使用上更偏向于日常流水账的记录方式，在保留灵活性的同时，使得新用户更容易上手使用。如果遇到问题，建议看看官方提供的中文的使用说明书：<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL2NodXlpLWJsZTdwL2JlYW5jb3VudC1ncw==">https://www.yuque.com/chuyi-ble7p/beancount-gs<i class="fa fa-external-link-alt"></i></span> 。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>BaoXuebin/beancount-gs: 基于 beancount 提供个人财务管理的 RESTful API 服务（包含前端页面）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Jhb1h1ZWJpbi9iZWFuY291bnQtZ3M=">https://github.com/BaoXuebin/beancount-gs<i class="fa fa-external-link-alt"></i></span></p>
+<p>BaoXuebin&#x2F;beancount-gs: 基于 beancount 提供个人财务管理的 RESTful API 服务（包含前端页面）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Jhb1h1ZWJpbi9iZWFuY291bnQtZ3M=">https://github.com/BaoXuebin/beancount-gs<i class="fa fa-external-link-alt"></i></span></p>
 <p>beancount-gs 使用文档 · 语雀<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cueXVxdWUuY29tL2NodXlpLWJsZTdwL2JlYW5jb3VudC1ncw==">https://www.yuque.com/chuyi-ble7p/beancount-gs<i class="fa fa-external-link-alt"></i></span></p>
-<p>beancount/beancount: Beancount: Double-Entry Accounting from Text Files.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JlYW5jb3VudC9iZWFuY291bnQ=">https://github.com/beancount/beancount<i class="fa fa-external-link-alt"></i></span></p>
+<p>beancount&#x2F;beancount: Beancount: Double-Entry Accounting from Text Files.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JlYW5jb3VudC9iZWFuY291bnQ=">https://github.com/beancount/beancount<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -770,7 +801,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

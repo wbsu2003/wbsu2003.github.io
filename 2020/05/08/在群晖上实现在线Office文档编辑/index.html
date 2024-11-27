@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="群晖作为万能的服务器，显然不仅仅只是娱乐的玩具，对于小团队来说，用好了是个提升工作效率的神器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg">
 <meta property="article:published_time" content="2020-05-08T08:05:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="owncloud">
 <meta property="article:tag" content="kodexplorer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/08/%E5%9C%A8%E7%BE%A4%E6%99%96%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%9C%A8%E7%BA%BFOffice%E6%96%87%E6%A1%A3%E7%BC%96%E8%BE%91/">
@@ -188,6 +188,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -395,7 +426,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/0068ubKvdPxGaODTZcif9nQ-9.fit_scale.size_1028x578.v_1569473499-1588930191758.jpg" itemprop="contentUrl">
     </div>
     </div>
 
@@ -436,7 +467,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -481,7 +512,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>863</span>
+      <span>873</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -502,37 +533,37 @@
     <div class="post-body" itemprop="articleBody"><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ul>
 <li>在docker注册表中搜索“onlyoffice”，第一个即为官方提供的image文件。</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/1-1588925796082.png" alt="title"></p>
 <ul>
 <li>双击开始安装，选“latest”</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/2-1588925921227.png" alt="title"></p>
 <ul>
 <li>下载速度还可以</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/3-1588926050168.png" alt="title"></p>
 <h1 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h1><ul>
 <li>先建好需要用的文件夹</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/4-1588926631369.png" alt="title"></p>
 <ul>
 <li>习惯性的限制下资源的使用</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/4-1588926371568.png" alt="title"></p>
 <ul>
 <li>进【高级设置】，【卷】的设置</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/6-1588929123790.png" alt="title"></p>
 <ul>
 <li>【端口】的设置</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http://群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/7-1588929135279.png" alt="title"></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 http:&#x2F;&#x2F;群晖IP:6080，当你看到下面这个界面，说明已经运行正常了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/8-1588929147086.png" alt="title"></p>
 <h1 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h1><p>接下来你可以继续在Docker中安装communityserver来搭建门户网站，将群晖变身成为集成了文档、电子邮件、事件、任务和客户关系管理工具的开源在线办公套件。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1sJUVGJUJDJTg5">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/83cbe-007rd8E4ly1g1ee0e0vjgj30mo0fsjxd-1588930691663.jpg" alt="title"><br>（图片来自：<span class="exturl" data-url="aHR0cHM6Ly9iYWl5dWUub25lL2FyY2hpdmVzLzQ1NS5odG1sJUVGJUJDJTg5">https://baiyue.one/archives/455.html）<i class="fa fa-external-link-alt"></i></span></p>
 <p>也可以搭配云盘服务，比如nextcloud、owncloud、seafile、kodexplorer，实现office文档的在线预览和编辑。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/08/2500x1000-win-1588930210849.jpg" alt="title"></p>
 <p>onlyoffice提供的在线创建，编辑和协作业务文档的方式，对于协同办公还是很有用的。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p> 群晖在线编辑文档方案-onlyoffice<br>地址：<span class="exturl" data-url="aHR0cDovL3d3dy5nZWJpMS5jbi90aHJlYWQtMjc4OTQ4LTEtMS5odG1s">http://www.gebi1.cn/thread-278948-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
@@ -689,7 +720,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

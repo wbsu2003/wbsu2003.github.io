@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Jetlog 是可自行托管的个人航班追踪器和查看器。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291946186.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291946186.png">
 <meta property="article:published_time" content="2024-08-03T01:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.946Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="航班管理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291946186.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291946186.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/08/03/%E4%B8%AA%E4%BA%BA%E8%88%AA%E7%8F%AD%E8%BF%BD%E8%B8%AA%E5%92%8C%E6%9F%A5%E7%9C%8B%E8%BD%AF%E4%BB%B6Jetlog/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291946186.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291946186.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -507,16 +538,16 @@
 <li>👨‍💻 简洁直观的用户界面</li>
 <li>✅ 轻松添加、编辑和删除过去的航班</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291751188.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291751188.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>jetlog</code> ，选择第一个 <code>pbogre/jetlog</code>，版本选择 <code>latest</code>。</p>
 <blockquote>
 <p><code>latest</code> 应该是稳定版本，而 <code>experimental</code> 应该是临时的测试版本</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291702613.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291702613.png"></p>
 <h2 id="卷"><a href="#卷" class="headerlink" title="卷"></a>卷</h2><p>在 <code>docker</code> 文件夹中，创建一个新文件夹 <code>jetlog</code>，并在其中建一个子文件夹 <code>data</code></p>
 <p>默认 <code>data</code> 目录，<code>Everyone</code> 只有读权限，要给 <code>data</code> 目录赋予 <code>Everyone</code> 读写权限，否则创建数据库会失败</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291951487.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291951487.png"></p>
 <table>
 <thead>
 <tr>
@@ -531,7 +562,7 @@
 <td align="center">存放数据库</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291745028.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291745028.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>本地端口不冲突就行，不确定的话可以用命令查一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看端口占用</span></span><br><span class="line">netstat -tunlp | grep 端口号</span><br></pre></td></tr></table></figure>
 
@@ -548,9 +579,9 @@
 </tr>
 </tbody></table>
 <p>默认的容器端口是 <code>3000</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291745440.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291745440.png"></p>
 <p>但是我们用环境变量修改成了 <code>3720</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291746051.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291746051.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -572,7 +603,7 @@
 </tr>
 </tbody></table>
 <p>将 <code>JETLOG_PORT</code> 的值从  <code>3000</code> 改为 <code>3720</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291747791.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291747791.png"></p>
 <h1 id="命令行安装"><a href="#命令行安装" class="headerlink" title="命令行安装"></a>命令行安装</h1><p>如果你熟悉命令行，可能用 <code>docker cli</code> 更快捷</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 jetlog 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/jetlog/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 jetlog 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/jetlog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> a+w data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -d \</span><br><span class="line">   --restart unless-stopped \</span><br><span class="line">   --name jetlog \</span><br><span class="line">   -p 3720:3720 \</span><br><span class="line">   -v $(<span class="built_in">pwd</span>)/data:/data \</span><br><span class="line">   -e PUID=1000 \</span><br><span class="line">   -e PGID=1000 \</span><br><span class="line">   -e JETLOG_PORT=3720 \</span><br><span class="line">   pbogre/jetlog:latest</span><br></pre></td></tr></table></figure>
 
@@ -583,17 +614,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 jetlog 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/jetlog/data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 jetlog 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/jetlog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改目录权限</span></span><br><span class="line"><span class="built_in">chmod</span> a+w data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 docker-compose.yml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3720</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291708329.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291708329.png"></p>
 <p>支持导入数据</p>
 <blockquote>
 <p><code>MyFlightRadar24</code> 是一个飞行跟踪应用，允许用户实时追踪飞机的飞行状态，并在社交媒体上分享他们的飞行记录。该应用不仅提供实时的航班信息，还支持多种视觉展示方式，包括地图、3D视图和增强现实（AR）视图</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291709043.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291709043.png"></p>
 <p><code>csv</code> 官方提供了格式，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bib2dyZS9qZXRsb2cjY3VzdG9tLWNzdg==">https://github.com/pbogre/jetlog#custom-csv<i class="fa fa-external-link-alt"></i></span>，如果数据多比较适合这种方式</p>
 <p>老苏很多年没飞过了，只能 <code>New</code> 一个虚拟的数据，在 <strong>航旅纵横</strong>  随便查了个到巴黎的航班</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291722679.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291722679.png"></p>
 <p>点进去，下拉可以查到机型</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291723406.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291723406.png"></p>
 <ul>
 <li><code>Origin</code>：出发地浦东机场的 <code>IATA</code> 代码是 <code>PVG</code></li>
 <li><code>Destination</code> ：目的地戴高乐机场的  <code>IATA</code> 代码是 <code>CDG</code></li>
@@ -607,15 +638,15 @@
 </li>
 <li><code>Airplane</code>：机型；</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291718746.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291718746.png"></p>
 <p>添加完成</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291718174.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291718174.png"></p>
 <p>进 <code>All Flights</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291719835.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291719835.png"></p>
 <p>再看看 <code>Statistics</code> 统计</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/07/202407291733395.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/07/202407291733395.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>pbogre/jetlog: Personal flight tracker and viewer<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bib2dyZS9qZXRsb2c=">https://github.com/pbogre/jetlog<i class="fa fa-external-link-alt"></i></span></p>
+<p>pbogre&#x2F;jetlog: Personal flight tracker and viewer<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bib2dyZS9qZXRsb2c=">https://github.com/pbogre/jetlog<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -761,7 +792,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

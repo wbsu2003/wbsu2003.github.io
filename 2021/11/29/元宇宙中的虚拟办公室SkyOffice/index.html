@@ -30,9 +30,9 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="SkyOffice 是身临其境的远程工作平台，该项目获得了 2021 翡翠创新大赛冠军。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282358603.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282358603.png">
 <meta property="article:published_time" content="2021-11-29T10:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.950Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.156Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="元宇宙">
 <meta property="article:tag" content="Metaverse">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282358603.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282358603.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/11/29/%E5%85%83%E5%AE%87%E5%AE%99%E4%B8%AD%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8A%9E%E5%85%AC%E5%AE%A4SkyOffice/">
@@ -186,6 +186,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -393,7 +424,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111282358603.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111282358603.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -434,7 +465,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -506,7 +537,7 @@
 <ul>
 <li><code>Phaser3</code> - 游戏引擎</li>
 <li><code>React/Redux</code> - 前端框架</li>
-<li><code>PeerJS</code> - 用于视频/屏幕共享的 <code>WebRTC</code></li>
+<li><code>PeerJS</code> - 用于视频&#x2F;屏幕共享的 <code>WebRTC</code></li>
 <li><code>Colyseus</code> - 基于 <code>WebSocket</code> 的服务器框架</li>
 <li><code>TypeScript</code>和<code>ES6</code> - 适用于客户端和服务器端</li>
 </ul>
@@ -557,17 +588,17 @@
 <h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><blockquote>
 <p>群晖的 <code>IP</code> 是 <code>192.168.0.197</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111271458554.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111271458554.png"></p>
 <p>进入 <code>自定义标题</code>，新增 <code>WebSocket</code></p>
 <blockquote>
 <p>这一步很重要，不然首页会卡在 <code>loading</code></p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111271502439.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111271502439.png"></p>
 <h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><p>前端必须使用 <code>https</code> 协议，否则在浏览器上无法使用音视频设备</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111271504607.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111271504607.png"></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。</p>
 <p>在注册表中搜索 <code>skyoffice</code> ，选择第一个 <code>wbsu2003/skyoffice</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111231359865.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111231359865.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><table>
 <thead>
 <tr>
@@ -584,7 +615,7 @@
 <td align="center"><code>3000</code></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111271234055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111271234055.png"></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
 <thead>
 <tr>
@@ -598,17 +629,17 @@
 </tr>
 </tbody></table>
 <p>如果你不改，你的容器将连接到官方服务器，但在国内 <code>heroku</code> 需要科学上网，否则你可能会一直卡在首页 <code>loading</code>，这个问题困扰了老苏一个礼拜，直到后来在  <code>/SkyOffice/client/src/services/Network.ts</code> 中发现红框中的代码 ，才知道 <code>production</code> 模式下并不是连的自己的服务器</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261952412.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261952412.png"></p>
 <p><code>BACKEND_URL</code> 只能使用 <code>ws</code>协议或者 <code>wss</code> 协议，不能用 <code>http</code> 或者 <code>https</code> 协议，这是需要<strong>特别注意</strong>的。</p>
 <p>根据我们在准备环节的设置，这里的 <code>BACKEND_URL</code> 应该为 <code>wss://map.laosu.ml</code></p>
 <blockquote>
 <p>如果你的域名带端口，这里也要带上</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111271510799.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111271510799.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>稍等一会儿，在浏览器中输入 <code>http://群晖IP:2568</code> 或者 <code>https://skyoffice.laosu.ml</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/09/202111231450778.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/09/202111231450778.png"></p>
 <p>如果一直在显示 <code>loading</code>，<strong>请仔细检测前面的设置是否正确</strong>，如果地图已经出来，可以设置好 <code>Name</code> 后点 <code>JOIN</code> 进入</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261638778.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261638778.png"></p>
 <blockquote>
 <p>【注意事项】：<br>如果在同一台机器上开两个页面，或者两台测试机靠的比较近，建议关闭声音，否则比较容易产生啸叫</p>
 </blockquote>
@@ -619,24 +650,24 @@
 <li><p>如果你是用 <code>https://域名</code> ，就像老苏用 <code>https://skyoffice.laosu.ml</code> 打开的网址，点 <code>CONNECT WEBCAM</code>，授权之后右上角会出现你的视频</p>
 </li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261642544.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261642544.png"></p>
 <h2 id="屏幕共享"><a href="#屏幕共享" class="headerlink" title="屏幕共享"></a>屏幕共享</h2><p><code>JOIN</code> 之后，你可以通过方向键在地图上随意行走，当你来到电脑前面时，会显示 <code>Press R to use computer</code>，意思是按 <code>R</code> 键使用电脑</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261648857.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261648857.png"></p>
 <p>按 <code>R</code> 键之后会显示 <code>屏幕共享</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261654810.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261654810.png"></p>
 <p>点左上角的 <code>SHARE SCREEN</code> 开启屏幕共享，可以选择要共享的内容</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261656866.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261656866.png"></p>
 <h2 id="视频会议"><a href="#视频会议" class="headerlink" title="视频会议"></a>视频会议</h2><p>当在会议室时，会提示 <code>Press E to sit</code>，意思是按 <code>E</code> 键可以坐下</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261701402.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261701402.png"></p>
 <p>坐下之后，老苏又登了一个账号 <code>xiaosu</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261702386.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261702386.png"></p>
 <p>只要进入会议室就开始显示对方的视频窗口</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261716776.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261716776.png"></p>
 <h2 id="视频聊天"><a href="#视频聊天" class="headerlink" title="视频聊天"></a>视频聊天</h2><p>这是基于距离的交互系统，只要两个人的距离接近，就会启动视频窗口</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/11/202111261718194.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/11/202111261718194.png"></p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这应该还是个原型应用，理论上你可以构建自己的办公室环境，想象一下，平时在不同区域分、子公司上班的人在 <code>SkyOffice</code> 中通过 <code>WebRTC</code> 随时可以视频交流，是不是有种天涯若比邻的感觉？</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>kevinshen56714/SkyOffice: Immersive virtual office built with Phaser, React, Redux, PeerJS, and Colyseus.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tldmluc2hlbjU2NzE0L1NreU9mZmljZQ==">https://github.com/kevinshen56714/SkyOffice<i class="fa fa-external-link-alt"></i></span></p>
+<p>kevinshen56714&#x2F;SkyOffice: Immersive virtual office built with Phaser, React, Redux, PeerJS, and Colyseus.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tldmluc2hlbjU2NzE0L1NreU9mZmljZQ==">https://github.com/kevinshen56714/SkyOffice<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 
     </div>
@@ -784,7 +815,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

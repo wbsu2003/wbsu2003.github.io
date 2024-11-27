@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="tl-rtc-file 是基于 webrtc 的网页在线媒体流传输开源工具。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101331107.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101331107.png">
 <meta property="article:published_time" content="2024-06-12T03:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.958Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.164Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="WebRTC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101331107.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101331107.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2024/06/12/%E5%9F%BA%E4%BA%8Ewebrtc%E7%9A%84%E5%AA%92%E4%BD%93%E6%B5%81%E4%BC%A0%E8%BE%93%E5%B7%A5%E5%85%B7tl-rtc-file/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101331107.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101331107.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -496,24 +527,24 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>也不知道是什么意思，天天都有人在微信公众号的后台发，是打算找我兑奖吗？</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406102027016.png"></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406111148553.png"></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406121126638.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406102027016.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406111148553.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406121126638.jpg"></p>
 <hr>
 <blockquote>
 <p>本文软件是朋友 <code>Eduna</code> 推荐的，因为他觉得好像很好玩的样子。老苏一开始以为 <code>tl-rtc-file</code> 是跟 <code>Snapdrop</code> 一样的局域网文件传输工具，在看了 <code>demo</code> 网站后，发现确实有点意思，但最终的结果却有点让人失望了。</p>
 </blockquote>
 <p> <strong>什么是  tl-rtc-file ？</strong></p>
 <blockquote>
-<p><code> tl-rtc-file</code> 是基于 <code>webrtc</code> 的网页在线媒体流传输开源工具。内网不限速（局域网最高到过70多M/s），支持多文件拖拽发送，网页文件预览。 扩展了许多丰富的小功能，如本地屏幕录制，远程屏幕共享(无延迟)，远程音视频通话(无延迟)，直播(无延迟)，密码房间，<code>oss</code> 云存储，中继服务设置，<code>webrtc</code> 检测，<code>webrtc</code> 统计，文字传输(群聊，私聊)，公共聊天，远程画板，<code>AI</code> 聊天框，丰富的后台管理，实时执行日志展示，机器人告警通知等功能… 等等</p>
+<p><code> tl-rtc-file</code> 是基于 <code>webrtc</code> 的网页在线媒体流传输开源工具。内网不限速（局域网最高到过70多M&#x2F;s），支持多文件拖拽发送，网页文件预览。 扩展了许多丰富的小功能，如本地屏幕录制，远程屏幕共享(无延迟)，远程音视频通话(无延迟)，直播(无延迟)，密码房间，<code>oss</code> 云存储，中继服务设置，<code>webrtc</code> 检测，<code>webrtc</code> 统计，文字传输(群聊，私聊)，公共聊天，远程画板，<code>AI</code> 聊天框，丰富的后台管理，实时执行日志展示，机器人告警通知等功能… 等等</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092224228.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092224228.png"></p>
 <p>官方的演示站点：<span class="exturl" data-url="aHR0cHM6Ly9pbS5pYW10c20uY24v">https://im.iamtsm.cn<i class="fa fa-external-link-alt"></i></span></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在群晖上以 Docker 方式安装。因为涉及到多个容器，所以采用 <code>docker-compose</code> 安装方式。</p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>第一步、先创建好目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建文件夹 tlrtcfile 和 子目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /volume1/docker/tlrtcfile/&#123;data/&#123;db,<span class="built_in">log</span>,init.sql,my.cnf&#125;,coturn&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 tlrtcfile 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tlrtcfile</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092152257.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092152257.png"></p>
 <p>第二步、准备好需要的文件</p>
 <h3 id="turnserver-with-secret-user-conf"><a href="#turnserver-with-secret-user-conf" class="headerlink" title="turnserver-with-secret-user.conf"></a>turnserver-with-secret-user.conf</h3><p>第一个文件是 <code>turnserver-with-secret-user.conf</code></p>
 <blockquote>
@@ -529,7 +560,7 @@
 <li><code>realm</code>： 前面的 <code>IP</code> 修改为自己群晖主机的 <code>IP</code>，后面的端口不要改</li>
 </ul>
 <p>这个文件需存放在 <code>coturn</code> 目录中</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092231611.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092231611.png"></p>
 <h3 id="env-txt"><a href="#env-txt" class="headerlink" title="env.txt"></a>env.txt</h3><p>第二个文件是 <code>env.txt</code>，之所以没用 <code>tlrtcfile.env</code> 做文件名，是为了方便在 <code>FileStation</code> 中直接编辑修改</p>
 <p>老苏基于官方的示例文件：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RsLW9wZW4tc291cmNlL3RsLXJ0Yy1maWxlL2Jsb2IvbWFzdGVyL3RscnRjZmlsZS5lbnY=">https://github.com/tl-open-source/tl-rtc-file/blob/master/tlrtcfile.env<i class="fa fa-external-link-alt"></i></span> 做了微调，去掉了没用上的部分，例如 <code>OSS</code>、企业微信等</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-----------------以下为基础配置-----------------#</span></span><br><span class="line"><span class="comment">## api服务端口</span></span><br><span class="line"><span class="attr">tl_rtc_file_api_port</span>=<span class="number">9092</span></span><br><span class="line"><span class="comment">## websocket服务端口</span></span><br><span class="line"><span class="attr">tl_rtc_file_socket_port</span>=<span class="number">8444</span></span><br><span class="line"><span class="comment">## websocket服务地址</span></span><br><span class="line"><span class="attr">tl_rtc_file_socket_host</span>=<span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">8444</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#-----------------以下为webrtc相关配置-----------------#</span></span><br><span class="line"><span class="comment">## webrtc-stun中继服务地址</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_stun_host</span>=stun:<span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">3478</span></span><br><span class="line"><span class="comment">## webrtc-turn中继服务地址</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_turn_host</span>=turn:<span class="number">192.168</span>.<span class="number">0.197</span>:<span class="number">3478</span>?transport=udp</span><br><span class="line"><span class="comment">## webrtc中继服务用户名</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_turn_username</span>=tlrtcfile</span><br><span class="line"><span class="comment">## webrtc中继服务密码</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_turn_credential</span>=tlrtcfile</span><br><span class="line"><span class="comment">## webrtc中继服务Secret</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_turn_secret</span>=tlrtcfile</span><br><span class="line"><span class="comment">## webrtc中继服务帐号过期时间 (毫秒)</span></span><br><span class="line"><span class="attr">tl_rtc_file_webrtc_turn_expire</span>=<span class="number">86400000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#-----------------以下为mysql数据库相关配置-----------------#</span></span><br><span class="line"><span class="comment">## 是否开启数据库</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_open</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">## 数据库地址</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_mysql_host</span>=mysql</span><br><span class="line"><span class="comment">## 数据库端口</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_mysql_port</span>=<span class="number">3306</span></span><br><span class="line"><span class="comment">## 数据库名称</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_mysql_dbName</span>=webchat</span><br><span class="line"><span class="comment">## 数据库用户名</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_mysql_user</span>=tlrtcfile</span><br><span class="line"><span class="comment">## 数据库密码</span></span><br><span class="line"><span class="attr">tl_rtc_file_db_mysql_password</span>=tlrtcfile</span><br><span class="line"></span><br><span class="line"><span class="comment">#-----------------以下为管理后台相关配置-----------------#</span></span><br><span class="line"><span class="comment">## 管理后台房间号</span></span><br><span class="line"><span class="attr">tl_rtc_file_manage_room</span>=tlrtcfile</span><br><span class="line"><span class="comment">## 管理后台密码</span></span><br><span class="line"><span class="attr">tl_rtc_file_manage_password</span>=tlrtcfile</span><br></pre></td></tr></table></figure>
@@ -540,46 +571,46 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">api-http:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;http&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-api</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-api</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_env_mode=http</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_db_open=true</span></span><br><span class="line">    <span class="attr">command:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">tlapi</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9092</span><span class="string">:9092</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">coturn</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt:/tlrtcfile/tlrtcfile.env</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#https模式启动api服务</span></span><br><span class="line">  <span class="attr">api-https:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;https&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-api</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-api</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_env_mode=https</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_db_open=true</span></span><br><span class="line">    <span class="attr">command:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">tlapi</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9092</span><span class="string">:9092</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">coturn</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt:/tlrtcfile/tlrtcfile.env</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#http模式启动socket服务</span></span><br><span class="line">  <span class="attr">socket-http:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;http&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-socket</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-socket</span></span><br><span class="line">    <span class="attr">command:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">tlsocket</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_env_mode=http</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_db_open=true</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8444</span><span class="string">:8444</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">coturn</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt:/tlrtcfile/tlrtcfile.env</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#https模式启动socket服务</span></span><br><span class="line">  <span class="attr">socket-https:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;https&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-socket</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-socket</span></span><br><span class="line">    <span class="attr">command:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">tlsocket</span></span><br><span class="line">    <span class="attr">env_file:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_env_mode=https</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">tl_rtc_file_db_open=true</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8444</span><span class="string">:8444</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">coturn</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./env.txt:/tlrtcfile/tlrtcfile.env</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#mysql服务</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;http&#x27;</span>,<span class="string">&#x27;https&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-mysql</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-mysql</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="comment">#设置root密码</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MYSQL_ROOT_PASSWORD=tlrtcfile</span></span><br><span class="line">      <span class="comment">#设置数据库</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MYSQL_DATABASE=webchat</span></span><br><span class="line">      <span class="comment">#设置用户</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MYSQL_USER=tlrtcfile</span></span><br><span class="line">      <span class="comment">#设置用户密码</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MYSQL_PASSWORD=tlrtcfile</span></span><br><span class="line">    <span class="comment">#ports:</span></span><br><span class="line">    <span class="comment">#  - 3306:3306</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/db:/var/lib/mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/my.cnf:/etc/mysql/conf.d/my.cnf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/log:/var/log/mysql</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data/init.sql:/docker-entrypoint-initdb.d/init.sql</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#coturn服务</span></span><br><span class="line">  <span class="attr">coturn:</span></span><br><span class="line">    <span class="attr">profiles:</span> [<span class="string">&#x27;http&#x27;</span>,<span class="string">&#x27;https&#x27;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">iamtsm/tl-rtc-file-coturn</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">tl-rtc-file-coturn</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3478:3478/udp&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3478:3478/tcp&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./coturn/turnserver-with-secret-user.conf:/etc/turnserver.conf</span></span><br></pre></td></tr></table></figure>
 
 <p>将 <code>env.txt</code>、<code>docker-compose.yml</code> 放入根目录</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092240623.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092240623.png"></p>
 <h2 id="一键启动"><a href="#一键启动" class="headerlink" title="一键启动"></a>一键启动</h2><p>然后执行下面的命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 tlrtcfile 目录</span></span><br><span class="line"><span class="built_in">cd</span> /volume1/docker/tlrtcfile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以 http 方式一键启动</span></span><br><span class="line">docker-compose --profile=http up -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以 https 方式一键启动</span></span><br><span class="line">docker-compose --profile=https up -d</span><br></pre></td></tr></table></figure>
 
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>如果是以 <code>http</code> 模式启动的，在浏览器中输入 <code>http://群晖IP:9092</code> 就能看到主界面</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406091923348.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406091923348.png"></p>
 <p>如果是 <code>https</code> 模式启动的，在浏览器中输入 <code>https://群晖IP:9092</code> 会看到提示</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101312704.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101312704.png"></p>
 <p>点 <code>高级</code>，选择继续前往</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101313671.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101313671.png"></p>
 <blockquote>
 <p>之后的操作和功能都是一样的</p>
 </blockquote>
 <p>点左下角的 <code>创建/加入房间</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101105778.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101105778.png"></p>
 <p>默认会生成一串数字，但是并不能用来做房间号</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101107393.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101107393.png"></p>
 <p>所以需要手动改为字母，然后再次点左下角的 <code>创建/加入房间</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101112992.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101112992.png"></p>
 <p>加入成功</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101113628.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101113628.png"></p>
 <p>另一方输入同样的房间号，加入到同一个房间</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092125515.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092125515.png"></p>
 <p>双方可以聊天</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406091956363.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406091956363.png"></p>
 <p>也可发文件</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092000031.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092000031.png"></p>
 <p>选择需要传递的文件，点 <code>一键发送</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406091957232.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406091957232.png"></p>
 <p>接收端会有提示</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406091958627.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406091958627.png"></p>
 <p>点开能看到详情</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406091959440.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406091959440.png"></p>
 <p>可惜其他功能不能用，可能需要 <code>捐赠版</code> 才行吧</p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406092001031.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406092001031.png"></p>
 <h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>刷新页面会显示 <code>系统错误</code></p>
-<p><img src="https://cdn.laosu.fun/images2024@main/picgo/2024/05/202406101316246.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2024@main/picgo/2024/05/202406101316246.png"></p>
 <p>但是似乎并不影响发消息和发文件，因此也就不去深究了，先这样吧</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>tl-open-source/tl-rtc-file: WebRTC P2P online web media streaming tool (for files, video, screen, live streaming, text) with management and statistical monitoring capabilities.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RsLW9wZW4tc291cmNlL3RsLXJ0Yy1maWxl">https://github.com/tl-open-source/tl-rtc-file<i class="fa fa-external-link-alt"></i></span></p>
+<p>tl-open-source&#x2F;tl-rtc-file: WebRTC P2P online web media streaming tool (for files, video, screen, live streaming, text) with management and statistical monitoring capabilities.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RsLW9wZW4tc291cmNlL3RsLXJ0Yy1maWxl">https://github.com/tl-open-source/tl-rtc-file<i class="fa fa-external-link-alt"></i></span></p>
 <p>tl-rtc-file<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pbS5pYW10c20uY24v">https://im.iamtsm.cn/<i class="fa fa-external-link-alt"></i></span></p>
 <p>tl-rtc-file-使用手册 · tl-rtc-file<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pbS5pYW10c20uY24vZG9jdW1lbnQv">https://im.iamtsm.cn/document/<i class="fa fa-external-link-alt"></i></span></p>
 <p>tl-rtc-file-website<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9pbS5pYW10c20uY24vd2Vic2l0ZS9pbmRleC5odG1s">https://im.iamtsm.cn/website/index.html<i class="fa fa-external-link-alt"></i></span></p>
@@ -728,7 +759,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

@@ -30,16 +30,16 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="在Coding上终于找到了正常访问的感觉，比Github和Netlify都要快。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png">
 <meta property="article:published_time" content="2020-05-12T11:49:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="blog">
 <meta property="article:tag" content="Coding">
 <meta property="article:tag" content="Github">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/05/12/%E5%9C%A8Coding%E4%B8%8A%E9%83%A8%E7%BD%B2Hexo%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%92%8CGithub%E5%8F%8C%E7%BA%BF%E8%AE%BF%E9%97%AE/">
@@ -185,6 +185,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -392,7 +423,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/e973f77c-5398-4f80-879e-d3e3b1678702-1589291610588.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -433,7 +464,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -501,19 +532,19 @@
 <h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><ul>
 <li>首先是<strong>注册团队</strong></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589285768968-1589285768971.png" alt="title"></p>
 <ul>
 <li>登录方式有点特别，先输入团队，再用账号、密码登录</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589285835067-1589285835070.png" alt="title"></p>
 <ul>
 <li>接下来就可以新建项目了</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589285945328-1589285945329.png" alt="title"></p>
 <h1 id="配置SSH公钥"><a href="#配置SSH公钥" class="headerlink" title="配置SSH公钥"></a>配置SSH公钥</h1><ul>
 <li>点右上角的头像，选择<strong>个人设置</strong></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589286100597-1589286100602.png" alt="title"></p>
 <ul>
 <li>在左边菜单选择 <strong>SSH公钥</strong>，配置方法和Github是一样的，具体如何生成秘钥，如何配置可以看看参考文档《<strong>超详细Hexo+Github博客搭建小白教程</strong>》，里面的介绍非常详细。</li>
 </ul>
@@ -526,38 +557,38 @@
 <li>添加完成后先执行命令 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g -d </span><br></pre></td></tr></table></figure></li>
 <li>将博客双线部署到 Coding Pages 和 GitHub Pages，如下图所示表示部署成功：</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589286884028-1589286884034.png" alt="title"></p>
 <h1 id="开启-Coding-Pages"><a href="#开启-Coding-Pages" class="headerlink" title="开启 Coding Pages"></a>开启 Coding Pages</h1><p>这一步折腾了半天，后来才发现，新建的项目默认项目的<strong>持续部署</strong>是不打开的，而我们需要的Coding Page（现在叫<strong>静态页面</strong>）就在这里面。</p>
 <ul>
 <li>在我们新建的项目界面，找到左下角的<strong>项目设置</strong>，并进入<strong>功能开关</strong>，打开<strong>持续部署</strong></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589287172069-1589287172071.png" alt="title"></p>
 <ul>
 <li>再次回到项目界面，左边菜单就会多出<strong>持续集成</strong>，进入后会看到<strong>静态页面</strong></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589287281291-1589287281293.png" alt="title"></p>
 <ul>
 <li>进入<strong>静态页面</strong>，会看到生成的默认访问地址，现在拿到的域名是 <span class="exturl" data-url="aHR0cHM6Ly94eHh4eC5jb2RpbmctcGFnZXMuY29tLw==">https://xxxxx.coding-pages.com<i class="fa fa-external-link-alt"></i></span> 这样的格式。</li>
 </ul>
 <h1 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h1><ul>
 <li>从右上角的<strong>设置</strong>进入</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589287543769-1589287543774.png" alt="title"></p>
 <ul>
 <li>找到<strong>自定义域名</strong>，最多可以绑5个自定义域名</li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589287863082-1589287863083.png" alt="title"></p>
 <h1 id="设置双线访问"><a href="#设置双线访问" class="headerlink" title="设置双线访问"></a>设置双线访问</h1><p>用的dnspod免费域名解析，首先在你的域名 DNS 设置中添加一条 CNAME 记录指向 xxxxx.coding-pages.com，解析路线选择** 默认**，将 GitHub 的解析路线改为 <strong>境外</strong>，这样境外访问就会走 GitHub，境内就会走 Coding</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589288920873-1589288920878.png" alt="title"></p>
 <h1 id="证书问题"><a href="#证书问题" class="headerlink" title="证书问题"></a>证书问题</h1><p>相信大家前面注意到， <strong>自定义域名</strong> 中首选域名的证书状态是<strong>申请失败</strong></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589289282375-1589289282377.png" alt="title"></p>
 <p>这是因为我们之前把域名绑定到了 GitHub Pages 并开启了 HTTPS，在验证域名所有权时会定位到 Github Pages 的主机上导致 SSL 证书申请失败，所以需要先暂停dnspod中对 GitHub Pages 的解析</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589289222588-1589289222590.png" alt="title"></p>
 <p>然后再次申请，等一会儿就会显示成功了！</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589289393822-1589289393824.png" alt="title"></p>
 <h1 id="测速"><a href="#测速" class="headerlink" title="测速"></a>测速</h1><p>因为laosu.ml绑了双线，所以这次测速主要对比Netlify和Coding，对应的域名分别是laosu.tk和laosu.gq</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589289958694-1589289958697.png" alt="title"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/mynote/2020/05/12/1589289987235-1589289987236.png" alt="title"></p>
 <p>虽然还是有些地方依然不理想，但是相比而言已经好了很多了。</p>
 <h1 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h1><p>因为是双线，所以虽然访问的都是laosu.ml，但是实际上是不同的网站，所以在计数上会存在不一致。</p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
@@ -710,7 +741,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

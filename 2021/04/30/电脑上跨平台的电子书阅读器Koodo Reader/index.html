@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="Koodo Reader 让您轻松管理和阅读各种格式的电子书，助力更高效书籍阅读和学习。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210430165854.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210430165854.png">
 <meta property="article:published_time" content="2021-04-30T10:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.978Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.184Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="Electron">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210430165854.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210430165854.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2021/04/30/%E7%94%B5%E8%84%91%E4%B8%8A%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%94%B5%E5%AD%90%E4%B9%A6%E9%98%85%E8%AF%BB%E5%99%A8Koodo%20Reader/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210430165854.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210430165854.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -502,16 +533,16 @@
 <p>Mac 上能看 <code>txt</code> 小说的阅读器不多，老苏最早用过 <code>超牛txt小说阅读器</code>，后来是 <code>x-Reader</code> ，当然支持 <code>epub</code> 和 <code>pdf</code>的阅读器还是很多的。</p>
 <h1 id="安装一"><a href="#安装一" class="headerlink" title="安装一"></a>安装一</h1><p>因为没有现成的最新版的镜像，所以需要从源代码开始构建。如果你不想自己构建，可以跳转到第二部分，因为老苏已经构建好了，你可以直接下载使用。</p>
 <h2 id="1-安装-git"><a href="#1-安装-git" class="headerlink" title="1.   安装 git"></a>1.   安装 git</h2><ul>
-<li> <code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
+<li><code>套件中心</code> → <code>设置</code> –&gt; <code>套件来源</code> –&gt; <code>新增</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131200.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131200.png"></p>
 <blockquote>
 <p>名称：随意，位置：<code>http://packages.synocommunity.com/</code></p>
 </blockquote>
 <ul>
-<li> <code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
+<li><code>套件中心</code> –&gt; <code>社群</code>，找到并安装套件 <code>Git</code></li>
 </ul>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210411131711.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210411131711.png"></p>
 <h2 id="2-下载代码"><a href="#2-下载代码" class="headerlink" title="2.  下载代码"></a>2.  下载代码</h2><blockquote>
 <p>用 SSH 客户端连到群晖，在 <code>docker</code> 目录中执行下面的命令</p>
 </blockquote>
@@ -520,17 +551,17 @@
 <blockquote>
 <p>我用的是国内源，应该比用 <code>github</code> 会快一些吧</p>
 </blockquote>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427092058.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427092058.png"></p>
 <h2 id="3-修改-docker-compose-yaml"><a href="#3-修改-docker-compose-yaml" class="headerlink" title="3.  修改 docker-compose.yaml"></a>3.  修改 docker-compose.yaml</h2><p>编辑 <code>docker-compose.yaml</code> 文件，老苏只是修改了群晖的本地端口为 <code>3480</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">koodo:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3480:80&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="4-开始构建"><a href="#4-开始构建" class="headerlink" title="4. 开始构建"></a>4. 开始构建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入 koodo-reader 目录</span></span><br><span class="line"><span class="built_in">cd</span> koodo-reader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427152923.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427152923.png"></p>
 <h2 id="5-释放空间"><a href="#5-释放空间" class="headerlink" title="5.  释放空间"></a>5.  释放空间</h2><p>在镜像构建过程中，下载了两个基础镜像，<code>nginx:stable</code> 和<code>node:lts-stretch</code>，加起来差不多有 <code>1G</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427095334.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427095334.png"></p>
 <p>最终生成了镜像 <code>koodo-reader_koodo:latest</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427095612.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427095612.png"></p>
 <p>建议删除用于中间过程的基础镜像，这样可以节省空间。有一种更简单的方法</p>
 <blockquote>
 <p>需要注意的是，这个操作有一定的危险！</p>
@@ -538,47 +569,47 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理未被使用的镜像</span></span><br><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
 
 <h1 id="安装二"><a href="#安装二" class="headerlink" title="安装二"></a>安装二</h1><p>如果你觉得自己构建麻烦，也可以在注册表中搜索 <code>koodo-reader</code> ，选择第二个 <code>wbsu2003/koodo-reader</code>，版本选择 <code>latest</code>。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210430165732.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210430165732.png"></p>
 <p>也可以直接用命令行拉取镜像</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull wbsu2003/koodo-reader:latest</span><br></pre></td></tr></table></figure>
 
-<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427173530.png"></p>
+<h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427173530.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖IP:3480</code>，就能看到主界面了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427094945.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427094945.png"></p>
 <h2 id="导入书籍"><a href="#导入书籍" class="headerlink" title="导入书籍"></a>导入书籍</h2><p><code>Koodo Reader</code> 支持阅读 <code>epub</code> , <code>pdf</code>, <code>mobi</code>, <code>azw3</code> 和 <code>txt</code> 格式的图书，我随便下载了几本 <code>epub</code> 格式的小说，选择 <code>从本地导入</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427101055.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427101055.png"></p>
 <p>支持拖拽操作</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427141111.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427141111.png"></p>
 <p>随便打开一本</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427101251.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427101251.png"></p>
 <h2 id="备份恢复"><a href="#备份恢复" class="headerlink" title="备份恢复"></a>备份恢复</h2><p>这是实现跨设备阅读的基础，目前支持 <code>Dropbox</code> 和 <code>WebDav</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427103555.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427103555.png"></p>
 <p>在群晖上使用显然 <code>WebDav</code> 才是我们必选，可惜网页上并不支持，所以网页上唯一的选择只能是 <code>Dropbox</code> </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427105638.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427105638.png"></p>
 <p>点 <code>复制链接</code>，在浏览器中打开新标签页</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427105827.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427105827.png"></p>
 <p>授权 <code>运行</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427110123.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427110123.png"></p>
 <p>授权成功后需要 <code>复制凭证</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427110203.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427110203.png"></p>
 <p>将获取的凭证字符串复制到文本框完成绑定</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427110246.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427110246.png"></p>
 <p>之后就可以上传下载阅读记录了</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427110724.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427110724.png"></p>
 <h1 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h1><p>因为是基于 <code>Electron</code> 开发的，所以在用户体验上是完全一致的，所不同的是客户端功能会略多一点，比如说备份支持 <code>WebDav</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427112013.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427112013.png"></p>
 <p>支持 <code>同步</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427112147.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427112147.png"></p>
 <p>通过 <code>备份和恢复</code>，很容易就实现了不同客户端书籍的同步。</p>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>个人感觉从应用场景来说，如果能实现 PC 和 移动端的同步才是最关键的，可是当我们在移动端访问 Web 时，却显示不支持，不能不说这是很大的遗憾。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/2021/04/20210427135752.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/2021/04/20210427135752.png"></p>
 <p>不过作为 PC 的阅读器， 不论颜值还是功能，都是非常不错的👍👍👍</p>
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>将构建好的镜像上传到 <code>dockerhub</code> 的一些操作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录</span></span><br><span class="line">docker login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改镜像 repository</span></span><br><span class="line">docker tag koodo-reader_koodo wbsu2003/koodo-reader:v1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传镜像</span></span><br><span class="line">docker push wbsu2003/koodo-reader:v1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改镜像 repository</span></span><br><span class="line">docker tag koodo-reader_koodo wbsu2003/koodo-reader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传镜像</span></span><br><span class="line">docker push wbsu2003/koodo-reader:latest</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20210427215226.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20210427215226.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
-<p>troyeguo/koodo-reader: 📚 A modern ebook manager and reader for epub, pdf, mobi, azw3 and txt, supporting Windows, macOS, Linux and Web. (跨平台的电子书阅读器，支持 epub, pdf, mobi, azw3 和 txt 格式)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Ryb3llZ3VvL2tvb2RvLXJlYWRlcg==">https://github.com/troyeguo/koodo-reader<i class="fa fa-external-link-alt"></i></span></p>
+<p>troyeguo&#x2F;koodo-reader: 📚 A modern ebook manager and reader for epub, pdf, mobi, azw3 and txt, supporting Windows, macOS, Linux and Web. (跨平台的电子书阅读器，支持 epub, pdf, mobi, azw3 和 txt 格式)<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Ryb3llZ3VvL2tvb2RvLXJlYWRlcg==">https://github.com/troyeguo/koodo-reader<i class="fa fa-external-link-alt"></i></span></p>
 <p>koodo-reader: 📚 跨平台的电子书阅读器，平台支持Windows，macOS，Linux 和网页版，格式支持 epub，pdf，mobi，azw3 和 txt，支持数据导入导出和网盘同步。基于 React、Redux、TypeScript、Electron、i18n<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20vdHJveWVndW8va29vZG8tcmVhZGVy">https://gitee.com/troyeguo/koodo-reader<i class="fa fa-external-link-alt"></i></span></p>
 <p>Koodo Reader<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9rb29kby45NjA5NjAueHl6LyM=">https://koodo.960960.xyz/#<i class="fa fa-external-link-alt"></i></span></p>
 <p>Docker - 将制作好的镜像上传到Docker Hub仓库（附操作步骤）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGFuZ2dlLmNvbS9ibG9nL2NhY2hlL2RldGFpbF8yNDA5Lmh0bWw=">https://www.hangge.com/blog/cache/detail_2409.html<i class="fa fa-external-link-alt"></i></span></p>
@@ -727,7 +758,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动

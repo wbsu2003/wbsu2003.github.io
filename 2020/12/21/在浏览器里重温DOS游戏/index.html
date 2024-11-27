@@ -30,15 +30,15 @@
 <meta property="og:site_name" content="老苏的blog">
 <meta property="og:description" content="网页版的中文 DOS 游戏库。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212200913.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212200913.png">
 <meta property="article:published_time" content="2020-12-21T11:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-27T01:34:00.954Z">
+<meta property="article:modified_time" content="2024-11-27T02:45:28.160Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="游戏">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212200913.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212200913.png">
 
 
 <link rel="canonical" href="https://laosu.tech/2020/12/21/%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E9%87%8D%E6%B8%A9DOS%E6%B8%B8%E6%88%8F/">
@@ -184,6 +184,37 @@
             });
     </script>
 
+<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
+<script>
+  async function getUserRegion() {
+    try {
+      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
+      if (!response.ok) {
+        throw new Error('网络错误');
+      }
+      const data = await response.json();
+      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
+    } catch (error) {
+      console.error('获取用户地区失败:', error);
+      return 'US'; // 默认返回国外
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async function() {
+    const userRegion = await getUserRegion(); // 获取用户地区
+    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+
+    images.forEach(img => {
+      const originalSrc = img.src; // 获取图片的原始地址
+      if (userRegion === 'CN') {
+        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
+      } else {
+        // 对于国外用户，保持原始地址
+        img.src = originalSrc; // 这里可以不做任何更改
+      }
+    });
+  });
+</script>
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
@@ -391,7 +422,7 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
-      <img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212200913.png" itemprop="contentUrl">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212200913.png" itemprop="contentUrl">
     </div>
     </div>
 
@@ -432,7 +463,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-27 09:34:00" itemprop="dateModified" datetime="2024-11-27T09:34:00+08:00">2024-11-27</time>
+      <time title="修改时间：2024-11-27 10:45:28" itemprop="dateModified" datetime="2024-11-27T10:45:28+08:00">2024-11-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,18 +529,18 @@
     <div class="post-body" itemprop="articleBody"><p>偶然找到一个网站， <span class="exturl" data-url="aHR0cHM6Ly9kb3MuemN6Yy5jei8=">在线 DOS 游戏<i class="fa fa-external-link-alt"></i></span> ：（<span class="exturl" data-url="aHR0cHM6Ly9kb3MuemN6Yy5jei8=">https://dos.zczc.cz/<i class="fa fa-external-link-alt"></i></span>）， 居然有《仙剑奇侠传》、《红色警戒》、《大富翁》、《大航海时代》，看着这些曾经熟悉的画面，虽然精美程度和现在的游戏无法同日而语，但是偶尔放松放松用来怀旧真的是非常不错，目前这个网站已经收集了 1898 款游戏，我相信你一定可以在这里找到你喜欢的游戏。</p>
 <p>有网友把这个游戏网站放到了 <code>docker</code> 中，所以我们可以在群晖上搭建我们自己的 <code>DOS</code> 游戏库了。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在 docker 注册表中搜索 <code>dosgame</code> ，选择第一个 <code>oldiy/dosgame-web-docker</code>，就一个版本，所以双击直接下载。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201209101420.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201209101420.png"></p>
 <h2 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h2><p>直接用了默认的 <code>262</code></p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201209113310.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201209113310.png"></p>
 <h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>在浏览器中输入 <code>http://群晖:262</code>，即可看到主界面，默认安装了42个游戏​。</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212161211.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212161211.png"></p>
 <p>游戏运行非常简单，只要选中自己中意的软件单击就可以了。有些游戏不仅仅有快捷键提示，还贴心的链接了游戏攻略</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201038.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201038.png"></p>
 <h1 id="下载更多游戏"><a href="#下载更多游戏" class="headerlink" title="下载更多游戏"></a>下载更多游戏</h1><ul>
 <li>第一步</li>
 </ul>
 <p>在 docker 文件夹中，创建一个新文件夹，并将其命名为 <code>dosgame</code>，查看属性可以得到文件夹的绝对路径</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201153.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201153.png"></p>
 <ul>
 <li>第二步</li>
 </ul>
@@ -519,14 +550,14 @@
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从容器内拷贝到群晖</span></span><br><span class="line">docker <span class="built_in">cp</span> oldiy-dosgame-web-docker1:/app/static/games /volume1/docker/dosgame</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201221.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201221.png"></p>
 <p>拷贝完成后</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201257.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201257.png"></p>
 <p>其中 <code>bin</code> 是游戏目录，<code>img</code> 是游戏封面的目录</p>
 <ul>
 <li>第三步</li>
 </ul>
-<p>打包的镜像中只有42种游戏（目前共1898种游戏，共31.9G，如果需要下载更多游戏的时候，记得创建容器的时候把 /app/static/games 挂载到空间足够的硬盘后再去下载）</p>
+<p>打包的镜像中只有42种游戏（目前共1898种游戏，共31.9G，如果需要下载更多游戏的时候，记得创建容器的时候把 &#x2F;app&#x2F;static&#x2F;games 挂载到空间足够的硬盘后再去下载）</p>
 <table>
 <thead>
 <tr>
@@ -535,30 +566,30 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">/docker/dosgame/games</td>
-<td align="center">/app/static/games</td>
+<td align="center">&#x2F;docker&#x2F;dosgame&#x2F;games</td>
+<td align="center">&#x2F;app&#x2F;static&#x2F;games</td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201349.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201349.png"></p>
 <ul>
 <li>第四步</li>
 </ul>
 <p>如果你是要定制自己的游戏库，可以打开 <code>all-geme-list.txt</code> 文件，里面有游戏的下载地址</p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201524.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201524.png"></p>
 <p><code>CONTRIBUTING.md</code> 文件里是对 <code>games.json</code> 的格式说明 </p>
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201548.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201548.png"></p>
 <ul>
 <li>第五步</li>
 </ul>
 <p>如果要全部下载，可以在SSH界面按下面的命令操作</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># oldiy-dosgame-web-docker1 是容器的名称</span></span><br><span class="line">docker <span class="built_in">exec</span> -it oldiy-dosgame-web-docker1 sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入容器后操作</span></span><br><span class="line"><span class="built_in">mv</span> /app/static/games/games.json /app/static/games/42games.json</span><br><span class="line"><span class="built_in">mv</span> /app/static/games/1898all_games.json /app/static/games/games.json</span><br><span class="line">python /app/static/games/download_data.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待下载完后重启容器即可</span></span><br><span class="line">docker restart oldiy-dosgame-web-docker1 </span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.laosu.fun/gitnote-images@master/picgo/20201212201621.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/gitnote-images@master/picgo/20201212201621.png"></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
 <p>一个中文DOS老游戏网站的诞生 - 知乎<br>地址：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80NzUzMjI2Mw==">https://zhuanlan.zhihu.com/p/47532263<i class="fa fa-external-link-alt"></i></span> </p>
 <p>在线 DOS 游戏<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9kb3MuemN6Yy5jei8=">https://dos.zczc.cz/<i class="fa fa-external-link-alt"></i></span> </p>
-<p>GitHub - rwv/chinese-dos-games-web: 🌐 Source code of <span class="exturl" data-url="aHR0cHM6Ly9kb3MuemN6Yy5jei8=">https://dos.zczc.cz<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J3di9jaGluZXNlLWRvcy1nYW1lcy13ZWI=">https://github.com/rwv/chinese-dos-games-web<i class="fa fa-external-link-alt"></i></span> </p>
-<p>GitHub - rwv/chinese-dos-games: 🎮 Chinese DOS games in browser.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J3di9jaGluZXNlLWRvcy1nYW1lcw==">https://github.com/rwv/chinese-dos-games<i class="fa fa-external-link-alt"></i></span> </p>
+<p>GitHub - rwv&#x2F;chinese-dos-games-web: 🌐 Source code of <span class="exturl" data-url="aHR0cHM6Ly9kb3MuemN6Yy5jei8=">https://dos.zczc.cz<i class="fa fa-external-link-alt"></i></span><br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J3di9jaGluZXNlLWRvcy1nYW1lcy13ZWI=">https://github.com/rwv/chinese-dos-games-web<i class="fa fa-external-link-alt"></i></span> </p>
+<p>GitHub - rwv&#x2F;chinese-dos-games: 🎮 Chinese DOS games in browser.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J3di9jaGluZXNlLWRvcy1nYW1lcw==">https://github.com/rwv/chinese-dos-games<i class="fa fa-external-link-alt"></i></span> </p>
 <p>在群晖里玩Dos游戏，没错！使用Docker就可以自建一个web版的dos游戏库！ &gt; oD^Blog<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9vZGNuLnRvcC8yMDE5LzAyLzEyLzI0NzEv">https://odcn.top/2019/02/12/2471/<i class="fa fa-external-link-alt"></i></span> </p>
 </blockquote>
 
@@ -705,7 +736,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">31:27</span>
+    <span title="站点阅读时长">31:36</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
