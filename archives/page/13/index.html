@@ -194,8 +194,19 @@
     }
   }
 
+  async function fetchUserRegion() {
+    try {
+      const response = await fetch('https://userjs.wbsu2003.workers.dev/'); // 替换为你的 Worker URL
+      const data = await response.json();
+      return data.region; // 返回 'CN' 或其他
+    } catch (error) {
+      console.error('Error fetching user region:', error);
+      return 'US'; // 默认返回
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", async function() {
-    const userRegion = await getUserRegion(); // 获取用户地区
+    const userRegion = await fetchUserRegion(); // 获取用户地区
     const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
 
     console.log('您的 IP 区域是：', userRegion);
