@@ -198,6 +198,8 @@
     const userRegion = await getUserRegion(); // 获取用户地区
     const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
 
+    console.log('您的 IP 区域是：', userRegion);
+
     images.forEach(img => {
       const originalSrc = img.src; // 获取图片的原始地址
       if (userRegion === 'CN') {
@@ -209,6 +211,7 @@
     });
   });
 </script>
+
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
