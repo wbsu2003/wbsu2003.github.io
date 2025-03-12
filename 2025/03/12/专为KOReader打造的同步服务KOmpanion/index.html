@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2025@main/picgo/2025/02/202503101611999.png">
 <meta property="article:published_time" content="2025-03-12T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-12T02:00:12.654Z">
+<meta property="article:modified_time" content="2025-03-12T02:14:34.603Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -471,7 +471,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-03-12 10:00:00 / 修改时间：10:00:12" itemprop="dateCreated datePublished" datetime="2025-03-12T10:00:00+08:00">2025-03-12</time>
+      <time title="创建时间：2025-03-12 10:00:00 / 修改时间：10:14:34" itemprop="dateCreated datePublished" datetime="2025-03-12T10:00:00+08:00">2025-03-12</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -706,7 +706,7 @@
 <p>现在可以同步阅读统计信息了，在网页上能看到</p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2025@main/picgo/2025/02/202503101432914.png"></p>
 <p>但是似乎只有第一次可以，之后再同步，会显示 <code>同步中发生错误，请检查您的网络连接并稍后重试</code></p>
-<p>从日志看，应该是程序的 <code>bug</code>，违反了数据库中定义的唯一约束</p>
+<p>从日志看，应该是程序的 <code>bug</code>，违反了数据库中定义的唯一约束。当然，这只是老苏的猜测</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ko-web      | &#123;&quot;level&quot;:&quot;info&quot;,&quot;time&quot;:&quot;2025-03-09T06:53:44Z&quot;,&quot;caller&quot;:&quot;/go/pkg/mod/github.com/gin-gonic/gin@v1.7.7/context.go:168&quot;,&quot;message&quot;:&quot;error writing statistics%!(EXTRA *fmt.wrapError=PostgresStorage - Write - r.Pool.Exec: ERROR: duplicate key value violates unique constraint \&quot;storage_blob_file_path_key\&quot; (SQLSTATE 23505))&quot;&#125;</span><br><span class="line">ko-web      | [GIN] 2025/03/09 - 06:53:44 | 500 |    9.265288ms |      172.18.0.1 | PUT      &quot;/webdav/statistics.sqlite3&quot;</span><br></pre></td></tr></table></figure>
 
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
