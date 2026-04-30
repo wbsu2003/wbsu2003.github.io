@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/404/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" },
+        { 
+          "key": "Content-Security-Policy", 
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.laosu.fun https://ipinfo.io https://www.googletagmanager.com https://hm.baidu.com https://pagead2.googlesyndication.com https://clustrmaps.com https://waline-wbsu2003.vercel.app https://www.google-analytics.com https://ssl.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.laosu.fun; img-src 'self' data: https: blob:; connect-src 'self' https://ipinfo.io https://cdnjs.laosu.fun https://0x404.cf https://clustrmaps.com https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://hm.baidu.com https://pagead2.googlesyndication.com https://waline-wbsu2003.vercel.app https://www.google-analytics.com https://ssl.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://player.bilibili.com https://www.bilibili.com https://*.hdslb.com; worker-src 'self' blob:;"
+        },
+        { 
+          "key": "Permissions-Policy", 
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), xr-spatial-tracking=()" 
+        }
+      ]
+    }
+  ]
+}
