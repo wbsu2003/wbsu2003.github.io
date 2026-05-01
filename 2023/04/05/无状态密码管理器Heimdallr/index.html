@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/12/202301221607696.png">
 <meta property="article:published_time" content="2023-04-05T05:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-01T05:34:19.149Z">
+<meta property="article:modified_time" content="2026-05-01T12:05:04.536Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -81,153 +81,134 @@
      crossorigin="anonymous"></script>
 
 <!--2024.10.27新增广告插件检测-->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #message {
-            text-align: center;
-            max-width: 400px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(255, 0, 0, 0.8);
-        }
-        .no-scroll {
-            overflow: hidden; /* 禁止滚动 */
-        }
-    </style>
 
-<script>
-        function detectAdBlocker(callback) {
-            const testImage = new Image();
-            // 使用一个可访问的真实广告 URL
-            //testImage.src = 'https://v2.euqq.cn/syjpc/qmtz-wxmsrl-1080-420-5-23-r.gif';
-            //testImage.src = 'https://v4.sogowan.com/20241024/Bj2nbPUW0KCpe71o.gif';
-            testImage.src = 'https://cdn.wwads.cn/creatives/i2Pn6tVwsn49BRfOaOrd7OHcRL5kgr1jwGqNlStj.png';
+  <!--广告拦截检测 + 区域CDN切换-->
+  <style>
+    #adblock-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    #adblock-overlay .msg {
+      text-align: center;
+      max-width: 420px;
+      padding: 24px 32px;
+      border-radius: 12px;
+      background: rgba(220, 38, 38, 0.9);
+      line-height: 1.6;
+    }
+    #adblock-overlay .msg h2 { margin: 0 0 12px; }
+    #adblock-overlay .msg p  { margin: 8px 0; }
+    body.adblock-locked { overflow: hidden; }
+  </style>
 
-            
-            testImage.onload = function() {
-                console.log('广告未被拦截'); // 调试信息
-                callback(false); // 没有广告拦截
-            };
+  <div id="adblock-overlay">
+    <div class="msg">
+      <h2>检测到广告拦截插件</h2>
+      <p>请禁用广告拦截插件以继续浏览此页面。</p>
+      <p>感谢您的支持！</p>
+    </div>
+  </div>
 
-            testImage.onerror = function() {
-                console.log('广告被拦截'); // 调试信息
-                callback(true); // 可能有广告拦截
-            };
-        }
+  <script>
+  (function () {
+    const OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
+    const NEW_CDN = 'https://cdn.laosu.fun/';
+    const REGION_API = 'https://cdnjs.laosu.fun/';
 
-        function showOverlay() {
-            const overlay = document.getElementById('overlay');
-            overlay.style.display = 'flex';
+    // ---- 广告拦截检测（诱饵元素 + 资源探针 + 超时保底）----
+    function detectAdBlocker() {
+      return new Promise(resolve => {
+        let resolved = false;
+        const done = (v) => { if (!resolved) { resolved = true; resolve(v); } };
 
-            // 禁止页面滚动
-            document.body.classList.add('no-scroll');
+        const bait = document.createElement('div');
+        bait.className = 'text-ad banner-ad adsbox ad-placement';
+        bait.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;';
+        document.body.appendChild(bait);
 
-            overlay.innerHTML = `
-                <div id="message">
-                    <h2>检测到广告拦截插件</h2>
-                    <p>请禁用广告拦截插件以继续浏览此页面。</p>
-                    <p>感谢您的支持！</p>
-                </div>
-            `;
-        }
+        setTimeout(() => {
+          if (bait.offsetHeight === 0 ||
+              getComputedStyle(bait).display === 'none' ||
+              getComputedStyle(bait).visibility === 'hidden') {
+            cleanup(true);
+          }
+        }, 150);
 
-        function checkAdBlocker() {
-            detectAdBlocker(function(isBlocked) {
-                if (isBlocked) {
-                    const message = "检测到广告拦截插件。请禁用它以继续浏览。";
-                    console.log(message);
-                    //showOverlay(); // 显示遮罩
-                } else {
-                    console.log('没有检测到广告拦截插件');
-                }
-            });
+        const img = new Image();
+        img.onload  = () => cleanup(false);
+        img.onerror = () => cleanup(true);
+        img.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+
+        function cleanup(result) {
+          try { document.body.removeChild(bait); } catch {}
+          done(result);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            checkAdBlocker();
-        });
-    </script>
+        setTimeout(() => cleanup(false), 3000);
+      });
+    }
 
-<!--2024.10.27新增用户IP检测-->
-    <script>
-        // 使用 fetch API 获取用户的 IP 地址
-        fetch('https://ipinfo.io/json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('网络错误');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // 输出用户的 IP 地址
-                console.log('您的 IP 地址是：', data.ip);
-            })
-            .catch(error => {
-                console.error('获取 IP 地址失败:', error);
-            });
-    </script>
+    function lockPage() {
+      document.getElementById('adblock-overlay').style.display = 'flex';
+      document.body.classList.add('adblock-locked');
+    }
 
-<!--2024.11.27新增用户区域判断，用于显示不同的图片地址-->
-<script>
-  async function getUserRegion() {
-    try {
-      const response = await fetch('https://ipinfo.io/json'); // 替换为你的 IPinfo token
-      if (!response.ok) {
-        throw new Error('网络错误');
+    // ---- 区域检测 ----
+    async function getRegion() {
+      try {
+        const res = await fetch(REGION_API, { mode: 'cors' });
+        const data = await res.json();
+        return data.region;
+      } catch {
+        return 'US';
       }
-      const data = await response.json();
-      return data.country === 'CN' ? 'CN' : 'US'; // 判断用户地区
-    } catch (error) {
-      console.error('获取用户地区失败:', error);
-      return 'US'; // 默认返回国外
     }
-  }
 
-  async function fetchUserRegion() {
-    try {
-      const response = await fetch('https://cdnjs.laosu.fun/'); // 替换为你的 Worker URL
-      const data = await response.json();
-      return data.region; // 返回 'CN' 或其他
-    } catch (error) {
-      console.error('Error fetching user region:', error);
-      return 'US'; // 默认返回
+    // ---- CDN 替换 ----
+    function replaceImageSrc(img) {
+      const src = img.getAttribute('src');
+      if (src && src.includes('cdn.jsdelivr.net/gh/wbsu2003/')) {
+        img.src = src.replace(OLD_CDN, NEW_CDN);
+      }
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", async function() {
-    const userRegion = await fetchUserRegion(); // 获取用户地区
-    const images = document.querySelectorAll('img[src]'); // 选择所有带有 src 的 img
+    function replaceAllImages() {
+      document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+    }
 
-    console.log('您的 IP 区域是：', userRegion);
+    function watchNewImages() {
+      new MutationObserver(mutations => {
+        for (const m of mutations) {
+          for (const node of m.addedNodes) {
+            if (node.nodeType !== 1) continue;
+            if (node.tagName === 'IMG') replaceImageSrc(node);
+            node.querySelectorAll?.('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+          }
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+    }
 
-    images.forEach(img => {
-      const originalSrc = img.src; // 获取图片的原始地址
-      if (userRegion === 'CN') {
-        img.src = originalSrc.replace('https://cdn.jsdelivr.net/gh/wbsu2003/', 'https://cdn.laosu.fun/');
-      } else {
-        // 对于国外用户，保持原始地址
-        img.src = originalSrc; // 这里可以不做任何更改
+    // ---- 启动 ----
+    document.addEventListener('DOMContentLoaded', async () => {
+      const [isBlocked, region] = await Promise.all([
+        detectAdBlocker(),
+        getRegion()
+      ]);
+
+      if (isBlocked) lockPage();
+      if (region === 'CN') {
+        replaceAllImages();
+        watchNewImages();
       }
     });
-  });
-</script>
+  })();
+  </script>
 
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
@@ -396,7 +377,7 @@
     <div class="sidebar-inner sidebar-blogroll">
       <div class="links-of-blogroll animated">
         <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-          Links
+          লিঙ্কসমুহ
         </div>
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
@@ -477,7 +458,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 13:34:19" itemprop="dateModified" datetime="2026-05-01T13:34:19+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:05:04" itemprop="dateModified" datetime="2026-05-01T20:05:04+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -642,7 +623,7 @@
   </script>
 
           <div class="reward-container">
-  <div>Buy me a coffee</div>
+  <div>আমাকে একটা কফি কিনে দাও</div>
   <button>
     赞赏
   </button>
