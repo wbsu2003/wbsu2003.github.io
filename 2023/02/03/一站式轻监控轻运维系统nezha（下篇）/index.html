@@ -32,11 +32,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301252140744.png">
 <meta property="article:published_time" content="2023-02-03T00:30:00.000Z">
-<meta property="article:modified_time" content="2026-05-01T12:05:04.529Z">
+<meta property="article:modified_time" content="2026-05-01T12:18:00.044Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
-<meta property="article:tag" content="docker">
 <meta property="article:tag" content="运维">
+<meta property="article:tag" content="docker">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/01/202301252140744.png">
 
@@ -116,92 +116,148 @@
   </div>
 
   <script>
-  (function () {
-    const OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
-    const NEW_CDN = 'https://cdn.laosu.fun/';
-    const REGION_API = 'https://cdnjs.laosu.fun/';
+  (function () {                         
+    var OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
+    var NEW_CDN = 'https://cdn.laosu.fun/';
+    var REGION_API = 'https://cdnjs.laosu.fun/';
 
-    // ---- 广告拦截检测（诱饵元素 + 资源探针 + 超时保底）----
-    function detectAdBlocker() {
-      return new Promise(resolve => {
-        let resolved = false;
-        const done = (v) => { if (!resolved) { resolved = true; resolve(v); } };
+    // 按区域选择探针 URL
+    var AD_PROBES = {
+      CN: 'https://cpro.baidustatic.com/img/3890_120.jpg',
+      US: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    };
 
-        const bait = document.createElement('div');
-        bait.className = 'text-ad banner-ad adsbox ad-placement';
-        bait.style.cssText = 'width:1px;height:1px;position:absolute;left:-9999px;';
-        document.body.appendChild(bait);
+    // ---- 区域检测 ----
+    async function getRegion() {
+      try {
+        var res = await fetch(REGION_API, { mode: 'cors' });
+        var data = await res.json();
+        console.log('[区域检测] 结果:', data.region);
+        return data.region;
+      } catch (e) {
+        console.warn('[区域检测] 请求失败，默认 US:', e.message);
+        return 'US';
+      }
+    }
 
-        setTimeout(() => {
-          if (bait.offsetHeight === 0 ||
-              getComputedStyle(bait).display === 'none' ||
-              getComputedStyle(bait).visibility === 'hidden') {
-            cleanup(true);
-          }
-        }, 150);
+    // ---- 广告拦截检测（诱饵元素 + 区域化图片探针）----
+    function detectAdBlocker(region) {
+      return new Promise(function (resolve) {
+        var resolved = false;
+        var baitResult = null;
+        var imgResult = null;
 
-        const img = new Image();
-        img.onload  = () => cleanup(false);
-        img.onerror = () => cleanup(true);
-        img.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-
-        function cleanup(result) {
-          try { document.body.removeChild(bait); } catch {}
-          done(result);
+        function tryResolve() {
+          if (baitResult === null || imgResult === null) return;
+          if (resolved) return;
+          resolved = true;
+          // 诱饵元素为主，图片探针为辅
+          var isBlocked = baitResult;
+          console.log('[广告检测] 最终结果:', isBlocked,
+            '(诱饵:', baitResult, '| 图片:', imgResult, ')');
+          resolve(isBlocked);
         }
 
-        setTimeout(() => cleanup(false), 3000);
+        // 诱饵元素
+        var bait = document.createElement('div');
+        bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container';
+        bait.setAttribute('id', 'carbonads');
+        bait.style.cssText = 'width:1px!important;height:1px!important;position:absolute!important;left:-9999px!important;';
+        document.body.appendChild(bait);
+        console.log('[广告检测] 诱饵元素已插入');
+
+        setTimeout(function () {
+          var h = bait.offsetHeight;
+          var display = getComputedStyle(bait).display;
+          var visibility = getComputedStyle(bait).visibility;
+          baitResult = (h === 0 || display === 'none' || visibility === 'hidden');
+          console.log('[广告检测] 诱饵结果:', baitResult,
+            '(高度:', h, 'display:', display, 'visibility:', visibility, ')');
+          try { document.body.removeChild(bait); } catch (e) {}
+          tryResolve();
+        }, 200);
+
+        // 图片探针（根据区域选择）
+        var probeUrl = AD_PROBES[region] || AD_PROBES.US;
+        console.log('[广告检测] 使用探针:', probeUrl);
+        var img = new Image();
+        img.onload = function () {
+          imgResult = false;
+          console.log('[广告检测] 图片探针: 加载成功(未拦截)');
+          tryResolve();
+        };
+        img.onerror = function () {
+          imgResult = true;
+          console.log('[广告检测] 图片探针: 加载失败(可能被拦截)');
+          tryResolve();
+        };
+        img.src = probeUrl;
+
+        // 超时保底
+        setTimeout(function () {
+          if (resolved) return;
+          console.log('[广告检测] 超时，以诱饵结果为准:', baitResult);
+          resolved = true;
+          resolve(baitResult || false);
+        }, 3000);
       });
     }
 
     function lockPage() {
       document.getElementById('adblock-overlay').style.display = 'flex';
       document.body.classList.add('adblock-locked');
+      console.log('[页面] 已锁定');
     }
 
-    // ---- 区域检测 ----
-    async function getRegion() {
-      try {
-        const res = await fetch(REGION_API, { mode: 'cors' });
-        const data = await res.json();
-        return data.region;
-      } catch {
-        return 'US';
-      }
+    function unlockPage() {
+      document.getElementById('adblock-overlay').style.display = 'none';
+      document.body.classList.remove('adblock-locked');
     }
 
     // ---- CDN 替换 ----
     function replaceImageSrc(img) {
-      const src = img.getAttribute('src');
-      if (src && src.includes('cdn.jsdelivr.net/gh/wbsu2003/')) {
+      var src = img.getAttribute('src');
+      if (src && src.indexOf('cdn.jsdelivr.net/gh/wbsu2003/') !== -1) {
         img.src = src.replace(OLD_CDN, NEW_CDN);
       }
     }
 
     function replaceAllImages() {
-      document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+      var imgs = document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]');
+      console.log('[CDN替换] 找到', imgs.length, '张需要替换的图片');
+      imgs.forEach(replaceImageSrc);
     }
 
     function watchNewImages() {
-      new MutationObserver(mutations => {
-        for (const m of mutations) {
-          for (const node of m.addedNodes) {
+      new MutationObserver(function (mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var nodes = mutations[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            var node = nodes[j];
             if (node.nodeType !== 1) continue;
             if (node.tagName === 'IMG') replaceImageSrc(node);
-            node.querySelectorAll?.('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+            if (node.querySelectorAll) {
+              node.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+            }
           }
         }
       }).observe(document.body, { childList: true, subtree: true });
     }
 
-    // ---- 启动 ----
-    document.addEventListener('DOMContentLoaded', async () => {
-      const [isBlocked, region] = await Promise.all([
-        detectAdBlocker(),
-        getRegion()
-      ]);
+    // ---- 启动：先区域，再广告，最后应用 ----
+    document.addEventListener('DOMContentLoaded', async function () {
+      console.log('[启动] DOMContentLoaded');
 
-      if (isBlocked) lockPage();
+      // 第一步：区域检测（决定探针 URL 和 CDN 策略）
+      var region = await getRegion();
+
+      // 第二步：广告检测（使用区域对应的探针）
+      var isBlocked = await detectAdBlocker(region);
+
+      // 第三步：应用结果
+      console.log('[启动] 广告拦截:', isBlocked, '| 区域:', region);
+      if (isBlocked) { lockPage(); }
+      else { unlockPage(); }
       if (region === 'CN') {
         replaceAllImages();
         watchNewImages();
@@ -377,7 +433,7 @@
     <div class="sidebar-inner sidebar-blogroll">
       <div class="links-of-blogroll animated">
         <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-          লিঙ্কসমুহ
+          Links
         </div>
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
@@ -458,7 +514,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:05:04" itemprop="dateModified" datetime="2026-05-01T20:05:04+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:18:00" itemprop="dateModified" datetime="2026-05-01T20:18:00+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -635,7 +691,7 @@
   </script>
 
           <div class="reward-container">
-  <div>আমাকে একটা কফি কিনে দাও</div>
+  <div>Buy me a coffee</div>
   <button>
     赞赏
   </button>
@@ -688,8 +744,8 @@
 
           <div class="post-tags">
               <a href="/tags/%E7%BE%A4%E6%99%96/" rel="tag"><i class="fa fa-tag"></i> 群晖</a>
-              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
               <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"><i class="fa fa-tag"></i> 运维</a>
+              <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
           </div>
 
         
