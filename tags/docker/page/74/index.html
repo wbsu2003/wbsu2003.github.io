@@ -134,100 +134,26 @@
       }
     }
 
-  // ---- 广告拦截检测（诱饵 + 控制探针）----
-  function detectAdBlocker(region) {
+  function detectAdBlocker() {
     return new Promise(function (resolve) {
-      var resolved = false;
-      var results = { bait: null, probe: null };
-
-      function tryResolve() {
-        if (results.bait === null || results.probe === null) return;
-        if (resolved) return;
-        resolved = true;
-        // 诱饵 OR 探针，任一判定拦截即拦截
-        var isBlocked = results.bait || results.probe;
-        console.log('[广告检测] 最终结果:', isBlocked,
-          '(诱饵:', results.bait, '| 探针:', results.probe, ')');
-        resolve(isBlocked);
-      }
-
-      // ---- 方法1: 诱饵元素 ----
       var bait = document.createElement('div');
       bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
       bait.setAttribute('id', 'carbonads');
       bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
       bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
       document.body.appendChild(bait);
+
       console.log('[广告检测] 诱饵元素已插入');
 
       setTimeout(function () {
         var h = bait.offsetHeight;
         var display = getComputedStyle(bait).display;
-        results.bait = (h === 0 || display === 'none');
-        console.log('[广告检测] 诱饵结果:', results.bait,
+        var isBlocked = (h === 0 || display === 'none');
+        console.log('[广告检测] 诱饵结果:', isBlocked,
           '(高度:', h, 'display:', display, ')');
         try { document.body.removeChild(bait); } catch (e) {}
-        tryResolve();
+        resolve(isBlocked);
       }, 300);
-
-      // ---- 方法2: 控制探针对比 ----
-      // 原理：同时探测「广告 URL」和「正常 URL」
-      // - 广告失败 + 正常成功 → 有广告拦截
-      // - 两个都失败 → 网络问题，不算拦截
-      // - 广告成功 → 没有拦截
-      var adUrl, controlUrl;
-      if (region === 'CN') {
-        adUrl = 'https://cpro.baidustatic.com/img/3890_120.jpg';
-        controlUrl = 'https://www.baidu.com/favicon.ico';
-      } else {
-        adUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-        controlUrl = 'https://www.google.com/favicon.ico';
-      }
-
-      var adResult = null;
-      var controlResult = null;
-
-      function checkProbe() {
-        if (adResult === null || controlResult === null) return;
-        if (results.probe !== null) return;
-
-        if (controlResult === false) {
-          // 控制 URL 也失败了 → 网络不通，无法判断，不算拦截
-          results.probe = false;
-          console.log('[广告检测] 探针结果: false (网络不通，无法判断)');
-        } else if (controlResult === true && adResult === true) {
-          // 控制成功但广告失败 → 有广告拦截
-          results.probe = true;
-          console.log('[广告检测] 探针结果: true (广告被拦截，网络正常)');
-        } else {
-          // 广告成功加载 → 没有拦截
-          results.probe = false;
-          console.log('[广告检测] 探针结果: false (广告加载成功)');
-        }
-        tryResolve();
-      }
-
-      // 广告探针
-      var adImg = new Image();
-      adImg.onload = function () { adResult = false; checkProbe(); };
-      adImg.onerror = function () { adResult = true; checkProbe(); };
-      adImg.src = adUrl;
-      console.log('[广告检测] 广告探针:', adUrl);
-
-      // 控制探针
-      var ctrlImg = new Image();
-      ctrlImg.onload = function () { controlResult = true; checkProbe(); };
-      ctrlImg.onerror = function () { controlResult = false; checkProbe(); };
-      ctrlImg.src = controlUrl;
-      console.log('[广告检测] 控制探针:', controlUrl);
-
-      // 超时：2秒后以诱饵结果为准
-      setTimeout(function () {
-        if (resolved) return;
-        resolved = true;
-        console.log('[广告检测] 探针超时，以诱饵结果为准:', results.bait);
-        resolve(results.bait || false);
-      }, 2000);
     });
   }
 
@@ -744,8 +670,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich%20%EF%BC%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89/" itemprop="url">
-            <span itemprop="name">手机照片备份方案Immich（修订版）</span>
+          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" itemprop="url">
+            <span itemprop="name">手机照片备份方案Immich</span>
           </a>
       </div>
 
