@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2023@main/picgo/2023/11/202312201351776.png">
 <meta property="article:published_time" content="2024-02-26T00:50:00.000Z">
-<meta property="article:modified_time" content="2026-05-01T12:49:25.706Z">
+<meta property="article:modified_time" content="2026-05-01T12:57:41.494Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="群晖">
 <meta property="article:tag" content="docker">
@@ -80,7 +80,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
      crossorigin="anonymous"></script>
 
-<!--2024.10.27新增广告插件检测-->
+<!--2026.05.01 全部改写-->
 
   <!--广告拦截检测 + 区域CDN切换-->
   <style>
@@ -116,62 +116,50 @@
   </div>
 
   <script>
-  (function () {                         
+  (function () {
     var OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
     var NEW_CDN = 'https://cdn.laosu.fun/';
     var REGION_API = 'https://cdnjs.laosu.fun/';
 
-    // 按区域选择探针 URL
-    var AD_PROBES = {
-      CN: 'https://cpro.baidustatic.com/img/3890_120.jpg',
-      US: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-    };
+    // ---- 广告拦截检测（纯诱饵元素，零网络依赖）----
+    function detectAdBlocker() {
+      return new Promise(function (resolve) {
+        var bait = document.createElement('div');
+        bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
+        bait.setAttribute('id', 'carbonads');
+        bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
+        bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
+        document.body.appendChild(bait);
+
+        setTimeout(function () {
+          var h = bait.offsetHeight;
+          var display = getComputedStyle(bait).display;
+          var isBlocked = (h === 0 || display === 'none');
+          try { document.body.removeChild(bait); } catch (e) {}
+          resolve(isBlocked);
+        }, 300);
+      });
+    }
+
+    function lockPage() {
+      document.getElementById('adblock-overlay').style.display = 'flex';
+      document.body.classList.add('adblock-locked');
+    }
+
+    function unlockPage() {
+      document.getElementById('adblock-overlay').style.display = 'none';
+      document.body.classList.remove('adblock-locked');
+    }
 
     // ---- 区域检测 ----
     async function getRegion() {
       try {
         var res = await fetch(REGION_API, { mode: 'cors' });
         var data = await res.json();
-        console.log('[区域检测] 结果:', data.region);
         return data.region;
       } catch (e) {
-        console.warn('[区域检测] 请求失败，默认 US:', e.message);
         return 'US';
       }
-    }
-
-  function detectAdBlocker() {
-    return new Promise(function (resolve) {
-      var bait = document.createElement('div');
-      bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
-      bait.setAttribute('id', 'carbonads');
-      bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
-      bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
-      document.body.appendChild(bait);
-
-      console.log('[广告检测] 诱饵元素已插入');
-
-      setTimeout(function () {
-        var h = bait.offsetHeight;
-        var display = getComputedStyle(bait).display;
-        var isBlocked = (h === 0 || display === 'none');
-        console.log('[广告检测] 诱饵结果:', isBlocked,
-          '(高度:', h, 'display:', display, ')');
-        try { document.body.removeChild(bait); } catch (e) {}
-        resolve(isBlocked);
-      }, 300);
-    });
-  }
-
-    function lockPage() {
-      document.getElementById('adblock-overlay').style.display = 'flex';
-      document.body.classList.add('adblock-locked');
-      console.log('[页面] 已锁定');
-    }
-
-    function unlockPage() {
-      document.getElementById('adblock-overlay').style.display = 'none';
-      document.body.classList.remove('adblock-locked');
     }
 
     // ---- CDN 替换 ----
@@ -183,9 +171,7 @@
     }
 
     function replaceAllImages() {
-      var imgs = document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]');
-      console.log('[CDN替换] 找到', imgs.length, '张需要替换的图片');
-      imgs.forEach(replaceImageSrc);
+      document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
     }
 
     function watchNewImages() {
@@ -204,20 +190,14 @@
       }).observe(document.body, { childList: true, subtree: true });
     }
 
-    // ---- 启动：先区域，再广告，最后应用 ----
+    // ---- 启动 ----
     document.addEventListener('DOMContentLoaded', async function () {
-      console.log('[启动] DOMContentLoaded');
-
-      // 第一步：区域检测（决定探针 URL 和 CDN 策略）
       var region = await getRegion();
+      var isBlocked = await detectAdBlocker();
 
-      // 第二步：广告检测（使用区域对应的探针）
-      var isBlocked = await detectAdBlocker(region);
-
-      // 第三步：应用结果
-      console.log('[启动] 广告拦截:', isBlocked, '| 区域:', region);
       if (isBlocked) { lockPage(); }
       else { unlockPage(); }
+
       if (region === 'CN') {
         replaceAllImages();
         watchNewImages();
@@ -474,7 +454,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

@@ -74,7 +74,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
      crossorigin="anonymous"></script>
 
-<!--2024.10.27新增广告插件检测-->
+<!--2026.05.01 全部改写-->
 
   <!--广告拦截检测 + 区域CDN切换-->
   <style>
@@ -110,62 +110,50 @@
   </div>
 
   <script>
-  (function () {                         
+  (function () {
     var OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
     var NEW_CDN = 'https://cdn.laosu.fun/';
     var REGION_API = 'https://cdnjs.laosu.fun/';
 
-    // 按区域选择探针 URL
-    var AD_PROBES = {
-      CN: 'https://cpro.baidustatic.com/img/3890_120.jpg',
-      US: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-    };
+    // ---- 广告拦截检测（纯诱饵元素，零网络依赖）----
+    function detectAdBlocker() {
+      return new Promise(function (resolve) {
+        var bait = document.createElement('div');
+        bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
+        bait.setAttribute('id', 'carbonads');
+        bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
+        bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
+        document.body.appendChild(bait);
+
+        setTimeout(function () {
+          var h = bait.offsetHeight;
+          var display = getComputedStyle(bait).display;
+          var isBlocked = (h === 0 || display === 'none');
+          try { document.body.removeChild(bait); } catch (e) {}
+          resolve(isBlocked);
+        }, 300);
+      });
+    }
+
+    function lockPage() {
+      document.getElementById('adblock-overlay').style.display = 'flex';
+      document.body.classList.add('adblock-locked');
+    }
+
+    function unlockPage() {
+      document.getElementById('adblock-overlay').style.display = 'none';
+      document.body.classList.remove('adblock-locked');
+    }
 
     // ---- 区域检测 ----
     async function getRegion() {
       try {
         var res = await fetch(REGION_API, { mode: 'cors' });
         var data = await res.json();
-        console.log('[区域检测] 结果:', data.region);
         return data.region;
       } catch (e) {
-        console.warn('[区域检测] 请求失败，默认 US:', e.message);
         return 'US';
       }
-    }
-
-  function detectAdBlocker() {
-    return new Promise(function (resolve) {
-      var bait = document.createElement('div');
-      bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
-      bait.setAttribute('id', 'carbonads');
-      bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
-      bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
-      document.body.appendChild(bait);
-
-      console.log('[广告检测] 诱饵元素已插入');
-
-      setTimeout(function () {
-        var h = bait.offsetHeight;
-        var display = getComputedStyle(bait).display;
-        var isBlocked = (h === 0 || display === 'none');
-        console.log('[广告检测] 诱饵结果:', isBlocked,
-          '(高度:', h, 'display:', display, ')');
-        try { document.body.removeChild(bait); } catch (e) {}
-        resolve(isBlocked);
-      }, 300);
-    });
-  }
-
-    function lockPage() {
-      document.getElementById('adblock-overlay').style.display = 'flex';
-      document.body.classList.add('adblock-locked');
-      console.log('[页面] 已锁定');
-    }
-
-    function unlockPage() {
-      document.getElementById('adblock-overlay').style.display = 'none';
-      document.body.classList.remove('adblock-locked');
     }
 
     // ---- CDN 替换 ----
@@ -177,9 +165,7 @@
     }
 
     function replaceAllImages() {
-      var imgs = document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]');
-      console.log('[CDN替换] 找到', imgs.length, '张需要替换的图片');
-      imgs.forEach(replaceImageSrc);
+      document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
     }
 
     function watchNewImages() {
@@ -198,20 +184,14 @@
       }).observe(document.body, { childList: true, subtree: true });
     }
 
-    // ---- 启动：先区域，再广告，最后应用 ----
+    // ---- 启动 ----
     document.addEventListener('DOMContentLoaded', async function () {
-      console.log('[启动] DOMContentLoaded');
-
-      // 第一步：区域检测（决定探针 URL 和 CDN 策略）
       var region = await getRegion();
+      var isBlocked = await detectAdBlocker();
 
-      // 第二步：广告检测（使用区域对应的探针）
-      var isBlocked = await detectAdBlocker(region);
-
-      // 第三步：应用结果
-      console.log('[启动] 广告拦截:', isBlocked, '| 区域:', region);
       if (isBlocked) { lockPage(); }
       else { unlockPage(); }
+
       if (region === 'CN') {
         replaceAllImages();
         watchNewImages();
@@ -466,7 +446,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -604,7 +584,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -742,7 +722,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -880,7 +860,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -982,144 +962,6 @@
     </div>
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://laosu.tech/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/laosu_wx.jpg">
-      <meta itemprop="name" content="杨浦老苏">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老苏的blog">
-      <meta itemprop="description" content="折腾各种好玩的东西">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 老苏的blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" class="post-title-link" itemprop="url">手机照片备份方案Immich</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-05 08:40:00" itemprop="dateCreated datePublished" datetime="2022-08-05T08:40:00+08:00">2022-08-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-    <span class="post-meta-item-icon">
-      <i class="far fa-comment"></i>
-    </span>
-    <span class="post-meta-item-text">Waline：</span>
-  
-    <a title="waline" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-    <span class="post-meta-item" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="waline-pageview-count" data-path="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/"></span>
-    </span>
-  
-<!--2021.08.21新增置顶标志-->
-<!--来自：https://www.itfanr.cc/2019/09/05/hexo-top-optimize/ -->
-
- 
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Immich 是直接从您的手机上自行托管照片和视频的备份解决方案。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-    
-    <div class="post-gallery-image">
-      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206142316553.png" itemprop="contentUrl">
-    </div>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://laosu.tech/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich%20%EF%BC%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1156,7 +998,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1253,6 +1095,144 @@
   <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     
     <div class="post-gallery-image">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/06/202206142316553.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://laosu.tech/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/laosu_wx.jpg">
+      <meta itemprop="name" content="杨浦老苏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 老苏的blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" class="post-title-link" itemprop="url">手机照片备份方案Immich</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-05 08:40:00" itemprop="dateCreated datePublished" datetime="2022-08-05T08:40:00+08:00">2022-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/"></span>
+    </span>
+  
+<!--2021.08.21新增置顶标志-->
+<!--来自：https://www.itfanr.cc/2019/09/05/hexo-top-optimize/ -->
+
+ 
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Immich 是直接从您的手机上自行托管照片和视频的备份解决方案。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
       <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2022@main/picgo/2022/05/202205031703636.png" itemprop="contentUrl">
     </div>
     </div>
@@ -1294,7 +1274,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1432,7 +1412,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1570,7 +1550,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1708,7 +1688,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-01 20:49:25" itemprop="dateModified" datetime="2026-05-01T20:49:25+08:00">2026-05-01</time>
+      <time title="修改时间：2026-05-01 20:57:41" itemprop="dateModified" datetime="2026-05-01T20:57:41+08:00">2026-05-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
