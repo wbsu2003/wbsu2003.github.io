@@ -97,29 +97,44 @@
         var h = bait.offsetHeight;
         var display = getComputedStyle(bait).display;
         var isBlocked = (h === 0 || display === 'none');
-        console.log('[广告检测] 诱饵:', isBlocked, '(高度:', h, 'display:', display, ')');
+        console.log('[检测] 诱饵:', isBlocked, '(高度:', h, 'display:', display, ')');
         try { document.body.removeChild(bait); } catch (e) {}
         resolve(isBlocked);
       }, 300);
     });
   }
 
-  // ---- 动态创建并显示弹窗 ----
+  // ---- 显示提示弹窗 ----
+  // 不用 "adblock"、"广告拦截" 等关键字，避开 ABP 的 Adblock Warning Removal List
   function lockPage() {
-    // 动态创建 overlay，不依赖 HTML 中的元素
     var overlay = document.createElement('div');
-    overlay.id = 'adblock-overlay';
+    overlay.className = 'site-notice-panel';
     overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center;z-index:2147483647;';
 
     var msg = document.createElement('div');
+    msg.className = 'site-notice-inner';
     msg.style.cssText = 'text-align:center;max-width:420px;padding:24px 32px;border-radius:12px;background:rgba(220,38,38,0.9);color:#fff;line-height:1.6;font-family:Arial,sans-serif;';
-    msg.innerHTML = '<h2 style="margin:0 0 12px;font-size:20px;">检测到广告拦截插件</h2><p style="margin:8px 0;">请禁用广告拦截插件以继续浏览此页面。</p><p style="margin:8px 0;">感谢您的支持！</p>';
 
+    var h2 = document.createElement('h2');
+    h2.style.cssText = 'margin:0 0 12px;font-size:20px;';
+    h2.textContent = '检测到插件干扰页面加载';
+
+    var p1 = document.createElement('p');
+    p1.style.cssText = 'margin:8px 0;';
+    p1.textContent = '请关闭浏览器插件以获得最佳体验。';
+
+    var p2 = document.createElement('p');
+    p2.style.cssText = 'margin:8px 0;font-size:13px;opacity:0.8;';
+    p2.textContent = '感谢您的支持！';
+
+    msg.appendChild(h2);
+    msg.appendChild(p1);
+    msg.appendChild(p2);
     overlay.appendChild(msg);
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
-    console.log('[页面] 已锁定，弹窗已显示');
+    console.log('[检测] 弹窗已显示');
   }
 
   // ---- 区域检测 ----
@@ -127,10 +142,10 @@
     try {
       var res = await fetch(REGION_API, { mode: 'cors' });
       var data = await res.json();
-      console.log('[区域检测] 结果:', data.region);
+      console.log('[区域] 结果:', data.region);
       return data.region;
     } catch (e) {
-      console.warn('[区域检测] 失败，默认 US');
+      console.warn('[区域] 失败，默认 US');
       return 'US';
     }
   }
@@ -145,7 +160,7 @@
 
   function replaceAllImages() {
     var imgs = document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]');
-    console.log('[CDN替换] 找到', imgs.length, '张图片');
+    console.log('[CDN] 替换', imgs.length, '张图片');
     imgs.forEach(replaceImageSrc);
   }
 
@@ -172,7 +187,7 @@
     var region = await getRegion();
     var isBlocked = await detectAdBlocker();
 
-    console.log('[启动] 广告拦截:', isBlocked, '| 区域:', region);
+    console.log('[启动] 拦截:', isBlocked, '| 区域:', region);
 
     if (isBlocked) { lockPage(); }
     if (region === 'CN') {
@@ -457,8 +472,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" itemprop="url">
-            <span itemprop="name">手机照片备份方案Immich</span>
+          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich%20%EF%BC%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89/" itemprop="url">
+            <span itemprop="name">手机照片备份方案Immich（修订版）</span>
           </a>
       </div>
 
@@ -482,8 +497,8 @@
       </div>
 
       <div class="post-title">
-          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich%20%EF%BC%88%E4%BF%AE%E8%AE%A2%E7%89%88%EF%BC%89/" itemprop="url">
-            <span itemprop="name">手机照片备份方案Immich（修订版）</span>
+          <a class="post-title-link" href="/2022/08/05/%E6%89%8B%E6%9C%BA%E7%85%A7%E7%89%87%E5%A4%87%E4%BB%BD%E6%96%B9%E6%A1%88Immich/" itemprop="url">
+            <span itemprop="name">手机照片备份方案Immich</span>
           </a>
       </div>
 
