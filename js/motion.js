@@ -4,20 +4,21 @@ NexT.motion = {};
 
 NexT.motion.integrator = {
   queue: [],
-  init() {
+  init : function() {
     this.queue = [];
     return this;
   },
-  add(fn) {
+  add: function(fn) {
     const sequence = fn();
-    this.queue.push(sequence);
+    if (CONFIG.motion.async) this.queue.push(sequence);
+    else this.queue = this.queue.concat(sequence);
     return this;
   },
-  bootstrap() {
-    if (!CONFIG.motion.async) this.queue = [this.queue.flat()];
+  bootstrap: function() {
+    if (!CONFIG.motion.async) this.queue = [this.queue];
     this.queue.forEach(sequence => {
       const timeline = window.anime.timeline({
-        duration: CONFIG.motion?.duration ?? 200,
+        duration: 200,
         easing  : 'linear'
       });
       sequence.forEach(item => {
@@ -29,7 +30,7 @@ NexT.motion.integrator = {
 };
 
 NexT.motion.middleWares = {
-  header() {
+  header: function() {
     const sequence = [];
 
     function getMistLineSettings(targets) {
@@ -50,7 +51,7 @@ NexT.motion.middleWares = {
       });
     }
 
-    pushToSequence('.column');
+    pushToSequence('.header');
     CONFIG.scheme === 'Mist' && getMistLineSettings('.logo-line');
     CONFIG.scheme === 'Muse' && pushToSequence('.custom-logo-image');
     pushToSequence('.site-title');
@@ -58,21 +59,18 @@ NexT.motion.middleWares = {
     pushToSequence('.site-subtitle');
     (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') && pushToSequence('.custom-logo-image');
 
-    const menuItemTransition = CONFIG.motion.transition.menu_item;
-    if (menuItemTransition) {
-      document.querySelectorAll('.menu-item').forEach(targets => {
-        sequence.push({
-          targets,
-          complete: () => targets.classList.add('animated', menuItemTransition),
-          deltaT  : '-=200'
-        });
+    document.querySelectorAll('.menu-item').forEach(targets => {
+      sequence.push({
+        targets,
+        complete: () => targets.classList.add('animated', 'fadeInDown'),
+        deltaT  : '-=200'
       });
-    }
+    });
 
     return sequence;
   },
 
-  subMenu() {
+  subMenu: function() {
     const subMenuItem = document.querySelectorAll('.sub-menu .menu-item');
     if (subMenuItem.length > 0) {
       subMenuItem.forEach(element => {
@@ -82,13 +80,13 @@ NexT.motion.middleWares = {
     return [];
   },
 
-  postList() {
+  postList: function() {
     const sequence = [];
     const { post_block, post_header, post_body, coll_header } = CONFIG.motion.transition;
 
-    function animate(animation, elements) {
+    function animate(animation, selector) {
       if (!animation) return;
-      elements.forEach(targets => {
+      document.querySelectorAll(selector).forEach(targets => {
         sequence.push({
           targets,
           complete: () => targets.classList.add('animated', animation),
@@ -97,40 +95,28 @@ NexT.motion.middleWares = {
       });
     }
 
-    document.querySelectorAll('.post-block').forEach(targets => {
-      sequence.push({
-        targets,
-        complete: () => targets.classList.add('animated', post_block),
-        deltaT  : '-=100'
-      });
-      animate(coll_header, targets.querySelectorAll('.collection-header'));
-      animate(post_header, targets.querySelectorAll('.post-header'));
-      animate(post_body, targets.querySelectorAll('.post-body'));
-    });
-
-    animate(post_block, document.querySelectorAll('.pagination, .comments'));
+    animate(post_block, '.post-block, .pagination, .comments');
+    animate(coll_header, '.collection-header');
+    animate(post_header, '.post-header');
+    animate(post_body, '.post-body');
 
     return sequence;
   },
 
-  sidebar() {
-    const sequence = [];
-    const sidebar = document.querySelectorAll('.sidebar-inner');
+  sidebar: function() {
+    const sidebar = document.querySelector('.sidebar');
     const sidebarTransition = CONFIG.motion.transition.sidebar;
-    // Only for desktop of Pisces | Gemini.
-    if (sidebarTransition && (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') && window.innerWidth >= 992) {
-      sidebar.forEach(targets => {
-        sequence.push({
-          targets,
-          complete: () => targets.classList.add('animated', sidebarTransition),
-          deltaT  : '-=100'
-        });
-      });
+    // Only for Pisces | Gemini.
+    if (sidebarTransition && (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini')) {
+      return [{
+        targets : sidebar,
+        complete: () => sidebar.classList.add('animated', sidebarTransition)
+      }];
     }
-    return sequence;
+    return [];
   },
 
-  footer() {
+  footer: function() {
     return [{
       targets: document.querySelector('.footer'),
       opacity: 1
