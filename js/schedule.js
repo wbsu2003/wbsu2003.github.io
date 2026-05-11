@@ -1,5 +1,6 @@
 /* global CONFIG */
 
+// https://developers.google.com/calendar/api/v3/reference/events/list
 (function() {
   // Initialization
   const calendar = {
@@ -91,13 +92,14 @@
     return eventContent;
   }
 
-  function fetchData() {
+  async function fetchData() {
     const eventList = document.querySelector('.event-list');
     if (!eventList) return;
 
-    fetch(request_url.href).then(response => {
-      return response.json();
-    }).then(data => {
+    try {
+      const response = await fetch(request_url.href);
+      const data = await response.json();
+
       if (data.items.length === 0) {
         eventList.innerHTML = '<hr>';
         return;
@@ -120,13 +122,16 @@
         }
 
         if (tense === 'future' && prevEnd < now) {
-          eventList.innerHTML += '<hr>';
+          eventList.insertAdjacentHTML('beforeend', '<hr>');
         }
 
-        eventList.innerHTML += buildEventDOM(tense, event, start, end);
+        eventList.insertAdjacentHTML('beforeend', buildEventDOM(tense, event, start, end));
         prevEnd = end;
       });
-    });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error fetching calendar data:', error);
+    }
   }
 
   fetchData();

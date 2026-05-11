@@ -4,21 +4,20 @@ NexT.motion = {};
 
 NexT.motion.integrator = {
   queue: [],
-  init : function() {
+  init() {
     this.queue = [];
     return this;
   },
-  add: function(fn) {
+  add(fn) {
     const sequence = fn();
-    if (CONFIG.motion.async) this.queue.push(sequence);
-    else this.queue = this.queue.concat(sequence);
+    this.queue.push(sequence);
     return this;
   },
-  bootstrap: function() {
-    if (!CONFIG.motion.async) this.queue = [this.queue];
+  bootstrap() {
+    if (!CONFIG.motion.async) this.queue = [this.queue.flat()];
     this.queue.forEach(sequence => {
       const timeline = window.anime.timeline({
-        duration: 200,
+        duration: CONFIG.motion?.duration ?? 200,
         easing  : 'linear'
       });
       sequence.forEach(item => {
@@ -30,7 +29,7 @@ NexT.motion.integrator = {
 };
 
 NexT.motion.middleWares = {
-  header: function() {
+  header() {
     const sequence = [];
 
     function getMistLineSettings(targets) {
@@ -51,7 +50,7 @@ NexT.motion.middleWares = {
       });
     }
 
-    pushToSequence('.header');
+    pushToSequence('.column');
     CONFIG.scheme === 'Mist' && getMistLineSettings('.logo-line');
     CONFIG.scheme === 'Muse' && pushToSequence('.custom-logo-image');
     pushToSequence('.site-title');
@@ -59,18 +58,21 @@ NexT.motion.middleWares = {
     pushToSequence('.site-subtitle');
     (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') && pushToSequence('.custom-logo-image');
 
-    document.querySelectorAll('.menu-item').forEach(targets => {
-      sequence.push({
-        targets,
-        complete: () => targets.classList.add('animated', 'fadeInDown'),
-        deltaT  : '-=200'
+    const menuItemTransition = CONFIG.motion.transition.menu_item;
+    if (menuItemTransition) {
+      document.querySelectorAll('.menu-item').forEach(targets => {
+        sequence.push({
+          targets,
+          complete: () => targets.classList.add('animated', menuItemTransition),
+          deltaT  : '-=200'
+        });
       });
-    });
+    }
 
     return sequence;
   },
 
-  subMenu: function() {
+  subMenu() {
     const subMenuItem = document.querySelectorAll('.sub-menu .menu-item');
     if (subMenuItem.length > 0) {
       subMenuItem.forEach(element => {
@@ -80,13 +82,13 @@ NexT.motion.middleWares = {
     return [];
   },
 
-  postList: function() {
+  postList() {
     const sequence = [];
     const { post_block, post_header, post_body, coll_header } = CONFIG.motion.transition;
 
-    function animate(animation, selector) {
+    function animate(animation, elements) {
       if (!animation) return;
-      document.querySelectorAll(selector).forEach(targets => {
+      elements.forEach(targets => {
         sequence.push({
           targets,
           complete: () => targets.classList.add('animated', animation),
@@ -95,28 +97,40 @@ NexT.motion.middleWares = {
       });
     }
 
-    animate(post_block, '.post-block, .pagination, .comments');
-    animate(coll_header, '.collection-header');
-    animate(post_header, '.post-header');
-    animate(post_body, '.post-body');
+    document.querySelectorAll('.post-block').forEach(targets => {
+      sequence.push({
+        targets,
+        complete: () => targets.classList.add('animated', post_block),
+        deltaT  : '-=100'
+      });
+      animate(coll_header, targets.querySelectorAll('.collection-header'));
+      animate(post_header, targets.querySelectorAll('.post-header'));
+      animate(post_body, targets.querySelectorAll('.post-body'));
+    });
+
+    animate(post_block, document.querySelectorAll('.pagination, .comments'));
 
     return sequence;
   },
 
-  sidebar: function() {
-    const sidebar = document.querySelector('.sidebar');
+  sidebar() {
+    const sequence = [];
+    const sidebar = document.querySelectorAll('.sidebar-inner');
     const sidebarTransition = CONFIG.motion.transition.sidebar;
-    // Only for Pisces | Gemini.
-    if (sidebarTransition && (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini')) {
-      return [{
-        targets : sidebar,
-        complete: () => sidebar.classList.add('animated', sidebarTransition)
-      }];
+    // Only for desktop of Pisces | Gemini.
+    if (sidebarTransition && (CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') && window.innerWidth >= 992) {
+      sidebar.forEach(targets => {
+        sequence.push({
+          targets,
+          complete: () => targets.classList.add('animated', sidebarTransition),
+          deltaT  : '-=100'
+        });
+      });
     }
-    return [];
+    return sequence;
   },
 
-  footer: function() {
+  footer() {
     return [{
       targets: document.querySelector('.footer'),
       opacity: 1
