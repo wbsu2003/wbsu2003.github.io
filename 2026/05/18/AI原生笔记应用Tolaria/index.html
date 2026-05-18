@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/latte_social_su_32px.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/latte_social_su_16px.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="NBzRmGkIEf2N-KtEpgbtZyLYN1upTKpKC-lGzMsR9Q0">
+  <meta name="msvalidate.01" content="57B6B7FD8CF2E061F464E9FF87D7EEF4">
+  <meta name="baidu-site-verification" content="code-CJomTbekyI">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"laosu.tech","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Tolaria 是一个 AI 原生的本地 markdown 笔记管理桌面应用，原生集成 Claude Code、OpenCode、Gemini 等 CLI 代理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI原生笔记应用Tolaria">
+<meta property="og:url" content="https://laosu.tech/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/index.html">
+<meta property="og:site_name" content="老苏的blog">
+<meta property="og:description" content="Tolaria 是一个 AI 原生的本地 markdown 笔记管理桌面应用，原生集成 Claude Code、OpenCode、Gemini 等 CLI 代理。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181100515.png">
+<meta property="article:published_time" content="2026-05-18T03:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-18T03:14:23.866Z">
+<meta property="article:author" content="杨浦老苏">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="obsidian">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181100515.png">
+
+
+<link rel="canonical" href="https://laosu.tech/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://laosu.tech/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/","path":"2026/05/18/AI原生笔记应用Tolaria/","title":"AI原生笔记应用Tolaria"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AI原生笔记应用Tolaria | 老苏的blog</title>
+  
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-ST3CRKDJLC","only_pageview":true,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?0d167cc966795fca90236e7478677373"></script>
+
+
+
+
+
+
+
+  
+  <script src="/js/anime.min.js" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+<link rel="dns-prefetch" href="https://0x404.cf"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><!--<script data-ad-client="ca-pub-2307783158392222" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<meta name="google-site-verification" content="6-FefznZ-94qcNTd7OV6fKVWevfNRndhbFMDXe4GWVU" />
+
+<!--2023.01.16新增-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
+     crossorigin="anonymous"></script>
+
+<!--2026.05.01 全部改写-->
+
+<!--广告拦截检测 + 区域CDN切换-->
+<script>
+(function () {
+  var OLD_CDN = 'https://cdn.jsdelivr.net/gh/wbsu2003/';
+  var NEW_CDN = 'https://cdn.laosu.fun/';
+  var REGION_API = 'https://cdnjs.laosu.fun/';
+
+  // ---- 广告拦截检测（纯诱饵元素，零网络依赖）----
+  function detectAdBlocker() {
+    return new Promise(function (resolve) {
+      var bait = document.createElement('div');
+      bait.className = 'text-ad banner-ad adsbox ad-placement advert ad-container adsbygoogle ad-block';
+      bait.setAttribute('id', 'carbonads');
+      bait.innerHTML = '<div class="ad-title">advertisement</div><iframe></iframe>';
+      bait.style.cssText = 'width:300px;height:250px;position:absolute;left:-9999px;';
+      document.body.appendChild(bait);
+
+      setTimeout(function () {
+        var h = bait.offsetHeight;
+        var display = getComputedStyle(bait).display;
+        var isBlocked = (h === 0 || display === 'none');
+        console.log('[检测] 诱饵:', isBlocked, '(高度:', h, 'display:', display, ')');
+        try { document.body.removeChild(bait); } catch (e) {}
+        resolve(isBlocked);
+      }, 300);
+    });
+  }
+
+  // ---- 显示提示弹窗 ----
+  // 不用 "adblock"、"广告拦截" 等关键字，避开 ABP 的 Adblock Warning Removal List
+  function lockPage() {
+    var overlay = document.createElement('div');
+    overlay.className = 'site-notice-panel';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;justify-content:center;align-items:center;z-index:2147483647;';
+
+    var msg = document.createElement('div');
+    msg.className = 'site-notice-inner';
+    msg.style.cssText = 'text-align:center;max-width:420px;padding:24px 32px;border-radius:12px;background:rgba(220,38,38,0.9);color:#fff;line-height:1.6;font-family:Arial,sans-serif;';
+
+    var h2 = document.createElement('h2');
+    h2.style.cssText = 'margin:0 0 12px;font-size:20px;';
+    h2.textContent = '检测到 AD 屏蔽插件干扰页面加载';
+
+    var p1 = document.createElement('p');
+    p1.style.cssText = 'margin:8px 0;';
+    p1.textContent = '请关闭浏览器 AD 屏蔽插件以获得最佳体验。';
+
+    var p2 = document.createElement('p');
+    p2.style.cssText = 'margin:8px 0;font-size:13px;opacity:0.8;';
+    p2.textContent = '感谢您的支持！';
+
+    msg.appendChild(h2);
+    msg.appendChild(p1);
+    msg.appendChild(p2);
+    overlay.appendChild(msg);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    console.log('[检测] 弹窗已显示');
+  }
+
+  // ---- 区域检测 ----
+  async function getRegion() {
+    try {
+      var res = await fetch(REGION_API, { mode: 'cors' });
+      var data = await res.json();
+      console.log('[区域] 结果:', data.region);
+      return data.region;
+    } catch (e) {
+      console.warn('[区域] 失败，默认 US');
+      return 'US';
+    }
+  }
+
+  // ---- CDN 替换 ----
+  function replaceImageSrc(img) {
+    var src = img.getAttribute('src');
+    if (src && src.indexOf('cdn.jsdelivr.net/gh/wbsu2003/') !== -1) {
+      img.src = src.replace(OLD_CDN, NEW_CDN);
+    }
+  }
+
+  function replaceAllImages() {
+    var imgs = document.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]');
+    console.log('[CDN] 替换', imgs.length, '张图片');
+    imgs.forEach(replaceImageSrc);
+  }
+
+  function watchNewImages() {
+    new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var nodes = mutations[i].addedNodes;
+        for (var j = 0; j < nodes.length; j++) {
+          var node = nodes[j];
+          if (node.nodeType !== 1) continue;
+          if (node.tagName === 'IMG') replaceImageSrc(node);
+          if (node.querySelectorAll) {
+            node.querySelectorAll('img[src*="cdn.jsdelivr.net/gh/wbsu2003/"]').forEach(replaceImageSrc);
+          }
+        }
+      }
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  // ---- 启动 ----
+  document.addEventListener('DOMContentLoaded', async function () {
+    console.log('[启动] DOMContentLoaded');
+
+    var region = await getRegion();
+    var isBlocked = await detectAdBlocker();
+
+    console.log('[启动] 拦截:', isBlocked, '| 区域:', region);
+
+    if (isBlocked) { lockPage(); }
+    if (region === 'CN') {
+      replaceAllImages();
+      watchNewImages();
+    }
+  });
+})();
+</script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="老苏的blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">老苏的blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">聚沙成塔，集腋成裘</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">414</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">1087</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-top"><a href="/top/" rel="section"><i class="fa fa-signal fa-fw"></i>热榜</a></li><li class="menu-item menu-item-message"><a href="/message/" rel="section"><i class="fa fa-comment fa-fw"></i>留言</a></li><li class="menu-item menu-item-waline"><span class="exturl" data-url="aHR0cHM6Ly8weDQwNC5jZi91aQ=="><i class="fa fa-cog fa-fw"></i>管理</span></li><li class="menu-item menu-item-wirters"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAzL215YmxvZy90cmVlL21haW4vc291cmNlL19wb3N0cw=="><i class="fa fa-book fa-fw"></i>发文</span></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E-Obsidian-%E8%AF%A6%E7%BB%86%E5%AF%B9%E6%AF%94"><span class="nav-number">4.</span> <span class="nav-text">与 Obsidian 详细对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="nav-number">4.1.</span> <span class="nav-text">选哪个？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#macOS"><span class="nav-number">5.1.</span> <span class="nav-text">macOS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">5.2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">5.3.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E5%90%AF%E5%8A%A8"><span class="nav-number">6.</span> <span class="nav-text">首次启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-AI-%E4%BB%A3%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">配置 AI 代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows-%E7%94%A8%E6%88%B7%E7%9A%84%E5%9D%91%E4%B8%8E%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">8.</span> <span class="nav-text">Windows 用户的坑与临时解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%B8%80%EF%BC%9AClaude-Code-%E5%92%8C-OpenCode-%E6%8A%A5-os-error-193"><span class="nav-number">8.1.</span> <span class="nav-text">坑一：Claude Code 和 OpenCode 报 os error 193</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%BA%8C%EF%BC%9AOpenCode-%E6%8A%A5-%E2%80%9Cexit-code-1%E2%80%9D"><span class="nav-number">8.2.</span> <span class="nav-text">坑二：OpenCode 报 “exit code: 1”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%91%E4%B8%89%EF%BC%9AGemini-%E7%9A%84%E8%AD%A6%E5%91%8A%E8%A2%AB%E5%BD%93%E6%88%90%E9%94%99%E8%AF%AF%E6%8A%9B"><span class="nav-number">8.3.</span> <span class="nav-text">坑三：Gemini 的警告被当成错误抛</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">9.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">10.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="杨浦老苏"
+      src="/images/laosu_wx.jpg">
+  <p class="site-author-name" itemprop="name">杨浦老苏</p>
+  <div class="site-description" itemprop="description">折腾各种好玩的东西</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1087</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">414</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dic3UyMDAz" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wbsu2003"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOndic3UyMDAzQGdtYWlsLmNvbQ==" title="E-Mail → mailto:wbsu2003@gmail.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMjg4NTI2NjU1NA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;2885266554"><i class="fab fa-weibo fa-fw"></i>Weibo</span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dic3UyMDA0" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;wbsu2004"><i class="fab fa-cuttlefish fa-fw"></i>CSDN</span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+<!--2021.10.13新增访客地图-->
+<!--2022.05.26访客地图突然 404 不能使用，暂时屏蔽-->
+<br>
+<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=EWTGbXHZX6xu3OvoHmCNfu1XyUopVnfkgF-99dlb9SE"></script>
+
+<!--2021.10.13新增tags cloud,不好看，也超长了
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">104</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AIGC/" rel="tag">AIGC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API%E7%BD%91%E5%85%B3/" rel="tag">API网关</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActivityPub/" rel="tag">ActivityPub</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Alertover/" rel="tag">Alertover</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ampache/" rel="tag">Ampache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BI/" rel="tag">BI</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BitTorrent/" rel="tag">BitTorrent</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bitwarden/" rel="tag">Bitwarden</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDN/" rel="tag">CDN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS/" rel="tag">CMS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CRM/" rel="tag">CRM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CalDAV/" rel="tag">CalDAV</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calibre/" rel="tag">Calibre</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Calibre-Web/" rel="tag">Calibre-Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CardDAV/" rel="tag">CardDAV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CardDav/" rel="tag">CardDav</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloudreve/" rel="tag">Cloudreve</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Coding/" rel="tag">Coding</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ERP/" rel="tag">ERP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EUserv/" rel="tag">EUserv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electron/" rel="tag">Electron</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emby/" rel="tag">Emby</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FUSE/" rel="tag">FUSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GCP/" rel="tag">GCP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GPU/" rel="tag">GPU</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GUI/" rel="tag">GUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitNote/" rel="tag">GitNote</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gitee/" rel="tag">Gitee</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Play-Music/" rel="tag">Google Play Music</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HA/" rel="tag">HA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HLS/" rel="tag">HLS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP-FLV/" rel="tag">HTTP-FLV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HomeAssistant/" rel="tag">HomeAssistant</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IFTTT/" rel="tag">IFTTT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IINA/" rel="tag">IINA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/" rel="tag">IM</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IPTV/" rel="tag">IPTV</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jellyfin/" rel="tag">Jellyfin</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kanboard/" rel="tag">Kanboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeePass/" rel="tag">KeePass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KeePass2Android/" rel="tag">KeePass2Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kodi/" rel="tag">Kodi</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KodiWebPortal/" rel="tag">KodiWebPortal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MCP/" rel="tag">MCP</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIDI/" rel="tag">MIDI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIUI/" rel="tag">MIUI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MP3/" rel="tag">MP3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MX-Player/" rel="tag">MX Player</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/" rel="tag">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacPass/" rel="tag">MacPass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MariaDB/" rel="tag">MariaDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/" rel="tag">Markdown</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mattermost/" rel="tag">Mattermost</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MediaElch/" rel="tag">MediaElch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mesh%E8%B7%AF%E7%94%B1/" rel="tag">Mesh路由</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Metaverse/" rel="tag">Metaverse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Moon/" rel="tag">Moon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Motrix/" rel="tag">Motrix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAS/" rel="tag">NAS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netlify/" rel="tag">Netlify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NexT/" rel="tag">NexT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCR/" rel="tag">OCR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOPS/" rel="tag">OOPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OPDS/" rel="tag">OPDS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OSINT/" rel="tag">OSINT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OneDrive/" rel="tag">OneDrive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PDF/" rel="tag">PDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PVE/" rel="tag">PVE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Plex/" rel="tag">Plex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Potplayer/" rel="tag">Potplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QRcode/" rel="tag">QRcode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickConnect/" rel="tag">QuickConnect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R6300V2/" rel="tag">R6300V2</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R6300v2/" rel="tag">R6300v2</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RAG/" rel="tag">RAG</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RDP/" rel="tag">RDP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RSS/" rel="tag">RSS</a><span class="tag-list-count">35</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTMP/" rel="tag">RTMP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RTSP/" rel="tag">RTSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Radio/" rel="tag">Radio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RaiDrive/" rel="tag">RaiDrive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rclone/" rel="tag">Rclone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rocket-Chat/" rel="tag">Rocket.Chat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/S3/" rel="tag">S3</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL/" rel="tag">SSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrapers/" rel="tag">Scrapers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SoundCloud/" rel="tag">SoundCloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Speedtest/" rel="tag">Speedtest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spotify/" rel="tag">Spotify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Synology-Chat/" rel="tag">Synology Chat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TTS/" rel="tag">TTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Telnet/" rel="tag">Telnet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tunnel/" rel="tag">Tunnel</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/USB%E9%A3%8E%E6%89%87/" rel="tag">USB风扇</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Usenet/" rel="tag">Usenet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMWare/" rel="tag">VMWare</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VNC/" rel="tag">VNC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPS/" rel="tag">VPS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS-Code/" rel="tag">VS Code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vercel/" rel="tag">Vercel</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WDS/" rel="tag">WDS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WOL/" rel="tag">WOL</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WeChatTweak/" rel="tag">WeChatTweak</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebDAV/" rel="tag">WebDAV</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStack/" rel="tag">WebStack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WizNote/" rel="tag">WizNote</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/" rel="tag">WordPress</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZeroTier/" rel="tag">ZeroTier</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zerotier/" rel="tag">Zerotier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZogVM/" rel="tag">ZogVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/airsonic/" rel="tag">airsonic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/" rel="tag">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitwarden/" rel="tag">bitwarden</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calibre/" rel="tag">calibre</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calibre-webserver/" rel="tag">calibre-webserver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deploy-git/" rel="tag">deploy_git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dns/" rel="tag">dns</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">971</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/draw-io/" rel="tag">draw.io</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/electron/" rel="tag">electron</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/element/" rel="tag">element</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/" rel="tag">email</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fnOS/" rel="tag">fnOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frp/" rel="tag">frp</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gps/" rel="tag">gps</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradshow/" rel="tag">gradshow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/homeassistant/" rel="tag">homeassistant</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/" rel="tag">https</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iSpy/" rel="tag">iSpy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jellyfin/" rel="tag">jellyfin</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jitsi/" rel="tag">jitsi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kanban/" rel="tag">kanban</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kanboard/" rel="tag">kanboard</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kcp%E5%8D%8F%E8%AE%AE/" rel="tag">kcp协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kodexplorer/" rel="tag">kodexplorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/libresonic/" rel="tag">libresonic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listen1/" rel="tag">listen1</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/madsonic/" rel="tag">madsonic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/" rel="tag">markdown</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mjpeg/" rel="tag">mjpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/my-calibre-webserver-docker/" rel="tag">my-calibre-webserver-docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nas/" rel="tag">nas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netgear/" rel="tag">netgear</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nextcloud/" rel="tag">nextcloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngrok/" rel="tag">ngrok</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noVNC/" rel="tag">noVNC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nplayer/" rel="tag">nplayer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nps/" rel="tag">nps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntfs/" rel="tag">ntfs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ntfstool/" rel="tag">ntfstool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/obsidian/" rel="tag">obsidian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oidc/" rel="tag">oidc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onedrive/" rel="tag">onedrive</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onlyoffice/" rel="tag">onlyoffice</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/onvif/" rel="tag">onvif</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/" rel="tag">owncloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pastebin/" rel="tag">pastebin</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pdf/" rel="tag">pdf</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plex/" rel="tag">plex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rtsp/" rel="tag">rtsp</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/samba/" rel="tag">samba</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seafile/" rel="tag">seafile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/" rel="tag">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/subsonic/" rel="tag">subsonic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tinyMediaManager/" rel="tag">tinyMediaManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/todo/" rel="tag">todo</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/" rel="tag">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/torrent/" rel="tag">torrent</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/utool/" rel="tag">utool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visio/" rel="tag">visio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/" rel="tag">vpn</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/waline/" rel="tag">waline</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi6/" rel="tag">wifi6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wiki/" rel="tag">wiki</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/youtube/" rel="tag">youtube</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zerotier/" rel="tag">zerotier</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E8%BD%BD/" rel="tag">下载</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%B4%E5%BA%8A/" rel="tag">临床</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%B4%E6%97%B6%E7%AC%94%E8%AE%B0/" rel="tag">临时笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/" rel="tag">临时邮箱</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%BA%E7%9F%A5%E7%AC%94%E8%AE%B0/" rel="tag">为知笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B9%A6%E7%AD%BE/" rel="tag">书签</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/" rel="tag">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%91%E7%9B%98/" rel="tag">云盘</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%8A%9B%E8%B5%84%E6%BA%90/" rel="tag">人力资源</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag">人工智能</a><span class="tag-list-count">95</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%93%E5%BA%93%E7%AE%A1%E7%90%86/" rel="tag">仓库管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86/" rel="tag">任务管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8D%E7%BD%AE%E5%85%B1%E4%BA%AB/" rel="tag">位置共享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8E%E4%BB%A3%E7%A0%81/" rel="tag">低代码</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%9C%E6%96%87/" rel="tag">作文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%A5%E5%BA%B7%E7%AE%A1%E7%90%86/" rel="tag">健康管理</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%83%E5%AE%87%E5%AE%99/" rel="tag">元宇宙</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%89%E7%8C%AB/" rel="tag">光猫</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%9C%E5%9C%BA/" rel="tag">农场</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96/" rel="tag">决策</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%AE%E5%89%8A%E5%99%A8/" rel="tag">刮削器</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%B7%E6%9C%BA/" rel="tag">刷机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%AA%E8%B4%B4%E6%9D%BF/" rel="tag">剪贴板</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E5%A5%97%E4%BB%B6/" rel="tag">办公套件</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6/" rel="tag">医学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%83%E5%85%86/" rel="tag">千兆</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E4%BD%9C/" rel="tag">协作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E4%BD%9C%E5%B7%A5%E5%85%B7/" rel="tag">协作工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%8F%E5%8A%A9/" rel="tag">协助</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E9%80%9A/" rel="tag">卡通</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/" rel="tag">即时通讯</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%9E%8B/" rel="tag">原型</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8C%E5%90%91%E9%93%BE%E6%8E%A5/" rel="tag">双向链接</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag">可视化</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8C%E6%AD%A5/" rel="tag">同步</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E7%89%87/" rel="tag">名片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%AD%E8%89%BA/" rel="tag">园艺</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BD%E5%B8%86%E8%B7%AF/" rel="tag">国帆路</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag">图床</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%BA%93/" rel="tag">图库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87/" rel="tag">图片</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E7%BC%96%E8%BE%91%E5%99%A8/" rel="tag">图片编辑器</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A8%E7%BA%BF%E6%96%87%E6%A1%A3/" rel="tag">在线文档</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%9F%E5%90%8D/" rel="tag">域名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%A1%E5%9E%92%E6%9C%BA/" rel="tag">堡垒机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%87%E4%BB%BD/" rel="tag">备份</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%8D%E6%97%A6%E5%A4%A7%E5%AD%A6/" rel="tag">复旦大学</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E5%AA%92%E4%BD%93/" rel="tag">多媒体</a><span class="tag-list-count">82</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E7%BF%BC%E4%BA%91%E7%9B%98/" rel="tag">天翼云盘</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A8%81%E5%8A%A8%E5%BD%B1%E9%9F%B3/" rel="tag">威动影音</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A9%B4%E5%84%BF%E7%AE%A1%E7%90%86/" rel="tag">婴儿管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E5%B9%95/" rel="tag">字幕</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%98%E5%82%A8/" rel="tag">存储</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" rel="tag">安全工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A0%E7%89%A9/" rel="tag">宠物</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E5%BA%AD%E5%BA%94%E7%94%A8/" rel="tag">家庭应用</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81/" rel="tag">密码</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%BC%E8%88%AA/" rel="tag">导航</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E4%BA%BA%E4%B9%A6/" rel="tag">小人书</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%99%BD%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/" rel="tag">小白文件管理器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%B1%B3%E6%89%8B%E6%9C%BA/" rel="tag">小米手机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E8%AF%B4/" rel="tag">小说</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%85%E5%AE%B6%E5%8A%9E%E5%85%AC/" rel="tag">居家办公</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%8F%E5%B9%95%E5%85%B1%E4%BA%AB/" rel="tag">屏幕共享</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/" rel="tag">工作流</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">48</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%BB%E7%81%AF%E7%89%87/" rel="tag">幻灯片</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">库存管理</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97/" rel="tag">应用商店</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%95%E5%83%8F/" rel="tag">录像</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%95%E6%92%AD/" rel="tag">录播</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag">微信</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7/" rel="tag">微信公众号</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E7%9B%91%E8%A7%86/" rel="tag">性能监视</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%88%AA%E5%9B%BE/" rel="tag">截图</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%95%E8%B5%84/" rel="tag">投资</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%82%E8%BD%BD/" rel="tag">挂载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%A8%E6%B5%81/" rel="tag">推流</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2/" rel="tag">播客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%B6%E8%97%8F%E7%AE%A1%E7%90%86/" rel="tag">收藏管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%8F%E6%84%9F%E8%AF%8D/" rel="tag">敏感词</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/" rel="tag">文件传输</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/" rel="tag">文件共享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB/" rel="tag">文件分享</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag">文件管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%94%9F%E5%9B%BE/" rel="tag">文生图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%A8%BF%E6%BC%94%E7%A4%BA/" rel="tag">文稿演示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92/" rel="tag">日程安排</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/" rel="tag">时间管理</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%BE%E5%8D%A1%E7%9B%B4%E9%80%9A/" rel="tag">显卡直通</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" rel="tag">智能家居</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%89%E5%A3%B0%E8%AF%BB%E7%89%A9/" rel="tag">有声读物</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E8%A3%85%E8%AE%BE%E8%AE%A1/" rel="tag">服装设计</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%83%E9%99%90/" rel="tag">权限</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%81%E5%BD%B1%E6%B4%BE/" rel="tag">极影派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2/" rel="tag">格式转换</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AF%95%E4%B8%9A%E7%A7%80/" rel="tag">毕业秀</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">流媒体服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E5%9B%BE/" rel="tag">流程图</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E9%80%9F/" rel="tag">测速</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%B7%E6%8A%A5/" rel="tag">海报</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/" rel="tag">消息推送</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag">游戏</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%85%A7%E7%89%87/" rel="tag">照片</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" rel="tag">物联网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8E%AF%E5%A2%83%E5%99%AA%E5%A3%B0/" rel="tag">环境噪声</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%A8%E6%88%B7/" rel="tag">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%8A%9B%E7%8C%AB/" rel="tag">电力猫</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%AD%90%E4%B9%A6/" rel="tag">电子书</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BD%E6%9D%BF/" rel="tag">白板</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B4%E6%92%AD/" rel="tag">直播</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%B8%E5%86%8C/" rel="tag">相册</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9C%8B%E6%9D%BF/" rel="tag">看板</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/" rel="tag">知识管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E9%93%BE%E6%8E%A5/" rel="tag">短链接</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A4%BE%E4%BA%A4/" rel="tag">社交</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8D%E5%90%8E%E9%98%85%E8%AF%BB/" rel="tag">稍后阅读</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a><span class="tag-list-count">59</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AD%BE%E5%90%8D/" rel="tag">签名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8E%86/" rel="tag">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="tag">管理系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag">统计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/" rel="tag">编辑器</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a><span class="tag-list-count">63</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E7%9B%91%E6%8E%A7/" rel="tag">网站监控</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90/" rel="tag">网络分析</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E7%9B%91%E6%8E%A7/" rel="tag">网页监控</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB/" rel="tag">美好生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BE%A4%E6%99%96/" rel="tag">群晖</a><span class="tag-list-count">1012</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BF%BB%E8%AF%91/" rel="tag">翻译</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8A%E5%A4%A9/" rel="tag">聊天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%9A%E5%90%88/" rel="tag">聚合</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%82%A1%E7%A5%A8/" rel="tag">股票</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%91%E5%9B%BE/" rel="tag">脑图</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%86%E6%83%85%E5%88%86%E6%9E%90/" rel="tag">舆情分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E7%8F%AD%E7%AE%A1%E7%90%86/" rel="tag">航班管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8F%9C%E8%B0%B1/" rel="tag">菜谱</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%97%A4%E6%9C%AC%E6%9C%88%E5%AD%A3/" rel="tag">藤本月季</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%98%BE%E7%A4%BA%E5%99%A8/" rel="tag">虚拟显示器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%9C%97%E7%89%9B%E6%98%9F%E9%99%85/" rel="tag">蜗牛星际</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95/" rel="tag">表单</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E6%A0%BC/" rel="tag">表格</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE/" rel="tag">视频会议</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7/" rel="tag">视频监控</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D/" rel="tag">视频通话</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%92%E8%89%B2%E6%89%AE%E6%BC%94/" rel="tag">角色扮演</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" rel="tag">计划任务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A2%E9%98%85/" rel="tag">订阅</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E8%B4%A6/" rel="tag">记账</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E5%9D%9B/" rel="tag">论坛</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%81%E4%B9%A6/" rel="tag">证书</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%81%E4%BB%B6%E7%85%A7/" rel="tag">证件照</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%8D%E5%85%B8/" rel="tag">词典</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%A2%E5%8A%A1/" rel="tag">财务</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" rel="tag">购物清单</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/" rel="tag">资产管理</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%A6%E8%BE%86%E7%AE%A1%E7%90%86/" rel="tag">车辆管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="tag">软件管理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/" rel="tag">软路由</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">42</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E6%95%99%E5%AD%A6/" rel="tag">远程教学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E6%95%99%E8%82%B2/" rel="tag">远程教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/" rel="tag">远程桌面</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%82%AE%E4%BB%B6/" rel="tag">邮件</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%82%AE%E4%BB%B6%E8%90%A5%E9%94%80/" rel="tag">邮件营销</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%82%AE%E7%AE%B1/" rel="tag">邮箱</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%85%92%E5%90%A7%E7%AE%A1%E7%90%86/" rel="tag">酒吧管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93/" rel="tag">量化交易</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E5%8D%B7/" rel="tag">问卷</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E7%AD%94/" rel="tag">问答</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E8%B7%9F%E8%B8%AA/" rel="tag">问题跟踪</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E5%90%8E%E5%8D%B3%E7%84%9A/" rel="tag">阅后即焚</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%B2%E7%97%85%E6%AF%92/" rel="tag">防病毒</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/" rel="tag">隐私保护</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9C%80%E6%B1%82%E8%B7%9F%E8%B8%AA/" rel="tag">需求跟踪</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2/" rel="tag">静态页面</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9F%B3%E4%B9%90/" rel="tag">音乐</a><span class="tag-list-count">38</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/" rel="tag">项目管理软件</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A3%9F%E8%B0%B1/" rel="tag">食谱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E8%80%83/" rel="tag">高考</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E7%BE%A4/" rel="tag">黑群</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+-->
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://laosu.tech/" title="https:&#x2F;&#x2F;laosu.tech">主站（new）</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5jZg==" title="https:&#x2F;&#x2F;laosu.cf">主站（Vercel）</span>
+            </li>
+            <li class="links-of-blogroll-item">
+              <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5ncQ==" title="https:&#x2F;&#x2F;laosu.gq">备站（Github）</span>
+            </li>
+            <li class="links-of-blogroll-item">
+              <span class="exturl" data-url="aHR0cHM6Ly9sYW9zdS5uZXRsaWZ5LmFwcA==" title="https:&#x2F;&#x2F;laosu.netlify.app">备站（Netlify）</span>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    
+    <div class="post-gallery-image">
+      <img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181100515.png" itemprop="contentUrl">
+    </div>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://laosu.tech/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/laosu_wx.jpg">
+      <meta itemprop="name" content="杨浦老苏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老苏的blog">
+      <meta itemprop="description" content="折腾各种好玩的东西">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AI原生笔记应用Tolaria | 老苏的blog">
+      <meta itemprop="description" content="Tolaria 是一个 AI 原生的本地 markdown 笔记管理桌面应用，原生集成 Claude Code、OpenCode、Gemini 等 CLI 代理。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI原生笔记应用Tolaria
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-18 11:00:00 / 修改时间：11:14:23" itemprop="dateCreated datePublished" datetime="2026-05-18T11:00:00+08:00">2026-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%90%84%E7%A7%8D%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">各种折腾</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+    <span class="post-meta-item" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="waline-pageview-count" data-path="/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/"></span>
+    </span>
+  
+<!--2021.08.21新增置顶标志-->
+<!--来自：https://www.itfanr.cc/2019/09/05/hexo-top-optimize/ -->
+
+ 
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">Tolaria 是一个 AI 原生的本地 markdown 笔记管理桌面应用，原生集成 Claude Code、OpenCode、Gemini 等 CLI 代理。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>什么是 Tolaria ？</strong></p>
+<blockquote>
+<p><code>Tolaria</code> 是一个 <code>AI</code> 原生的本地 <code>markdown</code> 笔记知识库桌面应用。它把”纯 <code>markdown</code> 文件 + <code>git</code> 仓库 + <code>AI</code> 代理”这三件事打包到一起，开箱即用，专为 <code>AI</code> 时代的”第二大脑”设计。</p>
+</blockquote>
+<p>项目作者 Luca Rossi 是 <span class="exturl" data-url="aHR0cHM6Ly9yZWZhY3RvcmluZy5mbS8=">Refactoring 通讯<i class="fa fa-external-link-alt"></i></span>（170,000+ 订阅）的创办者，自己用 Tolaria 管理 10,000+ 条个人笔记。项目以 AGPL-3.0 协议开源，2026 年 2 月发布，3 个月内 GitHub 攒到了 10K+ Star。</p>
+<h1 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h1><ul>
+<li><strong>AI 原生设计</strong>：开箱即用支持 Claude Code、Codex CLI、OpenCode、Pi、Gemini 五个本地 CLI 代理；同时支持自定义 OpenAI 兼容 model provider（API 直连模式）</li>
+<li><strong>Files-first</strong>：每条笔记都是磁盘上的 markdown 文件 + YAML frontmatter，任何编辑器（VSCode、Vim、Notepad）都能直接编辑，零专属格式锁定</li>
+<li><strong>Git-first</strong>：每个 vault 都是一个 git 仓库，commit &#x2F; push &#x2F; history 全部内嵌到 app 里，跨设备同步用你已经信任的 git 即可</li>
+<li><strong>Offline-first, zero lock-in</strong>：无账号、无订阅、无云端依赖，完全离线工作；停止使用 Tolaria 不会损失任何数据</li>
+<li><strong>块级富文本编辑器</strong>：slash 命令、wikilinks、whiteboard、媒体预览、原始 markdown 模式自由切换</li>
+<li><strong>类型作为视角而非约束</strong>：可以为笔记打”类型”（如 <code>person</code>、<code>project</code>、<code>event</code>），但不强制 schema 验证，只用来辅助导航</li>
+<li><strong>关系有类型、可独立查询</strong>:除了普通 wikilinks,还支持有名字的关系(如 “references”、”author of”、”part of”),关系是双向的,可以按关系类型筛选笔记</li>
+<li><strong>MCP server 内嵌</strong>：自带 mcp-server，外部 AI 工具可通过 MCP 协议直接搜索&#x2F;读取&#x2F;打开 vault 笔记</li>
+<li><strong>键盘优先</strong>：Command Palette、快捷键贯穿整个 UI，鼠标可有可无</li>
+<li><strong>真开源免费</strong>：基于 <code>AGPL-3.0-or-later</code> 协议开源</li>
+</ul>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ul>
+<li><strong>个人 second brain</strong>：替代 Notion &#x2F; Evernote &#x2F; Apple Notes，把零散信息整理成结构化知识网络</li>
+<li><strong>AI 上下文持久化</strong>：把你跟 AI 的讨论结果、长期记忆、procedure 存进 vault，下次让 AI 通过 MCP 直接读出来继续工作</li>
+<li><strong>写作工作流</strong>：写作者用它管理素材库、文章草稿、参考资料；作者本人就是这么用的</li>
+<li><strong>团队文档与公司知识库</strong>：把公司文档存成 markdown + git，团队可以用任何 IDE 编辑，也可以让 AI 代理基于这些文档生成内容</li>
+<li><strong>代码项目辅助笔记</strong>：跟代码仓库平行存储 ADR、设计文档、调研笔记，让本地 AI 代理同时操作代码和笔记</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181028674.png"></p>
+<p>Tolaria 是给 AI 时代写作者和知识工作者准备的本地优先笔记应用，把”文件、git、AI”三件事一站式整合，避开了 Notion 的云端锁定和 Obsidian 的插件繁琐。</p>
+<h1 id="与-Obsidian-详细对比"><a href="#与-Obsidian-详细对比" class="headerlink" title="与 Obsidian 详细对比"></a>与 Obsidian 详细对比</h1><p>Tolaria 和 Obsidian 对比，两者都是本地 markdown 知识库工具，但定位有显著差异。以下从十个维度详细对比：</p>
+<table>
+<thead>
+<tr>
+<th align="left">维度</th>
+<th align="left"><strong>Tolaria</strong></th>
+<th align="left"><strong>Obsidian</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">开源协议</td>
+<td align="left">AGPL-3.0，<strong>完全开源</strong></td>
+<td align="left"><strong>闭源</strong>（免费个人使用，商用需付费授权）</td>
+</tr>
+<tr>
+<td align="left">数据格式</td>
+<td align="left">Markdown + YAML frontmatter</td>
+<td align="left">Markdown + YAML frontmatter（兼容）</td>
+</tr>
+<tr>
+<td align="left">同步方案</td>
+<td align="left">内建 Git 客户端，commit&#x2F;push&#x2F;history 全在 app</td>
+<td align="left">Obsidian Sync 付费云（$8&#x2F;月），或装第三方 Git 插件</td>
+</tr>
+<tr>
+<td align="left">AI 代理集成</td>
+<td align="left"><strong>原生支持</strong> Claude Code &#x2F; Codex &#x2F; OpenCode &#x2F; Pi &#x2F; Gemini 五个 CLI 代理 + API model provider</td>
+<td align="left">需装插件（如 Smart Connections、Copilot 等），各家集成深浅不一</td>
+</tr>
+<tr>
+<td align="left">MCP 协议</td>
+<td align="left"><strong>内嵌 MCP server</strong>，外部 AI 直接搜笔记、读笔记、改笔记</td>
+<td align="left">需第三方插件（如 <code>obsidian-mcp</code>），且能力有限</td>
+</tr>
+<tr>
+<td align="left">关系建模</td>
+<td align="left">Wikilinks + <strong>有类型的双向关系</strong> + 类型化属性</td>
+<td align="left">仅 Wikilinks，关系靠手动 frontmatter 字段约定</td>
+</tr>
+<tr>
+<td align="left">插件生态</td>
+<td align="left">较小（项目仅 3 个月），主要功能内建</td>
+<td align="left"><strong>1500+ 社区插件</strong>，生态成熟</td>
+</tr>
+<tr>
+<td align="left">移动端</td>
+<td align="left">暂无</td>
+<td align="left">iOS &#x2F; Android 官方 app</td>
+</tr>
+<tr>
+<td align="left">团队协作</td>
+<td align="left">通过 git remote 共享 vault（公开&#x2F;私有仓库均可）</td>
+<td align="left">Obsidian Publish 付费（$10&#x2F;月）</td>
+</tr>
+<tr>
+<td align="left">项目年龄</td>
+<td align="left">2026 年 2 月，10K Star，<strong>新生态</strong></td>
+<td align="left">2020 年，<strong>成熟工具</strong></td>
+</tr>
+</tbody></table>
+<h3 id="选哪个？"><a href="#选哪个？" class="headerlink" title="选哪个？"></a>选哪个？</h3><p><strong>选 Tolaria 如果</strong>：</p>
+<ul>
+<li>你深度使用 Claude Code &#x2F; OpenCode &#x2F; Codex CLI 这类命令行 AI 代理</li>
+<li>你希望 AI 通过 MCP 协议直接读写你的笔记 vault</li>
+<li>你看重真正的开源（AGPL），不接受闭源核心</li>
+<li>你用 git 做同步、版本控制是自然选择</li>
+<li>你不依赖移动端</li>
+</ul>
+<p><strong>选 Obsidian 如果</strong>：</p>
+<ul>
+<li>你需要海量社区插件覆盖各种小众需求（PDF 标注、Anki 同步、Dataview 查询等）</li>
+<li>你需要 iOS &#x2F; Android 移动端</li>
+<li>你不太在意闭源</li>
+<li>你的 AI 使用主要是聊天侧栏，不需要 AI 操作 vault 文件</li>
+</ul>
+<p>两者并不互斥：vault 文件格式高度兼容（都是 markdown + YAML），可以在两个 app 之间切换。我自己的体验是 <strong>Tolaria 在”AI 直接操作笔记”这件事上做得显著更深</strong>，而 Obsidian 在”细节插件”这件事上仍然遥遥领先。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Tolaria 是 Tauri 桌面应用（Rust + React），跨平台支持 macOS、Windows、Linux 三大主流系统。</p>
+<h2 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h2><p><strong>方式一：Homebrew（推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install --cask tolaria</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式二：官方 dmg 下载</strong></p>
+<ul>
+<li>Intel 芯片：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYS9yZWxlYXNlcy9sYXRlc3Q=">Tolaria_2026.5.14_macOS_Intel.dmg<i class="fa fa-external-link-alt"></i></span>（15 MB）</li>
+<li>Apple Silicon：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYS9yZWxlYXNlcy9sYXRlc3Q=">Tolaria_2026.5.14_macOS_Silicon.dmg<i class="fa fa-external-link-alt"></i></span>（14 MB）</li>
+</ul>
+<p>下载后双击挂载、拖到 Applications 文件夹即可。</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>下载 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYS9yZWxlYXNlcy9sYXRlc3Q=">Tolaria_2026.5.14_x64-setup.exe<i class="fa fa-external-link-alt"></i></span>（10 MB），双击安装。</p>
+<blockquote>
+<p>安装目录默认在 <code>%LOCALAPPDATA%\Tolaria\</code>，配置在 <code>%APPDATA%\com.tolaria.app\</code>。</p>
+</blockquote>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>三种打包格式任选其一：</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式</th>
+<th align="center">大小</th>
+<th align="left">适用发行版</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>Tolaria_2026.5.14_amd64.deb</code></td>
+<td align="center">14 MB</td>
+<td align="left">Debian &#x2F; Ubuntu 22.04+</td>
+</tr>
+<tr>
+<td align="center"><code>Tolaria-2026.5.14-1.x86_64.rpm</code></td>
+<td align="center">14 MB</td>
+<td align="left">Fedora &#x2F; RHEL &#x2F; openSUSE</td>
+</tr>
+<tr>
+<td align="center"><code>Tolaria_2026.5.14_amd64.AppImage</code></td>
+<td align="center">89 MB</td>
+<td align="left">任意发行版（免安装）</td>
+</tr>
+</tbody></table>
+<p>依赖：Tauri 2 在 Linux 需要 WebKit2GTK 4.1。Ubuntu 用户参考：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install libwebkit2gtk-4.1-dev libxdo-dev libssl-dev \</span><br><span class="line">  libayatana-appindicator3-dev librsvg2-dev libsoup-3.0-dev patchelf</span><br></pre></td></tr></table></figure>
+
+<h1 id="首次启动"><a href="#首次启动" class="headerlink" title="首次启动"></a>首次启动</h1><ol>
+<li><strong>创建或克隆 vault</strong>：首次启动 Tolaria 会问你要不要克隆官方的 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYS1nZXR0aW5nLXN0YXJ0ZWQ=">getting-started vault<i class="fa fa-external-link-alt"></i></span>，这是一个带教程的演示 vault，推荐新用户克隆体验</li>
+<li><strong>打开本地 markdown 文件夹</strong>：如果你已经有 Obsidian &#x2F; Logseq vault 或纯 markdown 文件夹，直接 Open Vault 选中目录即可，Tolaria 会自动识别</li>
+<li><strong>初始化 git</strong>：Tolaria 强烈建议每个 vault 都是 git 仓库，会在你确认后跑 <code>git init</code>。如果想连远程 GitHub 仓库，可以在设置里配置 SSH key 或 token</li>
+<li><strong>配置 AI 代理</strong>（可选但强烈推荐，下一节详述）</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181042375.png"></p>
+<h1 id="配置-AI-代理"><a href="#配置-AI-代理" class="headerlink" title="配置 AI 代理"></a>配置 AI 代理</h1><p>Tolaria 最大的差异化卖点是<strong>原生 AI 代理集成</strong>。它<strong>不内置任何 AI 模型</strong>，而是检测并桥接你本机已安装的 CLI 代理：</p>
+<table>
+<thead>
+<tr>
+<th align="left">代理</th>
+<th align="left">包名</th>
+<th align="left">主要用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Claude Code</td>
+<td align="left"><code>@anthropic-ai/claude-code</code></td>
+<td align="left">Anthropic 官方,工具调用最完善</td>
+</tr>
+<tr>
+<td align="left">Codex CLI</td>
+<td align="left">OpenAI Codex</td>
+<td align="left">OpenAI 的代码 CLI</td>
+</tr>
+<tr>
+<td align="left">OpenCode</td>
+<td align="left"><code>opencode-ai</code></td>
+<td align="left">开源多模型聚合 CLI</td>
+</tr>
+<tr>
+<td align="left">Pi CLI</td>
+<td align="left">Pi.ai</td>
+<td align="left">Inflection 的对话型 CLI</td>
+</tr>
+<tr>
+<td align="left">Gemini CLI</td>
+<td align="left"><code>@google/gemini-cli</code></td>
+<td align="left">Google 官方</td>
+</tr>
+</tbody></table>
+<p>任选其一安装即可，Tolaria 启动时自动扫描 <code>where claude</code> &#x2F; <code>where opencode</code> 等 + 一组硬编码候选目录（如 <code>~/.local/bin/</code>、<code>~/.npm-global/bin/</code>、<code>AppData/Roaming/npm/</code> 等）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181033400.png"></p>
+<p><strong>安装示例</strong>（任选一个用 npm 全局装）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @anthropic-ai/claude-code   <span class="comment"># 或</span></span><br><span class="line">npm install -g opencode-ai                  <span class="comment"># 或</span></span><br><span class="line">npm install -g @google/gemini-cli</span><br></pre></td></tr></table></figure>
+
+<p>装完后在 CLI 里跑一次 <code>claude auth login</code> &#x2F; <code>opencode auth login</code> &#x2F; 启动 <code>gemini</code> 完成 OAuth 登录。然后<strong>重启 Tolaria</strong>，AI 面板的状态栏会显示”AI Agents”徽章，列出已识别的代理。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181036277.png"></p>
+<p><strong>两种 AI 工作模式</strong>：</p>
+<ul>
+<li><strong>Chat 模式</strong>：跟笔记内容对话，不修改文件；可以用 API model provider（OpenAI &#x2F; 本地 Ollama &#x2F; SiliconFlow 等）</li>
+<li><strong>Agent 模式</strong>：让 AI 真的去改 vault 里的笔记（Edit&#x2F;Write 工具开放），必须用 CLI 代理（不能用纯 API provider）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202605181039655.png"></p>
+<p>可以在 Tolaria 设置里把默认的 <code>default_ai_agent</code>（写文件 agent 引擎）和 <code>default_ai_target</code>（AI 面板默认目标）分别配置成不同的代理。</p>
+<h1 id="Windows-用户的坑与临时解决方案"><a href="#Windows-用户的坑与临时解决方案" class="headerlink" title="Windows 用户的坑与临时解决方案"></a>Windows 用户的坑与临时解决方案</h1><p>Tolaria 在 macOS 和 Linux 上工作得很顺，但在 <strong>Windows + nvm-for-windows + 较新版本 claude-code &#x2F; opencode-ai</strong> 组合下有几个坑值得提前避雷。</p>
+<h2 id="坑一：Claude-Code-和-OpenCode-报-os-error-193"><a href="#坑一：Claude-Code-和-OpenCode-报-os-error-193" class="headerlink" title="坑一：Claude Code 和 OpenCode 报 os error 193"></a>坑一：Claude Code 和 OpenCode 报 <code>os error 193</code></h2><p><strong>症状</strong>：Tolaria AI 面板能”检测到” Claude &#x2F; OpenCode，但不显示版本号，实际调用时报：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Failed to spawn claude: %1 不是有效的 Win32 应用程序。 (os error 193)</span><br></pre></td></tr></table></figure>
+
+<p>OpenCode 同样报这个错。Gemini 不受影响。</p>
+<p><strong>AI 给的原因分析</strong>：</p>
+<p><code>claude-code</code> 2.x 和 <code>opencode-ai</code> 改用了 native launcher 打包，npm 生成的 <code>claude.cmd</code> &#x2F; <code>opencode.cmd</code> 内部不再指向 <code>.js</code> bundle，而是直接指向 <code>node_modules\@anthropic-ai\claude-code\bin\claude.exe</code> 这类 native <code>.exe</code>。</p>
+<p>Tolaria 在 <code>src-tauri/src/cli_agent_runtime.rs</code> 里有 Windows 专用逻辑试图把 <code>.cmd</code> shim 替换成 <code>node script.js</code> 启动（绕开 <code>CreateProcessW</code> 不能执行 <code>.cmd</code> 的限制），但<strong>它的解析器只识别 <code>.js</code> &#x2F; <code>.mjs</code> &#x2F; <code>.cjs</code> 扩展名</strong>，遇到 <code>.exe</code> 就 fallback 到直接 spawn <code>.cmd</code>，触发 Windows 的 <code>ERROR_BAD_EXE_FORMAT</code>（os error 193）。</p>
+<p>Gemini CLI 仍是经典 npm shim 格式（<code>.cmd</code> → <code>gemini-cli/bundle/gemini.js</code>），所以走得通。</p>
+<p><strong>临时解决方案</strong>：</p>
+<p>让 Tolaria 直接找到 <code>.exe</code> 而不是 <code>.cmd</code>。把 npm 包内的 <code>.exe</code> 复制一份到 Tolaria 会扫的候选目录 <code>~/.local/bin/</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/.local/bin</span><br><span class="line"><span class="built_in">cp</span> <span class="string">&quot;C:/nvm4w/nodejs/node_modules/@anthropic-ai/claude-code/bin/claude.exe&quot;</span> ~/.local/bin/</span><br><span class="line"><span class="built_in">cp</span> <span class="string">&quot;C:/nvm4w/nodejs/node_modules/opencode-ai/bin/opencode.exe&quot;</span> ~/.local/bin/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 屏蔽掉原 .cmd（让 Tolaria 不会优先命中它）</span></span><br><span class="line"><span class="built_in">mv</span> C:/nvm4w/nodejs/claude.cmd C:/nvm4w/nodejs/claude.cmd.disabled</span><br><span class="line"><span class="built_in">mv</span> C:/nvm4w/nodejs/opencode.cmd C:/nvm4w/nodejs/opencode.cmd.disabled</span><br></pre></td></tr></table></figure>
+
+<p>重启 Tolaria 即可。<strong>不需要修改系统 PATH</strong> ——Tolaria 自己会扫 <code>~/.local/bin/claude.exe</code> 候选路径。</p>
+<h2 id="坑二：OpenCode-报-“exit-code-1”"><a href="#坑二：OpenCode-报-“exit-code-1”" class="headerlink" title="坑二：OpenCode 报 “exit code: 1”"></a>坑二：OpenCode 报 “exit code: 1”</h2><p>修完坑一之后 OpenCode 能启动了，但实际调用可能报：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: opencode exited with status exit code: 1</span><br></pre></td></tr></table></figure>
+
+<p>直接命令行跑 <code>opencode run --format json &quot;hi&quot;</code> 才能看到真实错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Model not found: opencode/glm-4.7-free. Did you mean: deepseek-v4-flash-free, glm-5, glm-5.1?</span><br></pre></td></tr></table></figure>
+
+<p><strong>AI 给的原因分析</strong>：<code>opencode-ai</code> 1.15.x 的 <code>run --format json</code> 模式不读 disk 上的 <code>~/.config/opencode/opencode.json</code>（不像交互模式），只认 <code>-m</code> 命令行参数；而 Tolaria 写死的命令是 <code>[&quot;run&quot;, &quot;--format&quot;, &quot;json&quot;]</code>，没传 <code>-m</code>。结果 OpenCode fallback 到内置 free 档位的默认 model <code>opencode/glm-4.7-free</code> ，这个 model 已被 OpenCode Zen 服务端下线。</p>
+<p><strong>临时解决方案</strong>：在 Tolaria UI 把 AI 默认目标切到 <code>claude_code</code>（设置里的 <code>default_ai_target</code> 字段）。等 Tolaria 后续版本透传 <code>-m</code> 参数后再切回 OpenCode。</p>
+<h2 id="坑三：Gemini-的警告被当成错误抛"><a href="#坑三：Gemini-的警告被当成错误抛" class="headerlink" title="坑三：Gemini 的警告被当成错误抛"></a>坑三：Gemini 的警告被当成错误抛</h2><p>Gemini 偶尔会显示这样的”错误”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error: Warning: Windows 10 detected. Some UI features like smooth scrolling may be degraded.</span><br><span class="line">Warning: 256-color support not detected.</span><br><span class="line">YOLO mode is enabled.</span><br></pre></td></tr></table></figure>
+
+<p>这其实是 Gemini CLI 自己向 stderr 输出的环境警告，<strong>不是真错误</strong>。Tolaria 的 <code>format_gemini_error</code> 在 Gemini 进程退出码非零时把 stderr 前 3 行原样转发，给人误判错误的观感。</p>
+<p><strong>临时缓解</strong>：</p>
+<ul>
+<li>在 Tolaria UI 把 Permission Mode 切到 Safe（避免 YOLO 模式触发 gemini-cli 内部判错）</li>
+<li>确保 vault 目录是 git 仓库（<code>.git/</code> 存在）</li>
+</ul>
+<p>更完整的踩坑分析、ADR 引用、修复方案对比，我整理了一份 <code>tolaria-windows-ai-agent-fix.md</code>。等作者更新吧</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
+<li><strong>macOS 平台测试最充分</strong>：作者自己用 Mac 日常开发，macOS 下体验最完整；Windows &#x2F; Linux 偶有上游 CLI 兼容性问题(见上节)</li>
+<li><strong>AGENTS.md 文件</strong>：可以在每个 vault 根目录放一个 <code>AGENTS.md</code>，告诉 AI 代理这个 vault 的约定（类型定义、命名规范、目录布局）。它和 Claude Code 的 <code>CLAUDE.md</code> &#x2F; Gemini 的 <code>GEMINI.md</code> 是同一类东西，<strong>Tolaria 启动 AI 代理时会让代理读这个文件</strong></li>
+<li><strong>数据备份</strong>：vault 是 git 仓库，强烈建议 <code>git remote</code> 推到 GitHub &#x2F; Gitea &#x2F; 自建 git server。Tolaria 不替你管云端</li>
+<li><strong>多 vault</strong>：Tolaria 支持同时打开多个 vault，会在状态栏切换。但 AI 代理一次只能操作 active vault</li>
+<li><strong>MCP server 反向连接</strong>：Tolaria 内嵌的 mcp-server 通过 WebSocket（默认 9711）反向连 Tolaria 主进程才能工作。所以从外部工具（如外部 Claude Code &#x2F; OpenCode）调 Tolaria MCP 时，<strong>Tolaria 主进程必须在运行</strong></li>
+<li><strong>稳定性预期</strong>：项目仅 3 个月，处于快速迭代期。如果想用稳定通道，在 settings 里把 <code>release_channel</code> 留空（默认 stable）；想吃最新功能可以切到 <code>alpha</code></li>
+</ol>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><blockquote>
+<p>refactoringhq&#x2F;tolaria: A second brain for the AI era. Free forever.<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYQ==">https://github.com/refactoringhq/tolaria<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tolaria 官方网站（含下载和完整文档）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90b2xhcmlhLm1kLw==">https://tolaria.md<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tolaria 安装指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90b2xhcmlhLm1kL3N0YXJ0L2luc3RhbGw=">https://tolaria.md/start/install<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tolaria AI 概念文档<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90b2xhcmlhLm1kL2NvbmNlcHRzL2Fp">https://tolaria.md/concepts/ai<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tolaria Configure AI Models 指南<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90b2xhcmlhLm1kL2d1aWRlcy9jb25maWd1cmUtYWktbW9kZWxz">https://tolaria.md/guides/configure-ai-models<i class="fa fa-external-link-alt"></i></span></p>
+<p>Tolaria AI Agent Not Found 故障排查<br>地址：<span class="exturl" data-url="aHR0cHM6Ly90b2xhcmlhLm1kL3Ryb3VibGVzaG9vdGluZy9haS1hZ2VudC1ub3QtZm91bmQ=">https://tolaria.md/troubleshooting/ai-agent-not-found<i class="fa fa-external-link-alt"></i></span></p>
+<p>Getting Started Vault（含 walkthrough 的演示 vault）<br>地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JlZmFjdG9yaW5naHEvdG9sYXJpYS1nZXR0aW5nLXN0YXJ0ZWQ=">https://github.com/refactoringhq/tolaria-getting-started<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div><div>
+    
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------扫一扫，关注本站的微信公众号-------------</div>
+        <br>
+        <img src="/uploads/wechat-qcode.jpg">
+        <br>
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+<!--2021.08.13新增广告单元-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2307783158392222"
+      crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+      style="display:block; text-align:center;"
+      data-ad-layout="in-article"
+      data-ad-format="fluid"
+      data-ad-client="ca-pub-2307783158392222"
+      data-ad-slot="3142196442"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/uploads/wechatpay.jpg" alt="杨浦老苏 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/uploads/alipay.jpg" alt="杨浦老苏 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>杨浦老苏
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://laosu.tech/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/" title="AI原生笔记应用Tolaria">https://laosu.tech/2026/05/18/AI原生笔记应用Tolaria/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+              <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+              <a href="/tags/obsidian/" rel="tag"><i class="fa fa-tag"></i> obsidian</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/16/%E7%94%B5%E8%A7%86%E7%9B%B4%E6%92%AD%E4%B8%AD%E8%BD%AC%E5%88%A9%E5%99%A8iptv-rust/" rel="prev" title="电视直播中转利器iptv-rust">
+                  <i class="fa fa-angle-left"></i> 电视直播中转利器iptv-rust
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2020 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">杨浦老苏</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">46:07</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div><!--2020.05.03新增flagconuter计数-->
+<div>
+  <a target="_blank" rel="noopener" href="https://info.flagcounter.com/BEXu"><img src="https://s11.flagcounter.com/count2/BEXu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+</div>
+
+<br>
+
+<!--2021.02.22新增网站运行时间-->
+<div>
+  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+  <script>
+      var now = new Date();
+      function createtime() {
+          var grt= new Date("04/28/2020 00:00:00");
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+          document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+      }
+  setInterval("createtime()",250);
+  </script>
+</div>
+
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-CN","enable":true,"serverURL":"https://0x404.cf","cssUrl":"https://jsd.onmicrosoft.cn/npm/@waline/client@v3/dist/waline.css","commentCount":true,"pageview":true,"libUrl":"https://jsd.onmicrosoft.cn/npm/@waline/client@v3/dist/waline.umd.js","locale":{"placeholder":"有什么想法和需求，可以留个言"},"emoji":["https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/qq/","https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/weibo/","https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/alus/","https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/bilibili/","https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/tieba/","https://jsd.onmicrosoft.cn/npm/@waline/emojis@1.4.0/tw-emoji/"],"meta":["nick","mail","link"],"requiredMeta":["nick","mail"],"wordLimit":0,"login":"enable","pageSize":10,"dark":"auto","el":"#waline","comment":true,"path":"/2026/05/18/AI%E5%8E%9F%E7%94%9F%E7%AC%94%E8%AE%B0%E5%BA%94%E7%94%A8Tolaria/"}</script>
+<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/@waline/client@v3/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script><div id="overlay"></div>
+
+</body>
+</html>
