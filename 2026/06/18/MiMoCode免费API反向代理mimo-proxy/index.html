@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202606181438891.png">
 <meta property="article:published_time" content="2026-06-18T06:30:00.000Z">
-<meta property="article:modified_time" content="2026-06-18T06:41:39.641Z">
+<meta property="article:modified_time" content="2026-06-18T06:54:59.452Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="API">
@@ -464,7 +464,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-06-18 14:30:00 / 修改时间：14:41:39" itemprop="dateCreated datePublished" datetime="2026-06-18T14:30:00+08:00">2026-06-18</time>
+      <time title="创建时间：2026-06-18 14:30:00 / 修改时间：14:54:59" itemprop="dateCreated datePublished" datetime="2026-06-18T14:30:00+08:00">2026-06-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -509,7 +509,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.5k</span>
+      <span>4.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -527,8 +527,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202606181438891.png"></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>什么是 mimo-proxy ？</strong></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>什么是 mimo-proxy ？</strong></p>
 <blockquote>
 <p><code>mimo-proxy</code> 是一个轻量级的 <code>MiMoCode Free API</code> 反向代理工具，基于 <code>Go</code> 语言编写。它可以帮助用户将小米 <code>MiMo Code</code> 的免费 <code>AI</code> 模型（<code>mimo-auto</code>）以标准的 <code>OpenAI</code> 和 <code>Anthropic</code> 格式暴露出来，供各种第三方客户端调用。</p>
 </blockquote>
@@ -653,7 +652,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker run -d \</span><br><span class="line">  --name=mimo-proxy \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  -p 5355:5000 \</span><br><span class="line">  -v $(<span class="built_in">pwd</span>)/config.yaml:/app/config.yaml:ro \</span><br><span class="line">  wbsu2003/mimo-proxy:latest</span><br></pre></td></tr></table></figure>
 
 <h2 id="docker-compose-安装"><a href="#docker-compose-安装" class="headerlink" title="docker-compose 安装"></a>docker-compose 安装</h2><p>也可以用 <code>docker-compose</code> 安装，将下面的内容保存为 <code>docker-compose.yml</code> 文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mimo-proxy:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/mimo-proxy:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mimo-proxy</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5355:5000&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config.yaml:/app/config.yaml:ro</span>  <span class="comment"># 配置文件只读挂载</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mimo-proxy:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wbsu2003/mimo-proxy:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mimo-proxy</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5355:5000&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config.yaml:/app/config.yaml:ro</span>  <span class="comment"># 配置文件只读挂载</span></span><br><span class="line">    <span class="attr">healthcheck:</span></span><br><span class="line">      <span class="attr">test:</span> [<span class="string">&quot;CMD&quot;</span>, <span class="string">&quot;wget&quot;</span>, <span class="string">&quot;-qO-&quot;</span>, <span class="string">&quot;http://127.0.0.1:5000/health&quot;</span>]</span><br><span class="line">      <span class="attr">interval:</span> <span class="string">30s</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="string">5s</span></span><br><span class="line">      <span class="attr">retries:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">start_period:</span> <span class="string">10s</span></span><br></pre></td></tr></table></figure>
 
 <p>然后通过 <code>SSH</code> 登录到您的群晖，执行下面的命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 docker-compose.yml 和 config.yaml 放入当前目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键启动</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
@@ -876,7 +875,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">47:12</span>
+    <span title="站点阅读时长">47:13</span>
   </span>
 </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
