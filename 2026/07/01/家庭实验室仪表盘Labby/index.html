@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202607011722271.png">
 <meta property="article:published_time" content="2026-07-01T09:30:00.000Z">
-<meta property="article:modified_time" content="2026-07-01T09:34:03.709Z">
+<meta property="article:modified_time" content="2026-07-01T09:48:27.132Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="监控">
@@ -391,7 +391,7 @@
     <div class="sidebar-inner sidebar-blogroll">
       <div class="links-of-blogroll animated">
         <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-          লিঙ্কসমুহ
+          Links
         </div>
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
@@ -463,7 +463,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-07-01 17:30:00 / 修改时间：17:34:03" itemprop="dateCreated datePublished" datetime="2026-07-01T17:30:00+08:00">2026-07-01</time>
+      <time title="创建时间：2026-07-01 17:30:00 / 修改时间：17:48:27" itemprop="dateCreated datePublished" datetime="2026-07-01T17:30:00+08:00">2026-07-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,14 +508,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.9k</span>
+      <span>5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -653,7 +653,7 @@
 <p><strong>注意</strong>：<code>Labby</code> 的 <code>Docker</code> 集成 <code>UI</code> 只支持 <code>http://</code>、<code>https://</code> 和 <code>s3://</code> 格式的 <code>URL</code>，不支持 <code>unix://</code> 格式的 <code>socket</code> 路径。因此需要使用 <code>Docker Socket Proxy</code> 将 <code>Unix socke</code>t 转换为 <code>HTTP API</code>。</p>
 </blockquote>
 <h3 id="方案一：使用-Docker-Socket-Proxy（推荐）"><a href="#方案一：使用-Docker-Socket-Proxy（推荐）" class="headerlink" title="方案一：使用 Docker Socket Proxy（推荐）"></a>方案一：使用 Docker Socket Proxy（推荐）</h3><p>使用 <code>tecnativa/docker-socket-proxy</code> 作为中间代理，将 Docker socket 转换为 HTTP API：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">labby:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/samuelloranger/labby:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">labby</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8425:8080&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/app/config</span>  <span class="comment"># 配置文件目录</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">docker-proxy</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">docker-proxy:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">tecnativa/docker-socket-proxy:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docker-proxy</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span>  <span class="comment"># 挂载 Docker Socket（只读）</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CONTAINERS=1</span>  <span class="comment"># 允许容器操作</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POST=1</span>        <span class="comment"># 允许 POST 请求</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">labby:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">ghcr.io/samuelloranger/labby:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">labby</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8425:8080&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config:/app/config</span>  <span class="comment"># 配置文件目录</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">docker-proxy</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">docker-proxy:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">tecnativa/docker-socket-proxy:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">docker-proxy</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock:ro</span>  <span class="comment"># 挂载 Docker Socket（只读）</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CONTAINERS=1</span>  <span class="comment"># 允许容器操作</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POST=1</span>        <span class="comment"># 允许 POST 请求</span></span><br><span class="line">    <span class="comment">#   - EXEC=1        # 允许执行命令  </span></span><br><span class="line">    <span class="comment">#   - NETWORKS=1    # 允许网络操作</span></span><br><span class="line">    <span class="comment">#   - VOLUMES=1     # 允许卷操作</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <code>Labby</code> 中添加 <code>Docker</code> 集成时，<code>host</code> 填写：<code>http://docker-proxy:2375</code></p>
 <p><img src="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/05/202607011702939.png"></p>
@@ -779,7 +779,7 @@
   </script>
 
           <div class="reward-container">
-  <div>আমাকে একটা কফি কিনে দাও</div>
+  <div>Buy me a coffee</div>
   <button>
     赞赏
   </button>
