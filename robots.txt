@@ -1,18 +1,9 @@
+# ==============================
+# laosu.tech robots.txt
+# ==============================
+# --- 通用规则 ---
 User-agent: *
 Allow: /
-Allow: /2020/
-Allow: /2021/
-Allow: /2022/
-Allow: /2023/
-Allow: /2024/
-Allow: /2025/
-Allow: /2026/
-Allow: /about/
-Allow: /archives/
-Allow: /categories/
-Allow: /tags/
-Allow: /page/
-Allow: /top/
 Disallow: /uploads/
 Disallow: /404/
 Disallow: /js/
@@ -20,12 +11,46 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /lib/
 
-Sitemap: https://laosu.tech/sitemap.xml
-Sitemap: https://laosu.tech/baidusitemap.xml
+# --- 搜索引擎爬虫（全部放行） ---
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Baiduspider
+Allow: /
+User-agent: Yandex
+Allow: /
+User-agent: Sogou
+Allow: /
+User-agent: BytesSpider
+Allow: /
 
+# --- AI 搜索爬虫（放行，用于 GEO 引用） ---
 User-agent: GPTBot
 Allow: /
 User-agent: ClaudeBot
 Allow: /
 User-agent: PerplexityBot
 Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+# --- AI 训练爬虫（封锁，防止内容被用于训练） ---
+User-agent: CCBot
+Disallow: /
+User-agent: meta-externalagent
+Disallow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# --- 其他 ---
+User-agent: CloudflareBrowserRenderingCrawler
+Disallow: /
+
+# --- Sitemap ---
+Sitemap: https://laosu.tech/sitemap.xml
+Sitemap: https://laosu.tech/baidusitemap.xml
