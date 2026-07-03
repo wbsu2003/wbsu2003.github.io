@@ -1,8 +1,10 @@
 # ==============================
 # laosu.tech robots.txt
 # ==============================
-# --- 通用规则 ---
+# --- 版权与内容信号 ---
+# 仅允许搜索索引，禁止 AI 训练，内容仅可作为参考引用
 User-agent: *
+Content-Signal: search=yes, ai-train=no, use=reference
 Allow: /
 Disallow: /uploads/
 Disallow: /404/
@@ -22,8 +24,6 @@ User-agent: Yandex
 Allow: /
 User-agent: Sogou
 Allow: /
-User-agent: BytesSpider
-Allow: /
 
 # --- AI 搜索爬虫（放行，用于 GEO 引用） ---
 User-agent: GPTBot
@@ -39,15 +39,13 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-# --- AI 训练爬虫（封锁，防止内容被用于训练） ---
+# --- AI 训练爬虫（封锁） ---
+User-agent: Bytespider
+Disallow: /
 User-agent: CCBot
 Disallow: /
 User-agent: meta-externalagent
 Disallow: /
-User-agent: ChatGPT-User
-Allow: /
-
-# --- 其他 ---
 User-agent: CloudflareBrowserRenderingCrawler
 Disallow: /
 
