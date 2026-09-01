@@ -13,15 +13,22 @@ HTMLElement.prototype.wrap = function(wrapper) {
     })
   );
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('readystatechange', onPageLoaded, { once: true });
-  } else {
-    onPageLoaded();
-  }
+  document.addEventListener('DOMContentLoaded', onPageLoaded);
   document.addEventListener('pjax:success', onPageLoaded);
 })();
 
 NexT.utils = {
+
+  scrollTo(target, top) {
+    if (window.CSS?.supports('scroll-behavior', 'smooth')) {
+      target.scrollTo({
+        top,
+        behavior: 'smooth'
+      });
+    } else {
+      target.scrollTo(0, top);
+    }
+  },
 
   registerExtURL() {
     document.querySelectorAll('span.exturl').forEach(element => {
@@ -43,34 +50,21 @@ NexT.utils = {
     // One-click copy code support.
     target.insertAdjacentHTML('beforeend', '<div class="copy-btn"><i class="fa fa-copy fa-fw"></i></div>');
     const button = target.querySelector('.copy-btn');
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       if (!code) {
         const lines = element.querySelector('.code') || element.querySelector('code');
         code = lines.innerText;
       }
       if (navigator.clipboard) {
         // https://caniuse.com/mdn-api_clipboard_writetext
-        navigator.clipboard.writeText(code).then(() => {
+        try {
+          await navigator.clipboard.writeText(code);
           button.querySelector('i').className = 'fa fa-check-circle fa-fw';
-        }, () => {
+        } catch {
           button.querySelector('i').className = 'fa fa-times-circle fa-fw';
-        });
+        }
       } else {
-        const ta = document.createElement('textarea');
-        ta.style.top = window.scrollY + 'px'; // Prevent page scrolling
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.readOnly = true;
-        ta.value = code;
-        document.body.append(ta);
-        ta.select();
-        ta.setSelectionRange(0, code.length);
-        ta.readOnly = false;
-        const result = document.execCommand('copy');
-        button.querySelector('i').className = result ? 'fa fa-check-circle fa-fw' : 'fa fa-times-circle fa-fw';
-        ta.blur(); // For iOS
-        button.blur();
-        document.body.removeChild(ta);
+        button.querySelector('i').className = 'fa fa-times-circle fa-fw';
       }
     });
     // If copycode.style is not mac, element is larger than target
@@ -93,6 +87,7 @@ NexT.utils = {
     figure.forEach(element => {
       // Skip pre > .mermaid for folding and copy button
       if (element.querySelector('.mermaid')) return;
+      const languageName = [...element.classList].find(cls => cls !== 'highlight');
       if (!inited) {
         let span = element.querySelectorAll('.code .line span');
         if (span.length === 0) {
@@ -106,10 +101,10 @@ NexT.utils = {
         });
       }
       const height = parseInt(window.getComputedStyle(element).height, 10);
-      const needFold = CONFIG.fold.enable && (height > CONFIG.fold.height);
-      if (!needFold && !CONFIG.copycode.enable) return;
+      const needFold = CONFIG.codeblock.fold.enable && (height > CONFIG.codeblock.fold.height);
+      if (!needFold && !CONFIG.codeblock.copy_button.enable && !CONFIG.codeblock.language) return;
       let target;
-      if (CONFIG.hljswrap && CONFIG.copycode.style === 'mac') {
+      if (CONFIG.hljswrap && CONFIG.codeblock.copy_button.style === 'mac') {
         target = element;
       } else {
         let box = element.querySelector('.code-container');
@@ -134,8 +129,14 @@ NexT.utils = {
           target.classList.add('unfold');
         });
       }
-      if (!inited && CONFIG.copycode.enable) {
+      if (!inited && CONFIG.codeblock.copy_button.enable) {
         this.registerCopyButton(target, element);
+      }
+      if (!inited && CONFIG.codeblock.language && languageName) {
+        const lang = document.createElement('div');
+        lang.className = 'code-lang';
+        lang.innerText = languageName.toUpperCase();
+        target.insertAdjacentElement('afterbegin', lang);
       }
     });
   },
@@ -173,7 +174,7 @@ NexT.utils = {
   updateActiveNav() {
     if (!Array.isArray(this.sections)) return;
     let index = this.sections.findIndex(element => {
-      return element && element.getBoundingClientRect().top > 10;
+      return element?.getBoundingClientRect().top > 10;
     });
     if (index === -1) {
       index = this.sections.length - 1;
@@ -202,13 +203,8 @@ NexT.utils = {
       this.updateActiveNav();
     }, { passive: true });
 
-    backToTop && backToTop.addEventListener('click', () => {
-      window.anime({
-        targets  : document.scrollingElement,
-        duration : 500,
-        easing   : 'linear',
-        scrollTop: 0
-      });
+    backToTop?.addEventListener('click', () => {
+      NexT.utils.scrollTo(window, 0);
     });
   },
 
@@ -268,12 +264,7 @@ NexT.utils = {
         }, 1000);
         if (!CONFIG.stickytabs) return;
         const offset = nav.parentNode.getBoundingClientRect().top + window.scrollY + 10;
-        window.anime({
-          targets  : document.scrollingElement,
-          duration : 500,
-          easing   : 'linear',
-          scrollTop: offset
-        });
+        NexT.utils.scrollTo(window, offset);
       });
     });
 
@@ -321,15 +312,8 @@ NexT.utils = {
       element.addEventListener('click', event => {
         event.preventDefault();
         const offset = target.getBoundingClientRect().top + window.scrollY;
-        window.anime({
-          targets  : document.scrollingElement,
-          duration : 500,
-          easing   : 'linear',
-          scrollTop: offset,
-          complete : () => {
-            history.pushState(null, document.title, element.href);
-          }
-        });
+        NexT.utils.scrollTo(window, offset);
+        history.pushState(null, document.title, element.href);
       });
       return target;
     });
@@ -352,8 +336,6 @@ NexT.utils = {
     const target = navItemList[index];
     if (!target || target.classList.contains('active-current')) return;
 
-    const singleHeight = navItemList[navItemList.length - 1].offsetHeight;
-
     nav.querySelectorAll('.active').forEach(navItem => {
       navItem.classList.remove('active', 'active-current');
     });
@@ -366,9 +348,13 @@ NexT.utils = {
       if (activateEle.classList.contains('nav-item')) {
         activateEle.classList.add('active');
       } else { // .nav-child or .nav
-        // scrollHeight isn't reliable for transitioning child items.
+        // Exclude nested lists so each item's own wrapped row is counted once.
+        const listItemHeight = [...activateEle.children].reduce((height, navItem) => {
+          const navChild = [...navItem.children].find(element => element.classList.contains('nav-child'));
+          return height + navItem.getBoundingClientRect().height - (navChild?.getBoundingClientRect().height || 0);
+        }, 0);
         // The last nav-item in a list has a margin-bottom of 5px.
-        navChildHeight += (singleHeight * activateEle.childElementCount) + 5;
+        navChildHeight += listItemHeight + 5;
         activateEle.style.setProperty('--height', `${navChildHeight}px`);
       }
       activateEle = activateEle.parentElement;
@@ -377,12 +363,7 @@ NexT.utils = {
     // Scrolling to center active TOC element if TOC content is taller then viewport.
     const tocElement = document.querySelector(CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini' ? '.sidebar-panel-container' : '.sidebar');
     if (!document.querySelector('.sidebar-toc-active')) return;
-    window.anime({
-      targets  : tocElement,
-      duration : 200,
-      easing   : 'linear',
-      scrollTop: tocElement.scrollTop - (tocElement.offsetHeight / 2) + target.getBoundingClientRect().top - tocElement.getBoundingClientRect().top
-    });
+    NexT.utils.scrollTo(tocElement, tocElement.scrollTop - (tocElement.offsetHeight / 2) + target.getBoundingClientRect().top - tocElement.getBoundingClientRect().top);
   },
 
   updateSidebarPosition() {
@@ -439,6 +420,18 @@ NexT.utils = {
     window.addEventListener('scroll', updateFooterPosition, { passive: true });
   },
 
+  /**
+   * Sets the CSS variable '--dialog-scrollgutter' to the specified gap value.
+   * If no gap is provided, it calculates the gap as the difference between
+   * the window's inner width and the document body's client width.
+   *
+   * @param {string} [gap] - The gap value to be set. If not provided, the
+   *                         default gap is calculated automatically.
+   */
+  setGutter(gap) {
+    document.body.style.setProperty('--dialog-scrollgutter', gap || `${window.innerWidth - document.body.clientWidth}px`);
+  },
+
   getScript(src, options = {}, legacyCondition) {
     if (typeof options === 'function') {
       return this.getScript(src, {
@@ -449,7 +442,6 @@ NexT.utils = {
       condition = false,
       attributes: {
         id = '',
-        async = false,
         defer = false,
         crossOrigin = '',
         dataset = {},
@@ -457,6 +449,7 @@ NexT.utils = {
       } = {},
       parentNode = null
     } = options;
+    const async = options.async ?? false;
     return new Promise((resolve, reject) => {
       if (condition) {
         resolve();
