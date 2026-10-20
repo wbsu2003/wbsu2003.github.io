@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/wbsu2003/images2026@main/picgo/2026/09/202610201407863.png">
 <meta property="article:published_time" content="2026-10-20T06:00:00.000Z">
-<meta property="article:modified_time" content="2026-10-20T06:27:46.602Z">
+<meta property="article:modified_time" content="2026-10-20T06:40:40.534Z">
 <meta property="article:author" content="杨浦老苏">
 <meta property="article:tag" content="docker">
 <meta property="article:tag" content="内容聚合">
@@ -396,7 +396,7 @@
     <div class="sidebar-inner sidebar-blogroll">
       <div class="links-of-blogroll animated">
         <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-          লিঙ্কসমুহ
+          Links
         </div>
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
@@ -465,7 +465,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-10-20 14:00:00 / 修改时间：14:27:46" itemprop="dateCreated datePublished" datetime="2026-10-20T14:00:00+08:00">2026-10-20</time>
+      <time title="创建时间：2026-10-20 14:00:00 / 修改时间：14:40:40" itemprop="dateCreated datePublished" datetime="2026-10-20T14:00:00+08:00">2026-10-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -510,7 +510,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
+      <span>4.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -644,10 +644,10 @@
 <p><strong>提示</strong>：<code>B</code>站内嵌播放器无法直接读取播放时间，如需字幕跟随与时间戳笔记精确同步，可安装项目提供的用户脚本 <code>bilibili-sync.user.js</code>（<code>Tampermonkey / Violentmonkey</code>）。</p>
 </blockquote>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol>
-<li><strong>镜像来源说明</strong>：<code>muzileee/tangentry</code> 为项目作者维护的第三方镜像，并非官方 CI 自动发布。使用前建议自行验证镜像真实性（<code>docker manifest inspect muzileee/tangentry:latest</code>），并关注镜像更新及时性；官方仓库的 <code>docker-compose.yml</code> 中镜像地址为占位符，需替换后才能使用</li>
-<li><strong>数据持久化</strong>：所有数据（SQLite 数据库、设置、凭据、缓存、下载）都保存在 <code>/data</code> 卷中，务必挂载；备份该目录即可完整迁移库、笔记与设置</li>
-<li><strong>公网暴露必须加 HTTPS</strong>：服务端模式只有一个共享密码，暴露到公网前务必在前面加 HTTPS 反向代理（Caddy &#x2F; Nginx &#x2F; Traefik）</li>
-<li><strong>升级方式</strong>：Docker 服务端不提供应用内自更新，升级时拉取新镜像并重新创建容器即可，数据卷会保留（<code>docker compose pull &amp;&amp; docker compose up -d</code>）</li>
+<li><strong>镜像来源说明</strong>：<code>muzileee/tangentry</code> 并非官方 <code>CI</code> 自动发布。官方仓库的 <code>docker-compose.yml</code> 中镜像地址为占位符，需替换后才能使用</li>
+<li><strong>数据持久化</strong>：所有数据（<code>SQLite</code> 数据库、设置、凭据、缓存、下载）都保存在 <code>/data</code> 卷中，务必挂载；备份该目录即可完整迁移库、笔记与设置</li>
+<li><strong>公网暴露必须加 HTTPS</strong>：服务端模式只有一个共享密码，暴露到公网前务必在前面加 <code>HTTPS</code> 反向代理（<code>Caddy / Nginx / Traefik</code>）</li>
+<li><strong>升级方式</strong>：<code>Docker</code> 服务端不提供应用内自更新，升级时拉取新镜像并重新创建容器即可，数据卷会保留（<code>docker compose pull &amp;&amp; docker compose up -d</code>）</li>
 <li><strong>端口冲突</strong>：<code>7380</code> 端口如被占用，更换左侧宿主端口即可，容器端口保持 <code>7380</code> 不变</li>
 <li><strong>早期版本风险</strong>：项目处于 <code>0.x</code> 阶段，接口和数据结构仍可能变化（数据库会自动迁移），生产环境使用请注意备份</li>
 <li><strong>平台解析失败</strong>：<code>YouTube</code> &#x2F; <code>B</code>站接口经常变化，遇到无法解析或下载时，先在「设置 → 工具」中更新 <code>yt-dlp</code>；<code>B</code>站高清晰度和部分内容需要登录账号</li>
@@ -696,7 +696,7 @@
   </script>
 
           <div class="reward-container">
-  <div>আমাকে একটা কফি কিনে দাও</div>
+  <div>Buy me a coffee</div>
   <button>
     赞赏
   </button>
